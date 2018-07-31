@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Readline</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Readline</h1>
+</div>
+<table style="width:75%;">
+<colgroup>
+<col width="5%" />
+<col width="69%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>&lt;Up&gt;</code></td>
+<td>Previously used commands in the current session.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;Down&gt;</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-Left&gt;</code></td>
+<td>Jumps between arguments in the command.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-Right&gt;</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-A&gt;</code></td>
+<td>Move cursor to beginning of the current line.=</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-E&gt;</code></td>
+<td>Move cursor to the end of the current line.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-U&gt;</code></td>
+<td>Delete all the line from the start of the line to the current cursor position.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-H&gt;</code></td>
+<td>Same as backspace.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-Z&gt;</code></td>
+<td>Suspends the current running command.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-K&gt;</code></td>
+<td>Delete all the line from the current cursor position to end of line.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-W&gt;</code></td>
+<td>Delete the word before the current cursor position.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-D&gt;</code></td>
+<td>On a blank line is the same as the exit command. Otherwise, it deletes the character in front of the cursor.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-R&gt;</code></td>
+<td>Search command history.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-C&gt;</code></td>
+<td>Stop the current running command.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-S-C&gt;</code></td>
+<td>Copy.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;C-S-V&gt;</code></td>
+<td>Paste.</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;S-Insert&gt;</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>&lt;Tab&gt;</code></td>
+<td>Command completion.</td>
+</tr>
+</tbody>
+</table>
+<p>From: https://help.gnome.org/users/gnome-terminal/stable/adv-keyboard-shortcuts.html.en http://www.catonmat.net/download/readline-emacs-editing-mode-cheat-sheet.pdf</p>
+<ul>
+<li>CAPS -&gt; CTRL</li>
+</ul>
+<p>setxkbmap -option caps:ctrl_modifier</p>
+</body>
+</html>

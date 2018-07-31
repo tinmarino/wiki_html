@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<ul>
+<li><code>start</code>
+<ul>
+<li><code>/B</code> In background -&gt; Like echo &quot;aezaz&quot; &amp;</li>
+</ul></li>
+<li><p><code>type c.txt</code> # Same as cat (unix)</p></li>
+<li><code>set /a result=(100*x)/y</code>
+<ul>
+<li><code>/a</code> for automatic substitution so you can use x instead of %x%</li>
+<li><code>set yy=%date:~-2%</code></li>
+<li><code>set yy=%date:~0,2%</code></li>
+<li></li>
+</ul></li>
+<li><p>windbg -k com:pipe,port=\.4,resets=0,baud=115200 -y Z:</p></li>
+<li>Fork Bomb
+<ul>
+<li><code>%0|%0</code> :s start %0 goto :s</li>
+</ul></li>
+</ul>
+<p>:: calculate x^n SET x=3 SET n=5 SET result=1 FOR /L %%i IN (1,1,%n%) DO SET /A result*=x ECHO %result%</p>
+<p>fc /l file1 file2 # File compare : like diff in linux tracert # Trace route &amp;&amp; # Command chaining at # Schedula task at a specific time cls # Clean command lines runas # Run process as a specific user whoami /all # display current User/Group/Priviledge information services.msc # Open services assoc # Create filetypê asscoaitaion # assoc .txt=txtfile ftype # Choose program to open files of certain type # ftype txtfile=c:Files.exe type # = cat</p>
+<p><code>tlist /t</code> # In the debugging tools for windows <code>kd&gt; !idt</code> # Display the Interuption Descriptor Table <code>WinObj.exe</code> # (SysInternals) display all objects</p>
+<h2 id="copied-from-an-apk-cheat">Copied from an apk cheat</h2>
+<p><code>cd</code> change directoryundelete Undelete a file that has been deleted.<br />
+<code>ver</code> Display the version information.<br />
+<code>arp</code> Displays, adds and removes arp information from network devices.<br />
+<code>xcopy</code> Copy multiple files, directories,unlock Unlock a disk drivetree View a visual tree of the hard drive.<br />
+<code>vol</code> Displays the volume information about the designated driveverify Enables or disables the feature to determine if files have been written properlyunformat Unformat a hard driveType Display the contents of a filetracert Visually view a network packets route across a network.<br />
+<code>title</code> Change the title of their MS-DOS window.<br />
+<code>time</code> View or modify the system 12:26telnet Telnet to another computer or device from the prompt.<br />
+<code>sys</code> Transfer system files to disk drive.<br />
+<code>switches</code> Remove add functions from MS-DOS.<br />
+<code>subst</code> Substitute a folder on your computer for another drive letter.<br />
+<code>start</code> Start a separate window in Windows from the MS-DOS prompt.<br />
+<code>sort</code> Sorts the input and displays the output to the screen.<br />
+<code>shutdown</code> Shutdown the computer from the MS-DOS prompt.<br />
+<code>shift</code> Changes the position of replaceable parameters in a batch program.<br />
+<code>share</code> Installs support for file sharing and locking capabilities.<br />
+<code>setver</code> Change MS-DOS version to trick older MS-DOS programs.<br />
+<code>setlocal</code> Enables local environments to be changed without affecting anything else.<br />
+<code>set</code> Change one variable or string to anotherscanreg Scan Registry and recover Registry from errorsat Schedule a time to execute commands or programs.<br />
+<code>break</code> Enable and disable Ctrl+C feature.<br />
+<code>cacls</code> View and modify filecall Calls a batch file from another batch filechdir Changes directorieschcp Supplement the International keyboard and character set informationchkdsk Check the hard drive runningFAT for errors.<br />
+<code>chkntfs</code> Check the hard drive runningNTFS for errors.<br />
+<code>clip</code> Redirect command line output to the Windowsclipboardcls Clears the screen.<br />
+<code>cmd</code> Opens the command interpreter.<br />
+<code>color</code> Change the foreground and background color of the MS-DOS window.<br />
+<code>command</code> Opens the command interpreter.<br />
+<code>comp</code> Compares files.<br />
+<code>compact</code> Compresses and uncompress files.<br />
+<code>route</code> View and configure Windows network route tables.<br />
+<code>robocopy</code> A robust file copy command for the Windows command line.<br />
+<code>rmdir</code> Removes an empty directory.<br />
+<code>rename</code> Renames a file or directoryren Renames a file or directoryrd Removes an empty directoryqbasic Open the QBasic.<br />
+<code>pushd</code> Stores a directory or network path in memory so it can be returned to at any time.<br />
+<code>prompt</code> View and change the MS-DOSpromptprint Prints data to a printer port.<br />
+<code>power</code> Conserve power with computer portables.<br />
+<code>popd</code> Changes to the directory or network path stored by thepushd command.<br />
+<code>ping</code> Test and send information to another network computer or network device.<br />
+<code>pause</code> Command used in batch files to stop the processing of a commandpathping View and locate locations of network latencymap Displays the device name of a drivelogon Recovery console command to list installations and enable administrator loginlogoff Logoff the currently profile using the computerlock Lock the hard drive.<br />
+<code>loadhigh</code> Load a device driver in to high memory.<br />
+<code>loadfix</code> Load a program above the first 64 k.<br />
+<code>listsvc</code> Recovery console command that displays the services and drivers.<br />
+<code>lh</code> Load a device driver in to high memory.<br />
+<code>keyb</code> Change layout of keyboardlabel Change the label of a disk drive.<br />
+<code>ipconfig</code> Network command to view network adapter settings and assigned values.<br />
+<code>ifshlp</code>.<br />
+<code>sys</code> 32-bit file manager.<br />
+<code>if</code> Allows for batch files to perform conditional processing.<br />
+<code>control</code> Open Control Panel icons from the MS-DOS prompt.<br />
+<code>convert</code> Convert FAT to NTFS.<br />
+<code>copy</code> Copy one or more files to an alternate locationctty Change the computers input/output devices.<br />
+<code>date</code> View or change the systems 2018-07-20debug Debug utility to create assembly programs to modify hardware settings.<br />
+<code>defrag</code> Re-arrange the hard drive to help with loading programs.<br />
+<code>del</code> Deletes one or more filesdelete Recovery console command that deletes a file.<br />
+<code>deltree</code> Deletes one or more files or directories.<br />
+<code>dir</code> List the contents of one or more directory.<br />
+<code>scandisk</code> k Run the scandisk utility.<br />
+<code>sc</code> Communicate with the Service Control Manager and services.<br />
+<code>runas</code> Enables a user to run a program as a different user.<br />
+<code>help</code> Display a listing of commands and brief explanationftp Command to connect and operate on an FTP server.<br />
+<code>fType</code> Displays or modifies file types used in file extension associations.<br />
+<code>goto</code> Moves a batch file to a specific label or location.<br />
+<code>graftabl</code> Show extended characters in graphics mode.<br />
+<code>path</code> View and modify the computers path locationnslookup Look up an IP address of a domain or host on a network.<br />
+<code>nlsfunc</code> Load country specific information.<br />
+<code>netstat</code> Display the TCP/IP network protocol statistics and information.<br />
+<code>netsh</code> Configure dynamic and static network information from MS-DOS.<br />
+<code>net</code> Update, fix, or view the network or network settings.<br />
+<code>nbtstat</code> Displays protocol statistics and current TCP/IP connections usingNBTmscdex Utility used to load and provide access to the CD-ROM.<br />
+<code>msd</code> Diagnostics utility.<br />
+<code>disable</code> Recovery console command that disables Windows system services or driversdiskcomp Compare a disk with another diskdoskey Command to view and execute commands that have been run in the past.<br />
+<code>dosshell</code> A GUI to help with early MS-DOS usersecho Displays messages and enables and disables echo.<br />
+<code>edit</code> View and edit filesedlin View and edit filesenable Recovery console command to enable a disable service or driver.<br />
+<code>erase</code> Erase files from computer.<br />
+<code>exit</code> Exit from the command interpreter.<br />
+<code>mkdir</code> Command to create a new directory.<br />
+<code>expand</code> Expand a Microsoft Windows file back to it's original format.<br />
+<code>extract</code> Extract files from the Microsoft Windows cabinetsfc Compare filesfdisk Utility used to create partitions on the hard drivefind Search for text within a file.<br />
+<code>findstr</code> Searches for a string of text within a file.<br />
+<code>fixboot</code> Writes a new boot sector.<br />
+<code>fixmbr</code> Writes a new boot record to a disk drive.<br />
+<code>for</code> Boolean used in batch files.<br />
+<code>format</code> Command to erase and prepare a disk drivemsav Early Microsoft Virus scanner.<br />
+<code>move</code> Move one or more files from one directory to another directory.<br />
+<code>more</code> Display one page at a time.<br />
+<code>mode</code> Modify the port or display settings.<br />
+<code>mklink</code> Creates a symbolic link.<br />
+<code>mem</code> Display memory on system.<br />
+<code>md</code> Command to create a new directory.</p>
+</body>
+</html>

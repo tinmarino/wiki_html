@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Empire</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Empire</h1>
+</div>
+<p>This is to test, play withg empire, a framework to send comand to a remote session (from Linux to Windows) Usually, it take 3 sec for empire to connect Before, you should check the ip</p>
+<h1 id="execute-windows-commands">Execute (Windows commands)</h1>
+<h3 id="analyse">Analyse</h3>
+<ul>
+<li>whoami</li>
+<li>query user # Get connected users</li>
+<li>tasklist</li>
+<li>wmic process list # Windows Management Instrumentation Command-line tool</li>
+</ul>
+<h3 id="message">Message</h3>
+<ul>
+<li>msg user Hi you have been infected</li>
+</ul>
+<h3 id="sound">Sound</h3>
+<ul>
+<li>pressing <c-g> in the shel lmake a bad cmd and trigger the beep</li>
+</ul>
+<h3 id="lateral-movements">Lateral movements</h3>
+<p>To make a sound, yo umust run as the user that is logged (the frist arg of msg)</p>
+<ul>
+<li>start</li>
+<li>runas /user:user cmd</li>
+<li>runas /user:user &quot;notepad c:.ini&quot;</li>
+<li>tskill notepad or pskill notepad</li>
+</ul>
+<h1 id="empire-commands-latteral-movements-...">Empire commands (latteral movements ...)</h1>
+<ul>
+<li><code>download</code> stores -&gt; files in ./downloads/AGENT_NAME -&gt; log in .agent.log</li>
+<li><p><code>kill</code> all</p></li>
+<li><code>ps</code> # List processes</li>
+<li><p><code>ps</code> powershell # With filter</p></li>
+<li><p><code>spawn</code> <listener> # Like a span http1 # SPawn a new powershell listener process</p></li>
+<li><p><code>psinject</code> http1 explorer.exe # The format is psinject <listener> <procname/pid> # Warning do not inject in LSASS # Please choose a process in the same section</p></li>
+</ul>
+<h1 id="prepare-linux">Prepare (Linux)</h1>
+<ul>
+<li>espeak Hi from the deep --stdout &gt; hi.wav</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Vim Tips</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Vim Tips</h1>
+</div>
+<ul>
+<li>Substitute without escaping the replcement</li>
+<li><code>:%sno/search_string/replace_string/g</code></li>
+<li><p><code>:s/&lt;/\='&amp;lt;'/g</code></p></li>
+<li>Delete everything except text</li>
+<li><code>:%s/\(^\|\(text\)\@&lt;=\).\{-}\($\|text\)\@=//g</code></li>
+<li><pre><code>\(^\|\(text\)\@&lt;=\)     # means start of line, or some point preceded by “text”
+.\{-}                   # as few characters as possible
+\($\|text\)\@=          # without globbing characters, checking that we reached either end of line or occurrence of “text”.</code></pre></li>
+<li><p>Another way to do it:</p></li>
+<li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
+<li><p>Use: :%s/.*/=repeat('text', matchcount('text', submatch(0)))</p></li>
+<li>Find where root runtime is
+<ul>
+<li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
+</ul></li>
+<li>Source autoload file
+<ul>
+<li><code>:call example#BadFunction()</code></li>
+</ul></li>
+<li>Find where a map has been defined (in which script)
+<ul>
+<li><code>:verbose map &lt;c-z&gt;</code></li>
+</ul></li>
+<li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
+</ul>
+<p>Vim can browse tar and zip archives uppercase maps to jump between files Read vimcast of drew neil and tim pope</p>
+<p>:b#|bd#</p>
+<pre><code>:wall # save all 
+cd %:p:h
+
+K   # get the doc 
+mapclear
+
+:nnoremap ,s :exe &#39;grep &#39; . expand(&#39;&lt;cword&gt;&#39;) . &#39; *&#39;&lt;CR&gt;
+:nnoremap ,s :grep &lt;C-R&gt;&lt;C-W&gt; *&lt;CR&gt;
+:inoremap &lt;F5&gt; &lt;C-O&gt;:call MyVimFunc()&lt;CR&gt;
+CTRL-\ CTRL-N command to go to normal mode. I
+
+
+
+
+:!mv {file location} {new file location}
+:e {new file location}
+    Write the file while editing - :w newname - to create a copy.
+    Start editing the new copy - :e#.
+    (Optionally) remove the old copy - :!rm oldname.
+
+
+    &lt;c-w&gt;f  open in a new window (Ctrl-w f)
+    &lt;c-w&gt;gf     open in a new tab (Ctrl-w gf) 
+    :find 
+    :e **/test/Suite.java
+    :r! find . -type f</code></pre>
+<p>q: q/ :<c-f> :%normal <span class="citation">@a</span> &quot; Execute a on all lines :%s//@=0 &quot; REplace last search by last yanked &amp; &quot; Repeat last s on this line g&amp; &quot; repeat last s on all lines :g/*{/ .+1,/-1 sort &quot; Sort lines between { and } :saveas := &quot; print last line number :echo expand('<sfile>') &quot; print file of script :syntax sync fromstart &quot; REdraw syntax :b#|bd# &quot; Delete buffer, not window</p>
+<p>vim --servername DEMO vim --servername DEMO --remote file.txt vim --servername DEMO --remote-send &quot;:3d<CR>&quot;</p>
+<p>g,g; gi</p>
+<p>gJ join lone without space g- g+ for older newer changes ga Show char hex g<em>, g# Smae as </em>, # but without delimiters gq Filter via formatprg X Delete char before</p>
+<p><c-g> Print filename K See documentation</p>
+<p><c-q> or <c-v> Visual block gv Reselect last selection gu, gU, ~ Lower, Uppder case operator</p>
+<p>EDIT</p>
+<p>Auto-completion Ctrl+n Ctrl+p (in insert mode) Complete word Ctrl+x Ctrl+l Complete line :set dictionary=dict Define dict as a dictionnary Ctrl+x Ctrl+k Complete with dictionnary</p>
+<p><c-x> <c-f> # for filname completion</p>
+<p>gUgU or gUU # duplicate operator on whole line</p>
+<blockquote>
+<p>G # increase indentation until the end of file f+s + <Esc>;.;.;. # remplace &quot;+&quot; par &quot; + &quot; 180<C-a>k.k.k. # add 180 to all</p>
+</blockquote>
+<p>INsret R # get in pelace made and stay in replace mode 80a-<esc> IN VISUAL o - move to other end of marked area O - move to other corner of block</p>
+<p>ga # show the hewa code for char</p>
+<p>:12,20&gt;&gt;&gt; indents lines 12 to 20 inclusive three times</p>
+<p>80a=<Esc> &quot; Create tje line :Sex | Split window and open integrated file explorer :e . | Open integrated file explorer</p>
+<p>= Indent operator</p>
+<p>:.,$normal <span class="citation">@q</span> To make macro on all lines</p>
+<pre><code>:py print 2
+:version
+:h +feature-list
+:h ex-cmd-index</code></pre>
+<p>vim: ft=myhelp</p>
+</body>
+</html>

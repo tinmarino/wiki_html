@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>List of all Keywords in C Language</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">List of all Keywords in C Language</h1>
+</div>
+<p>This tutorial provides a brief information on all 32 keywords in C programming.<br />
+Donloaded from : https://www.programiz.com/c-programming/list-all-keywords-c-language</p>
+<h1 id="keywords-in-c-programming">Keywords in C Programming</h1>
+<table>
+<tbody>
+<tr class="odd">
+<td>auto</td>
+<td>break</td>
+<td>case</td>
+<td>char</td>
+</tr>
+<tr class="even">
+<td>const</td>
+<td>continue</td>
+<td>default</td>
+<td>do</td>
+</tr>
+<tr class="odd">
+<td>double</td>
+<td>else</td>
+<td>enum</td>
+<td>extern</td>
+</tr>
+<tr class="even">
+<td>float</td>
+<td>for</td>
+<td>goto</td>
+<td>if</td>
+</tr>
+<tr class="odd">
+<td>int</td>
+<td>long</td>
+<td>register</td>
+<td>return</td>
+</tr>
+<tr class="even">
+<td>short</td>
+<td>signed</td>
+<td>sizeof</td>
+<td>static</td>
+</tr>
+<tr class="odd">
+<td>struct</td>
+<td>switch</td>
+<td>typedef</td>
+<td>union</td>
+</tr>
+<tr class="even">
+<td>unsigned</td>
+<td>void</td>
+<td>volatile</td>
+<td>while</td>
+</tr>
+</tbody>
+</table>
+<p><a href="#auto">auto</a> <a href="#break_continue">break</a> <a href="#switch_case_default">case</a> <a href="#char">char</a> <a href="#const">const</a> <a href="#break_continue">continue</a> <a href="#switch_case_default">default</a> <a href="#do_while">do</a> <a href="#double_float">double</a> <a href="#if_else">else</a> <a href="#enum">enum</a> <a href="#extern">extern</a> <a href="#double_float">float</a> <a href="#for">for</a> <a href="#goto">goto</a> <a href="#if_else">if</a> <a href="#int">int</a> <a href="#short_long_signed_unsigned">long</a> <a href="#register">register</a> <a href="#return">return</a> <a href="#short_long_signed_unsigned">short</a> <a href="#short_long_signed_unsigned">signed</a> <a href="#sizeof">sizeof</a> <a href="#static">static</a> <a href="#struct">struct</a> <a href="#switch_case_default">switch</a> <a href="#typedef">typedef</a> <a href="#union">union</a> <a href="#short_long_signed_unsigned">unsigned</a> <a href="#void">void</a> <a href="#volatile">volatile</a> <a href="#do_while">while</a></p>
+<h1 id="description-of-all-keywords-in-c">Description of all Keywords in C</h1>
+<hr />
+<h3 id="auto"><span id="auto"></span>auto</h3>
+<p>The auto keyword declares automatic variables. For example:</p>
+<pre title="Keyword auto"><code>auto int var1;</code></pre>
+<p>This statement suggests that var1 is a variable of storage class auto and type int.</p>
+<p>Variables declared within function bodies are automatic by default. They are recreated each time a function is executed.</p>
+<p>Since, automatic variables are local to a function, they are also called local variables. To learn more visit <a href="/c-programming/c-storage-class" title="C storage class">C storage class</a>.</p>
+<hr />
+<h3 id="break-and-continue"><span id="break_continue"></span>break and continue</h3>
+<p>The break statement makes program jump out of the innermost enclosing loop (while, do, for or switch statements) explicitly.</p>
+<p>The continue statement skips the certain statements inside the loop.</p>
+<pre title="Keywords break and continue"><code>for (i=1;i&lt;=10;++i)
+{
+   if (i==3)
+   continue;
+   if (i==7)
+   break;
+   printf(&quot;%d &quot;,i);
+} </code></pre>
+<div id="block-inject-1" class="block-inject block-inject-1">
+<div id="block-block-123" class="block block-block">
+<div class="content">
+<div id="div-gpt-ad-1527670353707-0">
+
+</div>
+<div id="div-gpt-ad-1527670429257-0">
+
+</div>
+</div>
+</div>
+</div>
+<div class="clearfix">
+
+</div>
+<p><strong>Output</strong></p>
+<pre><code>1 2 4 5 6</code></pre>
+<p>When i is equal to 3, continue statement comes into effect and skips 3. When i is equal to 7, break statement comes into effect and terminates the for loop. To learn more, visit <a href="/c-programming/c-break-continue-statement">C break and continue statement</a></p>
+<hr />
+<h3 id="switch-case-and-default"><span id="switch_case_default"></span>switch, case and default</h3>
+<p>The switch and case statement is used when a block of statements has to be executed among many blocks. For example:</p>
+<pre title="Keywords switch, case and default."><code>switch(expression)
+{
+    case &#39;1&#39;:
+    //some statements to execute when 1
+    break;
+    case &#39;5&#39;:
+    //some statements to execute when 5
+    break;
+    default:
+    //some statements to execute when default;
+}</code></pre>
+<p>Visit <a href="/c-programming/c-switch-case-statement" title="C switch statement">C switch statement</a> to learn more.</p>
+<hr />
+<h3 id="char"><span id="char"></span>char</h3>
+<p>The char keyword declares a character variable. For example:</p>
+<pre title="Keyword char"><code>char alphabet;</code></pre>
+<p>Here, alphabet is a character type variable.</p>
+<p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
+<hr />
+<h3 id="const"><span id="const"></span>const</h3>
+<p>An identifier can be declared constant by using const keyword.</p>
+<pre><code>const int a = 5;</code></pre>
+<p>To learn more, visit<a href="/c-programming/c-variables-constants" title="C programming variables and constants">C variables and constants</a>.</p>
+<hr />
+<h3 id="do...while"><span id="do_while"></span>do...while</h3>
+<pre><code>int i;
+do 
+{
+   print(&quot;%d &quot;,i);
+   i++;
+}
+while (i&lt;10)</code></pre>
+<p>To learn more, visit <a href="/c-programming/c-do-while-loops" title="C do while loop">C do...while loop</a></p>
+<hr />
+<h3 id="double-and-float"><span id="double_float"></span>double and float</h3>
+<p>Keywords double and float are used for declaring floating type variables. For example:</p>
+<pre title="Keywords double and float "><code>float number;
+double longNumber;</code></pre>
+<p>Here, number is single precision floating type variable whereas, longNumber is a double precision floating type variable.</p>
+<p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
+<hr />
+<h3 id="if-and-else"><span id="if_else"></span>if and else</h3>
+<p>In C programming, if and else are used to make decisions.</p>
+<pre><code>if (i == 1)
+   printf(&quot;i is 1.&quot;)
+else
+   prinf(&quot;i is not 1.&quot;)</code></pre>
+<p>If value of i is other than 1, output will be :</p>
+<pre><code>i is not 1</code></pre>
+<p>To learn more, visit <a href="/c-programming/c-if-else-statement" title="C if else">C if...else statement</a>.</p>
+<hr />
+<h3 id="enum"><span id="enum"></span>enum</h3>
+<p>Enumeration types are declared in C programming using keyword enum. For example:</p>
+<pre title="Keyword enum"><code>enum suit
+{
+    hearts;
+    spades;
+    clubs;
+    diamonds;
+};</code></pre>
+<p>Here, a enumerated variable suit is created having tags: hearts, spades, clubs and diamonds.</p>
+<p>To learn more, visit [C enum](/c-programming/c-enumeration &quot;C enum&quot;.html).</p>
+<hr />
+<h3 id="extern"><span id="extern"></span>extern</h3>
+<p>The extern keyword declares that a variable or a function has external linkage outside of the file it is declared.</p>
+<p>To learn more, visit <a href="/c-programming/c-storage-class" title="C storage type">C storage type</a>.</p>
+<hr />
+<h3 id="for"><span id="for"></span>for</h3>
+<p>There are three types of loops in C programming. The for loop is written in C programming using keyword for. For example:</p>
+<pre><code>for (i=0; i&lt; 9;++i)
+{
+  printf(&quot;%d &quot;,i);
+}</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>0 1 2 3 4 5 6 7 8</code></pre>
+<p>To learn more, visit <a href="/c-programming/c-for-loop" title="C for loop">C for loop</a>.</p>
+<hr />
+<h3 id="goto"><span id="goto"></span>goto</h3>
+<p>The goto keyword is used for unconditional jump to a labeled statement inside a function. For example:</p>
+<pre><code>for(i=1; i&lt;5; ++i)
+{
+    if (i==10)
+    goto error;
+}
+printf(&quot;i is not 10&quot;);
+error:
+    printf(&quot;Error, count cannot be 10.&quot;);</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>Error, count cannot be 10.</code></pre>
+<p>To learn more, visit [C goto](/c-programming/c-goto-statement &quot;C goto&quot;.html).</p>
+<hr />
+<h3 id="int"><span id="int"></span>int</h3>
+<p>The int keyword declares integer type variable. For example:</p>
+<pre><code>int count;</code></pre>
+<p>Here, count is a integer variable.</p>
+<p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
+<hr />
+<h3 id="short-long-signed-and-unsigned"><span id="short_long_signed_unsigned"></span>short, long, signed and unsigned</h3>
+<p>The short, long, signed and unsigned keywodrs are type modifiers that alters the meaning of a base data type to yield a new type.</p>
+<pre><code>short int smallInteger;
+long int bigInteger;
+signed int normalInteger;
+unsigned int positiveInteger;</code></pre>
+<table>
+<caption>Range of int type data types</caption>
+<thead>
+<tr class="header">
+<th align="left">Data types</th>
+<th align="left">Range</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">short int</td>
+<td align="left">-32768 to 32767</td>
+</tr>
+<tr class="even">
+<td align="left">long int</td>
+<td align="left">-2147483648 to 214743648</td>
+</tr>
+<tr class="odd">
+<td align="left">signed int</td>
+<td align="left">-32768 to 32767</td>
+</tr>
+<tr class="even">
+<td align="left">unsigned int</td>
+<td align="left">0 to 65535</td>
+</tr>
+</tbody>
+</table>
+<h3 id="return"><span id="return"></span>return</h3>
+<p>The return keyword terminates the function and returns the value.</p>
+<pre title="Keyword return"><code>int func()
+{
+    int b = 5;
+    return b;
+}</code></pre>
+<p>This function <code>func()</code> returns 5 to the calling function. To learn more, visit <a href="/c-programming/c-user-defined-functions" title="C user defined functions">C user-defined functions</a>.</p>
+<hr />
+<h3 id="sizeof"><span id="sizeof"></span>sizeof</h3>
+<p>The sizeof keyword evaluates the size of data (a variable or a constant).</p>
+<pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    printf(&quot;%u bytes.&quot;,sizeof(char));
+}</code></pre>
+<p>To learn more, visit <a href="/c-programming/c-operators" title="C operators">C operators</a>.</p>
+<p><strong>Output</strong></p>
+<pre><code>1 bytes.</code></pre>
+<hr />
+<h3 id="keyword-registerregister">[]{#Keyword register}register</h3>
+<p>The register keyword creates register variables which are much faster than normal variables.</p>
+<pre title="Keyword register"><code>register int var1;</code></pre>
+<hr />
+<h3 id="static"><span id="static"></span>static</h3>
+<p>The static keyword creates static variable. The value of the static variables persists until the end of the program. For example:</p>
+<pre title="Keyword static"><code>static int var;</code></pre>
+<hr />
+<h3 id="struct"><span id="struct"></span>struct</h3>
+<p>The struct keyword is used for declaring a structure. A structure can hold variables of different types under a single name.</p>
+<pre title="Keyword struct"><code>struct student{
+    char name[80];
+     float marks;
+     int age;
+}s1, s2;</code></pre>
+<p>To learn more, visit <a href="/c-programming/c-structures" title="C structures">C structures</a>.</p>
+<hr />
+<h3 id="typedef"><span id="typedef"></span>typedef</h3>
+<p>The typedef keyword is used to explicitly associate a type with an identifier.</p>
+<pre title="Keyword typedef"><code>typedef float kg;
+kg bear, tiger;</code></pre>
+<hr />
+<h3 id="union"><span id="union"></span>union</h3>
+<p>A Union is used for grouping different types of variable under a single name.</p>
+<pre title="Keyword union"><code>union student 
+{
+    char name[80];
+    float marks;
+    int age;
+}</code></pre>
+<p>To learn more, visit [C unions](/c-programming/c-unions &quot;C unions&quot;.html).</p>
+<hr />
+<h3 id="void"><span id="void"></span>void</h3>
+<p>The void keyword indicates that a function doesn't return any value.</p>
+<pre title="Keyword void"><code>void testFunction(int a)
+{
+  .....
+}</code></pre>
+<p>Here, function <code>testFunction( )</code> cannot return a value because the return type is void.</p>
+<hr />
+<h3 id="volatile"><span id="volatile"></span>volatile</h3>
+<p>The volatile keyword is used for creating volatile objects. A volatile object can be modified in an unspecified way by the hardware.</p>
+<pre><code>const volatile number</code></pre>
+<p>Here, number is a volatile object.</p>
+<p>Since, number is a constant variable, the program cannot change it. However, hardware can change it since it is a volatile object.</p>
+</body>
+</html>

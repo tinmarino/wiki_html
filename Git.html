@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>To learn git</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">To learn git</h1>
+</div>
+<ul>
+<li>Store credentials</li>
+</ul>
+<p><code>git config --global credential.helper cache</code> Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with: <code>git config credential.helper store</code> Stores permanently Note: While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the &quot;home&quot; directory). If you don't like this, delete this file and switch to using the cache option.</p>
+<ol start="0" style="list-style-type: decimal">
+<li>List |git-list|</li>
+<li>Start |git-init|</li>
+<li>Config |git-config|</li>
+<li>Aliases |git-alias|</li>
+<li>Branches |git-branch|</li>
+<li>Merge |git-merge|</li>
+<li>Rebasing |git-rebase|</li>
+<li>Remote |git-remote|</li>
+<li>Local |git-local|</li>
+</ol>
+<h1 id="tips">Tips</h1>
+<ul>
+<li>Ignore Windows newline
+<ul>
+<li><code>git config --global core.autocrlf true</code></li>
+</ul></li>
+<li>Show word regex in diff
+<ul>
+<li><code>git diff --word-diff-regex=.</code></li>
+</ul></li>
+</ul>
+<h1 id="change-history">Change history</h1>
+<p><code>git rebase -i &lt;commit&gt;~1</code> # Can edit or delete commits</p>
+<h1 id="stack">0. Stack</h1>
+<pre><code>git clone --recursive &lt;URL-OF-REPOSITORY&gt; </code></pre>
+<p>CLONE in non empty directory git init git remote add origin PATH/TO/REPO git fetch git checkout -t origin/master or git reset origin/master https://github.com/vim-scripts # 0. List</p>
+<h3 id="setup-and-config">Setup and config</h3>
+<pre><code>    -&gt; config 
+    -&gt; help </code></pre>
+<h3 id="getting-and-creating-project">Getting and Creating project</h3>
+<pre><code>    -&gt; init 
+    -&gt; clone </code></pre>
+<h3 id="basic-snapshotting">Basic Snapshotting</h3>
+<pre><code>    -&gt; add 
+    -&gt; status 
+    -&gt; diff
+    -&gt; commit 
+    -&gt; reset
+    -&gt; rm 
+    -&gt; mv</code></pre>
+<h3 id="branching-and-merging">Branching and Merging</h3>
+<pre><code>    -&gt; branch 
+    -&gt; checkout 
+    -&gt; merge
+    -&gt; mergetools 
+    -&gt; log 
+    -&gt; stash 
+    -&gt; tag </code></pre>
+<h3 id="sharing-and-updating-project">Sharing and updating project ~</h3>
+<pre><code>    -&gt; fetch 
+    -&gt; pull
+    -&gt; push 
+    -&gt; remote 
+    -&gt; submodule </code></pre>
+<h3 id="inspection-and-comparaison">Inspection and comparaison</h3>
+<pre><code>    -&gt; show 
+    -&gt; log 
+    -&gt; diff 
+    -&gt; rebase 
+    -&gt; revert </code></pre>
+<h3 id="debugging">Debugging</h3>
+<pre><code>    -&gt; bisect
+    -&gt; blame 
+    -&gt; grep </code></pre>
+<h3 id="email">Email</h3>
+<pre><code>    -&gt; am
+    -&gt; apply 
+    -&gt; format-patch 
+    -&gt; send-email 
+    -&gt; request-pull</code></pre>
+<h3 id="external-system">External system</h3>
+<pre><code>    -&gt; svn
+    -&gt; fast-import </code></pre>
+<h3 id="administration">Administration</h3>
+<pre><code>    -&gt; clean 
+    -&gt; gc 
+    -&gt; fsck 
+    -&gt; reflog
+    -&gt; filter -branch 
+    -&gt; instaweb, 
+    -&gt; arcive 
+    -&gt; bundle </code></pre>
+<h3 id="server-admin">Server Admin</h3>
+<pre><code>    -&gt; daemon 
+    -&gt; update-server_info </code></pre>
+<h3 id="plumbing-commands">Plumbing-commands</h3>
+<pre><code>    -&gt; cat-file
+    -&gt; commit-tree 
+    -&gt; count-objects
+    -&gt; diff-index 
+    -&gt; for-each-ref
+    -&gt; hash-object 
+    -&gt; ls-files
+    -&gt; merge-base 
+    -&gt; read-treee
+    -&gt; rev-list 
+    -&gt; rev-parse 
+    -&gt; show-ref 
+    -&gt; symbolic-ref 
+    -&gt; update-index
+    -&gt; update-ref 
+    -&gt; verify-pack 
+    -&gt; write-tree</code></pre>
+<h1 id="init">1. Init</h1>
+<pre><code>    git init 
+    git add LICENSE.txt
+    git commit -m &#39;first commit&#39;
+
+    git clone https://github.com/libgit2 mylibgit</code></pre>
+<h1 id="config">2. Config</h1>
+<pre><code>    git config --global user.name &quot;Martin T&quot;
+    git config --global user.email tbf@tbf
+                core.editor vim 
+    git config --list   # See all config vars 
+    git config user.name    # See the var git is using for name </code></pre>
+<h1 id="aliases">3. Aliases</h1>
+<pre><code>    git config --global alias.co checkout   
+    git config --global alias.br branch 
+    git config --global alias.ci commit     
+    git config --global alias.st status 
+
+    git config --global alias.unstage &#39;reset HEAD --&#39;
+    git config --global alias.last &#39;log -1 HEAD&#39;</code></pre>
+<h1 id="branches">4. Branches</h1>
+<pre><code>-&gt; Each Commit has a pointer to the previous commit 
+-&gt; The default branch name is master *git-master* .
+-&gt; HEAD is a pointer pointing to the current branch </code></pre>
+<pre><code>    git branch testing 
+&lt;       Creates a new pointer at the same commit you&#39;re currently on </code></pre>
+<pre><code>git checkout testing 
+git checkout -b testing # creates the branch and go in it </code></pre>
+<p>&lt; Moves HEAD to the testing branch</p>
+<pre><code>-&gt; Switching to a branch changes the working directory </code></pre>
+<pre><code>    git branch 
+    git branch -v   # see the last commit 
+    git branch -m &lt;oldname&gt; &lt;newname&gt;  
+&lt;       rename a branch </code></pre>
+<pre><code>git branch [--no-merged] [--merged]</code></pre>
+<p>&lt; Lists all Branches</p>
+<pre><code>    git log --oneline --decorate --graph --all 
+&lt;       Shows where branch pointers are
+    -&gt; Creating a branch is just creating a 41 byte pointer (to a sha-1) in a file 
+
+# 5. Merge
+
+
+    -&gt; You want to merge myBranch into master </code></pre>
+<pre><code>git checkout master
+git merge myBranch</code></pre>
+<p>&lt; If you changed the same part of the same file differently, this will cause confict. So this won't auto-merge and you have to resolve the conflict and then commit.</p>
+<pre><code>    git status 
+&lt;       To see the conflict 
+    Open the files manually to resolve the conflict and add them to the stage to remove them from conclicting files</code></pre>
+<pre><code>git mergetool</code></pre>
+<pre><code></code></pre>
+<pre><code>git branch -d myBranch </code></pre>
+<p>&lt; To deleta a branch, usefull if this branch is already merged</p>
+<h1 id="rebasing">6. Rebasing</h1>
+<pre><code>-&gt; Get the change one branch applied to the most common ancestor and apply this change to the other branch </code></pre>
+<pre><code>    git rebase --onto master server client
+&lt;       Check client branch, figure the changes from the common
+ancestor with client and apply these changes to master</code></pre>
+<pre><code>git rebase master server 
+git checkout master 
+git merge server
+git branch -d server</code></pre>
+<p>&lt; Replay server changes on master branch Then go to the master branch (without the server applyed) And merge both branch so master and server are now one branch Remove the server branch, not usefull anymore</p>
+<pre><code>-&gt; Don&#39;t rebase commits that exist outside your repository </code></pre>
+<h1 id="remote">7. Remote</h1>
+<pre><code>    git remote add maisonDir D:\Iso\VimMaison</code></pre>
+<pre><code>    git ls-remote (remote) 
+    git remote show (remote) 
+&lt;       To see all remote vars 
+    -&gt; Origin is the default name for a remote when you run git clone *git-origin*</code></pre>
+<pre><code>git fetch origin </code></pre>
+<p>&lt; Fetch data from origin into a new branch called origin/master</p>
+<pre><code>    git push (remote) (branch) 
+&lt;       Take my local branch and update the remote origin branch (with the same name) </code></pre>
+<pre><code>git checkout -b serverfix origin/serverfix </code></pre>
+<p>&lt; This gives a local branch where origin/serverfix was</p>
+<pre><code>-&gt; Tracking branches are local branches that are looking to remote branches. When you git clone, your master branch is tracking origin/master. You can then update master with &quot;git pull&quot;. From a tracking branch, git pull will act as git fetch and git merge  </code></pre>
+<h1 id="remote-1">8. Remote</h1>
+<pre><code>    git remote add local_proc /opt/git/projct.git 
+    git pull /home/john/project </code></pre>
+<h1 id="section">9.</h1>
+</body>
+</html>

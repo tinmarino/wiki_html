@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p><em>c-python.txt</em> Cheat: Python Language</p>
+<ul>
+<li>Hexadeciaml outputs get_ipython().display_formatter.formatters['text/plain'].for_type([[int,]] lambda n, p, cycle : p.text(&quot;0x%x&quot; %n))</li>
+</ul>
+<p>============================================================================== STATEMENTS <em>c-python-statement</em></p>
+<p>If-Statement ~ if expression: statements elif expression: statements else: statements</p>
+<p>While-Loop ~ while expression: statements</p>
+<p>For-Loop ~ for var in collection: statements</p>
+<p>Counting-For-Loop ~ for i in range(start, end [, step]): statements -&gt; (start is included; end is not)</p>
+<p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2, ...): statements return expr ret = name(arg1, arg2)</p>
+<p>EXCEPTION <em>c-python-exception</em> try: statements except [exception type [as var]]: statements finally: statements</p>
+<p>============================================================================== TYPES <em>c-python-types</em></p>
+<p>Integer -256, 15 Float 253.23, 1.253e-10 String &quot;Hello&quot;, 'Goodbye', &quot;&quot;&quot;Multiline&quot;&quot;&quot; Boolean True, False List [ value, ... ] Tuple ( value, ... )<br />
+-&gt; Parentheses usually optional Dictionary { key: value, ... } Set { value:, value, ... } -&gt; Create an empty set with set()</p>
+<p>============================================================================== OPERATORS <em>c-python-operators</em></p>
+<p>Arithmetic Operators ~ x + y Add x - y Subtract x * y Multiply x / y Divide x % y Modulus x ** y Exponent Assignment shortcuts: x op= y Example: x += 1 increments x</p>
+<p>Comparison Operators ~ x &lt; y Less x &lt;= y Less or eq x &gt; y Greater x &gt;= y Greater or eq x == y Equal x != y Not equal</p>
+<p>Boolean Operators ~ not x<br />
+x and y x or y</p>
+<p>============================================================================== MISC <em>c-python-misc</em></p>
+<p>Conversion Functions ~ int(expr) Converts expr to integer float(expr) Converts expr to float str(expr) Converts expr to string chr(num) ASCII char num</p>
+<p>String / List / Tuple Operations ~ len(s) Length of s s[i] Ith item in s (0-based) s[start : end] Slice of s from start (included) to end (excluded) x in s true if x is contained in s x not in s true if x is not contained in s s + t The concatenation of s with t s * n n copies of s concatenated sorted(s) A sorted copy of s s.index(item) Position in s of item</p>
+<p>More String Operations ~ s.lower() Lowercase copy of s s.replace(old, new) Copy of s with old replaced with new s.split( delim ) List of substrings delimited by delim s.strip() Copy of s with whitespace trimmed s.upper() Uppercase copy of s -&gt; See also http://docs.python.org/library/stdtypes.html#string-methgds</p>
+<p>Mutating List Operations ~ del lst[i] Deletes ith item from lst lst.append(e) Appends e to lst lst.insert(i, e) Inserts e before ith item in lst lst.sort() Sorts lst -&gt; See also http://docs.python.org/library/stdtypes.html#typesseq-mutable</p>
+<p>Dictionary Operations ~ len(d) Number of items in d del d[key] Removes key from d key in d True if d contains key d.keys() Returns a list of keys in d -&gt; See also http://docs.python.org/library/stdtypes.html#mapping-types-dict</p>
+<p>Environment ~ sys.argv List of command line arguments (argv[0] is executable) os.environ Dictionary of environment variables os.curdir String with path of current directory -&gt; import sys; print(sys.argv) -&gt; or -&gt; from sys import argv; print(argv)}</p>
+<p>String Formatting ~ &quot;Hello, {0} {1}&quot;.format(&quot;abe&quot;, &quot;jones&quot;) -&gt; Hello, abe jones &quot;Hello, {fn} {ln}&quot;.format(fn=&quot;abe&quot;, ln=&quot;jones&quot;) -&gt; Hello, abe jones &quot;You owe me ${0:,.2f}&quot;.format(253422.3) -&gt; You owe me $253,422.30 now = datetime.now() '{:%Y-%m-%d %H:%M:%S}'.format(now) -&gt; 2012-05-16 15:04:33 -&gt; See http://docs.python.org/library/string.html#format-specification-mini-language</p>
+<p>Useful Functions ~ exit( num ) Terminate program with exit num raw_input(&quot;prompt&quot;) Print prompt and readline() from stdin -&gt; Use input(&quot;prompt&quot;) in Python 3</p>
+<p>============================================================================== SYS <em>c-python-sys</em></p>
+<p>Python sys Variables ~ argv Command line args builtin_module_names Linked C modules byteorder Native byte order check_interval Signal check frequency exec_prefix Root directory executable Name of executable exitfunc Exit function name modules Loaded modules path Search path platform Current platform stdin, stdout, stderr File objects for I/O version_info Python version info winver Version number</p>
+<p>Python sys.argv ~ -&gt; sys.argv for the command: -&gt; python foo.py bar -c qux --h sys.argv[0] foo.py sys.argv[1] bar sys.argv[2] -c sys.argv[3] qux sys.argv[4] --h</p>
+<p>============================================================================== OS <em>c-python-os</em></p>
+<p>altsep Alternative sep curdir Current dir string defpath Default search path devnull Path of null device extsep Extension separator linesep Line separator name Name of OS pardir Parent dir string pathsep Patch separator sep Path separator -&gt; Registered OS names: &quot;posix&quot;, &quot;nt&quot;, &quot;mac&quot;, &quot;os2&quot;, &quot;ce&quot;, &quot;java&quot;, &quot;riscos&quot;</p>
+<p>============================================================================== CLASS <em>c-python-class</em></p>
+<p>Python Class Special Methods ~ <strong>new</strong>(cls) <strong>init</strong>(self, args) <strong>del</strong>(self) <strong>repr</strong>(self) <strong>str</strong>(self) <strong>cmp</strong>(self, other) <strong>index</strong>(self) <strong>hash</strong>(self) <strong>getattr</strong>(self, name) <strong>getattribute</strong>(self}, name) <strong>setattr</strong>(self, name, attr) <strong>delattr</strong>(self, name) <strong>call</strong>(self, args, kwargs) <strong>lt</strong>(self, other) <strong>le</strong>(self, other) <strong>gt</strong>(self, other) <strong>ge</strong>(self, other) <strong>eq</strong>(self, other) <strong>ne</strong>(self, other) <strong>nonzero</strong>(self)</p>
+<p>Python List Methods ~ append(item) count(item) extend(list) index(item) insert(position, item) remove(item) pop(position) reverse() sort()</p>
+<p>Python String Methods ~ capitalize() * lstrip() center(width) partition(sep) count(sub, start, end) replace(old, new) decode() rfind(sub, start ,end) encode() rindex(sub, start, end) endswith(sub) rjust(width) expandtabs() rpartition(sep) find(sub, start, end) rsplit(sep) index(sub, start, end) rstrip() isalnum() * split(sep) isalpha() * splitlines() isdigit() * startswith(sub) islower() * strip() isspace() * swapcase() <em> istitle() </em> title() <em> isupper() </em> translate(table) join() upper() <em> ljust(width) zfill(width) lower() </em> -&gt; Methods marked * are locale dependant for 8-bit strings.</p>
+<p>Python File Methods ~ close() readlines(size) flush() seek(offset) fileno() tell() isatty() truncate(size) next() write(string) read(size) writelines(list) readline(size)</p>
+<p>Python Indexes and Slices ~ -&gt; Indexes and Slices of a=[0,1,2,3,4,5] len(a) = 6 a[0] = 0 a[5] = 5 a[-1] = 5 a[-2] = 4 a[1:] = [1,2,3,4,5] a[:5] = [0,1,2,3,4] a[:-2] = [0,1,2,3] a[1:3] = [1,2] a[1:-1] = [1,2,3,4] b=a[:] = Shallow copy of a</p>
+<p>============================================================================== DATE <em>c-python-date</em></p>
+<p>Python Datetime Methods ~ today() fromordinal(ordinal) now(timezoneinfo) combine(date, time) utcnow() strptime(date, format) fromtimestamp(timestamp) utcfromtimestamp(timestamp)</p>
+<p>Python Time Methods ~ replace() utcoffset() isoformat() dst() <strong>str</strong>() tzname() strftime(format)</p>
+<p>Python Date Formatting ~ %a Abbreviated weekday (Sun) %A Weekday (Sunday) %b Abbreviated month name (Jan) %B Month name (January) %c Date and time %d Day (leading zeros) (01 to 31) %H 24 hour (leading zeros) (00 to 23) %I 12 hour (leading zeros) (01 to 12) %j Day of year (001 to 366) %m Month (01 to 12) %M Minute (00 to 59) %p AM or PM %S Second {4} %U Week number {1} (00 to 53) %w Weekday {2} (0 to 6) %W Week number {3} (00 to 53) %x Date %X Time %y Year without century (00 to 99) %Y Year (2008) %Z Time zone (GMT) %% A literal &quot;%&quot; character (%) -&gt; 1. Sunday as start of week. All days in a new year preceding the first Sunday are considered to be in week 0. -&gt; 2. 0 is Sunday, 6 is Saturday. -&gt; 3. Monday as start of week. All days in a new year preceding the first Monday are considered to be in week 0. -&gt; 4. This is not a mistake. Range takes account of leap and double-leap seconds.}</p>
+<p>============================================================================== EXAMPLES <em>c-python-examples</em> &gt;python #Loop-Over-Sequence for index, value in enumerate(seq): print(&quot;{} : {}&quot;.format(index, value))</p>
+<h1 id="loop-over-dictionary">Loop-Over-Dictionary</h1>
+<p>for key in sorted(dict): print(dict[key])</p>
+<h1 id="read-a-file">Read-a-File</h1>
+<p>with open(&quot;filename&quot;, &quot;r&quot;) as f: for line in f: line = line.rstrip(&quot;n&quot;) # Strip newline print(line) &lt;python</p>
+<p>============================================================================== Thanks ~ sschaub https://www.cheatography.com/sschaub/cheat-sheets/essential-python/ davechild https://www.cheatography.com/davechild/cheat-sheets/python/</p>
+<p>vim: ft=myhelp</p>
+</body>
+</html>

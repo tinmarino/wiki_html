@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>List of Keywords in Python Programming</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">List of Keywords in Python Programming</h1>
+</div>
+<p>This tutorial provides brief information on all keywords used in Python.</p>
+<p>Keywords are the reserved words in Python. We cannot use a keyword as variable name, function name or any other identifier.</p>
+<p>Here's a list of all keywords in Python Programming</p>
+<table>
+<caption>Keywords in Python programming language</caption>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#true_false">False</a></td>
+<td align="left"><a href="#class">class</a></td>
+<td align="left"><a href="#finally">finally</a></td>
+<td align="left"><a href="#is">is</a></td>
+<td align="left"><a href="#return">return</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#none">None</a></td>
+<td align="left"><a href="#break_continue">continue</a></td>
+<td align="left"><a href="#for">for</a></td>
+<td align="left"><a href="#lambda">lambda</a></td>
+<td align="left"><a href="#except_raise_try">try</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#true_false">True</a></td>
+<td align="left"><a href="#def">def</a></td>
+<td align="left"><a href="#from_import">from</a></td>
+<td align="left"><a href="#nonlocal">nonlocal</a></td>
+<td align="left"><a href="#while">while</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#and_or_not">and</a></td>
+<td align="left"><a href="#del">del</a></td>
+<td align="left"><a href="#global">global</a></td>
+<td align="left"><a href="#and_or_not">not</a></td>
+<td align="left"><a href="#with">with</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#as">as</a></td>
+<td align="left"><a href="#if_else_elif">elif</a></td>
+<td align="left"><a href="#if_else_elif">if</a></td>
+<td align="left"><a href="#and_or_not">or</a></td>
+<td align="left"><a href="#yield">yield</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#assert">assert</a></td>
+<td align="left"><a href="#if_else_elif">else</a></td>
+<td align="left"><a href="#from_import">import</a></td>
+<td align="left"><a href="#pass">pass</a></td>
+<td align="left"> </td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#break_continue">break</a></td>
+<td align="left"><a href="#except_raise_try">except</a></td>
+<td align="left"><a href="#in">in</a></td>
+<td align="left"><a href="#except_raise_try">raise</a></td>
+<td align="left"> </td>
+</tr>
+</tbody>
+</table>
+<p>The above keywords may get altered in different versions of Python. Some extra might get added or some might be removed. You can always get the list of keywords in your current version by typing the following in the prompt.</p>
+<pre><code>&gt;&gt;&gt; import keyword
+&gt;&gt;&gt; print(keyword.kwlist)
+[&#39;False&#39;, &#39;None&#39;, &#39;True&#39;, &#39;and&#39;, &#39;as&#39;, &#39;assert&#39;, &#39;break&#39;, &#39;class&#39;, &#39;continue&#39;, &#39;def&#39;, &#39;del&#39;, &#39;elif&#39;, &#39;else&#39;, &#39;except&#39;, &#39;finally&#39;, &#39;for&#39;, &#39;from&#39;, &#39;global&#39;, &#39;if&#39;, &#39;import&#39;, &#39;in&#39;, &#39;is&#39;, &#39;lambda&#39;, &#39;nonlocal&#39;, &#39;not&#39;, &#39;or&#39;, &#39;pass&#39;, &#39;raise&#39;, &#39;return&#39;, &#39;try&#39;, &#39;while&#39;, &#39;with&#39;, &#39;yield&#39;]</code></pre>
+<h2 id="description-of-keywords-in-python-with-examples">Description of Keywords in Python with examples</h2>
+<h3 id="true_false">True, False</h3>
+<p><code>True</code> and <code>False</code> are truth values in Python. They are the results of comparison operations or logical (Boolean) operations in Python. For example:</p>
+<pre><code>&gt;&gt;&gt; 1 == 1
+True
+&gt;&gt;&gt; 5 &gt; 3
+True
+&gt;&gt;&gt; True or False
+True
+&gt;&gt;&gt; 10 &lt;= 1
+False
+&gt;&gt;&gt; 3 &gt; 7
+False
+&gt;&gt;&gt; True and False
+False</code></pre>
+<p>Here we can see that the first three statements are true so the interpreter returns <code>True</code> and returns <code>False</code> for the remaining three statements. <code>True</code> and <code>False</code> in python is same as <code>1</code> and <code>0</code>. This can be justified with the following example:</p>
+<pre><code>&gt;&gt;&gt; True == 1
+True
+&gt;&gt;&gt; False == 0
+True
+&gt;&gt;&gt; True + True
+2</code></pre>
+<h3 id="none">None</h3>
+<p><code>None</code> is a special constant in Python that represents the absence of a value or a null value.</p>
+<p>It is an object of its own datatype, the <code>NoneType</code>. We cannot create multiple <code>None</code> objects but can assign it to variables. These variables will be equal to one another.</p>
+<p>We must take special care that <code>None</code> does not imply <code>False</code>, <code>0</code> or any empty list, dictionary, string etc. For example:</p>
+<pre><code>&gt;&gt;&gt; None == 0
+False
+&gt;&gt;&gt; None == []
+False
+&gt;&gt;&gt; None == False
+False
+&gt;&gt;&gt; x = None
+&gt;&gt;&gt; y = None
+&gt;&gt;&gt; x == y
+True</code></pre>
+<p>Void functions that do not return anything will return a <code>None</code> object automatically. <code>None</code> is also returned by functions in which the program flow does not encounter a return statement. For example:</p>
+<pre><code>def a_void_function():
+    a = 1
+    b = 2
+    c = a + b
+
+x = a_void_function()
+print(x)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>None</code></pre>
+<p>This program has a function that does not return a value, although it does some operations inside. So when we print x, we get <code>None</code> which is returned automatically (implicitly). Similarly, here is another example:</p>
+<pre><code>def improper_return_function(a):
+    if (a % 2) == 0:
+        return True
+
+x = improper_return_function(3)
+print(x)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>None</code></pre>
+<p>Although this function has a <code>return</code> statement, it is not reached in every case. The function will return <code>True</code> only when the input is even.</p>
+<p>If we give the function an odd number, <code>None</code> is returned implicitly.</p>
+<h3 id="and_or_not">and, or , not</h3>
+<p><code>and</code>, <code>or</code>, <code>not</code> are the logical operators in Python. <code>and</code> will result into <code>True</code> only if both the operands are <code>True</code>. The truth table for <code>and</code> is given below:</p>
+<table>
+<caption>Truth table for <code>and</code></caption>
+<thead>
+<tr class="header">
+<th align="left">A</th>
+<th align="left">B</th>
+<th align="left">A and B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">True</td>
+<td align="left">True</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left">True</td>
+<td align="left">False</td>
+<td align="left">False</td>
+</tr>
+<tr class="odd">
+<td align="left">False</td>
+<td align="left">True</td>
+<td align="left">False</td>
+</tr>
+<tr class="even">
+<td align="left">False</td>
+<td align="left">False</td>
+<td align="left">False</td>
+</tr>
+</tbody>
+</table>
+<p><code>or</code> will result into <code>True</code> if any of the operands is <code>True</code>. The truth table for <code>or</code> is given below:</p>
+<table>
+<caption>Truth table for <code>or</code></caption>
+<thead>
+<tr class="header">
+<th align="left">A</th>
+<th align="left">B</th>
+<th align="left">A or B</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">True</td>
+<td align="left">True</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left">True</td>
+<td align="left">False</td>
+<td align="left">True</td>
+</tr>
+<tr class="odd">
+<td align="left">False</td>
+<td align="left">True</td>
+<td align="left">True</td>
+</tr>
+<tr class="even">
+<td align="left">False</td>
+<td align="left">False</td>
+<td align="left">False</td>
+</tr>
+</tbody>
+</table>
+<p><code>not</code> operator is used to invert the truth value. The truth table for <code>not</code> is given below:</p>
+<table>
+<caption>Truth tabel for <code>not</code></caption>
+<thead>
+<tr class="header">
+<th align="left">A</th>
+<th align="left">not A</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">True</td>
+<td align="left">False</td>
+</tr>
+<tr class="even">
+<td align="left">False</td>
+<td align="left">True</td>
+</tr>
+</tbody>
+</table>
+<p>some example of their usage are given below</p>
+<pre><code>&gt;&gt;&gt; True and False
+False
+&gt;&gt;&gt; True or False
+True
+&gt;&gt;&gt; not False
+True</code></pre>
+<h3 id="as">as</h3>
+<p><code>as</code> is used to create an alias while importing a module. It means giving a different name (user-defined) to a module while importing it.</p>
+<p>As for example, Python has a standard module called <code>math</code>. Suppose we want to calculate what cosine pi is using an alias. We can do it as follows using <code>as</code>:</p>
+<pre><code>&gt;&gt;&gt; import math as myAlias
+&gt;&gt;&gt;myAlias.cos(myAlias.pi)
+-1.0</code></pre>
+<p>Here we imported the <code>math</code> module by giving it the name <code>myAlias</code>. Now we can refer to the <code>math</code> module with this name. Using this name we calculated cos(pi) and got <code>-1.0</code> as the answer.</p>
+<h3 id="assert">assert</h3>
+<p><code>assert</code> is used for debugging purposes.</p>
+<p>While programming, sometimes we wish to know the internal state or check if our assumptions are true. <code>assert</code> helps us do this and find bugs more conveniently. <code>assert</code> is followed by a condition.</p>
+<p>If the condition is true, nothing happens. But if the condition is false, <code>AssertionError</code> is raised. For example:</p>
+<pre><code>&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; assert a &lt; 5
+&gt;&gt;&gt; assert a &gt; 5
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 301, in runcode
+  File &quot;&lt;interactive input&gt;&quot;, line 1, in &lt;module&gt;
+AssertionError</code></pre>
+<p>For our better understanding, we can also provide a message to be printed with the <code>AssertionError</code>.</p>
+<pre><code>&gt;&gt;&gt; a = 4
+&gt;&gt;&gt; assert a &gt; 5, &quot;The value of a is too small&quot;
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 301, in runcode
+  File &quot;&lt;interactive input&gt;&quot;, line 1, in &lt;module&gt;
+AssertionError: The value of a is too small</code></pre>
+<p>At this point we can note that,</p>
+<pre><code>assert condition, message</code></pre>
+<p>is equivalent to,</p>
+<pre><code>if not condition:
+    raise AssertionError(message)</code></pre>
+<h3 id="break_continue">break, continue</h3>
+<p><code>break</code> and <code>continue</code> are used inside <code>for</code> and <code>while</code> loops to alter their normal behavior.</p>
+<p><code>break</code> will end the smallest loop it is in and control flows to the statement immediately below the loop. <code>continue</code> causes to end the current iteration of the loop, but not the whole loop.</p>
+<p>This can be illustrated with the following two examples:</p>
+<pre><code>for i in range(1,11):
+    if i == 5:
+        break
+    print(i)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>1
+2
+3
+4</code></pre>
+<p>Here, the <code>for</code> loop intends to print numbers from 1 to 10. But the <code>if</code> condition is met when i is equal to 5 and we break from the loop. Thus, only the range 1 to 4 is printed.</p>
+<pre><code>for i in range(1,11):
+    if i == 5:
+        continue
+    print(i)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>1
+2
+3
+4
+6
+7
+8
+9
+10</code></pre>
+<p>Here we use <code>continue</code> for the same program. So, when the condition is met, that iteration is skipped. But we do not exit the loop. Hence, all the values except 5 is printed out.</p>
+<p>Learn more about <a href="/python-programming/break-continue" title="Python break and continue statement">Python break and continue statement</a>.</p>
+<h3 id="class">class</h3>
+<p><code>class</code> is used to define a new user-defined class in Python.</p>
+<p>Class is a collection of related attributes and methods that try to represent a real world situation. This idea of putting data and functions together in a class is central to the concept of object-oriented programming (OOP).</p>
+<p>Classes can be defined anywhere in a program. But it is a good practice to define a single class in a module. Following is a sample usage:</p>
+<pre><code>class ExampleClass:
+    def function1(parameters):
+        …
+    def function2(parameters):
+        …</code></pre>
+<p>Learn more about <a href="/python-programming/class" title="Python Objects and Class">Python Objects and Class</a>.</p>
+<h3 id="def">def</h3>
+<p><code>def</code> is used to define a user-defined function.</p>
+<p>Function is a block of related statements, which together does some specific task. It helps us organize code into manageable chunks and also to do some repetitive task.</p>
+<p>The usage of <code>def</code> is shown below:</p>
+<pre><code>def function_name(parameters):
+    …</code></pre>
+<p>Learn more about <a href="/python-programming/function" title="Python Functions">Python functions</a>.</p>
+<h3 id="del">del</h3>
+<p><code>del</code> is used to delete the reference to an object. Everything is object in Python. We can delete a variable reference using <code>del</code></p>
+<pre><code>&gt;&gt;&gt; a = b = 5
+&gt;&gt;&gt; del a
+&gt;&gt;&gt; a
+Traceback (most recent call last):
+  File &quot;&lt;string&gt;&quot;, line 301, in runcode
+  File &quot;&lt;interactive input&gt;&quot;, line 1, in &lt;module&gt;
+NameError: name &#39;a&#39; is not defined
+&gt;&gt;&gt; b
+5</code></pre>
+<p>Here we can see that the reference of the variable a was deleted. So, it is no longer defined. But b still exists.</p>
+<p><code>del</code> is also used to delete items from a list or a dictionary:</p>
+<pre><code>&gt;&gt;&gt; a = [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;]
+&gt;&gt;&gt; del a[1]
+&gt;&gt;&gt; a
+[&#39;x&#39;, &#39;z&#39;]</code></pre>
+<h3 id="if_else_elif">if, else, elif</h3>
+<p><code>if, else, elif</code> are used for conditional branching or decision making.</p>
+<p>When we want to test some condition and execute a block only if the condition is true, then we use <code>if</code> and <code>elif</code>. <code>elif</code> is short for else if. <code>else</code> is the block which is executed if the condition is false. This will be clear with the following example:</p>
+<pre><code>def if_example(a):
+    if a == 1:
+        print(&#39;One&#39;)
+    elif a == 2:
+        print(&#39;Two&#39;)
+    else:
+        print(&#39;Something else&#39;)
+
+if_example(2)
+if_example(4)
+if_example(1)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>Two
+Something else
+One</code></pre>
+<p>Here, the function checks the input number and prints the result if it is 1 or 2. Any input other than this will cause the <code>else</code> part of the code to execute.</p>
+<p>Learn more about <a href="/python-programming/if-elif-else" title="Python if Statement">Python if and if...else Statement</a>.</p>
+<h3 id="except_raise_try">except, raise, try</h3>
+<p><code>except, raise, try</code> are used with exceptions in Python.</p>
+<p>Exceptions are basically errors that suggests something went wrong while executing our program. <code>IOError</code>, <code>ValueError</code>, <code>ZeroDivisionError</code>, <code>ImportError</code>, <code>NameError</code>, <code>TypeError</code> etc. are few examples of exception in Python. <code>try...except</code> blocks are used to catch exceptions in Python.</p>
+<p>We can raise an exception explicitly with the <code>raise</code> keyword. Following is an example:</p>
+<pre><code>def reciprocal(num):
+    try:
+        r = 1/num
+    except:
+        print(&#39;Exception caught&#39;)
+        return
+    return r
+
+print(reciprocal(10))
+print(reciprocal(0))</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>0.1
+Exception caught
+None</code></pre>
+<p>Here, the function <code>reciprocal()</code> returns the reciprocal of the input number.</p>
+<p>When we enter 10, we get the normal output of 0.1. But when we input 0, a <code>ZeroDivisionError</code> is raised automatically.</p>
+<p>This is caught by our <code>try…except</code> block and we return <code>None</code>. We could have also raised the <code>ZeroDivisionError</code> explicitly by checking the input and handled it elsewhere as follows:</p>
+<pre><code>if num == 0:
+    raise ZeroDivisionError(&#39;cannot divide&#39;)</code></pre>
+<h3 id="finally">finally</h3>
+<p><code>finally</code> is used with <code>try…except</code> block to close up resources or file streams.</p>
+<p>Using <code>finally</code> ensures that the block of code inside it gets executed even if there is an unhandled exception. For example:</p>
+<pre><code>try:
+    Try-block
+except exception1:
+    Exception1-block
+except exception2:
+    Exception2-block
+else:
+    Else-block
+finally:
+    Finally-block</code></pre>
+<p>Here if there is an exception in the <code>Try-block</code>, it is handled in the <code>except</code> or <code>else</code> block. But no matter in what order the execution flows, we can rest assured that the <code>Finally-block</code> is executed even if there is an error. This is useful in cleaning up the resources.</p>
+<p>Learn more about <a href="/python-programming/exception-handling" title="Python Exception Handling">exception handling in Python programming</a>.</p>
+<h3 id="for">for</h3>
+<p><code>for</code> is used for looping. Generally we use <code>for</code> when we know the number of times we want to loop.</p>
+<p>In Python we can use it with any type of sequence like a list or a string. Here is an example in which <code>for</code> is used to traverse through a list of names:</p>
+<pre><code>names = [&#39;John&#39;,&#39;Monica&#39;,&#39;Steven&#39;,&#39;Robin&#39;]
+for i in names:
+    print(&#39;Hello &#39;+i)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>Hello John
+Hello Monica
+Hello Steven
+Hello Robin</code></pre>
+<p>Learn more about <a href="/python-programming/for-loop" title="Python for Loop">Python for loop</a>.</p>
+<h3 id="from_import">from, import</h3>
+<p><code>import</code> keyword is used to import modules into the current namespace. <code>from…import</code> is used to import specific attributes or functions into the current namespace. For example:</p>
+<pre><code>import math</code></pre>
+<p>will import the <code>math</code> module. Now we can use the <code>cos()</code> function inside it as <code>math.cos()</code>. But if we wanted to import just the <code>cos()</code> function, this can done using <code>from</code> as</p>
+<pre><code>from math import cos</code></pre>
+<p>now we can use the function simply as <code>cos()</code>, no need to write <code>math.cos()</code>.</p>
+<p>Learn more on <a href="/python-programming/modules" title="Python Modules">Python modules and import statement</a>.</p>
+<h3 id="global">global</h3>
+<p><code>global</code> is used to declare that a variable inside the function is global (outside the function).</p>
+<p>If we need to read the value of a global variable, it is not necessary to define it as <code>global</code>. This is understood.</p>
+<p>If we need to modify the value of a global variable inside a function, then we must declare it with <code>global</code>. Otherwise a local variable with that name is created.</p>
+<p>Following example will help us clarify this.</p>
+<pre><code>globvar = 10
+def read1():
+    print(globvar)
+def write1():
+    global globvar
+    globvar = 5
+def write2():
+    globvar = 15
+
+read1()
+write1()
+read1()
+write2()
+read1()</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>10
+5
+5</code></pre>
+<p>Here, the <code>read1()</code> function is just reading the value of <code>globvar</code>. So, we do not need to declare it as <code>global</code>. But the <code>write1()</code> function is modifying the value, so we need to declare the variable as <code>global</code>.</p>
+<p>We can see in our output that the modification did take place (10 is changed to 5). The <code>write2()</code> also tries to modify this value. But we have not declared it as <code>global</code>.</p>
+<p>Hence, a new local variable <code>globvar</code> is created which is not visible outside this function. Although we modify this local variable to 15, the global variable remains unchanged. This is clearly visible in our output.</p>
+<h3 id="in">in</h3>
+<p><code>in</code> is used to test if a sequence (list, tuple, string etc.) contains a value. It returns <code>True</code> if the value is present, else it returns <code>False</code>. For example:</p>
+<pre><code>&gt;&gt;&gt; a = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; 5 in a
+True
+&gt;&gt;&gt; 10 in a
+False</code></pre>
+<p>The secondary use of <code>in</code> is to traverse through a sequence in a <code>for</code> loop.</p>
+<pre><code>for i in &#39;hello&#39;:
+    print(i)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>h
+e
+l
+l
+o</code></pre>
+<h3 id="is">is</h3>
+<p><code>is</code> is used in Python for testing object identity. While the <code>==</code> operator is used to test if two variables are equal or not, <code>is</code> is used to test if the two variables refer to the same object.</p>
+<p>It returns <code>True</code> if the objects are identical and <code>False</code> if not.</p>
+<pre><code>&gt;&gt;&gt; True is True
+True
+&gt;&gt;&gt; False is False
+True
+&gt;&gt;&gt; None is None
+True</code></pre>
+<p>We know that there is only one instance of <code>True</code>, <code>False</code> and <code>None</code> in Python, so they are identical.</p>
+<pre><code>&gt;&gt;&gt; [] == []
+True
+&gt;&gt;&gt; [] is []
+False
+&gt;&gt;&gt; {} == {}
+True
+&gt;&gt;&gt; {} is {}
+False</code></pre>
+<p>An empty list or dictionary is equal to another empty one. But they are not identical objects as they are located separately in memory. This is because list and dictionary are mutable (value can be changed).</p>
+<pre><code>&gt;&gt;&gt; &#39;&#39; == &#39;&#39;
+True
+&gt;&gt;&gt; &#39;&#39; is &#39;&#39;
+True
+&gt;&gt;&gt; () == ()
+True
+&gt;&gt;&gt; () is ()
+True</code></pre>
+<p>Unlike list and dictionary, string and tuple are immutable (value cannot be altered once defined). Hence, two equal string or tuple are identical as well. They refer to the same memory location.</p>
+<h3 id="lambda">lambda</h3>
+<p><code>lambda</code> is used to create an anonymous function (function with no name). It is an inline function that does not contain a <code>return</code> statement. It consists of an expression that is evaluated and returned. For example:</p>
+<pre><code>a = lambda x: x*2
+for i in range(1,6):
+    print(a(i))</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>2
+4
+6
+8
+10</code></pre>
+<p>Here, we have created an inline function that doubles the value, using the <code>lambda</code> statement. We used this to double the values in a list containing 1 to 5.</p>
+<p>Learn more about <a href="/python-programming/anonymous-function" title="Python lamda function">Python lamda function</a>.</p>
+<h3 id="nonlocal">nonlocal</h3>
+<p>The use of <code>nonlocal</code> keyword is very much similar to the <code>global</code> keyword. <code>nonlocal</code> is used to declare that a variable inside a nested function (function inside a function) is not local to it, meaning it lies in the outer inclosing function. If we need to modify the value of a non-local variable inside a nested function, then we must declare it with <code>nonlocal</code>. Otherwise a local variable with that name is created inside the nested function. Following example will help us clarify this.</p>
+<pre><code>def outer_function():
+    a = 5
+    def inner_function():
+        nonlocal a
+        a = 10
+        print(&quot;Inner function: &quot;,a)
+    inner_function()
+    print(&quot;Outer function: &quot;,a)
+
+outer_function()</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>Inner function:  10
+Outer function:  10</code></pre>
+<p>Here, the <code>inner_function()</code> is nested within the <code>outer_function</code>.</p>
+<p>The variable a is in the <code>outer_function()</code>. So, if we want to modify it in the <code>inner_function()</code>, we must declare it as <code>nonlocal</code>. Notice that a is not a global variable.</p>
+<p>Hence, we see from the output that the variable was successfully modified inside the nested <code>inner_function()</code>. The result of not using the <code>nonlocal</code> keyword is as follows:</p>
+<pre><code>def outer_function():
+    a = 5
+    def inner_function():
+        a = 10
+        print(&quot;Inner function: &quot;,a)
+    inner_function()
+    print(&quot;Outer function: &quot;,a)
+
+outer_function()</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>Inner function:  10
+Outer function:  5</code></pre>
+<p>Here, we do not declare that the variable a inside the nested function is <code>nonlocal</code>. Hence, a new local variable with the same name is created, but the non-local a is not modified as seen in our output.</p>
+<h3 id="pass">pass</h3>
+<p><code>pass</code> is a null statement in Python. Nothing happens when it is executed. It is used as a placeholder.</p>
+<p>Suppose we have a function that is not implemented yet, but we want to implement it in the future. Simply writing,</p>
+<pre><code>def function(args):</code></pre>
+<p>in the middle of a program will give us <code>IndentationError</code>. Instead of this, we construct a blank body with the <code>pass</code> statement.</p>
+<pre><code>def function(args):
+    pass</code></pre>
+<p>We can do the same thing in an empty <code>class</code> as well.</p>
+<pre><code>class example:
+    pass</code></pre>
+<h3 id="return">return</h3>
+<p><code>return</code> statement is used inside a function to exit it and return a value.</p>
+<p>If we do not return a value explicitly, <code>None</code> is returned automatically. This is verified with the following example.</p>
+<pre><code>def func_return():
+    a = 10
+    return a
+
+def no_return():
+    a = 10
+
+print(func_return())
+print(no_return())</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>10
+None</code></pre>
+<h3 id="while">while</h3>
+<p><code>while</code> is used for looping in Python.</p>
+<p>The statements inside a <code>while</code> loop continue to execute until the condition for the <code>while</code> loop evaluates to <code>False</code> or a <code>break</code> statement is encountered. Following program illustrates this.</p>
+<pre><code>i = 5
+while(i):
+    print(i)
+    i = i – 1</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>5
+4
+3
+2
+1</code></pre>
+<p>Note that 0 is equal to <code>False</code>.</p>
+<p>Learn more about <a href="/python-programming/while-loop" title="Python for loop">Python while loop</a>.</p>
+<h3 id="with">with</h3>
+<p><code>with</code> statement is used to wrap the execution of a block of code within methods defined by the context manager.</p>
+<p>Context manager is a class that implements <code>__enter__</code> and <code>__exit__</code> methods. Use of <code>with</code> statement ensures that the <code>__exit__</code> method is called at the end of the nested block. This concept is similar to the use of <code>try…finally</code> block. Here, is an example.</p>
+<pre><code>with open(&#39;example.txt&#39;, &#39;w&#39;) as my_file:
+    my_file.write(&#39;Hello world!&#39;)</code></pre>
+<p>This example writes the text <code>Hello world!</code> to the file <code>example.txt</code>. File objects have <code>__enter__</code> and <code>__exit__</code> method defined within them, so they act as their own context manager.</p>
+<p>First the <code>__enter__</code> method is called, then the code within <code>with</code> statement is executed and finally the <code>__exit__</code> method is called. <code>__exit__</code> method is called even if there is an error. It basically closes the file stream.</p>
+<h3 id="yield">yield</h3>
+<p><code>yield</code> is used inside a function like a <code>return</code> statement. But <code>yield</code> returns a generator.</p>
+<p>Generator is an iterator that generates one item at a time. A large list of value will take up a lot of memory. Generators are useful in this situation as it generates only one value at a time instead of storing all the values in memory. For example,</p>
+<pre><code>&gt;&gt;&gt; g = (2**x for x in range(100))</code></pre>
+<p>will create a generator g which generates powers of 2 up to the number two raised to the power 99. We can generate the numbers using the <code>next()</code> function as shown below.</p>
+<pre><code>&gt;&gt;&gt; next(g)
+1
+&gt;&gt;&gt; next(g)
+2
+&gt;&gt;&gt; next(g)
+4
+&gt;&gt;&gt; next(g)
+8
+&gt;&gt;&gt; next(g)
+16</code></pre>
+<p>And so on… This type of generator is returned by the <code>yield</code> statement from a function. Here is an example.</p>
+<pre><code>def generator():
+    for i in range(6):
+        yield i*i
+
+g = generator()
+for i in g:
+    print(i)</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>0
+1
+4
+9
+16
+25</code></pre>
+<p>Here, the function <code>generator()</code> returns a generator that generates square of numbers from 0 to 5. This is printed in the <code>for</code> loop.</p>
+</body>
+</html>

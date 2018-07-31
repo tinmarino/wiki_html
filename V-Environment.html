@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Vim environemnt</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Vim environemnt</h1>
+</div>
+<table style="width:43%;">
+<colgroup>
+<col width="5%" />
+<col width="37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Command</strong></th>
+<th><strong>Explanation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>:abbreviate</td>
+<td>list abbreviations</td>
+</tr>
+<tr class="even">
+<td>:args</td>
+<td>argument list</td>
+</tr>
+<tr class="odd">
+<td>:augroup</td>
+<td>augroups</td>
+</tr>
+<tr class="even">
+<td>:autocmd</td>
+<td>list auto-commands</td>
+</tr>
+<tr class="odd">
+<td>:buffers</td>
+<td>list buffers</td>
+</tr>
+<tr class="even">
+<td>:breaklist</td>
+<td>list current breakpoints</td>
+</tr>
+<tr class="odd">
+<td>:cabbrev</td>
+<td>list command mode abbreviations</td>
+</tr>
+<tr class="even">
+<td>:changes</td>
+<td>changes</td>
+</tr>
+<tr class="odd">
+<td>:cmap</td>
+<td>list command mode maps</td>
+</tr>
+<tr class="even">
+<td>:command</td>
+<td>list commands</td>
+</tr>
+<tr class="odd">
+<td>:compiler</td>
+<td>list compiler scripts</td>
+</tr>
+<tr class="even">
+<td>:digraphs</td>
+<td>digraphs</td>
+</tr>
+<tr class="odd">
+<td>:file</td>
+<td>print filename, cursor position and status (like Ctrl-G)</td>
+</tr>
+<tr class="even">
+<td>:filetype</td>
+<td>on/off settings for filetype detect/plugins/indent</td>
+</tr>
+<tr class="odd">
+<td>:function</td>
+<td>list user-defined functions (names and argument lists but not the full code)</td>
+</tr>
+<tr class="even">
+<td>:function Foo</td>
+<td>user-defined function Foo() (full code list)</td>
+</tr>
+<tr class="odd">
+<td>:highlight</td>
+<td>highlight groups</td>
+</tr>
+<tr class="even">
+<td>:history c</td>
+<td>command history</td>
+</tr>
+<tr class="odd">
+<td>:history =</td>
+<td>expression history</td>
+</tr>
+<tr class="even">
+<td>:history s</td>
+<td>search history</td>
+</tr>
+<tr class="odd">
+<td>:history</td>
+<td>your commands</td>
+</tr>
+<tr class="even">
+<td>:iabbrev</td>
+<td>list insert mode abbreviations</td>
+</tr>
+<tr class="odd">
+<td>:imap</td>
+<td>list insert mode maps</td>
+</tr>
+<tr class="even">
+<td>:intro</td>
+<td>the Vim splash screen, with summary version info</td>
+</tr>
+<tr class="odd">
+<td>:jumps</td>
+<td>your movements</td>
+</tr>
+<tr class="even">
+<td>:language</td>
+<td>current language settings</td>
+</tr>
+<tr class="odd">
+<td>:let</td>
+<td>all variables</td>
+</tr>
+<tr class="even">
+<td>:let FooBar</td>
+<td>variable FooBar</td>
+</tr>
+<tr class="odd">
+<td>:let g:</td>
+<td>global variables</td>
+</tr>
+<tr class="even">
+<td>:let v:</td>
+<td>Vim variables</td>
+</tr>
+<tr class="odd">
+<td>:list</td>
+<td>buffer lines (many similar commands)</td>
+</tr>
+<tr class="even">
+<td>:lmap</td>
+<td>language mappings (set by keymap or by lmap)</td>
+</tr>
+<tr class="odd">
+<td>:ls</td>
+<td>buffers</td>
+</tr>
+<tr class="even">
+<td>:ls!</td>
+<td>buffers, including &quot;unlisted&quot; buffers</td>
+</tr>
+<tr class="odd">
+<td>:map!</td>
+<td>Insert and Command-line mode maps (imap, cmap)</td>
+</tr>
+<tr class="even">
+<td>:map</td>
+<td>Normal and Visual mode maps (nmap, vmap, xmap, smap, omap)</td>
+</tr>
+<tr class="odd">
+<td>:map<buffer></td>
+<td>buffer local Normal and Visual mode maps</td>
+</tr>
+<tr class="even">
+<td>:map!<buffer></td>
+<td>buffer local Insert and Command-line mode maps</td>
+</tr>
+<tr class="odd">
+<td>:marks</td>
+<td>marks</td>
+</tr>
+<tr class="even">
+<td>:menu</td>
+<td>menu items</td>
+</tr>
+<tr class="odd">
+<td>:messages</td>
+<td>message history</td>
+</tr>
+<tr class="even">
+<td>:nmap</td>
+<td>Normal-mode mappings only</td>
+</tr>
+<tr class="odd">
+<td>:omap</td>
+<td>Operator-pending mode mappings only</td>
+</tr>
+<tr class="even">
+<td>:print</td>
+<td>display buffer lines (useful after :g or with a range)</td>
+</tr>
+<tr class="odd">
+<td>:reg</td>
+<td>registers</td>
+</tr>
+<tr class="even">
+<td>:scriptnames</td>
+<td>all scripts sourced so far</td>
+</tr>
+<tr class="odd">
+<td>:set all</td>
+<td>all options, including defaults</td>
+</tr>
+<tr class="even">
+<td>:setglobal</td>
+<td>global option values</td>
+</tr>
+<tr class="odd">
+<td>:setlocal</td>
+<td>local option values</td>
+</tr>
+<tr class="even">
+<td>:set</td>
+<td>options with non-default value</td>
+</tr>
+<tr class="odd">
+<td>:set termcap</td>
+<td>list terminal codes and terminal keys</td>
+</tr>
+<tr class="even">
+<td>:smap</td>
+<td>Select-mode mappings only</td>
+</tr>
+<tr class="odd">
+<td>:spellinfo</td>
+<td>spellfiles used</td>
+</tr>
+<tr class="even">
+<td>:syntax</td>
+<td>syntax items</td>
+</tr>
+<tr class="odd">
+<td>:syn sync</td>
+<td>current syntax sync mode</td>
+</tr>
+<tr class="even">
+<td>:tabs</td>
+<td>tab pages</td>
+</tr>
+<tr class="odd">
+<td>:tags</td>
+<td>tag stack contents</td>
+</tr>
+<tr class="even">
+<td>:undolist</td>
+<td>leaves of the undo tree</td>
+</tr>
+<tr class="odd">
+<td>:verbose</td>
+<td>show info about where a map or autocmd or function is defined</td>
+</tr>
+<tr class="even">
+<td>:version</td>
+<td>list version and build options</td>
+</tr>
+<tr class="odd">
+<td>:vmap</td>
+<td>Visual and Select mode mappings only</td>
+</tr>
+<tr class="even">
+<td>:winpos</td>
+<td>Vim window position (gui)</td>
+</tr>
+<tr class="odd">
+<td>:xmap</td>
+<td>visual mode maps only</td>
+</tr>
+</tbody>
+</table>
+<p>NOTE : Additional information is available to a Vim script. For example, :help tabpagebuflist() shows how to list all buffers in all tabs.</p>
+<p>A script called bugreport.vim is provided with Vim. When run, the script produces a file with information about Vim's environment.<br />
+To see the script, use the command <code>:view $VIMRUNTIME/bugreport.vim</code> in Vim.</p>
+</body>
+</html>

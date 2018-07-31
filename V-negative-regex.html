@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 id="search-for-lines-not-containing-pattern-and-other-helpful-searches" class="page-header__title">Search for lines not containing pattern and other helpful searches</h1>
+<p>It can be useful to specify in a search or a substitution what you do not want to have. Here is how to do that:</p>
+<pre><code>/^\(\(The_Regular_Expression\)\@!.\)*$</code></pre>
+<p>This will find everything but the regular expression you have specified. For example, if we want to find all the lines not containing the word 'foo', do:</p>
+<pre><code>/^\(\(.*foo.*\)\@!.\)*$</code></pre>
+<p>Here is an example: When examining a log file, you might only be interested in lines <em>not</em> containing the word &quot;Warning&quot;, so the search command is:</p>
+<pre><code>/^\(.*Warning\)\@!.*$</code></pre>
+<p>To match all words except 'foo', use:</p>
+<pre><code>/\&lt;\(foo\&gt;\)\@!\k\+\&gt;</code></pre>
+<ul>
+<li><code>\&lt;</code> Start-of-word</li>
+<li><code>\(Foo\&gt;\)</code> The atom 'Foo' followed by end-of-word</li>
+<li><code>\@!</code> Match (with zero length) when the previous atom doesn't match.</li>
+<li><code>\k\+</code> Match one or more Keywords</li>
+<li><code>\&gt;</code> Match end-of-word.</li>
+</ul>
+<p>The use of <code>\@!</code> can be very tricky. According to the Vim help files, it is often easier to use <code>\@&lt;!</code> instead. For example, to find all 'bar' strings unless they are part of 'foobar', use the following (non-magic):</p>
+<pre><code>/\(foo\)\@&lt;!bar</code></pre>
+<p>If we want to find a more complex regular expression on multiple lines, like all the lines which do not begin with 'foo' with 'bar' somewhere else and the word 'magic' at the end of the next line, do:</p>
+<pre><code>/^\(\(^foo.*bar.*\n.*magic$\)\@!.\)*$</code></pre>
+<p>Another thing useful in searches and substitutions is to omit some information. For example, suppose we want to find every 'foo' with 'bar' somewhere else on the line, but we do not want to take the 'bar' part in the search (let's say not highlight it if the hlsearch is set), we can do:</p>
+<pre><code>/foo\(.*bar\)\@=
+/foo.*\(bar\)\@=
+/foo.\{-}\(bar\)\@=</code></pre>
+<p>The first one will highlight only 'foo' in lines containing both 'foo' and 'bar'. The second one will highlight 'foo' and everything up to the longest match where 'bar' appears on the line. The third one, will do the same thing, but with the shortest match (non-greedy). So, if there is more than one 'bar' on the same line, the search will stop right before the first occurrence of 'bar'.</p>
+<p>We can also do the opposite. Let's say for example finding all the 'foo' with 'bar' some place else without highlighting the 'foo', we can do:</p>
+<pre><code>/\(foo.*\)\@&lt;=bar
+/\(foo\)\@&lt;=.*bar
+/\(foo\)\@&lt;=.\{-}bar</code></pre>
+<p>The first one will highlight only 'bar' in lines containing both 'foo' and 'bar'. The second one will highlight everything right after 'foo' up to the last 'bar' on the line. The third one will highlight everything right after 'foo' and up to the first 'bar' (non-greedy).</p>
+<p>There is also a way to specify that a part of the regular expression should not be there. As an example, if we want to search for all the lines where there is no word 'foo' preceding the word 'bar', we can do:</p>
+<pre><code>/\(foo.*\)\@&lt;!bar</code></pre>
+<p>Or, on the other hand, find all the word 'foo' where there is no 'bar' following, we can do:</p>
+<pre><code>/foo\(.*bar\)\@!</code></pre>
+<p>Now, let's see another kind of search. Imagine we want to find every 'bar' where there is no 'foo' before it. <strong>TODO Fix missing text</strong></p>
+<p>There is a way with Vim to specify where the beginning of the search pattern should start. As an example, suppose we want to find the lines beginning with 'foo', with the word 'bar' somewhere else and then 'magic', but that we only want to highlight 'magic' and everything up to the end to the line. We can use 'zs' for that like this:</p>
+<pre><code>/^foo.*bar.*\zsmagic.*</code></pre>
+<p>We can also do the opposite, specify where the search should end. For example, if we want to highlight every 'foo' with 'bar' with 'magic', but not highlight 'magic', we can do:</p>
+<pre><code>/foo.*bar.*\zemagic
+/foo.*bar.\{-}\zemagic</code></pre>
+<p>The last example was non-greedy, that is, matches up to the first occurrence of 'magic' in a line.</p>
+<p>Other interesting searches are the beginning of a file. For example to find the first word of a file, we can do (this one needs the <code>+syntax</code> feature when compiled):</p>
+<pre><code>/\%^\_.\{-}\&lt;.\{-}\&gt;</code></pre>
+<p>Or the first occurrence of a word in a file:</p>
+<pre><code>/\%^\_.\{-}\zsVIM</code></pre>
+<p>We can also search for something at the end of a file. For example, the last occurrence of 'VIM' in a file (this one is tricky):</p>
+<pre><code>/VIM\ze\(\(VIM\)\@!\_.\)*\%$</code></pre>
+<p>It finds the word 'VIM' where there is no word 'VIM' after it until the end of the file!</p>
+<h3 id="using-thev-commandeditwikisearch_for_lines_not_containing_pattern_and_other_helpful_searchesactioneditsection1-edit-using-thev-command-section.html"><span id="Using_the_:v_command" class="mw-headline">Using the :v command</span><span class="editsection">[<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil" />Edit](/wiki/Search_for_lines_not_containing_pattern_and_other_helpful_searches?action=edit&amp;section=1 &quot;Edit Using the :v command section&quot;.html)</span></h3>
+<p>The traditional approach to find lines not matching a pattern is using the <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%3Ag.html" class="external text">:v</a> command:</p>
+<pre><code>:v/Warning/p</code></pre>
+<p>A neat trick when working with a large log file where you want to filter out as many irrelevant lines as possible before you get started on your real search is to save the file under a temporary name and delete all non-matching lines there:</p>
+<pre><code>:sav junk.log
+:v/warning/d</code></pre>
+<p>You are now are editing a clone of your original file with all lines not matching &quot;warning&quot; removed and you can edit it at will.</p>
+<h2 id="referenceseditwikisearch_for_lines_not_containing_pattern_and_other_helpful_searchesactioneditsection2-edit-references-section.html"><span id="References" class="mw-headline">References</span><span class="editsection">[<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil" />Edit](/wiki/Search_for_lines_not_containing_pattern_and_other_helpful_searches?action=edit&amp;section=2 &quot;Edit References section&quot;.html)</span></h2>
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%40%3D.html" class="external text">:help /\@=</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%40%21.html" class="external text">:help /\@!</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%40%3C%3D.html" class="external text">:help /\@&lt;=</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%40%3C%21.html" class="external text">:help /\@&lt;!</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%40%3E.html" class="external text">:help /\@&gt;</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5Czs.html" class="external text">:help /\zs</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5Cze.html" class="external text">:help /\ze</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%25%5E.html" class="external text">:help /\%^</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%2F%5C%25%24.html" class="external text">:help /\%$</a></li>
+<li><a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%3Ag.html" class="external text">:help :g</a></li>
+</ul>
+</body>
+</html>

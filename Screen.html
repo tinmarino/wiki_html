@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>GNU screen cheat</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">GNU screen cheat</h1>
+</div>
+<h2 id="getting-in-test">Getting in test</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td>screen -S <name></td>
+<td>start a new screen session with session name</td>
+</tr>
+<tr class="even">
+<td>screen -ls</td>
+<td>list running sessions/screens</td>
+</tr>
+<tr class="odd">
+<td>screen -x</td>
+<td>attach to a running session</td>
+</tr>
+<tr class="even">
+<td>screen -dRR</td>
+<td>the “ultimate attach”</td>
+</tr>
+</tbody>
+</table>
+<p>(Attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one. If multiple sessions exist, uses the first one.)</p>
+<h2 id="escape-key">Escape key</h2>
+<p>All screen commands are prefixed by an escape key, by default <code>C-a</code> (that's Control-a, sometimes written <code>^a</code>). To send a literal <code>C-a</code> to the programs in screen, use <code>C-a a</code>. This is useful when working with screen within screen. For example <code>C-a a n</code> will move screen to a new window on the screen within screen.</p>
+<h2 id="getting-out">Getting out</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>C-a d</code></td>
+<td>Detach</td>
+</tr>
+<tr class="even">
+<td><code>C-a D D</code></td>
+<td>Detach and logout (quick exit)</td>
+</tr>
+<tr class="odd">
+<td><code>C-a \</code></td>
+<td>Exit screen = exit all program in screen (not recommended)</td>
+</tr>
+<tr class="even">
+<td><code>C-a C-\</code></td>
+<td>Force-exit screen = not recommended</td>
+</tr>
+<tr class="odd">
+<td><code>C-a c</code></td>
+<td>Getting out of the screen session</td>
+</tr>
+</tbody>
+</table>
+<h2 id="window-management">Window management</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>C-a C-a</code></td>
+<td>Change to last-visited active window</td>
+</tr>
+<tr class="even">
+<td><code>C-a &lt;n&gt;</code></td>
+<td>Change to window by number</td>
+</tr>
+<tr class="odd">
+<td><code>C-a ' &lt;n or t&gt;</code></td>
+<td>Change to window by number or name</td>
+</tr>
+<tr class="even">
+<td><code>C-a n</code></td>
+<td>Change to next window in list</td>
+</tr>
+<tr class="odd">
+<td><code>C-a p</code></td>
+<td>Change to previous window in list</td>
+</tr>
+<tr class="even">
+<td><code>C-a &quot;</code></td>
+<td>See window list</td>
+</tr>
+<tr class="odd">
+<td><code>C-a w</code></td>
+<td>Show window bar</td>
+</tr>
+<tr class="even">
+<td><code>C-a k</code></td>
+<td>Kill current window</td>
+</tr>
+<tr class="odd">
+<td><code>C-a \</code></td>
+<td>Kill all windows</td>
+</tr>
+<tr class="even">
+<td><code>C-a A</code></td>
+<td>Rename current window</td>
+</tr>
+</tbody>
+</table>
+<h2 id="split-screen">Split screen</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td>C-a S</td>
+<td>Split display horizontally</td>
+</tr>
+<tr class="even">
+<td>C-a</td>
+<td>Split display vertically</td>
+</tr>
+<tr class="odd">
+<td>or C-a V</td>
+<td>(for the vanilla vertical screen patch)</td>
+</tr>
+<tr class="even">
+<td>C-a tab</td>
+<td>Jump to next display region</td>
+</tr>
+<tr class="odd">
+<td>C-a X</td>
+<td>Remove current region</td>
+</tr>
+<tr class="even">
+<td>C-a Q</td>
+<td>Remove all regions but the current one</td>
+</tr>
+</tbody>
+</table>
+<h2 id="clipboard-and-navigation">Clipboard and navigation</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td>C-a [</td>
+<td>Freely navigate buffer</td>
+</tr>
+<tr class="even">
+<td>space</td>
+<td>Toggle selection to copy</td>
+</tr>
+<tr class="odd">
+<td>C-a ]</td>
+<td>Paste</td>
+</tr>
+</tbody>
+</table>
+<h2 id="help">Help</h2>
+<p>| --- | --- | | C-a ? | See help | The man page is the complete reference.</p>
+<h2 id="scripting">Scripting</h2>
+<p>To any session name,</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># send a command to a named session</span>
+<span class="ex">screen</span> -S name -X command       
+<span class="co"># create a new window and run ping example.com</span>
+<span class="ex">screen</span> -S name -X screen ping example.com       
+<span class="co"># stuff characters into the input buffer</span>
+<span class="co"># using bash to expand a newline character</span>
+<span class="ex">screen</span> -S name [-p page] -X stuff <span class="st">$&#39;quit</span><span class="dt">\r</span><span class="st">&#39;</span>     
+
+<span class="ex">A</span> full example:
+<span class="co"># run bash within screen</span>
+<span class="ex">screen</span> -AmdS bash_shell bash
+<span class="co"># run top within that bash session</span>
+<span class="ex">screen</span> -S bash_shell -p 0 -X stuff <span class="st">$&#39;top</span><span class="dt">\r</span><span class="st">&#39;</span>
+<span class="co"># ... some time later</span>
+<span class="co"># stuff &#39;q&#39; to tell top to quit</span>
+<span class="ex">screen</span> -S bash_shell -X stuff <span class="st">&#39;q&#39;</span>
+<span class="co"># stuff &#39;exit\n&#39; to exit bash session</span>
+<span class="ex">screen</span> -S bash_shell -X stuff <span class="st">$&#39;exit</span><span class="dt">\r</span><span class="st">&#39;</span></code></pre></div>
+<h2 id="misc">Misc</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td>C-a C-l</td>
+<td>Redraw window</td>
+</tr>
+<tr class="even">
+<td>C-a M</td>
+<td>Monitor window for activity</td>
+</tr>
+<tr class="odd">
+<td>C-a _</td>
+<td>Monitor window for silence</td>
+</tr>
+<tr class="even">
+<td>C-a C-v</td>
+<td>Enter digraph (for producing non-ASCII characters)</td>
+</tr>
+<tr class="odd">
+<td>C-a x</td>
+<td>Lock (password protect) session</td>
+</tr>
+<tr class="even">
+<td>C-a :</td>
+<td>Enter screen command</td>
+</tr>
+<tr class="odd">
+<td>C-a H</td>
+<td>Enable logging in the screen session</td>
+</tr>
+</tbody>
+</table>
+<h2 id="scrollback-buffer">Scrollback-buffer</h2>
+<p>In copy mode, one can navigate the scrollback buffer in various ways:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>C-u</td>
+<td>Half page up</td>
+</tr>
+<tr class="even">
+<td>C-d</td>
+<td>Half page down</td>
+</tr>
+<tr class="odd">
+<td>C-b</td>
+<td>Back</td>
+</tr>
+<tr class="even">
+<td>C-f</td>
+<td>Forward</td>
+</tr>
+<tr class="odd">
+<td>h/j/k/l</td>
+<td>Cursor left/down/up/right</td>
+</tr>
+</tbody>
+</table>
+<p>from http://aperiodic.net/screen/quick_reference</p>
+</body>
+</html>

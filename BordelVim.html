@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p><em>v-eclim.txt</em> Eclim shortcuts, maps, tips (todo merge with scirpt)</p>
+<pre><code>:Java %
+:NewJarEntry in .classpath</code></pre>
+<p>This makes it easy to count the number of occurrences of the word under the cursor: first press * to search for the current word, then enter :%s///gn to count all occurrences of that word. <em>v-eclim-idid</em> if import android cannot be resolved: add to .classpath (graddle) <classpathentry kind="src" path="src"/> <classpathentry exported="true" kind="lib" path="/home2/tourneboeuf/Software/Android/SDK/android-sdk-linux/platforms/android-22/android.jar"/></p>
+<p>!sort | uniq -c AAA AAA AAA BBB BBB AAA AAA</p>
+<p>you would end up with 3 AAA 2 BBB 2 AAA</p>
+<p><em>v-appearance.txt</em> Statusline (todo merge with script)</p>
+<p>=============================================================================== Appearance ~</p>
+<hr />
+<p>The <em>v-statusline</em> option</p>
+<p>This is a line at the bottom to get hud text. The ruler is supperposed to the statusline. If you want to play with it, first run &gt;vim set noruler set laststatus=2 <vim
+Then you can see what you are doing.
+
+For a *default-statusline* you can take this one 
+>vim :set statusline=%&lt;%f %h%m%r %y%=%{v:register} %-14.(%l,%c%V%) %P <vim
+You can also change ruler with 
+>vim :set rulerformat=%-14.(%l,%c%V%) %P <vim
+> hi User2 ctermbg=red ctermfg=blue guibg=red guifg=blue hi User1 ctermbg=green ctermfg=red guibg=green guifg=red hi User3 ctermbg=blue ctermfg=green guibg=blue guifg=green</p>
+<p>set statusline= set statusline+=%1* &quot;switch to User1 highlight set statusline+=%F &quot;full filename set statusline+=%2* &quot;switch to User2 highlight set statusline+=%y &quot;filetype set statusline+=%3* &quot;switch to User3 highlight set statusline+=%l &quot;line number set statusline+=%* &quot;switch back to statusline highlight set statusline+=%P &quot;percentage thru file &lt;</p>
+<p>vim: ft=myhelp:set modificable</p>
+<p><em>v-help.txt</em> How to add custom help, like myself</p>
+<ol style="list-style-type: decimal">
+<li>Add |v-help-add|</li>
+<li>Syntax |v-help-syntax|</li>
+<li>Browse |v-help-browse|</li>
+</ol>
+<p>=============================================================================== <em>v-help-add</em> Add Help ~</p>
+<p>In my runtime folder (ex ~/.vim/), in a doc folder I have many help files with documentation. They must be in a runtimepath/doc and not in a nested directory there.</p>
+<p>The Filename must start with the type and the tags are in separated with '#'</p>
+<p>The first line of the file can contains a tag and it will then be added to the local-addtions help file (see :h local-addtions)</p>
+<p>Dont forget to run helptags ./ in the current dir (doc) or just :Helptags for all pathogen stuff for the tags to be generated. Then the command :h will search them in a runtimepath/doc folder</p>
+<p>=============================================================================== <em>v-help-syntax</em> Help Syntax ~</p>
+<p>You can read /usr/share/vim/vim74/syntax/help.vim to get more info. You can get the vim path with :scriptnames because some of those stuff will be sourced</p>
+<p>=============================================================================== <em>v-help-browse</em> Browse help ~ :h help</p>
+<p>You can see everything I made with :h local-addtions</p>
+<blockquote>
+<p>vim command -nargs=* -complete=help Help vertical belowright help <args> :vert help :vert bo help &lt;vim</p>
+</blockquote>
+<blockquote>
+<p>vim :tag v#help :h v#help &lt;vim</p>
+</blockquote>
+<p>vim: ft=myhelp</p>
+<p><em>v-map.txt</em> Maps I don't wanna put in my vimrc</p>
+<blockquote>
+<p>vim :nmap Display normal mode maps :imap Display insert mode maps :vmap Display visual and select mode maps :smap Display select mode maps :xmap Display visual mode maps :cmap Display command-line mode maps :omap Display operator pending mode maps :nmapclear Clear all normal mode maps &lt;vim</p>
+</blockquote>
+<p>&quot;insert the directory name of the current buffer: :inoremap <F2> <C-R>=expand('%:p:h')<CR></p>
+<p>&quot; For when you forget to sudo.. Really Write the file. cmap w!! w !sudo tee % &gt;/dev/null</p>
+<p>&quot; visual shifting (does not exit Visual mode) vnoremap &lt; <gv
+vnoremap > &gt;gv</p>
+<p>&quot; Window mappings map <C-j> <C-W>j map <C-k> <C-W>k map <C-h> <C-W>h map <C-l> <C-W>l map <Leader>- <C-W><em><C-W><Bar> map <Leader></em> <C-W>_<C-W><Bar> map <Leader>= <C-w>=</p>
+<p>vim: ft=myhelp</p>
+<p><em>v-stack.txt</em> Drop shit here, git and move it then</p>
+<p>=============================================================================== Stack ~</p>
+<p>&quot; file is large from 10mb let g:LargeFile = 1024 * 1024 * 10 augroup LargeFile autocmd BufReadPre * let f=getfsize(expand(&quot;<afile>&quot;)) | if f &gt; g:LargeFile || f == -2 | call LargeFile() | endif augroup END</p>
+<p>function LargeFile() &quot; no syntax highlighting etc set eventignore+=FileType &quot; save memory when other file is viewed setlocal bufhidden=unload &quot; is read-only (write with :w new_filename) setlocal buftype=nowrite &quot; no undo possible setlocal undolevels=-1 &quot; display message autocmd VimEnter * echo &quot;The file is larger than &quot; . (g:LargeFile / 1024 / 1024) . &quot; MB, so some options are changed (see .vimrc for details).&quot; endfunction</p>
+<p>Ctrl+a Increment number under the cursor Ctrl+x Decrement number under cursor ggVGg? Change text to Rot13 g~~ Invert case ggguG Set all text to lowercase</p>
+<p>=============================================================================== <em>v-os</em> Os ~</p>
+<p>ftype code=&quot;C:.exe&quot; --remote-tab-silent &quot;%1&quot; assoc .py code # if you don't know to what python is asso type &quot;assoc .py&quot;</p>
+<p>:oldfiles :browse oldfiles</p>
+<pre><code>    set nrformats=
+:e ++ff=unix
+inoremap &lt;C-X&gt;&lt;C-S&gt; &lt;C-O&gt;:set completefunc=syntaxcomplete#Complete&lt;CR&gt;&lt;C-X&gt;&lt;C-U&gt;
+inoremap &lt;C-x&gt;&lt;C-z&gt; &lt;C-o&gt;:set completefunc=SimpleComplete&lt;CR&gt;&lt;C-x&gt;&lt;C-u&gt;
+imap 
+imap &lt;expr&gt; aa pumvisible() ? &quot;&lt;ESC&gt;:echo &#39;yes&#39;&lt;CR&gt;&quot; : &quot;&lt;ESC&gt;:echo &#39;no&#39;&lt;CR&gt;&quot;
+:command -complete=file -nargs=1 OpenFile e &lt;args&gt;
+setlocal omnifunc=syntaxcomplete#Complete
+
+setlocal omnifunc=syntaxcomplete#Complete
+inoremap &lt;expr&gt;&lt;C-X&gt;&lt;C-S&gt; neocomplete#start_manual_complete()
+
+Cv Cj insert \%x00 and can be used as a line separator
+? How to complete keyword
+
+
+
+
+
+:set virtualedit=all
+highlight LineNr ctermfg=grey ctermbg=white
+:highlight NonText ctermfg=12  # to display ~ for empay lines
+let &amp;colorcolumn=join(range(81,999),&quot;,&quot;)</code></pre>
+<p>cpp CSearchContext for elcim and <C-X> <C-O> youcompleteme, clang_complete or cpp_omnicomplete with ctags, or eclim (currently what I use You can use gn in version 7.4 onwards (and gN to go backwards). It replaces the v//e trick.</p>
+<pre><code>    Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match
+
+
+
+
+
+
+
+
+
+
+Jav afunction names 
+\v(public|protected|private|static|\s) +(\w|\&lt;|\&gt;|\[|\])+ *\s+\zs\w+\ze *\([^()]*\)
+
+
+    :set fileformat  # UNIX window
+    map ,a :let mycurf=expand(&quot;&lt;cfile&gt;&quot;)&lt;cr&gt;&lt;c-w&gt;w:execute(&quot;e &quot;.mycurf)&lt;cr&gt;&lt;c-w&gt;p
+
+    &quot;background color 
+    :highlight Normal ctermfg=grey ctermbg=darkblue
+    make good fold </code></pre>
+<p>au FileType python setlocal formatprg=autopep8 -</p>
+<p>vim: ft=myhelp:set modificable</p>
+<p><em>v-todo.txt</em> TODO list for vimrc, doc, pluggins, software, ideas</p>
+<p>https://noahfrederick.com/log/a-list-of-vims-lists.html</p>
+<ul>
+<li>iz for in fold stuff z[ z]</li>
+<li>ii for in indent</li>
+</ul>
+<p>todoc ~</p>
+<p>Make a sign for what is very nice and not very known ex tips in tips and with a link in ex (or the opposite)</p>
+<pre><code>                                                                    *idid* 
+
+This show what I found out. </code></pre>
+<p>LATEX ~</p>
+<p>Fix fucking font generation map issue rm ~/.texmf-var/fonts/map/pdftex/updmap/pdftex.map</p>
+<p>================================================================================ <em>idid-gvim</em> idid-gvim ~ Select with mouse as wisual selection and no auto-insert -&gt; behave xterm -&gt; remove mswim.vim in vim74</p>
+<p>vim: ft=myhelp</p>
+</body>
+</html>

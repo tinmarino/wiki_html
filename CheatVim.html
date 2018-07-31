@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>Notes (from doc)</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div id="header">
+<h1 class="title">Notes (from doc)</h1>
+</div>
+<h3 id="key">Key</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td>ga</td>
+<td>Caracter value, in unicode, ascii, hex octal</td>
+</tr>
+<tr class="even">
+<td>s</td>
+<td>cl: Change one char</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>c$: Change full line</td>
+</tr>
+<tr class="even">
+<td>S</td>
+<td>^C: Change line the end</td>
+</tr>
+<tr class="odd">
+<td><s-J></td>
+<td>paste next line at the end of current</td>
+</tr>
+<tr class="even">
+<td><c-l></td>
+<td>redraw screen</td>
+</tr>
+<tr class="odd">
+<td>8g8</td>
+<td>see if some invalid utf8 char</td>
+</tr>
+<tr class="even">
+<td>gw i</td>
+<td>indent filter: like gq but not moving cursor</td>
+</tr>
+<tr class="odd">
+<td>zt</td>
+<td>(zm, zb) puts current line to top of screen</td>
+</tr>
+<tr class="even">
+<td>z.</td>
+<td>or zz puts current line to center of screen</td>
+</tr>
+<tr class="odd">
+<td>zb</td>
+<td>puts current line to bottom of screen</td>
+</tr>
+</tbody>
+</table>
+<h1 id="jump">Jump</h1>
+<table>
+<tbody>
+<tr class="odd">
+<td>:jumps</td>
+<td>Display jump list</td>
+</tr>
+<tr class="even">
+<td><strong>1 Nice</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>%</td>
+<td>Matching bracket</td>
+</tr>
+<tr class="even">
+<td><C-i></td>
+<td>Next location, insert position</td>
+</tr>
+<tr class="odd">
+<td><C-o></td>
+<td>Previous (older) location</td>
+</tr>
+<tr class="even">
+<td>'.</td>
+<td>To last inserted text</td>
+</tr>
+<tr class="odd">
+<td>_ or ^</td>
+<td>move to first (non blank caracter)</td>
+</tr>
+<tr class="even">
+<td>gi</td>
+<td>Insert at last modified position</td>
+</tr>
+<tr class="odd">
+<td>gI</td>
+<td>Insert at col 1</td>
+</tr>
+<tr class="even">
+<td>-, +</td>
+<td>Insert at first non blank char at [count] lines before or after</td>
+</tr>
+<tr class="odd">
+<td>gx</td>
+<td>xRef (html on browser)</td>
+</tr>
+<tr class="even">
+<td>gd, gD</td>
+<td>Local(function), Global (file) declaration (no syntax)</td>
+</tr>
+<tr class="odd">
+<td>[I</td>
+<td>include-search of a word</td>
+</tr>
+<tr class="even">
+<td>gf</td>
+<td>open file name under cursor (SUPER)</td>
+</tr>
+<tr class="odd">
+<td><strong>2 Not bad</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>g_</td>
+<td>Last non-blank character of the line</td>
+</tr>
+<tr class="odd">
+<td>L M H</td>
+<td>Bottom, Middle, Top of screen</td>
+</tr>
+<tr class="even">
+<td>ge</td>
+<td>Backward to end of word</td>
+</tr>
+<tr class="odd">
+<td>g; and g,</td>
+<td>Older and newer changes</td>
+</tr>
+<tr class="even">
+<td><strong>3 Keys</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>( , )</td>
+<td>One sentence (sentences starts with .)</td>
+</tr>
+<tr class="even">
+<td>{ , }</td>
+<td>One paragraph</td>
+</tr>
+<tr class="odd">
+<td>fx</td>
+<td>Next occurrence of character x</td>
+</tr>
+<tr class="even">
+<td>tx</td>
+<td>Before next occurrence of character</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Note: Capital letters and some chars are much rarer.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>spot them</td>
+</tr>
+</tbody>
+</table>
+<h1 id="insert">INSERT</h1>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>i&lt;c-h&gt;</code></td>
+<td>Delete Char</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-w&gt;</code></td>
+<td>Delete Word</td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-u&gt;</code></td>
+<td>Delete Line</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-v&gt;&lt;c-m&gt;</code></td>
+<td>Carraige return for windows</td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-k&gt;c1 c2</code></td>
+<td>Insert unicode by digraph</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-t&gt;</code></td>
+<td>Indent current line</td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-d&gt;</code></td>
+<td>Unindent current line</td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>i&lt;c-s-u&gt;nnnnnn</code></td>
+<td>Insert unicode char</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>warning: <c-u> in insert mode delete line</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Cannot be undone but the content is in the . reg</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-v&gt;nnn</code></td>
+<td>Decimal value(with 000 &lt;= nnn &lt;= 255)</td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-v&gt;onnn</code></td>
+<td>Octal (000 &lt;= nnn &lt;= 377)</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-v&gt;Onnn</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-v&gt;xnn</code></td>
+<td>Hex value (00 &lt;= nn &lt;= FF)</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-v&gt;Xnn</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>i&lt;c-v&gt;unnnn</code></td>
+<td>Hex for BMP unicode codepoint (0000 &lt;= nnnn &lt;= FFFF)</td>
+</tr>
+<tr class="even">
+<td><code>i&lt;c-v&gt;Unnnnnnnnn</code></td>
+<td>Hex value for any Unicode codepoint: ^VUnnnnnnnn (with</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>00000000 &lt;= nnnnnnnn &lt;= 7FFFFFFF)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="normal-mode">Normal mode</h2>
+<h3 id="registers">Registers</h3>
+<pre class="vim"><code>&quot; IN COMMAND 
+:registers          &quot;to view content 
+:normal @a          &quot; to run macro a from ex command
+:g/vim/ normal @a   &quot; run a for lines containing vim 
+:call setreg(&#39;&quot;&#39;, @&quot;, &#39;V&#39;) 
+                    &quot; the inverse fct is getreg
+:&lt;C-R&gt;=getline(58)&lt;CR&gt;
+                    &quot; After that you will be back to command line editing, but it has inserted the contents of the 58th line.
+:g/^foo/y A,
+:g/bar/y A,
+:let @+ = @a .      &quot; Copy all lines beginning with foo, and afterwards all lines containing bar to clipboard, chain these commands: qaq (resets the a register storing an empty macro inside it), 
+:let @&quot; = expand(&quot;%:p&quot;) 
+                    &quot;put in the unamed register the full path
+:let @b = substitute(@a,&#39;\_s*\(.\{-}\)\_s*$&#39;,&#39;\1&#39;,&#39;&#39;)
+                    &quot; this give the output in reg b 
+:%y+.               &quot;Copy the entire buffer to the system clipboard of the file </code></pre>
+<h3 id="register-list">Register list</h3>
+<table>
+<colgroup>
+<col width="5%" />
+<col width="94%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>a</td>
+<td>Named register</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>Append</td>
+</tr>
+<tr class="odd">
+<td>&quot;</td>
+<td>Unamed register is the uname reg, everything going to a reg also go to this one</td>
+</tr>
+<tr class="even">
+<td>_</td>
+<td>is the black hole register, empty when reading but writable.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>everything going to it go to /dev/null to avoid erase the standar register</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>when deleting something</td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>the small delete (lesss than one line for example thing you delete with 3x</td>
+</tr>
+<tr class="even">
+<td>.</td>
+<td>last inserted text</td>
+</tr>
+<tr class="odd">
+<td>%</td>
+<td>filename</td>
+</tr>
+<tr class="even">
+<td>:</td>
+<td>command</td>
+</tr>
+<tr class="odd">
+<td>/</td>
+<td>search</td>
+</tr>
+<tr class="even">
+<td>=</td>
+<td>expression # to take the result of an arbitrary expression</td>
+</tr>
+<tr class="odd">
+<td>+</td>
+<td>and * are for interface with system clipboard &quot;maybe install vimx</td>
+</tr>
+<tr class="even">
+<td>#</td>
+<td>name od atlernate file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fold">Fold</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><strong>Create</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>zf</td>
+<td>Operator to create fold</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>zf10j, zf/string, zf'a</td>
+</tr>
+<tr class="even">
+<td><strong>Move</strong></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>zj</td>
+<td>To the next fold.</td>
+</tr>
+<tr class="even">
+<td>zk</td>
+<td>To the previous fold.</td>
+</tr>
+<tr class="odd">
+<td>]z</td>
+<td>To end of open fold.</td>
+</tr>
+<tr class="even">
+<td>[z</td>
+<td>To start of open fold.</td>
+</tr>
+<tr class="odd">
+<td><strong>Change</strong></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>zo, zO</td>
+<td>Opens a (all) fold at the cursor.</td>
+</tr>
+<tr class="odd">
+<td>zc, zC</td>
+<td>Close (all)</td>
+</tr>
+<tr class="even">
+<td>zm</td>
+<td>Increases the foldlevel by one.</td>
+</tr>
+<tr class="odd">
+<td>zM</td>
+<td>Closes all open folds.</td>
+</tr>
+<tr class="even">
+<td>zr</td>
+<td>Decreases the foldlevel by one.</td>
+</tr>
+<tr class="odd">
+<td>zR</td>
+<td>Decreases the foldlevel to zero -- all folds will be open.</td>
+</tr>
+<tr class="even">
+<td>zd</td>
+<td>Deletes the fold at the cursor.</td>
+</tr>
+<tr class="odd">
+<td>zE</td>
+<td>Deletes all folds.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fold-1">Fold</h3>
+<pre class="vim"><code>:syn match comment &quot;\v(^\s*//.*\n)+&quot; fold
+set &quot;foldtext&quot;              &quot; witch show what you see when folded 
+:set foldmethod=expr
+:set foldexpr=empty(getline(v:lnum))?&#39;=&#39;:indent(v:lnum)/4</code></pre>
+<h2 id="ex-mode">Ex mode</h2>
+<p>http://www.csb.yale.edu/userguides/wordprocess/vi-summary.html</p>
+<table>
+<tbody>
+<tr class="odd">
+<td>:t$</td>
+<td>Copy current line to the end</td>
+</tr>
+<tr class="even">
+<td>:#</td>
+<td>Display current line number</td>
+</tr>
+<tr class="odd">
+<td>:&amp;</td>
+<td>Repeat last substitue</td>
+</tr>
+<tr class="even">
+<td>:42</td>
+<td>Jump to line 42, as does typing42G.</td>
+</tr>
+<tr class="odd">
+<td>:e .</td>
+<td>Edit: Open integrated explorer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced">Advanced</h3>
+<p>:#n and :#<n      Are replaced by file buffer n or oldfiles n
+
+
+
+
+#### Man (Read linux manual pages)
+
+runtime! ftplugin/man.vim
+:Man 3 printf
+:h find-manpage 
+
+#### Buffer
+
+:argdel *           Delete the existing argument list
+:bufdo argadd %     For each buffer, add the buffer's path to the list
+:1,1000bd           Delete buffers 1 to 1000; probably there's a better way to do this
+:argdo e            For each argument, edit that argument
+:bufhiden           Can unload a buffer < then not visible
+                    Very cool for scratch buufer (warning they are permanently
+                    lost)
+
+#### Diff
+
+set diffopt+=iwhite  " ignore spacelines <br> set diffexpr= <br> :diffupdate <br></p>
+<h4 id="tips">Tips</h4>
+<p>:tab help foo <br> :!tidy -mi -html -wrap 0 % <br> :<n>,<m> w filename <br> :ccl Close it quickfix <br></p>
+<h3 id="regex">Regex</h3>
+<p>VIM: NFA regular expression</p>
+<p>Forget me and go to :h pattern (or :h regex) that is super well written. At least for the first chapter</p>
+<pre><code>1. Regex                        |v-regex|
+ 1. Escape Characters           |v-escape|
+ 2. Quantifiers Greedy or not   |v-quantifier|
+2. Search                       |v-search|
+ 1. Commands                    |v-search-modifier|
+ 1. Search modifiers            |v-search-modifier|
+3. Sustitute                    |v-substitute|
+4. Global                       |v-global|
+
+# 1. Regex
+
+http://vimregex.com/ (Vim Regular Expression 101)
+                                                                    
+
+
+### Escaped caracter or metecaratcter 
+.           any character except new line        
+\s          whitespace character    
+\S          no whitespace (upper case is the opposite)
+\d          digit   
+\x          hex digit   
+\o          octal digit     
+\h          head of word character (a,b,c...z,A,B,C...Z and _)  
+\p          printable character     
+\w          word character  
+\a          alphabetic character    
+\l          lowercase character     
+\u          uppercase character
+
+
+/\%x30      Search hexa
+/\%^, /\%$  Begining and end of document                                    
+/\_.        Include newline
+\@!         To negate ex: /^\(\(^.*cursor.*$\)\@!.*foo.*\)$
+
+
+### Quantifiers 
+*           matches 0 or more of the preceding characters, ranges or metacharacters .* matches everything including empty line
+\+          matches 1 or more of the preceding characters...
+\=          matches 0 or 1 more of the preceding characters...
+\{n,m}      matches from n to m of the preceding characters...
+\{n}        matches exactly n times of the preceding characters...
+\{,m}       matches at most m (from 0 to m) of the preceding characters...
+\{n,}       matches at least n of of the preceding characters...
+\{-}        matches 0 or more of the preceding atom, as few as possible
+\{-n,m}         matches 1 or more of the preceding characters...
+\{-n,}      matches at lease or more of the preceding characters...
+\{-,m}      matches 1 or more of the preceding characters... 
+                where n and m are positive integers (&gt;0) 
+
+### Search 
+
+``[v``]       Reselect paste text
+*, #        Search current word (backward)
+g*, g#      Without word delimiter 
+:noh        No hightlight search 
+/word       word from top to bottom
+?word       word from bottom to top
+
+### Example 
+\ze \zs     Regex start, stop
+/jo[ha]n    john or joan
+/fred\|joe  fred or joe
+/\&lt;the      the, theatre or then
+/the\&gt;      the or breathe
+/\&lt;the\&gt;    the
+/\&lt;\d\{4}\&gt; exactly 4 digits
+/^\n\{3}    empty lines
+/\cstring   Case insensitive 
+:bufdo /searchstr/  Search in all open files
+/\&lt;[A-Z]\+\/        or
+/\v&lt;[A-Z]+&gt;         or 
+/\&lt;\u\+\&gt;           Find upper case words
+
+### Search modifiers 
+/joe/e              cursor set to End of match
+3/joe/e+1           find 3rd joe cursor set to End of match plus 1 [C]
+/joe/s-2            cursor set to Start of match minus 2
+/joe/+3             find joe move cursor 3 lines down
+/.*fred\&amp;.*joe      Search for FRED AND JOE in any ORDER!
+
+### Substite
+:range s[ubstitute]/pattern/string/cgiI 
+c                   Confirm each substitution
+g                   Replace all occurrences in the line (without g - only first).
+i                   Ignore case for the pattern.
+I                   Don&#39;t ignore case for the pattern.
+
+:%s//\=@0           replace last search with register 0 content 
+:&amp;                  repeat last substitute cmd 
+g&amp;                  to make a replacement on all file lines ( equivalent to :%s//~/&amp; (or :%&amp;&amp;) 
+
+
+
+:%s/.*\(string_to_keep\).*/\1
+:%s/\&lt;./\u&amp;/g       Sets first letter of each word to uppercase
+:%s/\&lt;./\l&amp;/g       Sets first letter of each word to lowercase
+:%s/.*/\u&amp;          Sets first letter of each line to uppercase
+:%s/.*/\l&amp;          Sets first letter of each line to lowercase
+
+:%!/^#/d            Selete lines not begining with #
+^\(-*[0-9]*\.[0-9]*\s\)\{21}   
+                    Match the 21 first numbers like 12232.23 23.23 
+%s/^/\=line(&quot;.&quot;) . &quot;. &quot;/g    
+                    Substitute all lines by its line number 
+:4,$s/\d\+/\=submatch(0) + 1/ 
+                    Add one to every number
+
+&lt;ESC&gt;:%s/.*/\L&amp;/    Tranform everything to lowar case
+&lt;ESC&gt;:%s/.*/\U&amp;/    Upper
+/\&lt;[A-Z]\+\/ or /\v&lt;[A-Z]+&gt; or /\&lt;\u\+\&gt; # find upper case words
+
+:%s/.*/\L&amp;/         Tranform everything to lowar case
+:%s/.*/\U&amp;/         Upper
+
+:%s/\r//g           Delete DOS carriage returns (^M)
+:%s/\r/\r/g         Transform DOS carriage returns in returns
+:%s#&lt;[^&gt;]\+&gt;##g     Delete HTML tags but keeps text
+:%s/^\(.*\)\n\1$/\1/    
+                    Delete lines which appears twice
+
+:s:\(\a*\a\):&quot;\1&quot;:g \1 is like submatch(1)
+:%s/identifying text \zs\d\+\(.\d\+\)\=/\=(1.15+str2float(submatch(0)))/
+:%s/pattern \(saved portion\)\zs/\=SaverFunc(submatch(1))[-1]
+:%call setline(line(&#39;.&#39;),substitute(getline(&#39;.&#39;),&#39;foo&#39;,&#39;bar&#39;,&#39;g&#39;))
+1025,$s:^\(\d\+\.*\d*\)\s\+\(\d*\.*\d*\):\=printf(&quot;%f\t%f&quot;,submatch(1)/3.0, submatch(2) /3.0)
+1025,$s:^\(\d*\)\s\+\(\d*\):\=submatch(1) . &quot;\t&quot; . submatch(2)*200
+1025,$s:^(d*):=submatch(1)*200
+
+
+### Range 
+
+range 
+  The &#39;&lt; Vim mark represents the beginning line of a visual region and the &#39;&gt; mark represents the ending line of the visual region
+
+
+# REGEX MATCH NUMBER
+&quot; Integer with - + or nothing in front
+syn match celNumber &#39;\d\+&#39;
+syn match celNumber &#39;[-+]\d\+&#39;
+
+&quot; Floating point number with decimal no E or e (+,-)
+syn match celNumber &#39;\d\+\.\d*&#39;
+syn match celNumber &#39;[-+]\d\+\.\d*&#39;
+
+&quot; Floating point like number with E and no decimal point (+,-)
+syn match celNumber &#39;[-+]\=\d[[:digit:]]*[eE][\-+]\=\d\+&#39;
+syn match celNumber &#39;\d[[:digit:]]*[eE][\-+]\=\d\+&#39;
+
+&quot; Floating point like number with E and decimal point (+,-)
+syn match celNumber &#39;[-+]\=\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+&#39;
+syn match celNumber &#39;\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+&#39;
+
+
+
+POWER of G  http://vim.wikia.com/wiki/Power_of_g
+:v/./,/./-j                 &quot; delete duplicates
+:g/{/ .+1,/}/-1 sort        &quot; sort lines betwenn { and }
+:g/{/ .+1,/}/-1 &gt;           &quot; indeent 
+:g//                        &quot; lists all lines containing the last search pattern, and :redir will capture the results. 
+:g/pattern/m$               &quot; Move EOF
+:g/^/m0                     &quot; Reverse file
+:g/pattern/y A              &quot; Yank appending to reg a
+:v/string_to_keep/s/.*//    &quot;
+:g/^/put _                  &quot; Double-space your file: 
+:g/^/-put =&#39;foo&#39;.           &quot;Add a line containing foo before each lineThis is
+    &quot; a clever use of the expression register. Here, - is a synonym for .-1 (cf.
+    &quot; :help :range). Since :put puts the text after the line, you have to explicitly
+    &quot; tell it to act on the previous one. aa
+
+</code></pre>
+<h2 id="script">Script</h2>
+<p><em>v-script.txt</em> Functions, scripts</p>
+<h3 id="function">Function</h3>
+<p>:help functions :help function-list</p>
+<pre class="vim"><code>:echo expand(&#39;&lt;cword&gt;&#39;)                     &quot;return the word under cursor 
+:echo expand(&#39;%:p:h&#39;)
+sfrtime
+:let s=input(&#39;where to jump?&#39;)</code></pre>
+<h3 id="exec">EXEC</h3>
+<pre class="vim"><code>function Func()
+    command1
+    command2
+endfunction
+exec Func() 
+call Func()
+echo Func()</code></pre>
+<h3 id="function2command">Function2Command</h3>
+<pre><code>command! -nargs=1 MyCommand call s:MyFunc(&lt;f-args&gt;) &quot; transform a function to user-command</code></pre>
+<p>lcd to cd for current windwo</p>
+<h3 id="script-tips">Script tips</h3>
+<p>set formatoptions +=at <br> call append(line('<span class="math inline">′),[<em>v</em><em>a</em><em>r</em><em>i</em><em>a</em><em>b</em><em>l</em><em>e</em>]) &lt; <em>b</em><em>r</em> &gt; <em>c</em><em>a</em><em>l</em><em>l</em><em>a</em><em>p</em><em>p</em><em>e</em><em>n</em><em>d</em>(<em>l</em><em>i</em><em>n</em><em>e</em>(′</span>'), split(variable, &quot;&quot;)) <br> set autoread <br> help scrool-cursor <br> htlp winrestcmd() <br></p>
+</body>
+</html>
