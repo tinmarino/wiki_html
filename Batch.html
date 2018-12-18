@@ -10,6 +10,7 @@
 </head>
 <body>
 <ul>
+<li><p>Get pid title=mycmd tasklist /v /fo csv | findstr /i &quot;mycmd&quot;</p></li>
 <li><code>start</code>
 <ul>
 <li><code>/B</code> In background -&gt; Like echo &quot;aezaz&quot; &amp;</li>
@@ -23,10 +24,8 @@
 <li></li>
 </ul></li>
 <li><p>windbg -k com:pipe,port=\.4,resets=0,baud=115200 -y Z:</p></li>
-<li>Fork Bomb
-<ul>
-<li><code>%0|%0</code> :s start %0 goto :s</li>
-</ul></li>
+<li><p>Fork Bomb</p></li>
+<li><p><code>%0|%0</code> :s start %0 goto :s</p></li>
 </ul>
 <p>:: calculate x^n SET x=3 SET n=5 SET result=1 FOR /L %%i IN (1,1,%n%) DO SET /A result*=x ECHO %result%</p>
 <p>fc /l file1 file2 # File compare : like diff in linux tracert # Trace route &amp;&amp; # Command chaining at # Schedula task at a specific time cls # Clean command lines runas # Run process as a specific user whoami /all # display current User/Group/Priviledge information services.msc # Open services assoc # Create filetypê asscoaitaion # assoc .txt=txtfile ftype # Choose program to open files of certain type # ftype txtfile=c:Files.exe type # = cat</p>

@@ -13,6 +13,8 @@
 <pre><code>:Java %
 :NewJarEntry in .classpath</code></pre>
 <p>This makes it easy to count the number of occurrences of the word under the cursor: first press * to search for the current word, then enter :%s///gn to count all occurrences of that word. <em>v-eclim-idid</em> if import android cannot be resolved: add to .classpath (graddle) <classpathentry kind="src" path="src"/> <classpathentry exported="true" kind="lib" path="/home2/tourneboeuf/Software/Android/SDK/android-sdk-linux/platforms/android-22/android.jar"/></p>
+<p>gI insert text at column 1</p>
+<p>:read name :read !command :set backspace=indent,eol,start</p>
 <p>!sort | uniq -c AAA AAA AAA BBB BBB AAA AAA</p>
 <p>you would end up with 3 AAA 2 BBB 2 AAA</p>
 <p><em>v-appearance.txt</em> Statusline (todo merge with script)</p>
@@ -92,8 +94,12 @@ Cv Cj insert \%x00 and can be used as a line separator
 highlight LineNr ctermfg=grey ctermbg=white
 :highlight NonText ctermfg=12  # to display ~ for empay lines
 let &amp;colorcolumn=join(range(81,999),&quot;,&quot;)</code></pre>
-<p>cpp CSearchContext for elcim and <C-X> <C-O> youcompleteme, clang_complete or cpp_omnicomplete with ctags, or eclim (currently what I use You can use gn in version 7.4 onwards (and gN to go backwards). It replaces the v//e trick.</p>
-<pre><code>    Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match
+<p>cpp</p>
+<pre><code>CSearchContext for elcim and &lt;C-X&gt; &lt;C-O&gt;
+youcompleteme, clang_complete or cpp_omnicomplete with ctags, or eclim (currently what I use
+You can use gn in version 7.4 onwards (and gN to go backwards). It replaces the v//e trick.
+
+    Search forward for the last used search pattern, like with `n`, and start Visual mode to select the match
 
 
 
@@ -129,7 +135,9 @@ Jav afunction names
 This show what I found out. </code></pre>
 <p>LATEX ~</p>
 <p>Fix fucking font generation map issue rm ~/.texmf-var/fonts/map/pdftex/updmap/pdftex.map</p>
-<p>================================================================================ <em>idid-gvim</em> idid-gvim ~ Select with mouse as wisual selection and no auto-insert -&gt; behave xterm -&gt; remove mswim.vim in vim74</p>
-<p>vim: ft=myhelp</p>
+<p>================================================================================ <em>idid-gvim</em> idid-gvim ~</p>
+<pre><code>Select with mouse as wisual selection and no auto-insert 
+    -&gt; behave xterm 
+    -&gt; remove mswim.vim in vim74 </code></pre>
 </body>
 </html>

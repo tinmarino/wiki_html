@@ -13,6 +13,8 @@
 <h1 class="title">Vim Tips</h1>
 </div>
 <ul>
+<li><p>Script : Get filetype of a buffer</p></li>
+<li><p><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></p></li>
 <li>Substitute without escaping the replcement</li>
 <li><code>:%sno/search_string/replace_string/g</code></li>
 <li><p><code>:s/&lt;/\='&amp;lt;'/g</code></p></li>
@@ -24,18 +26,12 @@
 <li><p>Another way to do it:</p></li>
 <li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
 <li><p>Use: :%s/.*/=repeat('text', matchcount('text', submatch(0)))</p></li>
-<li>Find where root runtime is
-<ul>
-<li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
-</ul></li>
-<li>Source autoload file
-<ul>
-<li><code>:call example#BadFunction()</code></li>
-</ul></li>
-<li>Find where a map has been defined (in which script)
-<ul>
-<li><code>:verbose map &lt;c-z&gt;</code></li>
-</ul></li>
+<li><p>Find where root runtime is</p></li>
+<li><p><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></p></li>
+<li><p>Source autoload file</p></li>
+<li><p><code>:call example#BadFunction()</code></p></li>
+<li><p>Find where a map has been defined (in which script)</p></li>
+<li><p><code>:verbose map &lt;c-z&gt;</code></p></li>
 <li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
 </ul>
 <p>Vim can browse tar and zip archives uppercase maps to jump between files Read vimcast of drew neil and tim pope</p>

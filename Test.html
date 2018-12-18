@@ -9,6 +9,72 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-<p>Consider the following example: &gt; = Toggleable list of todo items = * [.] Toggle list item on/off. * [ ] Simple toggling between [ ] and [X]. * [ ] All list's subitems should be toggled on/off appropriately. * [ ] Toggle child subitems only if current line is list item * [ ] Parent list item should be toggled depending on it's child items. * [ ] Make numbered list items toggleable too * [X] Add highlighting to list item boxes * [X] Add [ ] to the next list item created with o, O and <CR>.</p>
+<p>here $1 is matched for [[name]]</p>
+<p>Consider the following example: &gt; = Toggleable list of todo items = * [ ] Toggle list item on/off. * [ ] Simple toggling between [ ] and [X]. * [ ] All list's subitems should be toggled on/off appropriately. * [ ] Toggle child subitems only if current line is list item * [ ] Parent list item should be toggled depending on it's child items. * [ ] Make numbered list items toggleable too * [ ] Add highlighting to list item boxes * [ ] Add [ ] to the next list item created with o, O and <CR>.</p>
+<p>This sould be followed by code</p>
+<pre><code>Here is the code
+and yes 
+this shoudl be co
+de</code></pre>
+<p>This is a table</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="right">Size</th>
+<th align="right">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Africans</td>
+<td align="right">22</td>
+<td align="right">31</td>
+</tr>
+<tr class="even">
+<td>Normandie</td>
+<td align="right">33</td>
+<td align="right">2066.55</td>
+</tr>
+<tr class="odd">
+<td>Nord</td>
+<td align="right">84</td>
+<td align="right">33</td>
+</tr>
+<tr class="even">
+<td>Total</td>
+<td align="right">117.0</td>
+<td align="right">2099</td>
+</tr>
+</tbody>
+</table>
+<p>%% tmf: $4,2=Sum(2:-1) ; $4,3=float2nr(Sum(2:-1))</p>
+<p>From CSV</p>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th align="right">Pay1</th>
+<th align="right">Pay2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Frinde1</td>
+<td align="right">221</td>
+<td align="right">33</td>
+</tr>
+<tr class="even">
+<td>Frinde2</td>
+<td align="right">22</td>
+<td align="right">33</td>
+</tr>
+<tr class="odd">
+<td>Frinde3</td>
+<td align="right">22</td>
+<td align="right">33</td>
+</tr>
+</tbody>
+</table>
 </body>
 </html>

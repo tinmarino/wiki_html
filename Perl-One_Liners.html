@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p>Double-space a file</p>
+<pre><code>perl -pe &#39;$\ = &quot;\n&quot;&#39; file
+perl -pe &#39;$_ .= &quot;\n&quot;&#39; file
+perl -pe &#39;s/$/\n/&#39; file
+perl -nE &#39;say&#39; file</code></pre>
+<p>Double-space a file, excluding the blank lines</p>
+<pre><code>perl -pe &#39;$_ .= &quot;\n&quot; unless /^$/&#39;
+perl -pe &#39;$_ .= &quot;\n&quot; if /\S/&#39;</code></pre>
+<p>N-space a file</p>
+<pre><code>perl -pe &#39;$_ .= &quot;\n&quot;x7&#39;</code></pre>
+<p>Add a blank line before every line</p>
+<pre><code>perl -pe &#39;s/^/\n/&#39;</code></pre>
+<p>Remove all blank lines</p>
+<pre><code>perl -ne &#39;print unless /^$/&#39;
+perl -lne &#39;print if length&#39;
+perl -ne &#39;print if /\S/&#39;
+perl -pe &#39;s/^\s*$//&#39;</code></pre>
+<p>Remove all consecutive blank lines, leaving only one</p>
+<pre><code>perl -00 -pe &#39;&#39;
+perl -00pe0</code></pre>
+<p>Compress/expand all blank lines into N consecutive lines</p>
+<pre><code>perl -00 -pe &#39;$_ .= &quot;\n&quot;x2&#39;</code></pre>
+<p>Insert a space between all characters</p>
+<pre><code>perl -lpe &#39;s// /g&#39;</code></pre>
+<h1 id="numbering">Numbering</h1>
+<p>Number all lines in a file</p>
+<pre><code>perl -pe &#39;$_ = &quot;$. $_&quot;&#39;
+perl -ne &#39;print &quot;$. $_&quot;&#39;
+perl -ne &#39;print $. . $_&#39;</code></pre>
+<p>Number only non-empty lines in a file</p>
+<pre><code>perl -pe&#39;$_ = ++$x . $_ if /./&#39;
+perl -pe &#39;$_ = ++$x.&quot; $_&quot; if /\S/&#39;</code></pre>
+<p>Number and print only non-empty lines in a file (drop empty lines)</p>
+<pre><code>perl -ne&#39;print ++$x . $_ if /\S/&#39; </code></pre>
+<p>Number all lines but print line numbers only for non-empty lines</p>
+<pre><code>perl -pe &#39;$_ = &quot;$. $_&quot; if /./&#39;</code></pre>
+<p>Number only lines that match a pattern; print others unmodified</p>
+<pre><code>perl -pe &#39;$_ = ++$x.&quot; $_&quot; if /regex/&#39;</code></pre>
+<p>Number and print only lines that match a pattern</p>
+<pre><code>perl -ne &#39;print ++$x.&quot; $_&quot; if /regex/&#39;</code></pre>
+<p>Number all lines but print line numbers only for lines that match a pattern</p>
+<pre><code>perl -pe &#39;$_ = &quot;$. $_&quot; if /regex/&#39;</code></pre>
+<p>Number all lines in a file using a custom format</p>
+<pre><code>perl -ne &#39;printf &quot;%-5d %s&quot;, $., $_&#39;</code></pre>
+<p>Print the total number of lines in a file (emulate wc -l)</p>
+<pre><code>perl -lne &#39;END { print $. }&#39;
+perl -le &#39;print $n = () = &lt;&gt;&#39;
+perl -le &#39;print $n = (() = &lt;&gt;)&#39;
+perl -le &#39;print scalar(() = &lt;&gt;)&#39;
+perl -le &#39;print scalar(@foo = &lt;&gt;)&#39;
+perl -ne &#39;}{print $.&#39;  # eskimo operator }{</code></pre>
+<p>Print the number of non-empty lines in a file</p>
+<pre><code>pl -ne&#39;/\S/ &amp;&amp; $a++}{print $a&#39;
+perl -le &#39;print scalar(grep { /./ } &lt;&gt;)&#39;
+perl -le &#39;print ~~grep{/./}&lt;&gt;&#39;
+perl -le &#39;print~~grep/./,&lt;&gt;&#39;
+perl -lE &#39;say~~grep/./,&lt;&gt;&#39;</code></pre>
+<p>Print the number of empty lines in a file</p>
+<pre><code>perl -lne &#39;$x++ if /^$/; END { print $x+0 }&#39;
+perl -lne &#39;$x++ if /^$/; END { print int $x }&#39;
+perl -le &#39;print scalar(grep { /^$/ } &lt;&gt;)&#39;
+perl -le &#39;print ~~grep{ /^$/ } &lt;&gt;&#39;</code></pre>
+<p>Print the number of lines in a file that match a pattern (emulate grep -c)</p>
+<pre><code>perl -lne &#39;$x++ if /regex/; END { print $x+0 }&#39;</code></pre>
+<p>Number words across all lines</p>
+<pre><code>perl -pe &#39;s/(\w+)/++$i.&quot;.$1&quot;/ge&#39;</code></pre>
+<p>Number words on each individual line</p>
+<pre><code>perl -pe &#39;$i=0; s/(\w+)/++$i.&quot;.$1&quot;/ge&#39;</code></pre>
+<h1 id="calculations">Calculations</h1>
+<p>Check if a number is a prime</p>
+<pre><code>perl -lne &#39;(1x$_) !~ /^1?$|^(11+?)\1+$/ &amp;&amp; print &quot;$_ is prime&quot;&#39;</code></pre>
+<p>Print the sum of all fields on each line</p>
+<pre><code>perl -MList::Util=sum -alne &#39;print sum @F&#39;
+perl -MList::Util=sum -F: -alne &#39;print sum @F&#39;</code></pre>
+<p>Print the sum of all fields on all lines</p>
+<pre><code>perl -MList::Util=sum -alne &#39;push @S,@F; END { print sum @S }&#39;
+perl -MList::Util=sum -alne &#39;$s += sum @F; END { print $s }&#39;</code></pre>
+<p>Shuffle all fields on each line</p>
+<pre><code>perl -MList::Util=shuffle -alne &#39;print &quot;@{[shuffle @F]}&quot;&#39;
+perl -MList::Util=shuffle -alne &#39;print join &quot; &quot;, shuffle @F&#39;</code></pre>
+<p>Find the numerically smallest element (minimum element) on each line</p>
+<pre><code>perl -MList::Util=min -alne &#39;print min @F&#39;</code></pre>
+<p>Find the numerically smallest element (minimum element) over all lines</p>
+<pre><code>perl -MList::Util=min -alne &#39;@M = (@M, @F); END { print min @M }&#39;
+perl -MList::Util=min -alne &#39;$min = min($min // (), @F); END { print $min }&#39;</code></pre>
+<p>Replace each field with its absolute value</p>
+<pre><code>perl -alne &#39;print &quot;@{[map { abs } @F]}&quot;&#39;</code></pre>
+<p>Print the total number of fields on each line</p>
+<pre><code>perl -alne &#39;print scalar @F&#39;</code></pre>
+<p>Print the total number of fields on each line, followed by the line</p>
+<pre><code>perl -alne &#39;print scalar @F, &quot; $_&quot;&#39;</code></pre>
+<p>Print the total number of fields on all lines</p>
+<pre><code>perl -alne &#39;$t += @F; END { print $t }&#39;</code></pre>
+<p>Print the total number of fields that match a pattern</p>
+<pre><code>perl -alne &#39;map { /regex/ &amp;&amp; $t++ } @F; END { print $t || 0 }&#39;
+perl -alne &#39;$t += /regex/ for @F; END { print $t }&#39;
+perl -alne &#39;$t += grep /regex/, @F; END { print $t }&#39;</code></pre>
+<p>Print the total number of lines that match a pattern</p>
+<pre><code>perl -lne &#39;/regex/ &amp;&amp; $t++; END { print $t || 0 }&#39;</code></pre>
+<p>Print the number π</p>
+<pre><code>perl -Mbignum=bpi -le &#39;print bpi(21)&#39;
+perl -Mbignum=PI -le &#39;print PI&#39;</code></pre>
+<p>Print the number e</p>
+<pre><code>perl -Mbignum=bexp -le &#39;print bexp(1,21)&#39;
+perl -Mbignum=bexp -le &#39;print bexp(2,31)&#39;
+perl -Mbignum=e -le &#39;print e&#39;</code></pre>
+<p>Print UNIX time (seconds since January 1, 1970, 00:00:00 UTC)</p>
+<pre><code>perl -le &#39;print time&#39;</code></pre>
+<p>Print Greenwich Mean Time and local computer time</p>
+<pre><code>perl -le &#39;print scalar gmtime&#39;
+perl -le &#39;print join &quot;:&quot;, (localtime)[2..6]&#39;</code></pre>
+<p>Calculate the factorial</p>
+<pre><code>perl -le &#39;$f = 1; $f *= $_ for 1..5; print $f&#39;</code></pre>
+<p>Calculate the greatest common divisor</p>
+<pre><code>perl -MMath::BigInt=bgcd -le &#39;print bgcd(20,60,30)&#39;</code></pre>
+<p>Generate 10 random numbers between 5 and 15 (excluding 15)</p>
+<pre><code>perl -le &#39;print join &quot;,&quot;, map { int(rand(15-5))+5 } 1..10&#39;
+perl -le &#39;for (1..10){say int(5 + 10 * rand)}&#39;</code></pre>
+<p>Convert an IP address to an unsigned integer</p>
+<pre><code>perl -le &#39;print unpack(&quot;N&quot;, 127.0.0.1)&#39;</code></pre>
+<p>Convert an unsigned integer to an IP address</p>
+<pre><code>perl -le &#39;
+$ip = 2130706433;
+$, = &quot;.&quot;;
+print map { (($ip&gt;&gt;8*($_))&amp;0xFF) } reverse 0..3
+&#39;</code></pre>
+<h1 id="array-and-string">Array and string</h1>
+<p>Generate and print the alphabet</p>
+<pre><code>perl -E &#39;say a..z&#39;
+perl -le &#39;$, = &quot;,&quot;; print (&quot;a&quot;..&quot;z&quot;)&#39;
+perl -le &#39;$alphabet = join &quot;,&quot;, (&quot;a&quot;..&quot;z&quot;); print $alphabet&#39;</code></pre>
+<p>Hex - Dec</p>
+<pre><code>perl -le &#39;use bigint; print 1024-&gt;as_hex&#39;
+perl -le &#39;print hex &quot;400&quot;&#39;</code></pre>
+<p>Generate a random eight-character password</p>
+<pre><code>perl -le &#39;print map { (&quot;a&quot;..&quot;z&quot;)[rand 26] } 1..8&#39;
+perl -le &#39;print map { (&quot;a&quot;..&quot;z&quot;, 0..9)[rand 36] } 1..8&#39;</code></pre>
+<p>Create a string of specific length</p>
+<pre><code>perl -E &#39;say &quot;a&quot;x50&#39;
+perl -e &#39;print &quot;a&quot;x1024&#39; # For 1K stream
+perl -le &#39;@list = (1,2)x20; print &quot;@list&quot;&#39;</code></pre>
+<p>Create an array from a string</p>
+<pre><code>@months = split &#39; &#39;, &quot;Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec&quot;
+@months = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/</code></pre>
+<p>Create a string from the command-line arguments</p>
+<pre><code>perl -E &#39;$, = &quot;, &quot;; say @ARGV&#39; val1 val2 val3
+perl -le &#39;print &quot;(&quot;, (join &quot;,&quot;, @ARGV), &quot;)&quot;&#39; val1 val2 val3</code></pre>
+<p>Find the numeric values for characters in a string</p>
+<pre><code>perl  -E &#39;say map {ord . &quot;,&quot;} split //, &quot;hello_world&quot;&#39;
+perl -le &#39;print join &quot;, &quot;, map { ord } split //, &quot;hello world&quot;&#39;
+perl -le &#39;print join &quot;, &quot;, unpack(&quot;C*&quot;, &quot;hello world&quot;)&#39;
+perl -Mbigint=hex -E &#39;say join &quot;, &quot;, map {Math::BigInt::as_hex ord} split //, &quot;hello_world&quot;&#39;
+perl -le &#39; print join &quot;, &quot;, map { sprintf &quot;0x%x&quot;, ord $_ } split //, &quot;hello world&quot; &#39;</code></pre>
+<p>Convert a list of numeric ASCII values into a string</p>
+<pre><code>pl -E &#39;say map { chr } (104,101,108,108,111)&#39;
+pl -E &#39;say map chr, 104,101,108,108,111&#39;</code></pre>
+<p>Generate an array with odd numbers from 1 to 100</p>
+<pre><code>perl -le &#39;@odd = grep { $_ &amp; 1 } 1..100; print &quot;@odd&quot;&#39;
+pl -E &#39;$, = &quot;,&quot;; say grep { $_ % 2 == 1 } 1..100&#39;</code></pre>
+<p>Find the length of a string</p>
+<pre><code>pl -E &#39;say length &quot;hello&quot;&#39;</code></pre>
+<p>Find the number of elements in an array</p>
+<pre><code>perl -le &#39;@array = (&quot;a&quot;..&quot;z&quot;); print scalar @array&#39;
+perl -le &#39;@array = (&quot;a&quot;..&quot;z&quot;); print $#array + 1&#39;
+perl -le &#39;print scalar @ARGV&#39; *.txt
+perl -le &#39;print scalar (@ARGV=&lt;*.txt&gt;)&#39;</code></pre>
+<h1 id="text-convertion">Text convertion</h1>
+<p>ROT13 a string</p>
+<pre><code>perl -le &#39;$string = &quot;bananas&quot;; $string =~ y/A-Za-z/N-ZA-Mn-za-m/; print $string&#39;
+perl -pi.bak -e &#39;y/A-Za-z/N-ZA-Mn-za-m/&#39; oranges.txt</code></pre>
+<p>Base64-encode a string</p>
+<pre><code>perl -MMIME::Base64 -e &#39;print encode_base64(&quot;string&quot;)&#39;
+perl -MMIME::Base64 -0777 -ne &#39;print encode_base64($_)&#39; file</code></pre>
+<p>Base64-decode a string</p>
+<pre><code>perl -MMIME::Base64 -le &#39;print decode_base64(&quot;base64string&quot;)&#39;
+perl -MMIME::Base64 -0777 -ne &#39;print decode_base64($_)&#39; file</code></pre>
+<p>URL-escape a string</p>
+<pre><code>perl -MURI::Escape -le &#39;print uri_escape(&quot;http://example.com&quot;)&#39;</code></pre>
+<p>URL-unescape a string</p>
+<pre><code>perl -MURI::Escape -le &#39;print uri_unescape(&quot;http%3A%2F%2Fexample.com&quot;)&#39;</code></pre>
+<p>HTML-encode a string</p>
+<pre><code>perl -MHTML::Entities -le &#39;print encode_entities(&quot;&lt;html&gt;&quot;)&#39;</code></pre>
+<p>HTML-decode a string</p>
+<pre><code>perl -MHTML::Entities -le &#39;print decode_entities(&quot;&amp;lt;html&amp;gt;&quot;)&#39;</code></pre>
+<p>Convert all text to uppercase</p>
+<pre><code>perl -nle &#39;print uc&#39;
+perl -ple &#39;$_ = uc&#39;
+perl -nle &#39;print &quot;\U$_&quot;&#39;</code></pre>
+<p>Uppercase only the first letter of each line</p>
+<pre><code>perl -nle &#39;print ucfirst lc&#39;</code></pre>
+<p>Invert the letter case</p>
+<pre><code>perl -ple &#39;y/A-Za-z/a-zA-Z/&#39;</code></pre>
+<p>Title-case each line</p>
+<pre><code>perl -ple &#39;s/(\w+)/\u$1/g&#39;</code></pre>
+<p>Strip leading whitespace (spaces, tabs) from the beginning of each line</p>
+<pre><code>perl -ple &#39;s/^\s+//&#39; array.c</code></pre>
+<p>Strip whitespace (spaces, tabs) from the beginning and end of each line</p>
+<pre><code>perl -ple &#39;s/^\s+|\s+$//g&#39;</code></pre>
+<p>Convert UNIX newlines to DOS/Windows newlines</p>
+<pre><code>perl -pe &#39;s|\012|\015\012|&#39;</code></pre>
+<p>Convert UNIX newlines to Mac newlines</p>
+<pre><code>perl -pe &#39;s|\012|\015|&#39;</code></pre>
+<p>Substitute (find and replace) “foo” with “bar” on lines that match “baz”</p>
+<pre><code>perl -pe &#39;/baz/ &amp;&amp; s/foo/bar/&#39;
+perl -pe &#39;s/foo/bar/ if /baz/&#39;</code></pre>
+<p>Print paragraphs in reverse order</p>
+<pre><code>perl -00 -e &#39;print reverse &lt;&gt;&#39; file</code></pre>
+<p>Print all lines in reverse order</p>
+<pre><code>perl -e &#39;print reverse &lt;&gt;&#39; array.c
+# Or, to reverse line characters
+perl -lne &#39;print scalar reverse $_&#39;
+perl -lpe &#39;$_ = reverse&#39;</code></pre>
+<p>Print columns in reverse order</p>
+<pre><code>perl -alne &#39;print &quot;@{[reverse @F]}&quot;&#39;
+perl -F: -alne &#39;$&quot; = &quot;:&quot;; print &quot;@{[reverse @F]}&quot;&#39;</code></pre>
+<h1 id="selectively-printing-and-deleting-lines">Selectively Printing and Deleting Lines</h1>
+<p>The first line of a file (emulate head -1)</p>
+<pre><code>perl -ne &#39;print; exit&#39; file</code></pre>
+<p>The first 10 lines of a file (emulate head -10)</p>
+<pre><code>perl -ne &#39;print if 1..10&#39; file
+perl -ne &#39;print if $. &lt;= 10&#39; file
+perl -pe &#39;exit if $. == 10&#39; file</code></pre>
+<p>The last line of a file (emulate tail -1)</p>
+<pre><code>perl -ne &#39;$last = $_; END { print $last }&#39; file
+perl -ne &#39;print if eof&#39; file</code></pre>
+<p>The last 10 lines of a file (emulate tail -10) (use tail)</p>
+<pre><code>perl -ne &#39;push @a, $_; shift @a if @a&gt;10; END { print @a }&#39; file</code></pre>
+<p>Only lines that match a regular expression</p>
+<pre><code>perl -ne &#39;print if /regex/&#39;</code></pre>
+<p>Only lines that do not match a regular expression</p>
+<pre><code>perl -ne &#39;print unless /regex/&#39;
+perl -ne &#39;print if !/regex/&#39;</code></pre>
+<p>Every line preceding a line that matches a regular expression</p>
+<pre><code>perl -ne &#39;/magic/ &amp;&amp; $last &amp;&amp; print $last; $last = $_&#39;</code></pre>
+<p>Every line following a line that matches a regular expression</p>
+<pre><code>perl -ne &#39;if ($p) { print; $p = 0 } $p++ if /regex/&#39;
+perl -ne &#39;$p &amp;&amp; print; $p = /science/&#39;</code></pre>
+<p>Lines that match regular expressions AAA and BBB in any order</p>
+<pre><code>perl -ne &#39;/AAA/ &amp;&amp; /BBB/ &amp;&amp; print&#39;</code></pre>
+<p>Lines that don’t match regular expressions AAA and BBB</p>
+<pre><code>perl -ne &#39;!/AAA/ &amp;&amp; !/BBB/ &amp;&amp; print&#39;</code></pre>
+<p>Lines that match regular expression AAA followed by BBB followed by CCC</p>
+<pre><code>perl -ne &#39;/AAA.*BBB.*CCC/ &amp;&amp; print&#39;</code></pre>
+<p>Lines that are at least 80 characters long</p>
+<pre><code>perl -lne &#39;print if length &gt;= 80&#39;
+# with l, I don&#39;t count line endings characters</code></pre>
+<p>Lines that are fewer than 80 characters long</p>
+<pre><code>perl -ne &#39;print if length() &lt; 80&#39;</code></pre>
+<p>Only line 13</p>
+<pre><code>perl -ne &#39;$. == 13 &amp;&amp; print&#39;</code></pre>
+<p>All lines except line 27</p>
+<pre><code>perl -ne &#39;print unless $. == 27&#39;</code></pre>
+<p>All lines from 17 to 30</p>
+<pre><code>perl -ne &#39;print if 17..30&#39;</code></pre>
+<p>All lines between two regular expressions (including the lines that match)</p>
+<pre><code>perl -ne &#39;print if /regex1/../regex2/&#39;</code></pre>
+<p>The longest line</p>
+<pre><code>perl -ne &#39;
+    $l = $_ if length($_) &gt; length($l);
+    END { print $l }
+&#39;</code></pre>
+<p>All lines containing digits</p>
+<pre><code>perl -ne &#39;print if /\d/&#39;</code></pre>
+<p>Every second line</p>
+<pre><code>perl -ne &#39;print if $. % 2&#39;</code></pre>
+<p>All repeated lines only once</p>
+<pre><code>perl -ne &#39;print if ++$a{$_} == 2&#39;</code></pre>
+<p>All unique lines</p>
+<pre><code>perl -ne &#39;print unless $a{$_}++&#39;</code></pre>
+<h1 id="useful-regular-expressions">­Useful Regular Expressions</h1>
+<p>Match something that looks like an IP address</p>
+<pre><code>/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/</code></pre>
+<p>Test whether a number is in the range 0 to 255</p>
+<pre><code>/^([0-9]|[0-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/</code></pre>
+<p>Match an IP address</p>
+<pre><code>my $ip_part = qr/[0-9]|[0-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]/;
+if ($ip =~ /^$ip_part\.$ip_part\.$ip_part\.$ip_part$/) {
+    print &quot;valid ip\n&quot;;
+}</code></pre>
+<p>Check whether a string looks like an email address</p>
+<pre><code>/\S+@\S+\.\S+/</code></pre>
+<p>Check whether a string is a number</p>
+<pre><code>/^[+-]?\d+\.?\d*$/
+perl -MRegexp::Common -ne &#39;print if /$RE{num}{real}/&#39;</code></pre>
+<p>Check whether a word appears in a string twice</p>
+<pre><code>/(word).*\1/</code></pre>
+<p>Increase all integers in a string by one</p>
+<pre><code>$str =~ s/(\d+)/$1+1/ge</code></pre>
+<p>Extract the HTTP User-Agent string from HTTP headers</p>
+<pre><code>/^User-Agent: (.+)$/  # -&gt; $1</code></pre>
+<p>Match printable ASCII characters</p>
+<pre><code>/[ -~]/</code></pre>
+<p>Extract all matches from a regular expression</p>
+<pre><code>my @matches = $text =~ /regex/g;</code></pre>
+</body>
+</html>

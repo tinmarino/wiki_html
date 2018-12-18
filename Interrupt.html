@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p>When generating a software interupt, the processor calls one of the 256 functions pointed to by the interrupt descriptor table (IDT) which is located in the first 1024 bytes of memory while in real mode. It is therefore possible to call these withg a far call.</p>
+<p>The first 0x20 (from 0 to 0x1F=31) are reserved for the CPU generated. Then there are 0x10 material interrupts</p>
+<ul>
+<li><strong>Interrupt Vector Table</strong> : used in real mode</li>
+<li><strong>Interrupt Descriptor Table</strong> : used in protected mode and is more complicated</li>
+<li><strong>Interrupt Service Routine</strong> : the routine that is called just after the int</li>
+<li><strong>Interrupt Request</strong> : hardware signal sent to the processor calling an interrupt handler</li>
+</ul>
+<table>
+<tbody>
+<tr class="odd">
+<td>0X0</td>
+<td>Division by zero</td>
+</tr>
+<tr class="even">
+<td>0X1</td>
+<td>Single-step interrupt</td>
+</tr>
+<tr class="odd">
+<td>0X2</td>
+<td>NMI</td>
+</tr>
+<tr class="even">
+<td>0X3</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X4</td>
+<td>Overflow</td>
+</tr>
+<tr class="even">
+<td>0X5</td>
+<td>Bounds</td>
+</tr>
+<tr class="odd">
+<td>0X6</td>
+<td>Invalid Opcode</td>
+</tr>
+<tr class="even">
+<td>0X7</td>
+<td>Coprocessor not available</td>
+</tr>
+<tr class="odd">
+<td>0X8</td>
+<td>Double fault</td>
+</tr>
+<tr class="even">
+<td>0X9</td>
+<td>Coprocessor segment overrun</td>
+</tr>
+<tr class="odd">
+<td>0XA</td>
+<td>Invalid Task State Segment</td>
+</tr>
+<tr class="even">
+<td>0XB</td>
+<td>Segment not present</td>
+</tr>
+<tr class="odd">
+<td>0XC</td>
+<td>Stack Fault</td>
+</tr>
+<tr class="even">
+<td>0XD</td>
+<td>General Protection Fault</td>
+</tr>
+<tr class="odd">
+<td>0XE</td>
+<td>Page fault</td>
+</tr>
+<tr class="even">
+<td>0XF</td>
+<td>reserved</td>
+</tr>
+<tr class="odd">
+<td>0X10</td>
+<td>Math fault</td>
+</tr>
+<tr class="even">
+<td>0X11</td>
+<td>Alignement check</td>
+</tr>
+<tr class="odd">
+<td>0X12</td>
+<td>Machine check</td>
+</tr>
+<tr class="even">
+<td>0X13</td>
+<td>SIMD floating point Exception</td>
+</tr>
+<tr class="odd">
+<td>0X14</td>
+<td>Virtualization Exception</td>
+</tr>
+<tr class="even">
+<td>0X15</td>
+<td>Control Protection Exception</td>
+</tr>
+<tr class="odd">
+<td>0X16</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X17</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X18</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X19</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X1A</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X1B</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X1C</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X1D</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X1E</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X1F</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X20</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X21</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X22</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X23</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X24</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X25</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X26</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X27</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X28</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X29</td>
+<td>RtlFailFast(ecx) with ecx = 5 &lt;- STATUS_INVALID_CRUNTIME_PARAMETER</td>
+</tr>
+<tr class="odd">
+<td>0X2A</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X2B</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X2C</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X2D</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X2E</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X2F</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X30</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X31</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X32</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>0X33</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>0X34</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sources">Sources</h2>
+<p>Wikipedia : interrupt descriptor table</p>
+</body>
+</html>

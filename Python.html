@@ -9,15 +9,18 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-<p><em>c-python.txt</em> Cheat: Python Language</p>
 <ul>
-<li>Hexadeciaml outputs get_ipython().display_formatter.formatters['text/plain'].for_type([[int,]] lambda n, p, cycle : p.text(&quot;0x%x&quot; %n))</li>
+<li><p><a href="Py-Keywords.html">Keywords</a></p></li>
+<li><p>Use stdout and restore sys.stdout = openb(&quot;tmp&quot;, &quot;w&quot;) sys.stdout = sys.<strong>stdout</strong></p></li>
+<li><p>Hexadeciaml outputs get_ipython().display_formatter.formatters['text/plain'].for_type([[int,]] lambda n, p, cycle : p.text(&quot;0x%x&quot; %n))</p></li>
+<li><p>With Statement : 2 one the same line with open('a', 'w') as a, open ('b', 'w') as b : do_stuff()</p></li>
 </ul>
 <p>============================================================================== STATEMENTS <em>c-python-statement</em></p>
 <p>If-Statement ~ if expression: statements elif expression: statements else: statements</p>
 <p>While-Loop ~ while expression: statements</p>
 <p>For-Loop ~ for var in collection: statements</p>
 <p>Counting-For-Loop ~ for i in range(start, end [, step]): statements -&gt; (start is included; end is not)</p>
+<p>with context_manager_classs as cr ~ a Context Manager class must have <code>__enter__</code> and <code>__exit__</code> methods</p>
 <p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2, ...): statements return expr ret = name(arg1, arg2)</p>
 <p>EXCEPTION <em>c-python-exception</em> try: statements except [exception type [as var]]: statements finally: statements</p>
 <p>============================================================================== TYPES <em>c-python-types</em></p>

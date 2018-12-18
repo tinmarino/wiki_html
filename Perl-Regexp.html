@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<table>
+<tbody>
+<tr class="odd">
+<td>title: 'Regular expressions in Perl - a summary with examples'</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Single characters</caption>
+<tbody>
+<tr class="odd">
+<td align="left"><code>\t</code></td>
+<td align="left">tab</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\n</code></td>
+<td align="left">newline</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>\r</code></td>
+<td align="left">return (CR)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\x</code>hh</td>
+<td align="left">character with hex. code hh</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>“Zero-width assertions”</caption>
+<tbody>
+<tr class="odd">
+<td align="left"><code>\b</code></td>
+<td align="left">“word” boundary</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\B</code></td>
+<td align="left">not a “word” boundary</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Matching</caption>
+<tbody>
+<tr class="odd">
+<td align="left"><code>\w</code></td>
+<td align="left">matches any <em>single</em> character classified as a “word” character (alphanumeric or “<code>_</code>”)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\W</code></td>
+<td align="left">matches any non-“word” character</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>\s</code></td>
+<td align="left">matches any whitespace character (space, tab, newline)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\S</code></td>
+<td align="left">matches any non-whitespace character</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>\d</code></td>
+<td align="left">matches any digit character, equiv. to <code>[0-9]</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>\D</code></td>
+<td align="left">matches any non-digit character</td>
+</tr>
+</tbody>
+</table>
+<h2 id="character-sets-specialities-inside-..."><span id="sets">Character sets: specialities inside <code>[</code>...<code>]</code></span></h2>
+<p><strong>Different meanings</strong> apply inside a character set (“character class”) denoted by <code>[</code>...<code>]</code> so that, <strong>instead of</strong> the normal rules given here, the following apply:</p>
+<table>
+<tbody>
+<tr class="odd">
+<td align="left"><code>[</code>characters<code>]</code></td>
+<td align="left">matches any of the characters in the sequence</td>
+</tr>
+<tr class="even">
+<td align="left"><code>[</code>x<code>-</code>y<code>]</code></td>
+<td align="left">matches any of the characters from x to y (inclusively) in the ASCII code</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[\-]</code></td>
+<td align="left">matches the hyphen character “<code>-</code>”</td>
+</tr>
+<tr class="even">
+<td align="left">[<code>\n</code>]</td>
+<td align="left">matches the newline; other <a href="#esc">single character denotations with <code>\</code></a> apply normally, too</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[^</code>something<code>]</code></td>
+<td align="left">matches any character <em>except</em> those that <code>[</code>something<code>]</code> denotes; that is, immediately after the leading “<code>[</code>”, the circumflex “<code>^</code>” means “not” applied to all of the rest</td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples"><span id="ex">Examples</span></h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">expression</th>
+<th align="left">matches...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>abc</code></td>
+<td align="left"><code>abc</code> (that exact character sequence, but anywhere in the string)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>^abc</code></td>
+<td align="left"><code>abc</code> at the <em>beginning</em> of the string</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>abc$</code></td>
+<td align="left"><code>abc</code> at the <em>end</em> of the string</td>
+</tr>
+<tr class="even">
+<td align="left"><code>a|b</code></td>
+<td align="left">either of <code>a</code> and <code>b</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>^abc|abc$</code></td>
+<td align="left">the string <code>abc</code> at the beginning or at the end of the string</td>
+</tr>
+<tr class="even">
+<td align="left"><code>ab{2,4}c</code></td>
+<td align="left">an <code>a</code> followed by two, three or four <code>b</code>’s followed by a <code>c</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>ab{2,}c</code></td>
+<td align="left">an <code>a</code> followed by at least two <code>b</code>’s followed by a <code>c</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>ab*c</code></td>
+<td align="left">an <code>a</code> followed by any number (zero or more) of <code>b</code>’s followed by a <code>c</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>ab+c</code></td>
+<td align="left">an <code>a</code> followed by one or more <code>b</code>’s followed by a <code>c</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>ab?c</code></td>
+<td align="left">an <code>a</code> followed by an optional <code>b</code> followed by a <code>c</code>; that is, either <code>abc</code> or <code>ac</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>a.c</code></td>
+<td align="left">an <code>a</code> followed by any single character (not newline) followed by a <code>c</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>a\.c</code></td>
+<td align="left"><code>a.c</code> exactly</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[abc]</code></td>
+<td align="left">any one of <code>a</code>, <code>b</code> and <code>c</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>[Aa]bc</code></td>
+<td align="left">either of <code>Abc</code> and <code>abc</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>[abc]+</code></td>
+<td align="left">any (nonempty) string of <code>a</code>’s, <code>b</code>’s and <code>cs</code> (such as <code>a</code>, <code>abba</code>, <code>acbabcacaa</code>)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>[^abc]+</code></td>
+<td align="left">any (nonempty) string which does <em>not</em> contain any of <code>a</code>, <code>b</code> and <code>c</code> (such as <code>defg</code>)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>\d\d</code></td>
+<td align="left">any two decimal digits, such as <code>42</code>; same as \d{2}</td>
+</tr>
+<tr class="even">
+<td align="left"><code>\w+</code></td>
+<td align="left">a “word”: a nonempty sequence of alphanumeric characters and low lines (underscores), such as <code>foo</code> and <code>12bar8</code> and <code>foo_1</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>100\s*mk</code></td>
+<td align="left">the strings <code>100</code> and <code>mk</code> optionally separated by any amount of white space (spaces, tabs, newlines)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>abc\b</code></td>
+<td align="left"><code>abc</code> when followed by a word boundary (e.g. in <code>abc!</code> but not in <code>abcd</code>)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>perl\B</code></td>
+<td align="left"><code>perl</code> when <em>not</em> followed by a word boundary (e.g. in <code>perlert</code> but not in <code>perl stuff</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples-of-simple-use-in-perl-statements">Examples of simple use in Perl statements</h3>
+<p>These examples use very simple regexps only. The intent is just to show <em>contexts</em> where regexps might be used, as well as the effect of some “flags” to matching and replacements. Note in particular that matching is by default <em>case-sensitive</em> (<code>Abc</code> does not match <code>abc</code> unless specified otherwise).</p>
+<p><code>s/foo/bar/;</code><br />
+replaces the <em>first</em> occurrence of the exact character sequence <code>foo</code> in the “current string” (in special variable <code class="rpad">$_</code>) by the character sequence <code>bar</code>; for example, <code>foolish bigfoot</code> would become <code>barlish bigfoot</code></p>
+<p><code>s/foo/bar/g;</code><br />
+replaces <em>any</em> occurrence of the exact character sequence <code>foo</code> in the “current string” by the character sequence <code>bar</code>; for example, <code>foolish bigfoot</code> would become <code>barlish bigbart</code></p>
+<p><code>s/foo/bar/gi;</code><br />
+replaces any occurrence of <code>foo</code> <em>case-insensitively</em> in the “current string” by the character sequence <code>bar</code> (e.g. <code>Foo</code> and <code>FOO</code> get replaced by <code>bar</code> too)</p>
+<p><code>if(m/foo/)</code>...<br />
+tests whether the current string contains the string <code>foo</code></p>
+<hr />
+<p>[Date](http://jkorpela.fi/iso8601.html &quot;ISO 8601, the date and time representation standard&quot;.html) of creation: 2000-01-28. Last revision: 2007-04-16. Last modification: 2007-05-28.</p>
+<p>Finnish translation – <span lang="fi">suomennos: <a href="http://www.uta.fi/~jm58660/jutut/ohjelmointi/regexp.html">Säännölliset lausekkeet Perlissä</a></span>.</p>
+<p>The inspiration for my writing this document was <a href="http://www.irt.org/articles/js184/index.htm#appendix">Appendix : A Summary of Perl Regular Expressions</a> in Pankaj Kamthan’s <a href="http://www.irt.org/articles/js184/index.htm">CGI Security : Better Safe than Sorry</a>, and my own repeated failures to memorize the syntax.</p>
+<p>This page belongs to section <a href="http://jkorpela.fi/prog/index.html.html">Programming</a> of the free information site <a href="http://jkorpela.fi/indexen.html.html">IT and communication</a> by <a href="http://jkorpela.fi/personal.html" title="Jukka K. Korpela, an IT generalist and specialist (personal home page.html)"><span lang="fi">Jukka</span> “Yucca” <span lang="fi">Korpela</span></a>.</p>
+</body>
+</html>

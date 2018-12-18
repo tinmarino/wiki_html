@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p>perl -p -i -e 's/oldstring/newstring/g' <code>find ./ -name *.html</code></p>
+<p>perl -p -i -e 's/oldstring/newstring/g' <code>grep -ril oldstring *</code></p>
+<h1 id="usrbinperl">!/usr/bin/perl</h1>
+<p>use strict; use warnings;</p>
+<h1 id="create-an-in-memory-file">create an in-memory file</h1>
+<p>my $fakefile = &quot;1234567890&quot;; open my $fh, &quot;+&lt;&quot;, $fakefile or die &quot;Cant open file: $!&quot;;</p>
+<p>my $offset = 5;</p>
+<p>seek $fh, $offset, 0 or die &quot;could not seek: $!&quot;;</p>
+<p>print $fh &quot;CP1&quot;;</p>
+<p>print $fakefile;</p>
+</body>
+</html>

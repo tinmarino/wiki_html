@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p>http://www.softpanorama.org/Scripting/Perlorama/perl_in_command_line.shtml</p>
+<p>Hi:</p>
+<pre><code>perl -e &#39;print &quot;hello world!\n&quot;&#39;</code></pre>
+<p>A simple filter:</p>
+<pre><code>perl -ne &#39;print if /REGEX/&#39;</code></pre>
+<p>Filter out blank lines (in place):</p>
+<pre><code>perl -i -ne&#39;print if /\w/&#39;</code></pre>
+<p>Search and replace (in place):</p>
+<pre><code>perl -i -pe&#39;s/SEARCH/REPLACE/&#39; </code></pre>
+<p>Add first and penultimate columns:</p>
+<pre><code>perl -lane &#39;print $F[0] + $F[-2]&#39;</code></pre>
+<p>Just lines 15 to 17:</p>
+<pre><code>perl -ne &#39;print if 15 .. 17&#39; *.pod</code></pre>
+<p>In-place edit of *.c files changing all foo to bar:</p>
+<pre><code>perl -p -i.bak -e &#39;s/\bfoo\b/bar/g&#39; *.c</code></pre>
+<p>Command-line that prints the first 50 lines (cheaply):</p>
+<pre><code>perl -pe &#39;exit if $. &gt; 50&#39; f1 f2 f3 ...</code></pre>
+<p>Delete first 10 lines:</p>
+<pre><code>perl -i.old -ne &#39;print unless 1 .. 10&#39; foo.txt</code></pre>
+<p>Change all the isolated oldvar occurrences to newvar:</p>
+<pre><code>perl -i.old -pe &#39;s{\boldvar\b}{newvar}g&#39; *.[chy]</code></pre>
+<p>Command-line that reverses the whole file by lines:</p>
+<pre><code>perl -e &#39;print reverse &lt;&gt;&#39; file1 file2 file3 ....</code></pre>
+<p>Find palindromes:</p>
+<pre><code>perl -lne &#39;print if $_ eq reverse&#39; /usr/dict/words</code></pre>
+<p>Command-line that reverse all the bytes in a file:</p>
+<pre><code>perl -0777e &#39;print scalar reverse &lt;&gt;&#39; f1 f2 f3 ...</code></pre>
+<p>Command-line that reverses the whole file by paragraphs:</p>
+<pre><code>perl -00 -e &#39;print reverse &lt;&gt;&#39; file1 file2 file3 ....</code></pre>
+<p>Increment all numbers found in these files:</p>
+<pre><code>perl i.tiny -pe &#39;s/(\d+)/ 1 + $1 /ge&#39; file1 file2 ....</code></pre>
+<p>Command-line that shows each line with its characters backwards:</p>
+<pre><code>perl -nle &#39;print scalar reverse $_&#39; file1 file2 file3 ....</code></pre>
+<p>Delete all but lines between START and END:</p>
+<pre><code>perl -i.old -ne &#39;print unless /^START$/ .. /^END$/&#39; foo.txt</code></pre>
+<p>Binary edit (careful!):</p>
+<pre><code>perl -i.bak -pe &#39;s/Mozilla/Slopoke/g&#39; /usr/local/bin/netscape</code></pre>
+<p>Duplicate words:</p>
+<pre><code>perl -0777 -ne &#39;print &quot;$.: doubled $_\n&quot; while /\b(\w+)\b\s+\b\1\b/gi&#39;</code></pre>
+<p>Print the last 50 lines (expensive!):</p>
+<pre><code>perl -e &#39;@lines = &lt;&gt;; print @lines[ $#lines .. $#lines-50&#39; f1 f2 f3 ...</code></pre>
+<p>Move files &lt; 1000 bytes to DIR:</p>
+<pre><code>ls -l *xls | perl -na -F&#39;/\s+/&#39; -e &#39;print &quot;$F[8]\n&quot; if $F[4] &lt; 1000&#39; |
+xargs -J % mv % DIR</code></pre>
+<p>Print 1st, 2nd, and last columns (use -l for auto-line-end processing):</p>
+<pre><code>perl -F&quot;\t&quot; -nlae&#39;print join &quot;\t&quot;, @F[0,1,-1]&#39; </code></pre>
+<p>Print columns 1-20:</p>
+<pre><code>perl -F&quot;\t&quot; -nlae&#39;print join &quot;\t&quot;, @F[0..19]&#39;</code></pre>
+<p>Print all filenames &amp; their line #s w/ pattern:</p>
+<pre><code>perl -ne&#39;if (/PATTERN/) { print &quot;$ARGV: $.\n&quot; }; $. = 0 if eof&#39;</code></pre>
+<p>Print file up to some pattern:</p>
+<pre><code>perl -ne&#39;if (/PATTERN/) { close ARGV } else { print }&#39;</code></pre>
+<p>Inclusive of line w/ pattern:</p>
+<pre><code>perl -pe&#39;if (/PATTERN/) { close ARGV }&#39;</code></pre>
+<p>Delete columns of file after column N+2:</p>
+<pre><code>perl -i -F&#39;\t&#39; -nlae&#39;print join &quot;\t&quot;, @F[0..N]&#39; </code></pre>
+<p>Insert new column after column N:</p>
+<pre><code>perl -i -F&#39;\t&#39; -nae&#39;print join &quot;\t&quot;, @F[0..N], &quot;new&quot;, @F[N+1..$#F]&#39;</code></pre>
+<p>Cut files in dir at pattern &amp; omit blank lines:</p>
+<pre><code>perl -i -ne &#39;if (/PATTERN/) { close ARGV } else { print unless /^$/ }&#39;</code></pre>
+<p>Insert line numbers in a file:</p>
+<pre><code>perl -i -ne &#39;printf &quot;%04d %s&quot;, $., $_&#39;</code></pre>
+<p>Insert text at line N:</p>
+<pre><code>perl -i -pe &#39;print &quot;text\n&quot; if $. == N; $. = 0 if eof&#39;</code></pre>
+<p>Print filenames of files containing pattern in first N lines:</p>
+<pre><code>perl -n -e &#39;if (/PATTERN/) { print &quot;$ARGV\n&quot;; close ARGV }&#39; 
+        -e &#39;close $ARGV if $. = N&#39;</code></pre>
+<p>Return part of select filenames:</p>
+<pre><code>perl -ne &#39;$ARGV =~ /^(.*)\.TXT$/; print &quot;$&amp;\n&quot;; close ARGV&#39;</code></pre>
+<p>Add columns M thru N and insert total:</p>
+<pre><code>perl -F&#39;\t&#39; -nlae &#39;$t=0; $t += $_ for @F[M..N]; print &quot;$_\t$t&quot; &#39;</code></pre>
+<p>Replace pattern on first line of each file:</p>
+<pre><code>perl -i -pe&#39;
+    $new = 1; 
+    s/PATTERN/REPLACE/ if $new; 
+    $new = eof(ARGV) ? 1 : 0&#39;</code></pre>
+<p>Create two columns of random numbers:</p>
+<pre><code>jot -r 100 | rs 50</code></pre>
+<p>Given a list of random numbers, ranging from 1 to 20, show the count of those numbers &gt;= 10 and those &lt; 10:</p>
+<pre><code>jot -r 20 1 20 | perl -ne &#39;print $_ &gt;= 10 ? 1 : 0, &quot;\n&quot;&#39; | sort | uniq -c</code></pre>
+<p>... or showing percentages:</p>
+<pre><code>jot -r 20 1 20 
+  | perl -ne &#39;print $_ &gt;= 10 ? 1 : 0, &quot;\n&quot;&#39; 
+  | sort 
+  | uniq -c 
+  | cut -c 3-4 
+  | perl -ne&#39;chomp; $sum += $_; push @counts, $_; 
+            END { print $_, &quot; : &quot;, $_ / $sum, &quot;\n&quot; for @counts }&#39;</code></pre>
+<p>... or to show the percentage of nines in the list:</p>
+<pre><code>  | perl -ne &#39;print $_ == 9 ? 1 : 0, &quot;\n&quot;&#39; </code></pre>
+<p>Given a list of numbers, ranging from 0 to 20,000, show the distribtion (i.e., individual counts) of those numbers after each is rounded to the nearest $1,000 increment:</p>
+<pre><code>jot -r 20 0 20000 
+  | perl -pe&#39;$_ = 1000 * int($_/1000).&quot;\n&quot;&#39; 
+  | sort -n 
+  | uniq -c</code></pre>
+<p>... or showing percentages:</p>
+<pre><code>jot -r 20 1000 20000 
+  | perl -pe&#39;$_ = 1000 * int($_/1000) . &quot;\n&quot;&#39; 
+  | sort -n
+  | uniq -c 
+  | perl -ne&#39;($n,$num) = /(\d+)/g; $counts{$num} = $n; $sum += $n; 
+              END { print $_, 
+                    &quot; : &quot;, 
+              $counts{$_} / $sum, &quot;\n&quot; 
+              for sort {$a&lt;=&gt;$b} keys %counts }&#39;</code></pre>
+<p>... or to find the median (i.e., the middle number):</p>
+<pre><code>    | perl -e&#39;@lines = &lt;&gt;; print $lines[int($#lines/2)]&#39;</code></pre>
+<p>... or to find the average:</p>
+<pre><code>jot -r 20 0 20000 | perl -pe&#39;$_=1000 * int($_/1000).&quot;\n&quot;&#39;</code></pre>
+</body>
+</html>

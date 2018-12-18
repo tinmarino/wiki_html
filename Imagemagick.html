@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<p><code>convert</code></p>
+<h1 id="stuff">Stuff</h1>
+<pre><code>-resize 100x40
+-crop 40x30+10+10   # (width)x(height)+(x)+y
+-crop 40x30-10-10   # (width)x(height)+(x)+y
+-flip               # vertical
+-flop               # horizontal
+-transpose          # flip vertical + rotate 90deg
+-transverse         # flip horizontal + rotate 270deg
+-trim               # trim image edges
+-rotate 90</code></pre>
+<h1 id="resize-to-fit">Resize to fit</h1>
+<p><code>convert input.jpg -resize 80x80^ -gravity center -extent 80x80 icon.png</code></p>
+<h1 id="convert-all-images-to-another-format">Convert all images to another format</h1>
+<p><code>mogrify -format jpg -quality 85 *.png</code></p>
+</body>
+</html>
