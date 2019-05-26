@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<ul>
+<li><p>On peut utiliser le convolutionelle pour tout signal spatio-temporelle : où il y a corrélation entre les coordonnées proches.</p></li>
+<li><p>Pour réduire le biais causé par 2 fonctions du mm nom mais pas les mêmes, on peu modifier la loss pour ne pas trop punir si elle se trompe trop (par exemple dans le cas d’un nouveau wrapper).</p></li>
+<li><p>Il existe des “autoencodeurs” qui peuvent supprimer les câbles d’une images, mettre un paysage en.hiver, un visage en caricature.</p></li>
+<li><p>Attention, plus ta données est transformée, plus tu introduit des bais, c’est pourquoi l’expert regarde la chaine complète de la transformation de la donnée.</p></li>
+<li><p>Il y a tellement de dimensions que dans la descente de gradient, on a du mal arrêter attraper dans un optimum local bien longtemps : on trouve toujours un chemin. Il existe pleins d’extremum globaux. On reste a la fin dans un local mais c pas grave car il est satisfaisant.</p></li>
+<li><p>Bien penser à normaliser : autour de la moyenne, divise par std et en log. Pour éviter que les grosses valeurs éclipsent les petites. Genre 10^9 dans une descente de gradient vaut + que 0.1</p></li>
+<li><p>Lorsqu’on met bout a bout les couches, on a besoin de moi s de neurones, on va plus vite au résultat. Bien qu’en théorie une seule couche soit nécessaire pour un perceptron.</p></li>
+<li><p>Plus c complexe, plus il faut de couches. Entre 3 et 6 c’est bien.</p></li>
+<li><p>Conv / Mlp / Lstm (== Rnn) are feed foward NN</p></li>
+<li><p>Optimizer, change le learning rate en dynamique : ADAM, GSD. Y’en a un qui utilise un momentum, après 2, 3 chute, on continue de tomber dans cette direction.</p></li>
+</ul>
+<h1 id="difficultés">Difficultés</h1>
+<ol type="1">
+<li>Classification</li>
+<li>Prédiction : classification continue</li>
+<li>Similarité : distance entre objets</li>
+<li>Génération</li>
+</ol>
+<h1 id="vocabulaire">Vocabulaire</h1>
+<h3 id="transfert-learning">Transfert learning</h3>
+<p>Utiliser un réseau déjà entrainer pour effectuer une autre tache.</p>
+<h3 id="early-stopping">Early stopping</h3>
+<p>Pour lutter contre le sur apprentissage. Sinon augmenter le nombre de données d’apprentissage ou réduire la taille du modèle.</p>
+<h3 id="règles-expertes">Règles expertes</h3>
+<p>Arbre de décision d’expert</p>
+<h3 id="pushbutton">PushButton</h3>
+<p>Réseau de neurone automatiquement généré</p>
+<h3 id="random-forest">Random Forest</h3>
+<p>Choisir aléatoirement un batch (1%) des vecteurs d’entrés. Et ne s’intéresse qu’à un sous ensemble des coordonnées. Il crée ensuite l’arbre de décision minimal qui permet de discriminer au mieux ces vecteurs. C’est comme si il crée des arbres de décision experts en chaque coordonnées puis il prend la majorités des votes. Utilise <code>Scikit learn</code>. L’avantage est qu’on peut remonter à l’origine des décisions facilement. Chaque arbre prend un échantillon différent. A chaque branche de l’arbre, on ne discrimine qu’une coordonnée, genre <code>x0 &lt; 0.3</code></p>
+<h3 id="k-means">K-means</h3>
+<h3 id="hot-encoding">Hot encoding</h3>
+<p>C’est pour encoder une valeur de manière discrète. En mettant chaque possibilité comme une dimension de vecteur. Comme l’output de la reconnaissance de caractère.</p>
+<h3 id="softmax">SoftMax</h3>
+<p>Permet de donner une sortie en probabilité dans des catégories discrètes. Pour l’erreur sur la fin, on utilise l’entropie croisée.</p>
+<h3 id="cross-validation">Cross Validation</h3>
+<p>S’entrainer sur 90% et valider sur 10% mais faire 10 fois l’expérience en faisant varier les 10%, pour au final qu’ils aient couvert tout le set. Voir changer la graine de la sélection aléatoire et refaire tout ça. Du genre faire 30 expériences pour un test. Attentions aux papiers qui affichent le meilleur résultat. C’est la moyenne qui compte.</p>
+<h3 id="matrice-de-confusion">Matrice de confusion</h3>
+<p>M(x, y) est le nombre d’élément de catégorie x classés y par le système. A partir de cette Matrice, on peut calculer plusieurs métriques différentes. Souvent ces métriques mesures les faux positifs <strong>ou</strong> négatifs suivant telle ou telle dimension (i.e. ici des familles).</p>
+<h4 id="précision">Précision</h4>
+<p>Nombre de bonne classification de chaque classe / nb d’élément classé dans cette classe (inclue les mauvais)</p>
+<h4 id="rappel">Rappel</h4>
+<p>Nombre de bonne classification de chaque classe / nombre d’élément dans cette classe</p>
+<h4 id="f1-score">F1 score</h4>
+<p>Moyenne géométrique Rappel et Précision : <code>2.p.r / (p + r)</code></p>
+<h2 id="statistiques">Statistiques</h2>
+<ul>
+<li><p>Regarder le nombre d’objets pour chaque label</p></li>
+<li>Bien comprendre qui est majoritaire et si ceux qui m’intèressent sont minoritaire, pourquoi ? Ou sont-ils ? Est ce que je considère les autres ? En superisé (ou semi) ?</li>
+<li><p>C’est parfois normal, par exemple pour chercher un evenement rare : une tumeur dans une image médicale. On a des échantillons d’intérêt minoritaire. Bonne chance.</p></li>
+</ul>
+<h1 id="todo">Todo</h1>
+<ul>
+<li>Exporter au format numpy (pour faciliter le chargement)</li>
+<li>Numpy sous forme binaire pour mmap rapide</li>
+<li><p>Prendre les exemples du cour pour les collègues.</p></li>
+<li><p>Faire des statistiques</p></li>
+<li>Voir les outsiders</li>
+<li><p>Faire un histogramme</p></li>
+<li><p>Regarder</p></li>
+<li>KNeighborsClassifier</li>
+<li><p>LinearDiscriminantAnalysis</p></li>
+<li><p>Préparer un Golden Standard, ce qui est comme un test de non régression pour l’IA.</p></li>
+</ul>
+<h1 id="numpy-plt-scikit-learn">Numpy / Plt / Scikit learn</h1>
+<ul>
+<li>plt.bar(array)</li>
+<li>plt.boxplot(array_x, array_y)</li>
+</ul>
+</body>
+</html>

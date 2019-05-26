@@ -1,18 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
 <li><a href="Perl-Perldoc.html">Perldoc</a></li>
-<li><a href="Perl-Cheatsheet_one_page.html">Cheatsheet_one_page</a></li>
 <li><a href="Perl-One_Liners.html">One_Liners</a></li>
+<li><a href="Perl-Programming-Note.html">Perl Programming Note</a></li>
+<li><a href="Perl-Japh.html">Japh</a> : Just Another Perl Hacker</li>
 </ul>
 <h1 id="old">Old</h1>
 <ul>
@@ -20,8 +26,71 @@
 <li><a href="Perl-Array.html">List &amp; Hash = Arrays</a></li>
 <li><a href="Perl-Regexp-Downloaded.html">/ = Regexp (Downloaded)</a></li>
 <li><a href="Perl-Tuto-France.html">Tutorial France Anger</a></li>
+<li><a href="Perl-Cheatsheet_one_page.html">Cheatsheet_one_page</a></li>
 <li><a href="Perl-One_Liners_old.html">Perl One_Liners_old</a></li>
 <li><a href="Perl-Snippet.html">Perl Snippet</a></li>
+</ul>
+<h1 id="tips">Tips</h1>
+<p>use Number::Format ‘format_number’ glob .perldlrc # to edit and load automatically some libs</p>
+<p>Symbol table edition</p>
+<pre><code>for (keys %main::){say}
+*sym = $main::{&quot;/&quot;}</code></pre>
+<p>Use Unicode::Collate::Sort</p>
+<p>my <span class="math inline">$foo = &quot;zombies are the bombies&quot;;if ($</span>foo =~ / zombie # sorry pirates /x ) { print “urg. brains.”;} /x modifier for pretty regzx print</p>
+<p>Even without the /x modifier, you can enclose comments in (?# … ):my $foo = “zombies are the bombies”;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print “urg. brains.”;}</p>
+<p>Get package path perl -MTime::HiRes -e ‘print $INC{“Time/HiRes.pm”}’ or perldoc -l Time::HiRes cpan -D Time::HiRes</p>
+<p>How do I completely remove an element from an array?</p>
+<pre><code>@array = grep { $_ != $element_omitted } @array;
+```
+@files = qw(/foo/bar/file.pdf /foo/baz/file2.jpg);
+
+foreach $file (@files) {
+        # exclude any files whose full name contains the string &#39;bar&#39;
+        next if $file =~ /bar/;
+
+        # print all other files
+        print &quot;$file\n&quot;;
+}
+```</code></pre>
+<p>Pdl</p>
+<pre><code>pdl &gt;demo</code></pre>
+<p>Profiling</p>
+<pre><code>perl -d:DProf program.pl
+dprofpp
+dprofpp -p program.pl
+perl -d:NYTProf some_perl.pl
+nytprofhtml
+
+perldoc perldebguts</code></pre>
+<p>Print Hash</p>
+<pre><code>print &quot;$_ $h{$_}\n&quot; for (keys %h);</code></pre>
+<p>Extend <span class="citation" data-cites="LIB">@LIB</span></p>
+<pre><code>export PERL5LIB=/home/foobar/code
+use lib &#39;/home/foobar/code&#39;;
+use My::Module;
+perl -I /home/foobar/code script.pl  # That is a capital i like include</code></pre>
+<p>Fork Bomb</p>
+<pre><code>perl -e &quot;fork while fork&quot; &amp;</code></pre>
+<p>Console</p>
+<pre><code>perl -de1 # debugging a trivial programe</code></pre>
+<p>Write multiple line regex</p>
+<ul>
+<li>Delete the space, then type CtrlV, CtrlJ.<br />
+Then Return.<br />
+The Ctrl-V prevents the shell interpreting the next character (newline) literally.</li>
+<li>toto</li>
+</ul>
+<p>Match brace, bracket or parenthesis</p>
+<ul>
+<li>Use Text::Balanced</li>
+<li></li>
+</ul>
+<pre><code>my $re; $re = qr/ \{ (?: [^{}]* | (??{$re}) )* \} /x;
+my @array = $str =~ /$re/xg;</code></pre>
+<p>Get environment variables</p>
+<ul>
+<li><code>$userName =  $ENV{'LOGNAME'};</code></li>
+<li>print “Hello, $userName”;</li>
 </ul>
 <h1 id="command-line">Command line</h1>
 <p>Interactive shell</p>
@@ -34,12 +103,12 @@
 </ul>
 <p>Change file content</p>
 <ul>
-<li>perl -i.bak -p -e 's/old/new/g;' *.config</li>
+<li>perl -i.bak -p -e ‘s/old/new/g;’ *.config</li>
 </ul>
-<table style="width:21%;">
+<table>
 <colgroup>
-<col width="15%" />
-<col width="5%" />
+<col style="width: 76%" />
+<col style="width: 23%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -62,7 +131,7 @@
 </tr>
 <tr class="even">
 <td>-I path</td>
-<td>Add path to <span class="citation">@INC</span></td>
+<td>Add path to <span class="citation" data-cites="INC">@INC</span></td>
 </tr>
 <tr class="odd">
 <td>-i[.bak]</td>
@@ -74,7 +143,7 @@
 </tr>
 <tr class="odd">
 <td>-a</td>
-<td>Enable autosplit mode : split input lines on whitespace into the <span class="citation">@F</span> array</td>
+<td>Enable autosplit mode : split input lines on whitespace into the <span class="citation" data-cites="F">@F</span> array</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -113,26 +182,19 @@
 <td>Process line by line and print output</td>
 </tr>
 <tr class="odd">
+<td>-l</td>
+<td>Remove newline char before giving line to you (and add it at the end)</td>
+</tr>
+<tr class="even">
 <td>-v</td>
 <td>Check Perl version</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 <p>The perl command is in apostrophes, and escaping those is hard work… So if your regex happens to contain apostrophes, first place it in an env variable then refer to it by name :</p>
 <pre><code>env mypattern=&quot;&#39;\w+&quot; perl -0777 -ne &#39;while(m/$ENV{mypattern}/g){print &quot;$&amp;\n&quot;;}&#39; yourfile</code></pre>
 <h1 id="packages">Packages</h1>
+<p>cpan install CPAN cpan reload cpan</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -151,61 +213,8 @@
 <td>PDL::IO::Image</td>
 <td>Image manipulation (object)</td>
 </tr>
-<tr class="odd">
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
-<p>my <span class="math inline">$foo = &quot;zombies are the bombies&quot;;if ($</span>foo =~ / zombie # sorry pirates /x ) { print &quot;urg. brains.&quot;;} /x modifier for pretty regzx print</p>
-<p>Even without the /x modifier, you can enclose comments in (?# ... ):my $foo = &quot;zombies are the bombies&quot;;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print &quot;urg. brains.&quot;;}</p>
-<p>Get package path perl -MTime::HiRes -e 'print $INC{&quot;Time/HiRes.pm&quot;}' or perldoc -l Time::HiRes cpan -D Time::HiRes</p>
-<p>How do I completely remove an element from an array?</p>
-<pre><code>@array = grep { $_ != $element_omitted } @array;
-```
-@files = qw(/foo/bar/file.pdf /foo/baz/file2.jpg);
-
-foreach $file (@files) {
-        # exclude any files whose full name contains the string &#39;bar&#39;
-        next if $file =~ /bar/;
-
-        # print all other files
-        print &quot;$file\n&quot;;
-}
-```</code></pre>
-<p>Print Hash</p>
-<pre><code>print &quot;$_ $h{$_}\n&quot; for (keys %h);</code></pre>
-<p>Extend <span class="citation">@LIB</span></p>
-<pre><code>export PERL5LIB=/home/foobar/code
-use lib &#39;/home/foobar/code&#39;;
-use My::Module;
-perl -I /home/foobar/code script.pl  # That is a capital i like include</code></pre>
-<p>Fork Bomb</p>
-<pre><code>perl -e &quot;fork while fork&quot; &amp;</code></pre>
-<p>Console</p>
-<pre><code>perl -de1 # debugging a trivial programe</code></pre>
-<p>Write multiple line regex</p>
-<ul>
-<li>Delete the space, then type CtrlV, CtrlJ.<br />
-Then Return.<br />
-The Ctrl-V prevents the shell interpreting the next character (newline) literally.</li>
-<li>toto</li>
-</ul>
-<p>Match brace, bracket or parenthesis</p>
-<ul>
-<li>Use Text::Balanced</li>
-<li><pre><code>my $re; $re = qr/ \{ (?: [^{}]* | (??{$re}) )* \} /x;
-my @array = $str =~ /$re/xg;</code></pre></li>
-</ul>
-<p>Get environment varaibles</p>
-<ul>
-<li><code>$userName =  $ENV{'LOGNAME'};</code></li>
-<li>print &quot;Hello, $userName&quot;;</li>
-</ul>
 <h1 id="regexp">Regexp</h1>
 <table>
 <thead>
@@ -243,10 +252,6 @@ my @array = $str =~ /$re/xg;</code></pre></li>
 <td><code>\K</code></td>
 <td>in vim (start recording)</td>
 </tr>
-<tr class="even">
-<td></td>
-<td></td>
-</tr>
 </tbody>
 </table>
 <table>
@@ -268,10 +273,6 @@ my @array = $str =~ /$re/xg;</code></pre></li>
 <tr class="odd">
 <td>r</td>
 <td>Non destructive</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>

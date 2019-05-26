@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <pre><code>Portability
@@ -22,16 +27,16 @@ Layout
 Recommended Shortcuts
 Errata              Compatibility Mode </code></pre>
 <h1 id="background">Background</h1>
-<p>This is the in-depth vimscript guide. If you're just a casual user looking to write a plugin, the <a href="vimscriptguide.html">abbreviated style guide</a> is for you.</p>
+<p>This is the in-depth vimscript guide. If you’re just a casual user looking to write a plugin, the <a href="vimscriptguide.html">abbreviated style guide</a> is for you.</p>
 <p>This rather rotund guide dives into justifications and clarifications. It provides an idealized set of rules that are rather too draconian to push on casual scripters.</p>
-<p>It's for users who want to know why certain decisions were made in the abbreviated guide and who want to learn a thing or two about using vimscript safely.</p>
+<p>It’s for users who want to know why certain decisions were made in the abbreviated guide and who want to learn a thing or two about using vimscript safely.</p>
 <p>Fair warning: Vimscript is a maddening abyss. When you gaze into it, it gazes also into you. Proceed with caution.</p>
 <h1 id="portability">Portability</h1>
 <p>Vim is highly configurable. Users can change many of the default settings, including the case sensitivity, the regular expression rules, the substitution rules, and more. In order for your vimscript to work for all users, follow these guidelines:</p>
 <ul>
 <li>Always prefix regular expressions with one of <code>\m</code>, <code>\v</code>, <code>\M</code>, or <code>\V</code> (prefer tersity)
 <ul>
-<li>Users can change the global &quot;magic level&quot; of regular expressions. This changes how atoms are parsed in regular expressions, including <code>.</code>, <code>*</code>, and <code>{</code>.</li>
+<li>Users can change the global “magic level” of regular expressions. This changes how atoms are parsed in regular expressions, including <code>.</code>, <code>*</code>, and <code>{</code>.</li>
 <li>Even if your regular expression does not contain characters which are affected by the <code>magic</code> setting you must prefix it with one of the magic control atoms. This future-proofs your regular expression against other devs modifying it and forgetting to add the control atom.</li>
 <li>If you have no opinion about what type of regular expression to use, prefer the one which makes your regular expression most concise.</li>
 </ul></li>
@@ -47,7 +52,7 @@ Errata              Compatibility Mode </code></pre>
 <li>This also applies to <code>!~ == != &gt; &gt;= &lt;</code> and <code>&lt;=</code></li>
 <li>This only applies for strings. <code>==</code> and <code>&gt;=</code> are fine for numbers, but <code>==#</code> and <code>&gt;=#</code> must be used for strings.</li>
 <li>The behavior of <code>=~</code> and friends is dependant upon the <code>ignorecase</code> setting.</li>
-<li>You may break this rule when you explicitly want to obey the user's <code>ignorecase</code> setting. Be prepared to justify your reasoning.</li>
+<li>You may break this rule when you explicitly want to obey the user’s <code>ignorecase</code> setting. Be prepared to justify your reasoning.</li>
 </ul></li>
 <li>When using regular expressions as arguments to functions, prepend them with <code>\c</code> or <code>\C</code>.
 <ul>
@@ -59,11 +64,11 @@ Errata              Compatibility Mode </code></pre>
 </ul></li>
 <li>Always use <code>normal!</code> instead of <code>normal</code>.
 <ul>
-<li>If you forgo the <code>!</code> the command will use the user's key mappings and you have literally no idea what your macro will do.</li>
+<li>If you forgo the <code>!</code> the command will use the user’s key mappings and you have literally no idea what your macro will do.</li>
 </ul></li>
 <li>Always use the <code>noremap</code> family of commands.
 <ul>
-<li>Your plugins generally shouldn't introduce mappings, but if they do, the <code>map</code> command respects the users existing mappings and could do anything.</li>
+<li>Your plugins generally shouldn’t introduce mappings, but if they do, the <code>map</code> command respects the users existing mappings and could do anything.</li>
 </ul></li>
 <li>When using <code>catch</code>, match the error code rather than the error text.
 <ul>
@@ -114,12 +119,12 @@ Errata              Compatibility Mode </code></pre>
 <ul>
 <li>Hurts code reuse since python code embedded in python plugins is awkward to share between plugins.</li>
 <li>Using python introduces python language version dependencies, which are likely to get stale.</li>
-<li>Exception: It's reasonable to use python for plugin functionality that needs to do work in the background, as vimscript can not do this.</li>
+<li>Exception: It’s reasonable to use python for plugin functionality that needs to do work in the background, as vimscript can not do this.</li>
 </ul></li>
 <li>Ruby: <strong>No</strong>
 <ul>
 <li>We can not assume ruby interoperability.</li>
-<li>You shouldn't depend upon the version of the ruby language that the user has installed.</li>
+<li>You shouldn’t depend upon the version of the ruby language that the user has installed.</li>
 </ul></li>
 <li>Lua: <strong>No</strong>
 <ul>
@@ -145,14 +150,14 @@ Errata              Compatibility Mode </code></pre>
 <ul>
 <li>Plugin names should be descriptive and concise.</li>
 </ul></li>
-<li>Each plugin must consist of one directory (or code repository), sharing a name with the plugin (with a &quot;vim-&quot; prefix or &quot;.vim&quot; suffix if desired).</li>
+<li>Each plugin must consist of one directory (or code repository), sharing a name with the plugin (with a “vim-” prefix or “.vim” suffix if desired).</li>
 <li>Plugin metadata should be declared in the addon-info.json format (see the <a href="https://github.com/MarcWeber/vim-addon-manager/blob/master/doc/vim-addon-manager-additional-documentation.txt">VAM documentation</a> for details).</li>
 <li>Functions should go in the <code>autoload/</code> subdirectory of your plugin.
 <ul>
 <li>This allows them to be late-loaded, which speeds up startup time.</li>
 <li>This helps vim enforce namespacing conventions.</li>
 </ul></li>
-<li>Each file in the <code>plugin/</code> or <code>instant/</code> directory should begin with the boilerplate let [s:plugin, s:enter] = maktaba#plugin#Enter(expand('&lt;sfile&gt;:p')) if !s:enter finish endif (This prevents re-entry and allows users to selectively disable functionality.)</li>
+<li>Each file in the <code>plugin/</code> or <code>instant/</code> directory should begin with the boilerplate let [s:plugin, s:enter] = maktaba#plugin#Enter(expand(‘&lt;sfile&gt;:p’)) if !s:enter finish endif (This prevents re-entry and allows users to selectively disable functionality.)</li>
 <li>User configuration should be via plugin flags defined in <code>instant/flags.vim</code>.
 <ul>
 <li>Define flags with <code>call s:plugin.Flag('FLAGNAME', DEFAULT_VALUE)</code>.</li>
@@ -175,16 +180,16 @@ Errata              Compatibility Mode </code></pre>
 <p>Separate library-providing plugins from command-providing plugins.</p>
 <p>Many plugins provide either user functionality (commands, autocommands, etc) or an API (of autoloaded functions) but not both. This separation is encouraged, as it allows other plugins to pull in a library without also pulling in commands, setting changes, and other plugin functionality that affects the end user.</p>
 <h2 id="configuration">Configuration</h2>
-<p>Don't clobber user settings. Provide as much configurability as possible: that's what Vim's all about.</p>
+<p>Don’t clobber user settings. Provide as much configurability as possible: that’s what Vim’s all about.</p>
 <ul>
 <li>Use maktaba flags for plugin configuration. Users can configure them using the <code>:Glaive</code> command.</li>
-<li>Check if configuration variables exist before setting them. if !exists('g:myplugin_option') let g:myplugin_option = 1 endif</li>
+<li>Check if configuration variables exist before setting them. if !exists(‘g:myplugin_option’) let g:myplugin_option = 1 endif</li>
 </ul>
 <h1 id="style-guide">Style Guide</h1>
 <p>Follow google-wide style conventions. Mimic google python style when in doubt.</p>
 <h1 id="documentation">Documentation</h1>
 <p>Use <a href="https://github.com/google/vimdoc.html">vimdoc</a>.</p>
-<p>Provide help files generated by <a href="https://github.com/google/vimdoc.html">vimdoc</a>. Write documentation in .vim files in conformance with the vimdoc standards and include fields like &quot;description&quot; and &quot;author&quot; in the addon-info.json file (see the <a href="https://github.com/MarcWeber/vim-addon-manager/blob/master/doc/vim-addon-manager-additional-documentation.txt">VAM documentation</a>).</p>
+<p>Provide help files generated by <a href="https://github.com/google/vimdoc.html">vimdoc</a>. Write documentation in .vim files in conformance with the vimdoc standards and include fields like “description” and “author” in the addon-info.json file (see the <a href="https://github.com/MarcWeber/vim-addon-manager/blob/master/doc/vim-addon-manager-additional-documentation.txt">VAM documentation</a>).</p>
 <h1 id="whitespace">Whitespace</h1>
 <p>Follow google-wide conventions.</p>
 <ul>
@@ -193,7 +198,7 @@ Errata              Compatibility Mode </code></pre>
 <li>Use spaces around operators except for arguments to commands.
 <ul>
 <li>Using spaces around operators for commands is often invalid syntax. This is inconsistently enforced by vimscript. To be safe, always omit whitespace around arguments to commands.</li>
-<li>let s:variable = &quot;concatenated &quot; . &quot;strings&quot; command -range=% MyCommand let s:variable=&quot;concatenated &quot;.&quot;strings&quot; command -range = % MyCommand</li>
+<li>let s:variable = “concatenated” . “strings” command -range=% MyCommand let s:variable=“concatenated”.“strings” command -range = % MyCommand</li>
 </ul></li>
 <li>Do not introduce trailing whitespace.
 <ul>
@@ -227,7 +232,7 @@ Errata              Compatibility Mode </code></pre>
 </ul></li>
 <li>Do not use inline comments.
 <ul>
-<li>Some commands treat them as comments and others as unclosed quotes. There are many edge cases. It's difficult to get right and difficult to maintain.</li>
+<li>Some commands treat them as comments and others as unclosed quotes. There are many edge cases. It’s difficult to get right and difficult to maintain.</li>
 <li>Where you would use an inline comment, put a line comment on the line above.</li>
 </ul></li>
 <li>When leaving blank lines in comments, include the quote in the blank line.
@@ -291,7 +296,7 @@ Errata              Compatibility Mode </code></pre>
 <li>If your string requires escape characters (<code>\n</code>, <code>\t</code>, etc.) use double quotes.
 <ul>
 <li>Escapes can not be expressed in single quoted strings.</li>
-<li>Remember that <code>'\n'</code> in a regex does not represent a newline, but rather &quot;\n&quot;. You only need to use double quotes when you want to embed the represented character itself (e.g. a newline) in the string.</li>
+<li>Remember that <code>'\n'</code> in a regex does not represent a newline, but rather “\n”. You only need to use double quotes when you want to embed the represented character itself (e.g. a newline) in the string.</li>
 </ul></li>
 <li>If your string contains no escapes nor single quotes, use single quoted strings.
 <ul>
@@ -299,7 +304,7 @@ Errata              Compatibility Mode </code></pre>
 </ul></li>
 <li>If your non-regex string contains single quotes but no double quotes, use double quotes.
 <ul>
-<li>Don't bother escaping strings if you don't have to.</li>
+<li>Don’t bother escaping strings if you don’t have to.</li>
 <li>This is similar to the python string rules.</li>
 </ul></li>
 <li>If your string contains both single and double quotes, use whichever quoting style requires less escaping.
@@ -404,7 +409,7 @@ Errata              Compatibility Mode </code></pre>
 <li>Place two blank lines between top-level functions.</li>
 <li>Declare all functions with <code>abort</code>.
 <ul>
-<li>If you do not do this, the function's behavior depends upon whether it is called within a <code>try..endtry</code> block somewhere on the stack.</li>
+<li>If you do not do this, the function’s behavior depends upon whether it is called within a <code>try..endtry</code> block somewhere on the stack.</li>
 <li>The <code>abort</code> keyword forces the function to act consistently.</li>
 <li>Without it, the function may (or may not) attempt to continue execution after an error occurs.</li>
 </ul></li>
@@ -442,7 +447,7 @@ Errata              Compatibility Mode </code></pre>
 <ul>
 <li>This will inform the user when they have a mapping conflict instead of silently clobbering their existing mappings.</li>
 </ul></li>
-<li>You may provide pseudo-mappings using <code>&lt;Plug&gt;</code> and your plugin's name in <code>plugin/plugs.vim</code> (separate from standard key mappings).
+<li>You may provide pseudo-mappings using <code>&lt;Plug&gt;</code> and your plugin’s name in <code>plugin/plugs.vim</code> (separate from standard key mappings).
 <ul>
 <li><code>&lt;Plug&gt;</code> is a sequence which can not be typed.</li>
 <li>You can do something like <code>noremap &lt;Plug&gt;namespace#MappingName                   some_key_sequence</code> and then users can do <code>noremap &lt;leader&gt;x                   &lt;Plug&gt;namespace#MappingName</code> to take advantage of your pseudo-mapping.</li>
@@ -451,12 +456,12 @@ Errata              Compatibility Mode </code></pre>
 </ul></li>
 <li>Always use the <code>noremap</code> family of commands. Never use the <code>map</code> family.
 <ul>
-<li><code>map</code> depends upon the user's existing mappings, and could do anything.</li>
+<li><code>map</code> depends upon the user’s existing mappings, and could do anything.</li>
 </ul></li>
 <li>Only use <code>noremap</code> for commands that both make a motion and take a range.
 <ul>
 <li><code>noremap</code> makes mappings in normal, visual, and operator-pending modes.</li>
-<li>If you don't want all these use <code>nnoremap</code> <code>onoremap</code> or <code>vnoremap</code> explicitly.</li>
+<li>If you don’t want all these use <code>nnoremap</code> <code>onoremap</code> or <code>vnoremap</code> explicitly.</li>
 </ul></li>
 <li>Always use <code>&lt;SID&gt;</code> in place of <code>s:</code> when accessing script locals in mappings.
 <ul>
@@ -467,10 +472,10 @@ Errata              Compatibility Mode </code></pre>
 <h2 id="dependency-checking">Dependency Checking</h2>
 <p>Declare dependencies in addon-info.json and use <code>maktaba</code>.</p>
 <p>Declaring dependencies in addon-info.json allows conformant plugin managers (like VAM) to ensure dependencies are installed. See the <a href="https://github.com/MarcWeber/vim-addon-manager/blob/master/doc/vim-addon-manager-additional-documentation.txt">VAM documentation</a> for details.</p>
-<p>Calling <code>maktaba#library#Require</code> from dependent code at runtime ensures that dependencies have been installed and that they don't include unsafe non-library files.</p>
+<p>Calling <code>maktaba#library#Require</code> from dependent code at runtime ensures that dependencies have been installed and that they don’t include unsafe non-library files.</p>
 <h2 id="statuline-flags">Statuline Flags</h2>
 <p>Use <code>&lt;plugin-name&gt;#status#Status()</code> or its finer-grained variants to provide statusline flags.</p>
-<p>Following is a convention for exposing statusline flags to the user. A plugin should never modify the user's statusline except for when that is the only purpose of the plugin (powerline, etc.).</p>
+<p>Following is a convention for exposing statusline flags to the user. A plugin should never modify the user’s statusline except for when that is the only purpose of the plugin (powerline, etc.).</p>
 <ul>
 <li>Provide the <code class="green">Info</code>, <code class="yellow">Alert</code>, <code class="orange">Warning</code>, and <code class="red">Error</code> functions under the <code>&lt;plugin-name&gt;#status</code> namespace.</li>
 <li><code class="green">Info</code> should provide information about the state of the buffer.
@@ -545,12 +550,12 @@ Errata              Compatibility Mode </code></pre>
 <li><code>return</code> over <code>return 0</code> when the return value has no semantic purpose.</li>
 </ul>
 <h1 id="errata">Errata</h1>
-<p>This section plumbs some of the darker corners of vimscript, explaining the language pathologies that you wish you didn't have to know.</p>
+<p>This section plumbs some of the darker corners of vimscript, explaining the language pathologies that you wish you didn’t have to know.</p>
 <h2 id="compatibility-mode">Compatibility Mode</h2>
-<p>If you don't support vi-compatibility mode, fail gracefully.</p>
+<p>If you don’t support vi-compatibility mode, fail gracefully.</p>
 <p>When <code>compatible</code> is set, many vim features are not available. The vim feature which most commonly affects vimscript authors is line continuations.</p>
 <p>If you want your plugin to work in vim with vi compatibility on, you will need to save the compatibility options at the beginning of each plugin file, clear them, and restore them at the end of each plugin file. See <code>:help use-cpo-save</code> for details.</p>
-<p>Plugins that depend on maktaba generally don't need to worry about compatible mode since maktaba currently just disables it, printing a warning.</p>
+<p>Plugins that depend on maktaba generally don’t need to worry about compatible mode since maktaba currently just disables it, printing a warning.</p>
 <p>Revision 1.1</p>
 <p>Nate Soares<br />
 Joshua Hoak<br />

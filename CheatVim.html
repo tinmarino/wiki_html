@@ -1,17 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Notes (from doc)</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Notes (from doc)</h1>
-</div>
+</header>
 <h3 id="key">Key</h3>
 <table>
 <tbody>
@@ -85,7 +90,7 @@
 <td>Previous (older) location</td>
 </tr>
 <tr class="even">
-<td>'.</td>
+<td>’.</td>
 <td>To last inserted text</td>
 </tr>
 <tr class="odd">
@@ -272,8 +277,8 @@
 <h3 id="register-list">Register list</h3>
 <table>
 <colgroup>
-<col width="5%" />
-<col width="94%" />
+<col style="width: 4%" />
+<col style="width: 95%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -347,7 +352,7 @@
 </tr>
 <tr class="odd">
 <td></td>
-<td>zf10j, zf/string, zf'a</td>
+<td>zf10j, zf/string, zf’a</td>
 </tr>
 <tr class="even">
 <td><strong>Move</strong></td>
@@ -395,7 +400,7 @@
 </tr>
 <tr class="odd">
 <td>zR</td>
-<td>Decreases the foldlevel to zero -- all folds will be open.</td>
+<td>Decreases the foldlevel to zero – all folds will be open.</td>
 </tr>
 <tr class="even">
 <td>zd</td>
@@ -438,31 +443,15 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 </tbody>
 </table>
 <h3 id="advanced">Advanced</h3>
-<p>:#n and :#<n      Are replaced by file buffer n or oldfiles n
-
-
-
-
-#### Man (Read linux manual pages)
-
-runtime! ftplugin/man.vim
-:Man 3 printf
-:h find-manpage 
-
-#### Buffer
-
-:argdel *           Delete the existing argument list
-:bufdo argadd %     For each buffer, add the buffer's path to the list
-:1,1000bd           Delete buffers 1 to 1000; probably there's a better way to do this
-:argdo e            For each argument, edit that argument
-:bufhiden           Can unload a buffer < then not visible
-
-                    Very cool for scratch buufer (warning they are permanently
-                    lost)
-
-#### Diff
-
-set diffopt+=iwhite  " ignore spacelines <br> set diffexpr= <br> :diffupdate <br></p>
+<p>:#n and :#&lt;n Are replaced by file buffer n or oldfiles n</p>
+<h4 id="man-read-linux-manual-pages">Man (Read linux manual pages)</h4>
+<p>runtime! ftplugin/man.vim :Man 3 printf :h find-manpage</p>
+<h4 id="buffer">Buffer</h4>
+<p>:argdel * Delete the existing argument list :bufdo argadd % For each buffer, add the buffer’s path to the list :1,1000bd Delete buffers 1 to 1000; probably there’s a better way to do this :argdo e For each argument, edit that argument :bufhiden Can unload a buffer &lt; then not visible</p>
+<pre><code>                Very cool for scratch buufer (warning they are permanently
+                lost)</code></pre>
+<h4 id="diff">Diff</h4>
+<p>set diffopt+=iwhite &quot; ignore spacelines <br> set diffexpr= <br> :diffupdate <br></p>
 <h4 id="tips">Tips</h4>
 <p>:tab help foo <br> :!tidy -mi -html -wrap 0 % <br> :<n>,<m> w filename <br> :ccl Close it quickfix <br></p>
 <h3 id="regex">Regex</h3>
@@ -661,6 +650,6 @@ echo Func()</code></pre>
 <pre><code>command! -nargs=1 MyCommand call s:MyFunc(&lt;f-args&gt;) &quot; transform a function to user-command</code></pre>
 <p>lcd to cd for current windwo</p>
 <h3 id="script-tips">Script tips</h3>
-<p>set formatoptions +=at <br> call append(line('<span class="math inline">′),[<em>v</em><em>a</em><em>r</em><em>i</em><em>a</em><em>b</em><em>l</em><em>e</em>]) &lt; <em>b</em><em>r</em> &gt; <em>c</em><em>a</em><em>l</em><em>l</em><em>a</em><em>p</em><em>p</em><em>e</em><em>n</em><em>d</em>(<em>l</em><em>i</em><em>n</em><em>e</em>(′</span>'), split(variable, &quot;&quot;)) <br> set autoread <br> help scrool-cursor <br> htlp winrestcmd() <br></p>
+<p>set formatoptions +=at <br> call append(line(‘<span class="math inline">′), [<em>v</em><em>a</em><em>r</em><em>i</em><em>a</em><em>b</em><em>l</em><em>e</em>]) &lt; <em>b</em><em>r</em> &gt; <em>c</em><em>a</em><em>l</em><em>l</em><em>a</em><em>p</em><em>p</em><em>e</em><em>n</em><em>d</em>(<em>l</em><em>i</em><em>n</em><em>e</em>(′</span>’), split(variable, “”)) <br> set autoread <br> help scrool-cursor <br> htlp winrestcmd() <br></p>
 </body>
 </html>

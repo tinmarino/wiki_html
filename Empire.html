@@ -1,18 +1,40 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Empire</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Empire</h1>
-</div>
+</header>
 <p>This is to test, play withg empire, a framework to send comand to a remote session (from Linux to Windows) Usually, it take 3 sec for empire to connect Before, you should check the ip</p>
+<h1 id="quick-start">Quick start</h1>
+<ul>
+<li><code>&gt;help</code></li>
+<li>Listener | agent | module</li>
+<li><code>&gt;listeners</code>
+<ul>
+<li><code>&gt;uselisteners &lt;Tab&gt;</code></li>
+<li><code>&gt;info</code></li>
+<li><code>&gt;sert|unset</code></li>
+<li><code>&gt;execute</code></li>
+</ul></li>
+<li><code>&gt;usestager &lt;Tab&gt;</code></li>
+<li><code>&gt;agents</code>
+<ul>
+<li><code>&gt;list</code></li>
+</ul></li>
+</ul>
 <h1 id="execute-windows-commands">Execute (Windows commands)</h1>
 <h3 id="analyse">Analyse</h3>
 <ul>
@@ -34,10 +56,10 @@
 <ul>
 <li>start</li>
 <li>runas /user:user cmd</li>
-<li>runas /user:user &quot;notepad c:.ini&quot;</li>
+<li>runas /user:user “notepad c:.ini”</li>
 <li>tskill notepad or pskill notepad</li>
 </ul>
-<h1 id="empire-commands-latteral-movements-...">Empire commands (latteral movements ...)</h1>
+<h1 id="empire-commands-latteral-movements">Empire commands (latteral movements …)</h1>
 <ul>
 <li><code>download</code> stores -&gt; files in ./downloads/AGENT_NAME -&gt; log in .agent.log</li>
 <li><p><code>kill</code> all</p></li>
@@ -48,7 +70,7 @@
 </ul>
 <h1 id="prepare-linux">Prepare (Linux)</h1>
 <ul>
-<li>espeak Hi from the deep --stdout &gt; hi.wav</li>
+<li>espeak Hi from the deep –stdout &gt; hi.wav</li>
 </ul>
 </body>
 </html>

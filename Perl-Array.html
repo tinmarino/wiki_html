@@ -1,21 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <h1 id="tips">Tips</h1>
 <ul>
 <li><p>Get key from value -&gt; reverse hash table</p>
 <p>my %rhash = reverse %hash; my $key = <span class="math inline">$rhash{$</span>value};</p>
-<p>my ($key) = grep{ <span class="math inline">$bugs{$</span>_} eq '<em>value</em>' } keys %bugs; print $key;</p>
+<p>my ($key) = grep{ <span class="math inline">$bugs{$</span>_} eq ‘<em>value</em>’ } keys %bugs; print $key;</p>
 <p>while (my ($key, $value) = each %by_key) { <span class="math inline">$by_value{$</span>value} = $key; }</p></li>
-<li><p>Hash : sort my <span class="citation">@keys</span> = sort { <span class="math inline">$h{$</span>a} &lt;=&gt; <span class="math inline">$h{$</span>b} } keys(%h); my <span class="citation">@vals</span> = <span class="citation">@h</span>{<span class="citation">@keys</span>};</p></li>
+<li><p>Hash : sort my <span class="citation" data-cites="keys">@keys</span> = sort { <span class="math inline">$h{$</span>a} &lt;=&gt; <span class="math inline">$h{$</span>b} } keys(%h); my <span class="citation" data-cites="vals">@vals</span> = <span class="citation" data-cites="h">@h</span>{<span class="citation" data-cites="keys">@keys</span>};</p></li>
 </ul>
 </body>
 </html>

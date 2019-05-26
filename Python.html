@@ -1,19 +1,66 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
+<li><p>Display : get info</p>
+<p>print np.__file__ print sys.executable priunt os.environment[’_’] print sys.maxsize</p></li>
+<li><p>Documentation (docstrings)</p>
+<p>&quot;&quot;&quot; This is first line</p>
+:param param1: description :type param1: :return(s) : :raise(s) : &quot;&quot;&quot;
+<ul>
+<li>Note : use ‘:’ and not ‘@’</li>
+</ul></li>
+<li>Debug
+<ul>
+<li><code>IPython.core.debugger.Pdb.set_trace()</code></li>
+<li><code>vars(myobj)</code></li>
+<li>`for attr in dir(myobj) if not callable(getattr(obj, attr)) and not attr.startswit(’__’)</li>
+<li><code>obj.__dict__</code></li>
+<li>ipy = get_ipython()</li>
+<li>from IPython import embeded ; embeded()</li>
+<li>from IPython.terminal.iapp import TerminalIPythonApp</li>
+<li>app = TerminalIPythonApp.instance()</li>
+<li>app.initialize(argv=[])</li>
+<li>app.start()</li>
+</ul></li>
+<li><p>Print python zen (19 principles) import this</p></li>
+<li><p>Get Path sys.executable # interpreter executable path os.path.realpath(<strong>file</strong>) # current script</p></li>
+<li><p>Format string “foo is {}”.format(bar) “foo is {bar}”.format(bar=bar) “foo is %s” % (bar,) “foo is %(bar)s” % {“bar”:bar} “foo is %(bar)s” % locals() “{{Hello}} {0}”.format(42) # prints {Hello} 42</p></li>
 <li><p><a href="Py-Keywords.html">Keywords</a></p></li>
-<li><p>Use stdout and restore sys.stdout = openb(&quot;tmp&quot;, &quot;w&quot;) sys.stdout = sys.<strong>stdout</strong></p></li>
-<li><p>Hexadeciaml outputs get_ipython().display_formatter.formatters['text/plain'].for_type([[int,]] lambda n, p, cycle : p.text(&quot;0x%x&quot; %n))</p></li>
-<li><p>With Statement : 2 one the same line with open('a', 'w') as a, open ('b', 'w') as b : do_stuff()</p></li>
+<li><p>Use stdout and restore sys.stdout = openb(“tmp”, “w”) sys.stdout = sys.__stdout__</p></li>
+<li><p>Hexadecimal outputs get_ipython().display_formatter.formatters[‘text/plain’].for_type([[int,]] lambda n, p, cycle : p.text(“0x%x” %n))</p></li>
+<li><p>Hexadecimal editor</p>
+<p>data = [hex(ord(c)) for c in bytearray]</p></li>
+<li><p>With Statement : 2 one the same line with open(‘a’, ‘w’) as a, open (‘b’, ‘w’) as b : do_stuff()</p></li>
+</ul>
+<h2 id="function-utils">Function, Utils</h2>
+<ul>
+<li><code>rstrip()</code> = chomp</li>
+</ul>
+<h1 id="why-love-python">Why love Python ?</h1>
+<ul>
+<li>Multi platform</li>
+<li>A language to rule them all (wrapper)</li>
+<li>Easy (learn and write)</li>
+<li>Expressive : short != c, java, explicit != perl</li>
+<li>Flexible (scirpt, object, web)</li>
+<li>active</li>
+<li>Documented</li>
+<li>Modules by default are enought</li>
+<li></li>
 </ul>
 <p>============================================================================== STATEMENTS <em>c-python-statement</em></p>
 <p>If-Statement ~ if expression: statements elif expression: statements else: statements</p>
@@ -21,11 +68,11 @@
 <p>For-Loop ~ for var in collection: statements</p>
 <p>Counting-For-Loop ~ for i in range(start, end [, step]): statements -&gt; (start is included; end is not)</p>
 <p>with context_manager_classs as cr ~ a Context Manager class must have <code>__enter__</code> and <code>__exit__</code> methods</p>
-<p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2, ...): statements return expr ret = name(arg1, arg2)</p>
+<p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2, …): statements return expr ret = name(arg1, arg2)</p>
 <p>EXCEPTION <em>c-python-exception</em> try: statements except [exception type [as var]]: statements finally: statements</p>
 <p>============================================================================== TYPES <em>c-python-types</em></p>
-<p>Integer -256, 15 Float 253.23, 1.253e-10 String &quot;Hello&quot;, 'Goodbye', &quot;&quot;&quot;Multiline&quot;&quot;&quot; Boolean True, False List [ value, ... ] Tuple ( value, ... )<br />
--&gt; Parentheses usually optional Dictionary { key: value, ... } Set { value:, value, ... } -&gt; Create an empty set with set()</p>
+<p>Integer -256, 15 Float 253.23, 1.253e-10 String “Hello”, ‘Goodbye’, &quot;&quot;“Multiline”&quot;&quot; Boolean True, False List [ value, … ] Tuple ( value, … )<br />
+-&gt; Parentheses usually optional Dictionary { key: value, … } Set { value:, value, … } -&gt; Create an empty set with set()</p>
 <p>============================================================================== OPERATORS <em>c-python-operators</em></p>
 <p>Arithmetic Operators ~ x + y Add x - y Subtract x * y Multiply x / y Divide x % y Modulus x ** y Exponent Assignment shortcuts: x op= y Example: x += 1 increments x</p>
 <p>Comparison Operators ~ x &lt; y Less x &lt;= y Less or eq x &gt; y Greater x &gt;= y Greater or eq x == y Equal x != y Not equal</p>
@@ -38,13 +85,13 @@ x and y x or y</p>
 <p>Mutating List Operations ~ del lst[i] Deletes ith item from lst lst.append(e) Appends e to lst lst.insert(i, e) Inserts e before ith item in lst lst.sort() Sorts lst -&gt; See also http://docs.python.org/library/stdtypes.html#typesseq-mutable</p>
 <p>Dictionary Operations ~ len(d) Number of items in d del d[key] Removes key from d key in d True if d contains key d.keys() Returns a list of keys in d -&gt; See also http://docs.python.org/library/stdtypes.html#mapping-types-dict</p>
 <p>Environment ~ sys.argv List of command line arguments (argv[0] is executable) os.environ Dictionary of environment variables os.curdir String with path of current directory -&gt; import sys; print(sys.argv) -&gt; or -&gt; from sys import argv; print(argv)}</p>
-<p>String Formatting ~ &quot;Hello, {0} {1}&quot;.format(&quot;abe&quot;, &quot;jones&quot;) -&gt; Hello, abe jones &quot;Hello, {fn} {ln}&quot;.format(fn=&quot;abe&quot;, ln=&quot;jones&quot;) -&gt; Hello, abe jones &quot;You owe me ${0:,.2f}&quot;.format(253422.3) -&gt; You owe me $253,422.30 now = datetime.now() '{:%Y-%m-%d %H:%M:%S}'.format(now) -&gt; 2012-05-16 15:04:33 -&gt; See http://docs.python.org/library/string.html#format-specification-mini-language</p>
-<p>Useful Functions ~ exit( num ) Terminate program with exit num raw_input(&quot;prompt&quot;) Print prompt and readline() from stdin -&gt; Use input(&quot;prompt&quot;) in Python 3</p>
+<p>String Formatting ~ “Hello, {0} {1}”.format(“abe”, “jones”) -&gt; Hello, abe jones “Hello, {fn} {ln}”.format(fn=“abe”, ln=“jones”) -&gt; Hello, abe jones “You owe me ${0:,.2f}”.format(253422.3) -&gt; You owe me $253,422.30 now = datetime.now() ‘{:%Y-%m-%d %H:%M:%S}’.format(now) -&gt; 2012-05-16 15:04:33 -&gt; See http://docs.python.org/library/string.html#format-specification-mini-language</p>
+<p>Useful Functions ~ exit( num ) Terminate program with exit num raw_input(“prompt”) Print prompt and readline() from stdin -&gt; Use input(“prompt”) in Python 3</p>
 <p>============================================================================== SYS <em>c-python-sys</em></p>
 <p>Python sys Variables ~ argv Command line args builtin_module_names Linked C modules byteorder Native byte order check_interval Signal check frequency exec_prefix Root directory executable Name of executable exitfunc Exit function name modules Loaded modules path Search path platform Current platform stdin, stdout, stderr File objects for I/O version_info Python version info winver Version number</p>
-<p>Python sys.argv ~ -&gt; sys.argv for the command: -&gt; python foo.py bar -c qux --h sys.argv[0] foo.py sys.argv[1] bar sys.argv[2] -c sys.argv[3] qux sys.argv[4] --h</p>
+<p>Python sys.argv ~ -&gt; sys.argv for the command: -&gt; python foo.py bar -c qux –h sys.argv[0] foo.py sys.argv[1] bar sys.argv[2] -c sys.argv[3] qux sys.argv[4] –h</p>
 <p>============================================================================== OS <em>c-python-os</em></p>
-<p>altsep Alternative sep curdir Current dir string defpath Default search path devnull Path of null device extsep Extension separator linesep Line separator name Name of OS pardir Parent dir string pathsep Patch separator sep Path separator -&gt; Registered OS names: &quot;posix&quot;, &quot;nt&quot;, &quot;mac&quot;, &quot;os2&quot;, &quot;ce&quot;, &quot;java&quot;, &quot;riscos&quot;</p>
+<p>altsep Alternative sep curdir Current dir string defpath Default search path devnull Path of null device extsep Extension separator linesep Line separator name Name of OS pardir Parent dir string pathsep Patch separator sep Path separator -&gt; Registered OS names: “posix”, “nt”, “mac”, “os2”, “ce”, “java”, “riscos”</p>
 <p>============================================================================== CLASS <em>c-python-class</em></p>
 <p>Python Class Special Methods ~ <strong>new</strong>(cls) <strong>init</strong>(self, args) <strong>del</strong>(self) <strong>repr</strong>(self) <strong>str</strong>(self) <strong>cmp</strong>(self, other) <strong>index</strong>(self) <strong>hash</strong>(self) <strong>getattr</strong>(self, name) <strong>getattribute</strong>(self}, name) <strong>setattr</strong>(self, name, attr) <strong>delattr</strong>(self, name) <strong>call</strong>(self, args, kwargs) <strong>lt</strong>(self, other) <strong>le</strong>(self, other) <strong>gt</strong>(self, other) <strong>ge</strong>(self, other) <strong>eq</strong>(self, other) <strong>ne</strong>(self, other) <strong>nonzero</strong>(self)</p>
 <p>Python List Methods ~ append(item) count(item) extend(list) index(item) insert(position, item) remove(item) pop(position) reverse() sort()</p>
@@ -54,12 +101,10 @@ x and y x or y</p>
 <p>============================================================================== DATE <em>c-python-date</em></p>
 <p>Python Datetime Methods ~ today() fromordinal(ordinal) now(timezoneinfo) combine(date, time) utcnow() strptime(date, format) fromtimestamp(timestamp) utcfromtimestamp(timestamp)</p>
 <p>Python Time Methods ~ replace() utcoffset() isoformat() dst() <strong>str</strong>() tzname() strftime(format)</p>
-<p>Python Date Formatting ~ %a Abbreviated weekday (Sun) %A Weekday (Sunday) %b Abbreviated month name (Jan) %B Month name (January) %c Date and time %d Day (leading zeros) (01 to 31) %H 24 hour (leading zeros) (00 to 23) %I 12 hour (leading zeros) (01 to 12) %j Day of year (001 to 366) %m Month (01 to 12) %M Minute (00 to 59) %p AM or PM %S Second {4} %U Week number {1} (00 to 53) %w Weekday {2} (0 to 6) %W Week number {3} (00 to 53) %x Date %X Time %y Year without century (00 to 99) %Y Year (2008) %Z Time zone (GMT) %% A literal &quot;%&quot; character (%) -&gt; 1. Sunday as start of week. All days in a new year preceding the first Sunday are considered to be in week 0. -&gt; 2. 0 is Sunday, 6 is Saturday. -&gt; 3. Monday as start of week. All days in a new year preceding the first Monday are considered to be in week 0. -&gt; 4. This is not a mistake. Range takes account of leap and double-leap seconds.}</p>
-<p>============================================================================== EXAMPLES <em>c-python-examples</em> &gt;python #Loop-Over-Sequence for index, value in enumerate(seq): print(&quot;{} : {}&quot;.format(index, value))</p>
-<h1 id="loop-over-dictionary">Loop-Over-Dictionary</h1>
-<p>for key in sorted(dict): print(dict[key])</p>
-<h1 id="read-a-file">Read-a-File</h1>
-<p>with open(&quot;filename&quot;, &quot;r&quot;) as f: for line in f: line = line.rstrip(&quot;n&quot;) # Strip newline print(line) &lt;python</p>
+<p>Python Date Formatting ~ %a Abbreviated weekday (Sun) %A Weekday (Sunday) %b Abbreviated month name (Jan) %B Month name (January) %c Date and time %d Day (leading zeros) (01 to 31) %H 24 hour (leading zeros) (00 to 23) %I 12 hour (leading zeros) (01 to 12) %j Day of year (001 to 366) %m Month (01 to 12) %M Minute (00 to 59) %p AM or PM %S Second {4} %U Week number {1} (00 to 53) %w Weekday {2} (0 to 6) %W Week number {3} (00 to 53) %x Date %X Time %y Year without century (00 to 99) %Y Year (2008) %Z Time zone (GMT) %% A literal “%” character (%) -&gt; 1. Sunday as start of week. All days in a new year preceding the first Sunday are considered to be in week 0. -&gt; 2. 0 is Sunday, 6 is Saturday. -&gt; 3. Monday as start of week. All days in a new year preceding the first Monday are considered to be in week 0. -&gt; 4. This is not a mistake. Range takes account of leap and double-leap seconds.}</p>
+<p>============================================================================== EXAMPLES <em>c-python-examples</em> &gt;python #Loop-Over-Sequence for index, value in enumerate(seq): print(“{} : {}”.format(index, value))</p>
+<p>#Loop-Over-Dictionary for key in sorted(dict): print(dict[key])</p>
+<p>#Read-a-File with open(“filename”, “r”) as f: for line in f: line = line.rstrip(“{}n”) # Strip newline print(line) &lt;python</p>
 <p>============================================================================== Thanks ~ sschaub https://www.cheatography.com/sschaub/cheat-sheets/essential-python/ davechild https://www.cheatography.com/davechild/cheat-sheets/python/</p>
 <p>vim: ft=myhelp</p>
 </body>

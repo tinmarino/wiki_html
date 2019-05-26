@@ -1,36 +1,124 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Git Wiki</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Git Wiki</h1>
-</div>
-<ul>
-<li>Store credentials</li>
-</ul>
-<p><code>git config --global credential.helper cache</code> Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with: <code>git config credential.helper store</code> Stores permanently Note: While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the &quot;home&quot; directory). If you don't like this, delete this file and switch to using the cache option.</p>
-<ol start="0" style="list-style-type: decimal">
-<li>List |git-list|</li>
-<li>Start |git-init|</li>
-<li>Config |git-config|</li>
-<li>Aliases |git-alias|</li>
-<li>Branches |git-branch|</li>
-<li>Merge |git-merge|</li>
-<li>Rebasing |git-rebase|</li>
-<li>Remote |git-remote|</li>
-<li>Local |git-local|</li>
-</ol>
+</header>
 <h1 id="tips">Tips</h1>
-<p>Checkout all the files</p>
-<pre><code>git checkout -- .</code></pre>
-<p>Choose ours ours (master) theirs (current branch) automaticcaly in case of conflict</p>
+<h3 id="ugly-tips-from-draft">Ugly tips from draft</h3>
+<p>git cherrypick <commit_sha1> git add -p # add by chunk (remember patch)</p>
+<ul>
+<li><p>Store credentials</p></li>
+<li><code>git config --global credential.helper cache</code> : Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with:</li>
+<li><code>git config credential.helper store</code> : Stores permanently</li>
+<li><p>Note : While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the “home” directory). If you don’t like this, delete this file and switch to using the cache option.</p></li>
+<li><p>Display</p></li>
+<li><code>git log --all --full-history -- **/thefile.*</code></li>
+<li><code>git log --diff-filter=D --summary | grep delete</code></li>
+<li><code>git log --all --{file_path}</code> : file_path can have * inside</li>
+<li><code>git log --pretty=format:&quot;%h&quot;</code></li>
+<li><code>git log --pretty=oneline</code></li>
+<li><code>git log -S watever [--source --all] [--decorate] [--reverse]</code></li>
+<li><code>git log -G &quot;^(\s)*function foo[(][)](\s.html)**{$&quot;</code> : regex</li>
+<li><code>git reflog</code></li>
+<li><code>git show &lt;COMMIT_ID&gt; -- &lt;FILE_PATH&gt;</code> : show deleted files</li>
+<li><code>git checkout &lt;SHA&gt;^ -- &lt;FILE_PATH&gt;</code></li>
+<li><code>git check-ignore *</code> : show ignored files</li>
+<li><code>git ls-files --others --exclude=standard</code></li>
+<li><code>git ls-tree --full-tree -r HEAD</code></li>
+<li><code>git cat-file -s</code></li>
+<li><code>git diff-tree</code></li>
+<li></li>
+<li><p>Interface</p></li>
+<li><p><code>git add -i</code> : add items without copying full file name</p></li>
+<li><p>Patch</p></li>
+<li><code>git .git/objects/pack SAMPLE</code></li>
+<li><p><code>git unpack-object &lt; SAMPLE/*.pack</code></p></li>
+<li><p>Ignore</p></li>
+<li><p><code>.git/info/exclude</code> : personal gitignore</p></li>
+<li><p>Clean</p></li>
+<li><code>git clean -[xd]n</code> : Show what I will clean</li>
+<li><p><code>git clean -[xd]f</code> : Do</p></li>
+<li>Grep regex
+<ul>
+<li><code>git log -S'regex'</code></li>
+<li><code>git log -S'regex'</code>
+<ul>
+<li><code>git grep &quot;regex&quot;</code></li>
+</ul></li>
+</ul></li>
+<li><p>Compress</p></li>
+<li><code>git reflog expire --expire=now --all</code>
+<ul>
+<li><code>git gc [--agressive --prune=now]</code> : garbage collector</li>
+</ul></li>
+<li>Filter : remove certain files
+<ul>
+<li><code>git filter-branch --tree-filter 'rm -f pass.txt' ~HEAD</code>
+<ul>
+<li>`git filter-branch –tree-filter ‘git clean -f -X’ – –all
+<ul>
+<li>Removegitignore form history</li>
+<li>Aster rebasing with a gitignore at first commit</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Clone only last commit
+<ul>
+<li><code>git clone --depth=1 http://www.github.com/toto/project.git</code></li>
+</ul></li>
+<li>Disable security check (https)
+<ul>
+<li><code>git -c http.sslVerify=false origin master</code></li>
+</ul></li>
+<li>Unstage all
+<ul>
+<li><code>git reset HEAD</code></li>
+</ul></li>
+<li>Stop tracking
+<ul>
+<li><code>git rm --cached file</code></li>
+</ul></li>
+<li>Ignore Windows newline
+<ul>
+<li><code>git config --global core.autocrlf true</code></li>
+</ul></li>
+<li>Get statistic lines changed stats
+<ul>
+<li><code>git diff --stat</code></li>
+</ul></li>
+<li>Make backup
+<ul>
+<li><code>git stash &amp;&amp; git stash apply</code></li>
+</ul></li>
+<li>Aliasing
+<ul>
+<li><code>git config --global alias.wdiff diff --color-words</code></li>
+<li><p>Edit <code>~/.gitconfig</code></p>
+<pre><code>  [alias]
+      wdiff = diff --color-words</code></pre></li>
+</ul></li>
+<li>Word by word diff
+<ul>
+<li><code>git diff --color-words</code></li>
+</ul></li>
+<li><p>Checkout all the files</p></li>
+<li><p><code>git checkout -- .</code></p></li>
+</ul>
+<p>Choose ours (master) theirs (current branch) automaticcaly in case of conflict</p>
 <pre><code>git rebase -Xtheirs branch-b
 git merge -Xours origin/master
 git checkout --ours foo/bar.java
@@ -40,7 +128,7 @@ git add foo/bar.java</code></pre>
 <p>Ignore file mode (755 in chmod)</p>
 <pre><code>git config core.fileMode false</code></pre>
 <p>Aliasing</p>
-<p>git config --global alias.wdiff diff --color-words<code>// Edit</code>~/.gitconfig` [alias] wdiff = diff --color-words</p>
+<p>git config –global alias.wdiff diff –color-words<code>// Edit</code>~/.gitconfig` [alias] wdiff = diff –color-words</p>
 <p>Word by word diff</p>
 <pre><code>git diff --color-words</code></pre>
 <ul>
@@ -74,10 +162,25 @@ git add foo/bar.java</code></pre>
 <ul>
 <li><code>git log --all -- &lt;filepath accepting *&gt;</code></li>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
-<li></li>
 </ul></li>
-<li><code>git rebase -i &lt;commit&gt;~1</code> # Can edit or delete commits</li>
+<li><p>Filter</p>
+<pre><code>  * `git filter-branch --index-filter &quot;git rm --cached --ignore-unmach file.txt&quot; [HEAD~5..HEAD` # file?txt can have a *</code></pre></li>
+<li><p>Clean</p></li>
+<li><code>git rebase -i &lt;commit&gt;~1</code> # Can edit or delete commits<br />
+</li>
+<li><p><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></p></li>
 </ul>
+<ol start="0" type="1">
+<li>List</li>
+<li>Start</li>
+<li>Config</li>
+<li>Aliases</li>
+<li>Branches</li>
+<li>Merge</li>
+<li>Rebasing</li>
+<li>Remote</li>
+<li>Local</li>
+</ol>
 <h1 id="stack">0. Stack</h1>
 <pre><code>git clone --recursive &lt;URL-OF-REPOSITORY&gt; </code></pre>
 <p>CLONE in non empty directory git init git remote add origin PATH/TO/REPO git fetch git checkout -t origin/master or git reset origin/master https://github.com/vim-scripts # 0. List</p>
@@ -211,7 +314,7 @@ git checkout -b testing # creates the branch and go in it </code></pre>
     -&gt; You want to merge myBranch into master </code></pre>
 <pre><code>git checkout master
 git merge myBranch</code></pre>
-<p>&lt; If you changed the same part of the same file differently, this will cause confict. So this won't auto-merge and you have to resolve the conflict and then commit.</p>
+<p>&lt; If you changed the same part of the same file differently, this will cause confict. So this won’t auto-merge and you have to resolve the conflict and then commit.</p>
 <pre><code>
     git status 
 &lt;       To see the conflict 

@@ -1,49 +1,54 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>C Operators: Arithmetic, Logical, Conditional and more</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">C Operators: Arithmetic, Logical, Conditional and more</h1>
-</div>
+</header>
 <p>An operator is a symbol which operates on a value or a variable. For example: + is an operator to perform addition.</p>
 <p>C programming has wide range of operators to perform various operations. For better understanding of operators, these operators can be classified as:</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operators in C programming</th>
+<th style="text-align: left;">Operators in C programming</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="#arithmetic">Arithmetic Operators</a></td>
+<td style="text-align: left;"><a href="#arithmetic">Arithmetic Operators</a></td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#increment">Increment and Decrement Operators</a></td>
+<td style="text-align: left;"><a href="#increment">Increment and Decrement Operators</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="#assignment">Assignment Operators</a></td>
+<td style="text-align: left;"><a href="#assignment">Assignment Operators</a></td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#relational">Relational Operators</a></td>
+<td style="text-align: left;"><a href="#relational">Relational Operators</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="#logical">Logical Operators</a></td>
+<td style="text-align: left;"><a href="#logical">Logical Operators</a></td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#conditional">Conditional Operators</a></td>
+<td style="text-align: left;"><a href="#conditional">Conditional Operators</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="#bitwise">Bitwise Operators</a></td>
+<td style="text-align: left;"><a href="#bitwise">Bitwise Operators</a></td>
 </tr>
 <tr class="even">
-<td align="left"><a href="#other">Special Operators</a></td>
+<td style="text-align: left;"><a href="#other">Special Operators</a></td>
 </tr>
 </tbody>
 </table>
@@ -52,30 +57,30 @@
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operator</th>
-<th align="left">Meaning of Operator</th>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">+</td>
-<td align="left">addition or unary plus</td>
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">addition or unary plus</td>
 </tr>
 <tr class="even">
-<td align="left">-</td>
-<td align="left">subtraction or unary minus</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">subtraction or unary minus</td>
 </tr>
 <tr class="odd">
-<td align="left">*</td>
-<td align="left">multiplication</td>
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">multiplication</td>
 </tr>
 <tr class="even">
-<td align="left">/</td>
-<td align="left">division</td>
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">division</td>
 </tr>
 <tr class="odd">
-<td align="left">%</td>
-<td align="left">remainder after division( modulo division)</td>
+<td style="text-align: left;">%</td>
+<td style="text-align: left;">remainder after division( modulo division)</td>
 </tr>
 </tbody>
 </table>
@@ -135,8 +140,8 @@ a/d = 2.5  // Because one operand is floating-point variable
 c/b = 2.5  // Because one operand is floating-point variable
 c/d = 2     // Because both operands are integers</code></pre>
 <h2 id="increment-and-decrement-operators" class="note"><span id="increment"></span>Increment and decrement operators</h2>
-<p>C programming has two operators increment ++ and decrement -- to change the value of an operand (constant or variable) by 1.</p>
-<p>Increment ++ increases the value by 1 whereas decrement -- decreases the value by 1. These two operators are unary operators, meaning they only operate on a single operand.</p>
+<p>C programming has two operators increment ++ and decrement – to change the value of an operand (constant or variable) by 1.</p>
+<p>Increment ++ increases the value by 1 whereas decrement – decreases the value by 1. These two operators are unary operators, meaning they only operate on a single operand.</p>
 <h3 id="example-2-increment-and-decrement-operators">Example #2: Increment and Decrement Operators</h3>
 <pre><code>// C Program to demonstrate the working of increment and decrement operators
 #include &lt;stdio.h&gt;
@@ -160,47 +165,47 @@ int main()
 --b = 99
 ++c = 11.500000
 ++d = 99.500000</code></pre>
-<p>Here, the operators ++ and -- are used as prefix. These two operators can also be used as postfix like <code>a++</code> and <code>a--</code>. Visit this page to learn more on how <a href="/article/increment-decrement-operator-difference-prefix-postfix" title="Increment Operator as postfix">increment and decrement operators work when used as postfix</a>.</p>
+<p>Here, the operators ++ and – are used as prefix. These two operators can also be used as postfix like <code>a++</code> and <code>a--</code>. Visit this page to learn more on how <a href="/article/increment-decrement-operator-difference-prefix-postfix" title="Increment Operator as postfix">increment and decrement operators work when used as postfix</a>.</p>
 <h2 id="c-assignment-operators"><span id="assignment"></span>C Assignment Operators</h2>
 <p>An assignment operator is used for assigning a value to a variable. The most common assignment operator is =</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operator</th>
-<th align="left">Example</th>
-<th align="left">Same as</th>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Same as</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">=</td>
-<td align="left">a = b</td>
-<td align="left">a = b</td>
+<td style="text-align: left;">=</td>
+<td style="text-align: left;">a = b</td>
+<td style="text-align: left;">a = b</td>
 </tr>
 <tr class="even">
-<td align="left">+=</td>
-<td align="left">a += b</td>
-<td align="left">a = a+b</td>
+<td style="text-align: left;">+=</td>
+<td style="text-align: left;">a += b</td>
+<td style="text-align: left;">a = a+b</td>
 </tr>
 <tr class="odd">
-<td align="left">-=</td>
-<td align="left">a -= b</td>
-<td align="left">a = a-b</td>
+<td style="text-align: left;">-=</td>
+<td style="text-align: left;">a -= b</td>
+<td style="text-align: left;">a = a-b</td>
 </tr>
 <tr class="even">
-<td align="left">*=</td>
-<td align="left">a *= b</td>
-<td align="left">a = a*b</td>
+<td style="text-align: left;">*=</td>
+<td style="text-align: left;">a *= b</td>
+<td style="text-align: left;">a = a*b</td>
 </tr>
 <tr class="odd">
-<td align="left">/=</td>
-<td align="left">a /= b</td>
-<td align="left">a = a/b</td>
+<td style="text-align: left;">/=</td>
+<td style="text-align: left;">a /= b</td>
+<td style="text-align: left;">a = a/b</td>
 </tr>
 <tr class="even">
-<td align="left">%=</td>
-<td align="left">a %= b</td>
-<td align="left">a = a%b</td>
+<td style="text-align: left;">%=</td>
+<td style="text-align: left;">a %= b</td>
+<td style="text-align: left;">a = a%b</td>
 </tr>
 </tbody>
 </table>
@@ -240,45 +245,45 @@ c = 5
 c = 0</code></pre>
 <h3 id="c-relational-operators"><span id="relational"></span>C Relational Operators</h3>
 <p>A relational operator checks the relationship between two operands. If the relation is true, it returns 1; if the relation is false, it returns value 0.</p>
-<p>Relational operators are used in <a href="/c-programming/c-if-else-statement" title="C if else">decision making</a> and [loops](/c-programming/c-for-loop &quot;C for loop&quot;.html).</p>
+<p>Relational operators are used in <a href="/c-programming/c-if-else-statement" title="C if else">decision making</a> and [loops](/c-programming/c-for-loop “C for loop”.html).</p>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operator</th>
-<th align="left">Meaning of Operator</th>
-<th align="left">Example</th>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
+<th style="text-align: left;">Example</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">==</td>
-<td align="left">Equal to</td>
-<td align="left">5 == 3 returns 0</td>
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">Equal to</td>
+<td style="text-align: left;">5 == 3 returns 0</td>
 </tr>
 <tr class="even">
-<td align="left">&gt;</td>
-<td align="left">Greater than</td>
-<td align="left">5 &gt; 3 returns 1</td>
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">Greater than</td>
+<td style="text-align: left;">5 &gt; 3 returns 1</td>
 </tr>
 <tr class="odd">
-<td align="left">&lt;</td>
-<td align="left">Less than</td>
-<td align="left">5 &lt; 3 returns 0</td>
+<td style="text-align: left;">&lt;</td>
+<td style="text-align: left;">Less than</td>
+<td style="text-align: left;">5 &lt; 3 returns 0</td>
 </tr>
 <tr class="even">
-<td align="left">!=</td>
-<td align="left">Not equal to</td>
-<td align="left">5 != 3 returns 1</td>
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">Not equal to</td>
+<td style="text-align: left;">5 != 3 returns 1</td>
 </tr>
 <tr class="odd">
-<td align="left">&gt;=</td>
-<td align="left">Greater than or equal to</td>
-<td align="left">5 &gt;= 3 returns 1</td>
+<td style="text-align: left;">&gt;=</td>
+<td style="text-align: left;">Greater than or equal to</td>
+<td style="text-align: left;">5 &gt;= 3 returns 1</td>
 </tr>
 <tr class="even">
-<td align="left">&lt;=</td>
-<td align="left">Less than or equal to</td>
-<td align="left">5 &lt;= 3 return 0</td>
+<td style="text-align: left;">&lt;=</td>
+<td style="text-align: left;">Less than or equal to</td>
+<td style="text-align: left;">5 &lt;= 3 return 0</td>
 </tr>
 </tbody>
 </table>
@@ -332,26 +337,26 @@ int main()
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operator</th>
-<th align="left">Meaning of Operator</th>
-<th align="left">Example</th>
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
+<th style="text-align: left;">Example</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">&amp;&amp;</td>
-<td align="left">Logial AND. True only if all operands are true </td>
-<td align="left">If c = 5 and d = 2 then, expression <code>((c == 5) &amp;&amp; (d &gt; 5))</code> equals to 0.</td>
+<td style="text-align: left;">&amp;&amp;</td>
+<td style="text-align: left;">Logial AND. True only if all operands are true </td>
+<td style="text-align: left;">If c = 5 and d = 2 then, expression <code>((c == 5) &amp;&amp; (d &gt; 5))</code> equals to 0.</td>
 </tr>
 <tr class="even">
-<td align="left">||</td>
-<td align="left">Logical OR. True only if either one operand is true</td>
-<td align="left">If c = 5 and d = 2 then, expression <code>((c == 5) || (d &gt; 5))</code> equals to 1.</td>
+<td style="text-align: left;">||</td>
+<td style="text-align: left;">Logical OR. True only if either one operand is true</td>
+<td style="text-align: left;">If c = 5 and d = 2 then, expression <code>((c == 5) || (d &gt; 5))</code> equals to 1.</td>
 </tr>
 <tr class="odd">
-<td align="left">!</td>
-<td align="left">Logical NOT. True only if the operand is 0</td>
-<td align="left">If c = 5 then, expression <code>! (c == 5)</code> equals to 0.</td>
+<td style="text-align: left;">!</td>
+<td style="text-align: left;">Logical NOT. True only if the operand is 0</td>
+<td style="text-align: left;">If c = 5 then, expression <code>! (c == 5)</code> equals to 0.</td>
 </tr>
 </tbody>
 </table>
@@ -405,34 +410,34 @@ int main()
 <table>
 <thead>
 <tr class="header">
-<th align="left">Operators</th>
-<th align="left">Meaning of operators</th>
+<th style="text-align: left;">Operators</th>
+<th style="text-align: left;">Meaning of operators</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">&amp;</td>
-<td align="left">Bitwise AND</td>
+<td style="text-align: left;">&amp;</td>
+<td style="text-align: left;">Bitwise AND</td>
 </tr>
 <tr class="even">
-<td align="left">|</td>
-<td align="left">Bitwise OR</td>
+<td style="text-align: left;">|</td>
+<td style="text-align: left;">Bitwise OR</td>
 </tr>
 <tr class="odd">
-<td align="left">^</td>
-<td align="left">Bitwise exclusive OR</td>
+<td style="text-align: left;">^</td>
+<td style="text-align: left;">Bitwise exclusive OR</td>
 </tr>
 <tr class="even">
-<td align="left">~</td>
-<td align="left">Bitwise complement</td>
+<td style="text-align: left;">~</td>
+<td style="text-align: left;">Bitwise complement</td>
 </tr>
 <tr class="odd">
-<td align="left">&lt;&lt;</td>
-<td align="left">Shift left</td>
+<td style="text-align: left;">&lt;&lt;</td>
+<td style="text-align: left;">Shift left</td>
 </tr>
 <tr class="even">
-<td align="left">&gt;&gt;</td>
-<td align="left">Shift right</td>
+<td style="text-align: left;">&gt;&gt;</td>
+<td style="text-align: left;">Shift right</td>
 </tr>
 </tbody>
 </table>
@@ -470,7 +475,7 @@ Size of integer type array having 10 elements = 40 bytes</code></pre>
 <pre><code>conditionalExpression ? expression1 : expression2</code></pre>
 <p>The conditional operator works as follows:</p>
 <ul>
-<li>The first expression conditionalExpression is evaluated first. This expression evaluates to 1 if it's true and evaluates to 0 if it's false.</li>
+<li>The first expression conditionalExpression is evaluated first. This expression evaluates to 1 if it’s true and evaluates to 0 if it’s false.</li>
 <li>If conditionalExpression is true, expression1 is evaluated.</li>
 <li>If conditionalExpression is false, expression2 is evaluated.</li>
 </ul>

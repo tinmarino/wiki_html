@@ -1,23 +1,71 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <h1 id="markdown">Markdown</h1>
 <h2 id="syntax">Syntax</h2>
 <ul>
-<li><strong>Lines break</strong> with <strong>2 spaces</strong> a <code>&lt;br&gt;</code> or a blank line for paragraphs</li>
+<li>Comment
+<ul>
+<li><code>&lt;!-- my comment --&gt;</code></li>
+<li><code>[//]: &lt;&gt;(my comment)</code></li>
+</ul></li>
+<li>Font style :
+<ul>
+<li><code>*italic* or _italic_</code> : <em>italic</em></li>
+<li><code>__bold__ or **bold**</code> : <strong>bold</strong></li>
+<li><code>~~scratched~~</code> : <del>scratched</del></li>
+<li><code>-&gt;center&lt;-</code> : -&gt;center&lt;-</li>
+</ul></li>
+<li><p>Diff :</p></li>
+<li>[+ addition +] or {+ addition +} and [- deletiion -]</li>
+<li><p><code>\`\`\`diff +add or -remove</code></p></li>
+<li><p>Tasklist : <code>- [x] Completed task</code></p></li>
+<li><p>Math : ```math ```</p></li>
+<li><p>Color : <code>#F00[A]</code></p></li>
+<li><p>Blockquote : <code>&gt; this is a blockquote</code></p></li>
+<li><p>Linebreak <code>---</code> <code>___</code> or <code>***</code></p></li>
+<li><p>Footnote : <code>[^2]</code> then <code>[^2]</code>: explanation</p></li>
+<li><p>Subscirpt <code>H&lt;sub&gt;2&lt;/sub&gt;O and E = mc^2</code></p></li>
+<li>Link :
+<ul>
+<li><code>[clickme](#title-name)</code> to point to some <code># Title Name</code></li>
+<li><a href="http://google.com.html">goto google</a></li>
+<li><a href="http://wwww.google.fr">in-ref-written</a></li>
+<li></li>
+</ul></li>
+<li><p>Image : `[img](http://…. “Ttitle”{width=“40px” height=&quot;400px}}.html)</p></li>
+<li><p>Hightlight : <code>== text to print ==</code> -&gt; == text to print ==</p></li>
+<li><p>Footnote : <code>see me [11] later</code> and later <code>[11]: The 'footnote'</code></p></li>
+<li>Newline :
+<ul>
+<li>2 spaces at end of line</li>
+<li>blank line -&gt; paragraph : 2 newlines in md</li>
+</ul></li>
 </ul>
 <h2 id="html">Html</h2>
 <ul>
 <li><code>&amp;nbsp;</code> To make spaces</li>
 <li><code>&lt;kbd&gt;Shift&lt;/kbd&gt;</code> to get keyboard shotcuts <kdb>Shift</kbd></li>
+<li><code>&lt;br&gt;</code> : newline</li>
+</ul>
+<h2 id="pandoc">Pandoc</h2>
+<ul>
+<li><code>pandoc --number-sections</code></li>
+<li><code>pandoc --toc</code></li>
+<li>TODO bash compleiton</li>
 </ul>
 </body>
 </html>

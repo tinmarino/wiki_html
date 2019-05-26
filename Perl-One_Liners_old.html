@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <p>http://www.softpanorama.org/Scripting/Perlorama/perl_in_command_line.shtml</p>
@@ -89,7 +94,7 @@ xargs -J % mv % DIR</code></pre>
 <pre><code>jot -r 100 | rs 50</code></pre>
 <p>Given a list of random numbers, ranging from 1 to 20, show the count of those numbers &gt;= 10 and those &lt; 10:</p>
 <pre><code>jot -r 20 1 20 | perl -ne &#39;print $_ &gt;= 10 ? 1 : 0, &quot;\n&quot;&#39; | sort | uniq -c</code></pre>
-<p>... or showing percentages:</p>
+<p>… or showing percentages:</p>
 <pre><code>jot -r 20 1 20 
   | perl -ne &#39;print $_ &gt;= 10 ? 1 : 0, &quot;\n&quot;&#39; 
   | sort 
@@ -97,14 +102,14 @@ xargs -J % mv % DIR</code></pre>
   | cut -c 3-4 
   | perl -ne&#39;chomp; $sum += $_; push @counts, $_; 
             END { print $_, &quot; : &quot;, $_ / $sum, &quot;\n&quot; for @counts }&#39;</code></pre>
-<p>... or to show the percentage of nines in the list:</p>
+<p>… or to show the percentage of nines in the list:</p>
 <pre><code>  | perl -ne &#39;print $_ == 9 ? 1 : 0, &quot;\n&quot;&#39; </code></pre>
 <p>Given a list of numbers, ranging from 0 to 20,000, show the distribtion (i.e., individual counts) of those numbers after each is rounded to the nearest $1,000 increment:</p>
 <pre><code>jot -r 20 0 20000 
   | perl -pe&#39;$_ = 1000 * int($_/1000).&quot;\n&quot;&#39; 
   | sort -n 
   | uniq -c</code></pre>
-<p>... or showing percentages:</p>
+<p>… or showing percentages:</p>
 <pre><code>jot -r 20 1000 20000 
   | perl -pe&#39;$_ = 1000 * int($_/1000) . &quot;\n&quot;&#39; 
   | sort -n
@@ -114,9 +119,9 @@ xargs -J % mv % DIR</code></pre>
                     &quot; : &quot;, 
               $counts{$_} / $sum, &quot;\n&quot; 
               for sort {$a&lt;=&gt;$b} keys %counts }&#39;</code></pre>
-<p>... or to find the median (i.e., the middle number):</p>
+<p>… or to find the median (i.e., the middle number):</p>
 <pre><code>    | perl -e&#39;@lines = &lt;&gt;; print $lines[int($#lines/2)]&#39;</code></pre>
-<p>... or to find the average:</p>
+<p>… or to find the average:</p>
 <pre><code>jot -r 20 0 20000 | perl -pe&#39;$_=1000 * int($_/1000).&quot;\n&quot;&#39;</code></pre>
 </body>
 </html>

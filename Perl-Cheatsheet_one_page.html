@@ -1,17 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <p>Perl 5 cheat sheet v8 by Juerd Waalboer, http://juerd.nl/ perldoc perlcheat</p>
-<p>CONTEXTS SIGILS ARRAYS HASHES void $scalar whole: <span class="citation">@array</span> %hash scalar <span class="citation">@array</span> slice: <span class="citation">@array [0, 2]</span> <span class="citation">@hash</span>{'a', 'b'} list %hash element: $array[0] $hash{'a'} &amp;sub *glob SCALAR VALUES number, string, reference, glob, undef REFERENCES   references <br /><span class="math display">$$foo[1]       aka $foo-&gt;[1]
- $@%&amp;* dereference     $$</span><br />foo{bar} aka $foo-&gt;{bar} [] anon. arrayref <span class="math inline">${$</span>$foo[1]}[2] aka $foo-&gt;[1]-&gt;[2] {} anon. hashref <span class="math inline">${$</span>$foo[1]}[2] aka $foo-&gt;[1][2] () list of refs NUMBERS vs STRINGS LINKS OPERATOR PRECEDENCE = = perl.plover.com -&gt; + . search.cpan.org ++ -- == != eq ne cpan.org ** &lt; &gt; &lt;= &gt;= lt gt le ge pm.org ! ~  u+ u- &lt;=&gt; cmp tpj.com =~ !~ perldoc.com * / % x SYNTAX + - . for (LIST) { }, for (a;b;c) { } &lt;&lt; &gt;&gt; while ( ) { }, until ( ) { } named uops if ( ) { } elsif ( ) { } else { } &lt; &gt; &lt;= &gt;= lt gt le ge unless ( ) { } elsif ( ) { } else { } == != &lt;=&gt; eq ne cmp for equals foreach (ALWAYS) &amp; | ^ REGEX METACHARS REGEX MODIFIERS &amp;&amp; ^ string begin /i case insens. || $ str. end (before ) /m line based ^$ .. ... + one or more /s . includes  ?: * zero or more /x ign. wh.space = += -= *= etc. ? zero or one /g global , =&gt; {3,7} repeat in range list ops () capture REGEX CHARCLASSES not (?:) no capture . == [^\n] and [] character class == [20] or xor | alternation == [A-Za-z0-9_] word boundary == [0-9] string end , and negate DO use strict; DON'T LINKS use warnings; &quot;$foo&quot; perl.com<br />
+<p>CONTEXTS SIGILS ARRAYS HASHES void $scalar whole: <span class="citation" data-cites="array">@array</span> %hash scalar <span class="citation" data-cites="array">@array</span> slice: <span class="citation" data-cites="array">@array [0, 2]</span> <span class="citation" data-cites="hash">@hash</span>{‘a’, ‘b’} list %hash element: $array[0] $hash{‘a’} &amp;sub *glob SCALAR VALUES number, string, reference, glob, undef REFERENCES   references <br /><span class="math display">$$foo[1]       aka $foo-&gt;[1]
+ $@%&amp;* dereference     $$</span><br />foo{bar} aka $foo-&gt;{bar} [] anon. arrayref <span class="math inline">${$</span>$foo[1]}[2] aka $foo-&gt;[1]-&gt;[2] {} anon. hashref <span class="math inline">${$</span>$foo[1]}[2] aka $foo-&gt;[1][2] () list of refs NUMBERS vs STRINGS LINKS OPERATOR PRECEDENCE = = perl.plover.com -&gt; + . search.cpan.org ++ – == != eq ne cpan.org ** &lt; &gt; &lt;= &gt;= lt gt le ge pm.org ! ~  u+ u- &lt;=&gt; cmp tpj.com =~ !~ perldoc.com * / % x SYNTAX + - . for (LIST) { }, for (a;b;c) { } &lt;&lt; &gt;&gt; while ( ) { }, until ( ) { } named uops if ( ) { } elsif ( ) { } else { } &lt; &gt; &lt;= &gt;= lt gt le ge unless ( ) { } elsif ( ) { } else { } == != &lt;=&gt; eq ne cmp for equals foreach (ALWAYS) &amp; | ^ REGEX METACHARS REGEX MODIFIERS &amp;&amp; ^ string begin /i case insens. || $ str. end (before ) /m line based ^$ .. … + one or more /s . includes  ?: * zero or more /x ign. wh.space = += -= *= etc. ? zero or one /g global , =&gt; {3,7} repeat in range list ops () capture REGEX CHARCLASSES not (?:) no capture . == [^\n] and [] character class == [20] or xor | alternation == [A-Za-z0-9_] word boundary == [0-9] string end , and negate DO use strict; DON’T LINKS use warnings; “$foo” perl.com<br />
 my $var; <br /><span class="math display">$$variable_name  perlmonks.org  
  open() or die $!;  `$userinput`     use.perl.org   
  use Modules;       /$userinput/     perl.apache.org
@@ -25,6 +30,6 @@ my $var; <br /><span class="math display">$$variable_name  perlmonks.org
   4 uid    4 month-1    4 hasargs      $|    autoflush
   5 gid    5 year-1900  5 wantarray    $!    sys/libcall error
   6 rdev   6 weekday    6 evaltext     $@    eval error
-  7 size   7 yearday    7 is_require   $$</span><br /> process ID 8 atime 8 is_dst 8 hints $. line number 9 mtime 9 bitmask <span class="citation">@ARGV</span> command line args 10 ctime just use <span class="citation">@INC</span> include paths 11 blksz POSIX:: 3..9 only <span class="citation">@_</span> subroutine args 12 blcks strftime! with EXPR %ENV environment</p>
+  7 size   7 yearday    7 is_require   $$</span><br /> process ID 8 atime 8 is_dst 8 hints $. line number 9 mtime 9 bitmask <span class="citation" data-cites="ARGV">@ARGV</span> command line args 10 ctime just use <span class="citation" data-cites="INC">@INC</span> include paths 11 blksz POSIX:: 3..9 only <span class="citation" data-cites="_">@_</span> subroutine args 12 blcks strftime! with EXPR %ENV environment</p>
 </body>
 </html>

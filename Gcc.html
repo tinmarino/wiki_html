@@ -1,25 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
+<li><p>Assemble</p></li>
+<li>gcc file.c -masm=intel -S -o file.d # assemble</li>
+<li>gcc -c file.s -i file.o # compile</li>
+<li>gcc file.o -o file # link</li>
+<li>gcc file.S -o file</li>
+<li>.s means pure asm .S means macro too</li>
+<li>man as</li>
+<li>see inline asm</li>
+<li>man objdump</li>
+<li><p>-m32 # compile 32 must instal libc en 32 bits</p></li>
 <li><p>Echo include dirs</p></li>
 <li>g++ -E -x c++ - -v &lt; /dev/null</li>
 <li><p>clang++ -E -x c++ - -v &lt; /dev/null</p></li>
-<li>Use of Make</li>
-<li><p><code>export CFLAGS=&quot;-g&quot;</code></p></li>
-<li>Compile 32 bit</li>
+<li>Use of Make
+<ul>
+<li><code>export CFLAGS=&quot;-g&quot;</code></li>
+</ul></li>
+<li>Compile 32 bit
+<ul>
 <li><code>apt install gcc-multilib</code></li>
 <li><code>gcc -m32</code></li>
 <li><code>export CFLAGS=&quot;-g -m32 -static&quot;</code></li>
-<li><p><code>export LDFLAGS='-m32 -L/usr/lib32'</code></p></li>
+<li><code>export LDFLAGS='-m32 -L/usr/lib32'</code></li>
+</ul></li>
 </ul>
 </body>
 </html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<h1 id="assembly-and-retro-engineering">Assembly and retro engineering</h1>
+<ul>
+<li>fs:30 -&gt; PEB</li>
+<li><p>fs:00 -&gt; TIB</p></li>
+<li>Addressing modes TODO add examples
+<ul>
+<li>Immediate</li>
+<li>Register</li>
+<li>Direct</li>
+<li>Register indirect</li>
+<li>Indexed</li>
+</ul></li>
+</ul>
+<h1 id="optimisation-gcc">Optimisation (gcc)</h1>
+<ul>
+<li>-O0 “no optimization”</li>
+<li>-O1 Somewhere between -O0 and -O2.</li>
+<li>-O2 Moderate level of optimization which enables most optimizations.</li>
+<li>-O3 Faster / Larger code (may be longer to compile)</li>
+<li>-Ofast The fastest</li>
+<li>-Os Size small</li>
+<li>-Oz Size super small</li>
+<li>-finline-functions</li>
+</ul>
+<h1 id="memory">Memory</h1>
+<ul>
+<li>Les pages sont marquées “kernel” ou “user” au niveau des PTE</li>
+<li><code>SMEP</code> != <code>NX</code> : SMEP is for userland (ring 0 execution prevention) and NX is to prevent kernel from executing data</li>
+</ul>
+<h1 id="calling-conventions-x64">Calling conventions (x64)</h1>
+<ul>
+<li>Application Binary Interface : Calling convention, Name mangling and type representation</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Convention</th>
+<th>Arguments</th>
+<th>Cleaner</th>
+<th>Memo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>cdecl</td>
+<td>stack</td>
+<td>caller</td>
+<td>printf</td>
+</tr>
+<tr class="even">
+<td>syscall</td>
+<td>al &lt;- nb of dw in arg_list</td>
+<td>caller</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>stdcall</td>
+<td>stack</td>
+<td>callee</td>
+<td>do(&amp;accelerate)</td>
+</tr>
+<tr class="even">
+<td>fastcall</td>
+<td>rcx, rdx r8, r9, stack</td>
+<td>callee</td>
+<td>rotate(30, true)</td>
+</tr>
+<tr class="odd">
+<td>thiscall</td>
+<td>rcx, stack</td>
+<td>callee</td>
+<td>x.sum(y)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="famous-instructions-x86">Famous instructions (x86)</h1>
+<ul>
+<li>Lea relative ro rip are only valids in 64 bits</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Mnemonic</th>
+<th>Opcodes (hex)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>NOP</td>
+<td>90</td>
+</tr>
+<tr class="even">
+<td>JMP esp</td>
+<td>FF E4</td>
+</tr>
+<tr class="odd">
+<td>CALL esp</td>
+<td>FF DC</td>
+</tr>
+<tr class="even">
+<td>DEBUGBREAK</td>
+<td>CC</td>
+</tr>
+<tr class="odd">
+<td>INT 03</td>
+<td>CC</td>
+</tr>
+<tr class="even">
+<td>RETN</td>
+<td>C3</td>
+</tr>
+<tr class="odd">
+<td>RETN 14</td>
+<td>C2 14 00</td>
+</tr>
+<tr class="even">
+<td>ADD ESP, 4</td>
+<td>83 C4 04</td>
+</tr>
+<tr class="odd">
+<td>ASS ESP, 104</td>
+<td>81 C4 01 01 00 00</td>
+</tr>
+<tr class="even">
+<td>PUSH 101</td>
+<td>68 01 01 00 00</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">JG | JL | Signed |<br />
+JA | JB | Unsigned |</div>
+<ul>
+<li><p><code>IMUL RCX</code> # RDX:RAX &lt;= RCX x RAX</p></li>
+<li><code>REP MOSD</code> # ESI -&gt; EDI with size = (4 x ECX)</li>
+<li><code>PAUSE</code> # SpinLock : the only lock you can use at dispatch lvl 2. Because the onther locks are dispatcher themselves</li>
+<li><code>PUSHAD</code> # pushes eax, ecx, edx, ebx, esp, ebp, esi, edi</li>
+<li><code>FLD</code> # pushed on float stack</li>
+<li><code>LEAVE</code> # mov esp, ebp ; pop ebp</li>
+<li><code>CLI</code> # Clear Interrupt flag : to mask interrupts</li>
+<li><code>STI</code> # Restore Interrupt flag</li>
+<li><code>LIDT</code> # Load IDT</li>
+<li><code>SIDT</code> # Store IDT</li>
+<li><code>INVLPG</code> # Invalidate TLB Entry</li>
+<li><code>LAHF</code> # Load Status Flag -&gt; AH</li>
+<li><code>SAHF</code> # Store … &lt;- AH</li>
+<li><code>OUT</code> # Output to port</li>
+<li><code>Enter</code> # Create, Allocates new local stack frame</li>
+<li><code>Leave</code> # Last inst of a function : Destroy the stack frame</li>
+<li><code>LIDT</code></li>
+<li><code>IRET</code> # Interrupt Return (POP EFLAG ; POP RIP)</li>
+<li><code>RDMSR</code> # Read the 64 bit MSR register specified by ECX to EDX:EAX</li>
+<li><p><code>WDMSR</code> # Write …</p></li>
+</ul>
+</body>
+</html>

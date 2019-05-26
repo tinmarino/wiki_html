@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
@@ -21,9 +26,43 @@
 <li><a href="Gcc.html">Gcc</a></li>
 <li><a href="Pentest.html">Pentest</a></li>
 <li><a href="Imagemagick.html">Imagemagick</a></li>
-<li><p><a href="BusyBox.html">BusyBox</a></p></li>
+<li><a href="BusyBox.html">BusyBox</a></li>
+<li><p><a href="W3m.html">W3m</a></p></li>
+<li><p>Files (Read, get specific info)</p></li>
+<li>/proc/sys/vm/block_dump # echo 1 lgos IO; then tail -f /var/log/syslog</li>
+<li>/proc/[pid]/io</li>
+<li>/proc/net/dev</li>
+<li><p>/sys/class/net/${interface}/statistics/</p></li>
+<li><p>Xrand</p>
+<p>redshift xrandr -q | grep &quot; connected&quot; # gives me LVDS1 xrandr –output LVDS1 –brightness 0.5 xbacklight -set 50 xbacklight -inc 10 xbacklight -dec 10 echo 400 | sudo tee /sys/class/backlight/intel_backlight/brightness</p></li>
+<li><p>Module (kernel) depmod - handle dependency descriptions for loadable kernel modules. insmod - install loadable kernel module. lsmod - list loaded modules. modinfo - display information about a kernel module. modprobe - high level handling of loadable modules. rmmod - unload loadable modules.</p></li>
+<li><p>User Rights, Capabilities</p>
+<p>visudo</p></li>
+</ul>
+<h1 id="file">File</h1>
+<ul>
+<li>/etc/resolv.conf</li>
+<li>/etc/nework/interface</li>
+<li>/etc/hosts</li>
+<li>/etc/mailname</li>
+<li><p>/etc/hostname</p></li>
+<li>tail -f</li>
+<li>apt –allow-unauthentificated</li>
+<li>cat | xargs grep</li>
+<li>find . -type f -size +10M</li>
+<li>grep -Po ‘[^[:digit:]]’</li>
+<li>grep -A 1 print 1 line before</li>
+<li>grep -B 1 print 1 line before</li>
+<li>grep -C 3 print 3 lines before and after</li>
+<li>grep –include=*.txt</li>
+<li>cat toto.txt | grep -arnobUP “”</li>
+<li>echo “conbtent” | mail -s “subject” user@email.com</li>
+<li><p>find . -maxdepth 1 -exec grep foo {}</p></li>
 <li><p>Hybernate</p>
 <p>sudo pm-hibernate sudo systemctl hibernate</p></li>
+<li><p>Move mouse tmux send-key -t session:pane ls tput - initialize a terminal or query terminfo database - color output xdotool - send keystrokes</p></li>
+<li><p>Screen off</p>
+<p>xset dpms force off</p></li>
 <li><p>Tar</p>
 <p>tar - cvf tecmint-14-09-12.tar /home/tecmint/ tar cvzf MyImages-14-09-12.tar.gz /home/MyImages c – Creates a new .tar archive file. v – Verbosely show the .tar file progress. f – File name type of the archive file. z - Compress tar -xvf thumbnails-14-09-12.tar.gz tar -zxvf tar-archive-name.tar.gz</p></li>
 <li><p>Remotely move mouse : <code>xdotool</code></p>
@@ -34,6 +73,13 @@ xdotool mousemove 1800 500
 xdotool click 1
 # right click
 xdotool click 3</code></pre></li>
+<li><p>List device UUID</p>
+<p>ls /dev:disk/by_uuid</p></li>
+<li>Find file (and print only finle name)
+<ul>
+<li><code>find /dir1 -type f -printf &quot;%f\n&quot;</code></li>
+<li><code>find ./dir1 -type f -exec basename {} \;</code> # If no printf</li>
+</ul></li>
 <li>Remove windows line ending</li>
 <li><code>tr -d '\15\32' &lt; winfile.txt &gt;  unixfile.txt</code></li>
 <li><code>tr -d &quot;\r&quot; &lt; file</code></li>
@@ -43,9 +89,11 @@ xdotool click 3</code></pre></li>
 <li><p><code>awk '{ sub(&quot;\r$&quot;,&quot;&quot;); print }' dos.txt &gt; unix.txt</code></p></li>
 <li><p>List signals shortcuts</p></li>
 <li><p><code>stty -a</code></p></li>
-<li>bc</li>
+<li>bc
+<ul>
 <li><code>echo &quot;ibase=16;FF&quot; | bc</code></li>
 <li></li>
+</ul></li>
 <li><p>expr 10 + 10</p></li>
 <li><p>List all users, groups</p></li>
 <li><code>groups</code></li>
@@ -55,15 +103,15 @@ xdotool click 3</code></pre></li>
 <li><code>df</code> list mount points</li>
 </ul></li>
 </ul>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD <em>linux.txt</em> Linux Memories, Usefull when no screen or connection Can become ugly</p>
+<p><em>linux.txt</em> Linux Memories, Usefull when no screen or connection Can become ugly</p>
 <p>df # list mount points</p>
 <p>JOBS <em>mlinux-cd</em> <em>mlinux-jobs</em></p>
-<p>This resume the work, commands I discover while trying to cd to vim's pwd when pressing <c-z> and fg</p>
+<p>This resume the work, commands I discover while trying to cd to vim’s pwd when pressing <c-z> and fg</p>
 <p>JOBS ~ jobs -l</p>
-<p>IPC (Inter-Process-Communication) ~ /proc/{PID}/cwd is as symlink the pwd of the current process bash local -i PID=<span class="math inline">${$</span>{<span class="math inline">${(s.:.)$</span>{(v)jobstates[1]}}[3]}%=*} cd <span class="math inline">(<em>r</em><em>e</em><em>a</em><em>d</em><em>l</em><em>i</em><em>n</em><em>k</em>/<em>p</em><em>r</em><em>o</em><em>c</em>/</span>PID/cwd) alias fg=&quot;$VIM --remote-send ':cd $PWD<CR>'; fg&quot; xdotool kill -l # to see the trap list</p>
+<p>IPC (Inter-Process-Communication) ~ /proc/{PID}/cwd is as symlink the pwd of the current process bash local -i PID=<span class="math inline">${$</span>{<span class="math inline">${(s.:.)$</span>{(v)jobstates[1]}}[3]}%=*} cd <span class="math inline">(<em>r</em><em>e</em><em>a</em><em>d</em><em>l</em><em>i</em><em>n</em><em>k</em>/<em>p</em><em>r</em><em>o</em><em>c</em>/</span>PID/cwd) alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” xdotool kill -l # to see the trap list</p>
 <pre><code>    # 20 for ctrl-z sigstp</code></pre>
-<p>!./ttyecho -n /dev/pts/22 &quot;echo hello&quot; -&gt; Give to me the write to read and write at tty or ioctl disown %2 gdb retpy tmux screen to reatach :e **/palette.cpp stty -a show shell shortcut for SIGNALS kill -SIGSTOP <code>vim &gt; /dev/pts/22</code> exec vi (rplace shell by vim last shell command) REad : export PROMPT_COMMAND=&quot;ls -a &gt; /dev/pts/23&quot; echo -en '1202' &gt; /dev/ttyS0 sudo chmod o-rw /dev/tty23 open /usr/share/doc/base-passwd/users-and-groups.html ( echo <br /><span class="math display">$$; echo $BASHPID )
-$$</span><br /> -&gt; Expands to the process ID of the (current) shell. $! -&gt; Expands to the process ID of the most recently executed background command. ps ax | grep pts/16 ps -f ax | grep pts/16 ps --ppid <span class="math inline">$$ -o CMD PROMPT_COMMAND is the key truncate -s 0 filename &gt;filename or tail -n +2 # shell -&gt; vim alias fg=&quot;$</span>VIM --remote-send ':cd $PWD<CR>'; fg&quot; On resume :cd $PWD $ sleep 42 &amp; [1] 5260 $ echo $! 5260 ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; After merge</p>
+<p>!./ttyecho -n /dev/pts/22 “echo hello” -&gt; Give to me the write to read and write at tty or ioctl disown %2 gdb retpy tmux screen to reatach :e **/palette.cpp stty -a show shell shortcut for SIGNALS kill -SIGSTOP <code>vim &gt; /dev/pts/22</code> exec vi (rplace shell by vim last shell command) REad : export PROMPT_COMMAND=“ls -a &gt; /dev/pts/23” echo -en ‘1202’ &gt; /dev/ttyS0 sudo chmod o-rw /dev/tty23 open /usr/share/doc/base-passwd/users-and-groups.html ( echo <br /><span class="math display">$$; echo $BASHPID )
+$$</span><br /> -&gt; Expands to the process ID of the (current) shell. $! -&gt; Expands to the process ID of the most recently executed background command. ps ax | grep pts/16 ps -f ax | grep pts/16 ps –ppid $$ -o CMD PROMPT_COMMAND is the key truncate -s 0 filename &gt;filename or tail -n +2 # shell -&gt; vim alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” On resume :cd $PWD $ sleep 42 &amp; [1] 5260 $ echo $! 5260</p>
 <h3 id="jobs-and-processes">Jobs and Processes</h3>
 <p><code>jobs -l</code><br />
 <code>disown %2</code><br />
@@ -91,8 +139,8 @@ touch ~/.local/share/applications/mimeapps.list<br />
 mimetype img.jpg</p>
 <p>// Get current font<br />
 gsettings get org.gnome.desktop.interface monospace-font-name</p>
-<p>gconftool-2 --get /apps/gnome-terminal/profiles/Unnamed/font<br />
-gconftool-2 --set /apps/gnome-terminal/profiles/Unnamed/font --type string &quot;courier new 12&quot;</p>
+<p>gconftool-2 –get /apps/gnome-terminal/profiles/Unnamed/font<br />
+gconftool-2 –set /apps/gnome-terminal/profiles/Unnamed/font –type string “courier new 12”</p>
 <h4 id="mouse">Mouse</h4>
 <p>sudo modprobe -r psmouse<br />
 sudo modprobe psmouse proto=imps</p>

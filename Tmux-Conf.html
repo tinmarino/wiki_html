@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<h1 id="remap-prefix-from-c-b-to-c-q">remap prefix from ‘C-b’ to ‘C-q’</h1>
+<pre><code>unbind C-b
+set -g prefix C-q</code></pre>
+<h1 id="enable-mouse-mode-tmux-2.1-and-above">Enable mouse mode (tmux 2.1 and above)</h1>
+<pre><code>set -g mouse on</code></pre>
+<h1 id="split-panes-using-and--">split panes using | and -</h1>
+<pre><code>bind | split-window -h
+bind - split-window -v
+bind _ split-window -v
+unbind &#39;&quot;&#39;
+unbind %</code></pre>
+<h1 id="reload-config-file">reload config file</h1>
+<pre><code>bind r source-file ~/.tmux.conf</code></pre>
+<h1 id="dont-rename-windows-automatically">don’t rename windows automatically</h1>
+<pre><code>set-option -g allow-rename off</code></pre>
+<h1 id="trigger-copy-mode-by">trigger copy mode by</h1>
+<pre><code>bind -n M-Up copy-mode</code></pre>
+<h1 id="do-not-copy-selection-and-cancel-copy-mode-on-drag-end-event">Do not copy selection and cancel copy mode on drag end event</h1>
+<h1 id="prefer-iterm-style-selection-select-then-mouse-click-to-copy-to-buffer">Prefer iTerm style selection: select, then mouse click to copy to buffer</h1>
+<p>unbind -T copy-mode-vi MouseDragEnd1Pane bind -T copy-mode-vi MouseDown1Pane select-pane ;<br />
+send-keys -X copy-pipe “pbcopy” ;<br />
+send-keys -X clear-selection</p>
+<h1 id="paste-with-p">Paste with p</h1>
+<p>bind p paste-buffer bind C-p choose-buffer</p>
+<h1 id="so-i-dont-have-escape-up-pb-on-vi">So I don’t have escape up pb on vi</h1>
+<p>set-option -s escape-time 0</p>
+<h1 id="new-window-same-path">New window same path</h1>
+<p>bind ’“’ split-window -c”#{pane_current_path}&quot; bind % split-window -h -c “#{pane_current_path}” bind c new-window -c “#{pane_current_path}”</p>
+</body>
+</html>

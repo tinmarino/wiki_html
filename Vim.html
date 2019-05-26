@@ -1,70 +1,147 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
-<li><a href="Practical_Vim.html">Practical_Vim</a></li>
-<li><a href="Vimstyle.html">Vimstyle</a> (from Google)</li>
-<li><a href="VimStory.html">VimStory</a></li>
-<li><a href="BordelVim.html">BordelVim</a></li>
-<li><a href="Plugin.html">Plugin</a></li>
-<li><a href="Tips.html">Tips</a></li>
-<li><a href="V-negative-regex.html">Negative Regex</a></li>
-<li><a href="V-Script.html">Script</a></li>
+<li><p><a href="Vim-Menu.html">Vim Menu</a></p></li>
+<li><p><a href="Tips.html">Tips</a> : advanced commands</p></li>
+</ul>
+<h1 id="tips">Tips</h1>
+<ul>
+<li><p>Copy without yanking selection in visual</p>
+<p>xnoremap p pgvy`</p></li>
+<li><p>Read man files</p>
+<p>runtime! ftplugin/man.vim an Man 3 printf</p></li>
+<li><p>Script : Get filetype of a buffer</p>
+<p>:let bufFiletype = getbufvar(bufNr, ‘&amp;filetype’)</p></li>
+<li>Substitute without escaping the replcement
+<ul>
+<li><code>:%sno/search_string/replace_string/g</code></li>
+<li><code>:s/&lt;/\='&amp;lt;'/g</code></li>
+</ul></li>
+<li>Delete everything except text
+<ul>
+<li><code>:%s/\(^\|\(text\)\@&lt;=\).\{-}\($\|text\)\@=//g</code></li>
+<li><pre><code>\(^\|\(text\)\@&lt;=\)     # means start of line, or some point preceded by “text”
+.\{-}                   # as few characters as possible
+\($\|text\)\@=          # without globbing characters, checking that we reached either end of line or occurrence of “text”.</code></pre></li>
+<li><p>Another way to do it:</p></li>
+<li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
+<li><p>Use: :%s/.*/=repeat(‘text’, matchcount(‘text’, submatch(0)))</p></li>
+</ul></li>
+<li><p>Find where root runtime is</p></li>
+<li><p><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></p></li>
+<li><p>Source autoload file</p></li>
+<li><p><code>:call example#BadFunction()</code></p></li>
+<li><p>Find where a map has been defined (in which script)</p></li>
+<li><p><code>:verbose map &lt;c-z&gt;</code></p></li>
+<li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
+</ul>
+<p>:h formatoptions :set fo+=t # to autowrap :match visu /%7l|%10l/ :hi visu ctermbg=darked</p>
+<h2 id="client-server">Client – Server</h2>
+<pre><code>vim --servernbame DEMO      # Open with name DEMO
+vim --servername DEOM --remote some-file.txt  # Send some file
+vim --servername DEMO --remote-send &#39;:3d&lt;CR&gt;&#39; # Send command</code></pre>
+<h2 id="fast-buffer-switching">Fast buffer switching</h2>
+<ul>
+<li><code>:oldfiles</code></li>
+<li><code>:bro[wse] ol[dfiles] [!]</code></li>
+<li><code>:changes</code></li>
+<li><code>'0 '1 '2 '3 ... '9</code></li>
+<li><code>CtrlP</code> pluggin</li>
+</ul>
+<h2 id="ctags">Ctags</h2>
+<ul>
+<li><code>ctags -R -f ./.git/tags .</code></li>
+<li><code>:tag function_name</code></li>
+<li><code>C-}</code> : see all tags</li>
+<li><code>C-]</code> : jump to tag</li>
+<li><code>:tn | :tp</code> : jump to next | previous tag</li>
+<li><code>:ts</code> : tag select : get a list</li>
 </ul>
 <h2 id="from-work">From work</h2>
-<pre class="vim"><code>\(External.*\)\@&lt;!mem</code></pre>
 <ul>
+<li><code>:%! clumn -t</code> align columns</li>
+<li>set fileencoding=utf-8</li>
+<li>set bomb</li>
+<li>:w ++enc=utf-8 %</li>
+<li>args *</li>
+<li>wchar encoding :e ++enc=utf-16</li>
 <li><code>1gt</code> goto tab 1</li>
 <li><code>set cul!</code> if scrooling slow for a long line</li>
 <li><code>set lazyredraw</code> can be usefull too</li>
 <li>h ttyfast</li>
 <li>222go go to byte 222</li>
 </ul>
-<h2 id="no-newline-at-end-of-file">No newline at end of file</h2>
+<h3 id="work-with-binary">Work with binary</h3>
+<pre><code>xxd -r      # reverse
+    -p      
+    -c56
+    -g 1    # bytes per line</code></pre>
+<h3 id="save-with-sudo">Save with sudo</h3>
+<ul>
+<li>`:w !sudo tee %</li>
+</ul>
+<h3 id="sort-lines-according-to-line-length">Sort lines according to line length</h3>
+<ul>
+<li>:%s/.*/=printf(“%03d”, len(submatch(0)) . “|” . submatch(0)/ | sor n | %s/…./<br />
+To sort all lines according to line lenght, otherwise, use awk with filter</li>
+</ul>
+<h3 id="reverse-line-order">Reverse line order</h3>
+<ul>
+<li>:%!tac</li>
+<li>:%!tail -r</li>
+<li>g/^/m0</li>
+</ul>
+<h3 id="no-newline-at-end-of-file">No newline at end of file</h3>
 <ul>
 <li><code>vim -b file</code> or <code>set binary</code></li>
 <li><code>:set noeol</code> or <code>set nofixendofline</code></li>
 </ul>
-<h2 id="environment">Environment</h2>
+<h3 id="environment">Environment</h3>
 <ul>
 <li>echo $PATH</li>
 <li>let myvar = $PATH</li>
-<li>let $PATH = '/foo:/bar'</li>
+<li>let $PATH = ‘/foo:/bar’</li>
 <li>i<c-r>=$PATH</li>
 </ul>
-<h2 id="c-s">C-s</h2>
+<h3 id="c-s">C-s</h3>
 <ul>
 <li>Can lock the terminal : <c-q> to unlock</li>
 <li>stty -ixon # for a permanent solution</li>
 </ul>
-<h2 id="gvim">GVim</h2>
+<h3 id="gvim">GVim</h3>
 <p>:set guioptions-=m &quot; remove menu bar :set guioptions-=T &quot; remove toobar :set guioptions-=r &quot; remove right hand scrool bar :set guioptions-=L &quot; remove lefthand scrooll bar</p>
-<p>Note: 'go' is an abbr for guioptions</p>
+<p>Note: ‘go’ is an abbr for guioptions</p>
 <h2 id="from-before">FRom before</h2>
-<p>set autochdir to auto chdir to current file :tabdo lcd /dir/ Another useful setting is set tags=./tags,tags;$HOME which tells Vim to look for a tags file in the directory of the current file, then in the &quot;current directory&quot; and up and up until it reaches your ~/. getpid() vim —cmd 'cd <code>pwd</code>'</p>
-<p>CTRL-W z CTRL-W_z CTRL-W CTRL-Z CTRL-W_CTRL-Z :pc :pclose :pc[lose][!] Close any &quot;Preview&quot; window currently open. When the 'hidden' option is set, or when the buffer was changed and the [!] is used, the buffer becomes hidden (unless there is another window editing it). The command fails if any &quot;Preview&quot; buffer cannot be closed. See also :close.</p>
+<p>set autochdir to auto chdir to current file :tabdo lcd /dir/ Another useful setting is set tags=./tags,tags;$HOME which tells Vim to look for a tags file in the directory of the current file, then in the “current directory” and up and up until it reaches your ~/. getpid() vim —cmd ‘cd <code>pwd</code>’</p>
+<p>CTRL-W z CTRL-W_z CTRL-W CTRL-Z CTRL-W_CTRL-Z :pc :pclose :pc[lose][!] Close any “Preview” window currently open. When the ‘hidden’ option is set, or when the buffer was changed and the [!] is used, the buffer becomes hidden (unless there is another window editing it). The command fails if any “Preview” buffer cannot be closed. See also :close.</p>
 <p>:earlier 12h :help undo-branches Gundo | undotree</p>
 <p>Paste stay on place The safest way without destroying a register is to do the following:</p>
 <p>p`[</p>
-<p>If you want to create a shortcut, just use any of vim's map functions that are suitable for you, eg:</p>
+<p>If you want to create a shortcut, just use any of vim’s map functions that are suitable for you, eg:</p>
 <p>noremap p p`[</p>
-<p>-&gt; h iskeyword //[:alpha:] [:alnum:]</p>
-<p>Something likelet $vimfiles = &quot;c:\ldigas-home\gvim72\vim\vimfiles&quot;so when I go cd $vimfiles it puts me inc:-home72\vimdid you have so</p>
+<p>-&gt; h iskeyword /[:alpha:] [:alnum:]</p>
+<p>Something likelet $vimfiles = “c:\ldigas-home\gvim72\vim\vimfiles”so when I go cd $vimfiles it puts me inc:-home72\vimdid you have so</p>
 <p>set shell=/bin/bash -i</p>
-<p>Vim's default CTRL-T is a good alternative to mashing CTRL-O, because it is coarser grained: it moves back through tag jumps only</p>
-<p>Exec cmd &quot;Examples: &quot;:call Exec('buffers') &quot;This will include the output of :buffers into the current buffer. &quot; &quot;Also try: &quot;:call Exec('ls') &quot;:call Exec('autocmd') &quot; funct! Exec(command) redir =&gt;output silent exec a:command redir END let <span class="citation">@o</span> = output execute &quot;put o&quot; endfunct!</p>
-<p>:'&lt;,'&gt;:w !command<CR> :'&lt;,'&gt;!command<CR></p>
-<p><a href="-"></a>&gt; h iskeyword //[:alpha:] [:alnum:]</p>
+<p>Vim’s default CTRL-T is a good alternative to mashing CTRL-O, because it is coarser grained: it moves back through tag jumps only</p>
+<p>Exec cmd “Examples:”:call Exec(‘buffers’) “This will include the output of :buffers into the current buffer.” “Also try:”:call Exec(‘ls’) “:call Exec(‘autocmd’)” funct! Exec(command) redir =&gt;output silent exec a:command redir END let <span class="citation" data-cites="o">@o</span> = output execute “put o” endfunct!</p>
+<p>:‘&lt;,’&gt;:w !command<CR> :‘&lt;,’&gt;!command<CR></p>
+<p><a href="-"></a>&gt; h iskeyword /[:alpha:] [:alnum:]</p>
 <p>vi &lt;(man $1) man ls | vi - runtime! ftplugin/man.vim :Man 3 printf</p>
-<p>CTRL-W z CTRL-W_z CTRL-W CTRL-Z CTRL-W_CTRL-Z :pc :pclose :pc[lose][!] Close any &quot;Preview&quot; window currently open. When the 'hidden' option is set, or when the buffer was changed and the [!] is used, the buffer becomes hidden (unless there is another window editing it). The command fails if any &quot;Preview&quot; buffer cannot be closed. See also :close.</p>
+<p>CTRL-W z CTRL-W_z CTRL-W CTRL-Z CTRL-W_CTRL-Z :pc :pclose :pc[lose][!] Close any “Preview” window currently open. When the ‘hidden’ option is set, or when the buffer was changed and the [!] is used, the buffer becomes hidden (unless there is another window editing it). The command fails if any “Preview” buffer cannot be closed. See also :close.</p>
 <h1 id="q-a">Q / A</h1>
 <h2 id="how-to-trace-back-all-changes-done-to-file-during-the-day">How to trace back all changes done to file during the day</h2>
 <pre><code>:earlier 12h

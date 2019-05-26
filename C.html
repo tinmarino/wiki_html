@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <h1 id="c">C</h1>
@@ -14,5 +19,48 @@
 <li><a href="C-Keywords.html">Keywords</a></li>
 <li><a href="C-Operators.html">Operators</a></li>
 </ul>
+<p>Include path (print)</p>
+<pre><code>gcc -xc -E -v -
+gcc -xc++ -E -v -</code></pre>
+<h1 id="macro">Macro</h1>
+<ul>
+<li><code>#define dbgprint(X,...) printf(X, ##__VA_ARGS__)</code> : variadic argument macro</li>
+<li><code>#</code> operator is called the <strong>stringifier</strong></li>
+<li><code>__declspec(dllexport)</code> # windows : export function in dll</li>
+<li><code>__debugbreak()</code> # Set breakpoint</li>
+<li><code>offsetof(struct_t, elt_t)</code> # Get elemenet offset</li>
+<li><p><code>extern int const iPi = 3.1415926535</code></p></li>
+<li>extern so importing this.h get iPi defined</li>
+<li>const for the precompiler (to avoid errors)</li>
+<li><code>#pragma pack(1)</code> # to let the structure without aligning each field</li>
+<li><code>__FILE__</code> # Name of the file.c</li>
+<li><code>__LINE__</code> # Current line</li>
+<li><p><code>__FUNCTION__</code> # Name of current function</p></li>
+<li><p>Jump to arbitrary addr</p>
+<p>void (*foo)(void) = 0xcacacaca; foo();</p></li>
+</ul>
+<h1 id="notes">Notes</h1>
+<ul>
+<li>Le tableau aloue de la mémoire et le pointeur non =&gt; préféré le tableau</li>
+</ul>
+<h3 id="random">Random</h3>
+<pre><code>```c
+#include &lt;time.h&gt;
+srand(time(NULL));  # Set seed
+rand();             # Get Random
+
+```</code></pre>
+<h2 id="calling-conventions-function-prototype">Calling conventions, function prototype</h2>
+<ul>
+<li><code>typedef int(__cdecl callback_t)(HANDLE h_process);</code></li>
+</ul>
+<h3 id="usercall">Usercall</h3>
+<pre><code>int __usercall fct1@&lt;eax&gt;(int p1@&lt;ecx&gt;, int p2@&lt;edx&gt;, int p3) {return p1 + p2 + p3;}</code></pre>
+<h4 id="stdcall">Stdcall</h4>
+<p>The called function is cleaning the stack</p>
+<h4 id="cdecl">Cdecl</h4>
+<p>The <strong>caller</strong> is correcting the stack (because <strong>HE</strong> knows : <code>printf</code>)</p>
+<h4 id="fastcall-x64">Fastcall (x64)</h4>
+<p>Rcx contains first var. The <strong>callee</strong> is cleaning the pile</p>
 </body>
 </html>

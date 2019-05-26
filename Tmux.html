@@ -1,33 +1,46 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Tmux : TerminalMultiplexer</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Tmux : TerminalMultiplexer</h1>
-</div>
+</header>
+<p><a href="Tmux-Conf.html">Tmux Conf</a></p>
+<h1 id="get-help">Get help</h1>
+<pre><code>tmux list-keys
+tmux list-commands
+tmux info
+tmux source-file ~/.tmux.conf
+    list-keys -T copy-mode-vi
+C-b ?  # Display a list of keyboard shortcuts:
+
+    tmux list-sessions
+    C-b w  # List windows
+    C-b s  # List sessions</code></pre>
 <h1 id="tips">Tips</h1>
-<p>tmux list-keys | grep &quot;send-keys -X cancel&quot;</p>
-<p>Reorder windows?</p>
-<pre><code>swap-window -s 3 -t 1
-swap-window -t 0
-move-window -t 0 #  In the unlikely case of having no window at index 0, do:
-bind-key T swap-window -t 0</code></pre>
-<p>================================================================================</p>
+<ul>
+<li><p>Rename window</p>
+<p>bind-key + , set-window-option -g automatic-rename off</p></li>
+<li><p>Rename Session</p>
+<p>Ctrl-b $ (tmux|ctrl-b :) rename-session -t current-name new-name</p></li>
+<li><p>tmux list-keys | grep “send-keys -X cancel”</p></li>
+<li><p>Reorder windows?</p>
+<p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0 # In the unlikely case of having no window at index 0, do: bind-key T swap-window -t 0</p></li>
+</ul>
 <h1 id="tmux-cheat-sheet">tmux cheat sheet</h1>
 <p>(C-x means ctrl+x, M-x means alt+x)</p>
-<h2 id="getting-help">Getting help</h2>
-<p>Display a list of keyboard shortcuts:</p>
-<pre><code>C-a ?</code></pre>
-<p>Navigate using Vim or Emacs shortcuts, depending on the value of <code>mode-keys</code>. Emacs is the default, and if you want Vim shortcuts for help and copy modes (e.g. j, k, C-u, C-d), add the following line to <code>~/.tmux.conf</code>:</p>
-<pre><code>setw -g mode-keys vi</code></pre>
-<p>Any command mentioned in this list can be executed as <code>tmux something</code> or <code>C-a :something</code> (or added to <code>~/.tmux.conf</code>).</p>
 <h2 id="prefix-key">Prefix key</h2>
 <p>The default prefix is C-b. If you (or your muscle memory) prefer C-a, you need to add this to <code>~/.tmux.conf</code>:</p>
 <pre><code># remap prefix to Control + a
@@ -35,50 +48,43 @@ set -g prefix C-a
 # bind &#39;C-a C-a&#39; to type &#39;C-a&#39;
 bind C-a send-prefix
 unbind C-b</code></pre>
-<p>I'm going to assume that C-a is your prefix.</p>
+<p>I’m going to assume that C-a is your prefix.</p>
+<p>Navigate using Vim or Emacs shortcuts, depending on the value of <code>mode-keys</code>. Emacs is the default, and if you want Vim shortcuts for help and copy modes (e.g. j, k, C-u, C-d), add the following line to <code>~/.tmux.conf</code>:</p>
+<pre><code>setw -g mode-keys vi</code></pre>
+<p>Any command mentioned in this list can be executed as <code>tmux something</code> or <code>C-a :something</code> (or added to <code>~/.tmux.conf</code>).</p>
+<h2 id="copy-mode">Copy mode</h2>
+<pre><code>    bind-key -T copy-mode-vi &#39;v&#39; send -X begin-selection
+    bind-key -T copy-mode-vi &#39;y&#39; send -X copy-selection-and-cancel
+    &lt;C-b&gt; =  # show the yank ring</code></pre>
 <h2 id="sessions-windows-panes">Sessions, windows, panes</h2>
 <p>Session is a set of windows, plus a notion of which window is current.</p>
 <p>Window is a single screen covered with panes. (Once might compare it to a ‘virtual desktop’ or a ‘space’.)</p>
-<p>Pane is a rectangular part of a window that runs a specific command, e.g. a shell.</p>
+<p>Pane is a rectangular part of a window that runs a specific command, e.g. a shell.</p>
 <p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0 bind-key T swap-window -t 0 bind-key -n C-S-Left swap-window -t -1 bind-key -n C-S-Right swap-window -t +1</p>
 <h2 id="sessions">Sessions</h2>
-<p>Creating a session:</p>
-<pre><code>tmux new[-session] -s work</code></pre>
-<p>Create a new session that shares all windows with an existing session, but has its own separate notion of which window is current:</p>
-<pre><code>tmux new-session -s work2 -t work</code></pre>
-<p>Attach to a session:</p>
-<pre><code>tmux attach -t work</code></pre>
-<p>Detach from a session: <code>C-a d</code>.</p>
-<p>Kill session</p>
-<pre><code>tmux kill-session -t mysession      # Kill my session
-tmux kill-session -a                # Kill all sessions
-tmux kill-session -a -t mysession   # Kill all sessions but the current</code></pre>
-<p>Switch between sessions:</p>
-<pre><code>C-a (          previous session
-C-a )          next session
-C-a L          ‘last’ (previously used) session
-C-a s          choose a session from a list</code></pre>
-<p>Other:</p>
-<pre><code>C-a $          rename the current session</code></pre>
+<ul>
+<li><p>Where am I | I go</p>
+<p>session=whatever window=<span class="math inline"><em>s</em><em>e</em><em>s</em><em>s</em><em>i</em><em>o</em><em>n</em> : 0<em>p</em><em>a</em><em>n</em><em>e</em>=</span>{window}.4 tmux send-keys -t “<span class="math inline">$pane&quot; C-z 'some -new command' Enter  tmux select-pane -t &quot;$</span>pane” tmux select-window -t “<span class="math inline">$window&quot;  tmux attach-session -t &quot;$</span>session”</p></li>
+<li><p>Creating a session:</p>
+<p>tmux new[-session] -s work</p></li>
+<li><p>Create a new session that shares all windows with an existing session, but has its own separate notion of which window is current:</p>
+<p>tmux new-session -s work2 -t work</p></li>
+<li><p>Attach to a session:</p>
+<p>tmux attach -t work</p></li>
+<li><p>Detach from a session: <code>C-a d</code>.</p></li>
+<li><p>Kill session</p>
+<p>tmux kill-session -t mysession # Kill my session tmux kill-session -a # Kill all sessions tmux kill-session -a -t mysession # Kill all sessions but the current</p></li>
+<li><p>Switch between sessions: C-a ( previous session C-a ) next session C-a L ‘last’ (previously used) session C-a s choose a session from a list</p></li>
+<li><p>Other: C-a $ rename the current session</p></li>
+</ul>
 <h2 id="windows">Windows</h2>
-<p>Create a window:</p>
-<pre><code>C-a c          create a new window</code></pre>
-<p>Switch between windows:</p>
-<pre><code>C-a 0 ... 9    switch to window 0, ..., 9
-C-a p          previous window
-C-a n          next window
-C-a l          ‘last’ (previously used) window
-C-a w          choose window from a list</code></pre>
-<p>Switch between windows with a twist:</p>
-<pre><code>C-a M-n        next window with a bell, activity or
-               content alert
-C-a M-p        previous such window</code></pre>
-<p>Rename, Kill:</p>
-<pre><code>C-a ,          rename the current window
-C-a &amp;          kill the current window</code></pre>
-<p>Reorder (from commmands)</p>
-<pre><code>:swap-window -s 2 -t 1    # Reorder window, swap window number 2(src) and 1(dst)
-:swap-window -t -1        # Move current window to the left by one position</code></pre>
+<ul>
+<li><p><strong>Create</strong> a window: C-a c create a new window</p></li>
+<li><p><strong>Switch</strong> between windows: C-a 0 … 9 switch to window 0, …, 9 C-a p previous window C-a n next window C-a l ‘last’ (previously used) window C-a w choose window from a list C-a M-n next window with a bell, activity or content alert C-a M-p previous such window</p></li>
+<li><p><strong>Rename</strong>, <strong>Kill</strong>: C-a , rename the current window C-a &amp; kill the current window</p></li>
+<li><p><strong>Reorder</strong> (from commmands)</p>
+<p>:swap-window -s 2 -t 1 # Reorder window, swap window number 2(src) and 1(dst) :swap-window -t -1 # Move current window to the left by one position</p></li>
+</ul>
 <h2 id="managing-split-panes">Managing split panes</h2>
 <p><strong>Split</strong>: Creating a new pane by splitting an existing one:</p>
 <pre><code>C-a &quot;          split vertically (top/bottom)
@@ -135,7 +141,7 @@ C-a space      switch to the next layout</code></pre>
 <p><strong>Other</strong>:</p>
 <pre><code>C-a x          kill the current pane
 C-a q          display pane numbers for a short while</code></pre>
-<h2 id="copy-mode">Copy mode</h2>
+<h2 id="copy-mode-1">Copy mode</h2>
 <p>:setw -g mode-keys vi # use vi keys in buffer</p>
 <pre><code>Function                vi             emacs
 Back to indentation     ^              M-m
@@ -184,24 +190,24 @@ Enter                    # Copy selection</code></pre>
 :save-buffer buf.txt     # Save buffer contents to buf.txt
 :delete-buffer -b 1      # delete buffer_1</code></pre>
 <h2 id="other-config-file-settings">Other config file settings</h2>
-<p>Force a reload of the config file on C-a r:</p>
-<pre><code>unbind r
-bind r source-file ~/.tmux.conf</code></pre>
-<p>Some other settings that I use:</p>
-<pre><code>setw -g xterm-keys on</code></pre>
+<p>Force a reload of the config file on C-a r: unbind r bind r source-file ~/.tmux.conf</p>
+<p>Some other settings that I use: setw -g xterm-keys on</p>
 <h3 id="tmux.conf">.tmux.conf</h3>
-<p>set-option -g allow-rename off set -g status-bg cyan set-option -g prefix C-a unbind C-b</p>
+<pre><code>set-option -g allow-rename off
+set -g status-bg cyan
+set-option -g prefix C-a
+unbind C-b </code></pre>
 <h1 id="key-bindings-other-cheat">key bindings (other cheat)</h1>
 <p>tmux may be controlled from an attached client by using a key combination of a prefix key, ‘C-b’ (Ctrl-b) by default, followed by a command key.</p>
 <ul>
-<li><h2 id="list-all-key-bindings.">? List all key bindings.</h2></li>
-<li>tmux new -s name_instance --&gt; new session called “name_instance”.</li>
+<li><p>? List all key bindings.</p></li>
+<li>tmux new -s name_instance –&gt; new session called “name_instance”.</li>
 <li>d detach from the tmux session.</li>
-<li>tmux ls --&gt; list existing tmux sessions.</li>
-<li>tmux new -s name_instance_two -d --&gt; new session instance in the background.</li>
-<li>tmux attach --&gt; if we only have one session running.</li>
-<li>tmux attach -t name_instance--&gt; attach to the session name_instance.</li>
-<li><h2 id="tmux-kill-session--t-name_instance----killing-sessions">tmux kill-session -t name_instance --&gt; killing sessions</h2></li>
+<li>tmux ls –&gt; list existing tmux sessions.</li>
+<li>tmux new -s name_instance_two -d –&gt; new session instance in the background.</li>
+<li>tmux attach –&gt; if we only have one session running.</li>
+<li>tmux attach -t name_instance–&gt; attach to the session name_instance.</li>
+<li><p>tmux kill-session -t name_instance –&gt; killing sessions</p></li>
 <li>[ enter copy mode and move the cursor to where we want to start selecting text.</li>
 <li>SPACE and move the cursor to the end of the text and press ENTER (the selected text gets copied into a paste buffer)</li>
 <li>] paste the contents we just capture (the current buffer)</li>
@@ -216,7 +222,7 @@ bind r source-file ~/.tmux.conf</code></pre>
 <li>g Jumps to the top of the buffer.</li>
 <li>G Jumps to the bottom of the buffer.</li>
 <li>? Starts a search backward through the buffer.</li>
-<li><h2 id="starts-a-search-forward-through-the-buffer.">/ Starts a search forward through the buffer.</h2></li>
+<li><p>/ Starts a search forward through the buffer.</p></li>
 <li>&quot; Split the current pane into two, top and bottom.</li>
 <li>% Split the current pane into two, left and right.</li>
 <li>o Select the next pane in the current window.</li>
@@ -226,13 +232,13 @@ bind r source-file ~/.tmux.conf</code></pre>
 <li>; Move to the previously active pane.</li>
 <li>q Briefly display pane indexes.</li>
 <li>{ Swap the current pane with the previous pane.</li>
-<li><h2 id="swap-the-current-pane-with-the-next-pane.">} Swap the current pane with the next pane.</h2></li>
+<li><p>} Swap the current pane with the next pane.</p></li>
 <li>$ Rename the current session.</li>
 <li>tmux new -s &lt;session-name&gt; (if you get some error related to $TMUX us this command - TMUX= tmux new-session -s &lt;session-name&gt;)</li>
 <li>d Detach from the current session.</li>
 <li>tmux list-sessions | tmux ls</li>
 <li>tmux attach -t &lt;session-name&gt; re-attach a session</li>
-<li><h2 id="tmux-kill-session--t-session-name">tmux kill-session -t &lt;session-name&gt;</h2></li>
+<li><p>tmux kill-session -t &lt;session-name&gt;</p></li>
 <li>c Create a new window.</li>
 <li>, Rename the current window.</li>
 <li>w Choose from a list of windows interactively.</li>
@@ -240,10 +246,10 @@ bind r source-file ~/.tmux.conf</code></pre>
 <li>n Change to the next window.</li>
 <li>p Change to the previous window.</li>
 <li>&amp; Kill the current window.</li>
-<li>' Prompt for a window index to select.</li>
+<li>’ Prompt for a window index to select.</li>
 <li>f Prompt to search for text in open windows.</li>
 <li>i Display some information about the current window.</li>
-<li><h2 id="to-9-select-windows-0-to-9.">0 to 9 Select windows 0 to 9.</h2></li>
+<li><p>0 to 9 Select windows 0 to 9.</p></li>
 <li>: Enter the tmux command prompt.</li>
 <li>C-b Send the prefix key (C-b) through to the application.</li>
 <li>C-z Suspend the tmux client.</li>
@@ -272,7 +278,7 @@ bind r source-file ~/.tmux.conf</code></pre>
 <li>M-o Rotate the panes in the current window backwards.</li>
 <li>M-p Move to the previous window with a bell or activity marker.</li>
 <li>C-Up, C-Down, C-Left, C-Right Resize the current pane in steps of one cell.</li>
-<li>M-Up, M-Down, M-Left, M-Right Resize the current pane in steps of five cells.</li>
+<li><p>M-Up, M-Down, M-Left, M-Right Resize the current pane in steps of five cells.</p></li>
 </ul>
 <p>Key bindings may be changed with the bind-key and unbind-key commands.</p>
 </body>

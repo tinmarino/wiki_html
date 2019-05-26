@@ -1,12 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <p><em>v-eclim.txt</em> Eclim shortcuts, maps, tips (todo merge with scirpt)</p>
@@ -21,25 +26,22 @@
 <p>=============================================================================== Appearance ~</p>
 <hr />
 <p>The <em>v-statusline</em> option</p>
-<p>This is a line at the bottom to get hud text. The ruler is supperposed to the statusline. If you want to play with it, first run &gt;vim set noruler set laststatus=2 <vim
-Then you can see what you are doing.
-
-For a *default-statusline* you can take this one 
->vim :set statusline=%&lt;%f %h%m%r %y%=%{v:register} %-14.(%l,%c%V%) %P <vim
+<p>This is a line at the bottom to get hud text. The ruler is supperposed to the statusline. If you want to play with it, first run &gt;vim set noruler set laststatus=2 &lt;vim Then you can see what you are doing.</p>
+<p>For a <em>default-statusline</em> you can take this one &gt;vim :set statusline=%&lt;%f %h%m%r %y%=%{v:register} %-14.(%l,%c%V%) %P <vim
 You can also change ruler with 
 >vim :set rulerformat=%-14.(%l,%c%V%) %P <vim
 > hi User2 ctermbg=red ctermfg=blue guibg=red guifg=blue hi User1 ctermbg=green ctermfg=red guibg=green guifg=red hi User3 ctermbg=blue ctermfg=green guibg=blue guifg=green</p>
-<p>set statusline= set statusline+=%1* &quot;switch to User1 highlight set statusline+=%F &quot;full filename set statusline+=%2* &quot;switch to User2 highlight set statusline+=%y &quot;filetype set statusline+=%3* &quot;switch to User3 highlight set statusline+=%l &quot;line number set statusline+=%* &quot;switch back to statusline highlight set statusline+=%P &quot;percentage thru file &lt;</p>
+<p>set statusline= set statusline+=%1* “switch to User1 highlight set statusline+=%F”full filename set statusline+=%2* “switch to User2 highlight set statusline+=%y”filetype set statusline+=%3* “switch to User3 highlight set statusline+=%l”line number set statusline+=%* “switch back to statusline highlight set statusline+=%P”percentage thru file &lt;</p>
 <p>vim: ft=myhelp:set modificable</p>
 <p><em>v-help.txt</em> How to add custom help, like myself</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Add |v-help-add|</li>
 <li>Syntax |v-help-syntax|</li>
 <li>Browse |v-help-browse|</li>
 </ol>
 <p>=============================================================================== <em>v-help-add</em> Add Help ~</p>
 <p>In my runtime folder (ex ~/.vim/), in a doc folder I have many help files with documentation. They must be in a runtimepath/doc and not in a nested directory there.</p>
-<p>The Filename must start with the type and the tags are in separated with '#'</p>
+<p>The Filename must start with the type and the tags are in separated with ‘#’</p>
 <p>The first line of the file can contains a tag and it will then be added to the local-addtions help file (see :h local-addtions)</p>
 <p>Dont forget to run helptags ./ in the current dir (doc) or just :Helptags for all pathogen stuff for the tags to be generated. Then the command :h will search them in a runtimepath/doc folder</p>
 <p>=============================================================================== <em>v-help-syntax</em> Help Syntax ~</p>
@@ -53,11 +55,11 @@ You can also change ruler with
 <p>vim :tag v#help :h v#help &lt;vim</p>
 </blockquote>
 <p>vim: ft=myhelp</p>
-<p><em>v-map.txt</em> Maps I don't wanna put in my vimrc</p>
+<p><em>v-map.txt</em> Maps I don’t wanna put in my vimrc</p>
 <blockquote>
 <p>vim :nmap Display normal mode maps :imap Display insert mode maps :vmap Display visual and select mode maps :smap Display select mode maps :xmap Display visual mode maps :cmap Display command-line mode maps :omap Display operator pending mode maps :nmapclear Clear all normal mode maps &lt;vim</p>
 </blockquote>
-<p>&quot;insert the directory name of the current buffer: :inoremap <F2> <C-R>=expand('%:p:h')<CR></p>
+<p>&quot;insert the directory name of the current buffer: :inoremap <F2> <C-R>=expand(‘%:p:h’)<CR></p>
 <p>&quot; For when you forget to sudo.. Really Write the file. cmap w!! w !sudo tee % &gt;/dev/null</p>
 <p>&quot; visual shifting (does not exit Visual mode) vnoremap &lt; <gv
 vnoremap > &gt;gv</p>
@@ -65,11 +67,11 @@ vnoremap > &gt;gv</p>
 <p>vim: ft=myhelp</p>
 <p><em>v-stack.txt</em> Drop shit here, git and move it then</p>
 <p>=============================================================================== Stack ~</p>
-<p>&quot; file is large from 10mb let g:LargeFile = 1024 * 1024 * 10 augroup LargeFile autocmd BufReadPre * let f=getfsize(expand(&quot;<afile>&quot;)) | if f &gt; g:LargeFile || f == -2 | call LargeFile() | endif augroup END</p>
-<p>function LargeFile() &quot; no syntax highlighting etc set eventignore+=FileType &quot; save memory when other file is viewed setlocal bufhidden=unload &quot; is read-only (write with :w new_filename) setlocal buftype=nowrite &quot; no undo possible setlocal undolevels=-1 &quot; display message autocmd VimEnter * echo &quot;The file is larger than &quot; . (g:LargeFile / 1024 / 1024) . &quot; MB, so some options are changed (see .vimrc for details).&quot; endfunction</p>
+<p>&quot; file is large from 10mb let g:LargeFile = 1024 * 1024 * 10 augroup LargeFile autocmd BufReadPre * let f=getfsize(expand(“<afile>”)) | if f &gt; g:LargeFile || f == -2 | call LargeFile() | endif augroup END</p>
+<p>function LargeFile() &quot; no syntax highlighting etc set eventignore+=FileType &quot; save memory when other file is viewed setlocal bufhidden=unload &quot; is read-only (write with :w new_filename) setlocal buftype=nowrite &quot; no undo possible setlocal undolevels=-1 &quot; display message autocmd VimEnter * echo “The file is larger than” . (g:LargeFile / 1024 / 1024) . &quot; MB, so some options are changed (see .vimrc for details).&quot; endfunction</p>
 <p>Ctrl+a Increment number under the cursor Ctrl+x Decrement number under cursor ggVGg? Change text to Rot13 g~~ Invert case ggguG Set all text to lowercase</p>
 <p>=============================================================================== <em>v-os</em> Os ~</p>
-<p>ftype code=&quot;C:.exe&quot; --remote-tab-silent &quot;%1&quot; assoc .py code # if you don't know to what python is asso type &quot;assoc .py&quot;</p>
+<p>ftype code=“C:.exe” –remote-tab-silent “%1” assoc .py code # if you don’t know to what python is asso type “assoc .py”</p>
 <p>:oldfiles :browse oldfiles</p>
 <pre><code>    set nrformats=
 :e ++ff=unix

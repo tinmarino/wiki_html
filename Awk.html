@@ -1,19 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Awk</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Awk</h1>
-</div>
+</header>
+<h1 id="tips">Tips</h1>
+<ul>
+<li><p>Print part of each line</p>
+<p>awk ‘{print substr($0, 2, 6)’} file.txt</p></li>
+</ul>
 <h1 id="usage">USAGE</h1>
-<p>awk [ - v var=val ] 'program' [file1 file2...] <br> awk [ - v var=val ] 'program' [file1 file2...]</p>
+<p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ] ‘program’ [file1 file2…]</p>
 <h3 id="structure-of-an-awk-program">Structure of an awk program</h3>
 <pre><code># comments
 pattern { action }  A sequence of pattern-action statements
@@ -22,15 +32,15 @@ pattern { action }</code></pre>
    For each input line,
       For each pattern,
          If pattern matches input line, do the action.</code></pre>
-<h3 id="pattern">&quot;pattern&quot;</h3>
+<h3 id="pattern">“pattern”</h3>
 <p>BEGIN :executes “action” before starting to view the input file <br> END :executes “action” after ending to view the input file <br> Other :regular, numeric or string expression or combination <br></p>
-<h3 id="action-is-executable-code">&quot;action&quot; is executable code</h3>
+<h3 id="action-is-executable-code">“action” is executable code</h3>
 <p>if (expression) statement1 else statement2 <br> while (expression) statement <br> for (expr1;expr2;expr3) statement <br> do statement while (expression) <br> break / continue :immediately leave / start next iteration of innermost enclosing loop <br> exit / exit expression : go immediately to the END action; if within the END action, exit program <br></p>
 <h1 id="built-in-variables">BUILT-IN VARIABLES</h1>
 <table>
 <colgroup>
-<col width="21%" />
-<col width="78%" />
+<col style="width: 20%" />
+<col style="width: 79%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -44,8 +54,8 @@ pattern { action }</code></pre>
 <td>Whole line,</td>
 </tr>
 <tr class="even">
-<td>$1, $2 ... $NF</td>
-<td>first, second... last field</td>
+<td>$1, $2 … $NF</td>
+<td>first, second… last field</td>
 </tr>
 <tr class="odd">
 <td>ARGC</td>
@@ -85,7 +95,7 @@ pattern { action }</code></pre>
 </tr>
 <tr class="even">
 <td>SUBSEP</td>
-<td>Subscript separator (default: 34)</td>
+<td>Subscript separator (default: \034)</td>
 </tr>
 </tbody>
 </table>
@@ -212,7 +222,7 @@ pattern { action }</code></pre>
 </tbody>
 </table>
 <h1 id="formatted-output">FORMATTED OUTPUT</h1>
-<p>{ printf (“FORMAT”,value1,value2,value3,...) }</p>
+<p>{ printf (“FORMAT”,value1,value2,value3,…) }</p>
 <table>
 <tbody>
 <tr class="odd">

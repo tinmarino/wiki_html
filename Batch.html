@@ -1,21 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <ul>
-<li><p>Get pid title=mycmd tasklist /v /fo csv | findstr /i &quot;mycmd&quot;</p></li>
+<li><p>Cmd</p>
+<p>cmd /c “echo toto” &amp; rem run comand and dye cmd /k “echo toto” &amp; rem run comand and survive</p></li>
+<li><p>Loop</p>
+<p>for /r %i in (*) do echo %i for /l %x in (1,1,100) do echo %x</p></li>
+<li><p>Delete DNS cache</p>
+<p>ipconfig /flushdns</p></li>
+<li><p>Comment</p>
+<p>rem this do nothing echo toto &amp; rem this will nto be displayed echo toto &amp; :: also that</p></li>
+<li><p>Display file content # Same as cat (unix)</p>
+<p>type file.txt more file.txt</p></li>
+<li><p>Filetype association</p>
+<p>assoc .pl=Perl ftype Perl=“C:.exe” “%1” %* ftype Python=“gvim.exe” –remote-tab-slient “%1” assoc .py Python assoc .py # To print what is associated with this filetype</p></li>
+<li><p>Path extension (add .pl as executable files)</p>
+<p>set PATHEXT=%PATHEXT%;.pl set PATHEXT=%PATHEXT%;. # Add empty extension to executables</p></li>
+<li><p>Shellbang</p>
+<p>assoc .=shebangfile ftype shebangfile=shebang.bat “%1” %* set PATHEXT=%PATHEXT%;. TODO : get shellbang file from whitescreen nicolas windows shelbangs</p>
+<p>echo &quot;@%*&quot; &gt; env.bat</p></li>
+<li><p>Get MD5 certUtil -hashfile example.zip MD5</p></li>
+<li><p>Get pid title=mycmd tasklist /v /fo csv | findstr /i “mycmd”</p></li>
 <li><code>start</code>
 <ul>
-<li><code>/B</code> In background -&gt; Like echo &quot;aezaz&quot; &amp;</li>
+<li><code>/B</code> In background -&gt; Like echo “aezaz” &amp;</li>
 </ul></li>
-<li><p><code>type c.txt</code> # Same as cat (unix)</p></li>
 <li><code>set /a result=(100*x)/y</code>
 <ul>
 <li><code>/a</code> for automatic substitution so you can use x instead of %x%</li>
@@ -24,6 +46,11 @@
 <li></li>
 </ul></li>
 <li><p>windbg -k com:pipe,port=\.4,resets=0,baud=115200 -y Z:</p></li>
+<li>FINDSTR
+<ul>
+<li><code>findstr /I /S &quot;Search text&quot; *.*</code></li>
+<li><code>findstr /S /I /M /C:&quot;togrep&quot; *.dll</code></li>
+</ul></li>
 <li><p>Fork Bomb</p></li>
 <li><p><code>%0|%0</code> :s start %0 goto :s</p></li>
 </ul>
@@ -43,8 +70,7 @@
 <code>subst</code> Substitute a folder on your computer for another drive letter.<br />
 <code>start</code> Start a separate window in Windows from the MS-DOS prompt.<br />
 <code>sort</code> Sorts the input and displays the output to the screen.<br />
-<code>shutdown</code> Shutdown the computer from the MS-DOS prompt.<br />
-<code>shift</code> Changes the position of replaceable parameters in a batch program.<br />
+<code>shutdown</code> Shutdown the computer from the MS-DOS prompt. * <code>/h /f</code> to hibernate <code>shift</code> Changes the position of replaceable parameters in a batch program.<br />
 <code>share</code> Installs support for file sharing and locking capabilities.<br />
 <code>setver</code> Change MS-DOS version to trick older MS-DOS programs.<br />
 <code>setlocal</code> Enables local environments to be changed without affecting anything else.<br />
@@ -105,7 +131,7 @@
 <code>erase</code> Erase files from computer.<br />
 <code>exit</code> Exit from the command interpreter.<br />
 <code>mkdir</code> Command to create a new directory.<br />
-<code>expand</code> Expand a Microsoft Windows file back to it's original format.<br />
+<code>expand</code> Expand a Microsoft Windows file back to it’s original format.<br />
 <code>extract</code> Extract files from the Microsoft Windows cabinetsfc Compare filesfdisk Utility used to create partitions on the hard drivefind Search for text within a file.<br />
 <code>findstr</code> Searches for a string of text within a file.<br />
 <code>fixboot</code> Writes a new boot sector.<br />

@@ -1,31 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Vim Tips</title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
-<div id="header">
+<header>
 <h1 class="title">Vim Tips</h1>
-</div>
+</header>
+<pre class="vim"><code>\(External.*\)\@&lt;!mem</code></pre>
 <ul>
+<li>Random, Sort, Shuffle
+<ul>
+<li>Random shuffle :10,20!shuf<CR> func Random() return reltimestr(reltime())[-2:] endfunc %s/^/=Random() . &quot;&quot;/|sort n|%s/^//</li>
+</ul></li>
+<li><p>Remote</p>
+<p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
+<li><p>File format</p></li>
+<li><code>:e ++ff=unix</code></li>
+<li><code>:w ++ff=dos</code></li>
+<li><p><code>%s/\r\n/</code></p></li>
+<li><p>Buffer</p></li>
+<li><p><code>:b *.java&lt;c-d&gt;</code> : list buffer names matching regex</p></li>
+<li><p>Pipeline</p></li>
+<li><code>echo toto | vim -</code> : take arguments from stdin</li>
+<li><code>echo foo | vim -e '+%print' '+q!' /dev/stdin</code> : exmode to not consume stdin and not clear output on quit</li>
+<li><code>vim &lt;(echo toto)</code> : process substitution command (BaSh)</li>
+<li><p><code>:w !tee</code> : write to stdout</p></li>
 <li><p>Script : Get filetype of a buffer</p></li>
 <li><p><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></p></li>
-<li>Substitute without escaping the replcement</li>
+<li>Substitute without escaping the replcement
+<ul>
 <li><code>:%sno/search_string/replace_string/g</code></li>
-<li><p><code>:s/&lt;/\='&amp;lt;'/g</code></p></li>
-<li>Delete everything except text</li>
+<li><code>:s/&lt;/\='&amp;lt;'/g</code></li>
+</ul></li>
+<li>Delete everything except text
+<ul>
 <li><code>:%s/\(^\|\(text\)\@&lt;=\).\{-}\($\|text\)\@=//g</code></li>
 <li><pre><code>\(^\|\(text\)\@&lt;=\)     # means start of line, or some point preceded by “text”
 .\{-}                   # as few characters as possible
 \($\|text\)\@=          # without globbing characters, checking that we reached either end of line or occurrence of “text”.</code></pre></li>
 <li><p>Another way to do it:</p></li>
 <li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
-<li><p>Use: :%s/.*/=repeat('text', matchcount('text', submatch(0)))</p></li>
+<li><p>Use: :%s/.*/=repeat(‘text’, matchcount(‘text’, submatch(0)))</p></li>
+</ul></li>
 <li><p>Find where root runtime is</p></li>
 <li><p><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></p></li>
 <li><p>Source autoload file</p></li>
@@ -33,9 +60,48 @@
 <li><p>Find where a map has been defined (in which script)</p></li>
 <li><p><code>:verbose map &lt;c-z&gt;</code></p></li>
 <li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
+<li><p>Remember manual folds</p></li>
+<li><code>au BufWinLeave ?*mkview</code></li>
+<li><p><code>au BufWinEnter ?* silent loadview</code></p></li>
 </ul>
 <p>Vim can browse tar and zip archives uppercase maps to jump between files Read vimcast of drew neil and tim pope</p>
-<p>:b#|bd#</p>
+<h1 id="advanced-commands">Advanced commands</h1>
+<pre><code>
+# Moving
+( | )                   # Jump backward | forward one sentence
+{ | }                   # Jump backward | forward one paragraph
+_ | ^                   # Move to the first non-blank
+&#39;.                      # Jump to last modificated line
+
+# Edit
+T,c,                    # Delete between coma
+
+# Display
+ga                      # Show as Ascii
+g8                      # Show as Unicode (:h character-class)
+8g8                     # Detect invalid utf8 characters
+zl, zh, zL, zH          # Scrool horizontally
+
+# Folding
+zc, zC | zo, zO         # Close | Open [nested] folds
+zr | zm                 # Reduce | increase foldlevel (think restore, mask)
+zg | zk
+zx | zv
+zf&#39;a | zf               # Fold from here 
+zj | zk                 # Move between folds
+[z | ]z                 # Goto begining | end of fold
+
+# Commands
+:@&quot;                     # Execute what is yanked
+/\%xYY                  # YY hex ord(ascii)
+/\%uYYYY                # YYYYY hex ord(unicode)
+:args * .* **/{*, .*}   # Add all file to buffers
+:b#|bd#
+
+</code></pre>
+<h1 id="easy-commands">Easy commands</h1>
+<pre><code>ma                      Mark a
+&#39;a                      Goto mark a</code></pre>
 <pre><code>:wall # save all 
 cd %:p:h
 
@@ -62,8 +128,7 @@ CTRL-\ CTRL-N command to go to normal mode. I
     :find 
     :e **/test/Suite.java
     :r! find . -type f</code></pre>
-<p>q: q/ :<c-f> :%normal <span class="citation">@a</span> &quot; Execute a on all lines :%s//@=0 &quot; REplace last search by last yanked &amp; &quot; Repeat last s on this line g&amp; &quot; repeat last s on all lines :g/*{/ .+1,/-1 sort &quot; Sort lines between { and } :saveas := &quot; print last line number :echo expand('<sfile>') &quot; print file of script :syntax sync fromstart &quot; REdraw syntax :b#|bd# &quot; Delete buffer, not window</p>
-<p>vim --servername DEMO vim --servername DEMO --remote file.txt vim --servername DEMO --remote-send &quot;:3d<CR>&quot;</p>
+<p>q: q/ :<c-f> :%normal <span class="citation" data-cites="a">@a</span> &quot; Execute a on all lines :%s//@=0 &quot; REplace last search by last yanked &amp; &quot; Repeat last s on this line g&amp; &quot; repeat last s on all lines :g/*{/ .+1,/-1 sort &quot; Sort lines between { and } :saveas := &quot; print last line number :echo expand(‘<sfile>’) &quot; print file of script :syntax sync fromstart &quot; REdraw syntax :b#|bd# &quot; Delete buffer, not window</p>
 <p>g,g; gi</p>
 <p>gJ join lone without space g- g+ for older newer changes ga Show char hex g<em>, g# Smae as </em>, # but without delimiters gq Filter via formatprg X Delete char before</p>
 <p><c-g> Print filename K See documentation</p>
@@ -73,14 +138,14 @@ CTRL-\ CTRL-N command to go to normal mode. I
 <p><c-x> <c-f> # for filname completion</p>
 <p>gUgU or gUU # duplicate operator on whole line</p>
 <blockquote>
-<p>G # increase indentation until the end of file f+s + <Esc>;.;.;. # remplace &quot;+&quot; par &quot; + &quot; 180<C-a>k.k.k. # add 180 to all</p>
+<p>G # increase indentation until the end of file f+s + <Esc>;.;.;. # remplace “+” par &quot; + &quot; 180<C-a>k.k.k. # add 180 to all</p>
 </blockquote>
 <p>INsret R # get in pelace made and stay in replace mode 80a-<esc> IN VISUAL o - move to other end of marked area O - move to other corner of block</p>
 <p>ga # show the hewa code for char</p>
 <p>:12,20&gt;&gt;&gt; indents lines 12 to 20 inclusive three times</p>
 <p>80a=<Esc> &quot; Create tje line :Sex | Split window and open integrated file explorer :e . | Open integrated file explorer</p>
 <p>= Indent operator</p>
-<p>:.,$normal <span class="citation">@q</span> To make macro on all lines</p>
+<p>:.,$normal <span class="citation" data-cites="q">@q</span> To make macro on all lines</p>
 <pre><code>:py print 2
 :version
 :h +feature-list

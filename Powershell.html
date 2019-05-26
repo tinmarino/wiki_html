@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<ul>
+<li><p>Remote Powershell</p>
+<ol type="1">
+<li>Guest :
+<ul>
+<li><code>Get-NetConectionProfile</code> : Get interface</li>
+<li><code>Set-NetConectionProfil -IntercaceIndex 9 -NetworkCategory Private</code> : Enable PS Remote</li>
+</ul></li>
+<li>Both : <code>Set-Item wsmon:\localhost\client\trustedhosts\ *</code> : Enable trust</li>
+<li>Both : <code>Restart-Service WimRM</code></li>
+<li>Host : <code>Test-WsMan COMPUTER</code></li>
+<li>Host : <code>Enter-PSSession -ComputerName COMPUTER -Credential USER</code></li>
+</ol></li>
+<li><p>Variable Afectation</p></li>
+<li><code>$a = ls 'HKLM:/Software/'</code></li>
+<li><p><code>$a[0].Property</code></p></li>
+<li><p>About</p></li>
+<li><p><code>[environment]::OSVersion.Version</code> : get os version (aparently :)</p></li>
+<li>Help
+<ul>
+<li>Get-Help Get-Item</li>
+<li>Get-Command | ?{ $_.Name -like “temp”} | select Name</li>
+</ul></li>
+<li>Comment
+<ul>
+<li><code># mycomment</code> Single line</li>
+<li><code>&lt;# mycomment #&gt;</code>multiline</li>
+</ul></li>
+<li>Enable scripts
+<ul>
+<li>set-executionpolicy remotesigned</li>
+</ul></li>
+<li>Script location
+<ul>
+<li>$PSScriptRoot</li>
+<li>split-path -parent $MyInvocation.MyCommand.Definition</li>
+</ul></li>
+<li>Load script
+<ul>
+<li>Import module myscript.pm1</li>
+<li>&amp; “C:Script with space.ps1”</li>
+<li>C:_without_spaces.ps1</li>
+</ul></li>
+<li>Last Error
+<ul>
+<li><code>$?</code> # True if last operation succeed</li>
+<li><code>$LastExitCode</code> # Exit code of last windows-based program that was run</li>
+</ul></li>
+<li>Environment
+<ul>
+<li>Get-ChildItem env:windir</li>
+</ul></li>
+<li>Random
+<ul>
+<li>Get-Random</li>
+</ul></li>
+<li>Find
+<ul>
+<li><code>ls -Recurse -Fiel | select *</code></li>
+</ul></li>
+</ul>
+</body>
+</html>

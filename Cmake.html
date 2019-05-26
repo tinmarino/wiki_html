@@ -1,16 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="style.css" type="text/css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
 <p><em>cmake</em> Cmake, C, Cpp Project builder</p>
-<pre><code>This help aims to explain some cmake commands lines, functions and
+<h1 id="cmake_cxx_flags">CMAKE_CXX_FLAGS</h1>
+<pre><code>if(CMAKE_CXX_FLAGS_DEBUG MATCHES &quot;/MD&quot;)
+    string(REGEX REPLACE &quot;/MD&quot; &quot;/MT&quot; CMAKE... CMAKE...)
+endif()
+
+This help aims to explain some cmake commands lines, functions and
 examples 
 
 For examples :   
@@ -23,25 +33,27 @@ Usually, I put 4 directories :
     build/  Contains the VS files and from here I compile 
     deps/   Out Lib, caintains external dependancies
     CMakeLists.txt With the rules of building</code></pre>
-<p>================================================================================ <em>mcmake-commands</em> cmake-commands ~ &gt;bash cd build cmake --build . --config release cmake .. -G &quot;NMake Makefiles&quot; # To create and nmake file dans build I can compile then with nmake nmake /help # in windows to get help <bash   
+<p>add_library add_executable add_test target_include_directory traget_compile_options project add_custom_command</p>
+<p>================================================================================ <em>mcmake-commands</em> cmake-commands ~ &gt;bash</p>
+<pre><code>cd build
+cmake --build . --config release
+cmake .. -G &quot;NMake Makefiles&quot; # To create and nmake file dans build I can compile then with nmake 
+nmake /help # in windows to get help 
+-DCMAKE_BUILD_TYPE=Relase</code></pre>
+<p>&lt;bash</p>
+<p>================================================================================ <em>mcmake-test</em> cmake-test ~</p>
+<pre><code>Test must return 0 in case of succes 
 
+enable_testing() 
+add_test(test mytest) 
+add_custom_command(TARGET mytest POST_BUILD COMMAND mytest ARGS arg1 arg2) # this will execute mytest after it is build  </code></pre>
+<p>================================================================================ <em>mcmake-stack</em> cmake-stack ~</p>
+<pre><code>cmake: fatal error cannot open x.lib or x.exp 
+    -&gt; use the __declspec(dllexport), because the dyanmic librairy
+    has no export
+    -&gt; See LoadLibrairy instead of target_link_librairies
 
-================================================================================
-                                                  *mcmake-test*
-cmake-test ~
-    Test must return 0 in case of succes 
-
-    enable_testing() 
-    add_test(test mytest) 
-    add_custom_command(TARGET mytest POST_BUILD COMMAND mytest ARGS arg1 arg2) # this will execute mytest after it is build  
-
-
-================================================================================
-                                                  *mcmake-stack*
-cmake-stack ~
-    cmake: fatal error cannot open x.lib or x.exp 
-        -> use the __declspec(dllexport), because the dyanmic librairy has no export -&gt; See LoadLibrairy instead of target_link_librairies</p>
-<pre><code>add_compile_options(-Wall) 
+add_compile_options(-Wall) 
 
 Cmake choose the config release or debug and archi. 
 Todo, change archi </code></pre>
