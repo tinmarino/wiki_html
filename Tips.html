@@ -19,6 +19,8 @@
 </header>
 <pre class="vim"><code>\(External.*\)\@&lt;!mem</code></pre>
 <ul>
+<li><p>Command stdout redirection</p>
+<p>:! # get last output redir <span class="citation" data-cites="a">@a</span> echo toto redir END let <span class="citation" data-cites="a">@a</span>=getcwd()</p></li>
 <li>Random, Sort, Shuffle
 <ul>
 <li>Random shuffle :10,20!shuf<CR> func Random() return reltimestr(reltime())[-2:] endfunc %s/^/=Random() . &quot;&quot;/|sort n|%s/^//</li>

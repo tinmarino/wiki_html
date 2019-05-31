@@ -25,6 +25,8 @@
 <li><code>git config --global credential.helper cache</code> : Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with:</li>
 <li><code>git config credential.helper store</code> : Stores permanently</li>
 <li><p>Note : While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the “home” directory). If you don’t like this, delete this file and switch to using the cache option.</p></li>
+<li><p>Submodules</p></li>
+<li><p>git submodule update –recursive –remote</p></li>
 <li><p>Display</p></li>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
 <li><code>git log --diff-filter=D --summary | grep delete</code></li>
