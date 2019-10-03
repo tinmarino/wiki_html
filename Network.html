@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Network.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<h1 id="unbound-dns-server">Unbound : DNS server</h1>
+<h2 id="unbound-files">Unbound files</h2>
+<ul>
+<li><code>/etc/hosts</code></li>
+<li><code>/etc/hostname</code></li>
+<li><code>/etc/resolv.conf</code> : fastly write : <code>nameserver 127.0.0.1</code></li>
+<li><code>/etc/network/interfaces</code></li>
+</ul>
+<h2 id="unbound-test">Unbound test</h2>
+<ul>
+<li><code>route add default gw 80.81.82.22</code></li>
+<li><code>unbound-checkconf /etc/unbound/unbound.conf</code></li>
+</ul>
+<h1 id="nginx-proxy">Nginx : proxy</h1>
+<h2 id="nginx-debug">Nginx debug</h2>
+<ul>
+<li><code>sudo /etc/init.d/apache2 stop</code> if impossible to bind to 443 or 80</li>
+</ul>
+</body>
+</html>

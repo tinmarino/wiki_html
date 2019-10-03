@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>BASH Bourne Again SHell</title>
+  <title>Bash.md – BASH Bourne Again SHell</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -14,7 +14,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -27,13 +27,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,6 +82,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <p><a href="Bash-Rc.html">Bash Rc</a></p>
 <ul>
+<li>Read file line by line
+<ul>
+<li>cat peptides.txt | while read line; do_something_with_$line_here; done</li>
+<li>while read p; do echo “$p” ; done &lt;peptides.txt</li>
+</ul></li>
 <li>Xterm change mouse cursor
 <ul>
 <li><code>printf '\033[6 q'</code>
@@ -97,52 +100,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>echo -e -n “1b[36 q” # changes to steady bar</li>
 </ul></li>
 </ul></li>
-<li><p>Remove all (including dot files)</p></li>
-<li><p><code>rm -rf .[^.] .??*</code></p></li>
-<li><p>Get filename and extension</p></li>
+<li>Remove all (including dot files)
+<ul>
+<li><code>rm -rf .[^.] .??*</code></li>
+</ul></li>
+<li>Get filename and extension
+<ul>
 <li><code>filename=$(basename -- &quot;$fullfile&quot;)</code></li>
 <li><code>extension=&quot;${filename##*.}&quot;</code></li>
-<li><p><code>filename=&quot;${filename%.*}&quot;</code></p></li>
-<li><p>Get source directory of a script</p></li>
+<li><code>filename=&quot;${filename%.*}&quot;</code></li>
+</ul></li>
+<li>Get source directory of a script
+<ul>
 <li><code>DIR=&quot;$( cd &quot;$( dirname &quot;${BASH_SOURCE[0]}&quot; )&quot; &gt;/dev/null &amp;&amp; pwd )&quot;</code></li>
 <li><code>dirname $0</code></li>
-<li><p><code>dirname &quot;$(readlink -f &quot;$0&quot;)&quot;</code></p></li>
+<li><code>dirname &quot;$(readlink -f &quot;$0&quot;)&quot;</code></li>
+</ul></li>
 <li><p>Faster redirect to null <code>| :</code> instead of <code>&gt; /dev/null</code></p></li>
-<li><p>Center text (read ~/Bin/hi.sh)</p></li>
-<li><div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="va">title=</span><span class="st">&quot;El terminal de la Ponette&quot;</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">printf</span> <span class="st">&quot;%*s\n&quot;</span> <span class="va">$((</span> ( <span class="va">${#title}</span> + <span class="va">$columns</span> ) / 2  <span class="va">))</span> <span class="st">&quot;</span><span class="va">$title</span><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">do</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">        <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$line</span><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">jobs</span><span class="op">)</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span>  ; <span class="kw">do</span> <span class="bu">echo</span> -e  <span class="st">&quot;ccaca </span><span class="va">$line</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">done</span><span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">echo</span> -e <span class="st">&quot;</span><span class="va">$toto</span><span class="st">&quot;</span><span class="op">)</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="va">lines=$(</span><span class="ex">tput</span> lines<span class="va">)</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="va">columns=$(</span><span class="ex">tput</span> cols<span class="va">)</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="va">IFS=</span><span class="st">&#39;&#39;</span> <span class="bu">read</span> -r -d <span class="st">&#39;&#39;</span> <span class="va">String</span> <span class="op">&lt;&lt;&quot;EOF&quot;</span></a>
-<a class="sourceLine" id="cb1-15" data-line-number="15">&lt;?xml version=&quot;1.0&quot; encoding=&#39;UTF-8&#39;?&gt;</a>
-<a class="sourceLine" id="cb1-16" data-line-number="16"> &lt;painting&gt;</a>
-<a class="sourceLine" id="cb1-17" data-line-number="17">     &lt;img src=&quot;madonna.jpg&quot; alt=&#39;Foligno Madonna, by Raphael&#39;/&gt;</a>
-<a class="sourceLine" id="cb1-18" data-line-number="18">     &lt;caption&gt;This is Raphael&#39;s &quot;Foligno&quot; Madonna, painted in</a>
-<a class="sourceLine" id="cb1-19" data-line-number="19">     &lt;date&gt;1511&lt;/date&gt;-&lt;date&gt;1512&lt;/date&gt;.&lt;/caption&gt;</a>
-<a class="sourceLine" id="cb1-20" data-line-number="20"> &lt;/painting&gt;</a>
-<a class="sourceLine" id="cb1-21" data-line-number="21">EOF</a>
-<a class="sourceLine" id="cb1-22" data-line-number="22">This will put your text into your variable without needing to escape the quotes. It will also handle unbalanced quotes (apostrophes, i.e. &#39;). Putting quotes around the sentinel (EOF) prevents the text from undergoing parameter expansion. The -d&#39;&#39; causes it to read multiple lines (ignore newlines). read is a Bash built-in so it doesn&#39;t require calling an external command such as cat.</a>
-<a class="sourceLine" id="cb1-23" data-line-number="23">And if you are using this multi-line String variable to write to a file, put the variable around &quot;QUOTES&quot; like echo &quot;${String}&quot; &gt; /tmp/multiline_file.txt or echo &quot;${String}&quot; | tee /tmp/multiline_file.txt. Took me more than an hour to find that.</a>
-<a class="sourceLine" id="cb1-24" data-line-number="24"># more there : https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</a></code></pre></div></li>
-<li><p>Fork bomb</p></li>
+<li>Center text (read ~/Bin/hi.sh)
+<ul>
+<li><div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="va">title=</span><span class="st">&quot;El terminal de la Ponette&quot;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="bu">printf</span> <span class="st">&quot;%*s\n&quot;</span> <span class="va">$((</span> ( <span class="va">${#title}</span> + <span class="va">$columns</span> ) / 2  <span class="va">))</span> <span class="st">&quot;</span><span class="va">$title</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">do</span></a>
+<a class="sourceLine" id="cb1-7" title="7">        <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$line</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">jobs</span><span class="op">)</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span>  ; <span class="kw">do</span> <span class="bu">echo</span> -e  <span class="st">&quot;ccaca </span><span class="va">$line</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">done</span><span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">echo</span> -e <span class="st">&quot;</span><span class="va">$toto</span><span class="st">&quot;</span><span class="op">)</span></a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="va">lines=$(</span><span class="ex">tput</span> lines<span class="va">)</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="va">columns=$(</span><span class="ex">tput</span> cols<span class="va">)</span></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="va">IFS=</span><span class="st">&#39;&#39;</span> <span class="bu">read</span> -r -d <span class="st">&#39;&#39;</span> <span class="va">String</span> <span class="op">&lt;&lt;&quot;EOF&quot;</span></a>
+<a class="sourceLine" id="cb1-15" title="15">&lt;?xml version=&quot;1.0&quot; encoding=&#39;UTF-8&#39;?&gt;</a>
+<a class="sourceLine" id="cb1-16" title="16"> &lt;painting&gt;</a>
+<a class="sourceLine" id="cb1-17" title="17">     &lt;img src=&quot;madonna.jpg&quot; alt=&#39;Foligno Madonna, by Raphael&#39;/&gt;</a>
+<a class="sourceLine" id="cb1-18" title="18">     &lt;caption&gt;This is Raphael&#39;s &quot;Foligno&quot; Madonna, painted in</a>
+<a class="sourceLine" id="cb1-19" title="19">     &lt;date&gt;1511&lt;/date&gt;-&lt;date&gt;1512&lt;/date&gt;.&lt;/caption&gt;</a>
+<a class="sourceLine" id="cb1-20" title="20"> &lt;/painting&gt;</a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="op">EOF</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="ex">This</span> will put your text into your variable without needing to escape the quotes. It will also handle unbalanced quotes (apostrophes, i.e. <span class="st">&#39;). Putting quotes around the sentinel (EOF) prevents the text from undergoing parameter expansion. The -d&#39;&#39; causes it to read multiple lines (ignore newlines). read is a Bash built-in so it doesn&#39;</span>t require calling an external command such as cat.</a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="ex">And</span> if you are using this multi-line String variable to write to a file, put the variable around <span class="st">&quot;QUOTES&quot;</span> like echo <span class="st">&quot;</span><span class="va">${String}</span><span class="st">&quot;</span> <span class="op">&gt;</span> /tmp/multiline_file.txt or echo <span class="st">&quot;</span><span class="va">${String}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /tmp/multiline_file.txt. Took me more than an hour to find that.</a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co"># more there : https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</span></a></code></pre></div></li>
+</ul></li>
+<li>Fork bomb
+<ul>
 <li>:(){ :|:&amp; };:</li>
 <li>Explications :</li>
-<li><p>:() définit une fonction nommée :. { :|:&amp; } est le corps de la fonction. Dans celui-ci, la fonction s’appelle elle-même (:), puis redirige la sortie à l’aide d’un pipe (|) sur l’entrée de la même fonction : et cache le processus en fond avec &amp;. La fonction, ensuite appelée avec :, s’appelle récursivement à l’infini.</p></li>
-<li><p>Redirection</p></li>
+<li>:() définit une fonction nommée :. { :|:&amp; } est le corps de la fonction. Dans celui-ci, la fonction s’appelle elle-même (:), puis redirige la sortie à l’aide d’un pipe (|) sur l’entrée de la même fonction : et cache le processus en fond avec &amp;. La fonction, ensuite appelée avec :, s’appelle récursivement à l’infini.</li>
+</ul></li>
+<li>Redirection
+<ul>
 <li><code>caca 2&gt;&amp;1 | tail -n 2</code></li>
-<li><p><code>cat &lt;&amp;1</code></p></li>
-<li><p>Regex</p></li>
-<li><p><code>mv /mnt/usbdisk/[^l]* /home/user/stuff/.</code></p></li>
-<li><p>Preserving spaces</p></li>
+<li><code>cat &lt;&amp;1</code></li>
+</ul></li>
+<li>Regex
+<ul>
+<li><code>mv /mnt/usbdisk/[^l]* /home/user/stuff/.</code></li>
+</ul></li>
+<li>Preserving spaces
+<ul>
 <li><code>var=&quot;abc        def    gh ijk&quot;</code></li>
 <li><code>echo $var</code>
 <ul>
@@ -155,39 +173,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>GOOD : <code>abc        def    gh ijk</code></li>
 <li>Put your variable inside double quote to prevent field splitting, which ate your spaces:</li>
 </ul></li>
-<li><p>Debugging</p></li>
+</ul></li>
+<li>Debugging
+<ul>
 <li><code>bash -x ./script.sh</code>
 <ul>
 <li>set -x # at the beginning of the script</li>
 <li>to debug</li>
 </ul></li>
-<li><p>Arrays</p></li>
-<li><p><code>arr=($line)</code> # Space separated string -&gt; array</p></li>
+</ul></li>
+<li>Arrays
+<ul>
+<li><code>arr=($line)</code> # Space separated string -&gt; array</li>
+</ul></li>
 <li>Let a variable
 <ul>
-<li><div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="va">var=$((</span>var+1<span class="va">))</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">((</span>var=var+1<span class="kw">))</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">((</span>var+=1<span class="kw">))</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">((</span>var++<span class="kw">))</span></a></code></pre></div></li>
+<li><div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="va">var=$((</span>var+1<span class="va">))</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">((</span>var=var+1<span class="kw">))</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">((</span>var+=1<span class="kw">))</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">((</span>var++<span class="kw">))</span></a></code></pre></div></li>
 <li>Or you can use let:</li>
-<li><div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="bu">let</span> <span class="st">&quot;var=var+1&quot;</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="bu">let</span> <span class="st">&quot;var+=1&quot;</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="bu">let</span> <span class="st">&quot;var++&quot;</span></a></code></pre></div></li>
+<li><div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">let</span> <span class="st">&quot;var=var+1&quot;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="bu">let</span> <span class="st">&quot;var+=1&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="bu">let</span> <span class="st">&quot;var++&quot;</span></a></code></pre></div></li>
 </ul></li>
-<li><p>Configuration</p></li>
+<li>Configuration
+<ul>
 <li>shopt -s chanble_vars now I can go to some vars</li>
-<li><p>shopt -s expand_aliases to get aliases in Vim</p></li>
-<li><p>Chaging directories fast</p></li>
+<li>shopt -s expand_aliases to get aliases in Vim</li>
+</ul></li>
+<li>Chaging directories fast
+<ul>
 <li><code>pushd -n /Project/Warnest/docs/</code></li>
 <li><code>pushd -n ~/Dropbox/Projects/ds/test/</code><br />
 </li>
 <li><code>dirs</code></li>
 <li><code>cd -</code> # Go back and foward</li>
-<li><p><code>$CDPATH</code> # is the path bash looks at then,</p></li>
+<li><code>$CDPATH</code> # is the path bash looks at then,</li>
 </ul>
 <p>cd ~ is your home,</p>
 <p>cd ~1 is ~/Dropbox/Projects/ds/test/</p>
 <p>cd ~2 is /Project/Warnest/docs/</p>
-<p>You can use <sub>1,</sub>2 etc in exactly the same way as</p>
+<p>You can use <sub>1,</sub>2 etc in exactly the same way as</p></li>
+</ul>
 </body>
 </html>

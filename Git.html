@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Git Wiki</title>
+  <title>Git.md – Git Wiki</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -19,15 +19,31 @@
 </header>
 <h1 id="tips">Tips</h1>
 <h3 id="ugly-tips-from-draft">Ugly tips from draft</h3>
-<p>git cherrypick <commit_sha1> git add -p # add by chunk (remember patch)</p>
 <ul>
-<li><p>Store credentials</p></li>
+<li>Add wisely
+<ul>
+<li><code>git cherrypick &lt;commit_sha1&gt;</code></li>
+<li><code>git add -p # add by chunk (remember patch)</code></li>
+</ul></li>
+<li>Store credentials
+<ul>
 <li><code>git config --global credential.helper cache</code> : Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with:</li>
 <li><code>git config credential.helper store</code> : Stores permanently</li>
-<li><p>Note : While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the “home” directory). If you don’t like this, delete this file and switch to using the cache option.</p></li>
-<li><p>Submodules</p></li>
-<li><p>git submodule update –recursive –remote</p></li>
-<li><p>Display</p></li>
+<li>Note : While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the “home” directory). If you don’t like this, delete this file and switch to using the cache option.</li>
+</ul></li>
+<li>Submodules
+<ul>
+<li><code>git submodule update --recursive --remote --jobs 8</code></li>
+<li><code>git submodule sync</code> # after modyfing .gitmodules</li>
+<li><code>git pull --recurse-submodules</code></li>
+<li><code>git submodule forech [--recursive] 'git reset --hard'</code></li>
+</ul></li>
+<li>Merge commit
+<ul>
+<li><code>git reset --soft &quot;HEAD~10&quot;</code> # Merge last 10 commits into 1</li>
+</ul></li>
+<li>Display
+<ul>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
 <li><code>git log --diff-filter=D --summary | grep delete</code></li>
 <li><code>git log --all --{file_path}</code> : file_path can have * inside</li>
@@ -43,39 +59,43 @@
 <li><code>git ls-tree --full-tree -r HEAD</code></li>
 <li><code>git cat-file -s</code></li>
 <li><code>git diff-tree</code></li>
-<li></li>
-<li><p>Interface</p></li>
-<li><p><code>git add -i</code> : add items without copying full file name</p></li>
-<li><p>Patch</p></li>
+</ul></li>
+<li>Interface
+<ul>
+<li><code>git add -i</code> : add items without copying full file name</li>
+</ul></li>
+<li>Patch
+<ul>
 <li><code>git .git/objects/pack SAMPLE</code></li>
-<li><p><code>git unpack-object &lt; SAMPLE/*.pack</code></p></li>
-<li><p>Ignore</p></li>
-<li><p><code>.git/info/exclude</code> : personal gitignore</p></li>
-<li><p>Clean</p></li>
+<li><code>git unpack-object &lt; SAMPLE/*.pack</code></li>
+</ul></li>
+<li>Ignore
+<ul>
+<li><code>.git/info/exclude</code> : personal gitignore</li>
+</ul></li>
+<li>Clean
+<ul>
 <li><code>git clean -[xd]n</code> : Show what I will clean</li>
-<li><p><code>git clean -[xd]f</code> : Do</p></li>
+<li><code>git clean -[xd]f</code> : Do</li>
+</ul></li>
 <li>Grep regex
 <ul>
 <li><code>git log -S'regex'</code></li>
-<li><code>git log -S'regex'</code>
-<ul>
+<li><code>git log -S'regex'</code></li>
 <li><code>git grep &quot;regex&quot;</code></li>
 </ul></li>
-</ul></li>
-<li><p>Compress</p></li>
-<li><code>git reflog expire --expire=now --all</code>
+<li>Compress
 <ul>
+<li><code>git reflog expire --expire=now --all</code></li>
 <li><code>git gc [--agressive --prune=now]</code> : garbage collector</li>
 </ul></li>
 <li>Filter : remove certain files
 <ul>
-<li><code>git filter-branch --tree-filter 'rm -f pass.txt' ~HEAD</code>
-<ul>
+<li><code>git filter-branch --tree-filter 'rm -f pass.txt' ~HEAD</code></li>
 <li>`git filter-branch –tree-filter ‘git clean -f -X’ – –all
 <ul>
 <li>Removegitignore form history</li>
 <li>Aster rebasing with a gitignore at first commit</li>
-</ul></li>
 </ul></li>
 </ul></li>
 <li>Clone only last commit
@@ -98,6 +118,8 @@
 <ul>
 <li><code>git config --global core.autocrlf true</code></li>
 </ul></li>
+<li>Show word regex in diff</li>
+<li><p><code>git diff --word-diff-regex=.</code></p></li>
 <li>Get statistic lines changed stats
 <ul>
 <li><code>git diff --stat</code></li>
@@ -117,45 +139,45 @@
 <ul>
 <li><code>git diff --color-words</code></li>
 </ul></li>
-<li><p>Checkout all the files</p></li>
-<li><p><code>git checkout -- .</code></p></li>
+<li>Checkout all the files
+<ul>
+<li><code>git checkout -- .</code></li>
+</ul></li>
+<li>Choose ours (master) theirs (current branch) automaticcaly in case of conflict
+<ul>
+<li><code>git rebase -Xtheirs branch-b</code></li>
+<li><code>git merge -Xours origin/master</code></li>
+<li><code>git checkout --ours foo/bar.java</code></li>
+<li><code>git add foo/bar.java</code></li>
+</ul></li>
 </ul>
-<p>Choose ours (master) theirs (current branch) automaticcaly in case of conflict</p>
-<pre><code>git rebase -Xtheirs branch-b
-git merge -Xours origin/master
-git checkout --ours foo/bar.java
-git add foo/bar.java</code></pre>
 <p>Merge unrelated history (to merge different project)</p>
-<pre><code>--allow-unrelated-histories </code></pre>
+<p>–allow-unrelated-histories</p>
 <p>Ignore file mode (755 in chmod)</p>
-<pre><code>git config core.fileMode false</code></pre>
+<p>git config core.fileMode false</p>
 <p>Aliasing</p>
 <p>git config –global alias.wdiff diff –color-words<code>// Edit</code>~/.gitconfig` [alias] wdiff = diff –color-words</p>
-<p>Word by word diff</p>
-<pre><code>git diff --color-words</code></pre>
+<p>Word by word diff git diff –color-words</p>
 <ul>
 <li>Personal gitignore</li>
 <li><code>git config --local -e</code></li>
 <li>We want to edit the git config of the repository we’re in. The —-local flag specifies that we’re editing the config of just this repository and the —e flag tells git to edit the config. For more info on this, run git config to see all of the options.</li>
-<li><pre><code>[core]
+<li></li>
+</ul>
+<pre><code>[core]
 
-    ... (existing configurations)
-    excludesfile = ~/Documents/my_repo/.local_gitignore
+  ... (existing configurations)
+  excludesfile = ~/Documents/my_repo/.local_gitignore
 
 [remote &quot;origin&quot;]
 
-    ... (existing configurations)
+  ... (existing configurations)
 
 [branch &quot;master&quot;]
 
-    ... (existing configurations)</code></pre></li>
-<li><p>Add the line in the core and then edit your .local_gitignore</p></li>
-<li>Ignore Windows newline
+  ... (existing configurations)</code></pre>
 <ul>
-<li><code>git config --global core.autocrlf true</code></li>
-</ul></li>
-<li><p>Show word regex in diff</p></li>
-<li><p><code>git diff --word-diff-regex=.</code></p></li>
+<li>Add the line in the core and then edit your .local_gitignore</li>
 </ul>
 <h1 id="change-history">Change history</h1>
 <h2 id="analyse">Analyse</h2>
@@ -165,13 +187,18 @@ git add foo/bar.java</code></pre>
 <li><code>git log --all -- &lt;filepath accepting *&gt;</code></li>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
 </ul></li>
-<li><p>Filter</p>
-<pre><code>  * `git filter-branch --index-filter &quot;git rm --cached --ignore-unmach file.txt&quot; [HEAD~5..HEAD` # file?txt can have a *</code></pre></li>
-<li><p>Clean</p></li>
+<li>Filter
+<ul>
+<li><code>git filter-branch --index-filter &quot;git rm --cached --ignore-unmach file.txt&quot; [HEAD~5..HEAD</code> # file?txt can have a *</li>
+</ul></li>
+<li>Clean
+<ul>
 <li><code>git rebase -i &lt;commit&gt;~1</code> # Can edit or delete commits<br />
 </li>
-<li><p><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></p></li>
+<li><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></li>
+</ul></li>
 </ul>
+<h1 id="git-old-cmdlist-used-to-be-vimhelp-formated">Git old cmdlist (used to be vimhelp formated)</h1>
 <ol start="0" type="1">
 <li>List</li>
 <li>Start</li>
@@ -184,185 +211,151 @@ git add foo/bar.java</code></pre>
 <li>Local</li>
 </ol>
 <h1 id="stack">0. Stack</h1>
-<pre><code>git clone --recursive &lt;URL-OF-REPOSITORY&gt; </code></pre>
-<p>CLONE in non empty directory git init git remote add origin PATH/TO/REPO git fetch git checkout -t origin/master or git reset origin/master https://github.com/vim-scripts # 0. List</p>
+<p>git clone –recursive <URL-OF-REPOSITORY> CLONE in non empty directory git init git remote add origin PATH/TO/REPO git fetch git checkout -t origin/master or git reset origin/master https://github.com/vim-scripts # 0. List</p>
 <h3 id="setup-and-config">Setup and config</h3>
-<pre><code>    -&gt; config 
-    -&gt; help </code></pre>
+<pre><code>-&gt; config 
+-&gt; help </code></pre>
 <h3 id="getting-and-creating-project">Getting and Creating project</h3>
-<pre><code>    -&gt; init 
-    -&gt; clone </code></pre>
+<pre><code>-&gt; init 
+-&gt; clone </code></pre>
 <h3 id="basic-snapshotting">Basic Snapshotting</h3>
-<pre><code>    -&gt; add 
-    -&gt; status 
-    -&gt; diff
-    -&gt; commit 
-    -&gt; reset
-    -&gt; rm 
-    -&gt; mv</code></pre>
+<pre><code>-&gt; add 
+-&gt; status 
+-&gt; diff
+-&gt; commit 
+-&gt; reset
+-&gt; rm 
+-&gt; mv</code></pre>
 <h3 id="branching-and-merging">Branching and Merging</h3>
-<pre><code>    -&gt; branch 
-    -&gt; checkout 
-    -&gt; merge
-    -&gt; mergetools 
-    -&gt; log 
-    -&gt; stash 
-    -&gt; tag </code></pre>
+<pre><code>-&gt; branch 
+-&gt; checkout 
+-&gt; merge
+-&gt; mergetools 
+-&gt; log 
+-&gt; stash 
+-&gt; tag </code></pre>
 <h3 id="sharing-and-updating-project">Sharing and updating project ~</h3>
-<pre><code>    -&gt; fetch 
-    -&gt; pull
-    -&gt; push 
-    -&gt; remote 
-    -&gt; submodule </code></pre>
+<pre><code>-&gt; fetch 
+-&gt; pull
+-&gt; push 
+-&gt; remote 
+-&gt; submodule </code></pre>
 <h3 id="inspection-and-comparaison">Inspection and comparaison</h3>
-<pre><code>    -&gt; show 
-    -&gt; log 
-    -&gt; diff 
-    -&gt; rebase 
-    -&gt; revert </code></pre>
+<pre><code>-&gt; show 
+-&gt; log 
+-&gt; diff 
+-&gt; rebase 
+-&gt; revert </code></pre>
 <h3 id="debugging">Debugging</h3>
-<pre><code>    -&gt; bisect
-    -&gt; blame 
-    -&gt; grep </code></pre>
+<pre><code>-&gt; bisect
+-&gt; blame 
+-&gt; grep </code></pre>
 <h3 id="email">Email</h3>
-<pre><code>    -&gt; am
-    -&gt; apply 
-    -&gt; format-patch 
-    -&gt; send-email 
-    -&gt; request-pull</code></pre>
+<pre><code>-&gt; am
+-&gt; apply 
+-&gt; format-patch 
+-&gt; send-email 
+-&gt; request-pull</code></pre>
 <h3 id="external-system">External system</h3>
-<pre><code>    -&gt; svn
-    -&gt; fast-import </code></pre>
+<pre><code>-&gt; svn
+-&gt; fast-import </code></pre>
 <h3 id="administration">Administration</h3>
-<pre><code>    -&gt; clean 
-    -&gt; gc 
-    -&gt; fsck 
-    -&gt; reflog
-    -&gt; filter -branch 
-    -&gt; instaweb, 
-    -&gt; arcive 
-    -&gt; bundle </code></pre>
+<pre><code>-&gt; clean 
+-&gt; gc 
+-&gt; fsck 
+-&gt; reflog
+-&gt; filter -branch 
+-&gt; instaweb, 
+-&gt; arcive 
+-&gt; bundle </code></pre>
 <h3 id="server-admin">Server Admin</h3>
-<pre><code>    -&gt; daemon 
-    -&gt; update-server_info </code></pre>
+<pre><code>-&gt; daemon 
+-&gt; update-server_info </code></pre>
 <h3 id="plumbing-commands">Plumbing-commands</h3>
-<pre><code>    -&gt; cat-file
-    -&gt; commit-tree 
-    -&gt; count-objects
-    -&gt; diff-index 
-    -&gt; for-each-ref
-    -&gt; hash-object 
-    -&gt; ls-files
-    -&gt; merge-base 
-    -&gt; read-treee
-    -&gt; rev-list 
-    -&gt; rev-parse 
-    -&gt; show-ref 
-    -&gt; symbolic-ref 
-    -&gt; update-index
-    -&gt; update-ref 
-    -&gt; verify-pack 
-    -&gt; write-tree</code></pre>
+<pre><code>-&gt; cat-file
+-&gt; commit-tree 
+-&gt; count-objects
+-&gt; diff-index 
+-&gt; for-each-ref
+-&gt; hash-object 
+-&gt; ls-files
+-&gt; merge-base 
+-&gt; read-treee
+-&gt; rev-list 
+-&gt; rev-parse 
+-&gt; show-ref 
+-&gt; symbolic-ref 
+-&gt; update-index
+-&gt; update-ref 
+-&gt; verify-pack 
+-&gt; write-tree</code></pre>
 <h1 id="init">1. Init</h1>
-<pre><code>
-    git init 
-    git add LICENSE.txt
-    git commit -m &#39;first commit&#39;
+<pre><code>  git init 
+  git add LICENSE.txt
+  git commit -m &#39;first commit&#39;
 
-    git clone https://github.com/libgit2 mylibgit</code></pre>
+  git clone https://github.com/libgit2 mylibgit</code></pre>
 <h1 id="config">2. Config</h1>
-<pre><code>
-    git config --global user.name &quot;Martin T&quot;
-    git config --global user.email tbf@tbf
-                core.editor vim 
-    git config --list   # See all config vars 
-    git config user.name    # See the var git is using for name </code></pre>
+<pre><code>  git config --global user.name &quot;Martin T&quot;
+  git config --global user.email tbf@tbf
+          core.editor vim 
+  git config --list   # See all config vars 
+  git config user.name   # See the var git is using for name </code></pre>
 <h1 id="aliases">3. Aliases</h1>
-<pre><code>
-    git config --global alias.co checkout   
-    git config --global alias.br branch 
-    git config --global alias.ci commit     
-    git config --global alias.st status 
+<pre><code>  git config --global alias.co checkout   
+  git config --global alias.br branch 
+  git config --global alias.ci commit    
+  git config --global alias.st status 
 
-    git config --global alias.unstage &#39;reset HEAD --&#39;
-    git config --global alias.last &#39;log -1 HEAD&#39;</code></pre>
+  git config --global alias.unstage &#39;reset HEAD --&#39;
+  git config --global alias.last &#39;log -1 HEAD&#39;</code></pre>
 <h1 id="branches">4. Branches</h1>
-<pre><code>-&gt; Each Commit has a pointer to the previous commit 
--&gt; The default branch name is master *git-master* .
--&gt; HEAD is a pointer pointing to the current branch </code></pre>
-<pre><code>
-    git branch testing 
-&lt;       Creates a new pointer at the same commit you&#39;re currently on </code></pre>
-<pre><code>git checkout testing 
-git checkout -b testing # creates the branch and go in it </code></pre>
-<p>&lt; Moves HEAD to the testing branch</p>
-<pre><code>-&gt; Switching to a branch changes the working directory </code></pre>
-<pre><code>
-    git branch 
-    git branch -v   # see the last commit 
-    git branch -m &lt;oldname&gt; &lt;newname&gt;  
-&lt;       rename a branch </code></pre>
-<pre><code>git branch [--no-merged] [--merged]</code></pre>
-<p>&lt; Lists all Branches</p>
-<pre><code>
-    git log --oneline --decorate --graph --all 
-&lt;       Shows where branch pointers are
-
-    -&gt; Creating a branch is just creating a 41 byte pointer (to a sha-1) in a file 
+<p>-&gt; Each Commit has a pointer to the previous commit -&gt; The default branch name is master <em>git-master</em> . -&gt; HEAD is a pointer pointing to the current branch</p>
+<pre><code>  git branch testing 
+&lt;    Creates a new pointer at the same commit you&#39;re currently on </code></pre>
+<p>git checkout testing git checkout -b testing # creates the branch and go in it &lt; Moves HEAD to the testing branch</p>
+<p>-&gt; Switching to a branch changes the working directory</p>
+<pre><code>  git branch 
+  git branch -v   # see the last commit 
+  git branch -m &lt;oldname&gt; &lt;newname&gt;  
+&lt;    rename a branch </code></pre>
+<p>git branch [–no-merged] [–merged] &lt; Lists all Branches</p>
+<pre><code>  git log --oneline --decorate --graph --all 
+&lt;     Shows where branch pointers are
+  -&gt; Creating a branch is just creating a 41 byte pointer (to a sha-1) in a file 
 
 # 5. Merge
 
 
-    -&gt; You want to merge myBranch into master </code></pre>
-<pre><code>git checkout master
-git merge myBranch</code></pre>
-<p>&lt; If you changed the same part of the same file differently, this will cause confict. So this won’t auto-merge and you have to resolve the conflict and then commit.</p>
-<pre><code>
-    git status 
-&lt;       To see the conflict 
-
-    Open the files manually to resolve the conflict and add them to the stage to remove them from conclicting files</code></pre>
-<pre><code>git mergetool</code></pre>
+  -&gt; You want to merge myBranch into master </code></pre>
+<p>git checkout master git merge myBranch &lt; If you changed the same part of the same file differently, this will cause confict. So this won’t auto-merge and you have to resolve the conflict and then commit.</p>
+<pre><code>  git status 
+&lt;    To see the conflict 
+  Open the files manually to resolve the conflict and add them to the stage to remove them from conclicting files</code></pre>
+<p>git mergetool</p>
 <pre><code></code></pre>
-<pre><code>git branch -d myBranch </code></pre>
-<p>&lt; To deleta a branch, usefull if this branch is already merged</p>
+<p>git branch -d myBranch &lt; To deleta a branch, usefull if this branch is already merged</p>
 <h1 id="rebasing">6. Rebasing</h1>
-<pre><code>-&gt; Get the change one branch applied to the most common ancestor and apply this change to the other branch </code></pre>
-<pre><code>
-    git rebase --onto master server client
-&lt;       Check client branch, figure the changes from the common
+<p>-&gt; Get the change one branch applied to the most common ancestor and apply this change to the other branch</p>
+<pre><code>  git rebase --onto master server client
+&lt;    Check client branch, figure the changes from the common
 ancestor with client and apply these changes to master</code></pre>
-<pre><code>git rebase master server 
-git checkout master 
-git merge server
-git branch -d server</code></pre>
-<p>&lt; Replay server changes on master branch</p>
-<pre><code>    Then go to the master branch (without the server applyed) 
-    And merge both branch so master and server are now one branch 
-    Remove the server branch, not usefull anymore 
-
--&gt; Don&#39;t rebase commits that exist outside your repository </code></pre>
+<p>git rebase master server git checkout master git merge server git branch -d server &lt; Replay server changes on master branch Then go to the master branch (without the server applyed) And merge both branch so master and server are now one branch Remove the server branch, not usefull anymore</p>
+<p>-&gt; Don’t rebase commits that exist outside your repository</p>
 <h1 id="remote">7. Remote</h1>
-<pre><code>
-    git remote add maisonDir D:\Iso\VimMaison</code></pre>
-<pre><code>
-    git ls-remote (remote) 
-    git remote show (remote) 
-&lt;       To see all remote vars 
-
-    -&gt; Origin is the default name for a remote when you run git clone *git-origin*</code></pre>
-<pre><code>git fetch origin </code></pre>
-<p>&lt; Fetch data from origin into a new branch called origin/master</p>
-<pre><code>
-    git push (remote) (branch) 
-&lt;       Take my local branch and update the remote origin branch (with the same name) </code></pre>
-<pre><code>git checkout -b serverfix origin/serverfix </code></pre>
-<p>&lt; This gives a local branch where origin/serverfix was</p>
-<pre><code>-&gt; Tracking branches are local branches that are looking to remote branches. When you git clone, your master branch is tracking origin/master. You can then update master with &quot;git pull&quot;. From a tracking branch, git pull will act as git fetch and git merge  </code></pre>
+<pre><code>  git remote add maisonDir D:\Iso\VimMaison</code></pre>
+<pre><code>  git ls-remote (remote) 
+  git remote show (remote) 
+&lt;    To see all remote vars 
+  -&gt; Origin is the default name for a remote when you run git clone *git-origin*</code></pre>
+<p>git fetch origin &lt; Fetch data from origin into a new branch called origin/master</p>
+<pre><code>  git push (remote) (branch) 
+&lt;    Take my local branch and update the remote origin branch (with the same name) </code></pre>
+<p>git checkout -b serverfix origin/serverfix &lt; This gives a local branch where origin/serverfix was</p>
+<p>-&gt; Tracking branches are local branches that are looking to remote branches. When you git clone, your master branch is tracking origin/master. You can then update master with “git pull”. From a tracking branch, git pull will act as git fetch and git merge</p>
 <h1 id="remote-1">8. Remote</h1>
-<pre><code>
-    git remote add local_proc /opt/git/projct.git 
-    git pull /home/john/project </code></pre>
+<pre><code>  git remote add local_proc /opt/git/projct.git 
+  git pull /home/john/project </code></pre>
 <h1 id="section">9.</h1>
 </body>
 </html>

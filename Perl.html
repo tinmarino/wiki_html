@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Perl.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -31,13 +31,28 @@
 <li><a href="Perl-Snippet.html">Perl Snippet</a></li>
 </ul>
 <h1 id="tips">Tips</h1>
-<p>use Number::Format ‘format_number’ glob .perldlrc # to edit and load automatically some libs</p>
+<ul>
+<li>use Number::Format ‘format_number’</li>
+<li>glob</li>
+<li>.perldlrc # to edit and load automatically some libs</li>
+<li>Use Unicode::Collate::Sort</li>
+</ul>
 <p>Symbol table edition</p>
 <pre><code>for (keys %main::){say}
 *sym = $main::{&quot;/&quot;}</code></pre>
-<p>Use Unicode::Collate::Sort</p>
+<ul>
+<li>Interpolate code in string = <code>@{[LIST EXPR]}</code> or <code>${\(SCALAR EXPR)}</code>
+<ul>
+<li><code>say &quot;@{[ 3 + 4 ]}&quot;</code></li>
+<li><code>say &quot;${\ function }&quot;</code> -&gt; <code>say &quot;${\ do { 3 + 4 }}&quot;</code> or <code>say &quot;${\( 3 + 4 )}&quot;</code></li>
+<li>Use dot operator</li>
+<li><code>print &lt;&lt;&quot;EOT&quot;; This is $x EOT</code> : interpolates</li>
+<li><code>print &lt;&lt;'EOT'; This is $x EOT</code> : do NOT interpolate</li>
+</ul></li>
+</ul>
 <p>my <span class="math inline">$foo = &quot;zombies are the bombies&quot;;if ($</span>foo =~ / zombie # sorry pirates /x ) { print “urg. brains.”;} /x modifier for pretty regzx print</p>
 <p>Even without the /x modifier, you can enclose comments in (?# … ):my $foo = “zombies are the bombies”;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print “urg. brains.”;}</p>
+<p>Add to path use lib qw(.); # Will add your cwd to <span class="citation" data-cites="INC">@INC</span> use lib qw(. /path/to/my/home /some/other/dir); # will add those dirs perl -I/path/to/include script</p>
 <p>Get package path perl -MTime::HiRes -e ‘print $INC{“Time/HiRes.pm”}’ or perldoc -l Time::HiRes cpan -D Time::HiRes</p>
 <p>How do I completely remove an element from an array?</p>
 <pre><code>@array = grep { $_ != $element_omitted } @array;
@@ -73,38 +88,18 @@ perl -I /home/foobar/code script.pl  # That is a capital i like include</code></
 <pre><code>perl -e &quot;fork while fork&quot; &amp;</code></pre>
 <p>Console</p>
 <pre><code>perl -de1 # debugging a trivial programe</code></pre>
-<p>Write multiple line regex</p>
-<ul>
-<li>Delete the space, then type CtrlV, CtrlJ.<br />
+<p>Write multiple line regex<br />
+* Delete the space, then type CtrlV, CtrlJ.<br />
 Then Return.<br />
-The Ctrl-V prevents the shell interpreting the next character (newline) literally.</li>
-<li>toto</li>
-</ul>
-<p>Match brace, bracket or parenthesis</p>
-<ul>
-<li>Use Text::Balanced</li>
-<li></li>
-</ul>
-<pre><code>my $re; $re = qr/ \{ (?: [^{}]* | (??{$re}) )* \} /x;
-my @array = $str =~ /$re/xg;</code></pre>
-<p>Get environment variables</p>
-<ul>
-<li><code>$userName =  $ENV{'LOGNAME'};</code></li>
-<li>print “Hello, $userName”;</li>
-</ul>
+The Ctrl-V prevents the shell interpreting the next character (newline) literally. * toto</p>
+<p>Match brace, bracket or parenthesis * Use Text::Balanced * <code>my $re; $re = qr/ \{ (?: [^{}]* | (??{$re}) )* \} /x;     my @array = $str =~ /$re/xg;</code></p>
+<p>Get environment variables * <code>$userName =  $ENV{'LOGNAME'};</code> * print “Hello, $userName”;</p>
+<h1 id="installing-modules">Installing modules</h1>
+<p>tar zxf Digest-SHA1-2.13.tar.gz cd Digest-SHA1-2.13 perl Makefile.PL make make test make install</p>
+<p>tar zxf … cd … perl Build.PL ./Build ./Build test ./Build install</p>
 <h1 id="command-line">Command line</h1>
-<p>Interactive shell</p>
-<ul>
-<li>perl -de1</li>
-<li>rlwrap perl -d -e 1</li>
-<li>perlconsole (get history)</li>
-<li>see psh</li>
-<li>reply (the best because it uses readline)</li>
-</ul>
-<p>Change file content</p>
-<ul>
-<li>perl -i.bak -p -e ‘s/old/new/g;’ *.config</li>
-</ul>
+<p>Interactive shell * perl -de1 * rlwrap perl -d -e 1 * perlconsole (get history) * see psh * reply (the best because it uses readline)</p>
+<p>Change file content * perl -i.bak -p -e ‘s/old/new/g;’ *.config</p>
 <table>
 <colgroup>
 <col style="width: 76%" />

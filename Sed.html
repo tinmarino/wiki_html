@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Sed.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -89,8 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="ex">one</span></a></code></pre></div></li>
 <li><code>-n</code> means silent</li>
 </ul></li>
-<li><p>Replace a multi-line string</p>
-https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa
+<li>Replace a multi-line string https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa
 <ul>
 <li></li>
 </ul>
@@ -108,38 +107,44 @@ https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-mu
 <a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">                # fall through to final auto-pattern_print (2 lines)</span></a>
 <a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">   }    </span></a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st"> }&#39;</span> alpha.txt         </a></code></pre></div></li>
-<li><p>Multiline pattern</p></li>
+<li>Multiline pattern
+<ul>
 <li></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">    <span class="fu">sed</span> -n <span class="st">&#39;/[{]/,/[}]/{</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">    p</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">    /[}]/a\</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">     end of block matching brace</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"> <span class="fu">sed</span> -n <span class="st">&#39;/[{]/,/[}]/{</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st"> p</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st"> /[}]/a\</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  end of block matching brace</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">    }&#39;</span> *.txt </a></code></pre></div>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st"> }&#39;</span> *.txt </a></code></pre></div>
 <ul>
 <li><code>-n</code> means ‘no default print lines as processed’.
 <ul>
 <li><code>'p'</code> means now print the line.</li>
 <li><code>/[{]/,/[}]/</code> is a range expression. It means scan until you find something that matches the first pattern (/[{]/) AND then scan until you find the 2nd pattern (/[}]/) THEN perform whatever actions you find in between the { } in the sed code. In this case ‘p’ and the debugging code. (not explained here, use it, mod it or take it out as works best for you).</li>
 </ul></li>
-<li><p>Read a file</p></li>
-<li><p><code>sed -i -e '/fox/{r f.html' -e 'd}'</code></p></li>
-<li><p>Append (line after pattern)</p></li>
+</ul></li>
+<li>Read a file
+<ul>
+<li><code>sed -i -e '/fox/{r f.html' -e 'd}'</code></li>
+</ul></li>
+<li>Append (line after pattern)
+<ul>
 <li></li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/a \</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">line1 \</span></a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div>
 <ul>
-<li><p><code>sed -i '/SearchPattern/aNew Text' SomeFile.txt</code></p></li>
-<li><p>Prepend (line before pattern)</p></li>
+<li><code>sed -i '/SearchPattern/aNew Text' SomeFile.txt</code></li>
+</ul></li>
+<li>Prepend (line before pattern)
+<ul>
 <li></li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/i \</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">line1 \</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div>
-<ul>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div></li>
 <li><p>Cheat</p>
 <pre><code>:  # label
 =  # line_number

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Powershell.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -27,11 +27,15 @@
 <li>Host : <code>Test-WsMan COMPUTER</code></li>
 <li>Host : <code>Enter-PSSession -ComputerName COMPUTER -Credential USER</code></li>
 </ol></li>
-<li><p>Variable Afectation</p></li>
+<li>Variable Afectation
+<ul>
 <li><code>$a = ls 'HKLM:/Software/'</code></li>
-<li><p><code>$a[0].Property</code></p></li>
-<li><p>About</p></li>
-<li><p><code>[environment]::OSVersion.Version</code> : get os version (aparently :)</p></li>
+<li><code>$a[0].Property</code></li>
+</ul></li>
+<li>About
+<ul>
+<li><code>[environment]::OSVersion.Version</code> : get os version (aparently :)</li>
+</ul></li>
 <li>Help
 <ul>
 <li>Get-Help Get-Item</li>

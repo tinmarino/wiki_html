@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Vim Tips</title>
+  <title>Tips.md – Vim Tips</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -27,19 +27,50 @@
 </ul></li>
 <li><p>Remote</p>
 <p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
-<li><p>File format</p></li>
+<li>File format
+<ul>
 <li><code>:e ++ff=unix</code></li>
 <li><code>:w ++ff=dos</code></li>
-<li><p><code>%s/\r\n/</code></p></li>
-<li><p>Buffer</p></li>
-<li><p><code>:b *.java&lt;c-d&gt;</code> : list buffer names matching regex</p></li>
-<li><p>Pipeline</p></li>
+<li><code>%s/\r\n/</code></li>
+</ul></li>
+<li>Buffer
+<ul>
+<li><code>:b *.java&lt;c-d&gt;</code> : list buffer names matching regex</li>
+</ul></li>
+<li>Pipeline
+<ul>
 <li><code>echo toto | vim -</code> : take arguments from stdin</li>
 <li><code>echo foo | vim -e '+%print' '+q!' /dev/stdin</code> : exmode to not consume stdin and not clear output on quit</li>
 <li><code>vim &lt;(echo toto)</code> : process substitution command (BaSh)</li>
-<li><p><code>:w !tee</code> : write to stdout</p></li>
-<li><p>Script : Get filetype of a buffer</p></li>
-<li><p><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></p></li>
+<li><code>:w !tee</code> : write to stdout</li>
+</ul></li>
+<li>Random, Sort, Shuffle
+<ul>
+<li>Random shuffle :10,20!shuf<CR> func Random() return reltimestr(reltime())[-2:] endfunc %s/^/=Random() . &quot;&quot;/|sort n|%s/^//</li>
+</ul></li>
+<li><p>Remote</p>
+<p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
+<li>File format
+<ul>
+<li><code>:e ++ff=unix</code></li>
+<li><code>:w ++ff=dos</code></li>
+<li><code>%s/\r\n/</code></li>
+</ul></li>
+<li>Buffer
+<ul>
+<li><code>:b *.java&lt;c-d&gt;</code> : list buffer names matching regex</li>
+</ul></li>
+<li>Pipeline
+<ul>
+<li><code>echo toto | vim -</code> : take arguments from stdin</li>
+<li><code>echo foo | vim -e '+%print' '+q!' /dev/stdin</code> : exmode to not consume stdin and not clear output on quit</li>
+<li><code>vim &lt;(echo toto)</code> : process substitution command (BaSh)</li>
+<li><code>:w !tee</code> : write to stdout</li>
+</ul></li>
+<li>Script : Get filetype of a buffer
+<ul>
+<li><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></li>
+</ul></li>
 <li>Substitute without escaping the replcement
 <ul>
 <li><code>:%sno/search_string/replace_string/g</code></li>
@@ -55,16 +86,24 @@
 <li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
 <li><p>Use: :%s/.*/=repeat(‘text’, matchcount(‘text’, submatch(0)))</p></li>
 </ul></li>
-<li><p>Find where root runtime is</p></li>
-<li><p><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></p></li>
-<li><p>Source autoload file</p></li>
-<li><p><code>:call example#BadFunction()</code></p></li>
-<li><p>Find where a map has been defined (in which script)</p></li>
-<li><p><code>:verbose map &lt;c-z&gt;</code></p></li>
+<li>Find where root runtime is
+<ul>
+<li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
+</ul></li>
+<li>Source autoload file
+<ul>
+<li><code>:call example#BadFunction()</code></li>
+</ul></li>
+<li>Find where a map has been defined (in which script)
+<ul>
+<li><code>:verbose map &lt;c-z&gt;</code></li>
+</ul></li>
 <li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
-<li><p>Remember manual folds</p></li>
+<li>Remember manual folds
+<ul>
 <li><code>au BufWinLeave ?*mkview</code></li>
-<li><p><code>au BufWinEnter ?* silent loadview</code></p></li>
+<li><code>au BufWinEnter ?* silent loadview</code></li>
+</ul></li>
 </ul>
 <p>Vim can browse tar and zip archives uppercase maps to jump between files Read vimcast of drew neil and tim pope</p>
 <h1 id="advanced-commands">Advanced commands</h1>

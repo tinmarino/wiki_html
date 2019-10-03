@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Ubuntu.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -14,8 +14,15 @@
   <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
+<h1 id="power-management-suspend-then-hibernate">Power management : suspend then hibernate</h1>
 <ul>
-<li>Geoff Chappell</li>
+<li><p>In <code>/etc/systemd/sleep.conf</code> new file:</p>
+<pre><code>[Sleep]
+HibernateDelaySec=3600</code></pre></li>
+<li><code>systemctl suspend-then-hibernate</code> # test</li>
+<li><p>In <code>/etc/systemd/logind.conf</code></p>
+<pre><code>HandleLidSwitch=suspend-then-hibernate</code></pre></li>
+<li><p><code>systemctl restart systemd-logind.service</code></p></li>
 </ul>
 </body>
 </html>

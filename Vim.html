@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Vim.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -15,11 +15,38 @@
 </head>
 <body>
 <ul>
-<li><p><a href="Vim-Menu.html">Vim Menu</a></p></li>
-<li><p><a href="Tips.html">Tips</a> : advanced commands</p></li>
+<li><a href="Vim-Menu.html">Vim Menu</a></li>
+<li><a href="Practical_Vim.html">Practical_Vim</a></li>
+<li><a href="Vimstyle.html">Vimstyle</a> (from Google)</li>
+<li><a href="VimStory.html">VimStory</a></li>
+<li><a href="BordelVim.html">BordelVim</a></li>
+<li><a href="Plugin.html">Plugin</a></li>
+<li><a href="Tips.html">Tips</a> : advanced commands</li>
+<li><a href="V-negative-regex.html">Negative Regex</a></li>
+<li><a href="V-Script.html">Script</a></li>
 </ul>
+<p>:h formatoptions :set fo+=t # to autowrap :match visu /%7l|%10l/ :hi visu ctermbg=darked</p>
+<h2 id="client-server">Client – Server</h2>
+<pre><code>vim --servernbame DEMO      # Open with name DEMO
+vim --servername DEOM --remote some-file.txt  # Send some file
+vim --servername DEMO --remote-send &#39;:3d&lt;CR&gt;&#39; # Send command</code></pre>
+<h2 id="fast-buffer-switching">Fast buffer switching</h2>
+<pre><code>* `:oldfiles`
+* `:bro[wse] ol[dfiles] [!]`
+* `:changes`
+* `&#39;0 &#39;1 &#39;2 &#39;3 ... &#39;9`
+* `CtrlP` pluggin</code></pre>
+<h2 id="ctags">Ctags</h2>
+<pre><code>* `ctags -R -f ./.git/tags .`
+* `:tag function_name`
+* `C-}` : see all tags
+* `C-]` : jump to tag
+* `:tn | :tp` : jump to next | previous tag
+* `:ts` : tag select : get a list</code></pre>
 <h1 id="tips">Tips</h1>
 <ul>
+<li><p>Show highlight sytnax type</p>
+<p>echo map(synstack(line(‘.’), col(‘.’)), ‘synIDattr(v:val, “name”)’)</p></li>
 <li><p>Check variable, set default</p>
 <p>let g:pluginname_setting = get(g: | ‘pluginname_setting’, “default”) if exists(‘g:pymode’) | echo ‘exists’ | endif</p></li>
 <li><p>Copy without yanking selection in visual</p>
@@ -43,36 +70,38 @@
 <li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
 <li><p>Use: :%s/.*/=repeat(‘text’, matchcount(‘text’, submatch(0)))</p></li>
 </ul></li>
-<li><p>Find where root runtime is</p></li>
-<li><p><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></p></li>
-<li><p>Source autoload file</p></li>
-<li><p><code>:call example#BadFunction()</code></p></li>
-<li><p>Find where a map has been defined (in which script)</p></li>
-<li><p><code>:verbose map &lt;c-z&gt;</code></p></li>
+<li>Find where root runtime is
+<ul>
+<li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
+</ul></li>
+<li>Source autoload file
+<ul>
+<li><code>:call example#BadFunction()</code></li>
+</ul></li>
+<li>Find where a map has been defined (in which script)
+<ul>
+<li><code>:verbose map &lt;c-z&gt;</code></li>
+</ul></li>
 <li><p>Use <code>s/\%V</code> to substitude within selection and not full lines</p></li>
 </ul>
 <p>:h formatoptions :set fo+=t # to autowrap :match visu /%7l|%10l/ :hi visu ctermbg=darked</p>
-<h2 id="client-server">Client – Server</h2>
+<h2 id="client-server-1">Client – Server</h2>
 <pre><code>vim --servernbame DEMO      # Open with name DEMO
 vim --servername DEOM --remote some-file.txt  # Send some file
 vim --servername DEMO --remote-send &#39;:3d&lt;CR&gt;&#39; # Send command</code></pre>
-<h2 id="fast-buffer-switching">Fast buffer switching</h2>
-<ul>
-<li><code>:oldfiles</code></li>
-<li><code>:bro[wse] ol[dfiles] [!]</code></li>
-<li><code>:changes</code></li>
-<li><code>'0 '1 '2 '3 ... '9</code></li>
-<li><code>CtrlP</code> pluggin</li>
-</ul>
-<h2 id="ctags">Ctags</h2>
-<ul>
-<li><code>ctags -R -f ./.git/tags .</code></li>
-<li><code>:tag function_name</code></li>
-<li><code>C-}</code> : see all tags</li>
-<li><code>C-]</code> : jump to tag</li>
-<li><code>:tn | :tp</code> : jump to next | previous tag</li>
-<li><code>:ts</code> : tag select : get a list</li>
-</ul>
+<h2 id="fast-buffer-switching-1">Fast buffer switching</h2>
+<pre><code>* `:oldfiles`
+* `:bro[wse] ol[dfiles] [!]`
+* `:changes`
+* `&#39;0 &#39;1 &#39;2 &#39;3 ... &#39;9`
+* `CtrlP` pluggin</code></pre>
+<h2 id="ctags-1">Ctags</h2>
+<pre><code>* `ctags -R -f ./.git/tags .`
+* `:tag function_name`
+* `C-}` : see all tags
+* `C-]` : jump to tag
+* `:tn | :tp` : jump to next | previous tag
+* `:ts` : tag select : get a list</code></pre>
 <h2 id="from-work">From work</h2>
 <ul>
 <li><code>:%! clumn -t</code> align columns</li>
@@ -127,6 +156,11 @@ To sort all lines according to line lenght, otherwise, use awk with filter</li>
 <h3 id="gvim">GVim</h3>
 <p>:set guioptions-=m &quot; remove menu bar :set guioptions-=T &quot; remove toobar :set guioptions-=r &quot; remove right hand scrool bar :set guioptions-=L &quot; remove lefthand scrooll bar</p>
 <p>Note: ‘go’ is an abbr for guioptions</p>
+<h3 id="plugin">Plugin</h3>
+<h4 id="ctrlp">Ctrlp</h4>
+<ul>
+<li><code>let g:ctrlp_cache_dir = $HOME . '/cache/ctrlp'</code></li>
+</ul>
 <h2 id="from-before">FRom before</h2>
 <p>set autochdir to auto chdir to current file :tabdo lcd /dir/ Another useful setting is set tags=./tags,tags;$HOME which tells Vim to look for a tags file in the directory of the current file, then in the “current directory” and up and up until it reaches your ~/. getpid() vim —cmd ‘cd <code>pwd</code>’</p>
 <p>CTRL-W z CTRL-W_z CTRL-W CTRL-Z CTRL-W_CTRL-Z :pc :pclose :pc[lose][!] Close any “Preview” window currently open. When the ‘hidden’ option is set, or when the buffer was changed and the [!] is used, the buffer becomes hidden (unless there is another window editing it). The command fails if any “Preview” buffer cannot be closed. See also :close.</p>

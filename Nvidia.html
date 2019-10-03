@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Nvidia.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="solarized-dark.css" />
+</head>
+<body>
+<p>GUI : NVIDIA X server settings</p>
+<ul>
+<li><code>nvidia-smi</code> : system management interface</li>
+<li><code>nvidia-smi --query-gpu=driver_version --format=csv,noheader</code></li>
+<li><code>modinfo nvidia | grep version</code></li>
+<li><code>lspci -k | grep -A 2 -i &quot;VGA&quot;</code></li>
+<li><code>lspci -vnn</code> # Will be with ‘driver in use’</li>
+<li><code>lshw -numeric -C display</code></li>
+<li><code>nvidia-settings -q all</code></li>
+<li><code>systemctl</code> # list many open/boot services</li>
+<li><code>cat /proc/driver/nvidia/version</code></li>
+<li><code>cat /proc/driver/nvidia/gpus/0/info</code></li>
+<li><code>cat /proc/cpuinfo</code></li>
+</ul>
+<h1 id="important-files">Important files</h1>
+<ul>
+<li><code>/etc/X11/xorg.conf[.d]</code></li>
+<li><code>/usr/share/X11/xorg.conf.d</code></li>
+<li><code>/etc/modules</code> # modules à charger au démarage</li>
+</ul>
+<h1 id="ubuntu">Ubuntu</h1>
+<ul>
+<li><code>gpu-manager</code></li>
+<li></li>
+</ul>
+<h1 id="log-files">Log files</h1>
+<p>cat /var/log/lightdm cat /var/log/Xorg.0.log cat /var/log/gpu-manager.log</p>
+</body>
+</html>

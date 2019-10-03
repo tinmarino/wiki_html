@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Windows.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -17,10 +17,14 @@
 <ul>
 <li><a href="Windows_Raccourci.html">Raccourci</a></li>
 <li><a href="Windows_Cmder.html">Cmder</a></li>
-<li>[<a href="Windows-Services.html">Windows Services</a>]</li>
-<li><p><a href="Ms-Dos.html">Ms Dos</a></p></li>
-<li><p>Check if admin</p></li>
-<li><p><code>regedit /HKLM/SAM</code> : if you can open AM, you are priviledged</p></li>
+<li><a href="Windows-Services.html">Windows Services</a></li>
+<li><a href="Ms-Dos.html">Ms Dos</a></li>
+<li><a href="Windows_Interrupt.html">Windows Interrupt</a></li>
+<li><p><a href="Interrupt.html">Interrupt</a></p></li>
+<li>Check if admin
+<ul>
+<li><code>regedit /HKLM/SAM</code> : if you can open AM, you are priviledged</li>
+</ul></li>
 <li><p>Power off (shutdown)</p>
 <p>shutdown /h /f # hibernate force /? # help /r # reboot /t 10 # in 10 sec powercfg /hibernate on powercfg /hibernate off # To be able to resize C (because /hiberfil.sys is an unmovable file)</p></li>
 <li><p>Screen off</p>
@@ -57,7 +61,9 @@
 <li>Some services cannot be debugged locally because of traps (anti-debug). So one must debug natively (i.e kernel, remote)</li>
 </ul>
 <h1 id="security">Security</h1>
-<h2 id="t">T</h2>
+<ul>
+<li>GetModuleHandle(NULL) -&gt; Base address (even if specified as HMODULE)</li>
+</ul>
 <h1 id="api">API</h1>
 <ul>
 <li>EnumDevideDrivers # Fill array of LPVOID with start address of all drivers</li>
@@ -140,11 +146,14 @@
 <li><code>int 31h</code> : Memory allocation, sector manipulation, table of descriptors</li>
 <li><code>int 2Eh</code> : Sleep</li>
 <li><code>int 21h</code> :</li>
+<li><code>int 20h</code> : Terminate program</li>
 <li><code>int 13h</code> : Access to disk</li>
-<li><p><code>int 10h</code> :</p></li>
+<li><code>int 10h</code> : BIOS
+<ul>
 <li><code>fct 00h</code> : Change video mode and clear screen</li>
 <li><code>fct 01h</code> : Set cursor type</li>
-<li><p><code>fct 13h</code> : Show string on screen</p></li>
+<li><code>fct 13h</code> : Show string on screen</li>
+</ul></li>
 </ul>
 <h2 id="tab-manipulation">Tab manipulation</h2>
 <p>Ctrl + ` : Global summon from taskbar Win + Alt + p : Preferences Ctrl + t : New tab Ctrl + w : Close tab Shitft + Alt + 1: New CMD tab Shitft + Alt + 2: New Powershell tab Alt + Enter : Full screen</p>

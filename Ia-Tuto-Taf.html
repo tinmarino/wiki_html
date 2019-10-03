@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Untitled</title>
+  <title>Ia-Tuto-Taf.md – Untitled</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
+<h1 id="notes">Notes</h1>
 <ul>
 <li><p>On peut utiliser le convolutionelle pour tout signal spatio-temporelle : où il y a corrélation entre les coordonnées proches.</p></li>
 <li><p>Pour réduire le biais causé par 2 fonctions du mm nom mais pas les mêmes, on peu modifier la loss pour ne pas trop punir si elle se trompe trop (par exemple dans le cas d’un nouveau wrapper).</p></li>
@@ -61,22 +62,29 @@
 <p>Moyenne géométrique Rappel et Précision : <code>2.p.r / (p + r)</code></p>
 <h2 id="statistiques">Statistiques</h2>
 <ul>
-<li><p>Regarder le nombre d’objets pour chaque label</p></li>
+<li>Regarder le nombre d’objets pour chaque label
+<ul>
 <li>Bien comprendre qui est majoritaire et si ceux qui m’intèressent sont minoritaire, pourquoi ? Ou sont-ils ? Est ce que je considère les autres ? En superisé (ou semi) ?</li>
-<li><p>C’est parfois normal, par exemple pour chercher un evenement rare : une tumeur dans une image médicale. On a des échantillons d’intérêt minoritaire. Bonne chance.</p></li>
+<li>C’est parfois normal, par exemple pour chercher un evenement rare : une tumeur dans une image médicale. On a des échantillons d’intérêt minoritaire. Bonne chance.</li>
+</ul></li>
 </ul>
 <h1 id="todo">Todo</h1>
 <ul>
 <li>Exporter au format numpy (pour faciliter le chargement)</li>
 <li>Numpy sous forme binaire pour mmap rapide</li>
 <li><p>Prendre les exemples du cour pour les collègues.</p></li>
-<li><p>Faire des statistiques</p></li>
+<li>Faire des statistiques
+<ul>
 <li>Voir les outsiders</li>
-<li><p>Faire un histogramme</p></li>
-<li><p>Regarder</p></li>
+<li>Faire un histogramme</li>
+</ul></li>
+<li>Regarder
+<ul>
 <li>KNeighborsClassifier</li>
-<li><p>LinearDiscriminantAnalysis</p></li>
+<li>LinearDiscriminantAnalysis</li>
+</ul></li>
 <li><p>Préparer un Golden Standard, ce qui est comme un test de non régression pour l’IA.</p></li>
+<li><p>Fuzzy distance (string)</p></li>
 </ul>
 <h1 id="numpy-plt-scikit-learn">Numpy / Plt / Scikit learn</h1>
 <ul>
