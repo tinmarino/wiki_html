@@ -82,6 +82,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 <p><a href="Bash-Rc.html">Bash Rc</a></p>
 <ul>
+<li>Exit with <C-D></li>
+<li>cat directory any write
+<ul>
+<li><code>inotifywait -qme close_write . | while read -r fil ; do cat $fil ; done</code></li>
+</ul></li>
 <li>Read file line by line
 <ul>
 <li>cat peptides.txt | while read line; do_something_with_$line_here; done</li>
@@ -176,10 +181,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>Debugging
 <ul>
-<li><code>bash -x ./script.sh</code>
+<li><p><code>bash -x ./script.sh</code></p></li>
+<li>set -x</li>
+<li>trap read debug
 <ul>
-<li>set -x # at the beginning of the script</li>
+<li><h1 id="at-the-beginning-of-the-script">at the beginning of the script</h1>
+<ul>
 <li>to debug</li>
+</ul></li>
 </ul></li>
 </ul></li>
 <li>Arrays

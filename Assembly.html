@@ -165,7 +165,8 @@ JA | JB | Unsigned |</div>
 <li><code>LIDT</code></li>
 <li><code>IRET</code> # Interrupt Return (POP EFLAG ; POP RIP)</li>
 <li><code>RDMSR</code> # Read the 64 bit MSR register specified by ECX to EDX:EAX</li>
-<li><p><code>WDMSR</code> # Write …</p></li>
+<li><code>WDMSR</code> # Write …</li>
+<li><p><code>JMP -2</code> # EB FE infinite loop</p></li>
 </ul>
 </body>
 </html>

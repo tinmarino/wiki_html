@@ -18,6 +18,7 @@
 <ul>
 <li><a href="C-Keywords.html">Keywords</a></li>
 <li><a href="C-Operators.html">Operators</a></li>
+<li><a href="C-Regle-De-Codage.html">Regle De Codage</a></li>
 </ul>
 <p>Include path (print)</p>
 <pre><code>gcc -xc -E -v -
@@ -29,9 +30,11 @@ gcc -xc++ -E -v -</code></pre>
 <li><code>__declspec(dllexport)</code> # windows : export function in dll</li>
 <li><code>__debugbreak()</code> # Set breakpoint</li>
 <li><code>offsetof(struct_t, elt_t)</code> # Get elemenet offset</li>
-<li><p><code>extern int const iPi = 3.1415926535</code></p></li>
+<li><code>extern int const iPi = 3.1415926535</code>
+<ul>
 <li>extern so importing this.h get iPi defined</li>
 <li>const for the precompiler (to avoid errors)</li>
+</ul></li>
 <li><code>#pragma pack(1)</code> # to let the structure without aligning each field</li>
 <li><code>__FILE__</code> # Name of the file.c</li>
 <li><code>__LINE__</code> # Current line</li>
