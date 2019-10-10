@@ -56,35 +56,48 @@ endfunction
 imap &lt;Tab&gt; &lt;C-R&gt;=SuperTab()&lt;CR&gt;</code></pre>
 <p><a href="http://www.vimbits.com/bits/46.html">Here</a>’s another example with <a href="#functions">functions</a>, <a href="#variables">variables</a> and <a href="#mapping">mapping</a>.</p>
 </div>
+<h2 id="titre-à-retirer">Titre à retirer</h2>
+<p>Putain y’a 2 titres collé, chaud pour <code>perl</code></p>
 <h2 id="variables">Variables</h2>
-<p>::::::::: ::::::::: {.h3-sections} ### Defining</p>
+<div class="h3-sections">
+<h3 id="defining">Defining</h3>
 <pre class="language-vim"><code>let var = &quot;hello&quot;</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Variable prefixes</p>
+</div>
+<div class="h3-sections">
+<h3 id="variable-prefixes">Variable prefixes</h3>
 <pre class="language-vim"><code>let g:ack_options = &#39;-s -H&#39;    &quot; g: global
 let s:ack_program = &#39;ack&#39;      &quot; s: local (to script)
 let l:foo = &#39;bar&#39;              &quot; l: local (to function)</code></pre>
 <p>The <code>s:</code> prefix is also available in function names. See <code>:help local-variables</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Other prefixes</p>
+</div>
+<div class="h3-sections">
+<h3 id="other-prefixes">Other prefixes</h3>
 <pre class="language-vim"><code>let w:foo = &#39;bar&#39;    &quot; w: window
 let b:state = &#39;on&#39;   &quot; b: buffer
 let t:state = &#39;off&#39;  &quot; t: tab
 echo v:var           &quot; v: vim special</code></pre>
 <pre class="language-vim"><code>let @/ = &#39;&#39;          &quot; @  register (this clears last search pattern)
 echo $PATH           &quot; $  env</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Vim options</p>
+</div>
+<div class="h3-sections">
+<h3 id="vim-options">Vim options</h3>
 <pre class="language-vim"><code>echo &#39;tabstop is &#39; . &amp;tabstop
 if &amp;insertmode
 echo &amp;g:option
 echo &amp;l:option</code></pre>
 <p>Prefix Vim options with <code>&amp;</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Operators</p>
+</div>
+<div class="h3-sections">
+<h3 id="operators">Operators</h3>
 <pre class="language-vim"><code>a + b             &quot; numbers only!
 &#39;hello &#39; . name   &quot; concat</code></pre>
 <pre class="language-vim"><code>let var -= 2
 let var += 5
 let var .= &#39;string&#39;   &quot; concat</code></pre>
-<p>::::::::: ## Strings</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Strings</p>
+</div>
+<h2 id="strings">Strings</h2>
+<div class="h3-sections">
+<h3 id="strings-1">Strings</h3>
 <pre class="language-vim"><code>let str = &quot;String&quot;
 let str = &quot;String with \n newline&quot;
 
@@ -93,7 +106,9 @@ let literal = &#39;that&#39;&#39;s enough&#39;  &quot; double &#39;&#39; =&gt; &
 
 echo &quot;result = &quot; . re   &quot; concatenation</code></pre>
 <p>Also see <code>:help literal-string</code> and <code>:help expr-quote</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/26.html.html">Strings</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### String functions</p>
+</div>
+<div class="h3-sections">
+<h3 id="string-functions">String functions</h3>
 <pre class="language-vim"><code>strlen(str)    &quot; length
 len(str)       &quot; same
 strchars(str)  &quot; character length
@@ -106,8 +121,10 @@ join([&#39;a&#39;, &#39;b&#39;], &#39;,&#39;)  &quot;=&gt; &#39;a,b&#39;
 tolower(&#39;Hello&#39;)
 toupper(&#39;Hello&#39;)</code></pre>
 <p>Also see <code>:help functions</code> See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/27.html.html">String functions</a></p>
-<p>::::::::: ## Functions</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Functions</p>
+</div>
+<h2 id="functions">Functions</h2>
+<div class="h3-sections">
+<h3 id="functions-1">Functions</h3>
 <pre class="language-vim"><code>&quot; prefix with s: for local script-only functions
 function! s:Initialize(cmd, args)
   &quot; a: prefix for arguments
@@ -116,18 +133,28 @@ function! s:Initialize(cmd, args)
   return true
 endfunction</code></pre>
 <p>See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/23.html.html">Functions</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Namespacing</p>
+</div>
+<div class="h3-sections">
+<h3 id="namespacing">Namespacing</h3>
 <pre class="language-vim"><code>function! myplugin#hello()</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Calling functions</p>
+</div>
+<div class="h3-sections">
+<h3 id="calling-functions">Calling functions</h3>
 <pre class="language-vim"><code>call s:Initialize()
 call s:Initialize(&quot;hello&quot;)</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Consuming return values</p>
+</div>
+<div class="h3-sections">
+<h3 id="consuming-return-values">Consuming return values</h3>
 <pre class="language-vim"><code>echo &quot;Result: &quot; . s:Initialize()</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Abortable</p>
+</div>
+<div class="h3-sections">
+<h3 id="abortable">Abortable</h3>
 <pre class="language-vim"><code>function! myfunction() abort
 endfunction</code></pre>
 <p>Aborts when an error occurs.</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Var arguments</p>
+</div>
+<div class="h3-sections">
+<h3 id="var-arguments">Var arguments</h3>
 <pre class="language-vim"><code>function! infect(...)
   echo a:0    &quot;=&gt; 2
   echo a:1    &quot;=&gt; jake
@@ -140,7 +167,8 @@ endfunction
 
 infect(&#39;jake&#39;, &#39;bella&#39;)</code></pre>
 <p>See <code>:help function-argument</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/24.html.html">Var arguments</a></p>
-<p>::::::::: ## Loops</p>
+</div>
+<h2 id="loops">Loops</h2>
 <pre class="language-vim"><code>for s in list
   echo s
   continue  &quot; jump to start of loop
@@ -148,16 +176,21 @@ infect(&#39;jake&#39;, &#39;bella&#39;)</code></pre>
 endfor</code></pre>
 <pre class="language-vim"><code>while x &lt; 5
 endwhile</code></pre>
-<p>::::::::: ## Custom commands</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Custom commands</p>
+<h2 id="custom-commands">Custom commands</h2>
+<div class="h3-sections">
+<h3 id="custom-commands-1">Custom commands</h3>
 <pre class="language-vim"><code>command! Save :set fo=want tw=80 nowrap</code></pre>
 <p>Custom commands start with uppercase letters. The <code>!</code> redefines a command if it already exists.</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Commands calling functions</p>
+</div>
+<div class="h3-sections">
+<h3 id="commands-calling-functions">Commands calling functions</h3>
 <pre class="language-vim"><code>command! Save call &lt;SID&gt;foo()</code></pre>
 <pre class="language-vim"><code>function! s:foo()
   ...
 endfunction</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Commands with arguments</p>
+</div>
+<div class="h3-sections">
+<h3 id="commands-with-arguments">Commands with arguments</h3>
 <pre class="language-vim"><code>command! -nargs=? Save call script#foo(&lt;args&gt;)</code></pre>
 <table>
 <thead>
@@ -190,7 +223,9 @@ endfunction</code></pre>
 </tbody>
 </table>
 <h2 id="flow">Flow</h2>
-<p>::::::::: ::::::::: {.h3-sections} ### Conditionals</p>
+</div>
+<div class="h3-sections">
+<h3 id="conditionals">Conditionals</h3>
 <pre class="language-vim"><code>let char = getchar()
 if char == &quot;\&lt;LeftMouse&gt;&quot;
   &quot; ...
@@ -199,7 +234,9 @@ elseif char == &quot;\&lt;RightMouse&gt;&quot;
 else
   &quot; ...
 endif</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Truthiness</p>
+</div>
+<div class="h3-sections">
+<h3 id="truthiness">Truthiness</h3>
 <pre class="language-vim"><code>if 1 | echo &quot;true&quot;  | endif
 if 0 | echo &quot;false&quot; | endif</code></pre>
 <pre class="language-vim"><code>if 1       &quot;=&gt; 1 (true)
@@ -208,35 +245,49 @@ if &quot;1&quot;     &quot;=&gt; 1 (true)
 if &quot;456&quot;   &quot;=&gt; 1 (true)
 if &quot;xfz&quot;   &quot;=&gt; 0 (false)</code></pre>
 <p>No booleans. <code>0</code> is false, <code>1</code> is true. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/21.html.html">Truthiness</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Operators</p>
+</div>
+<div class="h3-sections">
+<h3 id="operators-1">Operators</h3>
 <pre class="language-vim"><code>if 3 &gt; 2
 if a &amp;&amp; b
 if (a &amp;&amp; b) || (c &amp;&amp; d)
 if !c</code></pre>
 <p>See <code>:help expression-syntax</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/22.html.html">Operators</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Strings</p>
+</div>
+<div class="h3-sections">
+<h3 id="strings-2">Strings</h3>
 <pre class="language-vim"><code>if name ==# &#39;John&#39;     &quot; case-sensitive
 if name ==? &#39;John&#39;     &quot; case-insensitive
 if name == &#39;John&#39;      &quot; depends on :set ignorecase
 
 &quot; also: is#, is?, &gt;=#, &gt;=?, and so on</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Identity operators</p>
+</div>
+<div class="h3-sections">
+<h3 id="identity-operators">Identity operators</h3>
 <pre class="language-vim"><code>a is b
 a isnot b</code></pre>
 <p>Checks if it’s the same instance object.</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Regexp matches</p>
+</div>
+<div class="h3-sections">
+<h3 id="regexp-matches">Regexp matches</h3>
 <pre class="language-vim"><code>&quot;hello&quot; =~ &#39;/x/&#39;
 &quot;hello&quot; !~ &#39;/x/&#39;</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Single line</p>
+</div>
+<div class="h3-sections">
+<h3 id="single-line">Single line</h3>
 <pre class="language-vim"><code>if empty(a:path) | return [] | endif
 a ? b : c</code></pre>
 <p>Use <code>|</code> to join lines together.</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Boolean logic</p>
+</div>
+<div class="h3-sections">
+<h3 id="boolean-logic">Boolean logic</h3>
 <pre class="language-vim"><code>if g:use_dispatch &amp;&amp; s:has_dispatch
   ···
 endif</code></pre>
-<p>::::::::: ## Lists</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Lists</p>
+</div>
+<h2 id="lists">Lists</h2>
+<div class="h3-sections">
+<h3 id="lists-1">Lists</h3>
 <pre class="language-vim"><code>let mylist = [1, two, 3, &quot;four&quot;]
 
 let first = mylist[0]
@@ -245,7 +296,9 @@ let last  = mylist[-1]
 &quot; Suppresses errors
 let second = get(mylist, 1)
 let second = get(mylist, 1, &quot;NONE&quot;)</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Functions</p>
+</div>
+<div class="h3-sections">
+<h3 id="functions-2">Functions</h3>
 <pre class="language-vim"><code>len(mylist)
 empty(mylist)
 
@@ -253,22 +306,32 @@ sort(list)
 let sortedlist = sort(copy(list))
 
 split(&#39;hello there world&#39;, &#39; &#39;)</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Concatenation</p>
+</div>
+<div class="h3-sections">
+<h3 id="concatenation">Concatenation</h3>
 <pre class="language-vim"><code>let longlist = mylist + [5, 6]
 let mylist += [7, 8]</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Sublists</p>
+</div>
+<div class="h3-sections">
+<h3 id="sublists">Sublists</h3>
 <pre class="language-vim"><code>let shortlist = mylist[2:-1]
 let shortlist = mylist[2:]     &quot; same
 
 let shortlist = mylist[2:2]    &quot; one item</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Push</p>
+</div>
+<div class="h3-sections">
+<h3 id="push">Push</h3>
 <pre class="language-vim"><code>let alist = [1, 2, 3]
 let alist = add(alist, 4)</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Map</p>
+</div>
+<div class="h3-sections">
+<h3 id="map">Map</h3>
 <pre class="language-vim"><code>call map(files, &quot;bufname(v:val)&quot;)  &quot; use v:val for value
 call filter(files, &#39;v:val != &quot;&quot;&#39;)</code></pre>
-<p>::::::::: ## Dictionaries</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Dictionaries</p>
+</div>
+<h2 id="dictionaries">Dictionaries</h2>
+<div class="h3-sections">
+<h3 id="dictionaries-1">Dictionaries</h3>
 <pre class="language-vim"><code>let colors = {
   \ &quot;apple&quot;: &quot;red&quot;,
   \ &quot;banana&quot;: &quot;yellow&quot;
@@ -277,7 +340,9 @@ call filter(files, &#39;v:val != &quot;&quot;&#39;)</code></pre>
 echo colors[&quot;a&quot;]
 echo get(colors, &quot;apple&quot;)   &quot; suppress error</code></pre>
 <p>See <code>:help dict</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Using dictionaries</p>
+</div>
+<div class="h3-sections">
+<h3 id="using-dictionaries">Using dictionaries</h3>
 <pre class="language-vim"><code>remove(colors, &quot;apple&quot;)</code></pre>
 <pre class="language-vim"><code>&quot; :help E715
 if has_key(dict, &#39;foo&#39;)
@@ -289,35 +354,49 @@ min(dict)</code></pre>
 <pre class="language-vim"><code>count(dict, &#39;x&#39;)
 string(dict)</code></pre>
 <pre class="language-vim"><code>map(dict, &#39;&lt;&gt;&gt; &quot; . v:val&#39;)</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Iteration</p>
+</div>
+<div class="h3-sections">
+<h3 id="iteration">Iteration</h3>
 <pre class="language-vim"><code>for key in keys(mydict)
   echo key . &#39;: &#39; . mydict(key)
 endfor</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Prefixes</p>
+</div>
+<div class="h3-sections">
+<h3 id="prefixes">Prefixes</h3>
 <pre class="language-vim"><code>keys(s:)</code></pre>
 <p>Prefixes (<code>s:</code>, <code>g:</code>, <code>l:</code>, etc) are actually dictionaries.</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Extending</p>
+</div>
+<div class="h3-sections">
+<h3 id="extending">Extending</h3>
 <pre class="language-vim"><code>&quot; Extending with more
 let extend(s:fruits, { ... })</code></pre>
-<p>::::::::: ## Casting</p>
+</div>
+<h2 id="casting">Casting</h2>
 <pre class="language-vim"><code>str2float(&quot;2.3&quot;)
 str2nr(&quot;3&quot;)
 float2nr(&quot;3.14&quot;)</code></pre>
-<p>::::::::: ## Numbers</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Numbers</p>
+<h2 id="numbers">Numbers</h2>
+<div class="h3-sections">
+<h3 id="numbers-1">Numbers</h3>
 <pre class="language-vim"><code>let int = 1000
 let int = 0xff
 let int = 0755   &quot; octal</code></pre>
 <p>See <code>:help Number</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/25.html.html">Numbers</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Floats</p>
+</div>
+<div class="h3-sections">
+<h3 id="floats">Floats</h3>
 <pre class="language-vim"><code>let fl = 100.1
 let fl = 5.4e4</code></pre>
 <p>See <code>:help Float</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Arithmetic</p>
+</div>
+<div class="h3-sections">
+<h3 id="arithmetic">Arithmetic</h3>
 <pre class="language-vim"><code>3 / 2     &quot;=&gt; 1, integer division
 3 / 2.0   &quot;=&gt; 1.5
 3 * 2.0   &quot;=&gt; 6.0</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Math functions</p>
+</div>
+<div class="h3-sections">
+<h3 id="math-functions">Math functions</h3>
 <pre class="language-vim"><code>sqrt(100)
 floor(3.5)
 ceil(3.3)
@@ -326,43 +405,59 @@ abs(-3.4)
 sin() cos() tan()
 sinh() cosh() tanh()
 asin() acos() atan()</code></pre>
-<p>::::::::: ## Vim-isms</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Execute a command</p>
+</div>
+<h2 id="vim-isms">Vim-isms</h2>
+<div class="h3-sections">
+<h3 id="execute-a-command">Execute a command</h3>
 <pre class="language-vim"><code>execute &quot;vsplit&quot;
 execute &quot;e &quot; . fnameescape(filename)</code></pre>
 <p>Runs an ex command you typically run with <code>:</code>. Also see <code>:help execute</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/28.html.html">Execute a command</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Running keystrokes</p>
+</div>
+<div class="h3-sections">
+<h3 id="running-keystrokes">Running keystrokes</h3>
 <pre class="language-vim"><code>normal G
 normal! G   &quot; skips key mappings
 
 execute &quot;normal! gg/foo\&lt;cr&gt;dd&quot;</code></pre>
 <p>Use <code>:normal</code> to execute keystrokes as if you’re typing them in normal mode. Combine with <code>:execute</code> for special keystrokes. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/29.html.html">Running keystrokes</a></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Getting filenames</p>
+</div>
+<div class="h3-sections">
+<h3 id="getting-filenames">Getting filenames</h3>
 <pre class="language-vim"><code>echo expand(&quot;%&quot;)      &quot; path/file.txt
 echo expand(&quot;%:t&quot;)    &quot; file.txt
 echo expand(&quot;%:p:h&quot;)  &quot; /home/you/path/file.txt
 echo expand(&quot;%:r&quot;)    &quot; path/file
 echo expand(&quot;%:e&quot;)    &quot; txt</code></pre>
 <p>See <code>:help expand</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Silencing</p>
+</div>
+<div class="h3-sections">
+<h3 id="silencing">Silencing</h3>
 <pre class="language-vim"><code>silent g/Aap/p</code></pre>
 <p>Suppresses output. See <code>:help silent</code></p>
-<p>::::::::: ::::::::: {.h3-sections} ### Echo</p>
+</div>
+<div class="h3-sections">
+<h3 id="echo">Echo</h3>
 <pre class="language-vim"><code>echoerr &#39;oh it failed&#39;
 echomsg &#39;hello there&#39;
 echo &#39;hello&#39;
 
 echohl WarningMsg | echomsg &quot;=&gt; &quot; . a:msg | echohl None</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Settings</p>
+</div>
+<div class="h3-sections">
+<h3 id="settings">Settings</h3>
 <pre class="language-vim"><code>set number
 set nonumber
 set number!     &quot; toggle
 set numberwidth=5
 set guioptions+=e</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Prompts</p>
+</div>
+<div class="h3-sections">
+<h3 id="prompts">Prompts</h3>
 <pre class="language-vim"><code>let result = confirm(&quot;Sure?&quot;)
 execute &quot;confirm q&quot;</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Built-ins</p>
+</div>
+<div class="h3-sections">
+<h3 id="built-ins">Built-ins</h3>
 <pre class="language-vim"><code>has(&quot;feature&quot;)  &quot; :h feature-list
 executable(&quot;python&quot;)
 globpath(&amp;rtp, &quot;syntax/c.vim&quot;)
@@ -372,8 +467,10 @@ exists(&quot;:command&quot;)
 exists(&quot;variable&quot;)
 exists(&quot;+option&quot;)
 exists(&quot;g:...&quot;)</code></pre>
-<p>::::::::: ## Mapping</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Mapping commands</p>
+</div>
+<h2 id="mapping">Mapping</h2>
+<div class="h3-sections">
+<h3 id="mapping-commands">Mapping commands</h3>
 <pre class="language-vim"><code>nmap
 vmap
 imap
@@ -383,38 +480,52 @@ vnoremap
 inoremap
 xnoremap
 ...</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Explanation</p>
+</div>
+<div class="h3-sections">
+<h3 id="explanation">Explanation</h3>
 <pre class="language-vim"><code>[nvixso](nore.html)map</code></pre>
 <pre><code> │       └ don&#39;t recurse
  │
  └ normal, visual, insert,
    eX mode, select, operator-pending</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Arguments</p>
+</div>
+<div class="h3-sections">
+<h3 id="arguments">Arguments</h3>
 <div class="line-block"><code>&lt;buffer&gt;</code> | only in current buffer |<br />
 <code>&lt;silent&gt;</code> | no echo |<br />
 <code>&lt;nowait&gt;</code> | |</div>
-<p>::::::::: ## Syntax</p>
-<p>::::::::: ::::::::: {.h3-sections} ### Highlights</p>
+</div>
+<h2 id="syntax">Syntax</h2>
+<div class="h3-sections">
+<h3 id="highlights">Highlights</h3>
 <pre class="language-vim"><code>hi Comment
   term=bold,underline
   gui=bold
   ctermfg=4
   guifg=#80a0ff</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Filetype detection</p>
+</div>
+<div class="h3-sections">
+<h3 id="filetype-detection">Filetype detection</h3>
 <pre class="language-vim"><code>augroup filetypedetect
   au! BufNewFile,BufRead *.json setf javascript
 augroup END
 
 au Filetype markdown setlocal spell</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Conceal</p>
+</div>
+<div class="h3-sections">
+<h3 id="conceal">Conceal</h3>
 <pre class="language-vim"><code>set conceallevel=2
 syn match newLine &quot;&lt;br&gt;&quot; conceal cchar=}
 hi newLine guifg=green</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Region conceal</p>
+</div>
+<div class="h3-sections">
+<h3 id="region-conceal">Region conceal</h3>
 <pre class="language-vim"><code>syn region inBold concealends matchgroup=bTag start=&quot;&lt;b&gt;&quot; end=&quot;&lt;/b&gt;&quot;
 hi inBold gui=bold
 hi bTag guifg=blue</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Syntax</p>
+</div>
+<div class="h3-sections">
+<h3 id="syntax-1">Syntax</h3>
 <pre class="language-vim"><code>syn match :name &quot;:regex&quot; :flags
 
 syn region Comment  start=&quot;/\*&quot;  end=&quot;\*/&quot;
@@ -430,7 +541,8 @@ flags:
   contained
 
 hi def link markdownH1 htmlH1</code></pre>
-<p>::::::::: ::::::::: {.h3-sections} ### Include guards</p>
+</div>
+<p>::::::::: {.h3-sections} ### Include guards</p>
 <pre class="language-vim"><code>if exists(&#39;g:loaded_myplugin&#39;)
   finish
 endif
