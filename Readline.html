@@ -17,7 +17,9 @@
 <header>
 <h1 class="title">Readline</h1>
 </header>
-<p>$ echo -e “\e[?1000;1006;1015h” # Enable $ echo -e “\e[?1000;1006;1015l” # Disable $ bind ‘“\e[&lt;”:“echo totot is happy”’ $ bind -m emacs -x ‘“-h”:“echo totot is happy”’</p>
+<ul>
+<li><C-X><C-E> : dit current line with vim $ echo -e “\e[?1000;1006;1015h” # Enable $ echo -e “\e[?1000;1006;1015l” # Disable $ bind ‘“\e[&lt;”:“echo totot is happy”’ $ bind -m emacs -x ‘“-h”:“echo totot is happy”’</li>
+</ul>
 <p>man console_codes echo -e “\e[?1000h” # h-&gt; Enable = Report echo -e “\e[?1000l” # l-&gt; Disable = Stop</p>
 <p>9 -&gt; X10 mouse reporting, for compatibility with X10’s xterm, reports on button press. 1000 -&gt; X11 mouse reporting, reports on button press and release. 1001 -&gt; highlight reporting, useful for reporting mouse highlights. 1002 -&gt; button movement reporting, reports movement when a button is pressed. 1003 -&gt; all movement reporting, reports all movements.</p>
 <p>1006 -&gt; report back as decimal values (xterm, many other terminal emulators, but not urxvt) 1015 -&gt; report back as decimal values (urxvt, xterm, other terminal emulators, some applications find it complex to parse) 1005 -&gt; report back encoded as utf-8 (xterm, urxvt, broken in several ways)</p>
@@ -107,6 +109,9 @@
 </tr>
 </tbody>
 </table>
+<div class="line-block"><code>&lt;A-t&gt;</code> | transpose 2 words |<br />
+<code>&lt;A-b&gt;</code> | Back 1 word |<br />
+<code>&lt;A-l&gt;</code> | Lower 1 word |</div>
 <p>From: https://help.gnome.org/users/gnome-terminal/stable/adv-keyboard-shortcuts.html.en http://www.catonmat.net/download/readline-emacs-editing-mode-cheat-sheet.pdf</p>
 <ul>
 <li>CAPS -&gt; CTRL</li>

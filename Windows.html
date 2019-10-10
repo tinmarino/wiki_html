@@ -20,10 +20,22 @@
 <li><a href="Windows-Services.html">Windows Services</a></li>
 <li><a href="Ms-Dos.html">Ms Dos</a></li>
 <li><a href="Windows_Interrupt.html">Windows Interrupt</a></li>
-<li><p><a href="Interrupt.html">Interrupt</a></p></li>
+<li><a href="Interrupt.html">Interrupt</a></li>
+<li><a href="Empire.html">Empire</a></li>
+<li><p><a href="Visual-Studio.html">Visual Studio</a></p></li>
+<li><p>dd fs:34 -&gt; GetLastError()</p></li>
+<li>Dialog
+<ul>
+<li><p>Window Hello : <code>dialog --title 'Message' --msgbox 'Hello, world!' 5 20</code></p></li>
+<li><p>Yes / no menu : <code>dialog --title &quot;Message&quot; --yesno &quot;Are you having\ fun?&quot; 6 25</code></p></li>
+<li>Infobox : <code>dialog --infobox &quot;Please wait&quot; 10 30 ; sleep 4</code></li>
+<li>Inputbox : <code>dialog --inputbox &quot;Enter your name:&quot; 8 40 2&gt;answer</code></li>
+<li><pre><code>Textbox : `dialog --textbox ~/../usr/etc/profile 22 70`</code></pre></li>
+<li></li>
 <li>Check if admin
 <ul>
 <li><code>regedit /HKLM/SAM</code> : if you can open AM, you are priviledged</li>
+</ul></li>
 </ul></li>
 <li><p>Power off (shutdown)</p>
 <p>shutdown /h /f # hibernate force /? # help /r # reboot /t 10 # in 10 sec powercfg /hibernate on powercfg /hibernate off # To be able to resize C (because /hiberfil.sys is an unmovable file)</p></li>

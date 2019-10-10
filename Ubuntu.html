@@ -14,15 +14,30 @@
   <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
+<h1 id="restart">Restart</h1>
+<ul>
+<li>gnome-shell –replace</li>
+<li>alt f2 + r or <code>restart</code></li>
+</ul>
 <h1 id="power-management-suspend-then-hibernate">Power management : suspend then hibernate</h1>
 <ul>
+<li><code>systemctl suspend-then-hibernate</code> # test</li>
+<li><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</li>
+<li><code>sudoedit /etc/UPower/UPower.conf</code></li>
+<li><code>service upower restart</code></li>
 <li><p>In <code>/etc/systemd/sleep.conf</code> new file:</p>
 <pre><code>[Sleep]
 HibernateDelaySec=3600</code></pre></li>
-<li><code>systemctl suspend-then-hibernate</code> # test</li>
 <li><p>In <code>/etc/systemd/logind.conf</code></p>
 <pre><code>HandleLidSwitch=suspend-then-hibernate</code></pre></li>
-<li><p><code>systemctl restart systemd-logind.service</code></p></li>
+<li><code>systemctl restart systemd-logind.service</code></li>
+<li><p><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</p></li>
+</ul>
+<h2 id="power-stop-sleeping">Power : stop sleeping</h2>
+<ul>
+<li><code>sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target</code> # Disable</li>
+<li><code>sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target</code> # Enable</li>
+<li>Add the kernel options acpi=off apm=off to the contents of GRUB_CMDLINE_LINUX_DEFAULT in file /etc/default/grub. Then run sudo update-grub</li>
 </ul>
 </body>
 </html>

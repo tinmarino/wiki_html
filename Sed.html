@@ -14,7 +14,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -27,13 +27,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -82,41 +80,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Get submatch 1 for all lines
 <ul>
-<li><div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">echo</span> -e <span class="st">&quot;Bla\nBla\nImportant1: One \nBla\nImportant2: Two\nBla\nBla&quot;</span> <span class="kw">|</span> <span class="kw">\</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">   <span class="fu">sed</span> -n <span class="st">&#39;s/^Important1: *\([^ ]*\) */\1/p&#39;</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="ex">OUTPUT</span>:</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="ex">one</span></a></code></pre></div></li>
+<li><div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">echo</span> -e <span class="st">&quot;Bla\nBla\nImportant1: One \nBla\nImportant2: Two\nBla\nBla&quot;</span> <span class="kw">|</span> <span class="kw">\</span></a>
+<a class="sourceLine" id="cb1-2" title="2">   <span class="fu">sed</span> -n <span class="st">&#39;s/^Important1: *\([^ ]*\) */\1/p&#39;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ex">OUTPUT</span>:</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ex">one</span></a></code></pre></div></li>
 <li><code>-n</code> means silent</li>
 </ul></li>
 <li>Replace a multi-line string https://unix.stackexchange.com/questions/26284/how-can-i-use-sed-to-replace-a-multi-line-string?utm_medium=organic&amp;utm_source=google_rich_qa&amp;utm_campaign=google_rich_qa
 <ul>
 <li></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">sed</span> <span class="st">&#39;/^a test$/{</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">   $!{ N        # append the next line when not on the last line</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">     s/^a test\nPlease do not$/not a test\nBe/</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">                # now test for a successful substitution, otherwise</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">                #+  unpaired &quot;a test&quot; lines would be mis-handled</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="st">     t sub-yes  # branch_on_substitute (goto label :sub-yes)</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">     :sub-not   # a label (not essential; here to self document)</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">                # if no substituion, print only the first line</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">     P          # pattern_first_line_print</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">     D          # pattern_ltrunc(line+nl)_top/cycle</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">     :sub-yes   # a label (the goto target of the &#39;</span>t<span class="st">&#39; branch)</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">                # fall through to final auto-pattern_print (2 lines)</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="st">   }    </span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="st"> }&#39;</span> alpha.txt         </a></code></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">sed</span> <span class="st">&#39;/^a test$/{</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">   $!{ N        # append the next line when not on the last line</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">     s/^a test\nPlease do not$/not a test\nBe/</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">                # now test for a successful substitution, otherwise</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">                #+  unpaired &quot;a test&quot; lines would be mis-handled</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">     t sub-yes  # branch_on_substitute (goto label :sub-yes)</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="st">     :sub-not   # a label (not essential; here to self document)</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">                # if no substituion, print only the first line</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">     P          # pattern_first_line_print</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="st">     D          # pattern_ltrunc(line+nl)_top/cycle</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">     :sub-yes   # a label (the goto target of the &#39;</span>t<span class="st">&#39; branch)</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">                # fall through to final auto-pattern_print (2 lines)</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="st">   }    </span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="st"> }&#39;</span> alpha.txt         </a></code></pre></div></li>
 <li>Multiline pattern
 <ul>
 <li></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"> <span class="fu">sed</span> -n <span class="st">&#39;/[{]/,/[}]/{</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st"> p</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st"> /[}]/a\</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  end of block matching brace</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st"> }&#39;</span> *.txt </a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"> <span class="fu">sed</span> -n <span class="st">&#39;/[{]/,/[}]/{</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st"> p</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st"> /[}]/a\</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  end of block matching brace</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st"> }&#39;</span> *.txt </a></code></pre></div>
 <ul>
 <li><code>-n</code> means ‘no default print lines as processed’.
 <ul>
@@ -132,9 +130,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/a \</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">line1 \</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/a \</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">line1 \</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div>
 <ul>
 <li><code>sed -i '/SearchPattern/aNew Text' SomeFile.txt</code></li>
 </ul></li>
@@ -142,9 +140,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/i \</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">line1 \</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">sed</span> -i <span class="st">&#39;/pattern/i \</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">line1 \</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">line2&#39;</span> inputfile</a></code></pre></div></li>
 <li><p>Cheat</p>
 <pre><code>:  # label
 =  # line_number
@@ -171,5 +169,344 @@ w  # append_pattern_to_file_now
 x  # swap_pattern_and_hold             
 y  # transform_chars    </code></pre></li>
 </ul>
+<pre><code>.---------------------------------------------------------------------.
+|                                                                     |
+|                            UNIX Stream Editor                       |
+|                             Sed Cheat Sheet                         |
+|                                                                     |
+&#39;---------------------------------------------------------------------&#39;
+| Created by Peter Krumins (peter@catonmat.net, @pkrumins on twitter) |
+| www.catonmat.net -- good coders code, great coders reuse            |
+&#39;---------------------------------------------------------------------&#39;
+
+ ==================== How Commands Affect Streams ====================
+
+   .---------.-----------.-----------------------------------------.
+   |         |           |           Modifications to:             |
+   |         |  Address  &#39;---------.---------.---------.-----------&#39;
+   | Command | or Range  | Input   | Output  | Pattern |   Hold    |
+   |         |           | Stream  | Stream  | Space   |   Buffer  |
+   &#39;---------+-----------+---------+---------+---------+-----------&#39;
+   |    =    |     -     |    -    |    +    |    -    |     -     |
+   |    a    |     1     |    -    |    +    |    -    |     -     |
+   |    b    |     2     |    -    |    -    |    -    |     -     |
+   |    c    |     2     |    -    |    +    |    -    |     -     |
+   |    d    |     2     |    +    |    -    |    +    |     -     |
+   |    D    |     2     |    +    |    -    |    +    |     -     |
+   |    g    |     2     |    -    |    -    |    +    |     -     |
+   |    G    |     2     |    -    |    -    |    +    |     -     |
+   |    h    |     2     |    -    |    -    |    -    |     +     |
+   |    H    |     2     |    -    |    -    |    -    |     +     |
+   |    i    |     1     |    -    |    +    |    -    |     -     |
+   |    l    |     1     |    -    |    +    |    -    |     -     |
+   |    n    |     2     |    +    |    *    |    -    |     -     |
+   |    N    |     2     |    +    |    -    |    +    |     -     |
+   |    p    |     2     |    -    |    +    |    -    |     -     |
+   |    P    |     2     |    -    |    +    |    -    |     -     |
+   |    q    |     1     |    -    |    -    |    -    |     -     |
+   |    r    |     1     |    -    |    +    |    -    |     -     |
+   |    s    |     2     |    -    |    -    |    +    |     -     |
+   |    t    |     2     |    -    |    -    |    -    |     -     |
+   |    w    |     2     |    -    |    +    |    -    |     -     |
+   |    x    |     2     |    -    |    -    |    +    |     +     |
+   |    y    |     2     |    -    |    -    |    +    |     -     |
+   &#39;---------&#39;-----------&#39;---------&#39;---------&#39;---------&#39;-----------&#39;
+
+    Modifications to:
+
+    1    Command takes single address or pattern.
+    2    Command takes pair of addresses.
+    -    Command does not modify the buffer.
+    +    Command modifies the buffer.
+    *    The ``n&#39;&#39; command may or may not generate output depending
+         on the ``-n&#39;&#39; command option.
+
+
+ ========================== Command Summary ==========================
+
+.----------------.----------------------------------------------------.
+|                |                                                    |
+| Command        | Description                                        |
+|                |                                                    |
+&#39;----------------+----------------------------------------------------&#39;
+| #              | Adds a comment.                                    |
+&#39;----------------+----------------------------------------------------&#39;
+| =              | The &quot;=&quot; command prints the current line number to  |
+|                | standard output.                                   |
+&#39;----------------+----------------------------------------------------&#39;
+| a \            | The &quot;a&quot; command appends text after the             |
+| text           | range or pattern.                                  |
+&#39;----------------+----------------------------------------------------&#39;
+| b label        | The &quot;b&quot; command branches to the label. You can     |
+|                | specify a label with a text string followed by a   |
+|                | colon. If no label is there, branch to the end of  |
+|                | the script.                                        |
+&#39;----------------+----------------------------------------------------&#39;
+| c \            | The &quot;c&quot; command changes the current line with      |
+| text           | text.                                              |
+&#39;----------------+----------------------------------------------------&#39;
+| d              | The &quot;d&quot; command deletes the current pattern space, |
+|                | reads in the next line, puts the new line into the |
+|                | pattern space, and aborts the current command, and |
+|                | starts execution at the first sed command.         |
+&#39;----------------+----------------------------------------------------&#39;
+| D              | The &quot;D&quot; command deletes the first portion of the   |
+|                | pattern space, up to the new line character,       |
+|                | leaving the rest of the pattern alone.             |
+&#39;----------------+----------------------------------------------------&#39;
+| g              | Instead of exchanging (the &quot;x&quot; command) the hold   |
+|                | space with the pattern space, you can copy the     |
+|                | hold space to the pattern space with the &quot;g&quot;       |
+|                | command.                                           |
+&#39;----------------+----------------------------------------------------&#39;
+| G              | If you want to append to the pattern space, use    |
+|                | the &quot;G&quot; command.                                   |
+&#39;----------------+----------------------------------------------------&#39;
+| h              | The &quot;h&quot; command copies the pattern buffer into the |
+|                | hold buffer.                                       |
+&#39;----------------+----------------------------------------------------&#39;
+| H              | The &quot;H&quot; command allows you to combine several      |
+|                | lines in the hold buffer. It acts like the &quot;N&quot;     |
+|                | command as lines are appended to the buffer, with  |
+|                | a &quot;\n&quot; between the lines. You can save several     |
+|                | lines in the hold buffer, and print them only if a |
+|                | particular pattern is found later.                 |
+&#39;----------------+----------------------------------------------------&#39;
+| i \            | You can insert text before the pattern with        |
+| text           | the &quot;i&quot; command.                                   |
+&#39;----------------+----------------------------------------------------&#39;
+| l              | The &quot;l&quot; command prints the current pattern space.  |
+|                | It is therefore useful in debugging sed scripts.   |
+|                | It also converts unprintable characters into       |
+|                | printing characters by outputting the value in     |
+|                | octal preceded by a &quot;\&quot; character.                 |
+&#39;----------------+----------------------------------------------------&#39;
+| n              | The &quot;n&quot; command will print out the current pattern |
+|                | space (unless the &quot;-n&quot; flag is used), empty the    |
+|                | current pattern space, and read in the next        |
+|                | line of input.                                     |
+&#39;----------------+----------------------------------------------------&#39;
+| N              | The &quot;N&quot; command does not print out the current     |
+|                | pattern space and does not empty the pattern       |
+|                | space. It reads in the next line, but appends a    |
+|                | new line character along with the input line       |
+|                | itself to the pattern space.                       |
+&#39;----------------+----------------------------------------------------&#39;
+| p              | Another useful command is the print command: &quot;p&quot;.  |
+|                | If sed wasn&#39;t started with an &quot;-n&quot; option, the &quot;p&quot; |
+|                | command will duplicate the input. The &quot;p&quot; command  |
+|                | prints the entire pattern space.                   |
+&#39;----------------+----------------------------------------------------&#39;
+| P              | The &quot;P&quot; command only prints the first part of the  |
+|                | pattern space, up to the NEWLINE character.        |
+&#39;----------------+----------------------------------------------------&#39;
+| q              | There is one more simple command that can restrict |
+|                | the changes to a set of lines. It is the &quot;q&quot;       |
+|                | command: quit. This command is most useful when    |
+|                | you wish to abort the editing after some condition |
+|                | is reached.                                        |
+&#39;----------------+----------------------------------------------------&#39;
+| r filename     | The &quot;r&quot; command will append text from filename     |
+|                | after the range or pattern.                        |
+&#39;----------------+----------------------------------------------------&#39;
+| s/regex/repl/  | The substitute command replaces all occurrences of |
+|                | the regular expression (regex) with repl(acement)  |
+&#39;----------------+----------------------------------------------------&#39;
+| t label        | You can execute a branch if a pattern is found.    |
+|                | You may want to execute a branch only if a         |
+|                | substitution is made. The command &quot;t label&quot; will   |
+|                | branch to the label if the last substitute command |
+|                | modified the pattern space.                        |
+&#39;----------------+----------------------------------------------------&#39;
+| w filename     | With this command, you can specify a filename that |
+|                | will receive the modified data.                    |
+&#39;----------------+----------------------------------------------------&#39;
+| x              | The &quot;x&quot; command exchanges the hold buffer and the  |
+|                | pattern buffer.                                    |
+&#39;----------------+----------------------------------------------------&#39;
+| y/source/dest/ | Transliterate the characters in the pattern space, |
+|                | which appear in source to the corresponding        |
+|                | character in dest(ination).                        |
+&#39;----------------&#39;----------------------------------------------------&#39;
+
+
+ ======================== Command Extensions =========================
+
+.----------------.----------------------------------------------------.
+|                |                                                    |
+| Command        | Description                                        |
+|                |                                                    |
+&#39;----------------+----------------------------------------------------&#39;
+| Q              | Immediately quit the sed script without processing |
+|                | any more input. (zero or one address command)      |
+&#39;----------------+----------------------------------------------------&#39;
+| R filename     | Append a line read from filename. (zero or one     |
+|                | address command).                                  |
+&#39;----------------+----------------------------------------------------&#39;
+| T label        | If no s/// has done a successful substitution      |
+|                | since the last input line was read and since the   |
+|                | last t or T command, then branch to label;         |
+|                | if label is omitted, branch to end of script.      |
+|                | (accepts address range).                           |
+&#39;----------------+----------------------------------------------------&#39;
+| W filename     | Write the first line of the current pattern space  |
+|                | to filename. (accepts address range).              |
+&#39;----------------&#39;----------------------------------------------------&#39;
+
+
+ ======================= Address Range Summary =======================
+
+.----------------.----------------------------------------------------.
+|                |                                                    |
+| Format         | Description                                        |
+|                |                                                    |
+&#39;----------------+----------------------------------------------------&#39;
+| number         | Match only the specified line number.              |
+&#39;----------------+----------------------------------------------------&#39;
+| first~step     | Match every step&#39;th line starting with line first. |
+&#39;----------------+----------------------------------------------------&#39;
+| $              | Match the last line.                               |
+&#39;----------------+----------------------------------------------------&#39;
+| 0, addr2       | Start out in &quot;matched first address&quot; state,        |
+|                | until addr2 is found.                              |
+&#39;----------------+----------------------------------------------------&#39;
+| /regex/        | Match lines matching the regular expression regex. |
+&#39;----------------+----------------------------------------------------&#39;
+| addr1,+N       | Will match addr1 and the N lines following addr1.  |
+&#39;----------------+----------------------------------------------------&#39;
+| \cregexc       | Match lines matching the regular expression regex. |
+|                | The c may be any character.                        |
+&#39;----------------+----------------------------------------------------&#39;
+| addr1,~N       | Will match addr1 and the lines following addr1     |
+|                | until the next line whose input line number        |
+|                | is a multiple of N.                                |
+&#39;----------------&#39;----------------------------------------------------&#39;
+
+
+ ============== GNU Sed&#39;s Command Line Argument Summary ==============
+
+.---------------------.-----------------------------------------------.
+|                     |                                               |
+| Argument            | Description                                   |
+|                     |                                               |
+&#39;---------------------+-----------------------------------------------&#39;
+| -n                  |                                               |
+| --quiet             | Suppress automatic printing of pattern space. |
+| --silent            |                                               |
+&#39;---------------------+-----------------------------------------------&#39;
+| -e script           |                                               |  
+| --expression=script | Add the script to the commands to be executed.|
+|                     |                                               |
+&#39;---------------------+-----------------------------------------------&#39;
+| -f script-file      | Add the contents of script-file to the        |
+| --file=script-file  | commands to be executed.                      |
+&#39;---------------------+-----------------------------------------------&#39;
+| -i[suffix]          | Sdit files in place (makes backup if          |
+| --in-place[=suffix] | extension supplied).                          |
+&#39;---------------------+-----------------------------------------------&#39;
+| -l N                | Specify the desired line-wrap length for      |
+| --line-length=N     | the `l&#39; command.                              |
+&#39;---------------------+-----------------------------------------------&#39;
+| -r                  | Use extended regular expressions in the       |
+| --regexp-extended   | script.                                       |
+&#39;---------------------+-----------------------------------------------&#39;
+| -s                  | Consider files as separate rather than as a   |
+| --separate          | single continuous long stream.                |
+&#39;---------------------+-----------------------------------------------&#39;
+| -u                  | Load minimal amounts of data from the input   |
+| --unbuffered        | files and flush the output buffers more often.|
+&#39;---------------------+-----------------------------------------------&#39;
+| --help              | Display this help and exit                    |
+&#39;---------------------+-----------------------------------------------&#39;
+| -V                  | Output version information and exit           |
+| --version           |                                               |
+&#39;---------------------&#39;-----------------------------------------------&#39;
+
+ =====================================================================
+
+.---------------------------------------------------------------------.
+| Created by Peter Krumins (peter@catonmat.net, @pkrumins on twitter) |
+| www.catonmat.net -- good coders code, great coders reuse            |
+&#39;---------------------------------------------------------------------&#39;</code></pre>
+<h1 id="sed-by-example">Sed by example</h1>
+<pre><code>sed gets input stream (usually file) line by line, modify each line accordingly to rules in sed&#39;s script file and print the result to output stream.
+
+Following is example of command
+
+sed [options] &#39;{script}&#39; [file(s)]
+
+If there is no file as input then sed reads input stream or pipeline. If you want the result in a text file, you can either redirect it via the regular method:
+
+sed [options] &#39;{script}&#39; [inputfile] &gt; [output]
+
+Or use the option -i that will directly edit the input file
+
+sed -i [options] &#39;{script}&#39; [inputfile]
+
+Search
+Command     Description
+sed -n &quot;3p&quot; file.txt    print 3rd line
+sed -n &#39;1,3p&#39; file.txt  print strings from 1st to 3rd
+sed -n &quot;/[media]/,/[public]/p&quot; smb.conf     print strings from 1st to 3rd which contains specified string
+sed -n &#39;/[media]/,$p&#39; smb.conf  print strings from first mention of media till end of file
+sed 5,15d file.txt  show all of file.txt except for lines from 5 to 15
+sed &#39;/pattern/q&#39; file.txt   print all lines till pattern
+sed -n &#39;/pattern/p&#39; file.txt    print do matched strings (emulates grep)
+sed -n &#39;/pattern/!p&#39; file.txt   print do NOT matched strings (emulates grep -v)
+sed -n &#39;s/unix/linux/p&#39; file.txt    printing only the replaced lines
+sed -n &#39;/X/!p&#39; file.txt     print lines which does not contain &#39;X&#39;
+sed -n &#39;2~5p&#39; file.txt  print every 5th line starting with the second
+sed &#39;/AAA.*BBB.*CCC/!d&#39; file.txt    grep for AAA and BBB and CCC (in that order)
+sed &#39;/AAA/!d; /BBB/!d; /CCC/!d&#39; file.txt    grep for AAA and BBB and CCC (in any order)
+
+Modify
+Command     Description
+sed &#39;s/foo/boo/&#39; file.txt   replace first entrance foo with boo
+sed &#39;s|http://|www|&#39; file.txt   replace first entrance foo with boo (another divider)
+sed &#39;s/foo/boo/g&#39; file.txt  replace all entrances foo with boo
+sed &#39;s/foo/boo/3&#39; file.txt  replace first three entrances foo with boo
+sed &#39;s/foo/[&amp;]/&#39; file.txt   wrap foo with [ ]
+sed &#39;s/pattern1|pattern2/foo/g&#39; file.txt    replace pattern1 or pattern2 with foo
+sed &#39;s/\(foo\)\(boo\)/\2\1/&#39; file.txt   replace fooboo with boofoo
+sed &#39;s/^../XX/&#39; file.txt    replace the first two characters of a string or a line with &quot;XX&quot;
+sed -e &#39;s/unix/linux/&#39; -e &#39;s/os/system/&#39; file.txt   -e option provieds to run multiple sed commands in a single sed command
+sed &#39;3 s/foo/boo/&#39; file.txt     replace string on a specific line number
+sed &#39;1,3 s/foo/boo/&#39; file.txt   replace string on a range of lines
+sed &#39;/pattern/ s/foo/boo/&#39; file.txt     replace on a lines which matches a pattern
+sed &#39;1i HEAD1, HEAD2&#39; file.txt  insert a header line
+sed -i &#39;1a -------&#39; file.txt    add a line &#39;-------&#39; at the 1st line
+sed &#39;5!s/foo/boo/&#39; file.txt     replace foo with boo in file.txt except in the 5th line
+sed &#39;/pattern/!s/foo/boo/&#39; file.txt     unless pattern is found replace foo with boo
+sed &#39;/pattern/s/foo/boo/g&#39; file.txt     only if line contains pattern, substitute foo with boo
+sed &#39;1d;$d&#39; file.txt    delete the first line AND the last line of a file
+sed &#39;/^$/d&#39; file.txt    delete all blank lines in the file
+sed &#39;/foo/,$d&#39; file.txt     delete the lines starting from the pattern &#39;foo&#39; till the last line
+sed &#39;1,4{/foo/d;}&#39; file.txt     delete the lines containing the pattern &#39;foo&#39; only if it is present in the lines from 1 to 4
+sed &#39;1,20 s/foo/boo/g&#39; file.txt     replace foo with boo only on lines between 1 and 20
+sed &#39;1,20 !s/foo/boo/g&#39; file.txt    the above reversed (match all except lines 1-20)
+sed &#39;/pattern/G&#39; file.txt   insert blank line below every line that match pattern
+sed &#39;n;n;n;n;G;&#39; file.txt   add a blank line every 5 lines (after lines 5, 10, 15, 20, etc.)
+sed &#39;s/^/ /&#39; file.txt   insert 5 blank spaces at beginning of each line (make page offset)
+sed &#39;/foo/ a &quot;boo&quot;&#39; file.txt    add a line after a match
+sed &#39;/foo/ i &quot;boo&quot;&#39; file.txt    add a line before a match
+sed &#39;/foo/ c &quot;boo&quot;&#39; file.txt    replace an entire line with a new line
+sed ‘s/^/\t/’ file.txt  insert a tab at beginning of each line
+sed -e &#39;s/#.*//&#39; file.txt   delete all the comment lines from a file
+$sed &#39;s/.$//&#39; file.txt  convert DOS newlines (CR/LF) to Unix format
+sed -e &#39;$r 2.txt&#39; 1.txt     insert file 2.txt at the end of 1.txt
+sed &#39;s/\t/ /g&#39; file.txt     replace tab with spaces
+find ~/projects/ -type f -exec sed -i &#39;s/nodejs/django/g&#39; {} \;     replace in all found files
+find ~/projects/ -name &quot;*.js&quot; -print | xargs sed -i &#39;s/nodejs/django/g&#39;     replace in multiple files
+
+Delete
+Command     Description
+sed -n &quot;3,10d&quot; file.txt     delete all lines from line 3 till 10
+sed &#39;17,/foo/d&#39; file.txt    delete all lines from line 17 to &#39;foo&#39;
+sed &#39;s/^[ ^t]*//&#39; file.txt  delete all spaces in front of every line of file.txt
+sed &#39;s/[ ^t]*$//&#39; file.txt  delete all spaces at the end of every line of file.txt
+sed &#39;s/^[ ^t]*//;s/[ ^]*$//&#39; file.txt   delete all spaces in front and at the end of every line of file.txt
+sed &#39;1~3d&#39; file.txt     delete every third line, starting with the first
+sed ‘/^$/d’ in.txt &gt; out.txt    delete all the blank lines from a file
+sed &#39;0,/pattern_to_delete/{//d;}&#39; file.txt  delete only first match from a file</code></pre>
 </body>
 </html>

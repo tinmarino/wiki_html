@@ -14,6 +14,16 @@
   <link rel="stylesheet" href="solarized-dark.css" />
 </head>
 <body>
+<h1 id="protocol-layers">Protocol layers</h1>
+<ol type="1">
+<li>Physical : cable</li>
+<li>Link : MAC data</li>
+<li>Network : IP</li>
+<li>Transport : TCP | UDP</li>
+<li>Session</li>
+<li>Presentation</li>
+<li>Application</li>
+</ol>
 <h1 id="unbound-dns-server">Unbound : DNS server</h1>
 <h2 id="unbound-files">Unbound files</h2>
 <ul>
@@ -26,6 +36,11 @@
 <ul>
 <li><code>route add default gw 80.81.82.22</code></li>
 <li><code>unbound-checkconf /etc/unbound/unbound.conf</code></li>
+</ul>
+<h2 id="unbound-dns-cache">Unbound | Dns cache</h2>
+<ul>
+<li>systemd-resolve –flush-caches</li>
+<li>unbound-control flush_zone google.com</li>
 </ul>
 <h1 id="nginx-proxy">Nginx : proxy</h1>
 <h2 id="nginx-debug">Nginx debug</h2>

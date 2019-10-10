@@ -16,6 +16,7 @@
 <body>
 <ul>
 <li><a href="Vim-Menu.html">Vim Menu</a></li>
+<li><a href="Vim-Script-Cheetsheet-Rstacruz.html">Vim Script Cheetsheet Rstacruz</a></li>
 <li><a href="Practical_Vim.html">Practical_Vim</a></li>
 <li><a href="Vimstyle.html">Vimstyle</a> (from Google)</li>
 <li><a href="VimStory.html">VimStory</a></li>
@@ -23,9 +24,23 @@
 <li><a href="Plugin.html">Plugin</a></li>
 <li><a href="Tips.html">Tips</a> : advanced commands</li>
 <li><a href="V-negative-regex.html">Negative Regex</a></li>
-<li><a href="V-Script.html">Script</a></li>
+<li><p><a href="V-Script.html">Script</a></p></li>
+<li><p>where [[=c=]] is the equivalence class for the c character # Debug</p></li>
+<li><p><code>:command Man</code> : to see where Man has been defined</p></li>
+<li>:retab</li>
+<li>for file in * ; do vi +‘:w ++ff=unix’ +‘:q’ $file</li>
+<li>vim file.txt ‘x:s/bar/foo/g’ ‘:wq’</li>
+<li>:sort [u]niq [n]teger (like 20 before 100</li>
+<li>vim -u NONE</li>
+<li>:%s/^/=printf(‘%-4d’, line(‘.’)</li>
+<li>:put /</li>
+<li>/<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>*$/i french regex</li>
+<li>:sort n/(++){2}/ # match 2nd column</li>
+<li>T,c,</li>
+<li>:%! column -t</li>
+<li><p>sort(list), put, getline(int), setlone(int, list) join(list), split(string), len(list), get</p></li>
 </ul>
-<p>:h formatoptions :set fo+=t # to autowrap :match visu /%7l|%10l/ :hi visu ctermbg=darked</p>
+<p>:au FileTypepyrhon setlocal formatprg=autopep8 - :h formatoptions :set fo+=t # to autowrap :match visu /%7l|%10l/ :hi visu ctermbg=darked</p>
 <h2 id="client-server">Client – Server</h2>
 <pre><code>vim --servernbame DEMO      # Open with name DEMO
 vim --servername DEOM --remote some-file.txt  # Send some file
@@ -183,5 +198,11 @@ To sort all lines according to line lenght, otherwise, use awk with filter</li>
 <pre><code>:earlier 12h
 There are also plugins like Gundo and undotree.vim, which visualize the undo tree and allow to navigate it.</code></pre>
 <p>TEXT object vimtextobject for function argument vim-indent-obejct for indent</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>a-zàâçéèêëîïôûùüÿñæœ .-<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</section>
 </body>
 </html>
