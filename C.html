@@ -11,13 +11,13 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="include.css" />
 </head>
 <body>
 <h1 id="c">C</h1>
 <ul>
-<li><a href="C-Keywords.html">Keywords</a></li>
-<li><a href="C-Operators.html">Operators</a></li>
+<li><a href="Cheat/C-Keywords.html">Keywords</a></li>
+<li><a href="Cheat/C-Operators.html">Operators</a></li>
 <li><a href="C-Regle-De-Codage.html">Regle De Codage</a></li>
 </ul>
 <p>Include path (print)</p>
@@ -46,6 +46,7 @@ gcc -xc++ -E -v -</code></pre>
 <ul>
 <li>Le tableau aloue de la mémoire et le pointeur non =&gt; préféré le tableau</li>
 </ul>
+<div class="h3-sections">
 <h3 id="random">Random</h3>
 <pre><code>```c
 #include &lt;time.h&gt;
@@ -53,11 +54,12 @@ srand(time(NULL));  # Set seed
 rand();             # Get Random
 
 ```</code></pre>
+</div>
 <h2 id="calling-conventions-function-prototype">Calling conventions, function prototype</h2>
 <ul>
 <li><code>typedef int(__cdecl callback_t)(HANDLE h_process);</code></li>
 </ul>
-<h3 id="usercall">Usercall</h3>
+<p>::::::::: {.h3-sections} ### Usercall</p>
 <pre><code>int __usercall fct1@&lt;eax&gt;(int p1@&lt;ecx&gt;, int p2@&lt;edx&gt;, int p3) {return p1 + p2 + p3;}</code></pre>
 <h4 id="stdcall">Stdcall</h4>
 <p>The called function is cleaning the stack</p>

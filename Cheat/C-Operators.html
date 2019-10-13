@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>C-Operators.md – C Operators: Arithmetic, Logical, Conditional and more</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Css/solarized_dark.css" />
+  <link rel="stylesheet" href="../Css/layout_grid.css" />
+</head>
+<body>
+<header>
+<h1 class="title">C Operators: Arithmetic, Logical, Conditional and more</h1>
+</header>
+<p>An operator is a symbol which operates on a value or a variable. For example: + is an operator to perform addition.</p>
+<p>C programming has wide range of operators to perform various operations. For better understanding of operators, these operators can be classified as:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operators in C programming</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><a href="#arithmetic">Arithmetic Operators</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#increment">Increment and Decrement Operators</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="#assignment">Assignment Operators</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#relational">Relational Operators</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="#logical">Logical Operators</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#conditional">Conditional Operators</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><a href="#bitwise">Bitwise Operators</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><a href="#other">Special Operators</a></td>
+</tr>
+</tbody>
+</table>
+<div class="parent">
+<div class="h3-section">
+<h3 id="c-arithmetic-operators"><span id="arithmetic"></span>C Arithmetic Operators</h3>
+<p>An arithmetic operator performs mathematical operations such as addition, subtraction and multiplication on numerical values (constants and variables).</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">+</td>
+<td style="text-align: left;">addition or unary plus</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">subtraction or unary minus</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">*</td>
+<td style="text-align: left;">multiplication</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">/</td>
+<td style="text-align: left;">division</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">%</td>
+<td style="text-align: left;">remainder after division( modulo division)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="example-1-arithmetic-operators">Example #1: Arithmetic Operators</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1">    <span class="co">// C Program to demonstrate the working of arithmetic operators</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb1-4" title="4">    {</a>
+<a class="sourceLine" id="cb1-5" title="5">        <span class="dt">int</span> a = <span class="dv">9</span>,b = <span class="dv">4</span>, c;</a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7">        c = a+b;</a>
+<a class="sourceLine" id="cb1-8" title="8">        printf(<span class="st">&quot;a+b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>,c);</a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10">        c = a-b;</a>
+<a class="sourceLine" id="cb1-11" title="11">        printf(<span class="st">&quot;a-b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>,c);</a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13">        c = a*b;</a>
+<a class="sourceLine" id="cb1-14" title="14">        printf(<span class="st">&quot;a*b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>,c);</a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16">        c=a/b;</a>
+<a class="sourceLine" id="cb1-17" title="17">        printf(<span class="st">&quot;a/b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>,c);</a>
+<a class="sourceLine" id="cb1-18" title="18"></a>
+<a class="sourceLine" id="cb1-19" title="19">        c=a%b;</a>
+<a class="sourceLine" id="cb1-20" title="20">        printf(<span class="st">&quot;Remainder when a divided by b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>,c);</a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-23" title="23">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>a+b = 13
+a-b = 5
+a*b = 36
+a/b = 2
+Remainder when a divided by b=1</code></pre>
+<p>The operators +, - and * computes addition, subtraction and multiplication respectively as you might have expected.</p>
+<p>In normal calculation, <code>9/4 = 2.25</code>. However, the output is 2 in the program.</p>
+<p>It is because both variables a and b are integers. Hence, the output is also an integer. The compiler neglects the term after decimal point and shows answer 2 instead of 2.25.</p>
+<p>The modulo operator % computes the remainder. When <code>a = 9</code> is divided by <code>b = 4</code>, the remainder is 1. The % operator can only be used with integers.</p>
+<pre><code>Suppose a = 5.0, b = 2.0, c = 5 and d = 2. Then in C programming,
+
+a/b = 2.5  // Because both operands are floating-point variables
+a/d = 2.5  // Because one operand is floating-point variable
+c/b = 2.5  // Because one operand is floating-point variable
+c/d = 2     // Because both operands are integers</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="increment-and-decrement-operators" class="note"><span id="increment"></span>Increment and decrement operators</h3>
+<p>C programming has two operators increment ++ and decrement – to change the value of an operand (constant or variable) by 1.</p>
+<p>Increment ++ increases the value by 1 whereas decrement – decreases the value by 1. These two operators are unary operators, meaning they only operate on a single operand.</p>
+</div>
+<div class="h3-section">
+<h3 id="example-2-increment-and-decrement-operators">Example #2: Increment and Decrement Operators</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1">    <span class="co">// C Program to demonstrate the working of increment and decrement operators</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb4-4" title="4">    {</a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="dt">int</span> a = <span class="dv">10</span>, b = <span class="dv">100</span>;</a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="dt">float</span> c = <span class="fl">10.5</span>, d = <span class="fl">100.5</span>;</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8">        printf(<span class="st">&quot;++a = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, ++a);</a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10">        printf(<span class="st">&quot;--b = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, --b);</a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">        printf(<span class="st">&quot;++c = %f </span><span class="sc">\n</span><span class="st">&quot;</span>, ++c);</a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14">        printf(<span class="st">&quot;--d = %f </span><span class="sc">\n</span><span class="st">&quot;</span>, --d);</a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb4-17" title="17">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>++a = 11
+--b = 99
+++c = 11.500000
+++d = 99.500000</code></pre>
+<p>Here, the operators ++ and – are used as prefix. These two operators can also be used as postfix like <code>a++</code> and <code>a--</code>. Visit this page to learn more on how <a href="/article/increment-decrement-operator-difference-prefix-postfix" title="Increment Operator as postfix">increment and decrement operators work when used as postfix</a>.</p>
+</div>
+<div class="h3-section">
+<h3 id="c-assignment-operators"><span id="assignment"></span>C Assignment Operators</h3>
+<p>An assignment operator is used for assigning a value to a variable. The most common assignment operator is =</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Same as</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">=</td>
+<td style="text-align: left;">a = b</td>
+<td style="text-align: left;">a = b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">+=</td>
+<td style="text-align: left;">a += b</td>
+<td style="text-align: left;">a = a+b</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">-=</td>
+<td style="text-align: left;">a -= b</td>
+<td style="text-align: left;">a = a-b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">*=</td>
+<td style="text-align: left;">a *= b</td>
+<td style="text-align: left;">a = a*b</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">/=</td>
+<td style="text-align: left;">a /= b</td>
+<td style="text-align: left;">a = a/b</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">%=</td>
+<td style="text-align: left;">a %= b</td>
+<td style="text-align: left;">a = a%b</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-3-assignment-operators">Example #3: Assignment Operators</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" title="1">    <span class="co">// C Program to demonstrate the working of assignment operators</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb6-4" title="4">    {</a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="dt">int</span> a = <span class="dv">5</span>, c;</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">        c = a;</a>
+<a class="sourceLine" id="cb6-8" title="8">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-9" title="9"></a>
+<a class="sourceLine" id="cb6-10" title="10">        c += a; <span class="co">// c = c+a</span></a>
+<a class="sourceLine" id="cb6-11" title="11">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13">        c -= a; <span class="co">// c = c-a</span></a>
+<a class="sourceLine" id="cb6-14" title="14">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-15" title="15"></a>
+<a class="sourceLine" id="cb6-16" title="16">        c *= a; <span class="co">// c = c*a</span></a>
+<a class="sourceLine" id="cb6-17" title="17">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-18" title="18"></a>
+<a class="sourceLine" id="cb6-19" title="19">        c /= a; <span class="co">// c = c/a</span></a>
+<a class="sourceLine" id="cb6-20" title="20">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-21" title="21"></a>
+<a class="sourceLine" id="cb6-22" title="22">        c %= a; <span class="co">// c = c%a</span></a>
+<a class="sourceLine" id="cb6-23" title="23">        printf(<span class="st">&quot;c = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, c);</a>
+<a class="sourceLine" id="cb6-24" title="24"></a>
+<a class="sourceLine" id="cb6-25" title="25">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb6-26" title="26">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>c = 5 
+c = 10 
+c = 5 
+c = 25 
+c = 5 
+c = 0</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="c-relational-operators"><span id="relational"></span>C Relational Operators</h3>
+<p>A relational operator checks the relationship between two operands. If the relation is true, it returns 1; if the relation is false, it returns value 0.</p>
+<p>Relational operators are used in <a href="/c-programming/c-if-else-statement" title="C if else">decision making</a> and [loops](/c-programming/c-for-loop “C for loop”.html).</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">==</td>
+<td style="text-align: left;">Equal to</td>
+<td style="text-align: left;">5 == 3 returns 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&gt;</td>
+<td style="text-align: left;">Greater than</td>
+<td style="text-align: left;">5 &gt; 3 returns 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&lt;</td>
+<td style="text-align: left;">Less than</td>
+<td style="text-align: left;">5 &lt; 3 returns 0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">!=</td>
+<td style="text-align: left;">Not equal to</td>
+<td style="text-align: left;">5 != 3 returns 1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&gt;=</td>
+<td style="text-align: left;">Greater than or equal to</td>
+<td style="text-align: left;">5 &gt;= 3 returns 1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&lt;=</td>
+<td style="text-align: left;">Less than or equal to</td>
+<td style="text-align: left;">5 &lt;= 3 return 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="example-4-relational-operators">Example #4: Relational Operators</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" title="1">    <span class="co">// C Program to demonstrate the working of arithmetic operators</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb8-4" title="4">    {</a>
+<a class="sourceLine" id="cb8-5" title="5">        <span class="dt">int</span> a = <span class="dv">5</span>, b = <span class="dv">5</span>, c = <span class="dv">10</span>;</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">        printf(<span class="st">&quot;%d == %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a == b); <span class="co">// true</span></a>
+<a class="sourceLine" id="cb8-8" title="8">        printf(<span class="st">&quot;%d == %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a == c); <span class="co">// false</span></a>
+<a class="sourceLine" id="cb8-9" title="9"></a>
+<a class="sourceLine" id="cb8-10" title="10">        printf(<span class="st">&quot;%d &gt; %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a &gt; b); <span class="co">//false</span></a>
+<a class="sourceLine" id="cb8-11" title="11">        printf(<span class="st">&quot;%d &gt; %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a &gt; c); <span class="co">//false</span></a>
+<a class="sourceLine" id="cb8-12" title="12"></a>
+<a class="sourceLine" id="cb8-13" title="13"></a>
+<a class="sourceLine" id="cb8-14" title="14">        printf(<span class="st">&quot;%d &lt; %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a &lt; b); <span class="co">//false</span></a>
+<a class="sourceLine" id="cb8-15" title="15">        printf(<span class="st">&quot;%d &lt; %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a &lt; c); <span class="co">//true</span></a>
+<a class="sourceLine" id="cb8-16" title="16"></a>
+<a class="sourceLine" id="cb8-17" title="17"></a>
+<a class="sourceLine" id="cb8-18" title="18">        printf(<span class="st">&quot;%d != %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a != b); <span class="co">//false</span></a>
+<a class="sourceLine" id="cb8-19" title="19">        printf(<span class="st">&quot;%d != %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a != c); <span class="co">//true</span></a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21"></a>
+<a class="sourceLine" id="cb8-22" title="22">        printf(<span class="st">&quot;%d &gt;= %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a &gt;= b); <span class="co">//true</span></a>
+<a class="sourceLine" id="cb8-23" title="23">        printf(<span class="st">&quot;%d &gt;= %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a &gt;= c); <span class="co">//false</span></a>
+<a class="sourceLine" id="cb8-24" title="24"></a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26">        printf(<span class="st">&quot;%d &lt;= %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, b, a &lt;= b); <span class="co">//true</span></a>
+<a class="sourceLine" id="cb8-27" title="27">        printf(<span class="st">&quot;%d &lt;= %d = %d </span><span class="sc">\n</span><span class="st">&quot;</span>, a, c, a &lt;= c); <span class="co">//true</span></a>
+<a class="sourceLine" id="cb8-28" title="28"></a>
+<a class="sourceLine" id="cb8-29" title="29">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb8-30" title="30"></a>
+<a class="sourceLine" id="cb8-31" title="31">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>5 == 5 = 1
+5 == 10 = 0
+5 &gt; 5 = 0
+5 &gt; 10 = 0
+5 &lt; 5 = 0
+5 &lt; 10 = 1
+5 != 5 = 0
+5 != 10 = 1
+5 &gt;= 5 = 1
+5 &gt;= 10 = 0
+5 &lt;= 5 = 1
+5 &lt;= 10 = 1 </code></pre>
+</div>
+<div class="h3-section">
+<h3 id="c-logical-operators"><span id="logical"></span>C Logical Operators</h3>
+<p>An expression containing logical operator returns either 0 or 1 depending upon whether expression results true or false. Logical operators are commonly used in <a href="/c-programming/c-if-else-statement" title="C if else">decision making in C programming</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operator</th>
+<th style="text-align: left;">Meaning of Operator</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&amp;&amp;</td>
+<td style="text-align: left;">Logial AND. True only if all operands are true </td>
+<td style="text-align: left;">If c = 5 and d = 2 then, expression <code>((c == 5) &amp;&amp; (d &gt; 5))</code> equals to 0.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">||</td>
+<td style="text-align: left;">Logical OR. True only if either one operand is true</td>
+<td style="text-align: left;">If c = 5 and d = 2 then, expression <code>((c == 5) || (d &gt; 5))</code> equals to 1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">!</td>
+<td style="text-align: left;">Logical NOT. True only if the operand is 0</td>
+<td style="text-align: left;">If c = 5 then, expression <code>! (c == 5)</code> equals to 0.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="example-5-logical-operators">Example #5: Logical Operators</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb10-1" title="1">    <span class="co">// C Program to demonstrate the working of logical operators</span></a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb10-5" title="5">    {</a>
+<a class="sourceLine" id="cb10-6" title="6">        <span class="dt">int</span> a = <span class="dv">5</span>, b = <span class="dv">5</span>, c = <span class="dv">10</span>, result;</a>
+<a class="sourceLine" id="cb10-7" title="7"></a>
+<a class="sourceLine" id="cb10-8" title="8">        result = (a == b) &amp;&amp; (c &gt; b);</a>
+<a class="sourceLine" id="cb10-9" title="9">        printf(<span class="st">&quot;(a == b) &amp;&amp; (c &gt; b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-10" title="10"></a>
+<a class="sourceLine" id="cb10-11" title="11">        result = (a == b) &amp;&amp; (c &lt; b);</a>
+<a class="sourceLine" id="cb10-12" title="12">        printf(<span class="st">&quot;(a == b) &amp;&amp; (c &lt; b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-13" title="13"></a>
+<a class="sourceLine" id="cb10-14" title="14">        result = (a == b) || (c &lt; b);</a>
+<a class="sourceLine" id="cb10-15" title="15">        printf(<span class="st">&quot;(a == b) || (c &lt; b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-16" title="16"></a>
+<a class="sourceLine" id="cb10-17" title="17">        result = (a != b) || (c &lt; b);</a>
+<a class="sourceLine" id="cb10-18" title="18">        printf(<span class="st">&quot;(a != b) || (c &lt; b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-19" title="19"></a>
+<a class="sourceLine" id="cb10-20" title="20">        result = !(a != b);</a>
+<a class="sourceLine" id="cb10-21" title="21">        printf(<span class="st">&quot;!(a == b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-22" title="22"></a>
+<a class="sourceLine" id="cb10-23" title="23">        result = !(a == b);</a>
+<a class="sourceLine" id="cb10-24" title="24">        printf(<span class="st">&quot;!(a == b) equals to %d </span><span class="sc">\n</span><span class="st">&quot;</span>, result);</a>
+<a class="sourceLine" id="cb10-25" title="25"></a>
+<a class="sourceLine" id="cb10-26" title="26">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb10-27" title="27">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>(a == b) &amp;&amp; (c &gt; b) equals to 1 
+(a == b) &amp;&amp; (c &lt; b) equals to 0 
+(a == b) || (c &lt; b) equals to 1 
+(a != b) || (c &lt; b) equals to 0 
+!(a != b) equals to 1 
+!(a == b) equals to 0 </code></pre>
+<p><strong>Explanation of logical operator program</strong></p>
+<ul>
+<li><code>(a == b) &amp;&amp; (c &gt; 5)</code> evaluates to 1 because both operands <code>(a == b)</code> and <code>(c &gt; b)</code> is 1 (true).</li>
+<li><code>(a == b) &amp;&amp; (c &lt; b)</code> evaluates to 0 because operand <code>(c &lt; b)</code> is 0 (false).</li>
+<li><code>(a == b) || (c &lt; b)</code> evaluates to 1 because <code>(a = b)</code> is 1 (true).</li>
+<li><code>(a != b) || (c &lt; b)</code> evaluates to 0 because both operand <code>(a != b)</code> and <code>(c &lt; b)</code> are 0 (false).</li>
+<li><code>!(a != b)</code> evaluates to 1 because operand <code>(a != b)</code> is 0 (false). Hence, !(a != b) is 1 (true).</li>
+<li><code>!(a == b)</code> evaluates to 0 because <code>(a == b)</code> is 1 (true). Hence, <code>!(a == b)</code> is 0 (false).</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="bitwise-operators"><span id="bitwise"></span>Bitwise Operators</h3>
+<p>During computation, mathematical operations like: addition, subtraction, addition and division are converted to bit-level which makes processing faster and saves power.</p>
+<p>Bitwise operators are used in C programming to perform bit-level operations.</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Operators</th>
+<th style="text-align: left;">Meaning of operators</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">&amp;</td>
+<td style="text-align: left;">Bitwise AND</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">|</td>
+<td style="text-align: left;">Bitwise OR</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">^</td>
+<td style="text-align: left;">Bitwise exclusive OR</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">~</td>
+<td style="text-align: left;">Bitwise complement</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&lt;&lt;</td>
+<td style="text-align: left;">Shift left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&gt;&gt;</td>
+<td style="text-align: left;">Shift right</td>
+</tr>
+</tbody>
+</table>
+<p>Visit <a href="/c-programming/bitwise-operators" title="C bitwise operators">bitwise operator in C</a> to learn more.</p>
+</div>
+<div class="h3-section">
+<h3 id="other-operators"><span id="other"></span>Other Operators</h3>
+<h4 id="comma-operator">Comma Operator</h4>
+<p>Comma operators are used to link related expressions together. For example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" title="1">    <span class="dt">int</span> a, c = <span class="dv">5</span>, d;</a></code></pre></div>
+<h4 id="the-sizeof-operator">The sizeof operator</h4>
+<p>The <code>sizeof</code> is an unary operator which returns the size of data (constant, variables, array, structure etc).</p>
+<h4 id="example-6-sizeof-operator">Example #6: sizeof Operator</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb13-1" title="1">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb13-2" title="2">    <span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb13-3" title="3">    {</a>
+<a class="sourceLine" id="cb13-4" title="4">        <span class="dt">int</span> a, e[<span class="dv">10</span>];</a>
+<a class="sourceLine" id="cb13-5" title="5">        <span class="dt">float</span> b;</a>
+<a class="sourceLine" id="cb13-6" title="6">        <span class="dt">double</span> c;</a>
+<a class="sourceLine" id="cb13-7" title="7">        <span class="dt">char</span> d;</a>
+<a class="sourceLine" id="cb13-8" title="8">        printf(<span class="st">&quot;Size of int=%lu bytes</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="kw">sizeof</span>(a));</a>
+<a class="sourceLine" id="cb13-9" title="9">        printf(<span class="st">&quot;Size of float=%lu bytes</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="kw">sizeof</span>(b));</a>
+<a class="sourceLine" id="cb13-10" title="10">        printf(<span class="st">&quot;Size of double=%lu bytes</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="kw">sizeof</span>(c));</a>
+<a class="sourceLine" id="cb13-11" title="11">        printf(<span class="st">&quot;Size of char=%lu byte</span><span class="sc">\n</span><span class="st">&quot;</span>,<span class="kw">sizeof</span>(d));</a>
+<a class="sourceLine" id="cb13-12" title="12">        printf(<span class="st">&quot;Size of integer type array having 10 elements = %lu bytes</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="kw">sizeof</span>(e));</a>
+<a class="sourceLine" id="cb13-13" title="13">        <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb13-14" title="14">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>Size of int = 4 bytes
+Size of float = 4 bytes
+Size of double = 8 bytes
+Size of char = 1 byte
+Size of integer type array having 10 elements = 40 bytes</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="cternary-operator"><span id="conditional"></span> C Ternary Operator (?:)</h3>
+<p>A conditional operator is a ternary operator, that is, it works on 3 operands.</p>
+<h4 id="conditional-operator-syntax">Conditional Operator Syntax</h4>
+<pre><code>conditionalExpression ? expression1 : expression2</code></pre>
+<p>The conditional operator works as follows:</p>
+<ul>
+<li>The first expression conditionalExpression is evaluated first. This expression evaluates to 1 if it’s true and evaluates to 0 if it’s false.</li>
+<li>If conditionalExpression is true, expression1 is evaluated.</li>
+<li>If conditionalExpression is false, expression2 is evaluated.</li>
+</ul>
+<h4 id="example-7-c-conditional-operator">Example #7: C conditional Operator</h4>
+<div class="sourceCode" id="cb16"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" title="1">    <span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb16-2" title="2">    <span class="dt">int</span> main(){</a>
+<a class="sourceLine" id="cb16-3" title="3">       <span class="dt">char</span> February;</a>
+<a class="sourceLine" id="cb16-4" title="4">       <span class="dt">int</span> days;</a>
+<a class="sourceLine" id="cb16-5" title="5">       printf(<span class="st">&quot;If this year is leap year, enter 1. If not enter any integer: &quot;</span>);</a>
+<a class="sourceLine" id="cb16-6" title="6">       scanf(<span class="st">&quot;%c&quot;</span>,&amp;February);</a>
+<a class="sourceLine" id="cb16-7" title="7"></a>
+<a class="sourceLine" id="cb16-8" title="8">       <span class="co">// If test condition (February == &#39;l&#39;) is true, days equal to 29.</span></a>
+<a class="sourceLine" id="cb16-9" title="9">       <span class="co">// If test condition (February ==&#39;l&#39;) is false, days equal to 28. </span></a>
+<a class="sourceLine" id="cb16-10" title="10">       days = (February == <span class="ch">&#39;1&#39;</span>) ? <span class="dv">29</span> : <span class="dv">28</span>;</a>
+<a class="sourceLine" id="cb16-11" title="11"></a>
+<a class="sourceLine" id="cb16-12" title="12">       printf(<span class="st">&quot;Number of days in February = %d&quot;</span>,days);</a>
+<a class="sourceLine" id="cb16-13" title="13">       <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb16-14" title="14">    }</a></code></pre></div>
+<p><strong>Output</strong></p>
+<pre><code>If this year is leap year, enter 1. If not enter any integer: 1
+Number of days in February = 29</code></pre>
+<p>Other operators such as &amp; (reference operator), * (dereference operator) and -&gt; (member selection) operator will be discussed in <a href="/c-programming/c-pointers" title="C Pointers">C pointers</a>.</p>
+</div>
+</div>
+</body>
+</html>
