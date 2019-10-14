@@ -177,11 +177,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-22" title="22">        <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb1-23" title="23">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>a+b = 13
-a-b = 5
-a*b = 36
-a/b = 2
-Remainder when a divided by b=1</code></pre>
+<pre><code>    a+b = 13
+    a-b = 5
+    a*b = 36
+    a/b = 2
+    Remainder when a divided by b=1</code></pre>
 <p>The operators +, - and * computes addition, subtraction and multiplication respectively as you might have expected.</p>
 <p>In normal calculation, <code>9/4 = 2.25</code>. However, the output is 2 in the program.</p>
 <p>It is because both variables a and b are integers. Hence, the output is also an integer. The compiler neglects the term after decimal point and shows answer 2 instead of 2.25.</p>
@@ -218,10 +218,10 @@ c/d = 2     // Because both operands are integers</code></pre>
 <a class="sourceLine" id="cb4-16" title="16">        <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb4-17" title="17">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>++a = 11
---b = 99
-++c = 11.500000
-++d = 99.500000</code></pre>
+<pre><code>    ++a = 11
+    --b = 99
+    ++c = 11.500000
+    ++d = 99.500000</code></pre>
 <p>Here, the operators ++ and – are used as prefix. These two operators can also be used as postfix like <code>a++</code> and <code>a--</code>. Visit this page to learn more on how <a href="/article/increment-decrement-operator-difference-prefix-postfix" title="Increment Operator as postfix">increment and decrement operators work when used as postfix</a>.</p>
 </div>
 <div class="h3-section">
@@ -296,12 +296,12 @@ c/d = 2     // Because both operands are integers</code></pre>
 <a class="sourceLine" id="cb6-25" title="25">        <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb6-26" title="26">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>c = 5 
-c = 10 
-c = 5 
-c = 25 
-c = 5 
-c = 0</code></pre>
+<pre><code>    c = 5 
+    c = 10 
+    c = 5 
+    c = 25 
+    c = 5 
+    c = 0</code></pre>
 </div>
 <div class="h3-section">
 <h3 id="c-relational-operators"><span id="relational"></span>C Relational Operators</h3>
@@ -383,18 +383,18 @@ c = 0</code></pre>
 <a class="sourceLine" id="cb8-30" title="30"></a>
 <a class="sourceLine" id="cb8-31" title="31">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>5 == 5 = 1
-5 == 10 = 0
-5 &gt; 5 = 0
-5 &gt; 10 = 0
-5 &lt; 5 = 0
-5 &lt; 10 = 1
-5 != 5 = 0
-5 != 10 = 1
-5 &gt;= 5 = 1
-5 &gt;= 10 = 0
-5 &lt;= 5 = 1
-5 &lt;= 10 = 1 </code></pre>
+<pre><code>    5 == 5 = 1
+    5 == 10 = 0
+    5 &gt; 5 = 0
+    5 &gt; 10 = 0
+    5 &lt; 5 = 0
+    5 &lt; 10 = 1
+    5 != 5 = 0
+    5 != 10 = 1
+    5 &gt;= 5 = 1
+    5 &gt;= 10 = 0
+    5 &lt;= 5 = 1
+    5 &lt;= 10 = 1 </code></pre>
 </div>
 <div class="h3-section">
 <h3 id="c-logical-operators"><span id="logical"></span>C Logical Operators</h3>
@@ -456,12 +456,12 @@ c = 0</code></pre>
 <a class="sourceLine" id="cb10-26" title="26">        <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb10-27" title="27">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>(a == b) &amp;&amp; (c &gt; b) equals to 1 
-(a == b) &amp;&amp; (c &lt; b) equals to 0 
-(a == b) || (c &lt; b) equals to 1 
-(a != b) || (c &lt; b) equals to 0 
-!(a != b) equals to 1 
-!(a == b) equals to 0 </code></pre>
+<pre><code>    (a == b) &amp;&amp; (c &gt; b) equals to 1 
+    (a == b) &amp;&amp; (c &lt; b) equals to 0 
+    (a == b) || (c &lt; b) equals to 1 
+    (a != b) || (c &lt; b) equals to 0 
+    !(a != b) equals to 1 
+    !(a == b) equals to 0 </code></pre>
 <p><strong>Explanation of logical operator program</strong></p>
 <ul>
 <li><code>(a == b) &amp;&amp; (c &gt; 5)</code> evaluates to 1 because both operands <code>(a == b)</code> and <code>(c &gt; b)</code> is 1 (true).</li>
@@ -535,11 +535,11 @@ c = 0</code></pre>
 <a class="sourceLine" id="cb13-13" title="13">        <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb13-14" title="14">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>Size of int = 4 bytes
-Size of float = 4 bytes
-Size of double = 8 bytes
-Size of char = 1 byte
-Size of integer type array having 10 elements = 40 bytes</code></pre>
+<pre><code>    Size of int = 4 bytes
+    Size of float = 4 bytes
+    Size of double = 8 bytes
+    Size of char = 1 byte
+    Size of integer type array having 10 elements = 40 bytes</code></pre>
 </div>
 <div class="h3-section">
 <h3 id="cternary-operator"><span id="conditional"></span> C Ternary Operator (?:)</h3>
@@ -568,8 +568,8 @@ Size of integer type array having 10 elements = 40 bytes</code></pre>
 <a class="sourceLine" id="cb16-13" title="13">       <span class="cf">return</span> <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb16-14" title="14">    }</a></code></pre></div>
 <p><strong>Output</strong></p>
-<pre><code>If this year is leap year, enter 1. If not enter any integer: 1
-Number of days in February = 29</code></pre>
+<pre><code>    If this year is leap year, enter 1. If not enter any integer: 1
+    Number of days in February = 29</code></pre>
 <p>Other operators such as &amp; (reference operator), * (dereference operator) and -&gt; (member selection) operator will be discussed in <a href="/c-programming/c-pointers" title="C Pointers">C pointers</a>.</p>
 </div>
 </div>

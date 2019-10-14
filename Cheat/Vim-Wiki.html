@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Vim-Wiki.md – VimWiki</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../Css/code_prism_dark.css.css" />
+  <link rel="stylesheet" href="../Css/color_dark_solarized.css.css" />
+  <link rel="stylesheet" href="../Css/layout_grid.css" />
+</head>
+<body>
+<header>
+<h1 class="title">VimWiki</h1>
+</header>
+<div class="parent">
+<div class="h3-section">
+<h3 id="wiki-management">Wiki Management</h3>
+<ul>
+<li>[number] <code>&lt;leader&gt; ww</code> - open wiki index file</li>
+<li>[number] <code>&lt;leader&gt; wt</code> - open wiki index file in new tab</li>
+<li><code>&lt;leader&gt; ws</code> - list and select available wikis</li>
+<li><code>&lt;leader&gt; wd</code> - delete wiki page</li>
+<li><code>&lt;leader&gt; wr</code> - rename wiki page</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="diary-management">Diary management</h3>
+<ul>
+<li>[number] <code>&lt;leader&gt; wi</code> - open diary index file for wiki</li>
+<li><code>&lt;leader&gt; w &lt;leader&gt; i</code> - update current diary index</li>
+<li>[number] <code>&lt;leader&gt; w &lt;leader&gt; w</code> - open today’s diary file for wiki</li>
+<li>[number] <code>&lt;leader&gt; w &lt;leader&gt; t</code> - open today’s diary file for wiki in new tab</li>
+<li><code>&lt;C-Up&gt;</code> - open previous day’s diary</li>
+<li><code>&lt;C-Down&gt;</code> - open next day’s diary</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="navigation">Navigation</h3>
+<ul>
+<li><code>&lt;CR&gt;</code> - follow/create wiki link</li>
+<li><code>&lt;C-S-CR&gt;</code> - follow/create wiki link in new tab</li>
+<li><code>&lt;backspace&gt;</code> - go back to previous wiki page</li>
+<li><code>&lt;Tab&gt;</code> - go to next link on current page</li>
+<li><code>&lt;S-Tab&gt;</code> - go to previous link on current page</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="editing-shortcuts">Editing shortcuts</h3>
+<ul>
+<li><code>&lt;C-Space&gt;</code> - toggle list item on/off</li>
+<li><code>=</code> - add header level</li>
+<li><code>-</code> - remove header level</li>
+<li><code>+</code> - create/decorate links</li>
+<li><code>glm</code> - increase indent of list item</li>
+<li><code>gll</code> - decrease indent of list item</li>
+<li><code>gl*</code> or <code>gl8</code> - switch or insert “*” symbol</li>
+<li><code>gl#</code> or <code>gl3</code> - switch or insert “#” symbol</li>
+<li><code>gl-</code> - switch or insert “-“ symbol</li>
+<li><code>gl1</code> - switch or insert “1.” symbol</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="table-shortcuts">Table shortcuts</h3>
+<ul>
+<li><code>&lt;A-Left&gt;</code> move column left</li>
+<li><code>&lt;A-right&gt;</code> move column right</li>
+<li><code>&lt;CR&gt;</code> (insert mode) go down/create cell</li>
+<li><code>&lt;Tab&gt;</code> (insert mode) go next/create cell</li>
+<li><code>gqq</code> or <code>gww</code> reformat table</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="text-objects">Text objects</h3>
+<p><code>ah</code> section between 2 headings including empty trailing lines <code>ih</code> section between 2 headings excluding empty trailing lines <code>a\</code> table cell <code>i\</code> inner table cell <code>ac</code> table column <code>ic</code> inner table column</p>
+</div>
+</div>
+</body>
+</html>

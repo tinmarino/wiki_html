@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>C-Keywords.md – C Keywords</title>
+  <title>Css-Selector.md – Css tests</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -74,13 +74,163 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../Css/color_dark_solarized.css" />
-  <link rel="stylesheet" href="../Css/layout_grid.css" />
+  <link rel="stylesheet" href="../Css/layout_radio.css" />
 </head>
 <body>
 <header>
-<h1 class="title">C Keywords</h1>
+<h1 class="title">Css tests</h1>
 </header>
+<script>
+
+a_color = [
+    '../Css/color_dark_blue_striking_and_simple',
+    '../Css/color_light_solarized',
+    '../Css/color_dark_solarized',
+    '../Css/color_dark_jason23',
+];
+
+a_layout = [
+    '../Css/layout_grid',
+    '../Css/layout_solarized',
+];
+
+a_font = [
+    'Ubuntu', 
+    'Arial',
+    'IBM Plex Serif',
+    'Source Sans Pro',
+    'EB Garamond',
+
+    'Monotone',
+    'Alegreya',
+    'Tangerine',
+    'Liu Jian Mao Cao',
+    'Yatra One',
+];
+
+function disableAll (parent) {
+    Array.from(document.getElementsByClassName('class_' + parent.id))
+      .forEach(function (node) {
+          console.log('Disabling ' + node.value + ' from class_' + parent.id);
+          node.disabled = true;}
+      );
+}
+
+// If press css: color | layout button
+function onRadioCss(parent, id) {
+    console.log('Css ', id, '<- ', parent.id);
+
+    // Create link
+    if (!document.getElementById(id)){
+        console.log('Creating link');
+        var link = document.createElement('link');
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        link.disabled = true;
+        link.media = 'all';
+        link.id = id;
+        link.className = 'class_' + parent.id;
+        link.href = id + '.css';
+        document.head.appendChild(link);
+    }
+
+    // Disable others 
+    disableAll(parent);
+
+    // Enable me
+    var css = document.getElementById(id);
+    css.disabled = false;
+}
+
+// If press font button
+function onRadioFont(parent, id){
+    console.log('Font ', id, '<- ', parent.id);
+
+    // Create link
+    // TODO suffix by cursive
+    var link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    var font_url = "https://fonts.googleapis.com/css?family=";
+    font_url += id.replace(/ /g, "+") + "&display=swap";
+    link.href = font_url;
+    document.head.appendChild(link);
+
+    // Body choose font
+    document.body.style.fontFamily = id;
+}
+
+
+
+function addStylesheet(parent, id, onRadioCallback) {
+    // Create clickable link
+    // 1/ Label
+    var label = document.createElement('label');
+    label.textContent = id;
+    label.className = "container";
+    // 2/ Input
+    var input = document.createElement('input');
+    input.type = 'radio' ;
+    input.name = 'radio_' + parent.id ;
+    input.value = id
+    input.onchange = function () { onRadioCallback(parent, id); };
+    // 3 Span
+    var span = document.createElement('span');
+    span.className = 'checkmark';
+
+    // Append
+    label.appendChild(input);
+    label.appendChild(span);
+    parent.appendChild(document.createElement("br"));
+    parent.appendChild(label)
+
+}
+
+// Fill radio button: Define lists
+function start() {
+    // Fill color
+    var div_color = document.getElementById('div_color');
+    a_color.forEach(function (item, index) {
+        console.log('Color: ', item, index);
+        addStylesheet(div_color, item, onRadioCss);
+    });
+
+    // Fill layout
+    var div_layout = document.getElementById('div_layout');
+    a_layout.forEach(function (item, index) {
+        console.log('Layout: ', item, index);
+        addStylesheet(div_layout, item, onRadioCss);
+    });
+
+    //Fill font
+    var div_font = document.getElementById('div_font');
+    a_font.forEach(function (item, index) {
+        console.log('Font: ', item, index);
+        addStylesheet(div_font, item, onRadioFont);
+    });
+}
+
+window.onload = start
+
+</script>
+<div id="div_color" style="width:400px; float:left;">
+<h2>
+Color
+</h2>
+</div>
+<div id="div_layout" style="width:400px; float:left; overflow:hidden;">
+<h2>
+Layout
+</h2>
+</div>
+<div id="div_font" style="width:400px; float:left; overflow:hidden;">
+<h2>
+Font
+</h2>
+</div>
+<div id="div_clear" style="clear:both;">
+
+</div>
+<h1 id="start-test">Start test</h1>
 <p>This tutorial provides a brief information on all 32 keywords in C programming.</p>
 <table>
 <tbody>
@@ -136,6 +286,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p><a href="#auto">auto</a> <a href="#break_continue">break</a> <a href="#switch_case_default">case</a> <a href="#char">char</a> <a href="#const">const</a> <a href="#break_continue">continue</a> <a href="#switch_case_default">default</a> <a href="#do_while">do</a> <a href="#double_float">double</a> <a href="#if_else">else</a> <a href="#enum">enum</a> <a href="#extern">extern</a> <a href="#double_float">float</a> <a href="#for">for</a> <a href="#goto">goto</a> <a href="#if_else">if</a> <a href="#int">int</a> <a href="#short_long_signed_unsigned">long</a> <a href="#register">register</a> <a href="#return">return</a> <a href="#short_long_signed_unsigned">short</a> <a href="#short_long_signed_unsigned">signed</a> <a href="#sizeof">sizeof</a> <a href="#static">static</a> <a href="#struct">struct</a> <a href="#switch_case_default">switch</a> <a href="#typedef">typedef</a> <a href="#union">union</a> <a href="#short_long_signed_unsigned">unsigned</a> <a href="#void">void</a> <a href="#volatile">volatile</a> <a href="#do_while">while</a></p>
 <div class="parent">
+<div class="h3-section">
+<h3 id="colors">Colors</h3>
+<ul>
+<li>Protanopia</li>
+<li>Dueteranopia</li>
+<li>Tritanopia</li>
+<li>Achromatopsia</li>
+</ul>
+</div>
 <div class="h3-section">
 <h3 id="auto"><span id="auto"></span>auto</h3>
 <p>The auto keyword declares automatic variables. For example:</p>

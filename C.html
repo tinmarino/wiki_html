@@ -46,7 +46,8 @@ gcc -xc++ -E -v -</code></pre>
 <ul>
 <li>Le tableau aloue de la mémoire et le pointeur non =&gt; préféré le tableau</li>
 </ul>
-<div class="h3-sections">
+<div class="parent">
+<div class="h3-section">
 <h3 id="random">Random</h3>
 <pre><code>```c
 #include &lt;time.h&gt;
@@ -59,7 +60,8 @@ rand();             # Get Random
 <ul>
 <li><code>typedef int(__cdecl callback_t)(HANDLE h_process);</code></li>
 </ul>
-<p>::::::::: {.h3-sections} ### Usercall</p>
+<div class="h3-section">
+<h3 id="usercall">Usercall</h3>
 <pre><code>int __usercall fct1@&lt;eax&gt;(int p1@&lt;ecx&gt;, int p2@&lt;edx&gt;, int p3) {return p1 + p2 + p3;}</code></pre>
 <h4 id="stdcall">Stdcall</h4>
 <p>The called function is cleaning the stack</p>
@@ -67,5 +69,7 @@ rand();             # Get Random
 <p>The <strong>caller</strong> is correcting the stack (because <strong>HE</strong> knows : <code>printf</code>)</p>
 <h4 id="fastcall-x64">Fastcall (x64)</h4>
 <p>Rcx contains first var. The <strong>callee</strong> is cleaning the pile</p>
+</div>
+</div>
 </body>
 </html>

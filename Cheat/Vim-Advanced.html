@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Vim-Advanced.md – Vim Advanced cheatsheet</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="../Css/code_prism_dark.css" />
+  <link rel="stylesheet" href="../Css/color_dark_solarized.css" />
+  <link rel="stylesheet" href="../Css/layout_grid.css" />
+</head>
+<body>
+<header>
+<h1 class="title">Vim Advanced cheatsheet</h1>
+</header>
+<h2 id="commands">Commands</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>T,c,</code></td>
+<td>Delete between coma</td>
+</tr>
+<tr class="even">
+<td><code>:b#&lt;bar&gt;bd#</code></td>
+<td>delete buffer</td>
+</tr>
+<tr class="odd">
+<td><code>C</code></td>
+<td>= <code>c$</code>: Change to end of line</td>
+</tr>
+<tr class="even">
+<td><code>S</code></td>
+<td>= <code>^C</code>: Change from first non blank to EOL</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>zl, zh, zL, zH</code></td>
+<td>Scrool horizontally</td>
+</tr>
+<tr class="even">
+<td><code>'.</code></td>
+<td>Goto last edit location</td>
+</tr>
+<tr class="odd">
+<td><code>g-</code></td>
+<td>Goto last non blank character (Vs <code>_</code> or <code>^</code>)</td>
+</tr>
+<tr class="even">
+<td><code>gq</code>motion</td>
+<td>Filter format</td>
+</tr>
+<tr class="odd">
+<td><code>g=</code>motion</td>
+<td>Filter indent</td>
+</tr>
+</tbody>
+</table>
+<div class="parent">
+<div class="h3-section">
+<h3 id="ex-tips">Ex tips</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>:w !sudo tee %</code></td>
+<td>Save as root</td>
+</tr>
+<tr class="even">
+<td><code>:set nrformat+=alpha</code></td>
+<td><code>&lt;C-A&gt;</code> works with alphabet chars</td>
+</tr>
+<tr class="odd">
+<td><code>:sort [u] [n]</code></td>
+<td>Sort [Unique] [Numerals (so 100 after 20)</td>
+</tr>
+<tr class="even">
+<td><code>:echo 5e9x20</code></td>
+<td>Simple Math</td>
+</tr>
+<tr class="odd">
+<td><code>:q:</code>, <code>q/</code></td>
+<td>Ex, Search Windows</td>
+</tr>
+<tr class="even">
+<td><code>normal @a</code></td>
+<td>Execute register a in this line</td>
+</tr>
+<tr class="odd">
+<td><code>g/{/_.+1,/-1 sort</code></td>
+<td>Sort between { and }</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="ex-one-char">Ex one char</h2>
+<div class="h3-section">
+<h3 id="ex-1-char-13">Ex 1 char (1/3)</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>ab</code></td>
+<td>abbrev</td>
+</tr>
+<tr class="even">
+<td><code>a</code></td>
+<td>append</td>
+</tr>
+<tr class="odd">
+<td><code>ar</code></td>
+<td>args</td>
+</tr>
+<tr class="even">
+<td><code>c</code></td>
+<td>change</td>
+</tr>
+<tr class="odd">
+<td><code>co</code></td>
+<td>copy</td>
+</tr>
+<tr class="even">
+<td><code>t</code></td>
+<td>Copy line to</td>
+</tr>
+<tr class="odd">
+<td><code>d</code></td>
+<td>delete</td>
+</tr>
+<tr class="even">
+<td><code>e</code></td>
+<td>edit</td>
+</tr>
+<tr class="odd">
+<td><code>f</code></td>
+<td>file</td>
+</tr>
+<tr class="even">
+<td><code>g</code></td>
+<td>global</td>
+</tr>
+<tr class="odd">
+<td><code>i</code></td>
+<td>insert</td>
+</tr>
+<tr class="even">
+<td><code>j</code></td>
+<td>join</td>
+</tr>
+<tr class="odd">
+<td><code>l</code></td>
+<td>list</td>
+</tr>
+<tr class="even">
+<td><code>maa</code></td>
+<td>map</td>
+</tr>
+<tr class="odd">
+<td><code>ma</code></td>
+<td>mark</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="ex-1-char-23">Ex 1 char (2/3)</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>m</code></td>
+<td>move</td>
+</tr>
+<tr class="even">
+<td><code>n</code></td>
+<td>next</td>
+</tr>
+<tr class="odd">
+<td><code>nu</code></td>
+<td>number</td>
+</tr>
+<tr class="even">
+<td><code>o</code></td>
+<td>open</td>
+</tr>
+<tr class="odd">
+<td><code>pre</code></td>
+<td>preserve</td>
+</tr>
+<tr class="even">
+<td><code>p</code></td>
+<td>print</td>
+</tr>
+<tr class="odd">
+<td><code>pu</code></td>
+<td>put</td>
+</tr>
+<tr class="even">
+<td><code>q</code></td>
+<td>quit</td>
+</tr>
+<tr class="odd">
+<td><code>re</code></td>
+<td>read</td>
+</tr>
+<tr class="even">
+<td><code>rec</code></td>
+<td>recover</td>
+</tr>
+<tr class="odd">
+<td><code>rew</code></td>
+<td>rewind</td>
+</tr>
+<tr class="even">
+<td><code>se</code></td>
+<td>set</td>
+</tr>
+<tr class="odd">
+<td><code>sh</code></td>
+<td>shell</td>
+</tr>
+<tr class="even">
+<td><code>so</code></td>
+<td>source</td>
+</tr>
+<tr class="odd">
+<td><code>st</code></td>
+<td>stop</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="ex-1-char-33">Ex 1 char (3/3)</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>s</code></td>
+<td>substitute</td>
+</tr>
+<tr class="even">
+<td><code>una</code></td>
+<td>unabbrev</td>
+</tr>
+<tr class="odd">
+<td><code>u</code></td>
+<td>undo</td>
+</tr>
+<tr class="even">
+<td><code>unm</code></td>
+<td>unmap</td>
+</tr>
+<tr class="odd">
+<td><code>ve</code></td>
+<td>version</td>
+</tr>
+<tr class="even">
+<td><code>vi</code></td>
+<td>visual</td>
+</tr>
+<tr class="odd">
+<td><code>w</code></td>
+<td>write</td>
+</tr>
+<tr class="even">
+<td><code>x</code></td>
+<td>xit</td>
+</tr>
+<tr class="odd">
+<td><code>ya</code></td>
+<td>yank</td>
+</tr>
+<tr class="even">
+<td><code>z</code></td>
+<td>window</td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td>escape</td>
+</tr>
+<tr class="even">
+<td><code>CR</code></td>
+<td>print next</td>
+</tr>
+<tr class="odd">
+<td><code>&amp;</code></td>
+<td>resubst</td>
+</tr>
+<tr class="even">
+<td><code>&gt;</code></td>
+<td>rshift</td>
+</tr>
+<tr class="odd">
+<td><code>^D</code></td>
+<td>scroll</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="search-and-select">Search and Select</h3>
+<div class="line-block"><code>vo</code>, <code>vO</code> | Goto other side of visual selection |<br />
+<code>gv</code> | Reselect las selection |<br />
+<code>g*</code>, <code>g#</code> | Search word under cursor but without delimiter |<br />
+<code>/.\{-}toto</code> | Non greedy, get first occurent of toto |<br />
+<code>:&amp;</code> | Repeat las substitution |<br />
+             | |</div>
+</div>
+<h2 id="search">Search</h2>
+<div class="h3-section">
+<h3 id="negative-regex">Negative regex</h3>
+<p>TODO</p>
+</div>
+<div class="h3-section">
+<h3 id="search-examples">Search examples</h3>
+<p>/%xYY # YY hex ord(ascii) /%uYYYY # YYYYY hex ord(unicode)</p>
+</div>
+<h2 id="vimscript">Vimscript</h2>
+<div class="h3-section">
+<h3 id="get-output-from-ex-commands">Get output from ex commands</h3>
+<ul>
+<li><p>Command stdout redirection</p>
+<p>:! # get last output redir <span class="citation" data-cites="a">@a</span> echo toto redir END let <span class="citation" data-cites="a">@a</span>=getcwd()</p></li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="set-input-to-ex">Set input to ex</h3>
+<p>:@&quot; # Execute what is yanked</p>
+</div>
+<div class="h3-section">
+<h3 id="inspect-debug">Inspect, Debug</h3>
+</div>
+<div class="h3-section">
+<h3 id="display-environment">Display environment</h3>
+<p>To find the script file defining a map : <code>:verbose map &lt;c-z&gt;</code> . But <code>map</code> can ber replaced by: <code>abbreviate</code>, <code>autocmd</code>, <code>command</code>, <code>function</code>, <code>let</code>, <code>set all</code>.</p>
+<ul>
+<li>Script : Get filetype of a buffer
+<ul>
+<li><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<h2 id="command-line">Command line</h2>
+<p><code>vim -u NONE -N</code> # No (User) vimrc, Non-compatible</p>
+<ul>
+<li>Pipeline
+<ul>
+<li><code>echo toto | vim -</code> : take arguments from stdin</li>
+<li><code>echo foo | vim -e '+%print' '+q!' /dev/stdin</code> : exmode to not consume stdin and not clear output on quit</li>
+<li><code>vim &lt;(echo toto)</code> : process substitution command (BaSh)</li>
+<li><code>:w !tee</code> : write to stdout</li>
+<li><code>:w !sh</code> : write to shell input</li>
+</ul></li>
+</ul>
+<div class="line-block">digraphs | digraphs |<br />
+highlight | highlight groups |<br />
+reg | registers |<br />
+scriptnames | all scripts sourced so far |<br />
+spellinfo | spellfiles used |<br />
+syntax | syntax items |</div>
+<ul>
+<li><p>Remote</p>
+<p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
+</ul>
+</body>
+</html>

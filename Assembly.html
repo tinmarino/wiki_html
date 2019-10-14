@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="include.css" />
 </head>
 <body>
 <h1 id="assembly-and-retro-engineering">Assembly and retro engineering</h1>
@@ -166,7 +166,10 @@ JA | JB | Unsigned |</div>
 <li><code>IRET</code> # Interrupt Return (POP EFLAG ; POP RIP)</li>
 <li><code>RDMSR</code> # Read the 64 bit MSR register specified by ECX to EDX:EAX</li>
 <li><code>WDMSR</code> # Write …</li>
-<li><p><code>JMP -2</code> # EB FE infinite loop</p></li>
+<li><code>JMP -2</code> # EB FE infinite loop</li>
+<li>RETF # Return far</li>
+<li>INVLPG # Invalidate TLB Entry</li>
+<li><p>LFS # Load far pointer</p></li>
 </ul>
 </body>
 </html>

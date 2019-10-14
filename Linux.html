@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="include.css" />
 </head>
 <body>
 <ul>
@@ -31,6 +31,7 @@
 <li><a href="W3m.html">W3m</a></li>
 <li><a href="Nvidia.html">Nvidia</a></li>
 <li><a href="Ubuntu.html">Ubuntu</a></li>
+<li><a href="Man.html">Man</a></li>
 </ul>
 <h1 id="program">Program</h1>
 <ul>
@@ -129,6 +130,8 @@ xdotool click 3</code></pre>
 <p>JOBS ~ jobs -l</p>
 <p>IPC (Inter-Process-Communication) ~ /proc/{PID}/cwd is as symlink the pwd of the current process bash local -i PID=<span class="math inline">${$</span>{<span class="math inline">${(s.:.)$</span>{(v)jobstates[1]}}[3]}%=*} cd <span class="math inline">(<em>r</em><em>e</em><em>a</em><em>d</em><em>l</em><em>i</em><em>n</em><em>k</em>/<em>p</em><em>r</em><em>o</em><em>c</em>/</span>PID/cwd) alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” xdotool kill -l # to see the trap list # 20 for ctrl-z sigstp !./ttyecho -n /dev/pts/22 “echo hello” -&gt; Give to me the write to read and write at tty or ioctl disown %2 gdb retpy tmux screen to reatach :e **/palette.cpp stty -a show shell shortcut for SIGNALS kill -SIGSTOP <code>vim &gt; /dev/pts/22</code> exec vi (rplace shell by vim last shell command) REad : export PROMPT_COMMAND=“ls -a &gt; /dev/pts/23” echo -en ‘1202’ &gt; /dev/ttyS0 sudo chmod o-rw /dev/tty23 open /usr/share/doc/base-passwd/users-and-groups.html ( echo <br /><span class="math display">$$; echo $BASHPID )
 $$</span><br /> -&gt; Expands to the process ID of the (current) shell. $! -&gt; Expands to the process ID of the most recently executed background command. ps ax | grep pts/16 ps -f ax | grep pts/16 ps –ppid $$ -o CMD PROMPT_COMMAND is the key truncate -s 0 filename &gt;filename or tail -n +2 # shell -&gt; vim alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” On resume :cd $PWD $ sleep 42 &amp; [1] 5260 $ echo $! 5260</p>
+<div class="parent">
+<div class="h3-section">
 <h3 id="jobs-and-processes">Jobs and Processes</h3>
 <p><code>jobs -l</code><br />
 <code>disown %2</code><br />
@@ -161,6 +164,8 @@ gconftool-2 –set /apps/gnome-terminal/profiles/Unnamed/font –type string “
 <h4 id="mouse">Mouse</h4>
 <p>sudo modprobe -r psmouse<br />
 sudo modprobe psmouse proto=imps</p>
+</div>
+<div class="h3-section">
 <h3 id="par-format-text-with-indent-and-hard-wrap">Par (format text with indent and hard-wrap)</h3>
 <pre><code>    w - specify line length
     r - repeat characters in bodiless lines (empty line &quot;&quot; -&gt; &quot;    &quot;
@@ -169,5 +174,7 @@ sudo modprobe psmouse proto=imps</p>
     q - handle nested quotations in plaintext email
     f - fit: good argumnent for all lines to be good len (even th first; 
       protected one</code></pre>
+</div>
+</div>
 </body>
 </html>

@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="include.css" />
 </head>
 <body>
 <header>
@@ -21,29 +21,6 @@
 <ul>
 <li><p>Command stdout redirection</p>
 <p>:! # get last output redir <span class="citation" data-cites="a">@a</span> echo toto redir END let <span class="citation" data-cites="a">@a</span>=getcwd()</p></li>
-<li>Random, Sort, Shuffle
-<ul>
-<li>Random shuffle :10,20!shuf<CR> func Random() return reltimestr(reltime())[-2:] endfunc %s/^/=Random() . &quot;&quot;/|sort n|%s/^//</li>
-</ul></li>
-<li><p>Remote</p>
-<p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
-<li>File format
-<ul>
-<li><code>:e ++ff=unix</code></li>
-<li><code>:w ++ff=dos</code></li>
-<li><code>%s/\r\n/</code></li>
-</ul></li>
-<li>Buffer
-<ul>
-<li><code>:b *.java&lt;c-d&gt;</code> : list buffer names matching regex</li>
-</ul></li>
-<li>Pipeline
-<ul>
-<li><code>echo toto | vim -</code> : take arguments from stdin</li>
-<li><code>echo foo | vim -e '+%print' '+q!' /dev/stdin</code> : exmode to not consume stdin and not clear output on quit</li>
-<li><code>vim &lt;(echo toto)</code> : process substitution command (BaSh)</li>
-<li><code>:w !tee</code> : write to stdout</li>
-</ul></li>
 <li>Random, Sort, Shuffle
 <ul>
 <li>Random shuffle :10,20!shuf<CR> func Random() return reltimestr(reltime())[-2:] endfunc %s/^/=Random() . &quot;&quot;/|sort n|%s/^//</li>
@@ -105,7 +82,6 @@
 <li><code>au BufWinEnter ?* silent loadview</code></li>
 </ul></li>
 </ul>
-<p>Vim can browse tar and zip archives uppercase maps to jump between files Read vimcast of drew neil and tim pope</p>
 <h1 id="advanced-commands">Advanced commands</h1>
 <pre><code>
 # Moving
