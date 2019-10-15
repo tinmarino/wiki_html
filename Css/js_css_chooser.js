@@ -2,10 +2,12 @@
 // Define gGlobal array definitions
 
 a_color = [
+    '../Css/color_dark_material_1',
     '../Css/color_dark_blue_striking_and_simple',
-    '../Css/color_light_solarized',
     '../Css/color_dark_solarized',
     '../Css/color_dark_jason23',
+    '../Css/color_light_material_1',
+    '../Css/color_light_solarized',
 ];
 
 a_layout = [
@@ -35,10 +37,13 @@ a_font_cursive_hard = [
     'Tangerine',
 ];
 
+// Cursive script
 a_font_cursive_soft = [
     'Croissant One',
     'Courgette',
     'Redressed',
+    'Merienda One',
+    'Cookie',
 ];
 
 // Disable all radio button vith a certain class name
