@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <ul>
@@ -49,10 +49,12 @@
 <li><code>window.location.protocol</code> # protocl (http:)</li>
 <li><code>window.location.assign</code> # load document</li>
 </ul></li>
-<li><p>Get info</p></li>
+<li>Get info
+<ul>
 <li>window.navigator -&gt; dict full of info</li>
 <li>window.status -&gt; chang status bar of browser : connection received ;..</li>
-<li><p>window.origin -&gt; get the url origin of myself</p></li>
+<li>window.origin -&gt; get the url origin of myself</li>
+</ul></li>
 <li><p>Passing additional parameters to a Promise .then P.then( doWork.bind(‘text’, null) ); P.then( function(data) {return doWork(‘text’, data);} ); P.then( data =&gt; doWork(‘text’, data) );</p></li>
 </ul>
 <h1 id="vars">Vars</h1>

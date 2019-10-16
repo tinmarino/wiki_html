@@ -14,7 +14,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -27,13 +27,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -76,7 +74,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
@@ -88,16 +86,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Il est possible de construire une expression rationnelle de deux façons :</p>
 <ul>
 <li><p>Utiliser un littéral d’expression régulière, qui correspond à un motif contenu entre deux barres obliques, par exemple :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/ab</span><span class="sc">+</span><span class="ss">c/</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/ab</span><span class="sc">+</span><span class="ss">c/</span><span class="op">;</span></a></code></pre></div>
 <p>Lorsque les littéraux d’expression régulière sont utilisés, l’expression est compilée lors du chargement du script. Il est préférable d’utiliser cette méthode lorsque l’expression régulière reste constante, afin d’avoir de meilleurs performances.</p></li>
 <li><p>Appeler le constructeur de l’objet [<code>RegExp</code>](/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp “Le constructeur RegExp crée un objet expression rationnelle pour la reconnaissance d’un modèle dans un texte.”.html), par exemple :</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;ab+c&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;ab+c&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>Avec cette méthode, l’expression rationnelle est compilée lors de l’exécution. On utilisera cette méthode lorsque le motif utilisé est variable ou provient d’une autre source (par exemple une interaction utilisateur).</p></li>
 </ul>
 <h2 id="Écrire_une_expression_rationnelle">Écrire une expression rationnelle</h2>
 <p>Le motif d’une expression rationnelle est composé de caractères simples (comme <code>/abc/</code>), ou de caractères simples et spéciaux, comme <code>/ab*c/</code> ou <code>/Chapitre (\d+)\.\d*/</code>. Le dernier exemple utilise des parenthèses qui permettent d’avoir une « mémoire ». La correspondance avec le motif contenu entre parenthèses pourra être utilisée par la suite. Ceci est décrit avec <a href="#parentheses">ce paragraphe</a>.</p>
+<div class="parent">
+<div class="h3-section">
 <h3 id="Utiliser_des_motifs_simples">Utiliser des motifs simples</h3>
 <p>Les motifs simples sont construits à partir de caractères pour lesquels on souhaite avoir une correspondance directe. Le motif <code>/des/</code> correspond lorsqu’on observe exactement les caractères ‘des’ ensemble et dans cet ordre précis. On pourrait utiliser ce motif et détecter une correspondance dans les chaînes suivantes : “J’ai vu des licornes ?” et “Sa description de licorne était superbe” car la chaîne de caractères ‘des’ y est présente (dans le mot description pour le second exemple). Il n’y aura pas de correspondance avec la chaîne de caractères “Toc toc” car ‘des’ n’est pas présente.</p>
+</div>
+<div class="h3-section">
 <h3 id="Utiliser_des_caractères_spéciaux">Utiliser des caractères spéciaux</h3>
 <p>Lorsque le motif à trouver est plus complexe qu’une simple égalité (trouver tous les B, les blancs…), le motif devra contenir des caractères spéciaux. Ainsi, le motif <code>/ab*c/</code> correspond à toutes les combinaisons de caractères qui possèdent un seul ‘a’ suivi de zéro ou plusieurs ‘b’ (l’astérisque utilisée ici signifie que l’élément qui la précède doit être présent zéro ou plusieurs fois) qui sont immédiatement suivis d’un ‘c’. Par exemple, la chaîne de caractère “cbbabbbbcdebc” correspond au motif avec la chaîne de caractères ‘abbbbc’.</p>
 <p>La tableau qui suit fournit une liste complète des caractères spéciaux pouvant être utilisés dans les expressions régulières ainsi que leur signification.</p>
@@ -322,13 +324,15 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 </tbody>
 </table>
 <p>Afin d’échapper les informations saisies par l’utilisateur et de traîter les chaînes de caractères pour les utiliser au sein d’un expression régulière correspondante, il est possible d’utiliser le remplacement suivant :</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">function</span> <span class="at">escapeRegExp</span>(string)<span class="op">{</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="co">// $&amp; correspond à la chaîne correspondante</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="co">// dans son intégralité</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="cf">return</span> <span class="va">string</span>.<span class="at">replace</span>(<span class="ss">/</span><span class="sc">[.*+?^${}()|[\]\\]</span><span class="ss">/g</span><span class="op">,</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">$&amp;&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">escapeRegExp</span>(string)<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="co">// $&amp; correspond à la chaîne correspondante</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="co">// dans son intégralité</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="cf">return</span> <span class="va">string</span>.<span class="at">replace</span>(<span class="ss">/</span><span class="sc">[.*+?^${}()|[\]\\]</span><span class="ss">/g</span><span class="op">,</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">$&amp;&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre></div>
 <p>Le marqueur <code>g</code> situé en fin d’expression permet d’effectuer une recherche globale, qui parcoure toute la chaîne et renvoie l’ensemble des correspondances trouvées (voir <a href="#recherches_flag">Utiliser les marqueurs</a> ci-après).</p>
 <p><strong>Note :</strong> Voir la page sur la méthode <code>String.replace</code> pour plus d’informations.</p>
+</div>
+<div class="h3-section">
 <h3 id="Utiliser_les_parenthèses"><span id="parentheses">Utiliser les parenthèses</span></h3>
 <p>Les parenthèses encadrant une partie du motif de l’expression régulière peuvent être utilisées pour garder en mémoire les correspondances. Cela pourra être utile pour réutiliser la correspondance trouvée.</p>
 <p>Ainsi, le motif <code>/Chapitre (\d+)\.\d*/</code> utilise des caractères échappés et spéciaux et indique une partie du motif à garder en mémoire. Ce motif correspond aux caractères ‘Chapitre’ suivi par un ou plusieurs caractères numériques (<code>\d</code> correspond à un chiffre et <code>+</code> indiquant que une série de 1 ou plusieurs chiffres), suivis par un point (qu’il est nécessaire d’échapper car c’est un caractère spécial, on utilise donc ‘\’ pour indiquer qu’on souhaite reconnaître le caractère ‘.’), suivi par 0 ou plusieurs chiffres (<code>\d</code> correspondant à un chiffre et l’astérisque indiquant que le caractère est présent 0 ou plusieurs fois). Les parenthèses sont utilisées pour garder en mémoire les premiers chiffres correspondant.</p>
@@ -373,36 +377,40 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 </table>
 <p>Pour savoir si un motif est présent au sein d’une chaîne de caractères, utiliser les méthodes<code>test</code> ou <code>search</code>. Pour obtenir plus d’informations (moins rapidement) on utilisera les méthodes <code>exec</code> ou <code>match</code>. Si on utilise <code>exec</code> ou <code>match</code> et qu’une correspondance est trouvée, ces méthodes renverront un tableau et mettront à jour des propriétés de l’objet global <code>RegExp</code> et aussi de l’instance de <code>RegExp</code> associée à l’expression rationnelle ( De ces propriétés mises à jour, la seule qui ne soit pas non-standard ou dépréciée est <code>lastIndex</code> . D’ailleurs, il peut être nécessaire de s’assurer de la valeur de <code>lastIndex</code> avant d’utiliser <code>exec</code> avec les drapeaux <code>g</code> ( <code>global</code> ) ou <code>y</code> ( <code>sticky</code> ), ou d’utiliser <code>match</code> avec le drapeau <code>y</code> ). Si aucune correspondance n’est trouvée, la méthode <code>exec</code> renverra <code>null</code> (qui est automatiquement converti à <code>false</code> lors d’un test conditionnel).</p>
 <p>Dans l’exemple qui suit, le script utilise la méthode <code>exec</code> pour trouver une correspondance dans une chaîne de caractères.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>S’il n’est pas nécessaire d’accéder aux propriétés de l’expression régulière, une autre façon de récupérer <code>monTableau</code> peut être :</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">// équivalent à &quot;cdbbdbsbz&quot;.match(/d(b+)d/g);</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">// équivalent à &quot;cdbbdbsbz&quot;.match(/d(b+)d/g);</span></a></code></pre></div>
 <p>Si on souhaite construire une expression régulière à partir d’une chaîne de caractères, on peut utiliser le script suivant :</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;d(b+)d&quot;</span><span class="op">,</span> <span class="st">&quot;g&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;d(b+)d&quot;</span><span class="op">,</span> <span class="st">&quot;g&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>Avec ces scripts, on obtient bien une correspondance, la méthode renvoie un tableau et met à jour les propriétés listées dans le tableau qui suit.</p>
 <p>Résultats dûs à l’exécution d’une expression rationnelle. Objet Propriété ou indice Description Pour cet exemple <code>monTableau</code>   La chaîne de caractères correspondante et les fragments de chaînes gardés en mémoire. <code>[&quot;dbbd&quot;, &quot;bb&quot;]</code> <code>index</code> L’indice (débute à partir de 0) de la correspondance, compté dans la chaîne de caractère initiale. <code>1</code> <code>input</code> La chaîne de caractères initiale. <code>&quot;cdbbdbsbz&quot;</code> <code>[0]</code> Les derniers caractères qui correspondent. <code>&quot;dbbd&quot;</code> <code>monExpressionRégulière</code> <code>lastIndex</code> L’indice auquel débuter la prochaine correspondance. (Cette propriété n’est utilisée que si l’expression régulière utilise l’option g, décrite dans « <a href="#recherches_flag">Effectuer des recherches avancées avec les marqueurs</a> ». <code>5</code> <code>source</code> Le texte du motif, mis à jour à la création de l’expression régulière mais pas lors de son exécution. <code>&quot;d(b+)d&quot;</code> Comme le montre la seconde formulation de cet exemple, il est possible d’utiliser une expression rationnelle, créée avec un objet initialisé sans l’affecter à une variable. Cela implique qu’à chaque utilisation, on aura une nouvelle expression régulière distincte et qu’on ne pourra pas, pour cette raison, accéder aux propriétés de l’expression régulière. Avec le script suivant :</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;La valeur de lastIndex est &quot;</span> <span class="op">+</span> <span class="va">monExpressionReguliere</span>.<span class="at">lastIndex</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">// &quot;La valeur de lastIndex est 5&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> monExpressionReguliere <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">monExpressionReguliere</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;La valeur de lastIndex est &quot;</span> <span class="op">+</span> <span class="va">monExpressionReguliere</span>.<span class="at">lastIndex</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">// &quot;La valeur de lastIndex est 5&quot;</span></a></code></pre></div>
 <p>Si le script utilisé est :</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;La valeur de lastIndex est &quot;</span> <span class="op">+</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">lastIndex</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">// &quot;La valeur de lastIndex est 0&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">exec</span>(<span class="st">&quot;cdbbdbsbz&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;La valeur de lastIndex est &quot;</span> <span class="op">+</span> <span class="ss">/d</span><span class="sc">(</span><span class="ss">b</span><span class="sc">+)</span><span class="ss">d/g</span>.<span class="at">lastIndex</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">// &quot;La valeur de lastIndex est 0&quot;</span></a></code></pre></div>
 <p>Les occurences de <code>/d(b+)d/g</code> dans les deux instructions sont des objets différents. Leurs propriétés <code>lastIndex</code> respectives ont donc des valeurs différentes. Quand il est nécessaire d’accéder aux propriétés d’un objet décrivant une expression rationnelle, il faudra d’abord l’affecter à une variable.</p>
+</div>
+<div class="h3-section">
 <h3 id="Utiliser_les_correspondances_de_groupes_avec_les_parenthèses">Utiliser les correspondances de groupes avec les parenthèses</h3>
 <p>Les parenthèses, utilisées dans un motif d’expression régulière, permettent de garder en mémoire un groupe (ou fragment) d’une correspondance. Ainsi, <code>/a(b)c/</code> correspond aux caractères ‘abc’ et garde ‘b’ en mémoire. Pour récupérer ces fragments mémorisés, on peut utiliser les éléments du tableau <code>array</code> <code>[1]</code>, …, <code>[n]</code>.</p>
 <p>Le nombre de fragments qu’il est possible de garder entre parenthèses n’est pas limité. Le tableau renvoyé contiendra tout ce qui aura été trouvé. Les exemples qui suivent montrent comment utiliser cette syntaxe.</p>
 <p>Le script qui suit utilise la méthode <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/replace" title="La méthode replace(.html) renvoie une nouvelle chaîne de caractères dans laquelle tout ou partie des correspondances à un modèle sont remplacées par un remplacement. Le modèle utilisé peut être une RegExp et le remplacement peut être une chaîne ou une fonction à appeler pour chaque correspondance."><code>replace()</code></a> pour échanger les mots d’une chaîne de caractères. Pour remplacer le texte, le script utilise <code>$1</code> et <code>$2</code> qui correspondent au premier et deuxième groupe correspondant.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">(\w+)\s(\w+)</span><span class="ss">/</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">var</span> str <span class="op">=</span> <span class="st">&quot;Titi toto&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">var</span> newstr <span class="op">=</span> <span class="va">str</span>.<span class="at">replace</span>(re<span class="op">,</span> <span class="st">&quot;$2, $1&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="va">console</span>.<span class="at">log</span>(newstr)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">(\w+)\s(\w+)</span><span class="ss">/</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">var</span> str <span class="op">=</span> <span class="st">&quot;Titi toto&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">var</span> newstr <span class="op">=</span> <span class="va">str</span>.<span class="at">replace</span>(re<span class="op">,</span> <span class="st">&quot;$2, $1&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="va">console</span>.<span class="at">log</span>(newstr)<span class="op">;</span></a></code></pre></div>
 <p>Cela affichera “toto, Titi”.</p>
+</div>
+<div class="h3-section">
 <h3 id="effectuer-des-recherches-avancées-en-utilisant-les-marqueurs-flags-effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_flags"><span id="recherches_flag">Effectuer des recherches avancées en utilisant les marqueurs (<em>flags</em>)</span> {#Effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_(flags)}</h3>
 <p>Les expressions rationnelles peuvent être utilisées avec cinq marqueurs optionnels permettant des recherches globales et/ou ne respectant pas la casse. Ces marqueurs peuvent être utilisés séparement ou ensemble, quel que soit l’ordre. Ils font partie de l’expression régulière.</p>
 <table>
@@ -439,120 +447,126 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <p><a href="https://developer.mozilla.org/fr/docs/Mozilla/Firefox/Releases/3" class="new">Note concernant Firefox 3</a></p>
 <p>Le support du marqueur <code>y</code> a été ajouté dans Firefox 3. Le marqueur <code>y</code> échoue s’il n’y a pas de correspondance, à la position courante, pour la chaîne de caractère donnée.</p>
 <p>Pour utiliser un marqueur avec une expression régulière, on utilisera la syntaxe suivante :</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/motif/marqueurs</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/motif/marqueurs</span><span class="op">;</span></a></code></pre></div>
 <p>ou</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;motif&quot;</span><span class="op">,</span> <span class="st">&quot;marqueurs&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;motif&quot;</span><span class="op">,</span> <span class="st">&quot;marqueurs&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>Les marqueurs font partie intégrante d’une expression régulière, ils ne peuvent pas être ajoutés ou supprimés ensuite.</p>
 <p>Ainsi, <code>re = /\w+\s/g</code> permet de créer une expression régulière pour trouver un ou plusieurs caractères suivis d’un espace, la recherche est effectuée globalement, sur toute la chaîne de caractères.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">\w+\s</span><span class="ss">/g</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">var</span> str <span class="op">=</span> <span class="st">&quot;un deux trois quatre&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">str</span>.<span class="at">match</span>(re)<span class="op">;</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="va">console</span>.<span class="at">log</span>(monTableau)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">\w+\s</span><span class="ss">/g</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">var</span> str <span class="op">=</span> <span class="st">&quot;un deux trois quatre&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="kw">var</span> monTableau <span class="op">=</span> <span class="va">str</span>.<span class="at">match</span>(re)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="va">console</span>.<span class="at">log</span>(monTableau)<span class="op">;</span></a></code></pre></div>
 <p>Cela affichera [“un”, “deux”, “trois”]. On pourrait remplacer la ligne :</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">\w+\s</span><span class="ss">/g</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">\w+\s</span><span class="ss">/g</span><span class="op">;</span></a></code></pre></div>
 <p>avec la ligne :</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">s&quot;</span><span class="op">,</span> <span class="st">&quot;g&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">w+</span><span class="sc">\\</span><span class="st">s&quot;</span><span class="op">,</span> <span class="st">&quot;g&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>pour obtenir le même résultat.</p>
 <p>Le comportement du marqueur <code>'g'</code> est différent selon qu’il est utilisé avec <code>exec()</code> ou avec <code>match()</code>. Pour <code>match()</code>, c’est la chaîne de caractères qui invoque la méthode et l’expression rationnelle est alors un argument. Pour <code>exec()</code>, c’est l’expression rationnelle qui invoque la méthode et c’est la chaîne de caractères qui est passée en argument. Dans l’appel à <code>exec()</code>, le marqueur <code>'g'</code> permet d’avoir une progression itérative.</p>
 <p>Le marqueur <code>m</code> pourra être utilisé pour traiter une chaîne de caractères de plusieurs lignes comme plusieurs lignes distinctes. Si ce marqueur est utilisé, les caractères spéciaux <code>^</code> et <code>$</code> correspondront au début ou à la fin de n’importe quelle ligne appartenant à la chaîne de caractères au lieu de correspondre simplement au début ou à la fin de la chaîne.</p>
 <h2 id="Exemples">Exemples</h2>
 <p>Les exemples qui suivent utilisent les expressions régulières dans différents cas.</p>
+</div>
+<div class="h3-section">
 <h3 id="changer-lordre-dune-saisie-changer_lordre_dune_saisie">Changer l’ordre d’une saisie {#Changer_l’ordre_d’une_saisie}</h3>
 <p>L’exemple qui suit utilise les expressions régulières et <code>string.split()</code> et <code>string.replace()</code>. Le script nettoie la chaîne de caractères saisie qui contient des noms (prénom puis nom) séparés par des blancs, tabulations et points-virgules. Enfin il inverse les noms et prénoms puis trie la liste.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co">// La chaîne des noms contient plusieurs blancs et tabulations,</span></a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">// il peut y avoir plusieurs espaces entre le nom et le prénom.</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">var</span> noms <span class="op">=</span> <span class="st">&quot;Harry Trump ;Fred Barney; Helen Rigby ; Bill Abel ; Chris Hand &quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw">var</span> output <span class="op">=</span> [<span class="st">&quot;---------- Chaîne originale</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> noms <span class="op">+</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>]<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">// Préparer deux expressions régulières pour stocker un tableau.</span></a>
-<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">// et découper les chaînes dans ce tableau.</span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">// motif: on peut avoir des blancs, un point virgule puis d&#39;autres blancs</span></a>
-<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="kw">var</span> motifs <span class="op">=</span> <span class="ss">/</span><span class="sc">\s*</span><span class="ss">;</span><span class="sc">\s*</span><span class="ss">/</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">// Découper la chaîne de caractères en morceaux séparés par le précédent motif</span></a>
-<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">// Stocker ces morceaux dans un tableau listeNoms</span></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="kw">var</span> listeNoms <span class="op">=</span> <span class="va">noms</span>.<span class="at">split</span>(motif)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">// nouveau motif : un ou plusieurs caractères, des blancs puis des caractères.</span></a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">// On utilise des parenthèses pour garder en mémoire les groupes du motif.</span></a>
-<a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co">// On utilisera ces groupes par la suite.</span></a>
-<a class="sourceLine" id="cb15-20" data-line-number="20">motif <span class="op">=</span> <span class="ss">/</span><span class="sc">(\w+)\s+(\w+)</span><span class="ss">/</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb15-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb15-22" data-line-number="22"><span class="co">// Nouveau tableau pour enregistrer les noms traités.</span></a>
-<a class="sourceLine" id="cb15-23" data-line-number="23"><span class="kw">var</span> listeParNomFamille <span class="op">=</span> []<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb15-25" data-line-number="25"><span class="co">// Afficher le tableau des noms et remplir le nouveau tableau</span></a>
-<a class="sourceLine" id="cb15-26" data-line-number="26"><span class="co">// avec les noms et prénoms séparés par des virgules, le nom </span></a>
-<a class="sourceLine" id="cb15-27" data-line-number="27"><span class="co">// de famille étant écrit en premier </span></a>
-<a class="sourceLine" id="cb15-28" data-line-number="28"><span class="co">//</span></a>
-<a class="sourceLine" id="cb15-29" data-line-number="29"><span class="co">// La méthode replace supprime tout ce qui correspond au motif </span></a>
-<a class="sourceLine" id="cb15-30" data-line-number="30"><span class="co">// et le remplace par le nom (mémorisé), une virgule, un espace</span></a>
-<a class="sourceLine" id="cb15-31" data-line-number="31"><span class="co">// et le prénom (mémorisé).</span></a>
-<a class="sourceLine" id="cb15-32" data-line-number="32"><span class="co">//</span></a>
-<a class="sourceLine" id="cb15-33" data-line-number="33"><span class="co">// Les variables $1 et $2 font références aux fragments gardés</span></a>
-<a class="sourceLine" id="cb15-34" data-line-number="34"><span class="co">// en mémoire lors de l&#39;utilisation du motif.</span></a>
-<a class="sourceLine" id="cb15-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb15-36" data-line-number="36"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Après découpage avec l&#39;expression régulière&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-37" data-line-number="37"></a>
-<a class="sourceLine" id="cb15-38" data-line-number="38"><span class="kw">var</span> i<span class="op">,</span> len<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-39" data-line-number="39"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeNoms</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
-<a class="sourceLine" id="cb15-40" data-line-number="40">  <span class="va">output</span>.<span class="at">push</span>(listeNoms[i])<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-41" data-line-number="41">  listeParNomFamille[i] <span class="op">=</span> listeNoms[i].<span class="at">replace</span>(motif<span class="op">,</span> <span class="st">&quot;$2, $1&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-42" data-line-number="42"><span class="op">}</span></a>
-<a class="sourceLine" id="cb15-43" data-line-number="43"></a>
-<a class="sourceLine" id="cb15-44" data-line-number="44"><span class="co">// Afficher le nouveau tableau</span></a>
-<a class="sourceLine" id="cb15-45" data-line-number="45"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Noms et prénoms inversés&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-46" data-line-number="46"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeParNomFamille</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
-<a class="sourceLine" id="cb15-47" data-line-number="47">  <span class="va">output</span>.<span class="at">push</span>(listeParNomFamille[i])<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-48" data-line-number="48"><span class="op">}</span></a>
-<a class="sourceLine" id="cb15-49" data-line-number="49"></a>
-<a class="sourceLine" id="cb15-50" data-line-number="50"><span class="co">// Trier par le nom de famille puis afficher le tableau trié</span></a>
-<a class="sourceLine" id="cb15-51" data-line-number="51"><span class="va">listeParNomFamille</span>.<span class="at">sort</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-52" data-line-number="52"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Triée&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-53" data-line-number="53"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeParNomFamille</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
-<a class="sourceLine" id="cb15-54" data-line-number="54">  <span class="va">output</span>.<span class="at">push</span>(listeParNomFamille[i])<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-55" data-line-number="55"><span class="op">}</span></a>
-<a class="sourceLine" id="cb15-56" data-line-number="56"></a>
-<a class="sourceLine" id="cb15-57" data-line-number="57"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Fin&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-58" data-line-number="58"></a>
-<a class="sourceLine" id="cb15-59" data-line-number="59"><span class="va">console</span>.<span class="at">log</span>(<span class="va">output</span>.<span class="at">join</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="co">// La chaîne des noms contient plusieurs blancs et tabulations,</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="co">// il peut y avoir plusieurs espaces entre le nom et le prénom.</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">var</span> noms <span class="op">=</span> <span class="st">&quot;Harry Trump ;Fred Barney; Helen Rigby ; Bill Abel ; Chris Hand &quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw">var</span> output <span class="op">=</span> [<span class="st">&quot;---------- Chaîne originale</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> noms <span class="op">+</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-6" title="6"></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">// Préparer deux expressions régulières pour stocker un tableau.</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">// et découper les chaînes dans ce tableau.</span></a>
+<a class="sourceLine" id="cb15-9" title="9"></a>
+<a class="sourceLine" id="cb15-10" title="10"><span class="co">// motif: on peut avoir des blancs, un point virgule puis d&#39;autres blancs</span></a>
+<a class="sourceLine" id="cb15-11" title="11"><span class="kw">var</span> motifs <span class="op">=</span> <span class="ss">/</span><span class="sc">\s*</span><span class="ss">;</span><span class="sc">\s*</span><span class="ss">/</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12"></a>
+<a class="sourceLine" id="cb15-13" title="13"><span class="co">// Découper la chaîne de caractères en morceaux séparés par le précédent motif</span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="co">// Stocker ces morceaux dans un tableau listeNoms</span></a>
+<a class="sourceLine" id="cb15-15" title="15"><span class="kw">var</span> listeNoms <span class="op">=</span> <span class="va">noms</span>.<span class="at">split</span>(motif)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-16" title="16"></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="co">// nouveau motif : un ou plusieurs caractères, des blancs puis des caractères.</span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="co">// On utilise des parenthèses pour garder en mémoire les groupes du motif.</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="co">// On utilisera ces groupes par la suite.</span></a>
+<a class="sourceLine" id="cb15-20" title="20">motif <span class="op">=</span> <span class="ss">/</span><span class="sc">(\w+)\s+(\w+)</span><span class="ss">/</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-21" title="21"></a>
+<a class="sourceLine" id="cb15-22" title="22"><span class="co">// Nouveau tableau pour enregistrer les noms traités.</span></a>
+<a class="sourceLine" id="cb15-23" title="23"><span class="kw">var</span> listeParNomFamille <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-24" title="24"></a>
+<a class="sourceLine" id="cb15-25" title="25"><span class="co">// Afficher le tableau des noms et remplir le nouveau tableau</span></a>
+<a class="sourceLine" id="cb15-26" title="26"><span class="co">// avec les noms et prénoms séparés par des virgules, le nom </span></a>
+<a class="sourceLine" id="cb15-27" title="27"><span class="co">// de famille étant écrit en premier </span></a>
+<a class="sourceLine" id="cb15-28" title="28"><span class="co">//</span></a>
+<a class="sourceLine" id="cb15-29" title="29"><span class="co">// La méthode replace supprime tout ce qui correspond au motif </span></a>
+<a class="sourceLine" id="cb15-30" title="30"><span class="co">// et le remplace par le nom (mémorisé), une virgule, un espace</span></a>
+<a class="sourceLine" id="cb15-31" title="31"><span class="co">// et le prénom (mémorisé).</span></a>
+<a class="sourceLine" id="cb15-32" title="32"><span class="co">//</span></a>
+<a class="sourceLine" id="cb15-33" title="33"><span class="co">// Les variables $1 et $2 font références aux fragments gardés</span></a>
+<a class="sourceLine" id="cb15-34" title="34"><span class="co">// en mémoire lors de l&#39;utilisation du motif.</span></a>
+<a class="sourceLine" id="cb15-35" title="35"></a>
+<a class="sourceLine" id="cb15-36" title="36"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Après découpage avec l&#39;expression régulière&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-37" title="37"></a>
+<a class="sourceLine" id="cb15-38" title="38"><span class="kw">var</span> i<span class="op">,</span> len<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-39" title="39"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeNoms</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
+<a class="sourceLine" id="cb15-40" title="40">  <span class="va">output</span>.<span class="at">push</span>(listeNoms[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-41" title="41">  listeParNomFamille[i] <span class="op">=</span> listeNoms[i].<span class="at">replace</span>(motif<span class="op">,</span> <span class="st">&quot;$2, $1&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-42" title="42"><span class="op">}</span></a>
+<a class="sourceLine" id="cb15-43" title="43"></a>
+<a class="sourceLine" id="cb15-44" title="44"><span class="co">// Afficher le nouveau tableau</span></a>
+<a class="sourceLine" id="cb15-45" title="45"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Noms et prénoms inversés&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-46" title="46"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeParNomFamille</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
+<a class="sourceLine" id="cb15-47" title="47">  <span class="va">output</span>.<span class="at">push</span>(listeParNomFamille[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-48" title="48"><span class="op">}</span></a>
+<a class="sourceLine" id="cb15-49" title="49"></a>
+<a class="sourceLine" id="cb15-50" title="50"><span class="co">// Trier par le nom de famille puis afficher le tableau trié</span></a>
+<a class="sourceLine" id="cb15-51" title="51"><span class="va">listeParNomFamille</span>.<span class="at">sort</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-52" title="52"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Triée&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-53" title="53"><span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> len <span class="op">=</span> <span class="va">listeParNomFamille</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>)<span class="op">{</span></a>
+<a class="sourceLine" id="cb15-54" title="54">  <span class="va">output</span>.<span class="at">push</span>(listeParNomFamille[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-55" title="55"><span class="op">}</span></a>
+<a class="sourceLine" id="cb15-56" title="56"></a>
+<a class="sourceLine" id="cb15-57" title="57"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Fin&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-58" title="58"></a>
+<a class="sourceLine" id="cb15-59" title="59"><span class="va">console</span>.<span class="at">log</span>(<span class="va">output</span>.<span class="at">join</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))<span class="op">;</span></a></code></pre></div>
+</div>
+<div class="h3-section">
 <h3 id="Utiliser_les_caractères_spéciaux_pour_vérifier_la_saisie">Utiliser les caractères spéciaux pour vérifier la saisie</h3>
 <p>Dans l’exemple suivant, on s’attend à ce que l’utilisateur saisissent un numéro de téléphone. Quand l’utilisateur appuie sur le bouton “Vérifier”, le script vérifie la validité du numéro. Si le numéro est valide (il correspond à la séquence de caractères fournie par l’expression régulière), le script affiche un message remerciant l’utilisateur et confirmant le numéro. S’il est invalide, le script informe l’utilisateur et lui signifie que les informations saisies ne sont pas valides.</p>
 <p>Dans les parenthèses sans mémoire <code>(?:</code> , l’expression régulière cherche les deux premiers chiffres ou l’indicatif du pays suivi d’un blanc et du premier chiffre, ce qui correspond à</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb16-1" data-line-number="1">\d{2}|\+\d{2}[ ]\d</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb16-1" title="1">\d{2}|\+\d{2}[ ]\d</a></code></pre></div>
 <p>Cette partie signifie : deux chiffres OU un signe ‘+’ suivi de deux chiffres, un blanc et un autre chiffre.</p>
 <p>Ensuite, on a un groupe qui est mémorisé (entre parenthèses) :</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" data-line-number="1">([- ])</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" title="1">([- ])</a></code></pre></div>
 <p>Ce groupe correspond à ce qui va être utilisé pour séparer les différentes composantes du numéro de téléphone.</p>
 <p>Ensuite,</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb18-1" data-line-number="1">\d{2}\1</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb18-1" title="1">\d{2}\1</a></code></pre></div>
 <p>signifie qu’on a deux chiffres suivi du premier groupe qui est celui qui définit le séparateur. Le reste est composé de la même façon. Ainsi les numéros de téléphone +33 1 23 45 67 89 et 01 23 45 67 89 seront tous les deux valides.</p>
 <p>L’événement <code>Change</code>, provoqué quand l’utilisateur appuie sur Entrée, renseigne la valeur <code>RegExp.input</code>.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">&lt;html&gt;</span>  </a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">  <span class="kw">&lt;head&gt;</span>  </a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=ISO-8859-1&quot;</span><span class="kw">&gt;</span>  </a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Script-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>  </a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>  </a>
-<a class="sourceLine" id="cb19-7" data-line-number="7">      <span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">(?</span><span class="ss">:</span><span class="sc">\d{2}|\+\d{2}[ ]\d)([- ])\d{2}\1\d{2}\1\d{2}\1\d{2}</span><span class="ss">/</span><span class="op">;</span>  </a>
-<a class="sourceLine" id="cb19-8" data-line-number="8">      <span class="kw">function</span> <span class="at">testInfo</span>(phoneInput)<span class="op">{</span>  </a>
-<a class="sourceLine" id="cb19-9" data-line-number="9">        <span class="kw">var</span> OK <span class="op">=</span> <span class="va">re</span>.<span class="at">exec</span>(<span class="va">phoneInput</span>.<span class="at">value</span>)<span class="op">;</span>  </a>
-<a class="sourceLine" id="cb19-10" data-line-number="10">        <span class="cf">if</span> (<span class="op">!</span>OK)  </a>
-<a class="sourceLine" id="cb19-11" data-line-number="11">          <span class="va">window</span>.<span class="at">alert</span>(<span class="va">phone</span>.<span class="at">input</span> <span class="op">+</span> <span class="st">&quot; n&#39;est pas un numéro de téléphone valide!&quot;</span>)<span class="op">;</span>  </a>
-<a class="sourceLine" id="cb19-12" data-line-number="12">        <span class="cf">else</span></a>
-<a class="sourceLine" id="cb19-13" data-line-number="13">          <span class="va">window</span>.<span class="at">alert</span>(<span class="st">&quot;Merci, votre numéro est : &quot;</span> <span class="op">+</span> OK[<span class="dv">0</span>])<span class="op">;</span>  </a>
-<a class="sourceLine" id="cb19-14" data-line-number="14">      <span class="op">}</span>  </a>
-<a class="sourceLine" id="cb19-15" data-line-number="15">    <span class="kw">&lt;/script&gt;</span>  </a>
-<a class="sourceLine" id="cb19-16" data-line-number="16">  <span class="kw">&lt;/head&gt;</span>  </a>
-<a class="sourceLine" id="cb19-17" data-line-number="17">  <span class="kw">&lt;body&gt;</span>  </a>
-<a class="sourceLine" id="cb19-18" data-line-number="18">    <span class="kw">&lt;p&gt;</span>Saisissez votre numéro de téléphone (avec indicatif) puis cliquez sur &quot;Vérifier&quot;.</a>
-<a class="sourceLine" id="cb19-19" data-line-number="19">        <span class="kw">&lt;br&gt;</span>Le format attendu est ## ## ## ## ## ou +## # ## ## ## ##.<span class="kw">&lt;/p&gt;</span></a>
-<a class="sourceLine" id="cb19-20" data-line-number="20">    <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>  </a>
-<a class="sourceLine" id="cb19-21" data-line-number="21">      <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;phone&quot;</span><span class="kw">&gt;&lt;button</span><span class="ot"> onclick=</span><span class="st">&quot;testInfo(document.getElementById(&#39;phone&#39;));&quot;</span><span class="kw">&gt;</span>Vérifier<span class="kw">&lt;/button&gt;</span></a>
-<a class="sourceLine" id="cb19-22" data-line-number="22">    <span class="kw">&lt;/form&gt;</span>  </a>
-<a class="sourceLine" id="cb19-23" data-line-number="23">  <span class="kw">&lt;/body&gt;</span>  </a>
-<a class="sourceLine" id="cb19-24" data-line-number="24"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb19-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">&lt;html&gt;</span>  </a>
+<a class="sourceLine" id="cb19-3" title="3">  <span class="kw">&lt;head&gt;</span>  </a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/html; charset=ISO-8859-1&quot;</span><span class="kw">&gt;</span>  </a>
+<a class="sourceLine" id="cb19-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;Content-Script-Type&quot;</span><span class="ot"> content=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>  </a>
+<a class="sourceLine" id="cb19-6" title="6">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>  </a>
+<a class="sourceLine" id="cb19-7" title="7">      <span class="kw">var</span> re <span class="op">=</span> <span class="ss">/</span><span class="sc">(?</span><span class="ss">:</span><span class="sc">\d{2}|\+\d{2}[ ]\d)([- ])\d{2}\1\d{2}\1\d{2}\1\d{2}</span><span class="ss">/</span><span class="op">;</span>  </a>
+<a class="sourceLine" id="cb19-8" title="8">      <span class="kw">function</span> <span class="at">testInfo</span>(phoneInput)<span class="op">{</span>  </a>
+<a class="sourceLine" id="cb19-9" title="9">        <span class="kw">var</span> OK <span class="op">=</span> <span class="va">re</span>.<span class="at">exec</span>(<span class="va">phoneInput</span>.<span class="at">value</span>)<span class="op">;</span>  </a>
+<a class="sourceLine" id="cb19-10" title="10">        <span class="cf">if</span> (<span class="op">!</span>OK)  </a>
+<a class="sourceLine" id="cb19-11" title="11">          <span class="va">window</span>.<span class="at">alert</span>(<span class="va">phone</span>.<span class="at">input</span> <span class="op">+</span> <span class="st">&quot; n&#39;est pas un numéro de téléphone valide!&quot;</span>)<span class="op">;</span>  </a>
+<a class="sourceLine" id="cb19-12" title="12">        <span class="cf">else</span></a>
+<a class="sourceLine" id="cb19-13" title="13">          <span class="va">window</span>.<span class="at">alert</span>(<span class="st">&quot;Merci, votre numéro est : &quot;</span> <span class="op">+</span> OK[<span class="dv">0</span>])<span class="op">;</span>  </a>
+<a class="sourceLine" id="cb19-14" title="14">      <span class="op">}</span>  </a>
+<a class="sourceLine" id="cb19-15" title="15">    <span class="kw">&lt;/script&gt;</span>  </a>
+<a class="sourceLine" id="cb19-16" title="16">  <span class="kw">&lt;/head&gt;</span>  </a>
+<a class="sourceLine" id="cb19-17" title="17">  <span class="kw">&lt;body&gt;</span>  </a>
+<a class="sourceLine" id="cb19-18" title="18">    <span class="kw">&lt;p&gt;</span>Saisissez votre numéro de téléphone (avec indicatif) puis cliquez sur &quot;Vérifier&quot;.</a>
+<a class="sourceLine" id="cb19-19" title="19">        <span class="kw">&lt;br&gt;</span>Le format attendu est ## ## ## ## ## ou +## # ## ## ## ##.<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb19-20" title="20">    <span class="kw">&lt;form</span><span class="ot"> action=</span><span class="st">&quot;#&quot;</span><span class="kw">&gt;</span>  </a>
+<a class="sourceLine" id="cb19-21" title="21">      <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;phone&quot;</span><span class="kw">&gt;&lt;button</span><span class="ot"> onclick=</span><span class="st">&quot;testInfo(document.getElementById(&#39;phone&#39;));&quot;</span><span class="kw">&gt;</span>Vérifier<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb19-22" title="22">    <span class="kw">&lt;/form&gt;</span>  </a>
+<a class="sourceLine" id="cb19-23" title="23">  <span class="kw">&lt;/body&gt;</span>  </a>
+<a class="sourceLine" id="cb19-24" title="24"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+</div>
+</div>
 </body>
 </html>

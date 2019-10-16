@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
@@ -24,19 +24,24 @@
 </ul>
 <h1 id="usage">USAGE</h1>
 <p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ] ‘program’ [file1 file2…]</p>
-<h3 id="structure-of-an-awk-program">Structure of an awk program</h3>
-<pre><code># comments
+<p>::: {.parent} ::::::::: {.h3-section} ### Structure of an awk program</p>
+<pre><code>:::::::::
+# comments
 pattern { action }  A sequence of pattern-action statements
 pattern { action }</code></pre>
 <pre><code>For each file,
    For each input line,
       For each pattern,
          If pattern matches input line, do the action.</code></pre>
+<div class="h3-section">
 <h3 id="pattern">“pattern”</h3>
 <p>BEGIN :executes “action” before starting to view the input file <br> END :executes “action” after ending to view the input file <br> Other :regular, numeric or string expression or combination <br></p>
+</div>
+<div class="h3-section">
 <h3 id="action-is-executable-code">“action” is executable code</h3>
 <p>if (expression) statement1 else statement2 <br> while (expression) statement <br> for (expr1;expr2;expr3) statement <br> do statement while (expression) <br> break / continue :immediately leave / start next iteration of innermost enclosing loop <br> exit / exit expression : go immediately to the END action; if within the END action, exit program <br></p>
-<h1 id="built-in-variables">BUILT-IN VARIABLES</h1>
+</div>
+<p>::: # BUILT-IN VARIABLES</p>
 <table>
 <colgroup>
 <col style="width: 20%" />

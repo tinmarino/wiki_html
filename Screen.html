@@ -14,7 +14,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -27,13 +27,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -76,7 +74,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
@@ -235,24 +233,24 @@ C-a ? | See help |</div>
 <p>The man page is the complete reference.</p>
 <h2 id="scripting">Scripting</h2>
 <p>To any session name,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># send a command to a named session</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="ex">screen</span> -S name -X command       </a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># create a new window and run ping example.com</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="ex">screen</span> -S name -X screen ping example.com       </a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co"># stuff characters into the input buffer</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co"># using bash to expand a newline character</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="ex">screen</span> -S name [-p page] -X stuff <span class="st">$&#39;quit</span><span class="dt">\r</span><span class="st">&#39;</span>     </a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="ex">A</span> full example:</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co"># run bash within screen</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="ex">screen</span> -AmdS bash_shell bash</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co"># run top within that bash session</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="ex">screen</span> -S bash_shell -p 0 -X stuff <span class="st">$&#39;top</span><span class="dt">\r</span><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># ... some time later</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co"># stuff &#39;q&#39; to tell top to quit</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">&#39;q&#39;</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co"># stuff &#39;exit\n&#39; to exit bash session</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">$&#39;exit</span><span class="dt">\r</span><span class="st">&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># send a command to a named session</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ex">screen</span> -S name -X command       </a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"># create a new window and run ping example.com</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="ex">screen</span> -S name -X screen ping example.com       </a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"># stuff characters into the input buffer</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co"># using bash to expand a newline character</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="ex">screen</span> -S name [-p page] -X stuff <span class="st">$&#39;quit</span><span class="dt">\r</span><span class="st">&#39;</span>     </a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="ex">A</span> full example:</a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co"># run bash within screen</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="ex">screen</span> -AmdS bash_shell bash</a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co"># run top within that bash session</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="ex">screen</span> -S bash_shell -p 0 -X stuff <span class="st">$&#39;top</span><span class="dt">\r</span><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co"># ... some time later</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co"># stuff &#39;q&#39; to tell top to quit</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">&#39;q&#39;</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co"># stuff &#39;exit\n&#39; to exit bash session</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">$&#39;exit</span><span class="dt">\r</span><span class="st">&#39;</span></a></code></pre></div>
 <h2 id="misc">Misc</h2>
 <table>
 <tbody>

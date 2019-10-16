@@ -11,11 +11,12 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <ul>
-<li><p>Assemble</p></li>
+<li>Assemble
+<ul>
 <li>gcc file.c -masm=intel -S -o file.d # assemble</li>
 <li>gcc -c file.s -i file.o # compile</li>
 <li>gcc file.o -o file # link</li>
@@ -24,10 +25,13 @@
 <li>man as</li>
 <li>see inline asm</li>
 <li>man objdump</li>
-<li><p>-m32 # compile 32 must instal libc en 32 bits</p></li>
-<li><p>Echo include dirs</p></li>
+<li>-m32 # compile 32 must instal libc en 32 bits</li>
+</ul></li>
+<li>Echo include dirs
+<ul>
 <li>g++ -E -x c++ - -v &lt; /dev/null</li>
-<li><p>clang++ -E -x c++ - -v &lt; /dev/null</p></li>
+<li>clang++ -E -x c++ - -v &lt; /dev/null</li>
+</ul></li>
 <li>Use of Make
 <ul>
 <li><code>export CFLAGS=&quot;-g&quot;</code></li>

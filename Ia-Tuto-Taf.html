@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <h1 id="notes">Notes</h1>
@@ -35,23 +35,43 @@
 <li>Génération</li>
 </ol>
 <h1 id="vocabulaire">Vocabulaire</h1>
+<div class="parent">
+<div class="h3-section">
 <h3 id="transfert-learning">Transfert learning</h3>
 <p>Utiliser un réseau déjà entrainer pour effectuer une autre tache.</p>
+</div>
+<div class="h3-section">
 <h3 id="early-stopping">Early stopping</h3>
 <p>Pour lutter contre le sur apprentissage. Sinon augmenter le nombre de données d’apprentissage ou réduire la taille du modèle.</p>
+</div>
+<div class="h3-section">
 <h3 id="règles-expertes">Règles expertes</h3>
 <p>Arbre de décision d’expert</p>
+</div>
+<div class="h3-section">
 <h3 id="pushbutton">PushButton</h3>
 <p>Réseau de neurone automatiquement généré</p>
+</div>
+<div class="h3-section">
 <h3 id="random-forest">Random Forest</h3>
 <p>Choisir aléatoirement un batch (1%) des vecteurs d’entrés. Et ne s’intéresse qu’à un sous ensemble des coordonnées. Il crée ensuite l’arbre de décision minimal qui permet de discriminer au mieux ces vecteurs. C’est comme si il crée des arbres de décision experts en chaque coordonnées puis il prend la majorités des votes. Utilise <code>Scikit learn</code>. L’avantage est qu’on peut remonter à l’origine des décisions facilement. Chaque arbre prend un échantillon différent. A chaque branche de l’arbre, on ne discrimine qu’une coordonnée, genre <code>x0 &lt; 0.3</code></p>
+</div>
+<div class="h3-section">
 <h3 id="k-means">K-means</h3>
+</div>
+<div class="h3-section">
 <h3 id="hot-encoding">Hot encoding</h3>
 <p>C’est pour encoder une valeur de manière discrète. En mettant chaque possibilité comme une dimension de vecteur. Comme l’output de la reconnaissance de caractère.</p>
+</div>
+<div class="h3-section">
 <h3 id="softmax">SoftMax</h3>
 <p>Permet de donner une sortie en probabilité dans des catégories discrètes. Pour l’erreur sur la fin, on utilise l’entropie croisée.</p>
+</div>
+<div class="h3-section">
 <h3 id="cross-validation">Cross Validation</h3>
 <p>S’entrainer sur 90% et valider sur 10% mais faire 10 fois l’expérience en faisant varier les 10%, pour au final qu’ils aient couvert tout le set. Voir changer la graine de la sélection aléatoire et refaire tout ça. Du genre faire 30 expériences pour un test. Attentions aux papiers qui affichent le meilleur résultat. C’est la moyenne qui compte.</p>
+</div>
+<div class="h3-section">
 <h3 id="matrice-de-confusion">Matrice de confusion</h3>
 <p>M(x, y) est le nombre d’élément de catégorie x classés y par le système. A partir de cette Matrice, on peut calculer plusieurs métriques différentes. Souvent ces métriques mesures les faux positifs <strong>ou</strong> négatifs suivant telle ou telle dimension (i.e. ici des familles).</p>
 <h4 id="précision">Précision</h4>
@@ -60,6 +80,8 @@
 <p>Nombre de bonne classification de chaque classe / nombre d’élément dans cette classe</p>
 <h4 id="f1-score">F1 score</h4>
 <p>Moyenne géométrique Rappel et Précision : <code>2.p.r / (p + r)</code></p>
+</div>
+</div>
 <h2 id="statistiques">Statistiques</h2>
 <ul>
 <li>Regarder le nombre d’objets pour chaque label

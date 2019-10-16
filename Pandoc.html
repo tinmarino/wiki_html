@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <h1 id="synopsis">Synopsis</h1>
@@ -19,7 +19,7 @@
 <h1 id="description">Description</h1>
 <p>Pandoc is a <a href="https://www.haskell.org">Haskell</a> library for converting from one markup format to another, and a command-line tool that uses this library.</p>
 <p>Pandoc can convert between numerous markup and word processing formats, including, but not limited to, various flavors of <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, <a href="http://www.w3.org/html/">HTML</a>, <a href="http://latex-project.org">LaTeX</a> and <a href="https://en.wikipedia.org/wiki/Office_Open_XML">Word docx</a>. For the full lists of input and output formats, see the <code>--from</code> and <code>--to</code> <a href="#general-options">options below</a>. Pandoc can also produce <a href="https://www.adobe.com/pdf/">PDF</a> output: see <a href="#creating-a-pdf">creating a PDF</a>, below.</p>
-<p>Pandoc’s enhanced version of Markdown includes syntax for <a href="#tables">tables</a>, <a href="#definition-lists">definition lists</a>, <a href="#metadata-blocks">metadata blocks</a>, <a href="#footnotes">footnotes</a>, <a href="#citations">citations</a>, <a href="#math">math</a>, and much more. See below under <a href="#pandocs-markdown">Pandoc’s Markdown</a>.</p>
+<p>Pandoc’s enhanced version of Markdown includes syntax for <a href="#tables">tables</a>, [definition lists], <a href="#metadata-blocks">metadata blocks</a>, <a href="#footnotes">footnotes</a>, <a href="#citations">citations</a>, <a href="#math">math</a>, and much more. See below under <a href="#pandocs-markdown">Pandoc’s Markdown</a>.</p>
 <p>Pandoc has a modular design: it consists of a set of readers, which parse text in a given format and produce a native representation of the document (an <em>abstract syntax tree</em> or AST), and a set of writers, which convert this native representation into a target format. Thus, adding an input or output format requires only adding a reader or writer. Users can also run custom <a href="http://pandoc.org/filters.html">pandoc filters</a> to modify the intermediate AST.</p>
 <p>Because pandoc’s intermediate representation of a document is less expressive than many of the formats it converts between, one should not expect perfect conversions between every format and every other. Pandoc attempts to preserve the structural elements of a document, but not formatting details such as margin size. And some document elements, such as complex tables, may not fit into pandoc’s simple document model. While conversions from pandoc’s Markdown to all formats aspire to be perfect, conversions from formats more expressive than pandoc’s Markdown can be expected to be lossy.</p>
 <h2 id="using-pandoc">Using pandoc</h2>
@@ -382,7 +382,7 @@ return {{Str = expand_hello_world}}</code></pre>
 <dd><p>Specifies that headings with the specified level create slides (for <code>beamer</code>, <code>s5</code>, <code>slidy</code>, <code>slideous</code>, <code>dzslides</code>). Headings above this level in the hierarchy are used to divide the slide show into sections; headings below this level create subheads within a slide. Note that content that is not contained under slide-level headings will not appear in the slide show. The default is to set the slide level based on the contents of the document; see <a href="#structuring-the-slide-show">Structuring the slide show</a>.</p>
 </dd>
 <dt><code>--section-divs</code></dt>
-<dd><p>Wrap sections in <code>&lt;section&gt;</code> tags (or <code>&lt;div&gt;</code> tags for <code>html4</code>), and attach identifiers to the enclosing <code>&lt;section&gt;</code> (or <code>&lt;div&gt;</code>) rather than the heading itself. See <a href="#heading-identifiers">Heading identifiers</a>, below.</p>
+<dd><p>Wrap sections in <code>&lt;section&gt;</code> tags (or <code>&lt;div&gt;</code> tags for <code>html4</code>), and attach identifiers to the enclosing <code>&lt;section&gt;</code> (or <code>&lt;div&gt;</code>) rather than the heading itself. See [Heading identifiers], below.</p>
 </dd>
 <dt><code>--email-obfuscation=none</code>|<code>javascript</code>|<code>references</code></dt>
 <dd><p>Specify a method for obfuscating <code>mailto:</code> links in HTML documents. <code>none</code> leaves <code>mailto:</code> links as they are. <code>javascript</code> obfuscates them using JavaScript. <code>references</code> obfuscates them by printing their letters as decimal or hexadecimal character references. The default is <code>none</code>.</p>
@@ -709,7 +709,7 @@ More text in English. [&#39;Zitat auf Deutsch.&#39;]{lang=de}</code></pre>
 </dl>
 <h2 id="variables-for-latex">Variables for LaTeX</h2>
 <p>Pandoc uses these variables when <a href="#creating-a-pdf">creating a PDF</a> with a LaTeX engine.</p>
-<h3 id="layout">Layout</h3>
+<p>::: {.parent} ::::::::: {.h3-section} ### Layout</p>
 <dl>
 <dt><code>block-headings</code></dt>
 <dd><p>make <code>\paragraph</code> and <code>\subparagraph</code> (fourth- and fifth-level headings, or fifth- and sixth-level with book classes) free-standing rather than run-in; requires further formatting to distinguish from <code>\subsubsection</code> (third- or fourth-level headings). Instead of using this option, <a href="https://ctan.org/pkg/koma-script">KOMA-Script</a> can adjust headings more extensively:</p>
@@ -766,7 +766,7 @@ geometry:
 <dd>numbering depth for sections (with <code>--number-sections</code> option or <code>numbersections</code> variable)
 </dd>
 </dl>
-<h3 id="fonts">Fonts</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Fonts</p>
 <dl>
 <dt><code>fontenc</code></dt>
 <dd>allows font encoding to be specified through <code>fontenc</code> package (with <code>pdflatex</code>); default is <code>T1</code> (see <a href="https://ctan.org/pkg/encguide">LaTeX font encodings guide</a>)
@@ -802,7 +802,7 @@ mainfontoptions:
 <dd>options to pass to the microtype package
 </dd>
 </dl>
-<h3 id="links">Links</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Links</p>
 <dl>
 <dt><code>colorlinks</code></dt>
 <dd>add color to link text; automatically enabled if any of <code>linkcolor</code>, <code>filecolor</code>, <code>citecolor</code>, <code>urlcolor</code>, or <code>toccolor</code> are set
@@ -814,7 +814,7 @@ mainfontoptions:
 <dd>causes links to be printed as footnotes
 </dd>
 </dl>
-<h3 id="front-matter">Front matter</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Front matter</p>
 <dl>
 <dt><code>lof</code>, <code>lot</code></dt>
 <dd>include list of figures, list of tables
@@ -829,7 +829,7 @@ mainfontoptions:
 <dd>level of section to include in table of contents
 </dd>
 </dl>
-<h3 id="biblatex-bibliographies">BibLaTeX Bibliographies</h3>
+<p>::::::::: ::::::::: {.h3-section} ### BibLaTeX Bibliographies</p>
 <p>These variables function when using BibLaTeX for <a href="#citation-rendering">citation rendering</a>.</p>
 <dl>
 <dt><code>biblatexoptions</code></dt>
@@ -1216,7 +1216,7 @@ $endfor$</code></pre>
 <p>A backslash followed by a newline is also a hard line break. Note: in multiline and grid table cells, this is the only way to create a hard line break, since trailing spaces in the cells are ignored.</p>
 <h2 id="headings">Headings</h2>
 <p>There are two kinds of headings: Setext and ATX.</p>
-<h3 id="setext-style-headings">Setext-style headings</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Setext-style headings ###</p>
 <p>A setext-style heading is a line of text “underlined” with a row of <code>=</code> signs (for a level-one heading) or <code>-</code> signs (for a level-two heading):</p>
 <pre><code>A level-one heading
 ===================
@@ -1224,7 +1224,7 @@ $endfor$</code></pre>
 A level-two heading
 -------------------</code></pre>
 <p>The heading text can contain inline formatting, such as emphasis (see <a href="#inline-formatting">Inline formatting</a>, below).</p>
-<h3 id="atx-style-headings">ATX-style headings</h3>
+<p>::::::::: ::::::::: {.h3-section} ### ATX-style headings ###</p>
 <p>An ATX-style heading consists of one to six <code>#</code> signs and a line of text, optionally followed by any number of <code>#</code> signs. The number of <code>#</code> signs at the beginning of the line is the heading level:</p>
 <pre><code>## A level-two heading
 
@@ -1237,7 +1237,7 @@ A level-two heading
 #22, for example, and #5.</code></pre>
 <h4 id="extension-space_in_atx_header">Extension: <code>space_in_atx_header</code></h4>
 <p>Many Markdown implementations do not require a space between the opening <code>#</code>s of an ATX heading and the heading text, so that <code>#5 bolt</code> and <code>#hashtag</code> count as headings. With this extension, pandoc does require the space.</p>
-<h3 id="heading-identifiers">Heading identifiers</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Heading identifiers ###</p>
 <p>See also the <a href="#extension-auto_identifiers"><code>auto_identifiers</code> extension</a> above.</p>
 <h4 id="extension-header_attributes">Extension: <code>header_attributes</code></h4>
 <p>Headings can be assigned attributes using this syntax at the end of the line containing the heading text:</p>
@@ -1299,14 +1299,14 @@ paragraph has two lines.
 <pre><code>&gt; This is a block quote.
 &gt;&gt; Nested.</code></pre>
 <h2 id="verbatim-code-blocks">Verbatim (code) blocks</h2>
-<h3 id="indented-code-blocks">Indented code blocks</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Indented code blocks ###</p>
 <p>A block of text indented four spaces (or one tab) is treated as verbatim text: that is, special characters do not trigger special formatting, and all spaces and line breaks are preserved. For example,</p>
 <pre><code>    if (a &gt; 3) {
       moveShip(5 * gravity, DOWN);
     }</code></pre>
 <p>The initial (four space or one tab) indentation is not considered part of the verbatim text, and is removed in the output.</p>
 <p>Note: blank lines in the verbatim text need not begin with four spaces.</p>
-<h3 id="fenced-code-blocks">Fenced code blocks</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Fenced code blocks ###</p>
 <h4 id="extension-fenced_code_blocks">Extension: <code>fenced_code_blocks</code></h4>
 <p>In addition to standard indented code blocks, pandoc supports <em>fenced</em> code blocks. These begin with a row of three or more tildes (<code>~</code>) and end with a row of tildes that must be at least as long as the starting row. Everything between these lines is treated as code. No indentation is necessary:</p>
 <pre><code>~~~~~~~
@@ -1365,7 +1365,7 @@ qsort [] = []
 | Berkeley, CA 94718</code></pre>
 <p>This syntax is borrowed from <a href="http://docutils.sourceforge.net/docs/ref/rst/introduction.html">reStructuredText</a>.</p>
 <h2 id="lists">Lists</h2>
-<h3 id="bullet-lists">Bullet lists</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Bullet lists ###</p>
 <p>A bullet list is a list of bulleted list items. A bulleted list item begins with a bullet (<code>*</code>, <code>+</code>, or <code>-</code>). Here is a simple example:</p>
 <pre><code>* one
 * two
@@ -1385,7 +1385,7 @@ qsort [] = []
 <pre><code>* here is my first
 list item.
 * and my second.</code></pre>
-<h3 id="block-content-in-list-items">Block content in list items</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Block content in list items ###</p>
 <p>A list item may contain multiple paragraphs and other block-level content. However, subsequent paragraphs must be preceded by a blank line and indented to line up with the first non-space content after the list marker.</p>
 <pre><code>  * First paragraph.
 
@@ -1418,7 +1418,7 @@ bad but is legal.
 
     Second paragraph of second
 list item.</code></pre>
-<h3 id="ordered-lists">Ordered lists</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Ordered lists ###</p>
 <p>Ordered lists work just like bulleted lists, except that the items begin with enumerators rather than bullets.</p>
 <p>In standard Markdown, enumerators are decimal numbers followed by a period and a space. The numbers themselves are ignored, so there is no difference between this list:</p>
 <pre><code>1.  one
@@ -1454,7 +1454,7 @@ list item.</code></pre>
 <p>Pandoc supports task lists, using the syntax of GitHub-Flavored Markdown.</p>
 <pre><code>- [ ] an unchecked task list item
 - [x] checked item</code></pre>
-<h3 id="definition-lists">Definition lists</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Definition lists ###</p>
 <h4 id="extension-definition_lists">Extension: <code>definition_lists</code></h4>
 <p>Pandoc supports definition lists, using the syntax of <a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a> with some extensions.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <pre><code>Term 1
@@ -1484,7 +1484,7 @@ Term 2
   ~ Definition 2a
   ~ Definition 2b</code></pre>
 <p>Note that space between items in a definition list is required. (A variant that loosens this requirement, but disallows “lazy” hard wrapping, can be activated with <code>compact_definition_lists</code>: see <a href="#non-pandoc-extensions">Non-pandoc extensions</a>, below.)</p>
-<h3 id="numbered-example-lists">Numbered example lists</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Numbered example lists ###</p>
 <h4 id="extension-example_lists">Extension: <code>example_lists</code></h4>
 <p>The special list marker <code>@</code> can be used for sequentially numbered examples. The first list item with a <code>@</code> marker will be numbered ‘1’, the next ‘2’, and so on, throughout the document. The numbered examples need not occur in a single list; each new list using <code>@</code> will take up where the last stopped. So, for example:</p>
 <pre><code>(@)  My first example will be numbered (1).
@@ -1499,7 +1499,7 @@ Explanation of examples.
 As (@good) illustrates, ...</code></pre>
 <p>The label can be any string of alphanumeric characters, underscores, or hyphens.</p>
 <p>Note: continuation paragraphs in example lists must always be indented four spaces, regardless of the length of the list marker. That is, example lists always behave as if the <code>four_space_rule</code> extension is set. This is because example labels tend to be long, and indenting content to the first non-space character after the label would be awkward.</p>
-<h3 id="compact-and-loose-lists">Compact and loose lists</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Compact and loose lists ###</p>
 <p>Pandoc behaves differently from <code>Markdown.pl</code> on some “edge cases” involving lists. Consider this source:</p>
 <pre><code>+   First
 +   Second:
@@ -1509,7 +1509,7 @@ As (@good) illustrates, ...</code></pre>
 
 +   Third</code></pre>
 <p>Pandoc transforms this into a “compact list” (with no <code>&lt;p&gt;</code> tags around “First”, “Second”, or “Third”), while Markdown puts <code>&lt;p&gt;</code> tags around “Second” and “Third” (but not “First”), because of the blank space around “Third”. Pandoc follows a simple rule: if the text is followed by a blank line, it is treated as a paragraph. Since “Second” is followed by a list, and not a blank line, it isn’t treated as a paragraph. The fact that the list is followed by a blank line is irrelevant. (Note: Pandoc works this way even when the <code>markdown_strict</code> format is specified. This behavior is consistent with the official Markdown syntax description, even though it is different from that of <code>Markdown.pl</code>.)</p>
-<h3 id="ending-a-list">Ending a list</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Ending a list ###</p>
 <p>What if you want to put an indented code block after a list?</p>
 <pre><code>-   item one
 -   item two
@@ -1745,7 +1745,7 @@ $endfor$</code></pre>
 <p>A backslash-escaped newline (i.e. a backslash occurring at the end of a line) is parsed as a hard line break. It will appear in TeX output as <code>\\</code> and in HTML as <code>&lt;br /&gt;</code>. This is a nice alternative to Markdown’s “invisible” way of indicating hard line breaks using two trailing spaces on a line.</p>
 <p>Backslash escapes do not work in verbatim contexts.</p>
 <h2 id="inline-formatting">Inline formatting</h2>
-<h3 id="emphasis">Emphasis</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Emphasis ###</p>
 <p>To <em>emphasize</em> some text, surround it with <code>*</code>s or <code>_</code>, like this:</p>
 <pre><code>This text is _emphasized with underscores_, and this
 is *emphasized with asterisks*.</code></pre>
@@ -1756,16 +1756,16 @@ is *emphasized with asterisks*.</code></pre>
 <h4 id="extension-intraword_underscores">Extension: <code>intraword_underscores</code></h4>
 <p>Because <code>_</code> is sometimes used inside words and identifiers, pandoc does not interpret a <code>_</code> surrounded by alphanumeric characters as an emphasis marker. If you want to emphasize just part of a word, use <code>*</code>:</p>
 <pre><code>feas*ible*, not feas*able*.</code></pre>
-<h3 id="strikeout">Strikeout</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Strikeout ###</p>
 <h4 id="extension-strikeout">Extension: <code>strikeout</code></h4>
 <p>To strikeout a section of text with a horizontal line, begin and end it with <code>~~</code>. Thus, for example,</p>
 <pre><code>This ~~is deleted text.~~</code></pre>
-<h3 id="superscripts-and-subscripts">Superscripts and subscripts</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Superscripts and subscripts ###</p>
 <h4 id="extension-superscript-subscript">Extension: <code>superscript</code>, <code>subscript</code></h4>
 <p>Superscripts may be written by surrounding the superscripted text by <code>^</code> characters; subscripts may be written by surrounding the subscripted text by <code>~</code> characters. Thus, for example,</p>
 <pre><code>H~2~O is a liquid.  2^10^ is 1024.</code></pre>
 <p>If the superscripted or subscripted text contains spaces, these spaces must be escaped with backslashes. (This is to prevent accidental superscripting and subscripting through the ordinary use of <code>~</code> and <code>^</code>.) Thus, if you want the letter P with ‘a cat’ in subscripts, use <code>P~a\ cat~</code>, not <code>P~a cat~</code>.</p>
-<h3 id="verbatim">Verbatim</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Verbatim ###</p>
 <p>To make a short span of text verbatim, put it inside backticks:</p>
 <pre><code>What is the difference between `&gt;&gt;=` and `&gt;&gt;`?</code></pre>
 <p>If the verbatim text includes a backtick, use double backticks:</p>
@@ -1775,9 +1775,9 @@ is *emphasized with asterisks*.</code></pre>
 <p>Note that backslash-escapes (and other Markdown constructs) do not work in verbatim contexts:</p>
 <pre><code>This is a backslash followed by an asterisk: `\*`.</code></pre>
 <h4 id="extension-inline_code_attributes">Extension: <code>inline_code_attributes</code></h4>
-<p>Attributes can be attached to verbatim text, just as with <a href="#fenced-code-blocks">fenced code blocks</a>:</p>
+<p>Attributes can be attached to verbatim text, just as with [fenced code blocks]:</p>
 <pre><code>`&lt;$&gt;`{.haskell}</code></pre>
-<h3 id="small-caps">Small caps</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Small caps ###</p>
 <p>To write small caps, use the <code>smallcaps</code> class:</p>
 <pre><code>[Small caps]{.smallcaps}</code></pre>
 <p>Or, without the <code>bracketed_spans</code> extension:</p>
@@ -1878,7 +1878,7 @@ Age &amp; Frequency \\ \hline
 <p>the material between the begin and end tags will be interpreted as raw LaTeX, not as Markdown.</p>
 <p>For a more explicit and flexible way of including raw TeX in a Markdown document, see the <a href="#extension-raw_attribute"><code>raw_attribute</code> extension</a>.</p>
 <p>Inline LaTeX is ignored in output formats other than Markdown, LaTeX, Emacs Org mode, and ConTeXt.</p>
-<h3 id="generic-raw-attribute">Generic raw attribute</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Generic raw attribute ###</p>
 <h4 id="extension-raw_attribute">Extension: <code>raw_attribute</code></h4>
 <p>Inline spans and fenced code blocks with a special kind of attribute will be parsed as raw content with the designated format. For example, the following produces a raw roff <code>ms</code> block:</p>
 <pre><code>```{=ms}
@@ -1907,20 +1907,20 @@ $\tuple{a, b, c}$</code></pre>
 <p>Note that LaTeX macros will not be applied if they occur inside a raw span or block marked with the <a href="#extension-raw_attribute"><code>raw_attribute</code> extension</a>.</p>
 <p>When <code>latex_macros</code> is disabled, the raw LaTeX and math will not have macros applied. This is usually a better approach when you are targeting LaTeX or PDF.</p>
 <p>Whether or not <code>latex_macros</code> is enabled, the macro definitions will still be passed through as raw LaTeX.</p>
-<h2 id="links-1">Links</h2>
+<h2 id="links">Links</h2>
 <p>Markdown allows links to be specified in several ways.</p>
-<h3 id="automatic-links">Automatic links</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Automatic links ###</p>
 <p>If you enclose a URL or email address in pointy brackets, it will become a link:</p>
 <pre><code>&lt;http://google.com&gt;
 &lt;sam@green.eggs.ham&gt;</code></pre>
-<h3 id="inline-links">Inline links</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Inline links ###</p>
 <p>An inline link consists of the link text in square brackets, followed by the URL in parentheses. (Optionally, the URL can be followed by a link title, in quotes.)</p>
 <pre><code>This is an [inline link](/url.html), and here&#39;s [one with
 a title](http://fsf.org &quot;click here for a good time!&quot;).</code></pre>
 <p>There can be no space between the bracketed part and the parenthesized part. The link text can contain formatting (such as emphasis), but the title cannot.</p>
 <p>Email addresses in inline links are not autodetected, so they have to be prefixed with <code>mailto</code>:</p>
 <pre><code>[Write me!](mailto:sam@green.eggs.ham.html)</code></pre>
-<h3 id="reference-links">Reference links</h3>
+<p>::::::::: ::::::::: {.h3-section} ### Reference links ###</p>
 <p>An <em>explicit</em> reference link has two parts, the link itself and the link definition, which may occur elsewhere in the document (either before or after the link).</p>
 <p>The link consists of link text in square brackets, followed by a label in square brackets. (There cannot be space between the two unless the <code>spaced_reference_links</code> extension is enabled.) The link definition consists of the bracketed label, followed by a colon and a space, followed by the URL, and optionally (after a space) a link title either in quotes or in parentheses. The label must not be parseable as a citation (assuming the <code>citations</code> extension is enabled): citations take precedence over link labels.</p>
 <p>Here are some examples:</p>
@@ -1950,8 +1950,8 @@ a title](http://fsf.org &quot;click here for a good time!&quot;).</code></pre>
 <pre><code>See [my website].
 
 [my website]: http://foo.bar.baz</code></pre>
-<h3 id="internal-links">Internal links</h3>
-<p>To link to another section of the same document, use the automatically generated identifier (see <a href="#heading-identifiers">Heading identifiers</a>). For example:</p>
+<p>::::::::: ::::::::: {.h3-section} ### Internal links ###</p>
+<p>To link to another section of the same document, use the automatically generated identifier (see [Heading identifiers]). For example:</p>
 <pre><code>See the [Introduction](#introduction).</code></pre>
 <p>or</p>
 <pre><code>See the [Introduction].
@@ -2245,7 +2245,7 @@ Comment: This is a sample mmd title block, with
 <h4 id="extension-mmd_header_identifiers">Extension: <code>mmd_header_identifiers</code></h4>
 <p>Parses multimarkdown style heading identifiers (in square brackets, after the heading but before any trailing <code>#</code>s in an ATX heading).</p>
 <h4 id="extension-compact_definition_lists">Extension: <code>compact_definition_lists</code></h4>
-<p>Activates the definition list syntax of pandoc 1.12.x and earlier. This syntax differs from the one described above under <a href="#definition-lists">Definition lists</a> in several respects:</p>
+<p>Activates the definition list syntax of pandoc 1.12.x and earlier. This syntax differs from the one described above under [Definition lists] in several respects:</p>
 <ul>
 <li>No blank line is required between consecutive items of the definition list.</li>
 <li>To get a “tight” or “compact” list, omit space between consecutive items; the space between a term and its definition does not affect anything.</li>
@@ -2408,6 +2408,8 @@ title: My Slideshow
 parallaxBackgroundImage: /path/to/my/background_image.png
 ---
 
+:::::::::
+:::
 ## Slide One
 
 Slide 1 has background_image.png as its background.
@@ -2708,7 +2710,7 @@ hello
 <p>If you include raw HTML or TeX in an output cell, use the [raw attribute][Extension: <code>fenced_attribute</code>], as shown in the last cell of the example above. Although pandoc can process “bare” raw HTML and TeX, the result is often interspersed raw elements and normal textual elements, and in an output cell pandoc expects a single, connected raw block. To avoid using raw HTML or TeX except when marked explicitly using raw attributes, we recommend specifying the extensions <code>-raw_html-raw_tex+raw_attribute</code> when translating between Markdown and ipynb notebooks.</p>
 <p>Note that options and extensions that affect reading and writing of Markdown will also affect Markdown cells in ipynb notebooks. For example, <code>--wrap=preserve</code> will preserve soft line breaks in Markdown cells; <code>--atx-headers</code> will cause ATX-style headings to be used; and <code>--preserve-tabs</code> will prevent tabs from being turned to spaces.</p>
 <h1 id="syntax-highlighting">Syntax highlighting</h1>
-<p>Pandoc will automatically highlight syntax in <a href="#fenced-code-blocks">fenced code blocks</a> that are marked with a language name. The Haskell library <a href="https://github.com/jgm/skylighting">skylighting</a> is used for highlighting. Currently highlighting is supported only for HTML, EPUB, Docx, Ms, and LaTeX/PDF output. To see a list of language names that pandoc will recognize, type <code>pandoc --list-highlight-languages</code>.</p>
+<p>Pandoc will automatically highlight syntax in [fenced code blocks] that are marked with a language name. The Haskell library <a href="https://github.com/jgm/skylighting">skylighting</a> is used for highlighting. Currently highlighting is supported only for HTML, EPUB, Docx, Ms, and LaTeX/PDF output. To see a list of language names that pandoc will recognize, type <code>pandoc --list-highlight-languages</code>.</p>
 <p>The color scheme can be selected using the <code>--highlight-style</code> option. The default color scheme is <code>pygments</code>, which imitates the default color scheme used by the Python library pygments (though pygments is not actually used to do the highlighting). To see a list of highlight styles, type <code>pandoc --list-highlight-styles</code>.</p>
 <p>If you are not satisfied with the predefined styles, you can use <code>--print-highlight-style</code> to generate a JSON <code>.theme</code> file which can be modified and used as the argument to <code>--highlight-style</code>. To get a JSON version of the <code>pygments</code> style, for example:</p>
 <pre><code>pandoc --print-highlight-style pygments &gt; my.theme</code></pre>

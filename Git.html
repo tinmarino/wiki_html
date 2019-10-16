@@ -11,13 +11,15 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
 <h1 class="title">Git Wiki</h1>
 </header>
 <h1 id="tips">Tips</h1>
+<div class="parent">
+<div class="h3-section">
 <h3 id="ugly-tips-from-draft">Ugly tips from draft</h3>
 <ul>
 <li>git push <remote_name> –delete <branch_name> # or -d branch or :branch</li>
@@ -184,6 +186,8 @@
 <ul>
 <li>Add the line in the core and then edit your .local_gitignore</li>
 </ul>
+</div>
+</div>
 <h1 id="change-history">Change history</h1>
 <h2 id="analyse">Analyse</h2>
 <ul>
@@ -203,97 +207,6 @@
 <li><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></li>
 </ul></li>
 </ul>
-<h1 id="git-old-cmdlist-used-to-be-vimhelp-formated">Git old cmdlist (used to be vimhelp formated)</h1>
-<ol start="0" type="1">
-<li>List</li>
-<li>Start</li>
-<li>Config</li>
-<li>Aliases</li>
-<li>Branches</li>
-<li>Merge</li>
-<li>Rebasing</li>
-<li>Remote</li>
-<li>Local</li>
-</ol>
-<h1 id="stack">0. Stack</h1>
-<p>git clone –recursive <URL-OF-REPOSITORY> CLONE in non empty directory git init git remote add origin PATH/TO/REPO git fetch git checkout -t origin/master or git reset origin/master https://github.com/vim-scripts # 0. List</p>
-<h3 id="setup-and-config">Setup and config</h3>
-<pre><code>-&gt; config 
--&gt; help </code></pre>
-<h3 id="getting-and-creating-project">Getting and Creating project</h3>
-<pre><code>-&gt; init 
--&gt; clone </code></pre>
-<h3 id="basic-snapshotting">Basic Snapshotting</h3>
-<pre><code>-&gt; add 
--&gt; status 
--&gt; diff
--&gt; commit 
--&gt; reset
--&gt; rm 
--&gt; mv</code></pre>
-<h3 id="branching-and-merging">Branching and Merging</h3>
-<pre><code>-&gt; branch 
--&gt; checkout 
--&gt; merge
--&gt; mergetools 
--&gt; log 
--&gt; stash 
--&gt; tag </code></pre>
-<h3 id="sharing-and-updating-project">Sharing and updating project ~</h3>
-<pre><code>-&gt; fetch 
--&gt; pull
--&gt; push 
--&gt; remote 
--&gt; submodule </code></pre>
-<h3 id="inspection-and-comparaison">Inspection and comparaison</h3>
-<pre><code>-&gt; show 
--&gt; log 
--&gt; diff 
--&gt; rebase 
--&gt; revert </code></pre>
-<h3 id="debugging">Debugging</h3>
-<pre><code>-&gt; bisect
--&gt; blame 
--&gt; grep </code></pre>
-<h3 id="email">Email</h3>
-<pre><code>-&gt; am
--&gt; apply 
--&gt; format-patch 
--&gt; send-email 
--&gt; request-pull</code></pre>
-<h3 id="external-system">External system</h3>
-<pre><code>-&gt; svn
--&gt; fast-import </code></pre>
-<h3 id="administration">Administration</h3>
-<pre><code>-&gt; clean 
--&gt; gc 
--&gt; fsck 
--&gt; reflog
--&gt; filter -branch 
--&gt; instaweb, 
--&gt; arcive 
--&gt; bundle </code></pre>
-<h3 id="server-admin">Server Admin</h3>
-<pre><code>-&gt; daemon 
--&gt; update-server_info </code></pre>
-<h3 id="plumbing-commands">Plumbing-commands</h3>
-<pre><code>-&gt; cat-file
--&gt; commit-tree 
--&gt; count-objects
--&gt; diff-index 
--&gt; for-each-ref
--&gt; hash-object 
--&gt; ls-files
--&gt; merge-base 
--&gt; read-treee
--&gt; rev-list 
--&gt; rev-parse 
--&gt; show-ref 
--&gt; symbolic-ref 
--&gt; update-index
--&gt; update-ref 
--&gt; verify-pack 
--&gt; write-tree</code></pre>
 <h1 id="init">1. Init</h1>
 <pre><code>  git init 
   git add LICENSE.txt

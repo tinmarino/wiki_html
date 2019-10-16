@@ -20,6 +20,9 @@
 <h1 class="title">Vim Advanced cheatsheet</h1>
 </header>
 <h2 id="commands">Commands</h2>
+<div class="parent">
+<div class="h3-section">
+<h3 id="edit">Edit</h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -39,11 +42,22 @@
 <td>= <code>^C</code>: Change from first non blank to EOL</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td></td>
+<td><code>gq</code>motion</td>
+<td>Filter format</td>
+</tr>
+<tr class="even">
+<td><code>g=</code>motion</td>
+<td>Filter indent</td>
+</tr>
+<tr class="odd">
+<td><code>!&lt;motion&gt;&lt;cmd&gt;</code></td>
+<td>Filter <Motion> by <cmd></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="h3-section">
+<h3 id="move">Move</h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -52,23 +66,31 @@
 </tr>
 <tr class="even">
 <td><code>'.</code></td>
-<td>Goto last edit location</td>
+<td>Last edit location</td>
 </tr>
 <tr class="odd">
 <td><code>g-</code></td>
-<td>Goto last non blank character (Vs <code>_</code> or <code>^</code>)</td>
+<td>Last non blank character (Vs <code>_</code> or <code>^</code>)</td>
 </tr>
 <tr class="even">
-<td><code>gq</code>motion</td>
-<td>Filter format</td>
+<td><code>gm</code></td>
+<td>Middle of line</td>
 </tr>
 <tr class="odd">
-<td><code>g=</code>motion</td>
-<td>Filter indent</td>
+<td><code>n&lt;bar&gt;</code></td>
+<td>Column n of current line</td>
+</tr>
+<tr class="even">
+<td><code>ab</code> <code>aB</code></td>
+<td>Select a block ( ), a block { }</td>
+</tr>
+<tr class="odd">
+<td><code>-</code> <code>+</code></td>
+<td>line up, down on first non-blank character</td>
 </tr>
 </tbody>
 </table>
-<div class="parent">
+</div>
 <div class="h3-section">
 <h3 id="ex-tips">Ex tips</h3>
 <table>

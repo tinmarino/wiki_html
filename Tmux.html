@@ -11,7 +11,7 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
@@ -186,11 +186,15 @@ Enter                    # Copy selection</code></pre>
 <h2 id="other-config-file-settings">Other config file settings</h2>
 <p>Force a reload of the config file on C-a r: unbind r bind r source-file ~/.tmux.conf</p>
 <p>Some other settings that I use: setw -g xterm-keys on</p>
+<div class="parent">
+<div class="h3-section">
 <h3 id="tmux.conf">.tmux.conf</h3>
 <pre><code>set-option -g allow-rename off
 set -g status-bg cyan
 set-option -g prefix C-a
 unbind C-b </code></pre>
+</div>
+</div>
 <h1 id="key-bindings-other-cheat">key bindings (other cheat)</h1>
 <p>tmux may be controlled from an attached client by using a key combination of a prefix key, ‘C-b’ (Ctrl-b) by default, followed by a command key.</p>
 <ul>

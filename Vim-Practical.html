@@ -11,13 +11,15 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
 <h1 class="title">Practical Vim book notes</h1>
 </header>
 <p>I <a href="#i-modes">MODES</a> <br> II <a href="#ii-files">FILES</a> <br> III <a href="#iii-getting-around-faster">GETTING AROUND FASTER</a> <br> IV <a href="#iv-registers">REGISTERS</a> <br> V <a href="#v-patterns">PATTERNS</a> <br></p>
+<div class="parent">
+<div class="h3-section">
 <h3 id="the-vim-way">1. The Vim Way</h3>
 <pre><code>Tip 1. Meet the Dot Command
 Tip 2. Don’t Repeat Yourself
@@ -27,7 +29,9 @@ Tip 3. Take One Step Back, Then Three Forward
 Tip 4. Act, Repeat, Reverse
 Tip 5. Find and Replace by Hand
 Tip 6. Meet the Dot Formula</code></pre>
+</div>
 <h1 id="i-modes">I MODES</h1>
+<div class="h3-section">
 <h3 id="normal-mode">2. Normal Mode</h3>
 <pre><code>Tip 7. Pause with Your Brush Off the Page
 Tip 8. Chunk Your Undos
@@ -35,6 +39,8 @@ Tip 9. Compose Repeatable Changes
 Tip 10. Use Counts to Do Simple Arithmetic
 Tip 11. Don’t Count If You Can Repeat
 Tip 12. Combine and Conquer</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="insert-mode">3. Insert Mode</h3>
 <pre><code>Tip 13. Make Corrections Instantly from Insert Mode
 Tip 14. Get Back to Normal Mode
@@ -50,6 +56,8 @@ Tip 18. Insert Unusual Characters by Digraph
 Tip 19. Overwrite Existing Text with Replace Mode
     gR and gr           &quot; Treat tab as spaces
                         &quot; of |tabstop| characters</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="visual-mode">4. Visual Mode</h3>
 <pre><code>Tip 20. Grok Visual Mode
     v_&lt;C-g&gt;             &quot; Toogle visual-select mode
@@ -67,6 +75,8 @@ Tip 25. Change Columns of Text
 Tip 26. Append After a Ragged Visual Block
     `i` and `a` not working &quot; They are text obj
     use `I` and `A`</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="command-line-mode">5. Command-Line Mode</h3>
 <pre><code>Tip 27. Meet Vim’s Command Line
     d :[range]delete [x]      &quot; Delete specified lines [into register x]
@@ -125,7 +135,9 @@ Tip 35. Run Commands in the Shell
     :[range]write !{cmd}    &quot; Execute {cmd} in the shell with [range] lines as
                             &quot; standard input
     :[range]!{filter}       &quot; Filter the specified [range] through external program {filter}</code></pre>
+</div>
 <h1 id="ii-files">II FILES</h1>
+<div class="h3-section">
 <h3 id="manage-multiple-files">6. Manage Multiple Files</h3>
 <pre><code>Tip 36. Track Open Files with the Buffer List
 Tip 37. Group Buffers into a Collection with the Argument List
@@ -134,6 +146,8 @@ Tip 39. Divide Your Workspace into Split Windows
 Tip 40. Organize Your Window Layouts with Tab Pages Open Files and Save Them to Disk
     {N}gt                   &quot; goto tab N
     &lt;C-w&gt;T                  &quot; window -&gt; tab</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="open-files-and-save-them-to-disk">7. Open Files and Save Them to Disk</h3>
 <pre><code>Tip 41. Open a File by Its Filepath Using ‘:edit’
 Tip 42. Open a File by Its Filename Using ‘:find’
@@ -146,7 +160,9 @@ Tip 44. Save Files to Nonexistent Directories
     :!mkdir -p %:h          &quot; Create intermediate directories
     :write
 Tip 45. Save a File as the Super User</code></pre>
+</div>
 <h1 id="iii-getting-around-faster">III GETTING AROUND FASTER</h1>
+<div class="h3-section">
 <h3 id="navigate-inside-files-with-motions">8. Navigate Inside Files with Motions</h3>
 <pre><code>    :h motions
 Tip 46. Keep Your Fingers on the Home Row
@@ -169,6 +185,8 @@ Tip 53. Mark Your Place and Snap Back to It
     `&lt;      &quot; Start of last visual selection
     `&gt;      &quot; End of last visual selection
 Tip 54. Jump Between Matching Parentheses</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="navigate-between-files-with-jumps">9. Navigate Between Files with Jumps</h3>
 <pre><code>Tip 55. Traverse the Jump List
     H / M / L Jump to top/middle/bottom of screen
@@ -185,7 +203,9 @@ Tip 58. Snap Between Files Using Global Marks
     that interact with the quickfix list, such as :grep , :vimgrep , and :make
     . The same goes for the commands that interact with the buffer and
     argument lists, such as :args {arglist} and :argdo</code></pre>
+</div>
 <h1 id="iv-registers">IV REGISTERS</h1>
+<div class="h3-section">
 <h3 id="copy-and-paste">10. Copy and Paste</h3>
 <pre><code>Tip 59. Delete, Yank, and Put with Vim’s Unnamed Register
     xp  &quot; Transpose the next two characters.
@@ -216,6 +236,8 @@ Tip 63. Interact with the System Clipboard
         of options, including ‘autoindent’ (look up :h &#39;paste&#39; for the full list).
         That allows us to safely paste from the system clipboard with no surprises. 
     Avoid Toggling ‘paste’ by Putting from the Plus Register</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="macros">11. Macros</h3>
 <pre><code>Tip 64. Record and Execute a Macro
 Tip 65. Normalize, Strike, Abort
@@ -239,7 +261,9 @@ Tip 71. Edit the Contents of a Macro
     &quot;add  &quot; Bad: contains the new line
     &quot;ay$  &quot; Good: 
     :let @a=substitute(@a, &#39;\~&#39;, &#39;vU&#39;, &#39;g&#39;)</code></pre>
+</div>
 <h1 id="v-patterns">V PATTERNS</h1>
+<div class="h3-section">
 <h3 id="matching-patterns-and-literals">12. Matching Patterns and Literals</h3>
 <pre><code>Tip 72. Tune the Case Sensitivity of Search Patterns
 Tip 73. Use the \v Pattern Switch for Regex Searches
@@ -255,6 +279,8 @@ Tip 78. Escape Problem Characters
         backslash. If we were searching backward, we could instead call
         escape(@u, &#39;?\&#39;).
     =escape(@u, getcmdtype().&#39;\&#39;)</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="search">13. Search</h3>
 <pre><code>Tip 79. Meet the Search Command
 Tip 80. Highlight Search Matches
@@ -268,6 +294,8 @@ Tip 83. Offset the Cursor to the End of a Search Match
 Tip 84. Operate on a Complete Search Match
 Tip 85. Create Complex Patterns by Iterating upon Search History
 Tip 86. Search for the Current Visual Selection</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="substitution">14. Substitution</h3>
 <pre><code>Tip 87. Meet the Substitute Command
 Tip 88. Find and Replace Every Match in a File
@@ -312,6 +340,8 @@ Tip 96. Find and Replace Across Multiple Files
         endfor
         return join(map(values(buffer_numbers), &#39;fnameescape(v:val)&#39;))
         endfunction</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="global-commands">15. Global Commands</h3>
 <pre><code>Tip 97. Meet the Global Command
     :vglobal (mnemonic: invert).
@@ -319,7 +349,9 @@ Tip 98. Delete Lines Containing a Pattern
 Tip 99. Collect TODO Items in a Register
 Tip 100. Alphabetize the Properties of Each Rule in a CSS File
     `:g/{/sil .+1,/}/-1 &gt;`</code></pre>
+</div>
 <h1 id="vi-tools">VI TOOLS</h1>
+<div class="h3-section">
 <h3 id="index-and-navigate-source-code-with-ctags">16. Index and Navigate Source Code with ctags</h3>
 <pre><code>Tip 101. Meet ctags
     Keywords Are Addressed by Pattern, Not by Line Number
@@ -353,6 +385,8 @@ Tip 103. Navigate Keyword Definitions with Vim’s Tag Navigation Commands
     :tfirst             Jump to first matching tag
     :tlast              Jump to last matching tag
     :tselect            Prompt user to choose an item from the tag match list</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="compile-code-and-navigate-errors-with-the-quickfix-list">17. Compile Code and Navigate Errors with the Quickfix List</h3>
 <pre><code>Tip 104. Compile Code Without Leaving Vim
 :compiler nodelint      &quot; Set Up ‘makeprg’ and ‘errorformat’ with a Single
@@ -360,6 +394,8 @@ Tip 103. Navigate Keyword Definitions with Vim’s Tag Navigation Commands
 Tip 105. Browse the Quickfix List
 Tip 106. Recall Results from a Previous Quickfix List
 Tip 107. Customize the External Compiler</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="search-project-wide-with-grep-vimgrep-and-others">18. Search Project-Wide with grep, vimgrep, and Others</h3>
 <pre><code>Tip 108. Call grep Without Leaving Vim
 Tip 109. Customize the grep Program
@@ -373,6 +409,8 @@ Tip 110. Grep with Vim’s Internal Search Engine
         any file in the specified directory or any of its subdirectories.
         Additionally, we can use the ## symbol, which is expanded to represent
         the names of each file in the argument list</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="dial-x-for-autocompletion">19. Dial X for Autocompletion</h3>
 <pre><code>Tip 111. Meet Vim’s Keyword Autocompletion
 Tip 112. Work with the Autocomplete Pop-Up Menu
@@ -399,6 +437,8 @@ Tip 116. Autocomplete Filenames
     :cd -   &quot; switches to the previous working directory
             &quot; like in the shell   
 Tip 117. Autocomplete with Context Awareness</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="find-and-fix-typos-with-vims-spell-checker">20. Find and Fix Typos with Vim’s Spell Checker</h3>
 <pre><code>Tip 118. Spell Check Your Work
     [s      &quot; jump backward and forward between flagged words
@@ -414,5 +454,7 @@ Tip 120. Add Words to the Spell File
     1zg to add it to the default word list.
 Tip 121. Fix Spelling Errors from Insert Mode
     &lt;C-x&gt;s</code></pre>
+</div>
+</div>
 </body>
 </html>

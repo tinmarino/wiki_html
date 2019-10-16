@@ -11,13 +11,13 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <link rel="stylesheet" href="solarized-dark.css" />
+  <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
 <header>
 <h1 class="title">Notes (from doc)</h1>
 </header>
-<h3 id="key">Key</h3>
+<p>::: {.parent} ::::::::: {.h3-section} ### Key</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -66,7 +66,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="jump">Jump</h1>
+<p>::::::::: # Jump</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -257,6 +257,7 @@
 </tbody>
 </table>
 <h2 id="normal-mode">Normal mode</h2>
+<div class="h3-section">
 <h3 id="registers">Registers</h3>
 <pre class="vim"><code>&quot; IN COMMAND 
 :registers          &quot;to view content 
@@ -274,6 +275,8 @@
 :let @b = substitute(@a,&#39;\_s*\(.\{-}\)\_s*$&#39;,&#39;\1&#39;,&#39;&#39;)
                     &quot; this give the output in reg b 
 :%y+.               &quot;Copy the entire buffer to the system clipboard of the file </code></pre>
+</div>
+<div class="h3-section">
 <h3 id="register-list">Register list</h3>
 <table>
 <colgroup>
@@ -339,6 +342,8 @@
 </tr>
 </tbody>
 </table>
+</div>
+<div class="h3-section">
 <h3 id="fold">Fold</h3>
 <table>
 <tbody>
@@ -416,6 +421,7 @@
 set &quot;foldtext&quot;              &quot; witch show what you see when folded 
 :set foldmethod=expr
 :set foldexpr=empty(getline(v:lnum))?&#39;=&#39;:indent(v:lnum)/4</code></pre>
+</div>
 <h2 id="ex-mode">Ex mode</h2>
 <p>http://www.csb.yale.edu/userguides/wordprocess/vi-summary.html</p>
 <table>
@@ -442,6 +448,7 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 </tr>
 </tbody>
 </table>
+<div class="h3-section">
 <h3 id="advanced">Advanced</h3>
 <p>:#n and :#&lt;n Are replaced by file buffer n or oldfiles n</p>
 <h4 id="man-read-linux-manual-pages">Man (Read linux manual pages)</h4>
@@ -454,6 +461,8 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 <p>set diffopt+=iwhite &quot; ignore spacelines <br> set diffexpr= <br> :diffupdate <br></p>
 <h4 id="tips">Tips</h4>
 <p>:tab help foo <br> :!tidy -mi -html -wrap 0 % <br> :<n>,<m> w filename <br> :ccl Close it quickfix <br></p>
+</div>
+<div class="h3-section">
 <h3 id="regex">Regex</h3>
 <p>VIM: NFA regular expression</p>
 <p>Forget me and go to :h pattern (or :h regex) that is super well written. At least for the first chapter</p>
@@ -466,12 +475,14 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 3. Sustitute                    |v-substitute|
 4. Global                       |v-global|
 
+:::::::::
 # 1. Regex
 
 http://vimregex.com/ (Vim Regular Expression 101)
 
 
 
+::::::::: {.h3-section}
 ### Escaped caracter or metecaratcter 
 .           any character except new line        
 \s          whitespace character    
@@ -493,6 +504,8 @@ http://vimregex.com/ (Vim Regular Expression 101)
 \@!         To negate ex: /^\(\(^.*cursor.*$\)\@!.*foo.*\)$
 
 
+:::::::::
+::::::::: {.h3-section}
 ### Quantifiers 
 *           matches 0 or more of the preceding characters, ranges or metacharacters .* matches everything including empty line
 \+          matches 1 or more of the preceding characters...
@@ -507,6 +520,8 @@ http://vimregex.com/ (Vim Regular Expression 101)
 \{-,m}      matches 1 or more of the preceding characters... 
                 where n and m are positive integers (&gt;0) 
 
+:::::::::
+::::::::: {.h3-section}
 ### Search 
 
 ``[v``]       Reselect paste text
@@ -516,6 +531,8 @@ g*, g#      Without word delimiter
 /word       word from top to bottom
 ?word       word from bottom to top
 
+:::::::::
+::::::::: {.h3-section}
 ### Example 
 \ze \zs     Regex start, stop
 /jo[ha]n    john or joan
@@ -531,6 +548,8 @@ g*, g#      Without word delimiter
 /\v&lt;[A-Z]+&gt;         or 
 /\&lt;\u\+\&gt;           Find upper case words
 
+:::::::::
+::::::::: {.h3-section}
 ### Search modifiers 
 /joe/e              cursor set to End of match
 3/joe/e+1           find 3rd joe cursor set to End of match plus 1 [C]
@@ -538,6 +557,8 @@ g*, g#      Without word delimiter
 /joe/+3             find joe move cursor 3 lines down
 /.*fred\&amp;.*joe      Search for FRED AND JOE in any ORDER!
 
+:::::::::
+::::::::: {.h3-section}
 ### Substite
 :range s[ubstitute]/pattern/string/cgiI 
 c                   Confirm each substitution
@@ -589,12 +610,15 @@ g&amp;                  to make a replacement on all file lines ( equivalent to 
 :%s/^/\=line(&#39;.&#39;) . &quot;.&quot;/g       Substitute all line with its line number
 
 
+:::::::::
+::::::::: {.h3-section}
 ### Range 
 
 range 
   The &#39;&lt; Vim mark represents the beginning line of a visual region and the &#39;&gt; mark represents the ending line of the visual region
 
 
+:::::::::
 # REGEX MATCH NUMBER
 &quot; Integer with - + or nothing in front
 syn match celNumber &#39;\d\+&#39;
@@ -632,12 +656,15 @@ POWER of G  http://vim.wikia.com/wiki/Power_of_g
 </code></pre>
 <h2 id="script">Script</h2>
 <p><em>v-script.txt</em> Functions, scripts</p>
+<div class="h3-section">
 <h3 id="function">Function</h3>
 <p>:help functions :help function-list</p>
 <pre class="vim"><code>:echo expand(&#39;&lt;cword&gt;&#39;)                     &quot;return the word under cursor 
 :echo expand(&#39;%:p:h&#39;)
 sfrtime
 :let s=input(&#39;where to jump?&#39;)</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="exec">EXEC</h3>
 <pre class="vim"><code>function Func()
     command1
@@ -646,10 +673,16 @@ endfunction
 exec Func() 
 call Func()
 echo Func()</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="function2command">Function2Command</h3>
 <pre><code>command! -nargs=1 MyCommand call s:MyFunc(&lt;f-args&gt;) &quot; transform a function to user-command</code></pre>
 <p>lcd to cd for current windwo</p>
+</div>
+<div class="h3-section">
 <h3 id="script-tips">Script tips</h3>
 <p>set formatoptions +=at <br> call append(line(‘<span class="math inline">′), [<em>v</em><em>a</em><em>r</em><em>i</em><em>a</em><em>b</em><em>l</em><em>e</em>]) &lt; <em>b</em><em>r</em> &gt; <em>c</em><em>a</em><em>l</em><em>l</em><em>a</em><em>p</em><em>p</em><em>e</em><em>n</em><em>d</em>(<em>l</em><em>i</em><em>n</em><em>e</em>(′</span>’), split(variable, “”)) <br> set autoread <br> help scrool-cursor <br> htlp winrestcmd() <br></p>
+</div>
+</div>
 </body>
 </html>
