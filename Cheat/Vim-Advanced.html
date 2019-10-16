@@ -61,30 +61,26 @@
 <table>
 <tbody>
 <tr class="odd">
-<td><code>zl, zh, zL, zH</code></td>
-<td>Scrool horizontally</td>
-</tr>
-<tr class="even">
 <td><code>'.</code></td>
 <td>Last edit location</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>g-</code></td>
 <td>Last non blank character (Vs <code>_</code> or <code>^</code>)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>gm</code></td>
 <td>Middle of line</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>n&lt;bar&gt;</code></td>
 <td>Column n of current line</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>ab</code> <code>aB</code></td>
 <td>Select a block ( ), a block { }</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>-</code> <code>+</code></td>
 <td>line up, down on first non-blank character</td>
 </tr>
@@ -92,7 +88,30 @@
 </table>
 </div>
 <div class="h3-section">
-<h3 id="ex-tips">Ex tips</h3>
+<h3 id="move-cursor">Move cursor</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>zl, zh, zL, zH</code></td>
+<td>Scrool horizontally, one char or screen</td>
+</tr>
+<tr class="even">
+<td><code>zt</code>, <code>zz</code>, <code>zb</code></td>
+<td>Cursor top middle, bottom</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;C-W&gt;Z</code></td>
+<td><code>:pc[lose]</code>: Close previw window</td>
+</tr>
+<tr class="even">
+<td><code>1gt</code></td>
+<td>Goto tab 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="h3-section">
+<h3 id="ex-tips-12">Ex tips 1/2</h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -123,8 +142,269 @@
 <td><code>g/{/_.+1,/-1 sort</code></td>
 <td>Sort between { and }</td>
 </tr>
+<tr class="even">
+<td><code>:sort n/\(\S\+\s\+\)\{2}/</code></td>
+<td>Sort by 2nd column</td>
+</tr>
 </tbody>
 </table>
+</div>
+<div class="h3-section">
+<h3 id="ex-tips-22">Ex tips 2/2</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>:%s/^/\=printf('%-4d', line('.'))</code></td>
+<td>Prefix line by line number</td>
+</tr>
+<tr class="even">
+<td><code>:set fo+=t</code></td>
+<td>Autowrap (<code>h formatoption</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>:bro[wse] ol[dfiles][!]</code></td>
+<td>Prompt which file to choose</td>
+</tr>
+<tr class="even">
+<td><code>:earlier 12h</code></td>
+<td>Change file to how it was 12h ago</td>
+</tr>
+<tr class="odd">
+<td><code>:%! column -t</code></td>
+<td>align columns</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>set cul!</code> if scrooling slow for a long line</li>
+<li><code>set lazyredraw</code> can be usefull too</li>
+<li>h ttyfast</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="ex-tips-32">Ex tips 3/2</h3>
+<p>Some usefull function * <strong>Function:</strong> sort(list), put, getline(int), setlone(int, list) join(list), split(string), len(list), get, getpid()</p>
+<ul>
+<li><strong>Command:</strong> :retab,</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="sort-line-accroding-to-line-length">Sort line accroding to line length</h3>
+<pre class="language-vim"><code>:%s/.*/\=printf(&quot;%03d&quot;, len(submatch(0)) . &quot;|&quot; . submatch(0)/ | sor n | %s/..../  </code></pre>
+</div>
+<div class="h3-section">
+<h3 id="reverse-line-order">Reverse line order</h3>
+<pre class="language-vim"><code>:%!tac
+:%!tail -r</code></pre>
+<ul>
+<li>g/^/m0</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="man">Man</h3>
+<pre class="language-vim"><code>runtime! ftplugin/man.vim
+:Man 3 printf</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="auto-cd">Auto cd %</h3>
+<pre class="language-vim"><code>set autochdir  &quot; auto chdir to current file
+:tabdo lcd /dir/</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="substitute-without-escaping-the-replcement">Substitute without escaping the replcement</h3>
+<pre class="language-vim"><code>:%sno/search_string/replace_string/g
+:s/&lt;/\=&#39;&amp;lt;&#39;/g</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="delete-everything-except-text">Delete everything except text</h3>
+<ul>
+<li><p><code>:%s/\(^\|\(text\)\@&lt;=\).\{-}\($\|text\)\@=//g</code></p>
+<pre class="text"><code>\(^\|\(text\)\@&lt;=\)     # means start of line, or some point preceded by “text”
+.\{-}                   # as few characters as possible
+\($\|text\)\@=          # without globbing characters, checking that we reached either end of line or occurrence of “text”.</code></pre></li>
+<li>Another way to do it:
+<ul>
+<li>Create a function that count matches of a pattern in a string (see :help match() to help you design that)</li>
+<li>Use: <code>:%s/.*/\=repeat('text', matchcount('text', submatch(0)))</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="select-and-search">Select and Search</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>vo</code>, <code>vO</code></td>
+<td>Goto other side of visual selection</td>
+</tr>
+<tr class="even">
+<td><code>gv</code></td>
+<td>Reselect las selection</td>
+</tr>
+<tr class="odd">
+<td><code>g*</code>, <code>g#</code></td>
+<td>Search word under cursor but without delimiter</td>
+</tr>
+<tr class="even">
+<td><code>/.\{-}toto</code></td>
+<td>Non greedy, get first occurent of toto</td>
+</tr>
+<tr class="odd">
+<td><code>:&amp;</code></td>
+<td>Repeat las substitution</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre class="language-vim"><code>:hi visu ctermgg=Cyan
+:match visu /\%&lt;13c/
+:h /\%</code></pre>
+</div>
+<div class="h3-section">
+<h3 id="binary-editing">Binary editing</h3>
+<table>
+<tbody>
+<tr class="odd">
+<td><code>222go</code></td>
+<td>Goto byte 222</td>
+</tr>
+</tbody>
+</table>
+<h4 id="xxd">Xxd</h4>
+<ul>
+<li><code>xxd</code> -r (reverse, from hex to string) -p (output in ps := raw) -c 8 (bytes per line) -g 1 (bytes per column)</li>
+</ul>
+<h4 id="no-newline-at-end-of-file">No newline at end of file</h4>
+<ul>
+<li><code>vim -b file</code> or <code>set binary</code></li>
+<li><code>:set noeol</code> or <code>set nofixendofline</code></li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="file-encoding">File encoding</h3>
+<ul>
+<li>set fileencoding=utf-8</li>
+<li>set bomb</li>
+<li>:w ++enc=utf-8 %</li>
+<li>wchar encoding :e ++enc=utf-16</li>
+<li>args *</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="ctags">Ctags</h3>
+<ul>
+<li><code>ctags -R -f ./.git/tags .</code></li>
+<li><code>:tag function_name</code></li>
+<li><code>C-}</code> : see all tags</li>
+<li><code>C-]</code> : jump to tag</li>
+<li><code>:tn | :tp</code> : jump to next | previous tag</li>
+<li><code>:ts</code> : tag select : get a list</li>
+</ul>
+</div>
+<h2 id="search">Search</h2>
+<div class="h3-section">
+<h3 id="negative-regex">Negative regex</h3>
+<p>TODO</p>
+</div>
+<div class="h3-section">
+<h3 id="search-examples">Search examples</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code>/\%xYY</code></td>
+<td>YY hex ord(ascii)</td>
+</tr>
+<tr class="even">
+<td><code>/\%uYYYY</code></td>
+<td>hex ord(unicode)</td>
+</tr>
+<tr class="odd">
+<td><code>[[=a=]]   | Character (a) equivalentce class (so get à) | |</code>s/%V<code>| Substitute within selection | |</code>/%&lt;13c`</td>
+<td>Before 13 virtual column</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>French accents <code>/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i</code></li>
+</ul>
+</div>
+<h2 id="vimscript">Vimscript</h2>
+<div class="h3-section">
+<h3 id="getset-ouintput-from-ex-commands">Get|Set (ou|in)tput from ex commands</h3>
+<ul>
+<li><code>:!</code>: Get last output</li>
+<li></li>
+</ul>
+<pre class="language-vim"><code>redir @a
+echo toto
+redir END</code></pre>
+<ul>
+<li><p><code>let @a=getcwd()</code></p></li>
+<li><p><code>:@&quot;</code>: Execute what is yanked</p></li>
+</ul>
+<pre class="language-vim"><code>&quot;Examples: 
+&quot;:call Exec(&#39;buffers&#39;)
+&quot;This will include the output of :buffers into the current buffer.
+&quot;Also try: &quot;:call Exec(&#39;ls&#39;)
+&quot;:call Exec(&#39;autocmd&#39;)
+funct! Exec(command)
+    redir =&gt;output
+    silent exec a:command
+    redir END
+    let @o = output
+    execute &quot;put o&quot;
+endfunct! </code></pre>
+</div>
+<div class="h3-section">
+<h3 id="inspect-debug">Inspect, Debug</h3>
+<p>TODO</p>
+</div>
+<div class="h3-section">
+<h3 id="display-environment">Display environment</h3>
+<p>To find the script file defining a map : <code>:verbose map &lt;c-z&gt;</code>. But <code>map</code> can ber replaced by:</p>
+<ul>
+<li><code>abbreviate</code>, <code>autocmd</code>, <code>command</code>, <code>function</code>, <code>let</code>, <code>set all</code>.</li>
+<li><p><code>jumps</code>, <code>marks</code>, <code>args</code>, <code>changes</code></p></li>
+<li>Find where root runtime is
+<ul>
+<li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
+</ul></li>
+<li>Source autoload file
+<ul>
+<li><code>:call example#BadFunction()</code></li>
+</ul></li>
+</ul>
+<h4 id="get-filetype-of-a-buffer">Get filetype of a buffer</h4>
+<pre><code>* `:let bufFiletype = getbufvar(bufNr, &#39;&amp;filetype&#39;)`</code></pre>
+<h4 id="show-highlight-sytnax-type">Show highlight sytnax type</h4>
+<ul>
+<li><code>:echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, &quot;name&quot;)')</code></li>
+</ul>
+<h4 id="get-filetype-of-a-buffer-1">Get filetype of a buffer</h4>
+<ul>
+<li><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="vimrc-tips">Vimrc tips</h3>
+<ul>
+<li><code>:au FileTypepyrhon setlocal formatprg=autopep8\ -</code></li>
+<li><code>xnoremap p pgvy</code> : Copy without yanking selection in visual</li>
+</ul>
+</div>
+<div class="h3-section">
+<h3 id="vimrc-gvim-remove-useless-bars">Vimrc: GVim Remove useless bars</h3>
+<pre class="language-vim"><code>:set guioptions-=m &quot; remove menu bar
+:set guioptions-=T &quot; remove toobar
+:set guioptions-=r &quot; remove right hand scrool bar 
+:set guioptions-=L &quot; remove lefthand scrooll bar</code></pre>
 </div>
 <h2 id="ex-one-char">Ex one char</h2>
 <div class="h3-section">
@@ -328,53 +608,9 @@
 </tbody>
 </table>
 </div>
-<div class="h3-section">
-<h3 id="search-and-select">Search and Select</h3>
-<div class="line-block"><code>vo</code>, <code>vO</code> | Goto other side of visual selection |<br />
-<code>gv</code> | Reselect las selection |<br />
-<code>g*</code>, <code>g#</code> | Search word under cursor but without delimiter |<br />
-<code>/.\{-}toto</code> | Non greedy, get first occurent of toto |<br />
-<code>:&amp;</code> | Repeat las substitution |<br />
-             | |</div>
-</div>
-<h2 id="search">Search</h2>
-<div class="h3-section">
-<h3 id="negative-regex">Negative regex</h3>
-<p>TODO</p>
-</div>
-<div class="h3-section">
-<h3 id="search-examples">Search examples</h3>
-<p>/%xYY # YY hex ord(ascii) /%uYYYY # YYYYY hex ord(unicode)</p>
-</div>
-<h2 id="vimscript">Vimscript</h2>
-<div class="h3-section">
-<h3 id="get-output-from-ex-commands">Get output from ex commands</h3>
-<ul>
-<li><p>Command stdout redirection</p>
-<p>:! # get last output redir <span class="citation" data-cites="a">@a</span> echo toto redir END let <span class="citation" data-cites="a">@a</span>=getcwd()</p></li>
-</ul>
-</div>
-<div class="h3-section">
-<h3 id="set-input-to-ex">Set input to ex</h3>
-<p>:@&quot; # Execute what is yanked</p>
-</div>
-<div class="h3-section">
-<h3 id="inspect-debug">Inspect, Debug</h3>
-</div>
-<div class="h3-section">
-<h3 id="display-environment">Display environment</h3>
-<p>To find the script file defining a map : <code>:verbose map &lt;c-z&gt;</code> . But <code>map</code> can ber replaced by: <code>abbreviate</code>, <code>autocmd</code>, <code>command</code>, <code>function</code>, <code>let</code>, <code>set all</code>.</p>
-<ul>
-<li>Script : Get filetype of a buffer
-<ul>
-<li><code>:let bufFiletype = getbufvar(bufNr, '&amp;filetype')</code></li>
-</ul></li>
-</ul>
-</div>
-</div>
 <h2 id="command-line">Command line</h2>
-<p><code>vim -u NONE -N</code> # No (User) vimrc, Non-compatible</p>
 <ul>
+<li><p><code>vim -u NONE -N</code> # No (User) vimrc, Non-compatible</p></li>
 <li>Pipeline
 <ul>
 <li><code>echo toto | vim -</code> : take arguments from stdin</li>
@@ -384,15 +620,20 @@
 <li><code>:w !sh</code> : write to shell input</li>
 </ul></li>
 </ul>
-<div class="line-block">digraphs | digraphs |<br />
-highlight | highlight groups |<br />
-reg | registers |<br />
-scriptnames | all scripts sourced so far |<br />
-spellinfo | spellfiles used |<br />
-syntax | syntax items |</div>
+<p>digraphs, highlight, reg, scriptnames, spellinfo, syntax</p>
 <ul>
 <li><p>Remote</p>
 <p>vim –servername DEMO vim –servername DEMO –remote file.txt vim –servername DEMO –remote-send “:3d<CR>” :!vim –servername DEMO –remote-tab “%” &quot; Send current buffer to remote vim</p></li>
+<li><p><strong>Dos2Unix</strong>: <code>for file in * ; do vi +':w ++ff=unix' +':q' $file</code></p></li>
 </ul>
+<div class="h3-section">
+<h3 id="c-s">C-s</h3>
+<ul>
+<li>Can lock the terminal : <c-q> to unlock</li>
+<li>stty -ixon # for a permanent solution</li>
+</ul>
+<script src="../Css/js_prism_vim.js"></script>
+</div>
+</div>
 </body>
 </html>
