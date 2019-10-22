@@ -87,7 +87,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>bind x
 bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </ul>
-<h2 id="getting-in-test">Getting in test</h2>
+<p>::: {.parent} :::::: {.h2-section} ## Getting in test</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -109,9 +109,9 @@ bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </tbody>
 </table>
 <p>(Attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one. If multiple sessions exist, uses the first one.)</p>
-<h2 id="escape-key">Escape key</h2>
+<p>:::::: :::::: {.h2-section} ## Escape key</p>
 <p>All screen commands are prefixed by an escape key, by default <code>C-a</code> (that’s Control-a, sometimes written <code>^a</code>). To send a literal <code>C-a</code> to the programs in screen, use <code>C-a a</code>. This is useful when working with screen within screen. For example <code>C-a a n</code> will move screen to a new window on the screen within screen.</p>
-<h2 id="getting-out">Getting out</h2>
+<p>:::::: :::::: {.h2-section} ## Getting out</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -136,7 +136,7 @@ bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </tr>
 </tbody>
 </table>
-<h2 id="window-management">Window management</h2>
+<p>:::::: :::::: {.h2-section} ## Window management</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -181,7 +181,7 @@ bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </tr>
 </tbody>
 </table>
-<h2 id="split-screen">Split screen</h2>
+<p>:::::: :::::: {.h2-section} ## Split screen</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -210,7 +210,7 @@ bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </tr>
 </tbody>
 </table>
-<h2 id="clipboard-and-navigation">Clipboard and navigation</h2>
+<p>:::::: :::::: {.h2-section} ## Clipboard and navigation</p>
 <table>
 <tbody>
 <tr class="odd">
@@ -227,30 +227,32 @@ bind x stuff &quot;screen -X chdir \$PWD;screen^M&quot;</code></pre></li>
 </tr>
 </tbody>
 </table>
-<h2 id="help">Help</h2>
+<p>:::::: :::::: {.h2-section} ## Help</p>
 <div class="line-block">— | — |<br />
 C-a ? | See help |</div>
 <p>The man page is the complete reference.</p>
-<h2 id="scripting">Scripting</h2>
+<p>:::::: :::::: {.h2-section} ## Scripting</p>
 <p>To any session name,</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># send a command to a named session</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="ex">screen</span> -S name -X command       </a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co"># create a new window and run ping example.com</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="ex">screen</span> -S name -X screen ping example.com       </a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co"># stuff characters into the input buffer</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co"># using bash to expand a newline character</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="ex">screen</span> -S name [-p page] -X stuff <span class="st">$&#39;quit</span><span class="dt">\r</span><span class="st">&#39;</span>     </a>
-<a class="sourceLine" id="cb2-8" title="8"></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="ex">A</span> full example:</a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co"># run bash within screen</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="ex">screen</span> -AmdS bash_shell bash</a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co"># run top within that bash session</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="ex">screen</span> -S bash_shell -p 0 -X stuff <span class="st">$&#39;top</span><span class="dt">\r</span><span class="st">&#39;</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co"># ... some time later</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co"># stuff &#39;q&#39; to tell top to quit</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">&#39;q&#39;</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co"># stuff &#39;exit\n&#39; to exit bash session</span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">$&#39;exit</span><span class="dt">\r</span><span class="st">&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">::::::</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># send a command to a named session</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ex">screen</span> -S name -X command       </a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co"># create a new window and run ping example.com</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ex">screen</span> -S name -X screen ping example.com       </a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co"># stuff characters into the input buffer</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co"># using bash to expand a newline character</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="ex">screen</span> -S name [-p page] -X stuff <span class="st">$&#39;quit</span><span class="dt">\r</span><span class="st">&#39;</span>     </a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="ex">A</span> full example:</a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co"># run bash within screen</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="ex">screen</span> -AmdS bash_shell bash</a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co"># run top within that bash session</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="ex">screen</span> -S bash_shell -p 0 -X stuff <span class="st">$&#39;top</span><span class="dt">\r</span><span class="st">&#39;</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co"># ... some time later</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co"># stuff &#39;q&#39; to tell top to quit</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">&#39;q&#39;</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co"># stuff &#39;exit\n&#39; to exit bash session</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="ex">screen</span> -S bash_shell -X stuff <span class="st">$&#39;exit</span><span class="dt">\r</span><span class="st">&#39;</span></a></code></pre></div>
+<div class="h2-section">
 <h2 id="misc">Misc</h2>
 <table>
 <tbody>
@@ -284,6 +286,8 @@ C-a ? | See help |</div>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="h2-section">
 <h2 id="scrollback-buffer">Scrollback-buffer</h2>
 <p>In copy mode, one can navigate the scrollback buffer in various ways:</p>
 <table>
@@ -311,5 +315,7 @@ C-a ? | See help |</div>
 </tbody>
 </table>
 <p>from http://aperiodic.net/screen/quick_reference</p>
+</div>
+<p>:::</p>
 </body>
 </html>

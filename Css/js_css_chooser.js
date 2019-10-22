@@ -59,6 +59,11 @@ a_font_solarized = [
 
 // Disable all radio button vith a certain class name
 function disableAll (parent) {
+    // Disable js masonry
+    if (typeof stopMasonry !== "undefined") { 
+        stopMasonry();
+    }
+    // Disable all radio button script
     Array.from(document.getElementsByClassName('class_' + parent.id.slice(0, 8)))
         .forEach(function (node) {
             console.log('Disabling ' + node.value + ' from class_' + parent.id.slice(0, 8));
@@ -74,12 +79,11 @@ function onRadioJs(parent, id) {
 
     // Create link
     if (!document.getElementById(id)){
-        console.log('Creating link');
+        console.log('JS Creating link v1');
         var script = document.createElement('script');
         script.className = 'class_' + parent.id.slice(0, 8);
         script.type = "text/javascript";
         script.src = id;
-        script.onreadystatechange = function () {console.log("JS ready");};
         document.head.appendChild(script);
     }
 }

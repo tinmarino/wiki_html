@@ -24,7 +24,9 @@
 </ul>
 <h1 id="usage">USAGE</h1>
 <p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ] ‘program’ [file1 file2…]</p>
-<p>::: {.parent} ::::::::: {.h3-section} ### Structure of an awk program</p>
+<div class="h3-parent">
+<div class="h3-section">
+<h3 id="structure-of-an-awk-program">Structure of an awk program</h3>
 <pre><code>:::::::::
 # comments
 pattern { action }  A sequence of pattern-action statements
@@ -34,14 +36,16 @@ pattern { action }</code></pre>
       For each pattern,
          If pattern matches input line, do the action.</code></pre>
 <div class="h3-section">
+
+</div>
 <h3 id="pattern">“pattern”</h3>
 <p>BEGIN :executes “action” before starting to view the input file <br> END :executes “action” after ending to view the input file <br> Other :regular, numeric or string expression or combination <br></p>
-</div>
 <div class="h3-section">
+
+</div>
 <h3 id="action-is-executable-code">“action” is executable code</h3>
 <p>if (expression) statement1 else statement2 <br> while (expression) statement <br> for (expr1;expr2;expr3) statement <br> do statement while (expression) <br> break / continue :immediately leave / start next iteration of innermost enclosing loop <br> exit / exit expression : go immediately to the END action; if within the END action, exit program <br></p>
-</div>
-<p>::: # BUILT-IN VARIABLES</p>
+<h1 id="built-in-variables">BUILT-IN VARIABLES</h1>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -303,5 +307,7 @@ print “Address: “,$2 }
                         Multi-line records. Leading and trailing newlines are
                         ignored</code></pre>
 <p>from: http://www.cheat-sheets.org/saved-copy/awk_quickref.pdf</p>
+</div>
+</div>
 </body>
 </html>

@@ -94,7 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h2 id="Écrire_une_expression_rationnelle">Écrire une expression rationnelle</h2>
 <p>Le motif d’une expression rationnelle est composé de caractères simples (comme <code>/abc/</code>), ou de caractères simples et spéciaux, comme <code>/ab*c/</code> ou <code>/Chapitre (\d+)\.\d*/</code>. Le dernier exemple utilise des parenthèses qui permettent d’avoir une « mémoire ». La correspondance avec le motif contenu entre parenthèses pourra être utilisée par la suite. Ceci est décrit avec <a href="#parentheses">ce paragraphe</a>.</p>
-<div class="parent">
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="Utiliser_des_motifs_simples">Utiliser des motifs simples</h3>
 <p>Les motifs simples sont construits à partir de caractères pour lesquels on souhaite avoir une correspondance directe. Le motif <code>/des/</code> correspond lorsqu’on observe exactement les caractères ‘des’ ensemble et dans cet ordre précis. On pourrait utiliser ce motif et détecter une correspondance dans les chaînes suivantes : “J’ai vu des licornes ?” et “Sa description de licorne était superbe” car la chaîne de caractères ‘des’ y est présente (dans le mot description pour le second exemple). Il n’y aura pas de correspondance avec la chaîne de caractères “Toc toc” car ‘des’ n’est pas présente.</p>
@@ -568,5 +568,6 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb19-24" title="24"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
 </div>
 </div>
+<p>:::</p>
 </body>
 </html>

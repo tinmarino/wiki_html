@@ -89,6 +89,7 @@ h2:after {
 
 `
 
+var msnrys = [];
 
 
 function mainMasonry() {
@@ -99,15 +100,26 @@ function mainMasonry() {
     styleSheet.innerText = style;
     document.head.appendChild(styleSheet);
 
-    // init with elemene masonry
+    // Init masonry for each h3-parent
     var nodes = Array.from(document.getElementsByClassName('h3-parent'));
     nodes.forEach( function (node) {
         var msnry = new Masonry( node, {
-          itemSelector: '.h3-section'
+          itemSelector: '.h3-section',
         });
+        msnrys.push(msnry);
+    });
+}
+
+function stopMasonry() {
+    msnrys.forEach( function ( msnry ) {
+      msnry.destroy();
     });
 }
 
 
-window.onload = mainMasonry;
-
+// If document ready: go else wait
+if (document.readyState === "complete") {
+  mainMasonry();
+} else {
+  window.onload = mainMasonry;
+}

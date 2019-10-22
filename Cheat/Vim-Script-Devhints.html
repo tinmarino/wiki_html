@@ -19,7 +19,7 @@
 <header>
 <h1 class="title">Vim scripting</h1>
 </header>
-<div class="parent">
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="start-hacking">Start hacking</h3>
 <pre class="language-vim"><code>let name = &quot;John&quot;
@@ -39,8 +39,10 @@ endfunction
 
 imap &lt;Tab&gt; &lt;C-R&gt;=SuperTab()&lt;CR&gt;</code></pre>
 <p><a href="http://www.vimbits.com/bits/46.html">Here</a>’s another example with <a href="#functions">functions</a>, <a href="#variables">variables</a> and <a href="#mapping">mapping</a>.</p>
-</div>
+<div class="parent">
+<div class="h2-section">
 <h2 id="variables">Variables</h2>
+</div>
 <div class="h3-section">
 <h3 id="defining">Defining</h3>
 <pre class="language-vim"><code>let var = &quot;hello&quot;</code></pre>
@@ -77,7 +79,11 @@ echo &amp;l:option</code></pre>
 let var += 5
 let var .= &#39;string&#39;   &quot; concat</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="strings">Strings</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="strings-1">Strings</h3>
 <pre class="language-vim"><code>let str = &quot;String&quot;
@@ -104,7 +110,11 @@ tolower(&#39;Hello&#39;)
 toupper(&#39;Hello&#39;)</code></pre>
 <p>Also see <code>:help functions</code> See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/27.html.html">String functions</a></p>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="functions">Functions</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="functions-1">Functions</h3>
 <pre class="language-vim"><code>&quot; prefix with s: for local script-only functions
@@ -150,6 +160,9 @@ endfunction
 infect(&#39;jake&#39;, &#39;bella&#39;)</code></pre>
 <p>See <code>:help function-argument</code>. See: <a href="http://learnvimscriptthehardway.stevelosh.com/chapters/24.html.html">Var arguments</a></p>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="loops">Loops</h2>
 <pre class="language-vim"><code>for s in list
   echo s
@@ -158,7 +171,10 @@ infect(&#39;jake&#39;, &#39;bella&#39;)</code></pre>
 endfor</code></pre>
 <pre class="language-vim"><code>while x &lt; 5
 endwhile</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="custom-commands">Custom commands</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="custom-commands-1">Custom commands</h3>
 <pre class="language-vim"><code>command! Save :set fo=want tw=80 nowrap</code></pre>
@@ -205,7 +221,11 @@ endfunction</code></pre>
 </tbody>
 </table>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="control-flow">Control Flow</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="conditionals">Conditionals</h3>
 <pre class="language-vim"><code>let char = getchar()
@@ -267,7 +287,11 @@ a ? b : c</code></pre>
   ···
 endif</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="lists">Lists</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="lists-1">Lists</h3>
 <pre class="language-vim"><code>let mylist = [1, two, 3, &quot;four&quot;]
@@ -311,7 +335,11 @@ let alist = add(alist, 4)</code></pre>
 <pre class="language-vim"><code>call map(files, &quot;bufname(v:val)&quot;)  &quot; use v:val for value
 call filter(files, &#39;v:val != &quot;&quot;&#39;)</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="dictionaries">Dictionaries</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="dictionaries-1">Dictionaries</h3>
 <pre class="language-vim"><code>let colors = {
@@ -359,7 +387,11 @@ let extend(s:fruits, { ... })</code></pre>
 str2nr(&quot;3&quot;)
 float2nr(&quot;3.14&quot;)</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="numbers">Numbers</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="numbers-1">Numbers</h3>
 <pre class="language-vim"><code>let int = 1000
@@ -390,7 +422,11 @@ sin() cos() tan()
 sinh() cosh() tanh()
 asin() acos() atan()</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="vim-isms">Vim-isms</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="execute-a-command">Execute a command</h3>
 <pre class="language-vim"><code>execute &quot;vsplit&quot;
@@ -452,7 +488,11 @@ exists(&quot;variable&quot;)
 exists(&quot;+option&quot;)
 exists(&quot;g:...&quot;)</code></pre>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="mapping">Mapping</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="mapping-commands">Mapping commands</h3>
 <pre class="language-vim"><code>nmap
@@ -479,7 +519,11 @@ xnoremap
 <code>&lt;silent&gt;</code> | no echo |<br />
 <code>&lt;nowait&gt;</code> | |</div>
 </div>
+</div>
+</div>
+<div class="h2-section">
 <h2 id="syntax">Syntax</h2>
+<div class="h3-parent">
 <div class="h3-section">
 <h3 id="highlights">Highlights</h3>
 <pre class="language-vim"><code>hi Comment
@@ -536,6 +580,8 @@ endif
 
 let g:loaded_myplugin = 1</code></pre>
 <script src="../Css/js_prism_vim.js"></script>
+</div>
+</div>
 </div>
 </div>
 </body>

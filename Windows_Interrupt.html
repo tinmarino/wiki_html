@@ -40,6 +40,8 @@
 <li>INT 1Ah/00h</li>
 <li>INT 21h</li>
 </ul>
+<div class="parent">
+<div class="h2-section">
 <h2 id="int-10h-ah-00h---set-video-mode.">INT 10h / AH = 00h - set video mode.</h2>
 <pre><code>input:
 AL = desired video mode.
@@ -49,17 +51,23 @@ These video modes are supported:
 00h - Text mode 40x25, 16 colors, 8 pages.
 
 03h - Text mode 80x25, 16 colors, 8 pages. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-01h---set-text-mode-cursor-shape.">INT 10h / AH = 01h - set text-mode cursor shape.</h2>
 <pre><code>input:
 CH = cursor start line (bits 0-4) and options (bits 5-7).
 CL = bottom cursor line (bits 0-4).
 
 When bits 6-5 of CH are set to 00, the cursor is visible, to hide a cursor set these bits to 01 (this CH value will hide a cursor: 28h - 00101000b). Bit 7 should always be zero. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-02h---set-cursor-position.">INT 10h / AH = 02h - set cursor position.</h2>
 <pre><code>input:
 DH = row.
 DL = column.
 BH = page number (0..7).</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-03h---get-cursor-position-and-size.">INT 10h / AH = 03h - get cursor position and size.</h2>
 <pre><code>input:
 BH = page number.
@@ -68,38 +76,54 @@ DH = row.
 DL = column.
 CH = cursor start line.
 CL = cursor bottom line.</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-05h---select-active-video-page.">INT 10h / AH = 05h - select active video page.</h2>
 <pre><code>input:
 AL = new page number (0..7).
 the activated page is displayed. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-06h---scroll-up-window.">INT 10h / AH = 06h - scroll up window.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-07h---scroll-down-window.">INT 10h / AH = 07h - scroll down window.</h2>
 <pre><code>input:
 AL = number of lines by which to scroll (00h = clear entire window).
 BH = attribute used to write blank lines at bottom of window.
 CH, CL = row, column of window&#39;s upper left corner.
 DH, DL = row, column of window&#39;s lower right corner.</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-08h---read-character-and-attribute-at-cursor-position.">INT 10h / AH = 08h - read character and attribute at cursor position.</h2>
 <pre><code>input:
 BH = page number.
 return:
 AH = attribute.
 AL = character.</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-09h---write-character-and-attribute-at-cursor-position.">INT 10h / AH = 09h - write character and attribute at cursor position.</h2>
 <pre><code>input:
 AL = character to display.
 BH = page number.
 BL = attribute.
 CX = number of times to write character.</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-0ah---write-character-only-at-cursor-position.">INT 10h / AH = 0Ah - write character only at cursor position.</h2>
 <pre><code>input:
 AL = character to display.
 BH = page number.
 CX = number of times to write character.</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-0eh---teletype-output.">INT 10h / AH = 0Eh - teletype output.</h2>
 <pre><code>input:
 AL = character to write. </code></pre>
 <p>This functions displays a character on the screen, advancing the cursor and scrolling the screen as necessary. The printing is always done to current active page.</p>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ah-13h---write-string.">INT 10h / AH = 13h - write string.</h2>
 <pre><code>input:
 AL = write mode:
@@ -110,6 +134,8 @@ BL = attribute if string contains only characters (bit 1 of AL is zero).
 CX = number of characters in string (attributes are not counted).
 DL,DH = column, row at which to start writing.
 ES:BP points to string to be printed. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-10h-ax-1003h---toggle-intensityblinking.">INT 10h / AX = 1003h - toggle intensity/blinking.</h2>
 <pre><code>input:
 BL = write mode:
@@ -119,6 +145,8 @@ BH = 0 (to avoid problems on some adapters).</code></pre>
 <p>Bit color table: Character attribute is 8 bit value, low 4 bits set foreground color, high 4 bits set background color. Background blinking not supported.</p>
 <p>HEX BIN COLOR</p>
 <p>0 0000 black 1 0001 blue 2 0010 green 3 0011 cyan 4 0100 red 5 0101 magenta 6 0110 brown 7 0111 light gray 8 1000 dark gray 9 1001 light blue A 1010 light green B 1011 light cyan C 1100 light red D 1101 light magenta E 1110 yellow F 1111 white</p>
+</div>
+<div class="h2-section">
 <h2 id="int-11h---get-bios-equipment-list.">INT 11h - get BIOS equipment list.</h2>
 <pre><code>return:
 AX = BIOS equipment list word, actually this call returns the contents of the word at 0040h:0010h.
@@ -147,12 +175,20 @@ Bit(s)  Description
  2    not supported.
  1    math coprocessor installed.
  0    set when booted from floppy (always set by emulator).</code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-12h---get-memory-size.">INT 12h - get memory size.</h2>
 <pre><code>return:
 AX = kilobytes of contiguous memory starting at absolute address 00000h, this call returns the contents of the word at 0040h:0013h. </code></pre>
 <p>Floppy drives are emulated using FLOPPY_0(..3) files.</p>
+</div>
+<div class="h2-section">
 <h2 id="int-13h-ah-00h---reset-disk-system-currently-this-call-doesnt-do-anything.">INT 13h / AH = 00h - reset disk system, (currently this call doesn’t do anything).</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-13h-ah-02h---read-disk-sectors-into-memory.">INT 13h / AH = 02h - read disk sectors into memory.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-13h-ah-03h---write-disk-sectors.">INT 13h / AH = 03h - write disk sectors.</h2>
 <pre><code>input:
 
@@ -171,6 +207,8 @@ return:
     AL = number of sectors transferred.
 
 Note: each sector has 512 bytes. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-15h-ah-86h---bios-wait-function.">INT 15h / AH = 86h - BIOS wait function.</h2>
 <pre><code>input:
 
@@ -185,12 +223,16 @@ return:
 Note:
 
     the resolution of the wait period is 977 microseconds on many systems, Emu8086 uses 1000 microseconds period. </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-16h-ah-00h---get-keystroke-from-keyboard-no-echo.">INT 16h / AH = 00h - get keystroke from keyboard (no echo).</h2>
 <pre><code>return:
 
     AH = BIOS scan code.
     AL = ASCII character.
     (if a keystroke is present, it is removed from the keyboard buffer). </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-16h-ah-01h---check-for-keystroke-in-keyboard-buffer.">INT 16h / AH = 01h - check for keystroke in keyboard buffer.</h2>
 <pre><code>return:
 
@@ -199,8 +241,12 @@ Note:
     AH = BIOS scan code.
     AL = ASCII character.
     (if a keystroke is present, it is not removed from the keyboard buffer). </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-19h---system-reboot.">INT 19h - system reboot.</h2>
 <pre><code>Usually, the BIOS will try to read sector 1, head 0, track 0 from drive A: to 0000h:7C00h. Emulator just stops the execution, to boot from floppy drive select from the menu: &#39;Virtual Drive&#39; -&gt; &#39;Boot from Floppy&#39; </code></pre>
+</div>
+<div class="h2-section">
 <h2 id="int-1ah-ah-00h---get-system-time.">INT 1Ah / AH = 00h - get system time.</h2>
 <pre><code>return:
 
@@ -208,11 +254,25 @@ Note:
     AL = midnight counter, advanced each time midnight passes.</code></pre>
 <p>Notes: There are approximately 18.20648 clock ticks per second, and 1800B0h per 24 hours. AL is not set by emulator yet!</p>
 <p>MS-DOS can not be loaded completely in emulator yet, so I made an emulation for some basic DOS interrupts also:</p>
+</div>
+<div class="h2-section">
 <h2 id="int-20h---exit-to-operating-system.">INT 20h - exit to operating system.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-21h-ah09h---output-of-a-string-at-dsdx.">INT 21h / AH=09h - output of a string at DS:DX.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-21h-ah0ah---input-of-a-string-to-dsdx-fist-byte-is-buffer-size-second-byte-is-number-of-chars-actually-read.">INT 21h / AH=0Ah - input of a string to DS:DX, fist byte is buffer size, second byte is number of chars actually read.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-21h-ah4ch---exit-to-operating-system.">INT 21h / AH=4Ch - exit to operating system.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-21h-ah01h---read-character-from-standard-input-with-echo-result-is-stored-in-al.">INT 21h / AH=01h - read character from standard input, with echo, result is stored in AL.</h2>
+</div>
+<div class="h2-section">
 <h2 id="int-21h-ah02h---write-character-to-standard-output-dl-character-to-write-after-execution-al-dl.">INT 21h / AH=02h - write character to standard output, DL = character to write, after execution AL = DL.</h2>
+</div>
+</div>
 </body>
 </html>

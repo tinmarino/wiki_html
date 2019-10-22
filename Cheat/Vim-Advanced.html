@@ -238,13 +238,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td><code>:%! column -t</code></td>
 <td>align columns</td>
 </tr>
+<tr class="even">
+<td><code>:syntax sync fromstart</code></td>
+<td>Reload syntax</td>
+</tr>
+<tr class="odd">
+<td><code>set cul!</code></td>
+<td>if scrooling slow for a long line</td>
+</tr>
+<tr class="even">
+<td><code>set lazyredraw</code></td>
+<td>can be usefull too</td>
+</tr>
+<tr class="odd">
+<td><code>h ttyfast</code></td>
+<td></td>
+</tr>
 </tbody>
 </table>
-<ul>
-<li><code>set cul!</code> if scrooling slow for a long line</li>
-<li><code>set lazyredraw</code> can be usefull too</li>
-<li>h ttyfast</li>
-</ul>
 </div>
 <div class="h3-section">
 <h3 id="ex-tips-32">Ex tips 3/2</h3>
@@ -455,12 +466,16 @@ endfunct! </code></pre>
 <p>TODO</p>
 </div>
 <div class="h3-section">
+<h3 id="inspect-syntax-highlight-link">Inspect syntax highlight <a href="https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor.html">(link)</a></h3>
+<pre class="language-vim"><code>map K :echo &quot;hi&lt;&quot; . synIDattr(synID(line(&quot;.&quot;),col(&quot;.&quot;),1),&quot;name&quot;) . &#39;&gt; trans&lt;&#39; . synIDattr(synID(line(&quot;.&quot;),col(&quot;.&quot;),0),&quot;name&quot;) . &quot;&gt; lo&lt;&quot; . synIDattr(synIDtrans(synID(line(&quot;.&quot;),col(&quot;.&quot;),1)),&quot;name&quot;) . &quot;&gt;&quot;&lt;CR&gt;</code></pre>
+</div>
+<div class="h3-section">
 <h3 id="display-environment">Display environment</h3>
 <p>To find the script file defining a map : <code>:verbose map &lt;c-z&gt;</code>. But <code>map</code> can ber replaced by:</p>
 <ul>
 <li><code>abbreviate</code>, <code>autocmd</code>, <code>command</code>, <code>function</code>, <code>let</code>, <code>set all</code>.</li>
 <li><code>jumps</code>, <code>marks</code>, <code>args</code>, <code>changes</code></li>
-<li><p><code>digraphs</code>, <code>highlight</code>, <code>reg</code>, <code>scriptnames</code>, <code>spellinfo</code>, <code>synta</code>x</p></li>
+<li><p><code>digraphs</code>, <code>highlight</code>, <code>reg</code>, <code>scriptnames</code>, <code>spellinfo</code>, `syntax</p></li>
 <li>Find where root runtime is
 <ul>
 <li><code>:echo $VIMRUNTIME</code> -&gt; <code>/usr/share/vim/vim74</code></li>
@@ -721,10 +736,10 @@ endfunct! </code></pre>
 </div>
 <div class="h3-section">
 <h3 id="remote">Remote</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">vim</span> --servername DEMO</a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="ex">vim</span> --servername DEMO --remote file.txt</a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="ex">vim</span> --servername DEMO  --remote-send <span class="st">&quot;:3d&lt;CR&gt;&quot;</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="bu">:</span>!vim --servername DEMO --remote-tab <span class="st">&quot;%&quot;</span>   <span class="st">&quot; Send current buffer to remote vim</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">vim</span> --servername DEMO</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="ex">vim</span> --servername DEMO --remote file.txt</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="ex">vim</span> --servername DEMO  --remote-send <span class="st">&quot;:3d&lt;CR&gt;&quot;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="bu">:</span>!vim --servername DEMO --remote-tab <span class="st">&quot;%&quot;</span>   <span class="st">&quot; Send current buffer to remote vim</span></a></code></pre></div>
 <p><strong>Dos2Unix</strong>: <code>for file in * ; do vi +':w ++ff=unix' +':q' $file</code></p>
 </div>
 <div class="h3-section">

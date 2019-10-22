@@ -709,7 +709,7 @@ More text in English. [&#39;Zitat auf Deutsch.&#39;]{lang=de}</code></pre>
 </dl>
 <h2 id="variables-for-latex">Variables for LaTeX</h2>
 <p>Pandoc uses these variables when <a href="#creating-a-pdf">creating a PDF</a> with a LaTeX engine.</p>
-<p>::: {.parent} ::::::::: {.h3-section} ### Layout</p>
+<p>:::::::: {.h3-parent} ::::::::: {.h3-section} ### Layout</p>
 <dl>
 <dt><code>block-headings</code></dt>
 <dd><p>make <code>\paragraph</code> and <code>\subparagraph</code> (fourth- and fifth-level headings, or fifth- and sixth-level with book classes) free-standing rather than run-in; requires further formatting to distinguish from <code>\subsubsection</code> (third- or fourth-level headings). Instead of using this option, <a href="https://ctan.org/pkg/koma-script">KOMA-Script</a> can adjust headings more extensively:</p>
@@ -2408,12 +2408,16 @@ title: My Slideshow
 parallaxBackgroundImage: /path/to/my/background_image.png
 ---
 
-:::::::::
-:::
+::: {.parent}
+:::::: {.h2-section}
 ## Slide One
 
 Slide 1 has background_image.png as its background.
 
+:::::::::
+::::::::
+::::::
+:::::: {.h2-section}
 ## {data-background-image=&quot;/path/to/special_image.jpg&quot;}
 
 Slide 2 has a special image for its background, even though the heading has no content.</code></pre>
@@ -2641,6 +2645,7 @@ jupyter:
      version: &quot;2.7.15&quot;
 ---
 
+::::::
 # Lorem ipsum
 
 **Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Nunc luctus
@@ -2650,6 +2655,7 @@ bibendum felis dictum sodales.
 print(&quot;hello&quot;)
 ```
 
+:::::: {.h2-section}
 ## Pyout
 
 ``` code
@@ -2662,12 +2668,15 @@ console.log(&quot;hello&quot;);
 &quot;&quot;&quot;)
 ```
 
+::::::
+:::::: {.h2-section}
 ## Image
 
 This image ![image](myimage.png.html) will be
 included as a cell attachment.</code></pre>
 <p>If you want to add cell attributes, group cells differently, or add output to code cells, then you need to include divs to indicate the structure. You can use either <a href="#extension-fenced_divs">fenced divs</a> or <a href="#extension-native_divs">native divs</a> for this. Here is an example:</p>
 <pre><code>:::::: {.cell .markdown}
+::::::
 # Lorem
 
 **Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Nunc luctus
@@ -2706,7 +2715,8 @@ console.log(&quot;hello&quot;);
 hello
 ```
 :::
-::::::</code></pre>
+::::::
+:::</code></pre>
 <p>If you include raw HTML or TeX in an output cell, use the [raw attribute][Extension: <code>fenced_attribute</code>], as shown in the last cell of the example above. Although pandoc can process “bare” raw HTML and TeX, the result is often interspersed raw elements and normal textual elements, and in an output cell pandoc expects a single, connected raw block. To avoid using raw HTML or TeX except when marked explicitly using raw attributes, we recommend specifying the extensions <code>-raw_html-raw_tex+raw_attribute</code> when translating between Markdown and ipynb notebooks.</p>
 <p>Note that options and extensions that affect reading and writing of Markdown will also affect Markdown cells in ipynb notebooks. For example, <code>--wrap=preserve</code> will preserve soft line breaks in Markdown cells; <code>--atx-headers</code> will cause ATX-style headings to be used; and <code>--preserve-tabs</code> will prevent tabs from being turned to spaces.</p>
 <h1 id="syntax-highlighting">Syntax highlighting</h1>

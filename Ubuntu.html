@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
+<h1 id="mouse">Mouse</h1>
+<p>modprobe -r psmouse</p>
 <h1 id="restart">Restart</h1>
 <ul>
 <li>gnome-shell –replace</li>
@@ -33,11 +35,15 @@ HibernateDelaySec=3600</code></pre></li>
 <li><code>systemctl restart systemd-logind.service</code></li>
 <li><p><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</p></li>
 </ul>
+<div class="parent">
+<div class="h2-section">
 <h2 id="power-stop-sleeping">Power : stop sleeping</h2>
 <ul>
 <li><code>sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target</code> # Disable</li>
 <li><code>sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target</code> # Enable</li>
 <li>Add the kernel options acpi=off apm=off to the contents of GRUB_CMDLINE_LINUX_DEFAULT in file /etc/default/grub. Then run sudo update-grub</li>
 </ul>
+</div>
+</div>
 </body>
 </html>

@@ -176,15 +176,20 @@ Errata              Compatibility Mode </code></pre>
 <li>It is difficult for the user to add their own overrides when plugins use <code>after/</code>.</li>
 </ul></li>
 </ul>
+<div class="parent">
+<div class="h2-section">
 <h2 id="library">Library</h2>
 <p>Separate library-providing plugins from command-providing plugins.</p>
 <p>Many plugins provide either user functionality (commands, autocommands, etc) or an API (of autoloaded functions) but not both. This separation is encouraged, as it allows other plugins to pull in a library without also pulling in commands, setting changes, and other plugin functionality that affects the end user.</p>
+</div>
+<div class="h2-section">
 <h2 id="configuration">Configuration</h2>
 <p>Don’t clobber user settings. Provide as much configurability as possible: that’s what Vim’s all about.</p>
 <ul>
 <li>Use maktaba flags for plugin configuration. Users can configure them using the <code>:Glaive</code> command.</li>
 <li>Check if configuration variables exist before setting them. if !exists(‘g:myplugin_option’) let g:myplugin_option = 1 endif</li>
 </ul>
+</div>
 <h1 id="style-guide">Style Guide</h1>
 <p>Follow google-wide style conventions. Mimic google python style when in doubt.</p>
 <h1 id="documentation">Documentation</h1>
@@ -323,6 +328,7 @@ Errata              Compatibility Mode </code></pre>
 </ul>
 <h1 id="usage-guide">Usage Guide</h1>
 <p>Vim plugins should provide any or all of the following: <strong>Commands,</strong> <strong>Autocommands,</strong> <strong>Functions,</strong> <strong>Statusline Flags, and</strong> <strong>Mappings.</strong></p>
+<div class="h2-section">
 <h2 id="commands">Commands</h2>
 <ul>
 <li>Define in <code>plugin/commands.vim</code>.</li>
@@ -364,6 +370,8 @@ Errata              Compatibility Mode </code></pre>
 <li>The function should receive a boolean parameter, not a string.</li>
 </ul></li>
 </ul>
+</div>
+<div class="h2-section">
 <h2 id="autocommands">Autocommands</h2>
 <ul>
 <li>Define in <code>plugin/autocmds.vim</code>.</li>
@@ -393,6 +401,8 @@ Errata              Compatibility Mode </code></pre>
 <li>This allows your plugins to be re-enterable.</li>
 </ul></li>
 </ul>
+</div>
+<div class="h2-section">
 <h2 id="functions">Functions</h2>
 <ul>
 <li>FunctionNamesLikeThis.</li>
@@ -431,6 +441,8 @@ Errata              Compatibility Mode </code></pre>
 <li>Top-level functions expecting errors may catch them and print error messages, but even those should throw their own errors when they choke.</li>
 </ul></li>
 </ul>
+</div>
+<div class="h2-section">
 <h2 id="mappings">Mappings</h2>
 <ul>
 <li>Provide opt-in key mappings in <code>plugin/mappings.vim</code>.</li>
@@ -468,11 +480,15 @@ Errata              Compatibility Mode </code></pre>
 <li>Using <code>s:</code> will often fail as the mapping attempts to type a literal s and colon.</li>
 </ul></li>
 </ul>
+</div>
 <h1 id="conventions">Conventions</h1>
+<div class="h2-section">
 <h2 id="dependency-checking">Dependency Checking</h2>
 <p>Declare dependencies in addon-info.json and use <code>maktaba</code>.</p>
 <p>Declaring dependencies in addon-info.json allows conformant plugin managers (like VAM) to ensure dependencies are installed. See the <a href="https://github.com/MarcWeber/vim-addon-manager/blob/master/doc/vim-addon-manager-additional-documentation.txt">VAM documentation</a> for details.</p>
 <p>Calling <code>maktaba#library#Require</code> from dependent code at runtime ensures that dependencies have been installed and that they don’t include unsafe non-library files.</p>
+</div>
+<div class="h2-section">
 <h2 id="statuline-flags">Statuline Flags</h2>
 <p>Use <code>&lt;plugin-name&gt;#status#Status()</code> or its finer-grained variants to provide statusline flags.</p>
 <p>Following is a convention for exposing statusline flags to the user. A plugin should never modify the user’s statusline except for when that is the only purpose of the plugin (powerline, etc.).</p>
@@ -506,6 +522,7 @@ Errata              Compatibility Mode </code></pre>
 <li>This is useful for users who want only the most relevant flag and do not have a colored statusline.</li>
 </ul></li>
 </ul>
+</div>
 <h1 id="forbidden-commands">Forbidden commands</h1>
 <p>These are commands which can only be used by a limited number of plugins, and should not in general be used by yours.</p>
 <ul>
@@ -551,6 +568,7 @@ Errata              Compatibility Mode </code></pre>
 </ul>
 <h1 id="errata">Errata</h1>
 <p>This section plumbs some of the darker corners of vimscript, explaining the language pathologies that you wish you didn’t have to know.</p>
+<div class="h2-section">
 <h2 id="compatibility-mode">Compatibility Mode</h2>
 <p>If you don’t support vi-compatibility mode, fail gracefully.</p>
 <p>When <code>compatible</code> is set, many vim features are not available. The vim feature which most commonly affects vimscript authors is line continuations.</p>
@@ -561,5 +579,7 @@ Errata              Compatibility Mode </code></pre>
 Joshua Hoak<br />
 David Barnett<br />
 </p>
+</div>
+</div>
 </body>
 </html>
