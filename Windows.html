@@ -66,28 +66,29 @@
 <li><code>fltmc UNLOAD PROCMON23</code></li>
 </ul></li>
 </ul>
-<div class="parent">
-<div class="h2-section">
-<h2 id="notes-from-draft-book">Notes from draft book</h2>
+<section id="notes-from-draft-book" class="level2">
+<h2>Notes from draft book</h2>
 <ul>
 <li>In computing, Read or Write depends on the point of view …</li>
 <li>In kernel, we use objects and not handles</li>
 <li>Some services cannot be debugged locally because of traps (anti-debug). So one must debug natively (i.e kernel, remote)</li>
 </ul>
-</div>
-<h1 id="security">Security</h1>
+</section>
+<section id="security" class="level1">
+<h1>Security</h1>
 <ul>
 <li>GetModuleHandle(NULL) -&gt; Base address (even if specified as HMODULE)</li>
 </ul>
-<h1 id="api">API</h1>
+</section>
+<section id="api" class="level1">
+<h1>API</h1>
 <ul>
 <li>EnumDevideDrivers # Fill array of LPVOID with start address of all drivers</li>
 <li>GetDeviceDriverFileName # Returns the name of the driver</li>
 <li>NtQuerySystemInformation</li>
 </ul>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="control-access-to-resources">Control Access to Resources</h3>
+<section id="control-access-to-resources" class="level3">
+<h3>Control Access to Resources</h3>
 <ul>
 <li>GetCurrentProcess</li>
 <li>OpenProcessToken</li>
@@ -96,8 +97,10 @@
 <li>AdjustTokenPrivileges</li>
 <li>SeAccessCheck</li>
 </ul>
-</div>
-<h1 id="interprocess-communication">InterProcess Communication</h1>
+</section>
+</section>
+<section id="interprocess-communication" class="level1">
+<h1>InterProcess Communication</h1>
 <ul>
 <li>Clipboard</li>
 <li>Event (most primitive)</li>
@@ -148,8 +151,12 @@
 </tr>
 </tbody>
 </table>
-<h1 id="service">Service</h1>
-<h1 id="hooks-userland">Hooks (userland)</h1>
+</section>
+<section id="service" class="level1">
+<h1>Service</h1>
+</section>
+<section id="hooks-userland" class="level1">
+<h1>Hooks (userland)</h1>
 <ul>
 <li>PsSetLoadImageNotifyRoutine</li>
 <li>PsSetCreateProcessNotifyRoutine</li>
@@ -159,7 +166,9 @@
 <li>SeRegisterImageVerificationCallback</li>
 <li></li>
 </ul>
-<h1 id="interupt-table-todo-my-own-file">Interupt table (TODO my own file)</h1>
+</section>
+<section id="interupt-table-todo-my-own-file" class="level1">
+<h1>Interupt table (TODO my own file)</h1>
 <ul>
 <li><code>int 31h</code> : Memory allocation, sector manipulation, table of descriptors</li>
 <li><code>int 2Eh</code> : Sleep</li>
@@ -173,19 +182,22 @@
 <li><code>fct 13h</code> : Show string on screen</li>
 </ul></li>
 </ul>
-<div class="h2-section">
-<h2 id="tab-manipulation">Tab manipulation</h2>
+<section id="tab-manipulation" class="level2">
+<h2>Tab manipulation</h2>
 <p>Ctrl + ` : Global summon from taskbar Win + Alt + p : Preferences Ctrl + t : New tab Ctrl + w : Close tab Shitft + Alt + 1: New CMD tab Shitft + Alt + 2: New Powershell tab Alt + Enter : Full screen</p>
-</div>
-</div>
-<div class="h2-section">
-<h2 id="shell">Shell</h2>
+</section>
+<section id="shell" class="level2">
+<h2>Shell</h2>
 <p>Shift + Up : Traverse up in directory structure End, Home Ctrl : Traverse text as usual in windows Ctrl + r : History search Shift + mouse : Select and copy from buffer Right click : Paste text (or ctrl + shift + v)</p>
-</div>
-</div>
-<h1 id="ms-office">MS Office</h1>
+</section>
+</section>
+<section id="ms-office" class="level1">
+<h1>MS Office</h1>
 <p>shift+f5 : Full screen current slide</p>
-<h1 id="windows-shortcut">Windows shortcut</h1>
+</section>
+<section id="windows-shortcut" class="level1">
+<h1>Windows shortcut</h1>
 <p>win r cmd # as run</p>
+</section>
 </body>
 </html>

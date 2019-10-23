@@ -17,10 +17,10 @@
 <header>
 <h1 class="title">Git Wiki</h1>
 </header>
-<h1 id="tips">Tips</h1>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="ugly-tips-from-draft">Ugly tips from draft</h3>
+<section id="tips" class="level1">
+<h1>Tips</h1>
+<section id="ugly-tips-from-draft" class="level3">
+<h3>Ugly tips from draft</h3>
 <ul>
 <li>git push <remote_name> –delete <branch_name> # or -d branch or :branch</li>
 <li>git commit –amend –no-edit # Amend without changing message</li>
@@ -186,11 +186,12 @@
 <ul>
 <li>Add the line in the core and then edit your .local_gitignore</li>
 </ul>
-</div>
-<h1 id="change-history">Change history</h1>
-<div class="parent">
-<div class="h2-section">
-<h2 id="analyse">Analyse</h2>
+</section>
+</section>
+<section id="change-history" class="level1">
+<h1>Change history</h1>
+<section id="analyse" class="level2">
+<h2>Analyse</h2>
 <ul>
 <li>To see which commit modified the file
 <ul>
@@ -208,20 +209,26 @@
 <li><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></li>
 </ul></li>
 </ul>
-</div>
-<h1 id="init">1. Init</h1>
+</section>
+</section>
+<section id="init" class="level1">
+<h1>1. Init</h1>
 <pre><code>  git init 
   git add LICENSE.txt
   git commit -m &#39;first commit&#39;
 
   git clone https://github.com/libgit2 mylibgit</code></pre>
-<h1 id="config">2. Config</h1>
+</section>
+<section id="config" class="level1">
+<h1>2. Config</h1>
 <pre><code>  git config --global user.name &quot;Martin T&quot;
   git config --global user.email tbf@tbf
           core.editor vim 
   git config --list   # See all config vars 
   git config user.name   # See the var git is using for name </code></pre>
-<h1 id="aliases">3. Aliases</h1>
+</section>
+<section id="aliases" class="level1">
+<h1>3. Aliases</h1>
 <pre><code>  git config --global alias.co checkout   
   git config --global alias.br branch 
   git config --global alias.ci commit    
@@ -229,7 +236,9 @@
 
   git config --global alias.unstage &#39;reset HEAD --&#39;
   git config --global alias.last &#39;log -1 HEAD&#39;</code></pre>
-<h1 id="branches">4. Branches</h1>
+</section>
+<section id="branches" class="level1">
+<h1>4. Branches</h1>
 <p>-&gt; Each Commit has a pointer to the previous commit -&gt; The default branch name is master <em>git-master</em> . -&gt; HEAD is a pointer pointing to the current branch</p>
 <pre><code>  git branch testing 
 &lt;    Creates a new pointer at the same commit you&#39;re currently on </code></pre>
@@ -255,14 +264,18 @@
 <p>git mergetool</p>
 <pre><code></code></pre>
 <p>git branch -d myBranch &lt; To deleta a branch, usefull if this branch is already merged</p>
-<h1 id="rebasing">6. Rebasing</h1>
+</section>
+<section id="rebasing" class="level1">
+<h1>6. Rebasing</h1>
 <p>-&gt; Get the change one branch applied to the most common ancestor and apply this change to the other branch</p>
 <pre><code>  git rebase --onto master server client
 &lt;    Check client branch, figure the changes from the common
 ancestor with client and apply these changes to master</code></pre>
 <p>git rebase master server git checkout master git merge server git branch -d server &lt; Replay server changes on master branch Then go to the master branch (without the server applyed) And merge both branch so master and server are now one branch Remove the server branch, not usefull anymore</p>
 <p>-&gt; Don’t rebase commits that exist outside your repository</p>
-<h1 id="remote">7. Remote</h1>
+</section>
+<section id="remote" class="level1">
+<h1>7. Remote</h1>
 <pre><code>  git remote add maisonDir D:\Iso\VimMaison</code></pre>
 <pre><code>  git ls-remote (remote) 
   git remote show (remote) 
@@ -273,11 +286,14 @@ ancestor with client and apply these changes to master</code></pre>
 &lt;    Take my local branch and update the remote origin branch (with the same name) </code></pre>
 <p>git checkout -b serverfix origin/serverfix &lt; This gives a local branch where origin/serverfix was</p>
 <p>-&gt; Tracking branches are local branches that are looking to remote branches. When you git clone, your master branch is tracking origin/master. You can then update master with “git pull”. From a tracking branch, git pull will act as git fetch and git merge</p>
-<h1 id="remote-1">8. Remote</h1>
+</section>
+<section id="remote-1" class="level1">
+<h1>8. Remote</h1>
 <pre><code>  git remote add local_proc /opt/git/projct.git 
   git pull /home/john/project </code></pre>
-<h1 id="section">9.</h1>
-</div>
-</div>
+</section>
+<section id="section" class="level1">
+<h1>9.</h1>
+</section>
 </body>
 </html>

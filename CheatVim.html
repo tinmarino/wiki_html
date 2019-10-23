@@ -17,7 +17,8 @@
 <header>
 <h1 class="title">Notes (from doc)</h1>
 </header>
-<p>:::::::: {.h3-parent} ::::::::: {.h3-section} ### Key</p>
+<section id="key" class="level3">
+<h3>Key</h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -66,7 +67,9 @@
 </tr>
 </tbody>
 </table>
-<p>::::::::: # Jump</p>
+</section>
+<section id="jump" class="level1">
+<h1>Jump</h1>
 <table>
 <tbody>
 <tr class="odd">
@@ -175,7 +178,9 @@
 </tr>
 </tbody>
 </table>
-<h1 id="insert">INSERT</h1>
+</section>
+<section id="insert" class="level1">
+<h1>INSERT</h1>
 <table>
 <tbody>
 <tr class="odd">
@@ -256,13 +261,10 @@
 </tr>
 </tbody>
 </table>
-<div class="parent">
-<div class="h2-section">
-<h2 id="normal-mode">Normal mode</h2>
-<div class="h3-section">
-
-</div>
-<h3 id="registers">Registers</h3>
+<section id="normal-mode" class="level2">
+<h2>Normal mode</h2>
+<section id="registers" class="level3">
+<h3>Registers</h3>
 <pre class="language-vim"><code>&quot; IN COMMAND 
 :registers          &quot;to view content 
 :normal @a          &quot; to run macro a from ex command
@@ -279,10 +281,9 @@
 :let @b = substitute(@a,&#39;\_s*\(.\{-}\)\_s*$&#39;,&#39;\1&#39;,&#39;&#39;)
                     &quot; this give the output in reg b 
 :%y+.               &quot;Copy the entire buffer to the system clipboard of the file </code></pre>
-<div class="h3-section">
-
-</div>
-<h3 id="register-list">Register list</h3>
+</section>
+<section id="register-list" class="level3">
+<h3>Register list</h3>
 <table>
 <colgroup>
 <col style="width: 4%" />
@@ -347,10 +348,9 @@
 </tr>
 </tbody>
 </table>
-<div class="h3-section">
-
-</div>
-<h3 id="fold">Fold</h3>
+</section>
+<section id="fold" class="level3">
+<h3>Fold</h3>
 <table>
 <tbody>
 <tr class="odd">
@@ -427,9 +427,10 @@
 set &quot;foldtext&quot;              &quot; witch show what you see when folded 
 :set foldmethod=expr
 :set foldexpr=empty(getline(v:lnum))?&#39;=&#39;:indent(v:lnum)/4</code></pre>
-</div>
-</div>
-<p>:::::: {.h2-section} ## Ex mode</p>
+</section>
+</section>
+<section id="ex-mode" class="level2">
+<h2>Ex mode</h2>
 <p>http://www.csb.yale.edu/userguides/wordprocess/vi-summary.html</p>
 <table>
 <tbody>
@@ -455,23 +456,30 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 </tr>
 </tbody>
 </table>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="advanced">Advanced</h3>
+<section id="advanced" class="level3">
+<h3>Advanced</h3>
 <p>:#n and :#&lt;n Are replaced by file buffer n or oldfiles n</p>
-<h4 id="man-read-linux-manual-pages">Man (Read linux manual pages)</h4>
+<section id="man-read-linux-manual-pages" class="level4">
+<h4>Man (Read linux manual pages)</h4>
 <p>runtime! ftplugin/man.vim :Man 3 printf :h find-manpage</p>
-<h4 id="buffer">Buffer</h4>
+</section>
+<section id="buffer" class="level4">
+<h4>Buffer</h4>
 <p>:argdel * Delete the existing argument list :bufdo argadd % For each buffer, add the buffer’s path to the list :1,1000bd Delete buffers 1 to 1000; probably there’s a better way to do this :argdo e For each argument, edit that argument :bufhiden Can unload a buffer &lt; then not visible</p>
 <pre><code>                Very cool for scratch buufer (warning they are permanently
                 lost)</code></pre>
-<h4 id="diff">Diff</h4>
+</section>
+<section id="diff" class="level4">
+<h4>Diff</h4>
 <p>set diffopt+=iwhite &quot; ignore spacelines <br> set diffexpr= <br> :diffupdate <br></p>
-<h4 id="tips">Tips</h4>
+</section>
+<section id="tips" class="level4">
+<h4>Tips</h4>
 <p>:tab help foo <br> :!tidy -mi -html -wrap 0 % <br> :<n>,<m> w filename <br> :ccl Close it quickfix <br></p>
-</div>
-<div class="h3-section">
-<h3 id="regex">Regex</h3>
+</section>
+</section>
+<section id="regex" class="level3">
+<h3>Regex</h3>
 <p>VIM: NFA regular expression</p>
 <p>Forget me and go to :h pattern (or :h regex) that is super well written. At least for the first chapter</p>
 <pre><code>1. Regex                        |v-regex|
@@ -483,16 +491,12 @@ set &quot;foldtext&quot;              &quot; witch show what you see when folded
 3. Sustitute                    |v-substitute|
 4. Global                       |v-global|
 
-:::::::::
-::::::
 # 1. Regex
 
 http://vimregex.com/ (Vim Regular Expression 101)
 
 
 
-::::::::: {.h3-section}
-:::::::::
 ### Escaped caracter or metecaratcter 
 .           any character except new line        
 \s          whitespace character    
@@ -514,8 +518,6 @@ http://vimregex.com/ (Vim Regular Expression 101)
 \@!         To negate ex: /^\(\(^.*cursor.*$\)\@!.*foo.*\)$
 
 
-::::::::: {.h3-section}
-:::::::::
 ### Quantifiers 
 *           matches 0 or more of the preceding characters, ranges or metacharacters .* matches everything including empty line
 \+          matches 1 or more of the preceding characters...
@@ -530,8 +532,6 @@ http://vimregex.com/ (Vim Regular Expression 101)
 \{-,m}      matches 1 or more of the preceding characters... 
                 where n and m are positive integers (&gt;0) 
 
-::::::::: {.h3-section}
-:::::::::
 ### Search 
 
 ``[v``]       Reselect paste text
@@ -541,8 +541,6 @@ g*, g#      Without word delimiter
 /word       word from top to bottom
 ?word       word from bottom to top
 
-::::::::: {.h3-section}
-:::::::::
 ### Example 
 \ze \zs     Regex start, stop
 /jo[ha]n    john or joan
@@ -558,8 +556,6 @@ g*, g#      Without word delimiter
 /\v&lt;[A-Z]+&gt;         or 
 /\&lt;\u\+\&gt;           Find upper case words
 
-::::::::: {.h3-section}
-:::::::::
 ### Search modifiers 
 /joe/e              cursor set to End of match
 3/joe/e+1           find 3rd joe cursor set to End of match plus 1 [C]
@@ -567,8 +563,6 @@ g*, g#      Without word delimiter
 /joe/+3             find joe move cursor 3 lines down
 /.*fred\&amp;.*joe      Search for FRED AND JOE in any ORDER!
 
-::::::::: {.h3-section}
-:::::::::
 ### Substite
 :range s[ubstitute]/pattern/string/cgiI 
 c                   Confirm each substitution
@@ -620,8 +614,6 @@ g&amp;                  to make a replacement on all file lines ( equivalent to 
 :%s/^/\=line(&#39;.&#39;) . &quot;.&quot;/g       Substitute all line with its line number
 
 
-::::::::: {.h3-section}
-:::::::::
 ### Range 
 
 range 
@@ -663,22 +655,21 @@ POWER of G  http://vim.wikia.com/wiki/Power_of_g
     &quot; tell it to act on the previous one. aa
 
 </code></pre>
-<div class="h2-section">
-<h2 id="script">Script</h2>
+</section>
+</section>
+<section id="script" class="level2">
+<h2>Script</h2>
 <p><em>v-script.txt</em> Functions, scripts</p>
-<div class="h3-section">
-
-</div>
-<h3 id="function">Function</h3>
+<section id="function" class="level3">
+<h3>Function</h3>
 <p>:help functions :help function-list</p>
 <pre class="language-vim"><code>:echo expand(&#39;&lt;cword&gt;&#39;)                     &quot;return the word under cursor 
 :echo expand(&#39;%:p:h&#39;)
 sfrtime
 :let s=input(&#39;where to jump?&#39;)</code></pre>
-<div class="h3-section">
-
-</div>
-<h3 id="exec">EXEC</h3>
+</section>
+<section id="exec" class="level3">
+<h3>EXEC</h3>
 <pre class="language-vim"><code>function Func()
     command1
     command2
@@ -686,19 +677,17 @@ endfunction
 exec Func() 
 call Func()
 echo Func()</code></pre>
-<div class="h3-section">
-
-</div>
-<h3 id="function2command">Function2Command</h3>
+</section>
+<section id="function2command" class="level3">
+<h3>Function2Command</h3>
 <pre><code>command! -nargs=1 MyCommand call s:MyFunc(&lt;f-args&gt;) &quot; transform a function to user-command</code></pre>
 <p>lcd to cd for current windwo</p>
-<div class="h3-section">
-
-</div>
-<h3 id="script-tips">Script tips</h3>
+</section>
+<section id="script-tips" class="level3">
+<h3>Script tips</h3>
 <p>set formatoptions +=at <br> call append(line(‘<span class="math inline">′), [<em>v</em><em>a</em><em>r</em><em>i</em><em>a</em><em>b</em><em>l</em><em>e</em>]) &lt; <em>b</em><em>r</em> &gt; <em>c</em><em>a</em><em>l</em><em>l</em><em>a</em><em>p</em><em>p</em><em>e</em><em>n</em><em>d</em>(<em>l</em><em>i</em><em>n</em><em>e</em>(′</span>’), split(variable, “”)) <br> set autoread <br> help scrool-cursor <br> htlp winrestcmd() <br></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 </body>
 </html>

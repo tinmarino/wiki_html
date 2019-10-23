@@ -18,9 +18,12 @@
 <h1 class="title">Tmux : TerminalMultiplexer</h1>
 </header>
 <p><a href="Tmux-Conf.html">Tmux Conf</a></p>
-<h1 id="clipboard">Clipboard</h1>
+<section id="clipboard" class="level1">
+<h1>Clipboard</h1>
 <p>tmux save-buffer - | xclip -i</p>
-<h1 id="get-help">Get help</h1>
+</section>
+<section id="get-help" class="level1">
+<h1>Get help</h1>
 <pre><code>tmux list-keys
 tmux list-commands
 tmux info
@@ -31,7 +34,9 @@ C-b ?  # Display a list of keyboard shortcuts:
     tmux list-sessions
     C-b w  # List windows
     C-b s  # List sessions</code></pre>
-<h1 id="tips">Tips</h1>
+</section>
+<section id="tips" class="level1">
+<h1>Tips</h1>
 <ul>
 <li><p>Add mouse support</p>
 <p>set -g mouse on</p></li>
@@ -43,11 +48,12 @@ C-b ?  # Display a list of keyboard shortcuts:
 <li><p>Reorder windows?</p>
 <p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0 # In the unlikely case of having no window at index 0, do: bind-key T swap-window -t 0</p></li>
 </ul>
-<h1 id="tmux-cheat-sheet">tmux cheat sheet</h1>
+</section>
+<section id="tmux-cheat-sheet" class="level1">
+<h1>tmux cheat sheet</h1>
 <p>(C-x means ctrl+x, M-x means alt+x)</p>
-<div class="parent">
-<div class="h2-section">
-<h2 id="prefix-key">Prefix key</h2>
+<section id="prefix-key" class="level2">
+<h2>Prefix key</h2>
 <p>The default prefix is C-b. If you (or your muscle memory) prefer C-a, you need to add this to <code>~/.tmux.conf</code>:</p>
 <pre><code># remap prefix to Control + a
 set -g prefix C-a
@@ -58,22 +64,22 @@ unbind C-b</code></pre>
 <p>Navigate using Vim or Emacs shortcuts, depending on the value of <code>mode-keys</code>. Emacs is the default, and if you want Vim shortcuts for help and copy modes (e.g. j, k, C-u, C-d), add the following line to <code>~/.tmux.conf</code>:</p>
 <pre><code>setw -g mode-keys vi</code></pre>
 <p>Any command mentioned in this list can be executed as <code>tmux something</code> or <code>C-a :something</code> (or added to <code>~/.tmux.conf</code>).</p>
-</div>
-<div class="h2-section">
-<h2 id="copy-mode">Copy mode</h2>
+</section>
+<section id="copy-mode" class="level2">
+<h2>Copy mode</h2>
 <pre><code>    bind-key -T copy-mode-vi &#39;v&#39; send -X begin-selection
     bind-key -T copy-mode-vi &#39;y&#39; send -X copy-selection-and-cancel
     &lt;C-b&gt; =  # show the yank ring</code></pre>
-</div>
-<div class="h2-section">
-<h2 id="sessions-windows-panes">Sessions, windows, panes</h2>
+</section>
+<section id="sessions-windows-panes" class="level2">
+<h2>Sessions, windows, panes</h2>
 <p>Session is a set of windows, plus a notion of which window is current.</p>
 <p>Window is a single screen covered with panes. (Once might compare it to a ‘virtual desktop’ or a ‘space’.)</p>
 <p>Pane is a rectangular part of a window that runs a specific command, e.g. a shell.</p>
 <p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0 bind-key T swap-window -t 0 bind-key -n C-S-Left swap-window -t -1 bind-key -n C-S-Right swap-window -t +1</p>
-</div>
-<div class="h2-section">
-<h2 id="sessions">Sessions</h2>
+</section>
+<section id="sessions" class="level2">
+<h2>Sessions</h2>
 <ul>
 <li><p>Where am I | I go</p>
 <p>session=whatever window=<span class="math inline"><em>s</em><em>e</em><em>s</em><em>s</em><em>i</em><em>o</em><em>n</em> : 0<em>p</em><em>a</em><em>n</em><em>e</em>=</span>{window}.4 tmux send-keys -t “<span class="math inline">$pane&quot; C-z 'some -new command' Enter  tmux select-pane -t &quot;$</span>pane” tmux select-window -t “<span class="math inline">$window&quot;  tmux attach-session -t &quot;$</span>session”</p></li>
@@ -89,9 +95,9 @@ unbind C-b</code></pre>
 <li><p>Switch between sessions: C-a ( previous session C-a ) next session C-a L ‘last’ (previously used) session C-a s choose a session from a list</p></li>
 <li><p>Other: C-a $ rename the current session</p></li>
 </ul>
-</div>
-<div class="h2-section">
-<h2 id="windows">Windows</h2>
+</section>
+<section id="windows" class="level2">
+<h2>Windows</h2>
 <ul>
 <li><p><strong>Create</strong> a window: C-a c create a new window</p></li>
 <li><p><strong>Switch</strong> between windows: C-a 0 … 9 switch to window 0, …, 9 C-a p previous window C-a n next window C-a l ‘last’ (previously used) window C-a w choose window from a list C-a M-n next window with a bell, activity or content alert C-a M-p previous such window</p></li>
@@ -99,9 +105,9 @@ unbind C-b</code></pre>
 <li><p><strong>Reorder</strong> (from commmands)</p>
 <p>:swap-window -s 2 -t 1 # Reorder window, swap window number 2(src) and 1(dst) :swap-window -t -1 # Move current window to the left by one position</p></li>
 </ul>
-</div>
-<div class="h2-section">
-<h2 id="managing-split-panes">Managing split panes</h2>
+</section>
+<section id="managing-split-panes" class="level2">
+<h2>Managing split panes</h2>
 <p><strong>Split</strong>: Creating a new pane by splitting an existing one:</p>
 <pre><code>C-a &quot;          split vertically (top/bottom)
 C-a %          split horizontally (left/right)</code></pre>
@@ -149,9 +155,9 @@ C-a space      switch to the next layout</code></pre>
 <p><strong>Other</strong>:</p>
 <pre><code>C-a x          kill the current pane
 C-a q          display pane numbers for a short while</code></pre>
-</div>
-<div class="h2-section">
-<h2 id="copy-mode-1">Copy mode</h2>
+</section>
+<section id="copy-mode-1" class="level2">
+<h2>Copy mode</h2>
 <p>:setw -g mode-keys vi # use vi keys in buffer</p>
 <pre><code>Function                vi             emacs
 Back to indentation     ^              M-m
@@ -199,21 +205,22 @@ Enter                    # Copy selection</code></pre>
 :choose-buffer           # Show all buffers and paste selected
 :save-buffer buf.txt     # Save buffer contents to buf.txt
 :delete-buffer -b 1      # delete buffer_1</code></pre>
-</div>
-<div class="h2-section">
-<h2 id="other-config-file-settings">Other config file settings</h2>
+</section>
+<section id="other-config-file-settings" class="level2">
+<h2>Other config file settings</h2>
 <p>Force a reload of the config file on C-a r: unbind r bind r source-file ~/.tmux.conf</p>
 <p>Some other settings that I use: setw -g xterm-keys on</p>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="tmux.conf">.tmux.conf</h3>
+<section id="tmux.conf" class="level3">
+<h3>.tmux.conf</h3>
 <pre><code>set-option -g allow-rename off
 set -g status-bg cyan
 set-option -g prefix C-a
 unbind C-b </code></pre>
-</div>
-</div>
-<h1 id="key-bindings-other-cheat">key bindings (other cheat)</h1>
+</section>
+</section>
+</section>
+<section id="key-bindings-other-cheat" class="level1">
+<h1>key bindings (other cheat)</h1>
 <p>tmux may be controlled from an attached client by using a key combination of a prefix key, ‘C-b’ (Ctrl-b) by default, followed by a command key.</p>
 <ul>
 <li><p>? List all key bindings.</p></li>
@@ -297,7 +304,6 @@ unbind C-b </code></pre>
 <li><p>M-Up, M-Down, M-Left, M-Right Resize the current pane in steps of five cells.</p></li>
 </ul>
 <p>Key bindings may be changed with the bind-key and unbind-key commands.</p>
-</div>
-</div>
+</section>
 </body>
 </html>

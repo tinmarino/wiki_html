@@ -36,46 +36,49 @@ pre.numberSource a.sourceLine::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
+    background-color: #232629;
+    color: #7a7c7d;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  { color: #cfcfc2; background-color: #232629; }
 @media screen {
 a.sourceLine::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="../Css/color_dark_solarized.css" />
-  <link rel="stylesheet" href="../Css/layout_grid.css" />
+  <script type="text/javascript" src="../Css/js_masonry_desandro.js"></script>
 </head>
 <body>
 <header>
@@ -135,18 +138,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p><a href="#auto">auto</a> <a href="#break_continue">break</a> <a href="#switch_case_default">case</a> <a href="#char">char</a> <a href="#const">const</a> <a href="#break_continue">continue</a> <a href="#switch_case_default">default</a> <a href="#do_while">do</a> <a href="#double_float">double</a> <a href="#if_else">else</a> <a href="#enum">enum</a> <a href="#extern">extern</a> <a href="#double_float">float</a> <a href="#for">for</a> <a href="#goto">goto</a> <a href="#if_else">if</a> <a href="#int">int</a> <a href="#short_long_signed_unsigned">long</a> <a href="#register">register</a> <a href="#return">return</a> <a href="#short_long_signed_unsigned">short</a> <a href="#short_long_signed_unsigned">signed</a> <a href="#sizeof">sizeof</a> <a href="#static">static</a> <a href="#struct">struct</a> <a href="#switch_case_default">switch</a> <a href="#typedef">typedef</a> <a href="#union">union</a> <a href="#short_long_signed_unsigned">unsigned</a> <a href="#void">void</a> <a href="#volatile">volatile</a> <a href="#do_while">while</a></p>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="auto"><span id="auto"></span>auto</h3>
+<section id="start" class="level2">
+<h2>Start</h2>
+<section id="auto" class="level3">
+<h3><span id="auto"></span>auto</h3>
 <p>The auto keyword declares automatic variables. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">auto</span> <span class="dt">int</span> var1;</a></code></pre></div>
 <p>This statement suggests that var1 is a variable of storage class auto and type int.</p>
 <p>Variables declared within function bodies are automatic by default. They are recreated each time a function is executed.</p>
 <p>Since, automatic variables are local to a function, they are also called local variables. To learn more visit <a href="/c-programming/c-storage-class" title="C storage class">C storage class</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="break-and-continue"><span id="break_continue"></span>break and continue</h3>
+</section>
+<section id="break-and-continue" class="level3">
+<h3><span id="break_continue"></span>break and continue</h3>
 <p>The break statement makes program jump out of the innermost enclosing loop (while, do, for or switch statements) explicitly.</p>
 <p>The continue statement skips the certain statements inside the loop.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">for</span> (i=<span class="dv">1</span>;i&lt;=<span class="dv">10</span>;++i)</a>
@@ -176,9 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>1 2 4 5 6</code></pre>
 <p>When i is equal to 3, continue statement comes into effect and skips 3. When i is equal to 7, break statement comes into effect and terminates the for loop. To learn more, visit <a href="/c-programming/c-break-continue-statement">C break and continue statement</a></p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="switch-case-and-default"><span id="switch_case_default"></span>switch, case and default</h3>
+</section>
+<section id="switch-case-and-default" class="level3">
+<h3><span id="switch_case_default"></span>switch, case and default</h3>
 <p>The switch and case statement is used when a block of statements has to be executed among many blocks. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="cf">switch</span>(expression)</a>
 <a class="sourceLine" id="cb4-2" title="2">{</a>
@@ -193,24 +197,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-11" title="11">}</a></code></pre></div>
 <p>Visit <a href="/c-programming/c-switch-case-statement" title="C switch statement">C switch statement</a> to learn more.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="char"><span id="char"></span>char</h3>
+</section>
+<section id="char" class="level3">
+<h3><span id="char"></span>char</h3>
 <p>The char keyword declares a character variable. For example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" title="1"><span class="dt">char</span> alphabet;</a></code></pre></div>
 <p>Here, alphabet is a character type variable.</p>
 <p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="const"><span id="const"></span>const</h3>
+</section>
+<section id="const" class="level3">
+<h3><span id="const"></span>const</h3>
 <p>An identifier can be declared constant by using const keyword.</p>
 <pre><code>const int a = 5;</code></pre>
 <p>To learn more, visit<a href="/c-programming/c-variables-constants" title="C programming variables and constants">C variables and constants</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="dowhile"><span id="do_while"></span>do…while</h3>
+</section>
+<section id="dowhile" class="level3">
+<h3><span id="do_while"></span>do…while</h3>
 <pre><code>int i;
 do 
 {
@@ -220,18 +224,18 @@ do
 while (i&lt;10)</code></pre>
 <p>To learn more, visit <a href="/c-programming/c-do-while-loops" title="C do while loop">C do…while loop</a></p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="double-and-float"><span id="double_float"></span>double and float</h3>
+</section>
+<section id="double-and-float" class="level3">
+<h3><span id="double_float"></span>double and float</h3>
 <p>Keywords double and float are used for declaring floating type variables. For example:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb8-1" title="1"><span class="dt">float</span> number;</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="dt">double</span> longNumber;</a></code></pre></div>
 <p>Here, number is single precision floating type variable whereas, longNumber is a double precision floating type variable.</p>
 <p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="if-and-else"><span id="if_else"></span>if and else</h3>
+</section>
+<section id="if-and-else" class="level3">
+<h3><span id="if_else"></span>if and else</h3>
 <p>In C programming, if and else are used to make decisions.</p>
 <pre><code>if (i == 1)
    printf(&quot;i is 1.&quot;)
@@ -241,9 +245,9 @@ else
 <pre><code>i is not 1</code></pre>
 <p>To learn more, visit <a href="/c-programming/c-if-else-statement" title="C if else">C if…else statement</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="enum"><span id="enum"></span>enum</h3>
+</section>
+<section id="enum" class="level3">
+<h3><span id="enum"></span>enum</h3>
 <p>Enumeration types are declared in C programming using keyword enum. For example:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">enum</span> suit</a>
 <a class="sourceLine" id="cb11-2" title="2">{</a>
@@ -255,15 +259,15 @@ else
 <p>Here, a enumerated variable suit is created having tags: hearts, spades, clubs and diamonds.</p>
 <p>To learn more, visit [C enum](/c-programming/c-enumeration “C enum”.html).</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="extern"><span id="extern"></span>extern</h3>
+</section>
+<section id="extern" class="level3">
+<h3><span id="extern"></span>extern</h3>
 <p>The extern keyword declares that a variable or a function has external linkage outside of the file it is declared.</p>
 <p>To learn more, visit <a href="/c-programming/c-storage-class" title="C storage type">C storage type</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="for"><span id="for"></span>for</h3>
+</section>
+<section id="for" class="level3">
+<h3><span id="for"></span>for</h3>
 <p>There are three types of loops in C programming. The for loop is written in C programming using keyword for. For example:</p>
 <pre><code>for (i=0; i&lt; 9;++i)
 {
@@ -273,9 +277,9 @@ else
 <pre><code>0 1 2 3 4 5 6 7 8</code></pre>
 <p>To learn more, visit <a href="/c-programming/c-for-loop" title="C for loop">C for loop</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="goto"><span id="goto"></span>goto</h3>
+</section>
+<section id="goto" class="level3">
+<h3><span id="goto"></span>goto</h3>
 <p>The goto keyword is used for unconditional jump to a labeled statement inside a function. For example:</p>
 <pre><code>for(i=1; i&lt;5; ++i)
 {
@@ -289,17 +293,17 @@ error:
 <pre><code>Error, count cannot be 10.</code></pre>
 <p>To learn more, visit [C goto](/c-programming/c-goto-statement “C goto”.html).</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="int"><span id="int"></span>int</h3>
+</section>
+<section id="int" class="level3">
+<h3><span id="int"></span>int</h3>
 <p>The int keyword declares integer type variable. For example:</p>
 <pre><code>int count;</code></pre>
 <p>Here, count is a integer variable.</p>
 <p>To learn more, visit <a href="/c-programming/c-data-types" title="C data types">C data types</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="short-long-signed-and-unsigned"><span id="short_long_signed_unsigned"></span>short, long, signed and unsigned</h3>
+</section>
+<section id="short-long-signed-and-unsigned" class="level3">
+<h3><span id="short_long_signed_unsigned"></span>short, long, signed and unsigned</h3>
 <p>The short, long, signed and unsigned keywodrs are type modifiers that alters the meaning of a base data type to yield a new type.</p>
 <pre><code>short int smallInteger;
 long int bigInteger;
@@ -332,9 +336,9 @@ unsigned int positiveInteger;</code></pre>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="h3-section">
-<h3 id="return"><span id="return"></span>return</h3>
+</section>
+<section id="return" class="level3">
+<h3><span id="return"></span>return</h3>
 <p>The return keyword terminates the function and returns the value.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb18-1" title="1"><span class="dt">int</span> func()</a>
 <a class="sourceLine" id="cb18-2" title="2">{</a>
@@ -343,9 +347,9 @@ unsigned int positiveInteger;</code></pre>
 <a class="sourceLine" id="cb18-5" title="5">}</a></code></pre></div>
 <p>This function <code>func()</code> returns 5 to the calling function. To learn more, visit <a href="/c-programming/c-user-defined-functions" title="C user defined functions">C user-defined functions</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="sizeof"><span id="sizeof"></span>sizeof</h3>
+</section>
+<section id="sizeof" class="level3">
+<h3><span id="sizeof"></span>sizeof</h3>
 <p>The sizeof keyword evaluates the size of data (a variable or a constant).</p>
 <pre><code>#include &lt;stdio.h&gt;
 int main()
@@ -356,21 +360,21 @@ int main()
 <p><strong>Output</strong></p>
 <pre><code>1 bytes.</code></pre>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="register"><span id="register"></span>register</h3>
+</section>
+<section id="register" class="level3">
+<h3><span id="register"></span>register</h3>
 <p>The register keyword creates register variables which are much faster than normal variables.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb21-1" title="1"><span class="dt">register</span> <span class="dt">int</span> var1;</a></code></pre></div>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="static"><span id="static"></span>static</h3>
+</section>
+<section id="static" class="level3">
+<h3><span id="static"></span>static</h3>
 <p>The static keyword creates static variable. The value of the static variables persists until the end of the program. For example:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb22-1" title="1"><span class="dt">static</span> <span class="dt">int</span> var;</a></code></pre></div>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="struct"><span id="struct"></span>struct</h3>
+</section>
+<section id="struct" class="level3">
+<h3><span id="struct"></span>struct</h3>
 <p>The struct keyword is used for declaring a structure. A structure can hold variables of different types under a single name.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">struct</span> student{</a>
 <a class="sourceLine" id="cb23-2" title="2">    <span class="dt">char</span> name[<span class="dv">80</span>];</a>
@@ -379,16 +383,16 @@ int main()
 <a class="sourceLine" id="cb23-5" title="5">}s1, s2;</a></code></pre></div>
 <p>To learn more, visit <a href="/c-programming/c-structures" title="C structures">C structures</a>.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="typedef"><span id="typedef"></span>typedef</h3>
+</section>
+<section id="typedef" class="level3">
+<h3><span id="typedef"></span>typedef</h3>
 <p>The typedef keyword is used to explicitly associate a type with an identifier.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">typedef</span> <span class="dt">float</span> kg;</a>
 <a class="sourceLine" id="cb24-2" title="2">kg bear, tiger;</a></code></pre></div>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="union"><span id="union"></span>union</h3>
+</section>
+<section id="union" class="level3">
+<h3><span id="union"></span>union</h3>
 <p>A Union is used for grouping different types of variable under a single name.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">union</span> student </a>
 <a class="sourceLine" id="cb25-2" title="2">{</a>
@@ -398,9 +402,9 @@ int main()
 <a class="sourceLine" id="cb25-6" title="6">}</a></code></pre></div>
 <p>To learn more, visit [C unions](/c-programming/c-unions “C unions”.html).</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="void"><span id="void"></span>void</h3>
+</section>
+<section id="void" class="level3">
+<h3><span id="void"></span>void</h3>
 <p>The void keyword indicates that a function doesn’t return any value.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb26-1" title="1"><span class="dt">void</span> testFunction(<span class="dt">int</span> a)</a>
 <a class="sourceLine" id="cb26-2" title="2">{</a>
@@ -408,17 +412,20 @@ int main()
 <a class="sourceLine" id="cb26-4" title="4">}</a></code></pre></div>
 <p>Here, function <code>testFunction( )</code> cannot return a value because the return type is void.</p>
 <hr />
-</div>
-<div class="h3-section">
-<h3 id="volatile"><span id="volatile"></span>volatile</h3>
+</section>
+<section id="volatile" class="level3">
+<h3><span id="volatile"></span>volatile</h3>
 <p>The volatile keyword is used for creating volatile objects. A volatile object can be modified in an unspecified way by the hardware.</p>
 <pre><code>const volatile number</code></pre>
 <p>Here, number is a volatile object.</p>
 <p>Since, number is a constant variable, the program cannot change it. However, hardware can change it since it is a volatile object.</p>
 <hr />
+</section>
+</section>
+</section>
+<section id="end" class="level2">
+<h2>End</h2>
 <p>Donloaded from : https://www.programiz.com/c-programming/list-all-keywords-c-language</p>
-</div>
-</div>
-<p>:::</p>
+</section>
 </body>
 </html>

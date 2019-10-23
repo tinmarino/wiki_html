@@ -15,7 +15,8 @@
 </head>
 <body>
 <p><code>convert</code></p>
-<h1 id="stuff">Stuff</h1>
+<section id="stuff" class="level1">
+<h1>Stuff</h1>
 <pre><code>-resize 100x40
 -crop 40x30+10+10   # (width)x(height)+(x)+y
 -crop 40x30-10-10   # (width)x(height)+(x)+y
@@ -25,9 +26,14 @@
 -transverse         # flip horizontal + rotate 270deg
 -trim               # trim image edges
 -rotate 90</code></pre>
-<h1 id="resize-to-fit">Resize to fit</h1>
+</section>
+<section id="resize-to-fit" class="level1">
+<h1>Resize to fit</h1>
 <p><code>convert input.jpg -resize 80x80^ -gravity center -extent 80x80 icon.png</code></p>
-<h1 id="convert-all-images-to-another-format">Convert all images to another format</h1>
+</section>
+<section id="convert-all-images-to-another-format" class="level1">
+<h1>Convert all images to another format</h1>
 <p><code>mogrify -format jpg -quality 85 *.png</code></p>
+</section>
 </body>
 </html>

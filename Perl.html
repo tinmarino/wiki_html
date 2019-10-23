@@ -20,7 +20,8 @@
 <li><a href="Perl-Programming-Note.html">Perl Programming Note</a></li>
 <li><a href="Perl-Japh.html">Japh</a> : Just Another Perl Hacker</li>
 </ul>
-<h1 id="old">Old</h1>
+<section id="old" class="level1">
+<h1>Old</h1>
 <ul>
 <li><a href="Perl-Structure.html">If &amp; For &amp; Sub = Structures</a></li>
 <li><a href="Perl-Array.html">List &amp; Hash = Arrays</a></li>
@@ -30,7 +31,9 @@
 <li><a href="Perl-One_Liners_old.html">Perl One_Liners_old</a></li>
 <li><a href="Perl-Snippet.html">Perl Snippet</a></li>
 </ul>
-<h1 id="tips">Tips</h1>
+</section>
+<section id="tips" class="level1">
+<h1>Tips</h1>
 <ul>
 <li>use Number::Format ‘format_number’</li>
 <li>glob</li>
@@ -94,10 +97,14 @@ Then Return.<br />
 The Ctrl-V prevents the shell interpreting the next character (newline) literally. * toto</p>
 <p>Match brace, bracket or parenthesis * Use Text::Balanced * <code>my $re; $re = qr/ \{ (?: [^{}]* | (??{$re}) )* \} /x;     my @array = $str =~ /$re/xg;</code></p>
 <p>Get environment variables * <code>$userName =  $ENV{'LOGNAME'};</code> * print “Hello, $userName”;</p>
-<h1 id="installing-modules">Installing modules</h1>
+</section>
+<section id="installing-modules" class="level1">
+<h1>Installing modules</h1>
 <p>tar zxf Digest-SHA1-2.13.tar.gz cd Digest-SHA1-2.13 perl Makefile.PL make make test make install</p>
 <p>tar zxf … cd … perl Build.PL ./Build ./Build test ./Build install</p>
-<h1 id="command-line">Command line</h1>
+</section>
+<section id="command-line" class="level1">
+<h1>Command line</h1>
 <p>Interactive shell * perl -de1 * rlwrap perl -d -e 1 * perlconsole (get history) * see psh * reply (the best because it uses readline)</p>
 <p>Change file content * perl -i.bak -p -e ‘s/old/new/g;’ *.config</p>
 <table>
@@ -188,7 +195,9 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </table>
 <p>The perl command is in apostrophes, and escaping those is hard work… So if your regex happens to contain apostrophes, first place it in an env variable then refer to it by name :</p>
 <pre><code>env mypattern=&quot;&#39;\w+&quot; perl -0777 -ne &#39;while(m/$ENV{mypattern}/g){print &quot;$&amp;\n&quot;;}&#39; yourfile</code></pre>
-<h1 id="packages">Packages</h1>
+</section>
+<section id="packages" class="level1">
+<h1>Packages</h1>
 <p>cpan install CPAN cpan reload cpan</p>
 <table>
 <tbody>
@@ -210,7 +219,9 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </tr>
 </tbody>
 </table>
-<h1 id="regexp">Regexp</h1>
+</section>
+<section id="regexp" class="level1">
+<h1>Regexp</h1>
 <table>
 <thead>
 <tr class="header">
@@ -271,9 +282,12 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </tr>
 </tbody>
 </table>
-<h1 id="links-maybe-to-parse-and-add">Links (maybe to parse and add)</h1>
+</section>
+<section id="links-maybe-to-parse-and-add" class="level1">
+<h1>Links (maybe to parse and add)</h1>
 <ul>
 <li>Readen from France/Anger http://www.info.univ-angers.fr/~gh/tuteurs/tutperl.htm#dataty</li>
 </ul>
+</section>
 </body>
 </html>

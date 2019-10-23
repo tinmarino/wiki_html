@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<h1 id="assembly-and-retro-engineering">Assembly and retro engineering</h1>
+<section id="assembly-and-retro-engineering" class="level1">
+<h1>Assembly and retro engineering</h1>
 <ul>
 <li>fs:30 -&gt; PEB</li>
 <li><p>fs:00 -&gt; TIB</p></li>
@@ -27,7 +28,9 @@
 <li>Indexed</li>
 </ul></li>
 </ul>
-<h1 id="optimisation-gcc">Optimisation (gcc)</h1>
+</section>
+<section id="optimisation-gcc" class="level1">
+<h1>Optimisation (gcc)</h1>
 <ul>
 <li>-O0 “no optimization”</li>
 <li>-O1 Somewhere between -O0 and -O2.</li>
@@ -38,12 +41,16 @@
 <li>-Oz Size super small</li>
 <li>-finline-functions</li>
 </ul>
-<h1 id="memory">Memory</h1>
+</section>
+<section id="memory" class="level1">
+<h1>Memory</h1>
 <ul>
 <li>Les pages sont marquées “kernel” ou “user” au niveau des PTE</li>
 <li><code>SMEP</code> != <code>NX</code> : SMEP is for userland (ring 0 execution prevention) and NX is to prevent kernel from executing data</li>
 </ul>
-<h1 id="calling-conventions-x64">Calling conventions (x64)</h1>
+</section>
+<section id="calling-conventions-x64" class="level1">
+<h1>Calling conventions (x64)</h1>
 <ul>
 <li>Application Binary Interface : Calling convention, Name mangling and type representation</li>
 </ul>
@@ -89,7 +96,9 @@
 </tr>
 </tbody>
 </table>
-<h1 id="famous-instructions-x86">Famous instructions (x86)</h1>
+</section>
+<section id="famous-instructions-x86" class="level1">
+<h1>Famous instructions (x86)</h1>
 <ul>
 <li>Lea relative ro rip are only valids in 64 bits</li>
 </ul>
@@ -171,5 +180,6 @@ JA | JB | Unsigned |</div>
 <li>INVLPG # Invalidate TLB Entry</li>
 <li><p>LFS # Load far pointer</p></li>
 </ul>
+</section>
 </body>
 </html>

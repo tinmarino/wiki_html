@@ -36,43 +36,46 @@ pre.numberSource a.sourceLine::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
+    background-color: #232629;
+    color: #7a7c7d;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  { color: #cfcfc2; background-color: #232629; }
 @media screen {
 a.sourceLine::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
@@ -80,9 +83,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header>
 <h1 class="title">Expressions rationnelles - JavaScript | MDN</h1>
 </header>
-<h1 id="expressions-rationnelles">Expressions rationnelles</h1>
+<section id="expressions-rationnelles" class="level1">
+<h1>Expressions rationnelles</h1>
 <p>Les expressions rationnelles sont des motifs utilisés pour correspondre à certaines combinaisons de caractères au sein de chaînes de caractères. En JavaScript, les expressions rationnelles sont également des objets. Ces motifs sont utilisés avec les méthodes <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp/exec" title="La méthode exec(.html) exécute la recherche d&#39;une correspondance sur une chaîne de caractères donnée. Elle renvoie un tableau contenant les résultats ou null."><code>exec</code></a> et <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp/test" title="La méthode test(.html) vérifie s&#39;il y a une correspondance entre un texte et une expression rationnelle. Elle retourne true en cas de succès et false dans le cas contraire."><code>test</code></a> de [<code>RegExp</code>](/fr/docs/Web/JavaScript/Reference/Objets_globaux/RegExp “Le constructeur RegExp crée un objet expression rationnelle pour la reconnaissance d’un modèle dans un texte.”.html), et avec les méthodes <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/match" title="La méthode match(.html) permet d&#39;obtenir le tableau des correspondances entre la chaîne courante et une expression rationnelle."><code>match</code></a>, <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/replace" title="La méthode replace(.html) renvoie une nouvelle chaîne de caractères dans laquelle tout ou partie des correspondances à un modèle sont remplacées par un remplacement. Le modèle utilisé peut être une RegExp et le remplacement peut être une chaîne ou une fonction à appeler pour chaque correspondance."><code>replace</code></a>, <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/search" title="La méthode search(.html) éxecute une recherche dans une chaine de caractères grâce à une expression rationnelle appliquée sur la chaîne courante."><code>search</code></a> et <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/split" title="La méthode split(.html) permet de diviser une chaîne de caractères à partir d&#39;un séparateur pour fournir un tableau de sous-chaînes."><code>split</code></a> de [<code>String</code>](/fr/docs/Web/JavaScript/Reference/Objets_globaux/String “L’objet global String est un constructeur de chaînes de caractères.”.html). Ce chapitre explique comment utiliser les expressions rationnelles en JavaScript (aussi appelées expressions régulières ou « <em>RegExp</em> »).</p>
-<h2 id="Créer_une_expression_rationnelle">Créer une expression rationnelle</h2>
+<section id="Créer_une_expression_rationnelle" class="level2">
+<h2>Créer une expression rationnelle</h2>
 <p>Il est possible de construire une expression rationnelle de deux façons :</p>
 <ul>
 <li><p>Utiliser un littéral d’expression régulière, qui correspond à un motif contenu entre deux barres obliques, par exemple :</p>
@@ -92,15 +97,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> re <span class="op">=</span> <span class="kw">new</span> <span class="at">RegExp</span>(<span class="st">&quot;ab+c&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>Avec cette méthode, l’expression rationnelle est compilée lors de l’exécution. On utilisera cette méthode lorsque le motif utilisé est variable ou provient d’une autre source (par exemple une interaction utilisateur).</p></li>
 </ul>
-<h2 id="Écrire_une_expression_rationnelle">Écrire une expression rationnelle</h2>
+</section>
+<section id="Écrire_une_expression_rationnelle" class="level2">
+<h2>Écrire une expression rationnelle</h2>
 <p>Le motif d’une expression rationnelle est composé de caractères simples (comme <code>/abc/</code>), ou de caractères simples et spéciaux, comme <code>/ab*c/</code> ou <code>/Chapitre (\d+)\.\d*/</code>. Le dernier exemple utilise des parenthèses qui permettent d’avoir une « mémoire ». La correspondance avec le motif contenu entre parenthèses pourra être utilisée par la suite. Ceci est décrit avec <a href="#parentheses">ce paragraphe</a>.</p>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="Utiliser_des_motifs_simples">Utiliser des motifs simples</h3>
+<section id="Utiliser_des_motifs_simples" class="level3">
+<h3>Utiliser des motifs simples</h3>
 <p>Les motifs simples sont construits à partir de caractères pour lesquels on souhaite avoir une correspondance directe. Le motif <code>/des/</code> correspond lorsqu’on observe exactement les caractères ‘des’ ensemble et dans cet ordre précis. On pourrait utiliser ce motif et détecter une correspondance dans les chaînes suivantes : “J’ai vu des licornes ?” et “Sa description de licorne était superbe” car la chaîne de caractères ‘des’ y est présente (dans le mot description pour le second exemple). Il n’y aura pas de correspondance avec la chaîne de caractères “Toc toc” car ‘des’ n’est pas présente.</p>
-</div>
-<div class="h3-section">
-<h3 id="Utiliser_des_caractères_spéciaux">Utiliser des caractères spéciaux</h3>
+</section>
+<section id="Utiliser_des_caractères_spéciaux" class="level3">
+<h3>Utiliser des caractères spéciaux</h3>
 <p>Lorsque le motif à trouver est plus complexe qu’une simple égalité (trouver tous les B, les blancs…), le motif devra contenir des caractères spéciaux. Ainsi, le motif <code>/ab*c/</code> correspond à toutes les combinaisons de caractères qui possèdent un seul ‘a’ suivi de zéro ou plusieurs ‘b’ (l’astérisque utilisée ici signifie que l’élément qui la précède doit être présent zéro ou plusieurs fois) qui sont immédiatement suivis d’un ‘c’. Par exemple, la chaîne de caractère “cbbabbbbcdebc” correspond au motif avec la chaîne de caractères ‘abbbbc’.</p>
 <p>La tableau qui suit fournit une liste complète des caractères spéciaux pouvant être utilisés dans les expressions régulières ainsi que leur signification.</p>
 <table>
@@ -331,14 +337,17 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre></div>
 <p>Le marqueur <code>g</code> situé en fin d’expression permet d’effectuer une recherche globale, qui parcoure toute la chaîne et renvoie l’ensemble des correspondances trouvées (voir <a href="#recherches_flag">Utiliser les marqueurs</a> ci-après).</p>
 <p><strong>Note :</strong> Voir la page sur la méthode <code>String.replace</code> pour plus d’informations.</p>
-</div>
-<div class="h3-section">
-<h3 id="Utiliser_les_parenthèses"><span id="parentheses">Utiliser les parenthèses</span></h3>
+</section>
+<section id="Utiliser_les_parenthèses" class="level3">
+<h3><span id="parentheses">Utiliser les parenthèses</span></h3>
 <p>Les parenthèses encadrant une partie du motif de l’expression régulière peuvent être utilisées pour garder en mémoire les correspondances. Cela pourra être utile pour réutiliser la correspondance trouvée.</p>
 <p>Ainsi, le motif <code>/Chapitre (\d+)\.\d*/</code> utilise des caractères échappés et spéciaux et indique une partie du motif à garder en mémoire. Ce motif correspond aux caractères ‘Chapitre’ suivi par un ou plusieurs caractères numériques (<code>\d</code> correspond à un chiffre et <code>+</code> indiquant que une série de 1 ou plusieurs chiffres), suivis par un point (qu’il est nécessaire d’échapper car c’est un caractère spécial, on utilise donc ‘\’ pour indiquer qu’on souhaite reconnaître le caractère ‘.’), suivi par 0 ou plusieurs chiffres (<code>\d</code> correspondant à un chiffre et l’astérisque indiquant que le caractère est présent 0 ou plusieurs fois). Les parenthèses sont utilisées pour garder en mémoire les premiers chiffres correspondant.</p>
 <p>Ce motif est trouvé dans “Ouvrir le Chapitre 4.3 au paragraphe 6” et le chiffre ‘4’ est gardé en mémoire. Le motif n’est pas trouvé dans  “Chapitre 3 et 4”, car la chaîne de caractères ne comporte pas de point après le ‘3’.</p>
 <p>Pour qu’une partie de la chaîne de caractère corresponde mais que la correspondance ne soit pas gardée en mémoire, on pourra utiliser <code>?:</code>. Ainsi, <code>(?:\d+)</code> correspondra pour une séquence de chiffres (1 ou plusieurs chiffres) mais on ne gardera pas en mémoire les caractères correspondants.</p>
-<h2 id="Utiliser_les_expressions_rationnelles">Utiliser les expressions rationnelles</h2>
+</section>
+</section>
+<section id="Utiliser_les_expressions_rationnelles" class="level2">
+<h2>Utiliser les expressions rationnelles</h2>
 <p>Les expresssions régulières sont utilisées avec les méthodes <code>test``</code>et<code>exec</code> de l’objet<code>RegExp</code> et avec les méthodes <code>match</code>, <code>replace</code>, <code>search</code>, et <code>split</code> de l’objet <code>String</code>. Ces méthodes sont expliquées en détail dans la <a href="/fr/docs/Web/JavaScript/Reference">Référence JavaScript</a>.</p>
 <table>
 <caption>Méthodes utilisant les expressions régulières</caption>
@@ -398,9 +407,8 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb8-3" title="3"></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="co">// &quot;La valeur de lastIndex est 0&quot;</span></a></code></pre></div>
 <p>Les occurences de <code>/d(b+)d/g</code> dans les deux instructions sont des objets différents. Leurs propriétés <code>lastIndex</code> respectives ont donc des valeurs différentes. Quand il est nécessaire d’accéder aux propriétés d’un objet décrivant une expression rationnelle, il faudra d’abord l’affecter à une variable.</p>
-</div>
-<div class="h3-section">
-<h3 id="Utiliser_les_correspondances_de_groupes_avec_les_parenthèses">Utiliser les correspondances de groupes avec les parenthèses</h3>
+<section id="Utiliser_les_correspondances_de_groupes_avec_les_parenthèses" class="level3">
+<h3>Utiliser les correspondances de groupes avec les parenthèses</h3>
 <p>Les parenthèses, utilisées dans un motif d’expression régulière, permettent de garder en mémoire un groupe (ou fragment) d’une correspondance. Ainsi, <code>/a(b)c/</code> correspond aux caractères ‘abc’ et garde ‘b’ en mémoire. Pour récupérer ces fragments mémorisés, on peut utiliser les éléments du tableau <code>array</code> <code>[1]</code>, …, <code>[n]</code>.</p>
 <p>Le nombre de fragments qu’il est possible de garder entre parenthèses n’est pas limité. Le tableau renvoyé contiendra tout ce qui aura été trouvé. Les exemples qui suivent montrent comment utiliser cette syntaxe.</p>
 <p>Le script qui suit utilise la méthode <a href="/fr/docs/Web/JavaScript/Reference/Objets_globaux/String/replace" title="La méthode replace(.html) renvoie une nouvelle chaîne de caractères dans laquelle tout ou partie des correspondances à un modèle sont remplacées par un remplacement. Le modèle utilisé peut être une RegExp et le remplacement peut être une chaîne ou une fonction à appeler pour chaque correspondance."><code>replace()</code></a> pour échanger les mots d’une chaîne de caractères. Pour remplacer le texte, le script utilise <code>$1</code> et <code>$2</code> qui correspondent au premier et deuxième groupe correspondant.</p>
@@ -409,9 +417,9 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb9-3" title="3"><span class="kw">var</span> newstr <span class="op">=</span> <span class="va">str</span>.<span class="at">replace</span>(re<span class="op">,</span> <span class="st">&quot;$2, $1&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="va">console</span>.<span class="at">log</span>(newstr)<span class="op">;</span></a></code></pre></div>
 <p>Cela affichera “toto, Titi”.</p>
-</div>
-<div class="h3-section">
-<h3 id="effectuer-des-recherches-avancées-en-utilisant-les-marqueurs-flags-effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_flags"><span id="recherches_flag">Effectuer des recherches avancées en utilisant les marqueurs (<em>flags</em>)</span> {#Effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_(flags)}</h3>
+</section>
+<section id="effectuer-des-recherches-avancées-en-utilisant-les-marqueurs-flags-effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_flags" class="level3">
+<h3><span id="recherches_flag">Effectuer des recherches avancées en utilisant les marqueurs (<em>flags</em>)</span> {#Effectuer_des_recherches_avancées_en_utilisant_les_marqueurs_(flags)}</h3>
 <p>Les expressions rationnelles peuvent être utilisées avec cinq marqueurs optionnels permettant des recherches globales et/ou ne respectant pas la casse. Ces marqueurs peuvent être utilisés séparement ou ensemble, quel que soit l’ordre. Ils font partie de l’expression régulière.</p>
 <table>
 <caption>Drapeaux utilisés avec les expressions régulières.</caption>
@@ -463,11 +471,13 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <p>pour obtenir le même résultat.</p>
 <p>Le comportement du marqueur <code>'g'</code> est différent selon qu’il est utilisé avec <code>exec()</code> ou avec <code>match()</code>. Pour <code>match()</code>, c’est la chaîne de caractères qui invoque la méthode et l’expression rationnelle est alors un argument. Pour <code>exec()</code>, c’est l’expression rationnelle qui invoque la méthode et c’est la chaîne de caractères qui est passée en argument. Dans l’appel à <code>exec()</code>, le marqueur <code>'g'</code> permet d’avoir une progression itérative.</p>
 <p>Le marqueur <code>m</code> pourra être utilisé pour traiter une chaîne de caractères de plusieurs lignes comme plusieurs lignes distinctes. Si ce marqueur est utilisé, les caractères spéciaux <code>^</code> et <code>$</code> correspondront au début ou à la fin de n’importe quelle ligne appartenant à la chaîne de caractères au lieu de correspondre simplement au début ou à la fin de la chaîne.</p>
-<h2 id="Exemples">Exemples</h2>
+</section>
+</section>
+<section id="Exemples" class="level2">
+<h2>Exemples</h2>
 <p>Les exemples qui suivent utilisent les expressions régulières dans différents cas.</p>
-</div>
-<div class="h3-section">
-<h3 id="changer-lordre-dune-saisie-changer_lordre_dune_saisie">Changer l’ordre d’une saisie {#Changer_l’ordre_d’une_saisie}</h3>
+<section id="changer-lordre-dune-saisie-changer_lordre_dune_saisie" class="level3">
+<h3>Changer l’ordre d’une saisie {#Changer_l’ordre_d’une_saisie}</h3>
 <p>L’exemple qui suit utilise les expressions régulières et <code>string.split()</code> et <code>string.replace()</code>. Le script nettoie la chaîne de caractères saisie qui contient des noms (prénom puis nom) séparés par des blancs, tabulations et points-virgules. Enfin il inverse les noms et prénoms puis trie la liste.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode brush: js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="co">// La chaîne des noms contient plusieurs blancs et tabulations,</span></a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="co">// il peut y avoir plusieurs espaces entre le nom et le prénom.</span></a>
@@ -528,9 +538,9 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb15-57" title="57"><span class="va">output</span>.<span class="at">push</span>(<span class="st">&quot;---------- Fin&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb15-58" title="58"></a>
 <a class="sourceLine" id="cb15-59" title="59"><span class="va">console</span>.<span class="at">log</span>(<span class="va">output</span>.<span class="at">join</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))<span class="op">;</span></a></code></pre></div>
-</div>
-<div class="h3-section">
-<h3 id="Utiliser_les_caractères_spéciaux_pour_vérifier_la_saisie">Utiliser les caractères spéciaux pour vérifier la saisie</h3>
+</section>
+<section id="Utiliser_les_caractères_spéciaux_pour_vérifier_la_saisie" class="level3">
+<h3>Utiliser les caractères spéciaux pour vérifier la saisie</h3>
 <p>Dans l’exemple suivant, on s’attend à ce que l’utilisateur saisissent un numéro de téléphone. Quand l’utilisateur appuie sur le bouton “Vérifier”, le script vérifie la validité du numéro. Si le numéro est valide (il correspond à la séquence de caractères fournie par l’expression régulière), le script affiche un message remerciant l’utilisateur et confirmant le numéro. S’il est invalide, le script informe l’utilisateur et lui signifie que les informations saisies ne sont pas valides.</p>
 <p>Dans les parenthèses sans mémoire <code>(?:</code> , l’expression régulière cherche les deux premiers chiffres ou l’indicatif du pays suivi d’un blanc et du premier chiffre, ce qui correspond à</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode brush: html"><code class="sourceCode html"><a class="sourceLine" id="cb16-1" title="1">\d{2}|\+\d{2}[ ]\d</a></code></pre></div>
@@ -566,8 +576,8 @@ Le motif <code>[a-d]</code>,  aura les mêmes correspondances que <code>[abcd]<
 <a class="sourceLine" id="cb19-22" title="22">    <span class="kw">&lt;/form&gt;</span>  </a>
 <a class="sourceLine" id="cb19-23" title="23">  <span class="kw">&lt;/body&gt;</span>  </a>
 <a class="sourceLine" id="cb19-24" title="24"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
-</div>
-</div>
-<p>:::</p>
+</section>
+</section>
+</section>
 </body>
 </html>

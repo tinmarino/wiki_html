@@ -17,35 +17,37 @@
 <header>
 <h1 class="title">Awk</h1>
 </header>
-<h1 id="tips">Tips</h1>
+<section id="tips" class="level1">
+<h1>Tips</h1>
 <ul>
 <li><p>Print part of each line</p>
 <p>awk ‘{print substr($0, 2, 6)’} file.txt</p></li>
 </ul>
-<h1 id="usage">USAGE</h1>
+</section>
+<section id="usage" class="level1">
+<h1>USAGE</h1>
 <p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ] ‘program’ [file1 file2…]</p>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="structure-of-an-awk-program">Structure of an awk program</h3>
-<pre><code>:::::::::
-# comments
+<section id="structure-of-an-awk-program" class="level3">
+<h3>Structure of an awk program</h3>
+<pre><code># comments
 pattern { action }  A sequence of pattern-action statements
 pattern { action }</code></pre>
 <pre><code>For each file,
    For each input line,
       For each pattern,
          If pattern matches input line, do the action.</code></pre>
-<div class="h3-section">
-
-</div>
-<h3 id="pattern">“pattern”</h3>
+</section>
+<section id="pattern" class="level3">
+<h3>“pattern”</h3>
 <p>BEGIN :executes “action” before starting to view the input file <br> END :executes “action” after ending to view the input file <br> Other :regular, numeric or string expression or combination <br></p>
-<div class="h3-section">
-
-</div>
-<h3 id="action-is-executable-code">“action” is executable code</h3>
+</section>
+<section id="action-is-executable-code" class="level3">
+<h3>“action” is executable code</h3>
 <p>if (expression) statement1 else statement2 <br> while (expression) statement <br> for (expr1;expr2;expr3) statement <br> do statement while (expression) <br> break / continue :immediately leave / start next iteration of innermost enclosing loop <br> exit / exit expression : go immediately to the END action; if within the END action, exit program <br></p>
-<h1 id="built-in-variables">BUILT-IN VARIABLES</h1>
+</section>
+</section>
+<section id="built-in-variables" class="level1">
+<h1>BUILT-IN VARIABLES</h1>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -108,7 +110,9 @@ pattern { action }</code></pre>
 </tr>
 </tbody>
 </table>
-<h1 id="built-in-functions">BUILT-IN FUNCTIONS</h1>
+</section>
+<section id="built-in-functions" class="level1">
+<h1>BUILT-IN FUNCTIONS</h1>
 <p>r: regex ; s,t: strings ; n,p: integers</p>
 <table>
 <tbody>
@@ -230,7 +234,9 @@ pattern { action }</code></pre>
 </tr>
 </tbody>
 </table>
-<h1 id="formatted-output">FORMATTED OUTPUT</h1>
+</section>
+<section id="formatted-output" class="level1">
+<h1>FORMATTED OUTPUT</h1>
 <p>{ printf (“FORMAT”,value1,value2,value3,…) }</p>
 <table>
 <tbody>
@@ -252,7 +258,9 @@ pattern { action }</code></pre>
 </tr>
 </tbody>
 </table>
-<h1 id="operators">OPERATORS</h1>
+</section>
+<section id="operators" class="level1">
+<h1>OPERATORS</h1>
 <table>
 <tbody>
 <tr class="odd">
@@ -269,7 +277,9 @@ pattern { action }</code></pre>
 </tr>
 </tbody>
 </table>
-<h1 id="example">EXAMPLE</h1>
+</section>
+<section id="example" class="level1">
+<h1>EXAMPLE</h1>
 <pre><code>{ print NR, $0 }        Precede each line by line #
 { $1 = NR; print }      Replace first field by line #
 { $2 = log($2); $3 =”” ; print }
@@ -307,7 +317,6 @@ print “Address: “,$2 }
                         Multi-line records. Leading and trailing newlines are
                         ignored</code></pre>
 <p>from: http://www.cheat-sheets.org/saved-copy/awk_quickref.pdf</p>
-</div>
-</div>
+</section>
 </body>
 </html>

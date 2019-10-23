@@ -14,9 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="all-lines-stuff">All lines Stuff</h3>
+<section id="all-lines-stuff" class="level3">
+<h3>All lines Stuff</h3>
 <p>Double-space a file</p>
 <pre><code>perl -pe &#39;$\ = &quot;\n&quot;&#39; file
 perl -pe &#39;$_ .= &quot;\n&quot;&#39; file
@@ -41,9 +40,9 @@ perl -00pe0</code></pre>
 <pre><code>perl -00 -pe &#39;$_ .= &quot;\n&quot;x2&#39;</code></pre>
 <p>Insert a space between all characters</p>
 <pre><code>perl -lpe &#39;s// /g&#39;</code></pre>
-</div>
-<div class="h3-section">
-<h3 id="numbering">Numbering</h3>
+</section>
+<section id="numbering" class="level3">
+<h3>Numbering</h3>
 <p>Number all lines in a file</p>
 <pre><code>perl -pe &#39;$_ = &quot;$. $_&quot;&#39;
 perl -ne &#39;print &quot;$. $_&quot;&#39;
@@ -87,9 +86,9 @@ perl -le &#39;print ~~grep{ /^$/ } &lt;&gt;&#39;</code></pre>
 <pre><code>perl -pe &#39;s/(\w+)/++$i.&quot;.$1&quot;/ge&#39;</code></pre>
 <p>Number words on each individual line</p>
 <pre><code>perl -pe &#39;$i=0; s/(\w+)/++$i.&quot;.$1&quot;/ge&#39;</code></pre>
-</div>
-<div class="h3-section">
-<h3 id="calculations">Calculations</h3>
+</section>
+<section id="calculations" class="level3">
+<h3>Calculations</h3>
 <p>Check if a number is a prime</p>
 <pre><code>perl -lne &#39;(1x$_) !~ /^1?$|^(11+?)\1+$/ &amp;&amp; print &quot;$_ is prime&quot;&#39;</code></pre>
 <p>Print the sum of all fields on each line</p>
@@ -147,9 +146,9 @@ $ip = 2130706433;
 $, = &quot;.&quot;;
 print map { (($ip&gt;&gt;8*($_))&amp;0xFF) } reverse 0..3
 &#39;</code></pre>
-</div>
-<div class="h3-section">
-<h3 id="array-and-string">Array and string</h3>
+</section>
+<section id="array-and-string" class="level3">
+<h3>Array and string</h3>
 <p>Generate and print the alphabet</p>
 <pre><code>perl -E &#39;say a..z&#39;
 perl -le &#39;$, = &quot;,&quot;; print (&quot;a&quot;..&quot;z&quot;)&#39;
@@ -189,9 +188,9 @@ pl -E &#39;$, = &quot;,&quot;; say grep { $_ % 2 == 1 } 1..100&#39;</code></pre>
 perl -le &#39;@array = (&quot;a&quot;..&quot;z&quot;); print $#array + 1&#39;
 perl -le &#39;print scalar @ARGV&#39; *.txt
 perl -le &#39;print scalar (@ARGV=&lt;*.txt&gt;)&#39;</code></pre>
-</div>
-<div class="h3-section">
-<h3 id="text-convertion">Text convertion</h3>
+</section>
+<section id="text-convertion" class="level3">
+<h3>Text convertion</h3>
 <p>ROT13 a string</p>
 <pre><code>perl -le &#39;$string = &quot;bananas&quot;; $string =~ y/A-Za-z/N-ZA-Mn-za-m/; print $string&#39;
 perl -pi.bak -e &#39;y/A-Za-z/N-ZA-Mn-za-m/&#39; oranges.txt</code></pre>
@@ -240,9 +239,9 @@ perl -lpe &#39;$_ = reverse&#39;</code></pre>
 <p>Print columns in reverse order</p>
 <pre><code>perl -alne &#39;print &quot;@{[reverse @F]}&quot;&#39;
 perl -F: -alne &#39;$&quot; = &quot;:&quot;; print &quot;@{[reverse @F]}&quot;&#39;</code></pre>
-</div>
-<div class="h3-section">
-<h3 id="selectively-printing-and-deleting-lines">Selectively Printing and Deleting Lines</h3>
+</section>
+<section id="selectively-printing-and-deleting-lines" class="level3">
+<h3>Selectively Printing and Deleting Lines</h3>
 <p>The first line of a file (emulate head -1)</p>
 <pre><code>perl -ne &#39;print; exit&#39; file</code></pre>
 <p>The first 10 lines of a file (emulate head -10)</p>
@@ -296,8 +295,6 @@ perl -ne &#39;$p &amp;&amp; print; $p = /science/&#39;</code></pre>
 <pre><code>perl -ne &#39;print if ++$a{$_} == 2&#39;</code></pre>
 <p>All unique lines</p>
 <pre><code>perl -ne &#39;print unless $a{$_}++&#39;</code></pre>
-</div>
-<div class="h3-section">
 <p>###­Useful Regular Expressions</p>
 <p>Match something that looks like an IP address</p>
 <pre><code>/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/</code></pre>
@@ -323,8 +320,6 @@ perl -MRegexp::Common -ne &#39;print if /$RE{num}{real}/&#39;</code></pre>
 <pre><code>/[ -~]/</code></pre>
 <p>Extract all matches from a regular expression</p>
 <pre><code>my @matches = $text =~ /regex/g;</code></pre>
-</div>
-</div>
-<p>:::</p>
+</section>
 </body>
 </html>

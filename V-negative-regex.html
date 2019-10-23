@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<h1 id="search-for-lines-not-containing-pattern-and-other-helpful-searches" class="page-header__title">Search for lines not containing pattern and other helpful searches</h1>
+<section id="search-for-lines-not-containing-pattern-and-other-helpful-searches" class="level1 page-header__title">
+<h1>Search for lines not containing pattern and other helpful searches</h1>
 <p>It can be useful to specify in a search or a substitution what you do not want to have. Here is how to do that:</p>
 <pre><code>/^\(\(The_Regular_Expression\)\@!.\)*$</code></pre>
 <p>This will find everything but the regular expression you have specified. For example, if we want to find all the lines not containing the word ‘foo’, do:</p>
@@ -62,17 +63,15 @@
 <p>We can also search for something at the end of a file. For example, the last occurrence of ‘VIM’ in a file (this one is tricky):</p>
 <pre><code>/VIM\ze\(\(VIM\)\@!\_.\)*\%$</code></pre>
 <p>It finds the word ‘VIM’ where there is no word ‘VIM’ after it until the end of the file!</p>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="using-thev-commandeditwikisearch_for_lines_not_containing_pattern_and_other_helpful_searchesactioneditsection1-edit-using-thev-command-section.html"><span id="Using_the_:v_command" class="mw-headline">Using the :v command</span><span class="editsection">[<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil" />Edit](/wiki/Search_for_lines_not_containing_pattern_and_other_helpful_searches?action=edit&amp;section=1 “Edit Using the :v command section”.html)</span></h3>
+<section id="using-thev-commandeditwikisearch_for_lines_not_containing_pattern_and_other_helpful_searchesactioneditsection1-edit-using-thev-command-section.html" class="level3">
+<h3><span id="Using_the_:v_command" class="mw-headline">Using the :v command</span><span class="editsection">[<img src="data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D" class="sprite edit-pencil" />Edit](/wiki/Search_for_lines_not_containing_pattern_and_other_helpful_searches?action=edit&amp;section=1 “Edit Using the :v command section”.html)</span></h3>
 <p>The traditional approach to find lines not matching a pattern is using the <a href="http://vimdoc.sourceforge.net/cgi-bin/help?tag=%3Ag.html" class="external text">:v</a> command:</p>
 <pre><code>:v/Warning/p</code></pre>
 <p>A neat trick when working with a large log file where you want to filter out as many irrelevant lines as possible before you get started on your real search is to save the file under a temporary name and delete all non-matching lines there:</p>
 <pre><code>:sav junk.log
 :v/warning/d</code></pre>
 <p>You are now are editing a clone of your original file with all lines not matching “warning” removed and you can edit it at will.</p>
-</div>
-</div>
-<p>:::</p>
+</section>
+</section>
 </body>
 </html>

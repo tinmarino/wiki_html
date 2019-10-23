@@ -18,7 +18,8 @@
 <h1 class="title">Pluggin list: Community matters</h1>
 </header>
 <p>Pluggins are the most important stuff for a true text editor as one person cannot implement all the languages. Even thought most of Vim functionality is enought with small coding. Some big plugins bundle exist but you should known and clone these one by one. (Otherwise how can you use these all) Notice that the order in the TOC is not the same as in the file.</p>
-<h1 id="menu">MENU</h1>
+<section id="menu" class="level1">
+<h1>MENU</h1>
 <table>
 <thead>
 <tr class="header">
@@ -149,99 +150,151 @@
 </tr>
 </tbody>
 </table>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="on-local-machine">On local machine</h3>
+<section id="on-local-machine" class="level3">
+<h3>On local machine</h3>
 <p>git submodule add https://github.com/tpope/vim-fugitive /pack/bundle/start/fugitive :Helptags ALL</p>
-</div>
-<div class="h3-section">
-<h3 id="on-remote-machine">On remote machine</h3>
+</section>
+<section id="on-remote-machine" class="level3">
+<h3>On remote machine</h3>
 <p>git submodule init git submodule update</p>
-</div>
-<h1 id="bundle">BUNDLE</h1>
+</section>
+</section>
+<section id="bundle" class="level1">
+<h1>BUNDLE</h1>
 <p>https://github.com/altercation/vim-colors-solarized</p>
-<h1 id="pathogen">PATHOGEN</h1>
+</section>
+<section id="pathogen" class="level1">
+<h1>PATHOGEN</h1>
 <p>Note: Since vim version 8.0, it is useless since pack/bundle will be automatically added to your runtimepath.</p>
 <p>Is a pluggin manager. It basically extends your runtimepath dynamically. You just have to git clone the desired pluggin in ~/.vim/bundle/ for it to be loaded as if it was in the root folder (~/.vim)</p>
-<h1 id="fugitive">FUGITIVE</h1>
+</section>
+<section id="fugitive" class="level1">
+<h1>FUGITIVE</h1>
 <p>Get git functionality in current file folder with the <code>:Git</code> command. Very well coded :Gdiff -&gt; Use vimdiff to push in index :Gstatus -&gt; Many map to add or remove</p>
 <p>https://github.com/tpope/vim-fugitive</p>
-<h1 id="ipython">IPYTHON</h1>
+</section>
+<section id="ipython" class="level1">
+<h1>IPYTHON</h1>
 <p>The functionality <code>vim-server</code> and <code>python-zmq</code> (zero-message-query: to install) plus this small plugin, allow you to execute lines of code from here to a remote ipython/jupyter kernel</p>
 <p>https://github.com/ivanov/vim-ipython</p>
-<h1 id="python-mode">PYTHON-MODE</h1>
+</section>
+<section id="python-mode" class="level1">
+<h1>PYTHON-MODE</h1>
 <p>A HUGE collection of python plugins taht are up to date because they are written in python. Thanks to the +python feature of vim that is now embeded with a python interpreter. Pylama # Wraps others Rope # Refractoring PEP8; Pyflakes, Pylint # Code checking</p>
 <pre><code>And much much more.</code></pre>
 <p>NB: Community pluggin as dirty as python</p>
 <p>https://github.com/python-mode/python-mode</p>
-<h1 id="eclim">ECLIM</h1>
+</section>
+<section id="eclim" class="level1">
+<h1>ECLIM</h1>
 <p>Java users: Eclipse (free) is used as a server and vim as a client. So I can get completion, jump to code and error checking.</p>
 <p>http://eclim.org/</p>
-<h1 id="colorscheme-switcher">COLORSCHEME SWITCHER</h1>
+</section>
+<section id="colorscheme-switcher" class="level1">
+<h1>COLORSCHEME SWITCHER</h1>
 <p>Lot of colorschemes and 2 maps to switch: <F8> and <S-F8> May be included in the Main vim disti (at least neovim)</p>
-<h1 id="ctrlp">CTRLP</h1>
+</section>
+<section id="ctrlp" class="level1">
+<h1>CTRLP</h1>
 <p>Fuzzy file browsing with some regexp of the path (type scGam for s.<em>c.</em>G.<em>a.</em>m). Can browse in: 1. Files (above the pwd) 2. Most Recently Updated (MRU) 3. Buffers My settings are:</p>
 <pre class="language-vim"><code>&quot; E like edit and closer to ctrl + &lt;c-p&gt; used to paste
 let g:ctrlp_map = &#39;&lt;c-e&gt;&#39;
 &quot; Mixed to search in MRU, FIles, Buffers
 let g:ctrlp_cmd = &#39;CtrlPMixed&#39;</code></pre>
 <p>https://github.com/kien/ctrlp.vim</p>
-<h1 id="surround">SURROUND</h1>
+</section>
+<section id="surround" class="level1">
+<h1>SURROUND</h1>
 <p>https://github.com/tpope/vim-surround</p>
-<h1 id="solarized">SOLARIZED</h1>
+</section>
+<section id="solarized" class="level1">
+<h1>SOLARIZED</h1>
 <p>Make a noise nothing: I prefer dante colorscheme!</p>
-<h1 id="vimtex">VIMTEX</h1>
+</section>
+<section id="vimtex" class="level1">
+<h1>VIMTEX</h1>
 <p>Help Writting compiling Tex, LaTex files. Huge doc: 2000 lines. Many commands, options the vim way. Continous build mode Works</p>
 <p>https://github.com/lervag/vimtex</p>
-<h1 id="nerdtree">NERDTREE</h1>
+</section>
+<section id="nerdtree" class="level1">
+<h1>NERDTREE</h1>
 <p>Explore the directories. Move … Better than the embeded netrw plugin</p>
 <p>https://github.com/scrooloose/nerdtree</p>
-<h1 id="conque-gdb">CONQUE-GDB</h1>
+</section>
+<section id="conque-gdb" class="level1">
+<h1>CONQUE-GDB</h1>
 <p>Gdb integration thank to embede ConqueTerm. Works fine on Linux at least (on windows idk)</p>
 <p>https://github.com/vim-scripts/Conque-GDB</p>
-<h1 id="ultisnips">ULTISNIPS</h1>
+</section>
+<section id="ultisnips" class="level1">
+<h1>ULTISNIPS</h1>
 <p>Snippets manager. Easy to use. Considered to be the best by web community.</p>
 <p>https://github.com/SirVer/ultisnips</p>
-<h1 id="snippets">SNIPPETS</h1>
+</section>
+<section id="snippets" class="level1">
+<h1>SNIPPETS</h1>
 <p>Snippets database for 2 plugins including |v-plugin#ultisnips|</p>
 <p>https://github.com/honza/vim-snippets</p>
-<h1 id="airline">AIRLINE</h1>
+</section>
+<section id="airline" class="level1">
+<h1>AIRLINE</h1>
 <p>Lean &amp; mean status/tabline for vim that’s light as air.</p>
 <p>https://github.com/vim-airline/vim-airline</p>
-<h1 id="ansiesc">ANSIESC</h1>
+</section>
+<section id="ansiesc" class="level1">
+<h1>ANSIESC</h1>
 <p>Colorise text with Ansi Escaped colors</p>
 <p>https://github.com/powerman/vim-plugin-AnsiEsc</p>
-<h1 id="rainbow-parentheses">RAINBOW PARENTHESES</h1>
+</section>
+<section id="rainbow-parentheses" class="level1">
+<h1>RAINBOW PARENTHESES</h1>
 <p>Colorise parentheses according to imbrication. Give a quick short view of imbrication and maybe bugs</p>
 <p>https://github.com/kien/rainbow_parentheses.vim</p>
-<h1 id="commentary">COMMENTARY</h1>
+</section>
+<section id="commentary" class="level1">
+<h1>COMMENTARY</h1>
 <p>Toggle commenting and uncommenting</p>
 <p>https://github.com/tpope/vim-commentary</p>
-<h1 id="unimpaired">UNIMPAIRED</h1>
+</section>
+<section id="unimpaired" class="level1">
+<h1>UNIMPAIRED</h1>
 <p>A set of man Tpope’s maps I still never used it !</p>
 <p>https://github.com/tpope/vim-unimpaired</p>
-<h1 id="abolish">ABOLISH</h1>
+</section>
+<section id="abolish" class="level1">
+<h1>ABOLISH</h1>
 <p>Abbreviation Substitution Coercion</p>
 <p>https://github.com/tpope/vim-abolish</p>
-<h1 id="repeat">REPEAT</h1>
+</section>
+<section id="repeat" class="level1">
+<h1>REPEAT</h1>
 <p>Repeat the last used map</p>
 <p>https://github.com/tpope/vim-repeat</p>
-<h1 id="camelcase-motion">CAMELCASE MOTION</h1>
+</section>
+<section id="camelcase-motion" class="level1">
+<h1>CAMELCASE MOTION</h1>
 <p>Gives you camel case motions Can be usefull for java</p>
 <p>https://github.com/vim-scripts/camelcasemotion</p>
-<h1 id="delimitmate">DELIMITMATE</h1>
+</section>
+<section id="delimitmate" class="level1">
+<h1>DELIMITMATE</h1>
 <p>Autocomplete the ([{}])</p>
 <p>https://github.com/Raimondi/delimitMate</p>
-<h1 id="matchit">MATCHIT</h1>
+</section>
+<section id="matchit" class="level1">
+<h1>MATCHIT</h1>
 <p>For the |%| to work with language imbrication</p>
 <p>https://github.com/vim-scripts/matchit.zip</p>
-<h1 id="undotree">UNDOTREE</h1>
+</section>
+<section id="undotree" class="level1">
+<h1>UNDOTREE</h1>
 <p>Watch you undo as a tree. Cause it can be complicated to use vim default mapping</p>
 <p>https://github.com/mbbill/undotree</p>
-<h1 id="emacs-commandline">EMACS COMMANDLINE</h1>
+</section>
+<section id="emacs-commandline" class="level1">
+<h1>EMACS COMMANDLINE</h1>
 <p>To get emacs (terminal) shortcuts on vim cmdline Warning: It overwrites the: &lt;<C-R> -&gt; pretty annoying</p>
 <p>https://github.com/houtsnip/vim-emacscommandline</p>
-</div>
-<p>:::</p>
+</section>
 </body>
 </html>

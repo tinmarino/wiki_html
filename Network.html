@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<h1 id="protocol-layers">Protocol layers</h1>
+<section id="protocol-layers" class="level1">
+<h1>Protocol layers</h1>
 <ol type="1">
 <li>Physical : cable</li>
 <li>Link : MAC data</li>
@@ -24,38 +25,41 @@
 <li>Presentation</li>
 <li>Application</li>
 </ol>
-<h1 id="unbound-dns-server">Unbound : DNS server</h1>
-<div class="parent">
-<div class="h2-section">
-<h2 id="unbound-files">Unbound files</h2>
+</section>
+<section id="unbound-dns-server" class="level1">
+<h1>Unbound : DNS server</h1>
+<section id="unbound-files" class="level2">
+<h2>Unbound files</h2>
 <ul>
 <li><code>/etc/hosts</code></li>
 <li><code>/etc/hostname</code></li>
 <li><code>/etc/resolv.conf</code> : fastly write : <code>nameserver 127.0.0.1</code></li>
 <li><code>/etc/network/interfaces</code></li>
 </ul>
-</div>
-<div class="h2-section">
-<h2 id="unbound-test">Unbound test</h2>
+</section>
+<section id="unbound-test" class="level2">
+<h2>Unbound test</h2>
 <ul>
 <li><code>route add default gw 80.81.82.22</code></li>
 <li><code>unbound-checkconf /etc/unbound/unbound.conf</code></li>
 </ul>
-</div>
-<div class="h2-section">
-<h2 id="unbound-dns-cache">Unbound | Dns cache</h2>
+</section>
+<section id="unbound-dns-cache" class="level2">
+<h2>Unbound | Dns cache</h2>
 <ul>
 <li>systemd-resolve –flush-caches</li>
 <li>unbound-control flush_zone google.com</li>
 </ul>
-</div>
-<h1 id="nginx-proxy">Nginx : proxy</h1>
-<div class="h2-section">
-<h2 id="nginx-debug">Nginx debug</h2>
+</section>
+</section>
+<section id="nginx-proxy" class="level1">
+<h1>Nginx : proxy</h1>
+<section id="nginx-debug" class="level2">
+<h2>Nginx debug</h2>
 <ul>
 <li><code>sudo /etc/init.d/apache2 stop</code> if impossible to bind to 443 or 80</li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 </body>
 </html>

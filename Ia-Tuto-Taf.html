@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<h1 id="notes">Notes</h1>
+<section id="notes" class="level1">
+<h1>Notes</h1>
 <ul>
 <li><p>On peut utiliser le convolutionelle pour tout signal spatio-temporelle : où il y a corrélation entre les coordonnées proches.</p></li>
 <li><p>Pour réduire le biais causé par 2 fonctions du mm nom mais pas les mêmes, on peu modifier la loss pour ne pas trop punir si elle se trompe trop (par exemple dans le cas d’un nouveau wrapper).</p></li>
@@ -27,62 +28,71 @@
 <li><p>Conv / Mlp / Lstm (== Rnn) are feed foward NN</p></li>
 <li><p>Optimizer, change le learning rate en dynamique : ADAM, GSD. Y’en a un qui utilise un momentum, après 2, 3 chute, on continue de tomber dans cette direction.</p></li>
 </ul>
-<h1 id="difficultés">Difficultés</h1>
+</section>
+<section id="difficultés" class="level1">
+<h1>Difficultés</h1>
 <ol type="1">
 <li>Classification</li>
 <li>Prédiction : classification continue</li>
 <li>Similarité : distance entre objets</li>
 <li>Génération</li>
 </ol>
-<h1 id="vocabulaire">Vocabulaire</h1>
-<div class="h3-parent">
-<div class="h3-section">
-<h3 id="transfert-learning">Transfert learning</h3>
+</section>
+<section id="vocabulaire" class="level1">
+<h1>Vocabulaire</h1>
+<section id="transfert-learning" class="level3">
+<h3>Transfert learning</h3>
 <p>Utiliser un réseau déjà entrainer pour effectuer une autre tache.</p>
-</div>
-<div class="h3-section">
-<h3 id="early-stopping">Early stopping</h3>
+</section>
+<section id="early-stopping" class="level3">
+<h3>Early stopping</h3>
 <p>Pour lutter contre le sur apprentissage. Sinon augmenter le nombre de données d’apprentissage ou réduire la taille du modèle.</p>
-</div>
-<div class="h3-section">
-<h3 id="règles-expertes">Règles expertes</h3>
+</section>
+<section id="règles-expertes" class="level3">
+<h3>Règles expertes</h3>
 <p>Arbre de décision d’expert</p>
-</div>
-<div class="h3-section">
-<h3 id="pushbutton">PushButton</h3>
+</section>
+<section id="pushbutton" class="level3">
+<h3>PushButton</h3>
 <p>Réseau de neurone automatiquement généré</p>
-</div>
-<div class="h3-section">
-<h3 id="random-forest">Random Forest</h3>
+</section>
+<section id="random-forest" class="level3">
+<h3>Random Forest</h3>
 <p>Choisir aléatoirement un batch (1%) des vecteurs d’entrés. Et ne s’intéresse qu’à un sous ensemble des coordonnées. Il crée ensuite l’arbre de décision minimal qui permet de discriminer au mieux ces vecteurs. C’est comme si il crée des arbres de décision experts en chaque coordonnées puis il prend la majorités des votes. Utilise <code>Scikit learn</code>. L’avantage est qu’on peut remonter à l’origine des décisions facilement. Chaque arbre prend un échantillon différent. A chaque branche de l’arbre, on ne discrimine qu’une coordonnée, genre <code>x0 &lt; 0.3</code></p>
-</div>
-<div class="h3-section">
-<h3 id="k-means">K-means</h3>
-</div>
-<div class="h3-section">
-<h3 id="hot-encoding">Hot encoding</h3>
+</section>
+<section id="k-means" class="level3">
+<h3>K-means</h3>
+</section>
+<section id="hot-encoding" class="level3">
+<h3>Hot encoding</h3>
 <p>C’est pour encoder une valeur de manière discrète. En mettant chaque possibilité comme une dimension de vecteur. Comme l’output de la reconnaissance de caractère.</p>
-</div>
-<div class="h3-section">
-<h3 id="softmax">SoftMax</h3>
+</section>
+<section id="softmax" class="level3">
+<h3>SoftMax</h3>
 <p>Permet de donner une sortie en probabilité dans des catégories discrètes. Pour l’erreur sur la fin, on utilise l’entropie croisée.</p>
-</div>
-<div class="h3-section">
-<h3 id="cross-validation">Cross Validation</h3>
+</section>
+<section id="cross-validation" class="level3">
+<h3>Cross Validation</h3>
 <p>S’entrainer sur 90% et valider sur 10% mais faire 10 fois l’expérience en faisant varier les 10%, pour au final qu’ils aient couvert tout le set. Voir changer la graine de la sélection aléatoire et refaire tout ça. Du genre faire 30 expériences pour un test. Attentions aux papiers qui affichent le meilleur résultat. C’est la moyenne qui compte.</p>
-</div>
-<div class="h3-section">
-<h3 id="matrice-de-confusion">Matrice de confusion</h3>
+</section>
+<section id="matrice-de-confusion" class="level3">
+<h3>Matrice de confusion</h3>
 <p>M(x, y) est le nombre d’élément de catégorie x classés y par le système. A partir de cette Matrice, on peut calculer plusieurs métriques différentes. Souvent ces métriques mesures les faux positifs <strong>ou</strong> négatifs suivant telle ou telle dimension (i.e. ici des familles).</p>
-<h4 id="précision">Précision</h4>
+<section id="précision" class="level4">
+<h4>Précision</h4>
 <p>Nombre de bonne classification de chaque classe / nb d’élément classé dans cette classe (inclue les mauvais)</p>
-<h4 id="rappel">Rappel</h4>
+</section>
+<section id="rappel" class="level4">
+<h4>Rappel</h4>
 <p>Nombre de bonne classification de chaque classe / nombre d’élément dans cette classe</p>
-<h4 id="f1-score">F1 score</h4>
+</section>
+<section id="f1-score" class="level4">
+<h4>F1 score</h4>
 <p>Moyenne géométrique Rappel et Précision : <code>2.p.r / (p + r)</code></p>
-<div class="parent">
-<div class="h2-section">
-<h2 id="statistiques">Statistiques</h2>
+</section>
+</section>
+<section id="statistiques" class="level2">
+<h2>Statistiques</h2>
 <ul>
 <li>Regarder le nombre d’objets pour chaque label
 <ul>
@@ -90,9 +100,10 @@
 <li>C’est parfois normal, par exemple pour chercher un evenement rare : une tumeur dans une image médicale. On a des échantillons d’intérêt minoritaire. Bonne chance.</li>
 </ul></li>
 </ul>
-</div>
-</div>
-<h1 id="todo">Todo</h1>
+</section>
+</section>
+<section id="todo" class="level1">
+<h1>Todo</h1>
 <ul>
 <li>Exporter au format numpy (pour faciliter le chargement)</li>
 <li>Numpy sous forme binaire pour mmap rapide</li>
@@ -110,12 +121,13 @@
 <li><p>Préparer un Golden Standard, ce qui est comme un test de non régression pour l’IA.</p></li>
 <li><p>Fuzzy distance (string)</p></li>
 </ul>
-<h1 id="numpy-plt-scikit-learn">Numpy / Plt / Scikit learn</h1>
+</section>
+<section id="numpy-plt-scikit-learn" class="level1">
+<h1>Numpy / Plt / Scikit learn</h1>
 <ul>
 <li>plt.bar(array)</li>
 <li>plt.boxplot(array_x, array_y)</li>
 </ul>
-</div>
-</div>
+</section>
 </body>
 </html>
