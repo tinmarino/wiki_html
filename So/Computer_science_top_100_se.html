@@ -281,7 +281,7 @@ For fully associative, the number of set is 1 =&gt; no index bit =&gt; tag bit =
 <section id="question-2" class="level4">
 <h4>Question</h4>
 <p><code>xor</code> gate, now I need to construct this gate using only 4 <code>nand</code> gate</p>
-<pre class="text"><code>a b out
+<pre class="computer_science"><code>a b out
 0 0 0
 0 1 1
 1 0 1
@@ -303,18 +303,18 @@ the <code>xor = (a and not b) or (not a and b)</code>, which is
 <section id="answer-2-score-11" class="level4">
 <h4>Answer 2 (score 11)</h4>
 <p>From that formula? It can be done. But it’s easier to start with this one: (using a different notation here)</p>
-<pre class="text"><code>a ^ b = ~(a &amp;amp; b) &amp;amp; (a | b)</code></pre>
-<p>Ok, now what? Eventually we should derive <code>~(~(~(a &amp;amp; b) &amp;amp; a) &amp;amp; ~(~(a &amp;amp; b) &amp;amp; b))</code> (which looks like it has 5 NANDs, but just like the circuit diagram it has a sub-expression which is used twice).</p>
-<p>So make something that looks like <code>~(a &amp;amp; b) &amp;amp; a</code> (and the same thing but with a <code>b</code> at the end) and hope that it’ll stick around: (<code>and</code> distributes over <code>or</code>)</p>
-<pre class="text"><code>(~(a &amp;amp; b) &amp;amp; a) | (~(a &amp;amp; b) &amp;amp; b)</code></pre>
+<pre class="computer_science"><code>a ^ b = ~(a &amp; b) &amp; (a | b)</code></pre>
+<p>Ok, now what? Eventually we should derive <code>~(~(~(a &amp; b) &amp; a) &amp; ~(~(a &amp; b) &amp; b))</code> (which looks like it has 5 NANDs, but just like the circuit diagram it has a sub-expression which is used twice).</p>
+<p>So make something that looks like <code>~(a &amp; b) &amp; a</code> (and the same thing but with a <code>b</code> at the end) and hope that it’ll stick around: (<code>and</code> distributes over <code>or</code>)</p>
+<pre class="computer_science"><code>(~(a &amp; b) &amp; a) | (~(a &amp; b) &amp; b)</code></pre>
 <p>Pretty close now, just apply DeMorgan to turn that middle <code>or</code> into an <code>and</code>:</p>
-<pre class="text"><code>~(~(~(a &amp;amp; b) &amp;amp; a) &amp;amp; ~(~(a &amp;amp; b) &amp;amp; b))</code></pre>
+<pre class="computer_science"><code>~(~(~(a &amp; b) &amp; a) &amp; ~(~(a &amp; b) &amp; b))</code></pre>
 <p>And that’s it.</p>
 </section>
 <section id="answer-3-score-8" class="level4">
 <h4>Answer 3 (score 8)</h4>
 <p>I think you are asking for this proof:</p>
-<pre class="text"><code>A^B = (!A)B + A(!B)
+<pre class="computer_science"><code>A^B = (!A)B + A(!B)
     = !!((!A)B) + !!(A(!B))
     = !(!!A + !B) + !(!A + !!B)
     = !(A + !B) + !(!A + B)
@@ -410,7 +410,7 @@ Example
 Algorithm
 </h3>
 <p><code>L[i,j]</code> is the regexp of the language from <span class="math inline">\(q_i\)</span> to <span class="math inline">\(q_j\)</span>. First, we remove all multi-edges:</p>
-<pre class="text"><code>for i = 1 to n:
+<pre class="computer_science"><code>for i = 1 to n:
   for j = 1 to n:
     if i == j then:
       L[i,j] := ε
@@ -420,7 +420,7 @@ Algorithm
       if trans(i, a, j):
         L[i,j] := L[i,j] + a</code></pre>
 <p>Now, the state removal. Suppose we want to remove the state <span class="math inline">\(q_k\)</span>:</p>
-<pre class="text"><code>remove(k):
+<pre class="computer_science"><code>remove(k):
   for i = 1 to n:
     for j = 1 to n:
       L[i,i] += L[i,k] . star(L[k,k]) . L[k,i]
@@ -429,11 +429,11 @@ Algorithm
       L[j,i] += L[j,k] . star(L[k,k]) . L[k,i]</code></pre>
 <p>Note that both with a pencil of paper and with an algorithm you should simplify expressions like <code>star(ε)=ε</code>, <code>e.ε=e</code>, <code>∅+e=e</code>, <code>∅.e=∅</code> (By hand you just don’t write the edge when it’s not <span class="math inline">\(∅\)</span>, or even <span class="math inline">\(ε\)</span> for a self-loop and you ignore when there is no transition between <span class="math inline">\(q_i\)</span> and <span class="math inline">\(q_k\)</span> or <span class="math inline">\(q_j\)</span> and <span class="math inline">\(q_k\)</span>)</p>
 <p>Now, how to use <code>remove(k)</code>? You should not remove final or initial states lightly, otherwise you will miss parts of the language.</p>
-<pre class="text"><code>for i = 1 to n:
+<pre class="computer_science"><code>for i = 1 to n:
   if not(final(i)) and not(initial(i)):
     remove(i)</code></pre>
 <p>If you have only one final state <span class="math inline">\(q_f\)</span> and one initial state <span class="math inline">\(q_s\)</span> then the final expression is:</p>
-<pre class="text"><code>e := star(L[s,s]) . L[s,f] . star(L[f,s] . star(L[s,s]) . L[s,f] + L[f,f])</code></pre>
+<pre class="computer_science"><code>e := star(L[s,s]) . L[s,f] . star(L[f,s] . star(L[s,s]) . L[s,f] + L[f,f])</code></pre>
 <p>If you have several final states (or even initial states) then there is no simple way of merging these ones, other than applying the transitive closure method. Usually this is not a problem by hand but this is awkward when writing the algorithm. A much simpler workaround is to enumerate all pairs <span class="math inline">\((s,f)\)</span> and run the algorithm on the (already state-removed) graph to get all expressions <span class="math inline">\(e_{s,f}\)</span> supposing <span class="math inline">\(s\)</span> is the only initial state and <span class="math inline">\(f\)</span> is the only final state, then doing the union of all <span class="math inline">\(e_{s,f}\)</span>.</p>
 <p>This, and the fact that this is modifying languages more dynamically than the first method make it more error-prone when programming. I suggest using any other method.</p>
 <h5>
@@ -518,13 +518,13 @@ The idea of the algorithm
 The algorithm
 </h3>
 <p>Thanks to this, we can build the algorithm. To have the same convention than in the induction above, we will say that the initial state is <span class="math inline">\(q_1\)</span> and that the number of state is <span class="math inline">\(m\)</span>. First, the initialization to fill <span class="math inline">\(B\)</span>:</p>
-<pre class="text"><code>for i = 1 to m:
+<pre class="computer_science"><code>for i = 1 to m:
   if final(i):
     B[i] := ε
   else:
     B[i] := ∅</code></pre>
 <p>and <span class="math inline">\(A\)</span>:</p>
-<pre class="text"><code>for i = 1 to m:
+<pre class="computer_science"><code>for i = 1 to m:
   for j = 1 to m:
     for a in Σ:
       if trans(i, a, j):
@@ -532,7 +532,7 @@ The algorithm
       else:
         A[i,j] := ∅</code></pre>
 <p>and then the solving:</p>
-<pre class="text"><code>for n = m decreasing to 1:
+<pre class="computer_science"><code>for n = m decreasing to 1:
   B[n] := star(A[n,n]) . B[n]
   for j = 1 to n:
     A[n,j] := star(A[n,n]) . A[n,j];
@@ -541,7 +541,7 @@ The algorithm
     for j = 1 to n:
       A[i,j] += A[i,n] . A[n,j]</code></pre>
 <p>the final expression is then:</p>
-<pre class="text"><code>e := B[1]</code></pre>
+<pre class="computer_science"><code>e := B[1]</code></pre>
 <h5>
 Implementation
 </h3>
@@ -1383,7 +1383,7 @@ BST have average of <span class="math-container"><span class="math inline">\(O(\
 <section id="answer-3-score-32" class="level4">
 <h4>Answer 3 (score 32)</h4>
 <p><strong>Summary</strong></p>
-<pre class="text"><code>          Type      BST (*)   Heap
+<pre class="computer_science"><code>          Type      BST (*)   Heap
 Insert    average   log(n)    1
 Insert    worst     log(n)    log(n) or n (***)
 Find any  worst     log(n)    n
@@ -1639,33 +1639,33 @@ search: <code>O(n)</code> for both
 <h4>Answer 3 (score 27)</h4>
 <p>Big O notation (<span class="math inline">\(\mathcal{O}\)</span>) ignores all constant factors so that you’re left with an upper bound on growth rate.</p>
 <p>For a single line statement like assignment, where the running time is independent of the input size <span class="math inline">\(n\)</span>, the time complexity would be <span class="math inline">\(\mathcal{O}(1)\)</span>:</p>
-<pre class="text"><code>int index = 5;  *//constant time*   
+<pre class="computer_science"><code>int index = 5;  *//constant time*   
 int item = list[index]; *//constant time*</code></pre>
 <p>For a loop like:</p>
-<pre class="text"><code>for i:=1 to n do  
+<pre class="computer_science"><code>for i:=1 to n do  
   x:=x+1;</code></pre>
 <p>The running time would be <span class="math inline">\(\mathcal{O}(n)\)</span>, because the line <span class="math inline">\(x=x+1\)</span> will be executed <span class="math inline">\(n\)</span> times.</p>
 <p>But for:</p>
-<pre class="text"><code>for ( i = 0; i &amp;lt; N; i++ ) {  
-  for ( j = 0; j &amp;lt; N; j++ )  
+<pre class="computer_science"><code>for ( i = 0; i &lt; N; i++ ) {  
+  for ( j = 0; j &lt; N; j++ )  
     statement; 
 }</code></pre>
 <p>It’d be <span class="math inline">\(\mathcal{O}(n^2)\)</span> because the statement will be executed <span class="math inline">\(n\)</span> times for every <span class="math inline">\(i\)</span>.</p>
 <p>For a while statement, it depends on the condition and the statement which will be executed in it.</p>
-<pre class="text"><code>i := 1;
-while ( i &amp;lt; n )  
+<pre class="computer_science"><code>i := 1;
+while ( i &lt; n )  
   i = i * 2;</code></pre>
 <p>The running time is logarithmic, <span class="math inline">\(\mathcal{O}(\log n)\)</span> because of the multiplication by 2.</p>
 <p>For instance:</p>
-<pre class="text"><code>Double test(int n){  
-  int sum=0;  -&amp;gt; 1 time
-  int i;  -&amp;gt; 0 time
-  for(i=0; i&amp;lt;=n;i++)  -&amp;gt; n+2 times
+<pre class="computer_science"><code>Double test(int n){  
+  int sum=0;  -&gt; 1 time
+  int i;  -&gt; 0 time
+  for(i=0; i&lt;=n;i++)  -&gt; n+2 times
   {
-    scanf(&quot;%d&quot;,&amp;amp;a);  -&amp;gt; n+1 times
-    sum=sum+a;  -&amp;gt; n+1 times
+    scanf(&quot;%d&quot;,&amp;a);  -&gt; n+1 times
+    sum=sum+a;  -&gt; n+1 times
   }
-  return sum;  -&amp;gt; 1 time
+  return sum;  -&gt; 1 time
 }</code></pre>
 <hr>
 <p>Which is <span class="math inline">\(3n+6\)</span>. Hence, <span class="math inline">\(\mathcal{O}(n)\)</span>.</p>
@@ -2026,38 +2026,38 @@ Assembly language is as close to the processor as you can get as a programmer so
 Why do we need assembly language?
 </blockquote>
 <p>Well, there’s actually only one language we will ever <em>need</em>, which is called “machine language” or “machine code”. It looks like this:</p>
-<pre class="text"><code>0010000100100011</code></pre>
+<pre class="computer_science"><code>0010000100100011</code></pre>
 <p><strong>This is the only language your computer can speak directly.</strong> It is the language a CPU speaks (and technically, different types of CPUs speak different versions). It also sucks to look at and try to understand.</p>
 <p>Fortunately, each section of binary corresponds to a particular meaning. It is divided into a number of sections:</p>
-<pre class="text"><code>0010|0001|0010|0011
+<pre class="computer_science"><code>0010|0001|0010|0011
 
 operation type  source register  other source  destination register
 0010            0001             0010          0011</code></pre>
 <p>These values correspond to:</p>
-<pre class="text"><code>operation type 0010 = addition
+<pre class="computer_science"><code>operation type 0010 = addition
 source register 0001 = register 1
 other source 0010 = register 2
 destination register 0011 = register 3</code></pre>
 <p>So this operation would add the numbers in registers 1 and 2 and put that value in register 3. If you literally put these values into a CPU and tell it “go”, it will add two numbers for you. The operation “subtract” could be a 0011 or something, instead of 0010 here. Whatever value will make the CPU do a subtraction.</p>
 <p>So a program could look like this (don’t try to understand it, since I made up this particular version of machine code to explain things):</p>
-<pre class="text"><code>instruction 1: 0010000100100011
+<pre class="computer_science"><code>instruction 1: 0010000100100011
 instruction 2: 0011000110100100
 instruction 3: 0101001100010111
 instruction 4: 0010001001100000</code></pre>
 <p>Does this suck to read? Definitely. <strong>But we need it for the CPU</strong>. Well, if every machine code corresponds to a particular action, lets just make a simple “English” shorthand, and then once we understand what the program is doing, convert it into real binary machine code and give it to the CPU to run.</p>
 <p>So our original instruction from above could look like:</p>
-<pre class="text"><code>(meaning)      operation type  source register  other source  destination register
+<pre class="computer_science"><code>(meaning)      operation type  source register  other source  destination register
 (machine code) 0010            0001             0010          0011
 (&quot;English&quot;)    add             r1               r2            r3</code></pre>
 <p>Note that this English version has an <em>exact mapping to machine code</em>. So when we write a line of this “English”, we’re really just writting friendlier and more understandable machine code.</p>
 <p>Well, <em>this is assembly language.</em> That’s why it exists, and why it was originally created.</p>
 <p>To understand why we need it now, read the above answers, but the key this to understand is this: High level languages do not have a single representation is machine code. E.g. in C, or Python, or whatever:</p>
-<pre class="text"><code>z = x + y</code></pre>
+<pre class="computer_science"><code>z = x + y</code></pre>
 <p>This sounds just like our addition from above, assuming <code>x</code> is in register 1, <code>y</code> is in register 2, and <code>z</code> should end up in register 3. But what about this line?</p>
-<pre class="text"><code>z = x * 2 + (y / 6) * p + q - r</code></pre>
+<pre class="computer_science"><code>z = x * 2 + (y / 6) * p + q - r</code></pre>
 <p>Try representing <em>that</em> line in 16 bits of binary and telling a CPU “go”. You can’t. Machine code has no single operation instruction to perform an addition, subtraction, and whatever else with 4 or 5 variables at once. So it has to be converted to a <em>sequence</em> of machine code first. This is what you do when you “compile” or “interpret” a high level language.</p>
 <p>Well, we have programs to do that, so why do we need assembly now? Well say your program is running more slowly than you expect, and you want to know why. Looking at the machine language “output” of this line, it might look like:</p>
-<pre class="text"><code>1010010010001001
+<pre class="computer_science"><code>1010010010001001
 0010001000010000
 0110010000100100
 0010001011000010
@@ -2152,19 +2152,19 @@ Bootstrapping, also called self-training, is a form of learning that is designed
 Generic selection algorithm
 </h3>
 <p>First let’s see an algorithm <code>find-kth</code> that finds the <span class="math inline">\(k\)</span>th smallest element of an array:</p>
-<pre class="text"><code>find-kth(A, k)
+<pre class="computer_science"><code>find-kth(A, k)
   pivot = random element of A
   (L, R) = split(A, pivot)
   if k = |L|+1, return pivot
   if k ≤ |L|  , return find-kth(L, k)
-  if k &amp;gt; |L|+1, return find-kth(R, k-(|L|+1))</code></pre>
+  if k &gt; |L|+1, return find-kth(R, k-(|L|+1))</code></pre>
 <p>The function <code>split(A, pivot)</code> returns <code>L,R</code> such that all elements in <code>R</code> are greater than <code>pivot</code> and <code>L</code> all the others (minus one occurrence of <code>pivot</code>). Then all is done recursively.</p>
 <p>This is <span class="math inline">\(O(n)\)</span> in average but <span class="math inline">\(O(n^2)\)</span> in the worst case.</p>
 <h5>
 Linear worst case: the <a href="https://en.wikipedia.org/wiki/Median_of_medians" rel="noreferrer">median-of-medians algorithm</a>
 </h3>
 <p>A better pivot is the median of all the medians of sub arrays of <code>A</code> of size 5, by using calling the procedure on the array of these medians.</p>
-<pre class="text"><code>find-kth(A, k)
+<pre class="computer_science"><code>find-kth(A, k)
   B = [median(A[1], .., A[5]), median(A[6], .., A[10]), ..]
   pivot = find-kth(B, |B|/2)
   ...</code></pre>
@@ -2298,7 +2298,7 @@ Media is a medium on which data is saved. e.g CD Devices are something which run
 <section id="question-19" class="level4">
 <h4>Question</h4>
 <p>Question. Name the law given and verify it using a truth table. X+ X’.Y=X+Y</p>
-<pre class="text"><code>My Answer. 
+<pre class="computer_science"><code>My Answer. 
 X   Y   X’  X’.Y    X+X’.Y  X+Y
 0   0   1   0       0       0
 0   1   1   1       1       1
@@ -2594,7 +2594,7 @@ To represent a tuple, where <span class="math inline">\(a\)</span> and <span cla
 An Example
 </h2>
 <p>In functional languages a common definition of a list (given in Haskell here) is this:</p>
-<pre class="text"><code>data List a = Empty 
+<pre class="computer_science"><code>data List a = Empty 
             | Cons a List</code></pre>
 <p>This says that a list is either empty or a tuple of a value and another list. Transforming that to algebraic notation, we get:</p>
 <p><span class="math display">\[L(a) = 1 + a * L(a)\]</span></p>
@@ -2726,27 +2726,27 @@ So a logical address of, e.g., <span class="math inline">\(508\)</span>, with <s
 <section id="question-23" class="level4">
 <h4>Question</h4>
 <p>There are two quicksort partition methods mentioned in Cormen:</p>
-<pre class="text"><code>Hoare-Partition(A, p, r)
+<pre class="computer_science"><code>Hoare-Partition(A, p, r)
 x = A[p]
 i = p - 1
 j = r + 1
 while true
     repeat
         j = j - 1
-    until A[j] &amp;lt;= x
+    until A[j] &lt;= x
     repeat
         i = i + 1
-    until A[i] &amp;gt;= x
-    if i &amp;lt; j
+    until A[i] &gt;= x
+    if i &lt; j
         swap( A[i], A[j] )
     else
         return j</code></pre>
 <p>and:</p>
-<pre class="text"><code>Lomuto-Partition(A, p, r)
+<pre class="computer_science"><code>Lomuto-Partition(A, p, r)
 x = A[r]
 i = p - 1
 for j = p to r - 1
-    if A[j] &amp;lt;= x
+    if A[j] &lt;= x
         i = i + 1
         swap( A[i], A[j] )
 swap( A[i +1], A[r] )
@@ -2818,7 +2818,7 @@ Equal Elements and Already Sorted Lists
 <p>
 The presence of equal elements requires special care in Quicksort. (I stepped into this trap myself; see <a href="https://kluedo.ub.uni-kl.de/frontdoor/index/index/docId/3463">my master’s thesis</a>, page 36, for a “Tale on Premature Optimization”) Consider as extreme example an array which filled with <span class="math inline">\(0\)</span>s. On such an array, Hoare’s method performs a swap for <em>every</em> pair of elements - which is the worst case for Hoare’s partitioning - but <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> always meet in the middle of the array. Thus, we have optimal partitioning and the total running time remains in <span class="math inline">\(\mathcal O(n\log n)\)</span>.
 </p>
-<p>Lomuto’s method behaves much more stupidly on the all <span class="math inline">\(0\)</span> array: The comparison <code>A[j] &amp;lt;= x</code> will always be true, so we do a swap for <em>every single element</em>! But even worse: After the loop, we always have <span class="math inline">\(i=n\)</span>, so we observe the worst case partitioning, making the overall performance degrade to <span class="math inline">\(\Theta(n^2)\)</span>!</p>
+<p>Lomuto’s method behaves much more stupidly on the all <span class="math inline">\(0\)</span> array: The comparison <code>A[j] &lt;= x</code> will always be true, so we do a swap for <em>every single element</em>! But even worse: After the loop, we always have <span class="math inline">\(i=n\)</span>, so we observe the worst case partitioning, making the overall performance degrade to <span class="math inline">\(\Theta(n^2)\)</span>!</p>
 <h5>
 Conclusion
 </h1>
@@ -2943,12 +2943,12 @@ I know that Euclid’s algorithm is the best algorithm for getting the GCD (grea
 </p>
 <p>I need to use the most efficient code possible in my program.</p>
 <p>In recursive mode, you can write:</p>
-<pre class="text"><code>static long gcd (long a, long b){
+<pre class="computer_science"><code>static long gcd (long a, long b){
     a = Math.abs(a); b = Math.abs(b);
     return (b==0) ? a : gcd(b, a%b);
   }</code></pre>
 <p>And in iterative mode, it looks like this:</p>
-<pre class="text"><code>static long gcd (long a, long b) {
+<pre class="computer_science"><code>static long gcd (long a, long b) {
   long r, i;
   while(b!=0){
     r = a % b;
@@ -2959,7 +2959,7 @@ I know that Euclid’s algorithm is the best algorithm for getting the GCD (grea
 }</code></pre>
 <hr>
 <p>There is also the Binary algorithm for the GCD, which may be coded simply like this:</p>
-<pre class="text"><code>int gcd (int a, int b)
+<pre class="computer_science"><code>int gcd (int a, int b)
 {
     while(b) b ^= a ^= b ^= a %= b;
     return a;
@@ -3243,12 +3243,12 @@ int g(int x) {
 <h5>
 Approach A: Linear Recursive Process
 </h2>
-<pre class="text"><code>(define (factorial n)
+<pre class="computer_science"><code>(define (factorial n)
  (if (= n 1)
   1
   (* n (factorial (- n 1)))))</code></pre>
 <p>The shape of the process for <strong>Approach A</strong> looks like this:</p>
-<pre class="text"><code>(factorial 5)
+<pre class="computer_science"><code>(factorial 5)
 (* 5 (factorial 4))
 (* 5 (* 4 (factorial 3)))
 (* 5 (* 4 (* 3 (factorial 2))))
@@ -3261,17 +3261,17 @@ Approach A: Linear Recursive Process
 <h5>
 Approach B: Linear Iterative Process
 </h2>
-<pre class="text"><code>(define (factorial n)
+<pre class="computer_science"><code>(define (factorial n)
  (fact-iter 1 1 n))
 
 (define (fact-iter product counter max-count)
- (if (&amp;gt; counter max-count)
+ (if (&gt; counter max-count)
   product
   (fact-iter (* counter product)
              (+ counter 1)
              max-count)))</code></pre>
 <p>Shape of the process for <strong>Approach B</strong> looks like this:</p>
-<pre class="text"><code>(factorial 5)
+<pre class="computer_science"><code>(factorial 5)
 (fact-iter 1 1 5)
 (fact-iter 1 2 5)
 (fact-iter 2 3 5)
@@ -3288,12 +3288,12 @@ Approach B: Linear Iterative Process
 <h5>
 Approach A: Linear Recursive Process
 </h2>
-<pre class="text"><code>(define (factorial n)
+<pre class="computer_science"><code>(define (factorial n)
  (if (= n 1)
   1
   (* n (factorial (- n 1)))))</code></pre>
 <p>The shape of the process for <strong>Approach A</strong> looks like this:</p>
-<pre class="text"><code>(factorial 5)
+<pre class="computer_science"><code>(factorial 5)
 (* 5 (factorial 4))
 (* 5 (* 4 (factorial 3)))
 (* 5 (* 4 (* 3 (factorial 2))))
@@ -3306,17 +3306,17 @@ Approach A: Linear Recursive Process
 <h5>
 Approach B: Linear Iterative Process
 </h2>
-<pre class="text"><code>(define (factorial n)
+<pre class="computer_science"><code>(define (factorial n)
  (fact-iter 1 1 n))
 
 (define (fact-iter product counter max-count)
- (if (&amp;gt; counter max-count)
+ (if (&gt; counter max-count)
   product
   (fact-iter (* counter product)
              (+ counter 1)
              max-count)))</code></pre>
 <p>Shape of the process for <strong>Approach B</strong> looks like this:</p>
-<pre class="text"><code>(factorial 5)
+<pre class="computer_science"><code>(factorial 5)
 (fact-iter 1 1 5)
 (fact-iter 1 2 5)
 (fact-iter 2 3 5)
@@ -3512,10 +3512,10 @@ Commenters are saying I need to be able to convert a letter into a number. If so
 <p>This seems a very basic question to me, so excuse me if I lecture you a bit. The most important point for you to learn here is that <strong>a number is not its digit representation</strong>. A number is an abstract mathematical object, whereas its digit representation is a concrete thing, namely a sequence of symbols on a paper (or a sequence of bits in compute memory, or a sequence of sounds which you make when you communicate a number). What is confusing you is the fact that you never <em>see</em> a number but always its digit representation. So you end up thinking that the number <em>is</em> the representation.</p>
 <p>Therefore, the correct question to ask is not “how to I convert from one base to another” but rather “how do I find out which number is represented by a given string of digits” and “how do I find the digit representation of a given number”.</p>
 <p>So let us produce two functions in Python, one for converting a digit representation to a number, and another for doing the opposite. Note: when we run the function Python will of course <em>print on the screen</em> the number it got in base 10. But this does <em>not</em> mean that the computer is keeping numbers in base 10 (it isn’t). It is <em>irrelevant</em> how the computer represents the numbers.</p>
-<pre class="text"><code>def toDigits(n, b):
+<pre class="computer_science"><code>def toDigits(n, b):
     &quot;&quot;&quot;Convert a positive number n to its digit representation in base b.&quot;&quot;&quot;
     digits = []
-    while n &amp;gt; 0:
+    while n &gt; 0:
         digits.insert(0, n % b)
         n  = n // b
     return digits
@@ -3527,18 +3527,18 @@ def fromDigits(digits, b):
         n = b * n + d
     return n</code></pre>
 <p>Let us test these:</p>
-<pre class="text"><code>&amp;gt;&amp;gt;&amp;gt; toDigits(42, 2)
+<pre class="computer_science"><code>&gt;&gt;&gt; toDigits(42, 2)
 [1, 0, 1, 0, 1, 0]
-&amp;gt;&amp;gt;&amp;gt; toDigits(42, 3)
+&gt;&gt;&gt; toDigits(42, 3)
 [1, 1, 2, 0]
-&amp;gt;&amp;gt;&amp;gt; fromDigits([1,1,2,0],3)
+&gt;&gt;&gt; fromDigits([1,1,2,0],3)
 42</code></pre>
 <p>Armed with conversion functions, your problem is solved easily:</p>
-<pre class="text"><code>def convertBase(digits, b, c):
+<pre class="computer_science"><code>def convertBase(digits, b, c):
     &quot;&quot;&quot;Convert the digits representation of a number from base b to base c.&quot;&quot;&quot;
     return toDigits(fromDigits(digits, b), c)</code></pre>
 <p>A test:</p>
-<pre class="text"><code>&amp;gt;&amp;gt;&amp;gt; convertBase([1,1,2,0], 3, 2) 
+<pre class="computer_science"><code>&gt;&gt;&gt; convertBase([1,1,2,0], 3, 2) 
 [1, 0, 1, 0, 1, 0]</code></pre>
 <p><strong>Note:</strong> we did <em>not</em> pass through base 10 representation! We converted the base <span class="math inline">\(b\)</span> representation to the number, and then the number to base <span class="math inline">\(c\)</span>. The number was <em>not</em> in any representation. (Actually it was, the computer had to represent it somehow, and it did represent it using electrical signals and funky stuff that happens in chips, but certainly those were not 0’s and 1’s.)</p>
 </section>
@@ -3633,11 +3633,11 @@ def fromDigits(digits, b):
 <section id="answer-3-score-9-1" class="level4">
 <h4>Answer 3 (score 9)</h4>
 <p>This is just a refactoring (Python 3) of <a href="https://cs.stackexchange.com/a/10321/61097">Andrej’s</a> code. In Andrej’s code numbers are represented through a list of digits (scalars), while in the following code numbers are represented through a list of symbols taken from a <strong>custom string</strong>:</p>
-<pre class="text"><code>def v2r(n, base): # value to representation
+<pre class="computer_science"><code>def v2r(n, base): # value to representation
     &quot;&quot;&quot;Convert a positive number to its digit representation in a custom base.&quot;&quot;&quot;
     b = len(base)
     digits = &#39;&#39;
-    while n &amp;gt; 0:
+    while n &gt; 0:
         digits = base[n % b] + digits
         n  = n // b
     return digits
@@ -3654,29 +3654,29 @@ def b2b(digits, base1, base2):
     &quot;&quot;&quot;Convert the digits representation of a number from base1 to base2.&quot;&quot;&quot;
     return v2r(r2v(digits, base1), base2)</code></pre>
 <p>To perform a conversion from value to representation in a custom base:</p>
-<pre class="text"><code>&amp;gt;&amp;gt;&amp;gt; v2r(64,&#39;01&#39;)
+<pre class="computer_science"><code>&gt;&gt;&gt; v2r(64,&#39;01&#39;)
 &#39;1000000&#39;
-&amp;gt;&amp;gt;&amp;gt; v2r(64,&#39;XY&#39;)
+&gt;&gt;&gt; v2r(64,&#39;XY&#39;)
 &#39;YXXXXXX&#39;
-&amp;gt;&amp;gt;&amp;gt; v2r(12340,&#39;ZABCDEFGHI&#39;) # decimal base with custom symbols
+&gt;&gt;&gt; v2r(12340,&#39;ZABCDEFGHI&#39;) # decimal base with custom symbols
 &#39;ABCDZ&#39;</code></pre>
 <p>To perform a conversion from representation (in a custom base) to value:</p>
-<pre class="text"><code>&amp;gt;&amp;gt;&amp;gt; r2v(&#39;100&#39;,&#39;01&#39;)
+<pre class="computer_science"><code>&gt;&gt;&gt; r2v(&#39;100&#39;,&#39;01&#39;)
 4
-&amp;gt;&amp;gt;&amp;gt; r2v(&#39;100&#39;,&#39;0123456789&#39;) # standard decimal base
+&gt;&gt;&gt; r2v(&#39;100&#39;,&#39;0123456789&#39;) # standard decimal base
 100
-&amp;gt;&amp;gt;&amp;gt; r2v(&#39;100&#39;,&#39;01_whatevr&#39;) # decimal base with custom symbols
+&gt;&gt;&gt; r2v(&#39;100&#39;,&#39;01_whatevr&#39;) # decimal base with custom symbols
 100
-&amp;gt;&amp;gt;&amp;gt; r2v(&#39;100&#39;,&#39;0123456789ABCDEF&#39;) # standard hexadecimal base
+&gt;&gt;&gt; r2v(&#39;100&#39;,&#39;0123456789ABCDEF&#39;) # standard hexadecimal base
 256
-&amp;gt;&amp;gt;&amp;gt; r2v(&#39;100&#39;,&#39;01_whatevr-jklmn&#39;) # hexadecimal base with custom symbols
+&gt;&gt;&gt; r2v(&#39;100&#39;,&#39;01_whatevr-jklmn&#39;) # hexadecimal base with custom symbols
 256</code></pre>
 <p>To perform a base conversion from one custome base to another:</p>
-<pre class="text"><code>&amp;gt;&amp;gt;&amp;gt; b2b(&#39;1120&#39;,&#39;012&#39;,&#39;01&#39;)
+<pre class="computer_science"><code>&gt;&gt;&gt; b2b(&#39;1120&#39;,&#39;012&#39;,&#39;01&#39;)
 &#39;101010&#39;
-&amp;gt;&amp;gt;&amp;gt; b2b(&#39;100&#39;,&#39;01&#39;,&#39;0123456789&#39;)
+&gt;&gt;&gt; b2b(&#39;100&#39;,&#39;01&#39;,&#39;0123456789&#39;)
 &#39;4&#39;
-&amp;gt;&amp;gt;&amp;gt; b2b(&#39;100&#39;,&#39;0123456789ABCDEF&#39;,&#39;01&#39;)
+&gt;&gt;&gt; b2b(&#39;100&#39;,&#39;0123456789ABCDEF&#39;,&#39;01&#39;)
 &#39;100000000&#39;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -3807,7 +3807,7 @@ An informal definition could be “a set of rules that precisely defines a seque
 <h4>Answer 2 (score 228)</h4>
 <p>Let me offer one reason and one misconception as an answer to your question.</p>
 <p>The <strong>main reason</strong> that it is easier to write (seemingly) correct mathematical proofs is that they are written at a very high level. Suppose that you could write a program like this:</p>
-<pre class="text"><code>function MaximumWindow(A, n, w):
+<pre class="computer_science"><code>function MaximumWindow(A, n, w):
     using a sliding window, calculate (in O(n)) the sums of all length-w windows
     return the maximum sum (be smart and use only O(1) memory)</code></pre>
 <p>It would be much harder to go wrong when programming this way, since the <em>specification</em> of the program is much more succinct than its <em>implementation</em>. Indeed, every programmer who tries to convert pseudocode to code, especially to efficient code, encounters this large chasm between the <em>idea</em> of an algorithm and its <em>implementation details</em>. Mathematical proofs concentrate more on the ideas and less on the detail.</p>
@@ -3983,7 +3983,7 @@ The longest path in <span class="math inline">\(T_v\)</span> contains <span clas
 In the second case, we have to combine the one or two longest paths from <span class="math inline">\(v\)</span> into one of the subtrees; these are certainly those to the deepest leaves. The length of the path is then <span class="math inline">\(H_{(k)} + H_{(k-1)} + 2\)</span> if <span class="math inline">\(k&amp;gt;1\)</span>, or <span class="math inline">\(H_{(k)}+1\)</span> if <span class="math inline">\(k=1\)</span>, with <span class="math inline">\(H = \{ h(T_{u_i}) \mid i=1,\dots,k\}\)</span> the multi set of subtree heights¹.
 </p>
 <p>In pseudo code, the algorithm looks like this:</p>
-<pre class="text"><code>procedure longestPathLength(T : Tree) = helper(T)[2]
+<pre class="computer_science"><code>procedure longestPathLength(T : Tree) = helper(T)[2]
 
 /* Recursive helper function that returns (h,p)
  * where h is the height of T and p the length
@@ -3994,9 +3994,9 @@ procedure helper(T : Tree) : (int, int) = {
   }
   else {
     // Calculate heights and longest path lengths of children
-    recursive = T.children.map { c =&amp;gt; helper(c) }
-    heights = recursive.map { p =&amp;gt; p[1] }
-    paths = recursive.map { p =&amp;gt; p[2] }
+    recursive = T.children.map { c =&gt; helper(c) }
+    heights = recursive.map { p =&gt; p[1] }
+    paths = recursive.map { p =&gt; p[2] }
 
     // Find the two largest subtree heights
     height1 = heights.max
@@ -4106,32 +4106,32 @@ At the end of the algorithm the value in maxDistance is the diameter.
 <section id="answer-3-score--3" class="level4">
 <h4>Answer 3 (score -3)</h4>
 <p>Below is code that returns a diameter path using only a single DFS traversal. It requires extra space to keep track of the best diameter seen so far as well as the longest path beginning at a particular node in the tree. This is a dynamic programming approach based on the fact that a longest diameter path either doesn’t include root, or is combination of the two longest paths of root’s neighbours. Thus we need two vectors to keep track of this information.</p>
-<pre class="text"><code> int getDiam(int root, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; adj_list, int&amp;amp; height, vector&amp;lt;int&amp;gt;&amp;amp; path, vector&amp;lt;int&amp;gt;&amp;amp; diam) {
+<pre class="computer_science"><code> int getDiam(int root, vector&lt;vector&lt;int&gt;&gt;&amp; adj_list, int&amp; height, vector&lt;int&gt;&amp; path, vector&lt;int&gt;&amp; diam) {
     visited[root] = true;
     int m1 = -1;
     int m2 = -1;
     int max_diam = -1;
-    vector&amp;lt;int&amp;gt; best1 = vector&amp;lt;int&amp;gt;();
-    vector&amp;lt;int&amp;gt; best2 = vector&amp;lt;int&amp;gt;();
-    vector&amp;lt;int&amp;gt; diam_path = vector&amp;lt;int&amp;gt;();
+    vector&lt;int&gt; best1 = vector&lt;int&gt;();
+    vector&lt;int&gt; best2 = vector&lt;int&gt;();
+    vector&lt;int&gt; diam_path = vector&lt;int&gt;();
     for(auto n : adj_list[root]) {
         if(!visited[n]) {
             visited[n] = true;
             int _height = 0;
-            vector&amp;lt;int&amp;gt; path1;
-            vector&amp;lt;int&amp;gt; path2;
+            vector&lt;int&gt; path1;
+            vector&lt;int&gt; path2;
             int _diam = getDiam(n, adj_list, _height, path1, path2);
-            if(_diam &amp;gt; max_diam) {
+            if(_diam &gt; max_diam) {
                 max_diam = _diam;
                 diam_path = path2;
             }
-            if(_height &amp;gt; m1) {
+            if(_height &gt; m1) {
                 m2 = m1;
                 m1 = _height;
                 best2 = best1;
                 best1 = path1;
             }
-            else if(_height &amp;gt; m2) {
+            else if(_height &gt; m2) {
                 m2 = _height;
                 best2 = path1;
             }
@@ -4143,7 +4143,7 @@ At the end of the algorithm the value in maxDistance is the diameter.
     path.insert( path.end(), best1.begin(), best1.end() );
     path.push_back(root);
 
-    if(m1 + m2 + 2 &amp;gt; max_diam) {
+    if(m1 + m2 + 2 &gt; max_diam) {
         diam = path;
         std::reverse(best2.begin(), best2.end());
         diam.insert( diam.end(), best2.begin(), best2.end() );
@@ -4163,7 +4163,7 @@ At the end of the algorithm the value in maxDistance is the diameter.
 <section id="question-41" class="level4">
 <h4>Question</h4>
 <p>So given an input of lets say 10 strings, what way can we input these so we get the best or worst case for these two given sorts?</p>
-<pre class="text"><code>Heap sort:
+<pre class="computer_science"><code>Heap sort:
 best case - nlogn
 worst case - nlogn
 
@@ -4420,7 +4420,7 @@ But for a context-free grammar, it really doesn’t make much difference in what
 <h4>Answer accepted (score 10)</h4>
 <p>A binary tree has 1 or 2 children at non-leaf nodes and 0 nodes at leaf nodes. Let there be <span class="math inline">\(n\)</span> nodes in a tree and we have to arrange them in such a way that they still form a valid binary tree.</p>
 <p>Without proving, I am stating that to maximize the height, given nodes should be arranged linearly, i.e. each non-leaf node should have only one child:</p>
-<pre class="text"><code>                              O 1
+<pre class="computer_science"><code>                              O 1
                               |
                               O 2
                               |
@@ -4437,7 +4437,7 @@ But for a context-free grammar, it really doesn’t make much difference in what
                               O 8</code></pre>
 <p>Here, formula to compute relation of height in terms of number of nodes is straight-forward. If <span class="math inline">\(h\)</span> is the height of the tree, then <span class="math inline">\(h = n-1\)</span>.</p>
 <p>Now, if we try to construct a binary tree of <span class="math inline">\(n\)</span> nodes with minimum height (always reducible to a complete binary tree), we have to pack as many nodes as possible in upper levels, before moving on to the next level. So, the tree takes the form of following tree:</p>
-<pre class="text"><code>                              O
+<pre class="computer_science"><code>                              O
                               |1
                               |
                        O------+-----O
@@ -4523,7 +4523,7 @@ In either case, <em>h</em> doesn’t change. So which means you have a complete 
 <section id="answer-2-score-17-2" class="level4">
 <h4>Answer 2 (score 17)</h4>
 <p>Consider the following algorithm (or procedure, or piece of code, or whatever):</p>
-<pre class="text"><code>Contrive(n)
+<pre class="computer_science"><code>Contrive(n)
 1. if n = 0 then do something Theta(n^3)
 2. else if n is even then
 3.    flip a coin
@@ -4577,7 +4577,7 @@ In DPDAs, only one move is possible when reading any input from any state but, i
 <section id="question-49" class="level4">
 <h4>Question</h4>
 <p>Using the following recursive Fibonacci algorithm:</p>
-<pre class="text"><code>def fib(n):
+<pre class="computer_science"><code>def fib(n):
    if n==0:
       return 0
    elif n==1
@@ -4671,12 +4671,12 @@ If <span class="math inline">\(L = L(M)\)</span> is the lenguage recognized by a
 <p>The order of algorithms (growth) can be in Big-oh (O), little-oh(o), omega (Ω) or theta(Θ).</p>
 <p>If you are having problems calculating RR please view some questions i asked before and vote if you understand.</p>
 <p>Say you have a for loop:</p>
-<pre class="text"><code> for(i=1 to n)
+<pre class="computer_science"><code> for(i=1 to n)
      x++</code></pre>
 <p>The order or time complexity of this piece of code is: O(n)</p>
 <p>Why big-oh? Because we want the worst case at which this piece of code runs.</p>
 <p>Read here (these define the complexity of an algorithm and informs you of how algorithms are done in polynomial time):</p>
-<pre class="text"><code> http://en.wikipedia.org/wiki/NP_(complexity)
+<pre class="computer_science"><code> http://en.wikipedia.org/wiki/NP_(complexity)
 
  http://en.wikipedia.org/wiki/NP-complete
 
@@ -4701,9 +4701,9 @@ If <span class="math inline">\(L = L(M)\)</span> is the lenguage recognized by a
 Does a string contain a character <span class="math inline">\(x\)</span>?
 </blockquote>
 <p>This is how we did it before: iterate the string, and see if any index contains <span class="math inline">\(x\)</span>.</p>
-<pre class="text"><code>bool find(const std::string&amp;amp; s, char x)
+<pre class="computer_science"><code>bool find(const std::string&amp; s, char x)
 {
-   for(int i = 0; i &amp;lt; s.size(); ++i)
+   for(int i = 0; i &lt; s.size(); ++i)
    {
       if(s[i] == x)
          return true;
@@ -4712,7 +4712,7 @@ Does a string contain a character <span class="math inline">\(x\)</span>?
    return false;
 }</code></pre>
 <p>The question is then, <em>can</em> we do it recursively? Sure we can, here’s one way:</p>
-<pre class="text"><code>bool find(const std::string&amp;amp; s, int idx, char x)
+<pre class="computer_science"><code>bool find(const std::string&amp; s, int idx, char x)
 {
    if(idx == s.size())
       return false;
@@ -4726,7 +4726,7 @@ Does a string contain a character <span class="math inline">\(x\)</span>?
 <p>The solutions to some problems are more naturally expressed using recursion.</p>
 <p>For example, assume that you have a tree data structure with two kinds of nodes: leaves, which store an integer value; and branches, which have a left and right subtree in their fields. Assume that the leaves are ordered, so that the lowest value is in the leftmost leaf.</p>
 <p>Suppose the task is to print out the values of the tree in order. A recursive algorithm for doing this is quite natural:</p>
-<pre class="text"><code>class Node { abstract void traverse(); }
+<pre class="computer_science"><code>class Node { abstract void traverse(); }
 class Leaf extends Node { 
   int val; 
   void traverse() { print(val); }
@@ -4810,7 +4810,7 @@ any node can serve as the root of the tree.
 </ul>
 <p>Choose an arbitrary tree node <span class="math inline">\(s\)</span>. Assume <span class="math inline">\(u, v \in V(G)\)</span> are nodes with <span class="math inline">\(d(u,v) = diam(G)\)</span>. Assume further that the algorithm finds a node <span class="math inline">\(x\)</span> starting at <span class="math inline">\(s\)</span> first, some node <span class="math inline">\(y\)</span> starting at <span class="math inline">\(x\)</span> next. wlog <span class="math inline">\(d(s,u) \geq d(s,v)\)</span>. note that <span class="math inline">\(d(s,x) \geq d(s,y)\)</span> must hold, unless the algorithm’s first stage wouldn’t end up at <span class="math inline">\(x\)</span>. We will see that <span class="math inline">\(d(x,y) = d(u,v)\)</span>.</p>
 <p>The most general configuration of all nodes involved can be seen in the following pseudo-graphics ( possibly <span class="math inline">\(s = z_{uv}\)</span> or <span class="math inline">\(s = z_{xy}\)</span> or both ):</p>
-<pre class="text"><code>(u)                                            (x)
+<pre class="computer_science"><code>(u)                                            (x)
   \                                            /
    \                                          /
     \                                        /
@@ -4840,7 +4840,7 @@ any node can serve as the root of the tree.
 </ol>
 <p>therefore <span class="math inline">\(d(u,v) = d(x,y)\)</span>.</p>
 <p>analogue proofs hold for the alternative configurations</p>
-<pre class="text"><code>                 (u)                          (x)
+<pre class="computer_science"><code>                 (u)                          (x)
                    \                          /
                     \                        /
                      \                      /
@@ -4850,7 +4850,7 @@ any node can serve as the root of the tree.
                    /                          \
                  (v)                          (y)</code></pre>
 <p>and</p>
-<pre class="text"><code>                          (x)        (u)  
+<pre class="computer_science"><code>                          (x)        (u)  
                           /            \  
                          /              \ 
                         /                \
@@ -4871,7 +4871,7 @@ After drawing some diagrams we can observe that the longest path will always occ
 <p>Instead of first finding which nodes are leaf nodes , we start BFS from a random node and then see which node is farthest from it. Let the node farthest be x. It is clear that x is a leaf node. Now if we start BFS from x and check farthest node from it, we will get our answer.</p>
 <p>But what is the guarantee that x will be a end point of a maximum path?</p>
 <p>Let’s see by an example :-</p>
-<pre class="text"><code>       1   
+<pre class="computer_science"><code>       1   
     / /\ \
    6 2  4 8
          \ \
@@ -4932,7 +4932,7 @@ We know that the degree is related to a node but what is the degree of a tree?<b
 </section>
 <section id="answer-3-score-9-3" class="level4">
 <h4>Answer 3 (score 9)</h4>
-<p>A B-Tree node can contain more than one key values whereas a BST node contains only one. There are lower and upper bounds on the number of keys a node can contain. These bounds can be expressed in terms of a fixed integer <code>t&amp;gt;=2</code> called the <em>minimum degree</em> of the B-tree.</p>
+<p>A B-Tree node can contain more than one key values whereas a BST node contains only one. There are lower and upper bounds on the number of keys a node can contain. These bounds can be expressed in terms of a fixed integer <code>t&gt;=2</code> called the <em>minimum degree</em> of the B-tree.</p>
 <ul>
 <li>
 Every node other than the root must have at least <code>t-1</code> keys. Every internal node other than the root thus has at least <code>t</code> children.
@@ -5304,11 +5304,11 @@ The very first pen itself may well have been a pointed stick dipped in tar or bl
 Let <span class="math inline">\(n?\)</span> denote <span class="math inline">\(1 \cdot 3 \cdot 5 \dotsm (2n-1)\)</span> as a convenient notation. Rearrange the factors of <span class="math inline">\((2n)! = 1 \cdot 2 \cdot 3 \dotsm (2n)\)</span> as <span class="math display">\[(2n)! = n! \cdot 2^n \cdot 3 \cdot 5 \cdot 7 \dotsm (2n-1).\]</span> Now suppose <span class="math inline">\(n = 2^k\)</span> for some integer <span class="math inline">\(k&amp;gt;0\)</span>. (This is a useful assumption to avoid complications in the following discussion, and the idea can be extended to general <span class="math inline">\(n\)</span>.) Then <span class="math inline">\((2^k)! = (2^{k-1})!2^{2^{k-1}}(2^{k-1})?\)</span> and by expanding this recurrence, <span class="math display">\[(2^k)! =  \left(2^{2^{k-1}+2^{k-2}+\dots+2^0}\right) \prod_{i=0}^{k-1} (2^i)? = \left(2^{2^k - 1}\right) \prod_{i=1}^{k-1} (2^i)?.\]</span> Computing <span class="math inline">\((2^{k-1})?\)</span> and multiplying the partial products at each stage takes <span class="math inline">\((k-2) + 2^{k-1} - 2\)</span> multiplications. This is an improvement of a factor of nearly <span class="math inline">\(2\)</span> from <span class="math inline">\(2^k-2\)</span> multiplications just using the definition. Some additional operations are required to compute the power of <span class="math inline">\(2\)</span>, but in binary arithmetic this can be done cheaply (depending on what precisely is required, it may just require adding a suffix of <span class="math inline">\(2^k-1\)</span> zeroes).
 </p>
 <p>The following Ruby code implements a simplified version of this. This does not avoid recomputing <span class="math inline">\(n?\)</span> even where it could do so:</p>
-<pre class="text"><code>def oddprod(l,h)
+<pre class="computer_science"><code>def oddprod(l,h)
   p = 1
-  ml = (l%2&amp;gt;0) ? l : (l+1)
-  mh = (h%2&amp;gt;0) ? h : (h-1)
-  while ml &amp;lt;= mh do
+  ml = (l%2&gt;0) ? l : (l+1)
+  mh = (h%2&gt;0) ? h : (h-1)
+  while ml &lt;= mh do
     p = p * ml
     ml = ml + 2
   end
@@ -5325,7 +5325,7 @@ end
 
 print fact(15)</code></pre>
 <p>Even this first-pass code improves on the trivial</p>
-<pre class="text"><code>f = 1; (1..32768).map{ |i| f *= i }; print f</code></pre>
+<pre class="computer_science"><code>f = 1; (1..32768).map{ |i| f *= i }; print f</code></pre>
 <p>by about 20% in my testing.</p>
 <p>With a bit of work, this can be improved further, also removing the requirement that <span class="math inline">\(n\)</span> be a power of <span class="math inline">\(2\)</span> (see the <a href="http://www.luschny.de/math/factorial/description.html" rel="noreferrer">extensive discussion</a>).</p>
 </section>
@@ -5422,7 +5422,7 @@ Computing the number of <span class="math inline">\(s\)</span>-<span class="math
 \end{cases}\]</span>
 </p>
 <p>A simple modification of DFS will compute this given as</p>
-<pre class="text"><code>def dfs(u, t):
+<pre class="computer_science"><code>def dfs(u, t):
     if u == t:
         return 1
     else:
@@ -5459,7 +5459,7 @@ Computing the number of <span class="math inline">\(s\)</span>-<span class="math
 </ol>
 <p>(How do I know how many bits the tag and index are supposed to have? Also, it is a miss unless both the tag and the index match, right? Or is it just if the index matches? I’m obviously extremely confused but I really do want to understand!)</p>
 <p>My answer for a) :</p>
-<pre class="text"><code>Memory        Binary          tag          index         hit/miss
+<pre class="computer_science"><code>Memory        Binary          tag          index         hit/miss
 3             00000011       0000          0011          miss
 180           10110100       0010          0000          miss
 43            00101011       0010          0011          miss
@@ -5473,7 +5473,7 @@ Computing the number of <span class="math inline">\(s\)</span>-<span class="math
 186           10111010       1011          1010          miss
 253           11111101       1111          1101          miss</code></pre>
 <p>b)I’m not sure how to figure this out, but when I looked it up, people were saying the index should be left shifted one bit so that’s what I got (I’d like to understand why)</p>
-<pre class="text"><code>3             00000011       0000          001          miss
+<pre class="computer_science"><code>3             00000011       0000          001          miss
 180           10110100       0010          000          miss
 43            00101011       0010          001          miss
 2             00000010       0000          001          hit
@@ -5561,15 +5561,15 @@ In general for <span class="math inline">\(y=x_1 \land x_2 \land \dots \land x_n
 <h4>Question</h4>
 <p>In many discussions of binary heap, normally only decrease-key is listed as supported operation for a min-heap. For example, CLR chapter 6.1 and <a href="http://en.wikipedia.org/wiki/Heap_%28data_structure%29">this wikipedia page</a>. Why isn’t increase key normally listed for min-heap? I imagine it is possible to do that in O(height) by iteratively swapping the increased element (x) with the minimum of its children, until none of its children is bigger than x.</p>
 <p>e.g.</p>
-<pre class="text"><code>IncreaseKey(int pos, int newValue)
+<pre class="computer_science"><code>IncreaseKey(int pos, int newValue)
 {
    heap[pos] = newValue;
-   while(left(pos) &amp;lt; heap.Length)
+   while(left(pos) &lt; heap.Length)
    {
       int smallest = left(pos);
-      if(heap[right(pos)] &amp;lt; heap[left(pos)])
+      if(heap[right(pos)] &lt; heap[left(pos)])
          smallest = right(pos);
-      if(heap[pos] &amp;lt; heap[smallest])
+      if(heap[pos] &lt; heap[smallest])
       { 
          swap(smallest, pos);
          pos= smallest;
@@ -5916,12 +5916,12 @@ There’s more room for error in FSM’s since we can easily fall on a non-endin
 <p>With 4 slots, using the clock page replacement algorithm</p>
 <p>Reference list: 1 2 3 4 1 2 5 1 3 2 4 5</p>
 <p>Initial list would look like this:</p>
-<pre class="text"><code>-&amp;gt; [1][1]
+<pre class="computer_science"><code>-&gt; [1][1]
    [2][1]
    [3][1]
    [4][1]</code></pre>
 <p>The next reference to insert would be 1, then 2. Would the hand still point at 1 after 1, and after 2 ? In other words, after inserting the 5, would the clock look like this :</p>
-<pre class="text"><code>-&amp;gt; [5][1]
+<pre class="computer_science"><code>-&gt; [5][1]
    [2][0]
    [3][0]
    [4][0]</code></pre>
@@ -6340,17 +6340,17 @@ The state of an object encompasses all of the (usually static) properties of the
 <h4>Answer accepted (score 168)</h4>
 <p>Intuitively, you can think of a binary indexed tree as a compressed representation of a binary tree that is itself an optimization of a standard array representation. This answer goes into one possible derivation.</p>
 <p>Let’s suppose, for example, that you want to store cumulative frequencies for a total of 7 different elements. You could start off by writing out seven buckets into which the numbers will be distributed:</p>
-<pre class="text"><code>[   ] [   ] [   ] [   ] [   ] [   ] [   ]
+<pre class="computer_science"><code>[   ] [   ] [   ] [   ] [   ] [   ] [   ]
   1     2     3     4     5     6     7</code></pre>
 <p>Now, let’s suppose that the cumulative frequencies look something like this:</p>
-<pre class="text"><code>[ 5 ] [ 6 ] [14 ] [25 ] [77 ] [105] [105]
+<pre class="computer_science"><code>[ 5 ] [ 6 ] [14 ] [25 ] [77 ] [105] [105]
   1     2     3     4     5     6     7</code></pre>
 <p>Using this version of the array, you can increment the cumulative frequency of any element by increasing the value of the number stored at that spot, then incrementing the frequencies of everything that come afterwards. For example, to increase the cumulative frequency of 3 by 7, we could add 7 to each element in the array at or after position 3, as shown here:</p>
-<pre class="text"><code>[ 5 ] [ 6 ] [21 ] [32 ] [84 ] [112] [112]
+<pre class="computer_science"><code>[ 5 ] [ 6 ] [21 ] [32 ] [84 ] [112] [112]
   1     2     3     4     5     6     7</code></pre>
 <p>The problem with this is that it takes O(n) time to do this, which is pretty slow if n is large.</p>
 <p>One way that we can think about improving this operation would be to change what we store in the buckets. Rather than storing the cumulative frequency up to the given point, you can instead think of just storing the amount that the current frequency has increased relative to the previous bucket. For example, in our case, we would rewrite the above buckets as follows:</p>
-<pre class="text"><code>Before:
+<pre class="computer_science"><code>Before:
 [ 5 ] [ 6 ] [21 ] [32 ] [84 ] [112] [112]
   1     2     3     4     5     6     7
 
@@ -6360,13 +6360,13 @@ After:
 <p>Now, we can increment the frequency within a bucket in time O(1) by just adding the appropriate amount to that bucket. However, the total cost of doing a lookup now becomes O(n), since we have to recompute the total in the bucket by summing up the values in all smaller buckets.</p>
 <p>The first major insight we need to get from here to a binary indexed tree is the following: rather than continuously recomputing the sum of the array elements that precede a particular element, what if we were to precompute the total sum of all the elements before specific points in the sequence? If we could do that, then we could figure out the cumulative sum at a point by just summing up the right combination of these precomputed sums.</p>
 <p>One way to do this is to change the representation from being an array of buckets to being a binary tree of nodes. Each node will be annotated with a value that represents the cumulative sum of all the nodes to the left of that given node. For example, suppose we construct the following binary tree from these nodes:</p>
-<pre class="text"><code>             4
+<pre class="computer_science"><code>             4
           /     \
          2       6
         / \     / \
        1   3   5   7</code></pre>
 <p>Now, we can augment each node by storing the cumulative sum of all the values including that node and its left subtree. For example, given our values, we would store the following:</p>
-<pre class="text"><code>Before:
+<pre class="computer_science"><code>Before:
 [ +5] [ +1] [+15] [+11] [+52] [+28] [ +0]
   1     2     3     4     5     6     7
 
@@ -6409,43 +6409,43 @@ Go upward to node (4). Counter is 21.
 </ul>
 <p>To increment the frequency of a node (and, implicitly, the frequencies of all nodes that come after it), we need to update the set of nodes in the tree that include that node in its left subtree. To do this, we do the following: increment the frequency for that node, then start walking up to the root of the tree. Any time you follow a link that takes you up as a left child, increment the frequency of the node you encounter by adding in the current value.</p>
 <p>For example, to increment the frequency of node 1 by five, we would do the following:</p>
-<pre class="text"><code>                 4
+<pre class="computer_science"><code>                 4
                [+32]
               /     \
            2           6
          [ +6]       [+80]
          /   \       /   \
-      &amp;gt; 1     3     5     7
+      &gt; 1     3     5     7
       [ +5] [+15] [+52] [ +0]</code></pre>
 <p>Starting at node 1, increment its frequency by 5 to get</p>
-<pre class="text"><code>                 4
+<pre class="computer_science"><code>                 4
                [+32]
               /     \
            2           6
          [ +6]       [+80]
          /   \       /   \
-      &amp;gt; 1     3     5     7
+      &gt; 1     3     5     7
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>Now, go to its parent:</p>
-<pre class="text"><code>                 4
+<pre class="computer_science"><code>                 4
                [+32]
               /     \
-         &amp;gt; 2           6
+         &gt; 2           6
          [ +6]       [+80]
          /   \       /   \
         1     3     5     7
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>We followed a left child link upward, so we increment this node’s frequency as well:</p>
-<pre class="text"><code>                 4
+<pre class="computer_science"><code>                 4
                [+32]
               /     \
-         &amp;gt; 2           6
+         &gt; 2           6
          [+11]       [+80]
          /   \       /   \
         1     3     5     7
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>We now go to its parent:</p>
-<pre class="text"><code>               &amp;gt; 4
+<pre class="computer_science"><code>               &gt; 4
                [+32]
               /     \
            2           6
@@ -6454,7 +6454,7 @@ Go upward to node (4). Counter is 21.
         1     3     5     7
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>That was a left child link, so we increment this node as well:</p>
-<pre class="text"><code>                 4
+<pre class="computer_science"><code>                 4
                [+37]
               /     \
            2           6
@@ -6464,7 +6464,7 @@ Go upward to node (4). Counter is 21.
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>And now we’re done!</p>
 <p>The final step is to convert from this to a binary indexed tree, and this is where we get to do some fun things with binary numbers. Let’s rewrite each bucket index in this tree in binary:</p>
-<pre class="text"><code>                100
+<pre class="computer_science"><code>                100
                [+37]
               /     \
           010         110
@@ -6473,7 +6473,7 @@ Go upward to node (4). Counter is 21.
        001   011   101   111
       [+10] [+15] [+52] [ +0]</code></pre>
 <p>Here, we can make a very, very cool observation. Take any of these binary numbers and find the very last 1 that was set in the number, then drop that bit off, along with all the bits that come after it. You are now left with the following:</p>
-<pre class="text"><code>              (empty)
+<pre class="computer_science"><code>              (empty)
                [+37]
               /     \
            0           1
@@ -6796,15 +6796,15 @@ etc
 <p>So yours would start out like this:</p>
 <p><img src="https://i.stack.imgur.com/9byto.png" alt="enter image description here"></p>
 <p>The heap invariant is that each parent is smaller than both its children. In the heap construction algorithm you work bottom up, restoring the heap invariant. One way to do this is a recursive post-order tree traversal:</p>
-<pre class="text"><code>Heapify (x):
-    if (x-&amp;gt;is_leaf) return x
-    l = Heapify (x-&amp;gt;left_child)
-    if (exists(x-&amp;gt;right_child)):
-        r = Heapify (x-&amp;gt;right_child)
-        if ((r-&amp;gt;value &amp;lt; x-&amp;gt;value) &amp;amp;&amp;amp; (r-&amp;gt;value &amp;lt; l-&amp;gt;value)):
-            swap(r-&amp;gt;value, x-&amp;gt;value)                    # r-&amp;gt;value was smallest
-    if (l-&amp;gt;value &amp;lt; x-&amp;gt;value):
-        swap(l-&amp;gt;value, x-&amp;gt;value)                        # l-&amp;gt;value was smallest
+<pre class="computer_science"><code>Heapify (x):
+    if (x-&gt;is_leaf) return x
+    l = Heapify (x-&gt;left_child)
+    if (exists(x-&gt;right_child)):
+        r = Heapify (x-&gt;right_child)
+        if ((r-&gt;value &lt; x-&gt;value) &amp;&amp; (r-&gt;value &lt; l-&gt;value)):
+            swap(r-&gt;value, x-&gt;value)                    # r-&gt;value was smallest
+    if (l-&gt;value &lt; x-&gt;value):
+        swap(l-&gt;value, x-&gt;value)                        # l-&gt;value was smallest
     return x</code></pre>
 <p>In actual code for heaps the heap is often represented as an array with the elements stored top-to-bottom and left-to-right in each level. The first element is the root, the second and third elements are the children of the root, and so on. In this case you can do the initial heap creation by working backwards through the array to get a post-order tree traversal for cheap (i.e., as an iterative algorithm that doesn’t need to recurse).</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -6820,7 +6820,7 @@ Give an <span class="math inline">\(O(n \lg k)\)</span> time algorithm to merge 
 </blockquote>
 <p>As there are <span class="math inline">\(k\)</span> sorted lists and total of <span class="math inline">\(n\)</span> values, let us assume each list contains <span class="math inline">\(\frac{n}{k}\)</span> numbers, moreover each of the lists are sorted in strictly ascending order, and the results will also be stored in the ascending order.</p>
 <p>My pseudo-code looks like this –</p>
-<pre class="text"><code>    list[k]   ; k sorted lists
+<pre class="computer_science"><code>    list[k]   ; k sorted lists
     heap[k]   ; an auxiliary array to hold the min-heap
     result[n] ; array to store the sorted list
     for i := 1 to k                 ; O(k)
@@ -6836,7 +6836,7 @@ Give an <span class="math inline">\(O(n \lg k)\)</span> time algorithm to merge 
         ; find the minimum value from the top of k lists - O(k)
         for j := 2 to k                 
         do
-            if GET-MIN(list[j]) &amp;lt; nextMin
+            if GET-MIN(list[j]) &lt; nextMin
                 nextMin := GET-MIN(list[j]) 
         done
         ; insert the next minimum into the heap - O(logk)
@@ -6848,7 +6848,7 @@ Give an <span class="math inline">\(O(n \lg k)\)</span> time algorithm to merge 
 <h4>Answer accepted (score 13)</h4>
 <p>The purpose of the heap is to give you the minimum, so I’m not sure what the purpose of this for-loop is - <code>for j := 2 to k</code>.</p>
 <p>My take on the pseudo-code:</p>
-<pre class="text"><code>lists[k][?]      // input lists
+<pre class="computer_science"><code>lists[k][?]      // input lists
 c = 0            // index in result
 result[n]        // output
 heap[k]          // stores index and applicable list and uses list value for comparison
@@ -6866,14 +6866,14 @@ while !heap.empty()           // runs O(n) times
   i,k = heap.deleteMin();     // O(log k)
   result[c++] = lists[k][i]
   i++
-  if (i &amp;lt; lists[k].length)    // insert only if not end-of-list
+  if (i &lt; lists[k].length)    // insert only if not end-of-list
     heap.insert(i, k)         // O(log k)</code></pre>
 <p>The total time complexity is thus <span class="math inline">\(O(k * \log k + n * 2 \log k) = O(n \log k)\)</span></p>
 <p>You can also, instead of <code>deleteMin</code> and <code>insert</code>, have a <code>getMin</code> (<span class="math inline">\(O(1)\)</span>) and an <code>incrementIndex</code> (<span class="math inline">\(O(\log k)\)</span>), which will reduce the constant factor, but not the complexity.</p>
 <p>
 <strong>Example:</strong><br> (using value rather than index and list index and heap represented as a sorted array for clarity)
 </p>
-<pre class="text"><code>Input: [1, 10, 15], [4, 5, 6], [7, 8, 9]
+<pre class="computer_science"><code>Input: [1, 10, 15], [4, 5, 6], [7, 8, 9]
 
 Initial heap: [1, 4, 7]
 
@@ -6957,11 +6957,11 @@ The invariant holds after an iteration: We proceed in the same way. Assume the <
 I have a very simple question. What is the right standard convention to use for declaring arrays?
 </p>
 <p>I understand that for a simple declaration of a variable as an integer, this is the convention:</p>
-<pre class="text"><code>DECLARE myVar : INTEGER</code></pre>
+<pre class="computer_science"><code>DECLARE myVar : INTEGER</code></pre>
 <p>What about for an integer array of 10 elements?</p>
-<pre class="text"><code>DECLARE myVar : ARRAY[1,10] of INT</code></pre>
+<pre class="computer_science"><code>DECLARE myVar : ARRAY[1,10] of INT</code></pre>
 <p>or</p>
-<pre class="text"><code>DECLARE myVar[1,10] : ARRAY of INT</code></pre>
+<pre class="computer_science"><code>DECLARE myVar[1,10] : ARRAY of INT</code></pre>
 <p>or something else?</p>
 </section>
 <section id="answer-accepted-score-7-1" class="level4">
@@ -6972,7 +6972,7 @@ I have a very simple question. What is the right standard convention to use for 
 <h4>Answer 2 (score 3)</h4>
 <p>There are no conventions in pseudocode. You can use whatever convention you want, as long as you think that the reader can understand what you mean. If you’re not sure that your convention is transparent enough, explain it.</p>
 <p>There is no reason to use a programming-language-like convention like you give. How about:</p>
-<pre class="text"><code>$myVar$ is an integer.
+<pre class="computer_science"><code>$myVar$ is an integer.
 $myArray$ is an array of 10 integers.</code></pre>
 <p>In the second case, you can explain that your arrays are always 1-based.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -7079,7 +7079,7 @@ note: page fault is denoted by <code>p</code> and no page fault by <code>n</code
 <code>physical memory = 400 bytes</code><br> <code>page size = 100 bytes</code><br> <code>number of frames = 4</code>
 </p>
 </blockquote>
-<pre class="text"><code>1 2 3 4 5 1 2 3 4 5
+<pre class="computer_science"><code>1 2 3 4 5 1 2 3 4 5
 p p p p p p p p p p
 1 1 1 1 5 5 5 5 4 4
   2 2 2 2 1 1 1 1 5
@@ -7092,7 +7092,7 @@ p p p p p p p p p p
 <code>physical memory = 400 bytes</code><br> <code>page size = 50 bytes</code><br> <code>number of frames = 8</code>
 </p>
 </blockquote>
-<pre class="text"><code>1 2 3 4 5 1 2 3 4 5
+<pre class="computer_science"><code>1 2 3 4 5 1 2 3 4 5
 p p p p p n n n n n 
 1 1 1 1 1 1 1 1 1 1
   2 2 2 2 2 2 2 2 2
@@ -7110,7 +7110,7 @@ p p p p p n n n n n
 <blockquote>
 1 2 3 4 5 1 2 3 4 5 =&gt; (1 2) (3 4) (5 1) (2 3) (4 5) =&gt; 1 3 5 2 4
 </blockquote>
-<pre class="text"><code>1 3 5 2 4
+<pre class="computer_science"><code>1 3 5 2 4
 p p p p p 
 1 1 5 5 4 
   3 3 2 2</code></pre>

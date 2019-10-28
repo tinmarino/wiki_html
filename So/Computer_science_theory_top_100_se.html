@@ -1485,22 +1485,22 @@ X 2 1        # if the signal of qubit &#39;1&#39; is True, execute the Pauli-X o
 <p>The above is naturally at such low level that you wouldn’t want to hand-code it. The benefit of the measurement calculus is that it introduces ‘patterns’, some sort of composable macros that allow you to compose larger algorithms as you would with subroutines. You start off with 1-instruction patterns and grow larger patterns from there.</p>
 <p>Instead of an assembler-like instruction sequence, it is also common to write the program down as a graph:</p>
 <pre><code> input                .........
-    \--&amp;gt; ( E ) ---&amp;gt; (M:0)     v
-(N) ---&amp;gt; (   ) ------------&amp;gt; (X) ---&amp;gt; output</code></pre>
+    \--&gt; ( E ) ---&gt; (M:0)     v
+(N) ---&gt; (   ) ------------&gt; (X) ---&gt; output</code></pre>
 <p>where full arrows are qubit dependencies and the dotted arrow is a ‘signal’ dependency.</p>
 <p>The following is the same Hadamard example expressed in a little programming tool as I would imagine a ‘quantum programmer’ would use.</p>
 <p><img src="https://i.stack.imgur.com/B6LcK.png" alt="Measurement Calculus Tool"></p>
 <p><strong>edit:</strong> (adding relation with ‘classical’ computers) Classical computers are still really efficient in what they do best, and so the vision is that quantum computers will be used to off-load certain algorithms, analogous to how current computer offloads graphics to a GPU. As you have seen above, the CPU would control the quantum computer by sending it an instruction stream and read back the measurement results from the boolean ‘signals’. This way you have a strict separation of classical control by the CPU and quantum state and effects on the quantum computer.</p>
 <p>For example, I’m going to use my quantum co-processor to calculate a random boolean or cointoss. Classical computers are deterministic, so its bad at returning a good random number. Quantum computers are inherently probabilistic though, all I have to do to get a random 0 or 1 is to measure out a equally-balanced qubit. The communication between the CPU and ‘QPU’ would look something like this:</p>
 <pre><code> qrand()       N 1; M 1 0;
- ==&amp;gt;  | CPU | ------------&amp;gt; | QPU |  ==&amp;gt; { q1 } ,  []
+ ==&gt;  | CPU | ------------&gt; | QPU |  ==&gt; { q1 } ,  []
                  start()
-      |     | ------------&amp;gt; |     |  ==&amp;gt; { } , [q1: 0]
+      |     | ------------&gt; |     |  ==&gt; { } , [q1: 0]
                  read(q1)         
-      |     | ------------&amp;gt; |     |
+      |     | ------------&gt; |     |
                   q1: 0 
- 0    |     | &amp;lt;-----------  |     |
- &amp;lt;==</code></pre>
+ 0    |     | &lt;-----------  |     |
+ &lt;==</code></pre>
 <p>Where <code>{ ... }</code> is the QPU’s quantum memory containing qubits and <code>[...]</code> is its classical (signal) memory containing booleans.</p>
 <hr>
 <ol>
@@ -1798,7 +1798,7 @@ end while</code></pre>
     best = null
     for i=1 to k
         ind = pop[random(1, N)]
-        if (best == null) or fitness(ind) &amp;gt; fitness(best)
+        if (best == null) or fitness(ind) &gt; fitness(best)
             best = ind
     return best </code></pre>
 <p>Let <code>k=1</code>. Looking at the pseudocode, this yields purely random selection. You pick one individual at random and return it.</p>
@@ -4776,15 +4776,15 @@ Popping is done as follows. If <span class="math inline">\(first\)</span> is emp
 </ul>
 <p><strong>C# code for the first algorithm</strong></p>
 <p>This could should be quite readable, even if you’ve never seen C# before. If you don’t know what generics are, just replace all instances of ‘T’ by ‘string’ in your mind, for a stack of strings.</p>
-<pre><code>public class Stack&amp;lt;T&amp;gt; {
-    private Queue&amp;lt;T&amp;gt; first = new Queue&amp;lt;T&amp;gt;();
-    private Queue&amp;lt;T&amp;gt; second = new Queue&amp;lt;T&amp;gt;();
+<pre><code>public class Stack&lt;T&gt; {
+    private Queue&lt;T&gt; first = new Queue&lt;T&gt;();
+    private Queue&lt;T&gt; second = new Queue&lt;T&gt;();
     public void Push(T value) {
         first.Enqueue(value);
     }
     public T Pop() {
         if (first.Count == 0) {
-            if (second.Count &amp;gt; 0)
+            if (second.Count &gt; 0)
                 return second.Dequeue();
             else
                 throw new InvalidOperationException(&quot;Empty stack.&quot;);
@@ -4793,17 +4793,17 @@ Popping is done as follows. If <span class="math inline">\(first\)</span> is emp
             T[] reverser = new T[nrOfItemsInFirst];
 
             // Reverse first
-            for (int i = 0; i &amp;lt; nrOfItemsInFirst; i++)
+            for (int i = 0; i &lt; nrOfItemsInFirst; i++)
                 reverser[i] = first.Dequeue();    
-            for (int i = nrOfItemsInFirst - 1; i &amp;gt;= 0; i--)
+            for (int i = nrOfItemsInFirst - 1; i &gt;= 0; i--)
                 first.Enqueue(reverser[i]);
 
             // Append second to first
-            while (second.Count &amp;gt; 0)
+            while (second.Count &gt; 0)
                 first.Enqueue(second.Dequeue());
 
             // Swap first and second
-            Queue&amp;lt;T&amp;gt; temp = first; first = second; second = temp;
+            Queue&lt;T&gt; temp = first; first = second; second = temp;
 
             return second.Dequeue();
         }
@@ -4824,9 +4824,9 @@ Popping is done as follows. If <span class="math inline">\(first\)</span> is emp
 </ul>
 <p><strong>C# code for the first algorithm</strong></p>
 <p>This could should be quite readable, even if you’ve never seen C# before. If you don’t know what generics are, just replace all instances of ‘T’ by ‘string’ in your mind, for a stack of strings.</p>
-<pre><code>public class Stack&amp;lt;T&amp;gt; {
-    private Queue&amp;lt;T&amp;gt; first = new Queue&amp;lt;T&amp;gt;();
-    private Queue&amp;lt;T&amp;gt; second = new Queue&amp;lt;T&amp;gt;();
+<pre><code>public class Stack&lt;T&gt; {
+    private Queue&lt;T&gt; first = new Queue&lt;T&gt;();
+    private Queue&lt;T&gt; second = new Queue&lt;T&gt;();
     int unsortedPart = 0;
     public void Push(T value) {
         unsortedPart++;
@@ -4834,7 +4834,7 @@ Popping is done as follows. If <span class="math inline">\(first\)</span> is emp
     }
     public T Pop() {
         if (first.Count == 0) {
-            if (second.Count &amp;gt; 0)
+            if (second.Count &gt; 0)
                 return second.Dequeue();
             else
                 throw new InvalidOperationException(&quot;Empty stack.&quot;);
@@ -4842,23 +4842,23 @@ Popping is done as follows. If <span class="math inline">\(first\)</span> is emp
             int nrOfItemsInFirst = first.Count;
             T[] reverser = new T[nrOfItemsInFirst];
 
-            for (int i = nrOfItemsInFirst - unsortedPart - 1; i &amp;gt;= 0; i--)
+            for (int i = nrOfItemsInFirst - unsortedPart - 1; i &gt;= 0; i--)
                 reverser[i] = first.Dequeue();
 
-            for (int i = nrOfItemsInFirst - unsortedPart; i &amp;lt; nrOfItemsInFirst; i++)
+            for (int i = nrOfItemsInFirst - unsortedPart; i &lt; nrOfItemsInFirst; i++)
                 reverser[i] = first.Dequeue();
 
-            for (int i = nrOfItemsInFirst - 1; i &amp;gt;= 0; i--)
+            for (int i = nrOfItemsInFirst - 1; i &gt;= 0; i--)
                 first.Enqueue(reverser[i]);
 
             unsortedPart = 0;
-            if (first.Count * first.Count &amp;lt; second.Count)
+            if (first.Count * first.Count &lt; second.Count)
                 return first.Dequeue();
             else {
-                while (second.Count &amp;gt; 0)
+                while (second.Count &gt; 0)
                     first.Enqueue(second.Dequeue());
 
-                Queue&amp;lt;T&amp;gt; temp = first; first = second; second = temp;
+                Queue&lt;T&gt; temp = first; first = second; second = temp;
 
                 return second.Dequeue();
             }
@@ -4891,9 +4891,9 @@ Pop is done by dequeueing <span class="math inline">\(first\)</span> and returni
 </ul>
 <p><strong>C# code for the first algorithm</strong></p>
 <p>This code should be quite readable, even if you’ve never seen C# before. If you don’t know what generics are, just replace all instances of ‘T’ by ‘string’ in your mind, for a stack of strings.</p>
-<pre><code>public class Stack&amp;lt;T&amp;gt; {
-    private Queue&amp;lt;T&amp;gt; first = new Queue&amp;lt;T&amp;gt;();
-    private Queue&amp;lt;T&amp;gt; second = new Queue&amp;lt;T&amp;gt;();
+<pre><code>public class Stack&lt;T&gt; {
+    private Queue&lt;T&gt; first = new Queue&lt;T&gt;();
+    private Queue&lt;T&gt; second = new Queue&lt;T&gt;();
     public void Push(T value) {
         // I&#39;ll explain what&#39;s happening in these comments. Assume we pushed
         // integers onto the stack in increasing order: ie, we pushed 1 first,
@@ -4911,7 +4911,7 @@ Pop is done by dequeueing <span class="math inline">\(first\)</span> and returni
         // second: in 1 2 3 4 out
 
         // We restore the stack order in first:
-        for (int i = 0; i &amp;lt; first.Count - 1; i++)
+        for (int i = 0; i &lt; first.Count - 1; i++)
             first.Enqueue(first.Dequeue());
         // first.Enqueue(first.Dequeue()); is executed twice for this example, the 
         // following happens:
@@ -4921,8 +4921,8 @@ Pop is done by dequeueing <span class="math inline">\(first\)</span> and returni
         // second: in 1 2 3 4 out
 
         // first exeeded its capacity, so we merge first and second.
-        if (first.Count * first.Count &amp;gt; second.Count) {
-            while (second.Count &amp;gt; 0)
+        if (first.Count * first.Count &gt; second.Count) {
+            while (second.Count &gt; 0)
                 first.Enqueue(second.Dequeue());
             // first: in 4 5 6 7 out
             // second: in 1 2 3 out
@@ -4933,14 +4933,14 @@ Pop is done by dequeueing <span class="math inline">\(first\)</span> and returni
             // first: in 1 2 3 4 5 6 7 out
             // second: in out
 
-            Queue&amp;lt;T&amp;gt; temp = first; first = second; second = temp;
+            Queue&lt;T&gt; temp = first; first = second; second = temp;
             // first: in out
             // second: in 1 2 3 4 5 6 7 out
         }
     }
     public T Pop() {
         if (first.Count == 0) {
-            if (second.Count &amp;gt; 0)
+            if (second.Count &gt; 0)
                 return second.Dequeue();
             else
                 throw new InvalidOperationException(&quot;Empty stack.&quot;);

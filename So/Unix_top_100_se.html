@@ -204,7 +204,7 @@ How can I copy a file from <code>System B</code> to <code>System A</code>? And, 
 <section id="answer-2-score-991" class="level4">
 <h4>Answer 2 (score 991)</h4>
 <p>Syntax:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">scp</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="bu">source</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">destination</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">scp</span> <span class="op">&lt;</span>source<span class="op">&gt;</span> <span class="op">&lt;</span>destination<span class="op">&gt;</span></a></code></pre></div>
 <p>To copy a file from <code>B</code> to <code>A</code> while logged into <code>B</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">scp</span> /path/to/file username@a:/path/to/destination</a></code></pre></div>
 <p>To copy a file from <code>B</code> to <code>A</code> while logged into <code>A</code>:</p>
@@ -663,7 +663,7 @@ Recursive, regular files (<strong>including hidden ones</strong>) in this and al
 <p>Bash can’t check directly for regular files, a loop is needed (braces avoid setting the options globally):</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">(</span> <span class="bu">shopt</span> -s globstar dotglob<span class="kw">;</span></a>
 <a class="sourceLine" id="cb48-2" title="2">    <span class="kw">for</span> <span class="fu">file</span> in **<span class="kw">;</span> <span class="kw">do</span></a>
-<a class="sourceLine" id="cb48-3" title="3">        <span class="kw">if [[</span> <span class="ot">-f</span> <span class="va">$file</span><span class="kw"> ]]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">; [[</span> <span class="ot">-w</span> <span class="va">$file</span><span class="kw"> ]]</span>; <span class="kw">then</span></a>
+<a class="sourceLine" id="cb48-3" title="3">        <span class="kw">if [[</span> <span class="ot">-f</span> <span class="va">$file</span><span class="kw"> ]]</span> <span class="kw">&amp;&amp; [[</span> <span class="ot">-w</span> <span class="va">$file</span><span class="kw"> ]]</span>; <span class="kw">then</span></a>
 <a class="sourceLine" id="cb48-4" title="4">            <span class="fu">sed</span> -i -- <span class="st">&#39;s/foo/bar/g&#39;</span> <span class="st">&quot;</span><span class="va">$file</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb48-5" title="5">        <span class="kw">fi</span></a>
 <a class="sourceLine" id="cb48-6" title="6">    <span class="kw">done</span></a>
@@ -780,14 +780,14 @@ Or, if you have too many pattern pairs for the above to be feasible, you can rea
 </p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">pattern</span> <span class="va">replacement</span>; <span class="kw">do</span>   </a>
 <a class="sourceLine" id="cb64-2" title="2">    <span class="fu">sed</span> -i <span class="st">&quot;s/</span><span class="va">$pattern</span><span class="st">/</span><span class="va">$replacement</span><span class="st">/&quot;</span> file</a>
-<a class="sourceLine" id="cb64-3" title="3"><span class="kw">done</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">patterns.txt</span></a></code></pre></div>
+<a class="sourceLine" id="cb64-3" title="3"><span class="kw">done</span> <span class="op">&lt;</span> <span class="ex">patterns.txt</span></a></code></pre></div>
 </li>
 <li>
 <p>
 That will be quite slow for long lists of patterns and large data files so you might want to read the patterns and create a <code>sed</code> script from them instead. The following assumes a <em>&lt;space&gt;</em> delimiter separates a list of <em>MATCH&lt;space&gt;REPLACE</em> pairs occurring one-per-line in the file <em><code>patterns.txt</code></em> :
 </p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb65-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s| *\([^ ]*\) *\([^ ]*\).*|s/\1/\2/g|&#39;</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">patterns.txt</span> <span class="kw">|</span></a>
-<a class="sourceLine" id="cb65-2" title="2"><span class="fu">sed</span> -f- ./editfile <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">outfile</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb65-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s| *\([^ ]*\) *\([^ ]*\).*|s/\1/\2/g|&#39;</span> <span class="op">&lt;</span>patterns.txt <span class="kw">|</span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="fu">sed</span> -f- ./editfile <span class="op">&gt;</span>outfile</a></code></pre></div>
 The above format is largely arbitrary and, for example, doesn’t allow for a <em>&lt;space&gt;</em> in either of <em>MATCH</em> or <em>REPLACE</em>. The method is very general though: basically, if you can create an output stream which looks like a <code>sed</code> script, then you can source that stream as a <code>sed</code> script by specifying <code>sed</code>’s script file as <code>-</code>stdin.
 </li>
 <li>
@@ -798,24 +798,24 @@ You can combine and concatenate multiple scripts in similar fashion:
 <a class="sourceLine" id="cb66-2" title="2"><span class="fu">sed</span> -e<span class="st">&#39;#some expression script&#39;</span>  \</a>
 <a class="sourceLine" id="cb66-3" title="3">    -f./script_file -f-          \</a>
 <a class="sourceLine" id="cb66-4" title="4">    -e<span class="st">&#39;#more inline expressions&#39;</span> \</a>
-<a class="sourceLine" id="cb66-5" title="5">./actual_edit_file <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">./outfile</span></a></code></pre></div>
+<a class="sourceLine" id="cb66-5" title="5">./actual_edit_file <span class="op">&gt;</span>./outfile</a></code></pre></div>
 A POSIX <code>sed</code> will concatenate all scripts into one in the order they appear on the command-line. None of these need end in a <code>\n</code>ewline.
 </li>
 <li>
 <p>
 <code>grep</code> can work the same way:
 </p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb67-1" title="1"><span class="fu">sed</span> -e<span class="st">&#39;#generate a pattern list&#39;</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;in</span> <span class="kw">|</span></a>
+<div class="sourceCode" id="cb67"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb67-1" title="1"><span class="fu">sed</span> -e<span class="st">&#39;#generate a pattern list&#39;</span> <span class="op">&lt;</span>in <span class="kw">|</span></a>
 <a class="sourceLine" id="cb67-2" title="2"><span class="fu">grep</span> -f- ./grepped_file</a></code></pre></div>
 </li>
 <li>
 <p>
 When working with fixed-strings as patterns, it is good practice to escape regular expression <em>metacharacters</em>. You can do this rather easily:
 </p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb68-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s/[]$&amp;amp;^*\./[]/\\&amp;amp;/g</span></a>
+<div class="sourceCode" id="cb68"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb68-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s/[]$&amp;^*\./[]/\\&amp;/g</span></a>
 <a class="sourceLine" id="cb68-2" title="2"><span class="st">     s| *\([^ ]*\) *\([^ ]*\).*|s/\1/\2/g|</span></a>
-<a class="sourceLine" id="cb68-3" title="3"><span class="st">&#39;</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">patterns.txt</span> <span class="kw">|</span></a>
-<a class="sourceLine" id="cb68-4" title="4"><span class="fu">sed</span> -f- ./editfile <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">outfile</span></a></code></pre></div>
+<a class="sourceLine" id="cb68-3" title="3"><span class="st">&#39;</span> <span class="op">&lt;</span>patterns.txt <span class="kw">|</span></a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="fu">sed</span> -f- ./editfile <span class="op">&gt;</span>outfile</a></code></pre></div>
 </li>
 </ul>
 <h5>
@@ -930,17 +930,17 @@ You could also use find and sed, but I find that this little line of perl works 
 <section id="answer-3-score-22-1" class="level4">
 <h4>Answer 3 (score 22)</h4>
 <p>Like TC1 said, <code>-F</code> seems to be usable option:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" title="1">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">cat</span> text</a>
+<div class="sourceCode" id="cb87"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb87-1" title="1">$<span class="op">&gt;</span> <span class="fu">cat</span> text</a>
 <a class="sourceLine" id="cb87-2" title="2"><span class="ex">some</span> text</a>
 <a class="sourceLine" id="cb87-3" title="3"><span class="ex">foo</span></a>
 <a class="sourceLine" id="cb87-4" title="4"><span class="ex">another</span> text</a>
 <a class="sourceLine" id="cb87-5" title="5"><span class="ex">bar</span></a>
 <a class="sourceLine" id="cb87-6" title="6"><span class="ex">end</span> of file</a>
 <a class="sourceLine" id="cb87-7" title="7"></a>
-<a class="sourceLine" id="cb87-8" title="8">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">patterns=</span><span class="st">&quot;foo</span></a>
+<a class="sourceLine" id="cb87-8" title="8">$<span class="op">&gt;</span> <span class="va">patterns=</span><span class="st">&quot;foo</span></a>
 <a class="sourceLine" id="cb87-9" title="9"><span class="st">bar&quot;</span> </a>
 <a class="sourceLine" id="cb87-10" title="10"></a>
-<a class="sourceLine" id="cb87-11" title="11">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">grep</span> -F <span class="st">&quot;</span><span class="va">${patterns}</span><span class="st">&quot;</span> text</a>
+<a class="sourceLine" id="cb87-11" title="11">$<span class="op">&gt;</span> <span class="fu">grep</span> -F <span class="st">&quot;</span><span class="va">${patterns}</span><span class="st">&quot;</span> text</a>
 <a class="sourceLine" id="cb87-12" title="12"><span class="ex">foo</span></a>
 <a class="sourceLine" id="cb87-13" title="13"><span class="ex">bar</span></a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -1054,11 +1054,11 @@ and store the output as a <strong>f</strong> (file) named <em><code>archive.tar.
 </li>
 </ul>
 <p>The <code>tar</code> command offers <code>gzip</code> support (via the <code>-z</code> flag) purely for your convenience. The <code>gzip</code> command/lib is completely separate. The command above is effectively the same as</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" title="1"><span class="fu">tar</span> -cv directory <span class="kw">|</span> <span class="fu">gzip</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">archive.tar.gz</span></a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb98-1" title="1"><span class="fu">tar</span> -cv directory <span class="kw">|</span> <span class="fu">gzip</span> <span class="op">&gt;</span> archive.tar.gz</a></code></pre></div>
 <p>To decompress and unpack the archive into the current directory you would use</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb99-1" title="1"><span class="fu">tar</span> -zxvf archive.tar.gz</a></code></pre></div>
 <p>That command is effectively the same as</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" title="1"><span class="fu">gunzip</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">archive.tar.gz</span> <span class="kw">|</span> <span class="fu">tar</span> -xv</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb100-1" title="1"><span class="fu">gunzip</span> <span class="op">&lt;</span> archive.tar.gz <span class="kw">|</span> <span class="fu">tar</span> -xv</a></code></pre></div>
 <p><code>tar</code> has many, many, MANY other options and uses as well; I heartily recommend reading through its manpage sometime.</p>
 </section>
 <section id="answer-3-score-47" class="level4">
@@ -1205,7 +1205,7 @@ How to use GNOME Shell?
 </h3>
 <p>The default GNOME Desktop of CentOS 7 starts with <em>classic mode</em> but if you’d like to use GNOME Shell, set like follows:</p>
 <p><strong>Option A:</strong> If you start GNOME with <code>startx</code>, set like follows.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># echo &quot;exec gnome-session&quot; &amp;gt;&amp;gt; ~/.xinitrc</span></a>
+<div class="sourceCode" id="cb110"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb110-1" title="1"><span class="co"># echo &quot;exec gnome-session&quot; &gt;&gt; ~/.xinitrc</span></a>
 <a class="sourceLine" id="cb110-2" title="2"><span class="co"># startx </span></a></code></pre></div>
 <p><strong>Option B:</strong> set the system graphical login <a href="http://www.server-world.info/en/note?os=CentOS_7&amp;p=runlevel" rel="noreferrer"><code>systemctl set-default graphical.target</code></a> and reboot the system. After system starts</p>
 <ol>
@@ -1242,7 +1242,7 @@ Install KDE Desktop Environment on here.
 <p>
 Input a command like below after finishing installation:
 </p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" title="1"><span class="co"># echo &quot;exec startkde&quot; &amp;gt;&amp;gt; ~/.xinitrc</span></a>
+<div class="sourceCode" id="cb112"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb112-1" title="1"><span class="co"># echo &quot;exec startkde&quot; &gt;&gt; ~/.xinitrc</span></a>
 <a class="sourceLine" id="cb112-2" title="2"><span class="co"># startx</span></a></code></pre></div>
 </li>
 <li>
@@ -1286,7 +1286,7 @@ And now install the Cinnamon Desktop Environment from EPEL Repository:
 <p>
 Input a command like below after finishing installation:
 </p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" title="1"><span class="co"># echo &quot;exec /usr/bin/cinnamon-session&quot; &amp;gt;&amp;gt; ~/.xinitrc</span></a>
+<div class="sourceCode" id="cb115"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb115-1" title="1"><span class="co"># echo &quot;exec /usr/bin/cinnamon-session&quot; &gt;&gt; ~/.xinitrc</span></a>
 <a class="sourceLine" id="cb115-2" title="2"><span class="co"># startx </span></a></code></pre></div>
 </li>
 <li>
@@ -1331,7 +1331,7 @@ Install MATE Desktop Environment on here (You will need to add the EPEL Reposito
 <p>
 Input a command like below after finishing installation:
 </p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" title="1"><span class="co"># echo &quot;exec /usr/bin/mate-session&quot; &amp;gt;&amp;gt; ~/.xinitrc </span></a>
+<div class="sourceCode" id="cb117"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb117-1" title="1"><span class="co"># echo &quot;exec /usr/bin/mate-session&quot; &gt;&gt; ~/.xinitrc </span></a>
 <a class="sourceLine" id="cb117-2" title="2"><span class="co"># startx</span></a></code></pre></div>
 </li>
 <li>
@@ -1356,7 +1356,7 @@ Install Xfce Desktop Environment on here (You will need to add the EPEL Reposito
 <p>
 Input a command like below after finishing installation:
 </p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" title="1"><span class="co"># echo &quot;exec /usr/bin/xfce4-session&quot; &amp;gt;&amp;gt; ~/.xinitrc </span></a>
+<div class="sourceCode" id="cb119"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb119-1" title="1"><span class="co"># echo &quot;exec /usr/bin/xfce4-session&quot; &gt;&gt; ~/.xinitrc </span></a>
 <a class="sourceLine" id="cb119-2" title="2"><span class="co"># startx</span></a></code></pre></div>
 </li>
 <li>
@@ -1955,21 +1955,21 @@ All in all, it works but I don’t think it is the intended result asked for. A 
 <p>You can’t use a terminal to create a file. You can use an application running in a terminal. Just invoke any non-GUI editor (<code>emacs -nw</code>, <code>joe</code>, <code>nano</code>, <code>vi</code>, <code>vim</code>, …).</p>
 <p>If you meant using the command line, then you are asking how to create a file using the shell. See <a href="https://unix.stackexchange.com/questions/4126/what-is-the-exact-difference-between-a-terminal-a-shell-a-tty-and-a-con/4132#4132">What is the exact difference between a ‘terminal’, a ‘shell’, a ‘tty’ and a ‘console’?</a></p>
 <p>The basic way to create a file with the shell is with <a href="http://en.wikipedia.org/wiki/Redirection_(computing)" rel="noreferrer">output redirection</a>. For example, the following command creates a file called <code>foo.txt</code> containing the line <code>Hello, world.</code></p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb180-1" title="1"><span class="bu">echo</span> <span class="st">&#39;Hello, world.&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb180-1" title="1"><span class="bu">echo</span> <span class="st">&#39;Hello, world.&#39;</span> <span class="op">&gt;</span>foo.txt</a></code></pre></div>
 <p>If you want to write multiple lines, here are a few possibilities. You can use <code>printf</code>.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb181-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;First line.&#39;</span> <span class="st">&#39;Second line.&#39;</span> <span class="st">&#39;Third line.&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb181-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;First line.&#39;</span> <span class="st">&#39;Second line.&#39;</span> <span class="st">&#39;Third line.&#39;</span> <span class="op">&gt;</span>foo.txt</a></code></pre></div>
 <p>You can use a string literal containing newlines.</p>
 <div class="sourceCode" id="cb182"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb182-1" title="1"><span class="bu">echo</span> <span class="st">&#39;First line.</span></a>
 <a class="sourceLine" id="cb182-2" title="2"><span class="st">Second line.</span></a>
-<a class="sourceLine" id="cb182-3" title="3"><span class="st">Third line.&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<a class="sourceLine" id="cb182-3" title="3"><span class="st">Third line.&#39;</span> <span class="op">&gt;</span>foo.txt</a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb183-1" title="1"><span class="bu">echo</span> <span class="st">$&#39;First line.</span><span class="dt">\n</span><span class="st">Second line.</span><span class="dt">\n</span><span class="st">Third line.&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb183-1" title="1"><span class="bu">echo</span> <span class="st">$&#39;First line.</span><span class="dt">\n</span><span class="st">Second line.</span><span class="dt">\n</span><span class="st">Third line.&#39;</span> <span class="op">&gt;</span>foo.txt</a></code></pre></div>
 <p>Another possibility is to group commands.</p>
 <div class="sourceCode" id="cb184"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">{</span></a>
 <a class="sourceLine" id="cb184-2" title="2">  <span class="bu">echo</span> <span class="st">&#39;First line.&#39;</span></a>
 <a class="sourceLine" id="cb184-3" title="3">  <span class="bu">echo</span> <span class="st">&#39;Second line.&#39;</span></a>
 <a class="sourceLine" id="cb184-4" title="4">  <span class="bu">echo</span> <span class="st">&#39;Third line.&#39;</span></a>
-<a class="sourceLine" id="cb184-5" title="5"><span class="kw">}</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<a class="sourceLine" id="cb184-5" title="5"><span class="kw">}</span> <span class="op">&gt;</span><span class="ex">foo.txt</span></a></code></pre></div>
 <p>On the command line, you can do this more directly with <code>cat</code>. Redirect its output to the file and type the input line by line on <code>cat</code>’s standard input. Press <kbd>Ctrl</kbd>+<kbd>D</kbd> at the beginning of the line to indicate the end of the input.</p>
 <pre>
 $ <strong>cat &gt;foo.txt</strong>
@@ -1979,25 +1979,25 @@ $ <strong>cat &gt;foo.txt</strong>
 <kbd>Ctrl+D</kbd>
 </pre>
 <p>In a script you would use a <a href="http://en.wikipedia.org/wiki/Here_document" rel="noreferrer">here document</a> to achieve the same effect:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb185-1" title="1"><span class="fu">cat</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">EOF</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a>
-<a class="sourceLine" id="cb185-2" title="2"><span class="ex">First</span> line.</a>
-<a class="sourceLine" id="cb185-3" title="3"><span class="ex">Second</span> line.</a>
-<a class="sourceLine" id="cb185-4" title="4"><span class="ex">Third</span> line.</a>
-<a class="sourceLine" id="cb185-5" title="5"><span class="ex">EOF</span></a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb185-1" title="1"><span class="fu">cat</span> <span class="op">&lt;&lt;EOF</span> <span class="op">&gt;</span><span class="ex">foo.txt</span></a>
+<a class="sourceLine" id="cb185-2" title="2">First line.</a>
+<a class="sourceLine" id="cb185-3" title="3">Second line.</a>
+<a class="sourceLine" id="cb185-4" title="4">Third line.</a>
+<a class="sourceLine" id="cb185-5" title="5">EOF</a></code></pre></div>
 <p>If you just want to create an empty file, you can use the <code>touch</code> command: it creates the file if it doesn’t exist, and just updates its last-modified date if it exists.</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb186-1" title="1"><span class="fu">touch</span> foo.txt</a></code></pre></div>
 <p>Equivalently:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb187-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb187-1" title="1"><span class="op">&gt;&gt;</span><span class="ex">foo.txt</span></a></code></pre></div>
 <p>i.e. open <code>foo.txt</code> for appending, but write 0 bytes to it — this creates the file but doesn’t modify it. Unlike <code>touch</code>, this doesn’t update the file’s last-modified date if it already existed.</p>
 <p>To create an empty file, and remove the file’s content if the file already existed, you can use</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb188-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">foo.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb188-1" title="1"><span class="op">&gt;</span><span class="ex">foo.txt</span></a></code></pre></div>
 </section>
 <section id="answer-3-score-13" class="level4">
 <h4>Answer 3 (score 13)</h4>
 <div class="sourceCode" id="cb189"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb189-1" title="1"><span class="fu">touch</span> ~/Desktop/something.txt</a></code></pre></div>
 <p>This will create an empty <code>txt</code> file.</p>
 <p>Or</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb190-1" title="1"><span class="bu">echo</span> <span class="st">&quot;Hello&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">~/Desktop/somethingelse.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb190-1" title="1"><span class="bu">echo</span> <span class="st">&quot;Hello&quot;</span> <span class="op">&gt;</span> ~/Desktop/somethingelse.txt</a></code></pre></div>
 <p>This will create a <code>txt</code> file saying “Hello”.</p>
 <div class="sourceCode" id="cb191"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb191-1" title="1"><span class="fu">nano</span> ~/Desktop/anotherfile.txt</a></code></pre></div>
 <p>This will open <code>~/Desktop/anotherfile.txt</code> in <code>nano</code>, or if it doesn’t exist, it will create it and open it in <code>nano</code>.</p>
@@ -2144,45 +2144,45 @@ Step 1. Open a terminal window, <kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>T</kbd> on m
 <p>
 So <code>&quot;line then new line 'tab' then text&quot;</code> I think its a sensitive format. I know you can do this:
 </p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb212-1" title="1"><span class="fu">cat</span> temp.txt <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">data.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb212-1" title="1"><span class="fu">cat</span> temp.txt <span class="op">&gt;&gt;</span> data.txt</a></code></pre></div>
 <p>But it seems weird since its two lines. Is there a way to append that in this format:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb213-1" title="1"><span class="bu">echo</span> <span class="st">&quot;hello&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb213-1" title="1"><span class="bu">echo</span> <span class="st">&quot;hello&quot;</span> <span class="op">&gt;&gt;</span> greetings.txt</a></code></pre></div>
 </section>
 <section id="answer-accepted-score-533" class="level4">
 <h4>Answer accepted (score 533)</h4>
 <div class="sourceCode" id="cb214"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb214-1" title="1"><span class="co"># possibility 1:</span></a>
-<a class="sourceLine" id="cb214-2" title="2"><span class="bu">echo</span> <span class="st">&quot;line 1&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a>
-<a class="sourceLine" id="cb214-3" title="3"><span class="bu">echo</span> <span class="st">&quot;line 2&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a>
+<a class="sourceLine" id="cb214-2" title="2"><span class="bu">echo</span> <span class="st">&quot;line 1&quot;</span> <span class="op">&gt;&gt;</span> greetings.txt</a>
+<a class="sourceLine" id="cb214-3" title="3"><span class="bu">echo</span> <span class="st">&quot;line 2&quot;</span> <span class="op">&gt;&gt;</span> greetings.txt</a>
 <a class="sourceLine" id="cb214-4" title="4"></a>
 <a class="sourceLine" id="cb214-5" title="5"><span class="co"># possibility 2:</span></a>
 <a class="sourceLine" id="cb214-6" title="6"><span class="bu">echo</span> <span class="st">&quot;line 1</span></a>
-<a class="sourceLine" id="cb214-7" title="7"><span class="st">line 2&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a>
+<a class="sourceLine" id="cb214-7" title="7"><span class="st">line 2&quot;</span> <span class="op">&gt;&gt;</span> greetings.txt</a>
 <a class="sourceLine" id="cb214-8" title="8"></a>
 <a class="sourceLine" id="cb214-9" title="9"><span class="co"># possibility 3:</span></a>
-<a class="sourceLine" id="cb214-10" title="10"><span class="fu">cat</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">EOT</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a>
-<a class="sourceLine" id="cb214-11" title="11"><span class="ex">line</span> 1</a>
-<a class="sourceLine" id="cb214-12" title="12"><span class="ex">line</span> 2</a>
-<a class="sourceLine" id="cb214-13" title="13"><span class="ex">EOT</span></a></code></pre></div>
+<a class="sourceLine" id="cb214-10" title="10"><span class="fu">cat</span> <span class="op">&lt;&lt;EOT</span> <span class="op">&gt;&gt;</span> <span class="ex">greetings.txt</span></a>
+<a class="sourceLine" id="cb214-11" title="11">line 1</a>
+<a class="sourceLine" id="cb214-12" title="12">line 2</a>
+<a class="sourceLine" id="cb214-13" title="13">EOT</a></code></pre></div>
 <p>If sudo (other user privileges) is needed to write to the file, use this:</p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb215-1" title="1"><span class="co"># possibility 1:</span></a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="bu">echo</span> <span class="st">&quot;line 1&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee -a greetings.txt <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/dev/null</span></a>
+<a class="sourceLine" id="cb215-2" title="2"><span class="bu">echo</span> <span class="st">&quot;line 1&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee -a greetings.txt <span class="op">&gt;</span> /dev/null</a>
 <a class="sourceLine" id="cb215-3" title="3"></a>
 <a class="sourceLine" id="cb215-4" title="4"><span class="co"># possibility 3:</span></a>
-<a class="sourceLine" id="cb215-5" title="5"><span class="fu">sudo</span> tee -a greetings.txt <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/dev/null</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">EOT</span></a>
-<a class="sourceLine" id="cb215-6" title="6"><span class="ex">line</span> 1</a>
-<a class="sourceLine" id="cb215-7" title="7"><span class="ex">line</span> 2</a>
-<a class="sourceLine" id="cb215-8" title="8"><span class="ex">EOT</span></a></code></pre></div>
+<a class="sourceLine" id="cb215-5" title="5"><span class="fu">sudo</span> tee -a greetings.txt <span class="op">&gt;</span> /dev/null <span class="op">&lt;&lt;EOT</span></a>
+<a class="sourceLine" id="cb215-6" title="6">line 1</a>
+<a class="sourceLine" id="cb215-7" title="7">line 2</a>
+<a class="sourceLine" id="cb215-8" title="8"><span class="op">EOT</span></a></code></pre></div>
 </section>
 <section id="answer-2-score-60" class="level4">
 <h4>Answer 2 (score 60)</h4>
-<div class="sourceCode" id="cb216"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb216-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n    %s\n&#39;</span> <span class="st">&#39;Host localhost&#39;</span> <span class="st">&#39;ForwardAgent yes&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">file.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb216-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n    %s\n&#39;</span> <span class="st">&#39;Host localhost&#39;</span> <span class="st">&#39;ForwardAgent yes&#39;</span> <span class="op">&gt;&gt;</span> file.txt</a></code></pre></div>
 <p>Or, if it’s a literal tab that you want (rather than the four spaces in your question):</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb217-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n\t%s\n&#39;</span> <span class="st">&#39;Host localhost&#39;</span> <span class="st">&#39;ForwardAgent yes&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">file.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb217-1" title="1"><span class="bu">printf</span> <span class="st">&#39;%s\n\t%s\n&#39;</span> <span class="st">&#39;Host localhost&#39;</span> <span class="st">&#39;ForwardAgent yes&#39;</span> <span class="op">&gt;&gt;</span> file.txt</a></code></pre></div>
 <p>You can achieve the same effect with <code>echo</code>, but exactly how varies from implementation to implementation, whereas <code>printf</code> is constant.</p>
 </section>
 <section id="answer-3-score-33" class="level4">
 <h4>Answer 3 (score 33)</h4>
-<div class="sourceCode" id="cb218"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb218-1" title="1"><span class="bu">echo</span> -e <span class="st">&quot;Hello \nWorld \n&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">greetings.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb218-1" title="1"><span class="bu">echo</span> -e <span class="st">&quot;Hello \nWorld \n&quot;</span> <span class="op">&gt;&gt;</span> greetings.txt</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -2294,7 +2294,7 @@ Also, if SELinux is set to enforcing, you may need to run <code>restorecon -R -v
 Emptying the buffers cache
 </h3>
 <p>If you ever want to empty it you can use this chain of commands.</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb227-1" title="1"><span class="co"># free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free</span></a>
+<div class="sourceCode" id="cb227"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb227-1" title="1"><span class="co"># free &amp;&amp; sync &amp;&amp; echo 3 &gt; /proc/sys/vm/drop_caches &amp;&amp; free</span></a>
 <a class="sourceLine" id="cb227-2" title="2"></a>
 <a class="sourceLine" id="cb227-3" title="3">             <span class="ex">total</span>       used       free     shared    buffers     cached</a>
 <a class="sourceLine" id="cb227-4" title="4"><span class="ex">Mem</span>:       1018916     980832      38084          0      46924     355764</a>
@@ -2310,27 +2310,27 @@ Emptying the buffers cache
 <p>
 To free pagecache:
 </p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb228-1" title="1"><span class="co"># echo 1 &amp;gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb228-1" title="1"><span class="co"># echo 1 &gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
 </li>
 <li>
 <p>
 To free dentries and inodes:
 </p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb229-1" title="1"><span class="co"># echo 2 &amp;gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb229-1" title="1"><span class="co"># echo 2 &gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
 </li>
 <li>
 <p>
 To free pagecache, dentries and inodes:
 </p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb230-1" title="1"><span class="co"># echo 3 &amp;gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb230-1" title="1"><span class="co"># echo 3 &gt; /proc/sys/vm/drop_caches</span></a></code></pre></div>
 </li>
 </ul>
 <p>The above are meant to be run as root. If you’re trying to do them using <code>sudo</code> then you’ll need to change the syntax slightly to something like these:</p>
-<div class="sourceCode" id="cb231"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb231-1" title="1">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 1 &amp;gt;/proc/sys/vm/drop_caches&#39;</span></a>
-<a class="sourceLine" id="cb231-2" title="2">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 2 &amp;gt;/proc/sys/vm/drop_caches&#39;</span></a>
-<a class="sourceLine" id="cb231-3" title="3">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 3 &amp;gt;/proc/sys/vm/drop_caches&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb231-1" title="1">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 1 &gt;/proc/sys/vm/drop_caches&#39;</span></a>
+<a class="sourceLine" id="cb231-2" title="2">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 2 &gt;/proc/sys/vm/drop_caches&#39;</span></a>
+<a class="sourceLine" id="cb231-3" title="3">$ <span class="fu">sudo</span> sh -c <span class="st">&#39;echo 3 &gt;/proc/sys/vm/drop_caches&#39;</span></a></code></pre></div>
 <p><strong>NOTE:</strong> There’s a more esoteric version of the above command if you’re into that:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb232-1" title="1">$ <span class="bu">echo</span> <span class="st">&quot;echo 1 &amp;gt; /proc/sys/vm/drop_caches&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> sh</a></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb232-1" title="1">$ <span class="bu">echo</span> <span class="st">&quot;echo 1 &gt; /proc/sys/vm/drop_caches&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> sh</a></code></pre></div>
 <p>Why the change in syntax? The <code>/bin/echo</code> program is running as root, because of <code>sudo</code>, but the shell that’s redirecting echo’s output to the root-only file is still running as you. Your current shell does the redirection <em>before</em> <code>sudo</code> starts.</p>
 <h5>
 Seeing what’s in the buffers and cache
@@ -2449,12 +2449,12 @@ Even though everybody uses <code>cat filename</code> to print a files text to th
 cat - concatenate files and print on the standard output
 </blockquote>
 <p>Now cat is fine for printing files but there are alternatives:</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb245-1" title="1">  <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$(</span><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">filename</span><span class="va">)</span><span class="st">&quot;</span></a>
+<div class="sourceCode" id="cb245"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb245-1" title="1">  <span class="bu">echo</span> <span class="st">&quot;</span><span class="op">$(&lt;</span>filename<span class="op">)</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb245-2" title="2"><span class="ex">or</span></a>
-<a class="sourceLine" id="cb245-3" title="3">  <span class="bu">printf</span> <span class="st">&quot;%s&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">filename</span><span class="va">)</span><span class="st">&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb245-3" title="3">  <span class="bu">printf</span> <span class="st">&quot;%s&quot;</span> <span class="st">&quot;</span><span class="op">$(&lt;</span>filename<span class="op">)</span><span class="st">&quot;</span></a></code></pre></div>
 <p>The <code>( )</code> return the value of an expression, in this case the content of <em>filename</em> which then is expanded by <code>$</code> for <code>echo</code> or <code>printf</code>.</p>
 <p>Update:</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb246-1" title="1"><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">filename</span></a></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb246-1" title="1"><span class="op">&lt;</span> <span class="ex">filename</span></a></code></pre></div>
 <p>This does exactly what you want and is easy to remember.</p>
 <p>Here is an example that lets you select a file in a menu and then prints it.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb247-1" title="1"><span class="co">#!/bin/bash</span></a>
@@ -2462,7 +2462,7 @@ cat - concatenate files and print on the standard output
 <a class="sourceLine" id="cb247-3" title="3"><span class="kw">select</span> <span class="ex">fname</span> in *<span class="kw">;</span></a>
 <a class="sourceLine" id="cb247-4" title="4"><span class="kw">do</span></a>
 <a class="sourceLine" id="cb247-5" title="5"><span class="co"># Don&#39;t forget the &quot;&quot; around the second part, else newlines won&#39;t be printed</span></a>
-<a class="sourceLine" id="cb247-6" title="6">  <span class="bu">printf</span> <span class="st">&quot;%s&quot;</span> <span class="st">&quot;</span><span class="va">$(</span><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="va">$fname)</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb247-6" title="6">  <span class="bu">printf</span> <span class="st">&quot;%s&quot;</span> <span class="st">&quot;</span><span class="op">$(&lt;</span><span class="va">$fname</span><span class="op">)</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb247-7" title="7">  <span class="bu">break</span></a>
 <a class="sourceLine" id="cb247-8" title="8"><span class="kw">done</span></a></code></pre></div>
 <p>
@@ -2678,7 +2678,7 @@ Use color for some <a href="http://www.debian.org/doc/manuals/reference/ch09.en.
 <a class="sourceLine" id="cb272-8" title="8">    <span class="kw">esac</span></a>
 <a class="sourceLine" id="cb272-9" title="9"></a>
 <a class="sourceLine" id="cb272-10" title="10"><span class="bu">local</span> <span class="va">UC=$COLOR_WHITE</span>               <span class="co"># user&#39;s color</span></a>
-<a class="sourceLine" id="cb272-11" title="11"><span class="bu">[</span> <span class="va">$UID</span> <span class="ot">-eq</span> <span class="st">&quot;0&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="va">UC=$COLOR_RED</span>   <span class="co"># root&#39;s color</span></a>
+<a class="sourceLine" id="cb272-11" title="11"><span class="bu">[</span> <span class="va">$UID</span> <span class="ot">-eq</span> <span class="st">&quot;0&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="va">UC=$COLOR_RED</span>   <span class="co"># root&#39;s color</span></a>
 <a class="sourceLine" id="cb272-12" title="12"></a>
 <a class="sourceLine" id="cb272-13" title="13"><span class="va">PS1=</span><span class="st">&quot;</span><span class="va">$TITLEBAR</span><span class="st">\n\[</span><span class="va">${UC}</span><span class="st">\]</span><span class="dt">\\</span><span class="st">u \[</span><span class="va">${COLOR_LIGHT_BLUE}</span><span class="st">\]</span><span class="dt">\$</span><span class="st">{PWD} \[</span><span class="va">${COLOR_BLACK}</span><span class="st">\]</span><span class="dt">\$</span><span class="st">(vcprompt) \n\[</span><span class="va">${COLOR_LIGHT_GREEN}</span><span class="st">\]→\[</span><span class="va">${COLOR_NC}</span><span class="st">\] &quot;</span>  </a></code></pre></div>
 <p>$(vcprompt) is calling a python script in my ~/sbin which prints version control information about the current path. It includes support for Mercurial, Git, Svn, Cvs, etc. The author of the script has the <a href="https://gist.github.com/kriswill/83c1aad72b961632866fc012f2578dea" rel="noreferrer">source here</a>.</p>
@@ -2858,20 +2858,20 @@ Give <code>gunzip</code> the <code>--keep</code> option (version 1.6 or later)
 <p>
 Pass the file to <code>gunzip</code> as stdin
 </p>
-<div class="sourceCode" id="cb284"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb284-1" title="1"><span class="fu">gunzip</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">file.gz</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">file</span></a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb284-1" title="1"><span class="fu">gunzip</span> <span class="op">&lt;</span> file.gz <span class="op">&gt;</span> file</a></code></pre></div>
 </li>
 <li>
 <p>
 Use <code>zcat</code> (or, on older systems, <code>gzcat</code>)
 </p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb285-1" title="1"><span class="fu">zcat</span> file.gz <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">file</span></a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb285-1" title="1"><span class="fu">zcat</span> file.gz <span class="op">&gt;</span> file</a></code></pre></div>
 </li>
 </ul>
 </section>
 <section id="answer-2-score-23" class="level4">
 <h4>Answer 2 (score 23)</h4>
 <p>Without requiring a temporary file:</p>
-<div class="sourceCode" id="cb286"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb286-1" title="1"> <span class="fu">zcat</span> somefile.gz <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">somefile</span></a></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb286-1" title="1"> <span class="fu">zcat</span> somefile.gz <span class="op">&gt;</span> somefile</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -2965,7 +2965,7 @@ removes all secondary/supplementary groups from <i>username</i>, leaving them as
 <h4>Answer 2 (score 227)</h4>
 <p>The way to “double-click” on a file from the command line is <code>xdg-open</code>.</p>
 <p>If you’re on Gnome (probably, if you’re using Nautilus), you can use <code>eog</code> directly, or any other image program (<code>feh</code> is quite good).</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb300-1" title="1"><span class="ex">feh</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">image-name</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span>      </a></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb300-1" title="1"><span class="ex">feh</span> <span class="op">&lt;</span>image-name<span class="op">&gt;</span>      </a></code></pre></div>
 <p>If you want to consult <code>image-name</code> file easilly.</p>
 </section>
 <section id="answer-3-score-104" class="level4">
@@ -3009,7 +3009,7 @@ See also –proxy-insecure and –cacert.
 <section id="answer-2-score-36" class="level4">
 <h4>Answer 2 (score 36)</h4>
 <p>You may use the following command to apply the changes for all connections:</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb303-1" title="1">$ <span class="bu">echo</span> insecure <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">~/.curlrc</span></a></code></pre></div>
+<div class="sourceCode" id="cb303"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb303-1" title="1">$ <span class="bu">echo</span> insecure <span class="op">&gt;&gt;</span> ~/.curlrc</a></code></pre></div>
 <p>On Windows just create <code>_curlrc</code> text file with ‘insecure’ text in it in your <code>%HOME%</code>, <code>%CURL_HOME%</code>, <code>%APPDATA%</code>, <code>%USERPROFILE%</code> or <code>%USERPROFILE%\Application Data</code> directory.</p>
 <p>Advantage of using above solution is that it works for all <code>curl</code> commands, but it is not recommended since it may introduce <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" rel="noreferrer">MITM attacks</a> by connecting to insecure and untrusted hosts.</p>
 </section>
@@ -3026,7 +3026,7 @@ See also –proxy-insecure and –cacert.
 <h4>Question</h4>
 <p>I’m trying to compress a folder (<code>/var/www/</code>) to <code>~/www_backups/$time.tar</code> where <code>$time</code> is the current date.</p>
 <p>This is what I have:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb304-1" title="1"><span class="bu">cd</span> /var/www <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="fu">sudo</span> tar -czf ~/www_backups <span class="va">$time</span><span class="st">&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb304-1" title="1"><span class="bu">cd</span> /var/www <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> tar -czf ~/www_backups <span class="va">$time</span><span class="st">&quot;</span></a></code></pre></div>
 <p>I am completely lost and I’ve been at this for hours now. Not sure if <code>-czf</code> is correct. I simply want to copy all of the content in <code>/var/www</code> into a <code>$time.tar</code> file, and I want to maintain the file permissions for all of the files. Can anyone help me out?</p>
 </section>
 <section id="answer-accepted-score-376-1" class="level4">
@@ -3035,7 +3035,7 @@ See also –proxy-insecure and –cacert.
 <div class="sourceCode" id="cb305"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb305-1" title="1"><span class="fu">tar</span> czf name_of_archive_file.tar.gz name_of_directory_to_tar</a></code></pre></div>
 <p>The <code>-</code> is optional. If you want to <code>tar</code> the current directory, use <code>.</code> to designate that.</p>
 <p>To construct your filename, use the <code>date</code> utility (look at its man page for the available format options). For example:</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb306-1" title="1"><span class="bu">cd</span> /var/www <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="fu">sudo</span> tar czf ~/www_backups/<span class="va">$(</span><span class="fu">date</span> +%Y%m%d-%H%M%S<span class="va">)</span>.tar.gz .</a></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb306-1" title="1"><span class="bu">cd</span> /var/www <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> tar czf ~/www_backups/<span class="va">$(</span><span class="fu">date</span> +%Y%m%d-%H%M%S<span class="va">)</span>.tar.gz .</a></code></pre></div>
 <p>This would have created a file named something like <code>20120902-185558.tar.gz</code>.</p>
 <p>On Linux, chances are your <code>tar</code> also supports BZip2 compression with the <code>j</code> rather than <code>z</code> option. And possibly others. Check the man page on your local system.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -3229,11 +3229,11 @@ You should almost never need to use these zones. Instead you should be using a f
 <p><code>echo 'Asia/Tokyo' | sudo tee /etc/timezone</code></p>
 <p><code>sudo dpkg-reconfigure -f noninteractive tzdata</code></p>
 <p>There is a <a href="https://bugs.launchpad.net/ubuntu/+source/tzdata/+bug/772024">bug</a> in <code>tzdata</code>: certain values get normalized by <code>dpkg-reconfigure</code>:</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb320-1" title="1"><span class="bu">echo</span> <span class="st">&#39;US/Central&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">/etc/timezone</span></a>
+<div class="sourceCode" id="cb320"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb320-1" title="1"><span class="bu">echo</span> <span class="st">&#39;US/Central&#39;</span> <span class="op">&gt;</span>/etc/timezone</a>
 <a class="sourceLine" id="cb320-2" title="2"><span class="ex">dpkg-reconfigure</span> -f noninteractive tzdata</a>
 <a class="sourceLine" id="cb320-3" title="3"><span class="co"># Current default time zone: &#39;America/Chicago&#39;</span></a>
 <a class="sourceLine" id="cb320-4" title="4"></a>
-<a class="sourceLine" id="cb320-5" title="5"><span class="bu">echo</span> <span class="st">&#39;US/Eastern&#39;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">/etc/timezone</span></a>
+<a class="sourceLine" id="cb320-5" title="5"><span class="bu">echo</span> <span class="st">&#39;US/Eastern&#39;</span> <span class="op">&gt;</span>/etc/timezone</a>
 <a class="sourceLine" id="cb320-6" title="6"><span class="ex">apt-get</span> install --reinstall tzdata</a>
 <a class="sourceLine" id="cb320-7" title="7"><span class="co"># Current default time zone: &#39;America/New_York&#39;</span></a></code></pre></div>
 </section>
@@ -3282,7 +3282,7 @@ Sample output
 <p>
 Run the command in debugfs
 </p>
-<div class="sourceCode" id="cb325"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb325-1" title="1"><span class="ex">debugfs</span>: logdump -i <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">7536655</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb325-1" title="1"><span class="ex">debugfs</span>: logdump -i <span class="op">&lt;7536655&gt;</span></a></code></pre></div>
 </li>
 <li>
 <p>
@@ -3335,13 +3335,13 @@ Other options
 <a class="sourceLine" id="cb328-5" title="5">    <span class="bu">exit</span> 1</a>
 <a class="sourceLine" id="cb328-6" title="6"><span class="kw">fi</span></a>
 <a class="sourceLine" id="cb328-7" title="7"></a>
-<a class="sourceLine" id="cb328-8" title="8"><span class="va">f=$(</span><span class="fu">ls</span> 2<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">/dev/null</span> -l /proc/*/fd/* <span class="kw">|</span> <span class="fu">fgrep</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st"> (deleted&quot;</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $9}&#39;</span><span class="va">)</span></a>
+<a class="sourceLine" id="cb328-8" title="8"><span class="va">f=$(</span><span class="fu">ls</span> <span class="op">2&gt;</span>/dev/null -l /proc/*/fd/* <span class="kw">|</span> <span class="fu">fgrep</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st"> (deleted&quot;</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $9}&#39;</span><span class="va">)</span></a>
 <a class="sourceLine" id="cb328-9" title="9"></a>
 <a class="sourceLine" id="cb328-10" title="10"><span class="kw">if [[</span> <span class="va">$f</span><span class="kw"> ]]</span>; <span class="kw">then</span></a>
 <a class="sourceLine" id="cb328-11" title="11">    <span class="bu">echo</span> <span class="st">&quot;fd </span><span class="va">$f</span><span class="st"> found...&quot;</span></a>
 <a class="sourceLine" id="cb328-12" title="12">    <span class="fu">cp</span> -v <span class="st">&quot;</span><span class="va">$f</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb328-13" title="13"><span class="kw">else</span></a>
-<a class="sourceLine" id="cb328-14" title="14">    <span class="bu">echo</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="ex">2</span> <span class="st">&quot;No fd found...&quot;</span></a>
+<a class="sourceLine" id="cb328-14" title="14">    <span class="bu">echo</span> <span class="op">&gt;&amp;2</span> <span class="st">&quot;No fd found...&quot;</span></a>
 <a class="sourceLine" id="cb328-15" title="15">    <span class="bu">exit</span> 2</a>
 <a class="sourceLine" id="cb328-16" title="16"><span class="kw">fi</span></a></code></pre></div>
 <hr>
@@ -3369,33 +3369,33 @@ Other options
 <h4>Answer accepted (score 543)</h4>
 <p><strong>apt-get</strong></p>
 <p>You can run a simulation to see what would happen if you upgrade/install a package:</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb331-1" title="1"><span class="ex">apt-get</span> -s install <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb331-1" title="1"><span class="ex">apt-get</span> -s install <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p>To see all possible upgrades, run a <code>upgrade</code> in verbose mode and (to be safe) with simulation, press <kbd>n</kbd> to cancel:</p>
 <div class="sourceCode" id="cb332"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb332-1" title="1"><span class="ex">apt-get</span> -V -s upgrade</a></code></pre></div>
 <p><strong>apt-cache</strong></p>
 <p>The option <code>policy</code> can show the installed and the remote version (install candidate) of a package.</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb333-1" title="1"><span class="ex">apt-cache</span> policy <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb333-1" title="1"><span class="ex">apt-cache</span> policy <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p><strong>apt-show-versions</strong></p>
 <p>If installed, shows version information about one or more packages:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb334-1" title="1"><span class="ex">apt-show-versions</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb334-1" title="1"><span class="ex">apt-show-versions</span> <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p>Passing the <code>-u</code> switch with or without a package name will only show upgradeable packages.</p>
 <p><strong>aptitude</strong></p>
 <p>The console GUI of <code>aptitude</code> can display upgradeable packages with new versions. Open the menu ‘Upgradable Packages’. Pressing <kbd>v</kbd> on a package will show more detailed version information.</p>
 <p>Or on the command-line:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb335-1" title="1"><span class="ex">aptitude</span> versions <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb335-1" title="1"><span class="ex">aptitude</span> versions <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p>Passing <code>-V</code> will show detailed information about versions, again to be safe with the simulation switch:</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb336-1" title="1"><span class="ex">aptitude</span> -V -s install <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb336-1" title="1"><span class="ex">aptitude</span> -V -s install <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p>Substituting <code>install &amp;lt;package&amp;gt;</code> with <code>upgrade</code> will show the versions from all upgradeable packages.</p>
 </section>
 <section id="answer-2-score-59" class="level4">
 <h4>Answer 2 (score 59)</h4>
 <p>Another way using <strong>dpkg</strong> and <strong>grep</strong>:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb337-1" title="1"><span class="ex">dpkg</span> -s <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="kw">|</span> <span class="fu">grep</span> Version</a></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb337-1" title="1"><span class="ex">dpkg</span> -s <span class="op">&lt;</span>package<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> Version</a></code></pre></div>
 </section>
 <section id="answer-3-score-21-1" class="level4">
 <h4>Answer 3 (score 21)</h4>
 <p>Another option, if you don’t know the full name of the package, is formatting aptitude’s search output:</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb338-1" title="1"><span class="ex">aptitude</span> search <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">-F</span> <span class="st">&quot;%c %p %d %V&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb338-1" title="1"><span class="ex">aptitude</span> search <span class="op">&lt;</span>package<span class="op">&gt;</span> -F <span class="st">&quot;%c %p %d %V&quot;</span></a></code></pre></div>
 <p>
 <code>%c</code> = status (package installed or not)<br> <code>%p</code> = package’s name<br> <code>%d</code> = package’s description<br> <code>%V</code> = available package’s version
 </p>
@@ -3448,7 +3448,7 @@ Set by the shell and by the cd utility. In the shell the value shall be initiali
 <h4>Question</h4>
 <p><code>grep -c</code> is useful for finding how many times a string occurs in a file, but it only counts each occurence once per line. How to count multiple occurences per line?</p>
 <p>I’m looking for something more elegant than:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb343-1" title="1"><span class="fu">perl</span> -e <span class="st">&#39;$_ = &amp;lt;&amp;gt;; print scalar ( () = m/needle/g ), &quot;\n&quot;&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb343-1" title="1"><span class="fu">perl</span> -e <span class="st">&#39;$_ = &lt;&gt;; print scalar ( () = m/needle/g ), &quot;\n&quot;&#39;</span></a></code></pre></div>
 </section>
 <section id="answer-accepted-score-306" class="level4">
 <h4>Answer accepted (score 306)</h4>
@@ -3459,7 +3459,7 @@ This will also match ‘needles’ or ‘multineedle’.<br> Only single words:
 </p>
 <div class="sourceCode" id="cb345"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb345-1" title="1"><span class="fu">grep</span> -o <span class="st">&#39;\bneedle\B&#39;</span> file <span class="kw">|</span> <span class="fu">wc</span> -l</a>
 <a class="sourceLine" id="cb345-2" title="2"><span class="co"># or:</span></a>
-<a class="sourceLine" id="cb345-3" title="3"><span class="fu">grep</span> -o <span class="st">&#39;\&amp;lt;needle\&amp;gt;&#39;</span> file <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
+<a class="sourceLine" id="cb345-3" title="3"><span class="fu">grep</span> -o <span class="st">&#39;\&lt;needle\&gt;&#39;</span> file <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
 </section>
 <section id="answer-2-score-17-1" class="level4">
 <h4>Answer 2 (score 17)</h4>
@@ -3474,11 +3474,11 @@ This will also match ‘needles’ or ‘multineedle’.<br> Only single words:
 <p>Otherwise, there’s no standard command to do this particular bit of text processing, so you need to turn to sed (if you’re a masochist) or awk.</p>
 <div class="sourceCode" id="cb348"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb348-1" title="1"><span class="fu">awk</span> <span class="st">&#39;{while (match($0, /set/)) {++c; $0=substr($0, RSTART+RLENGTH)}}</span></a>
 <a class="sourceLine" id="cb348-2" title="2"><span class="st">     END {print c}&#39;</span></a>
-<a class="sourceLine" id="cb348-3" title="3"><span class="fu">sed</span> -n -e <span class="st">&#39;s/set/\n&amp;amp;\n/g&#39;</span> -e <span class="st">&#39;s/^/\n/&#39;</span> -e <span class="st">&#39;s/$/\n/&#39;</span> \</a>
+<a class="sourceLine" id="cb348-3" title="3"><span class="fu">sed</span> -n -e <span class="st">&#39;s/set/\n&amp;\n/g&#39;</span> -e <span class="st">&#39;s/^/\n/&#39;</span> -e <span class="st">&#39;s/$/\n/&#39;</span> \</a>
 <a class="sourceLine" id="cb348-4" title="4">       -e <span class="st">&#39;s/\n[^\n]*\n/\n/g&#39;</span> -e <span class="st">&#39;s/^\n//&#39;</span> -e <span class="st">&#39;s/\n$//&#39;</span> \</a>
 <a class="sourceLine" id="cb348-5" title="5">       -e <span class="st">&#39;/./p&#39;</span> <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
 <p>Here’s a simpler solution using <code>sed</code> and <code>grep</code>, which works for strings or even by-the-book regular expressions but fails in a few corner cases with anchored patterns (e.g. it finds two occurrences of <code>^needle</code> or <code>\bneedle</code> in <code>needleneedle</code>).</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb349-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s/needle/\n&amp;amp;\n/g&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -cx <span class="st">&#39;needle&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb349-1" title="1"><span class="fu">sed</span> <span class="st">&#39;s/needle/\n&amp;\n/g&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -cx <span class="st">&#39;needle&#39;</span></a></code></pre></div>
 <p>Note that in the sed substitutions above, I used <code>\n</code> to mean a newline. This is standard in the pattern part, but in the replacement text, for portability, substitute backslash-newline for <code>\n</code>.</p>
 </section>
 <section id="answer-3-score-4" class="level4">
@@ -3617,9 +3617,9 @@ Also, this is usually successful in highlighting the worst offender but I’ve o
 <p>Don’t go straight to <code>du /</code>. Use <code>df</code> to find the partition that’s hurting you, and then try <code>du</code> commands.</p>
 <p>One I like to try is</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb362-1" title="1"><span class="co"># U.S.</span></a>
-<a class="sourceLine" id="cb362-2" title="2"><span class="fu">du</span> -h <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="fu">dir</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;[0-9\.]\+G&#39;</span></a>
+<a class="sourceLine" id="cb362-2" title="2"><span class="fu">du</span> -h <span class="op">&lt;</span>dir<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;[0-9\.]\+G&#39;</span></a>
 <a class="sourceLine" id="cb362-3" title="3"><span class="co"># Others</span></a>
-<a class="sourceLine" id="cb362-4" title="4"><span class="fu">du</span> -h <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="fu">dir</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;[0-9\,]\+G&#39;</span></a></code></pre></div>
+<a class="sourceLine" id="cb362-4" title="4"><span class="fu">du</span> -h <span class="op">&lt;</span>dir<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;[0-9\,]\+G&#39;</span></a></code></pre></div>
 <p>because it prints sizes in “human readable form”. Unless you’ve got really small partitions, grepping for directories in the gigabytes is a pretty good filter for what you want. This will take you some time, but unless you have quotas set up, I think that’s just the way it’s going to be.</p>
 <p>As <span class="citation" data-cites="jchavannes">@jchavannes</span> points out in the comments, the expression can get more precise if you’re finding too many false positives. I incorporated the suggestion, which does make it better, but there are still false positives, so there are just tradeoffs (simpler expr, worse results; more complex and longer expr, better results). If you have too many little directories showing up in your output, adjust your regex accordingly. For example,</p>
 <div class="sourceCode" id="cb363"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb363-1" title="1"><span class="fu">grep</span> <span class="st">&#39;^\s*[0-9\.]\+G&#39;</span></a></code></pre></div>
@@ -3669,7 +3669,7 @@ It is possible to use apt-get on OS X 10.9 like Deb based Linux using a third pa
 <section id="question-52" class="level4">
 <h4>Question</h4>
 <p>I’m currently studying <a href="https://en.wikipedia.org/wiki/Penetration_test">penetration testing</a> and Python programming. I just want to know how I would go about executing a Linux command in Python. The commands I want to execute are:</p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb366-1" title="1"><span class="bu">echo</span> 1 <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/proc/sys/net/ipv4/ip_forward</span></a>
+<div class="sourceCode" id="cb366"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb366-1" title="1"><span class="bu">echo</span> 1 <span class="op">&gt;</span> /proc/sys/net/ipv4/ip_forward</a>
 <a class="sourceLine" id="cb366-2" title="2"><span class="ex">iptables</span> -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080</a></code></pre></div>
 <p>If I just use <code>print</code> in Python and run it in the terminal will it do the same as executing it as if you was typing it yourself and pressing <kbd>Enter</kbd>?</p>
 </section>
@@ -3679,7 +3679,7 @@ It is possible to use apt-get on OS X 10.9 like Deb based Linux using a third pa
 <div class="sourceCode" id="cb367"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb367-1" title="1"><span class="ex">import</span> os</a>
 <a class="sourceLine" id="cb367-2" title="2"><span class="ex">os.system</span>(<span class="st">&#39;ls&#39;</span>)</a></code></pre></div>
 <p>Or in your case:</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb368-1" title="1"><span class="ex">os.system</span>(<span class="st">&#39;echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&#39;</span>)</a>
+<div class="sourceCode" id="cb368"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb368-1" title="1"><span class="ex">os.system</span>(<span class="st">&#39;echo 1 &gt; /proc/sys/net/ipv4/ip_forward&#39;</span>)</a>
 <a class="sourceLine" id="cb368-2" title="2"><span class="ex">os.system</span>(<span class="st">&#39;iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 8080&#39;</span>)</a></code></pre></div>
 <p>Better yet, you can use subprocess’s call, it is safer, more powerful and likely faster:</p>
 <div class="sourceCode" id="cb369"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb369-1" title="1"><span class="ex">from</span> subprocess import call</a>
@@ -3776,7 +3776,7 @@ erroneous uninterruptible sleep. It should not happen but with a combination of 
 <a class="sourceLine" id="cb376-7" title="7"><span class="ex">httpd.x86_64</span>                        2.4.6-6.fc20                         fedora </a>
 <a class="sourceLine" id="cb376-8" title="8"><span class="ex">httpd.x86_64</span>                        2.4.10-1.fc20                        updates</a></code></pre></div>
 <p>As far as installing a particular version? You can append the version info to the name of the package, removing the architecture name, like so:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb377-1" title="1">$ <span class="fu">sudo</span> yum install <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span> name<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span><span class="ex">-</span><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">version</span> info<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb377-1" title="1">$ <span class="fu">sudo</span> yum install <span class="op">&lt;</span>package name<span class="op">&gt;</span>-<span class="op">&lt;</span>version info<span class="op">&gt;</span></a></code></pre></div>
 <p>For example in this case if I wanted to install the older version, 2.4.6-6 I’d do the following:</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb378-1" title="1">$ <span class="fu">sudo</span> yum install httpd-2.4.6-6</a></code></pre></div>
 <p>You can also include the release info when specifying a package. In this case since I’m dealing with Fedora 20 (F20) the release info would be “fc20”, and the architecture info too.</p>
@@ -3794,22 +3794,22 @@ repoquery
 downloading &amp; installing
 </h3>
 <p>You can also use one of the following options to download a particular RPM from the web, and then use <code>yum</code> to install it.</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb381-1" title="1">$ <span class="ex">yum</span> --downloadonly <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a>
+<div class="sourceCode" id="cb381"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb381-1" title="1">$ <span class="ex">yum</span> --downloadonly <span class="op">&lt;</span>package<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb381-2" title="2"><span class="ex">-or-</span></a>
-<a class="sourceLine" id="cb381-3" title="3">$ <span class="ex">yumdownloader</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb381-3" title="3">$ <span class="ex">yumdownloader</span> <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <p>And then install it like so:</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb382-1" title="1">$ <span class="fu">sudo</span> yum localinstall <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">path</span> to rpm<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb382-1" title="1">$ <span class="fu">sudo</span> yum localinstall <span class="op">&lt;</span>path to rpm<span class="op">&gt;</span></a></code></pre></div>
 <p>What if I want to download everything that package X requires?</p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb383-1" title="1">$ <span class="ex">yumdownloader</span> --resolve <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">package</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb383-1" title="1">$ <span class="ex">yumdownloader</span> --resolve <span class="op">&lt;</span>package<span class="op">&gt;</span></a></code></pre></div>
 <h5>
 Example
 </h3>
 <div class="sourceCode" id="cb384"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb384-1" title="1">$ <span class="ex">yumdownloader</span> --resolve vim-X11</a>
 <a class="sourceLine" id="cb384-2" title="2"><span class="ex">Loaded</span> plugins: langpacks, presto, refresh-packagekit</a>
 <a class="sourceLine" id="cb384-3" title="3"><span class="ex">Adding</span> en_US to language list</a>
-<a class="sourceLine" id="cb384-4" title="4"><span class="ex">--</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">Running</span> transaction check</a>
-<a class="sourceLine" id="cb384-5" title="5"><span class="ex">---</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">Package</span> vim-X11.x86_64 2:7.3.315-1.fc14 set to be reinstalled</a>
-<a class="sourceLine" id="cb384-6" title="6"><span class="ex">--</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">Finished</span> Dependency Resolution</a>
+<a class="sourceLine" id="cb384-4" title="4"><span class="ex">--</span><span class="op">&gt;</span> Running transaction check</a>
+<a class="sourceLine" id="cb384-5" title="5"><span class="ex">---</span><span class="op">&gt;</span> Package vim-X11.x86_64 2:7.3.315-1.fc14 set to be reinstalled</a>
+<a class="sourceLine" id="cb384-6" title="6"><span class="ex">--</span><span class="op">&gt;</span> Finished Dependency Resolution</a>
 <a class="sourceLine" id="cb384-7" title="7"><span class="ex">vim-X11-7.3.315-1.fc14.x86_64.rpm</span>                              <span class="kw">|</span> <span class="ex">1.1</span> MB     00:01</a></code></pre></div>
 <p>Notice it’s doing a dependency check, and then downloading the missing pieces. See my answer that covers it in more details here: <a href="https://unix.stackexchange.com/questions/89222/how-to-download-a-file-from-repo-and-install-it-later-w-o-internet-connection/89250#89250">How to download a file from repo, and install it later w/o internet connection?</a>.</p>
 <h5>
@@ -3955,11 +3955,11 @@ Method #4 - jobs
 Example
 </h3>
 <p>My fake job, <code>sleep</code>.</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb393-1" title="1">$ <span class="fu">sleep</span> 100 <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a>
+<div class="sourceCode" id="cb393"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb393-1" title="1">$ <span class="fu">sleep</span> 100 <span class="kw">&amp;</span></a>
 <a class="sourceLine" id="cb393-2" title="2">[<span class="ex">1</span>] 4542</a></code></pre></div>
 <p>Find it’s job number. <strong>NOTE:</strong> the number 4542 is the process ID.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb394-1" title="1">$ <span class="bu">jobs</span></a>
-<a class="sourceLine" id="cb394-2" title="2">[<span class="ex">1</span>]+  Running                 sleep 100 <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a>
+<a class="sourceLine" id="cb394-2" title="2">[<span class="ex">1</span>]+  Running                 sleep 100 <span class="kw">&amp;</span></a>
 <a class="sourceLine" id="cb394-3" title="3"></a>
 <a class="sourceLine" id="cb394-4" title="4">$ <span class="bu">kill</span> %1</a>
 <a class="sourceLine" id="cb394-5" title="5">[<span class="ex">1</span>]+  Terminated              sleep 100</a></code></pre></div>
@@ -3971,11 +3971,11 @@ Method #5 - fg
 Example
 </h3>
 <p>Fake job, <code>sleep</code>.</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb395-1" title="1">$ <span class="fu">sleep</span> 100 <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a>
+<div class="sourceCode" id="cb395"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb395-1" title="1">$ <span class="fu">sleep</span> 100 <span class="kw">&amp;</span></a>
 <a class="sourceLine" id="cb395-2" title="2">[<span class="ex">1</span>] 4650</a></code></pre></div>
 <p>Get the job’s number.</p>
 <div class="sourceCode" id="cb396"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb396-1" title="1">$ <span class="bu">jobs</span></a>
-<a class="sourceLine" id="cb396-2" title="2">[<span class="ex">1</span>]+  Running                 sleep 100 <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb396-2" title="2">[<span class="ex">1</span>]+  Running                 sleep 100 <span class="kw">&amp;</span></a></code></pre></div>
 <p>Bring job #1 back to the foreground, and then use <kbd>Ctrl</kbd>+<kbd>C</kbd>.</p>
 <div class="sourceCode" id="cb397"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb397-1" title="1">$ <span class="bu">fg</span> 1</a>
 <a class="sourceLine" id="cb397-2" title="2"><span class="fu">sleep</span> 100</a>
@@ -4039,7 +4039,7 @@ Example
 <section id="answer-2-score-153" class="level4">
 <h4>Answer 2 (score 153)</h4>
 <p>Before running the command, you can append <code>&amp;amp;</code> to the command line to run in the background:</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb406-1" title="1"><span class="ex">long-running-command</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb406-1" title="1"><span class="ex">long-running-command</span> <span class="kw">&amp;</span></a></code></pre></div>
 <p>After starting a command, you can press <kbd>Ctrl</kbd><kbd>Z</kbd> to suspend it, and then <code>bg</code> to put it in the background:</p>
 <div class="sourceCode" id="cb407"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb407-1" title="1"><span class="ex">long-running-command</span></a>
 <a class="sourceLine" id="cb407-2" title="2">[<span class="ex">Ctrl+Z</span>]</a>
@@ -4048,10 +4048,10 @@ Example
 <section id="answer-3-score-113" class="level4">
 <h4>Answer 3 (score 113)</h4>
 <p>This is the favorite of all since apart of sending the process into the background you don’t have to worry about the text output dirtying your terminal:</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb408-1" title="1"><span class="fu">nohup</span> command <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb408-1" title="1"><span class="fu">nohup</span> command <span class="kw">&amp;</span></a></code></pre></div>
 <p>This not only runs the process in background, also generates a log (called <code>nohup.out</code> in the current directory, if that’s not possible, your home directory) and if you close/logout the current shell the process is not killed by preventing the child proccess from recieving the parent signals when killed (ie. logging out, by SIGHUP to the parent, or closing the current shell).</p>
 <p>There’s other called <code>disown</code> but that’s rather a extension of other answers rather that a method in itself:</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb409-1" title="1"><span class="bu">command</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="co"># our program is in background</span></a>
+<div class="sourceCode" id="cb409"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb409-1" title="1"><span class="bu">command</span> <span class="kw">&amp;</span> <span class="co"># our program is in background</span></a>
 <a class="sourceLine" id="cb409-2" title="2"><span class="bu">disown</span> <span class="co"># now it detached itself of the shell, you can do whatever you want</span></a></code></pre></div>
 <p>These commands do not allows you to recover easily the process outputs unless <a href="https://serverfault.com/a/205458/180142">you use a hackish way to get it done.</a></p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -4365,11 +4365,11 @@ To achieve the same intention <strong>when you are logging in the SSH</strong>, 
 <section id="answer-3-score-133" class="level4">
 <h4>Answer 3 (score 133)</h4>
 <p>For small things that you want to happen if a shell command works, you can use the <code>&amp;amp;&amp;amp;</code> construct:</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb437-1" title="1"><span class="fu">rm</span> -rf somedir <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="ex">trace_output</span> <span class="st">&quot;Removed the directory&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb437-1" title="1"><span class="fu">rm</span> -rf somedir <span class="kw">&amp;&amp;</span> <span class="ex">trace_output</span> <span class="st">&quot;Removed the directory&quot;</span></a></code></pre></div>
 <p>Similarly for small things that you want to happen when a shell command fails, you can use <code>||</code>:</p>
 <div class="sourceCode" id="cb438"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb438-1" title="1"><span class="fu">rm</span> -rf somedir <span class="kw">||</span> <span class="ex">exit_on_error</span> <span class="st">&quot;Failed to remove the directory&quot;</span></a></code></pre></div>
 <p>Or both</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb439-1" title="1"><span class="fu">rm</span> -rf somedir <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="ex">trace_output</span> <span class="st">&quot;Removed the directory&quot;</span> <span class="kw">||</span> <span class="ex">exit_on_error</span> <span class="st">&quot;Failed to remove the directory&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb439"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb439-1" title="1"><span class="fu">rm</span> -rf somedir <span class="kw">&amp;&amp;</span> <span class="ex">trace_output</span> <span class="st">&quot;Removed the directory&quot;</span> <span class="kw">||</span> <span class="ex">exit_on_error</span> <span class="st">&quot;Failed to remove the directory&quot;</span></a></code></pre></div>
 <p>It’s probably unwise to do very much with these constructs, but they can on occasion make the flow of control a lot clearer.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -4456,8 +4456,8 @@ PS: Maybe a better way to do this would be to generalize <code>repeat</code> to 
 <section id="answer-2-score-619" class="level4">
 <h4>Answer 2 (score 619)</h4>
 <p>Try the <code>watch</code> command.</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb448-1" title="1"><span class="ex">Usage</span>: watch [-dhntv] [--differences[=cumulative]] [--help] [--interval=<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">n</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span>] </a>
-<a class="sourceLine" id="cb448-2" title="2">             [<span class="ex">--no-title</span>] [--version] <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="bu">command</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;`</span></a></code></pre></div>
+<div class="sourceCode" id="cb448"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb448-1" title="1"><span class="ex">Usage</span>: watch [-dhntv] [--differences[=cumulative]] [--help] [--interval=<span class="op">&lt;</span>n<span class="op">&gt;</span>] </a>
+<a class="sourceLine" id="cb448-2" title="2">             [<span class="ex">--no-title</span>] [--version] <span class="op">&lt;</span>command<span class="op">&gt;</span><span class="kw">`</span></a></code></pre></div>
 <p>So that:</p>
 <div class="sourceCode" id="cb449"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb449-1" title="1"><span class="ex">watch</span> -n1  command</a></code></pre></div>
 <p>will run the command every second (well, technically, every one second plus the time it takes for <code>command</code> to run as <code>watch</code> (at least the <code>procps</code> and <code>busybox</code> implementations) just sleeps one second in between two runs of <code>command</code>), forever.</p>
@@ -4547,7 +4547,7 @@ PS: Maybe a better way to do this would be to generalize <code>repeat</code> to 
 <div class="sourceCode" id="cb464"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb464-1" title="1">$ <span class="fu">find</span> /usr/lib/systemd/ /etc/systemd -name <span class="st">&#39;*.timer&#39;</span></a>
 <a class="sourceLine" id="cb464-2" title="2">$ <span class="fu">find</span> /home <span class="st">&#39;(&#39;</span> -path <span class="st">&#39;/home/*/.local/share/systemd/user/*&#39;</span> \</a>
 <a class="sourceLine" id="cb464-3" title="3">              -o -path <span class="st">&#39;/home/*/.config/systemd/*&#39;</span> <span class="st">&#39;)&#39;</span> \</a>
-<a class="sourceLine" id="cb464-4" title="4">      -name <span class="st">&#39;*.timer&#39;</span>  2<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/dev/null</span></a></code></pre></div>
+<a class="sourceLine" id="cb464-4" title="4">      -name <span class="st">&#39;*.timer&#39;</span>  <span class="op">2&gt;</span> /dev/null</a></code></pre></div>
 <p>(As with normal service units, a timer unit is enabled via creating a symbolic link in the right systemd config directory.)</p>
 <p>See also:</p>
 <ul>
@@ -4584,7 +4584,7 @@ crontab -u username -l;
 <div class="sourceCode" id="cb466"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb466-1" title="1">[<span class="ex">root@centos6test</span> ~]# yum update</a>
 <a class="sourceLine" id="cb466-2" title="2"><span class="ex">Loaded</span> plugins: fastestmirror, refresh-packagekit</a>
 <a class="sourceLine" id="cb466-3" title="3"><span class="ex">Determining</span> fastest mirrors</a>
-<a class="sourceLine" id="cb466-4" title="4"><span class="ex">Could</span> not retrieve mirrorlist http://mirrorlist.centos.org/?release=6<span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="va">arch=</span>i386<span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="va">repo=</span>os</a>
+<a class="sourceLine" id="cb466-4" title="4"><span class="ex">Could</span> not retrieve mirrorlist http://mirrorlist.centos.org/?release=6<span class="kw">&amp;</span><span class="va">arch=</span>i386<span class="kw">&amp;</span><span class="va">repo=</span>os</a>
 <a class="sourceLine" id="cb466-5" title="5"><span class="ex">error</span> was 14: PYCURL ERROR 6 - <span class="st">&quot;&quot;</span> Error: Cannot find a valid baseurl for repo: base</a></code></pre></div>
 <p>Why is that happening? How can I fix it?</p>
 </section>
@@ -4601,7 +4601,7 @@ crontab -u username -l;
 <dd></p>
 </dd>
 </dl>
-<div class="sourceCode" id="cb467"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb467-1" title="1"><span class="ex">Could</span> not retrieve mirrorlist http://mirrorlist.centos.org/?release=6<span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="va">arch=</span>x86_64<span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="va">repo=</span>os <span class="ex">error</span> was 14: PYCURL ERROR 6 - <span class="st">&quot;Couldn&#39;t resolve host &#39;mirrorlist.centos.org&#39;&quot;</span> Error: Cannot find a valid baseurl for repo: base</a></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb467-1" title="1"><span class="ex">Could</span> not retrieve mirrorlist http://mirrorlist.centos.org/?release=6<span class="kw">&amp;</span><span class="va">arch=</span>x86_64<span class="kw">&amp;</span><span class="va">repo=</span>os <span class="ex">error</span> was 14: PYCURL ERROR 6 - <span class="st">&quot;Couldn&#39;t resolve host &#39;mirrorlist.centos.org&#39;&quot;</span> Error: Cannot find a valid baseurl for repo: base</a></code></pre></div>
 <p>So, I fixed it by these steps:</p>
 <p>
 edit network interface. For my case, I used <code>eth0</code> in CentOS 6.X In CentOS 7 you can use the “ensxxx” interface.
@@ -4637,9 +4637,9 @@ edit network interface. For my case, I used <code>eth0</code> in CentOS 6.X In C
 </section>
 <section id="answer-accepted-score-335" class="level4">
 <h4>Answer accepted (score 335)</h4>
-<div class="sourceCode" id="cb473"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb473-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">logfile</span></a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb473-1" title="1"><span class="op">&gt;</span> <span class="ex">logfile</span></a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb474-1" title="1"><span class="fu">cat</span> /dev/null <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">logfile</span></a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb474-1" title="1"><span class="fu">cat</span> /dev/null <span class="op">&gt;</span> logfile</a></code></pre></div>
 <p>or</p>
 <div class="sourceCode" id="cb475"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb475-1" title="1"><span class="fu">true</span> <span class="kw">|</span> <span class="fu">tee</span> logfile</a></code></pre></div>
 <p>(fell free to substitute <code>false</code> or any other command that produces no output, like e.g. <code>:</code> does in <code>bash</code>) if you want to be more eloquent, will all empty <code>logfile</code> (actually they will truncate it to zero size).</p>
@@ -4655,7 +4655,7 @@ edit network interface. For my case, I used <code>eth0</code> in CentOS 6.X In C
 <p>Should you need to do it for several files, the safe way is</p>
 <div class="sourceCode" id="cb479"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb479-1" title="1"><span class="ex">truncate</span> -s 0 file1 file2 ...</a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb480-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">file1</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">file2</span> ...</a></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb480-1" title="1"><span class="op">&gt;</span> <span class="ex">file1</span> <span class="op">&gt;</span> file2 ...</a></code></pre></div>
 <p>Some shells (<code>zsh</code>) also allow one to specify several redirection targets.</p>
 <p>This works (at least in <code>bash</code>) since it creates all the redirections required although only the last one will catch any input (or none in this case). The <code>tee</code> example with several files should work in any case (given your <code>tee</code> does know how to handle several output files)</p>
 <p>Of course, the good old shell loop would work as well:</p>
@@ -4663,10 +4663,10 @@ edit network interface. For my case, I used <code>eth0</code> in CentOS 6.X In C
 <a class="sourceLine" id="cb481-2" title="2">    <span class="co"># pick your favourite emptying method</span></a>
 <a class="sourceLine" id="cb481-3" title="3"><span class="kw">done</span></a></code></pre></div>
 <p>although it will be much slower due to the command being run separately for each file. That may be helped by using <code>find</code>:</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb482-1" title="1"><span class="fu">find</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">criteria</span> matching required files<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="kw">\</span></a>
-<a class="sourceLine" id="cb482-2" title="2">    <span class="ex">-exec</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="bu">command</span> capable of zeroing several files<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> {} \<span class="ex">+</span></a></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb482-1" title="1"><span class="fu">find</span> <span class="op">&lt;</span>criteria matching required files<span class="op">&gt;</span> \</a>
+<a class="sourceLine" id="cb482-2" title="2">    -exec <span class="op">&lt;</span>command capable of zeroing several files<span class="op">&gt;</span> {} \<span class="ex">+</span></a></code></pre></div>
 <p>or</p>
-<div class="sourceCode" id="cb483"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb483-1" title="1"><span class="fu">find</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">criteria</span> matching required files<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">-delete</span></a></code></pre></div>
+<div class="sourceCode" id="cb483"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb483-1" title="1"><span class="fu">find</span> <span class="op">&lt;</span>criteria matching required files<span class="op">&gt;</span> -delete</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -4725,15 +4725,15 @@ This is a common function in many languages, e.g. Perl and JavaScript. Have a l
 <p>Say that you want to code an equivalent of <code>VAR=value; echo $VAR</code>. Note the difference in how the shell handles the writings of <code>echo VAR=value</code>:</p>
 <ol>
 <li>
-<div class="sourceCode" id="cb487"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb487-1" title="1"><span class="ex">andcoz@...</span>:~<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">$(</span> <span class="bu">echo</span> VAR=value <span class="va">)</span></a>
+<div class="sourceCode" id="cb487"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb487-1" title="1"><span class="ex">andcoz@...</span>:~<span class="op">&gt;</span> <span class="va">$(</span> <span class="bu">echo</span> VAR=value <span class="va">)</span></a>
 <a class="sourceLine" id="cb487-2" title="2"><span class="ex">bash</span>: VAR=value: command not found</a>
-<a class="sourceLine" id="cb487-3" title="3"><span class="ex">andcoz@...</span>:~<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="bu">echo</span> <span class="va">$VAR</span></a>
-<a class="sourceLine" id="cb487-4" title="4"><span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">empty</span> line<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb487-3" title="3"><span class="ex">andcoz@...</span>:~<span class="op">&gt;</span> echo <span class="va">$VAR</span></a>
+<a class="sourceLine" id="cb487-4" title="4"><span class="op">&lt;</span><span class="ex">empty</span> line<span class="op">&gt;</span></a></code></pre></div>
 The shell tries to execute <code>echo</code> and <code>VAR=value</code> as two separate commands. It throws an error about the second string. The assignment remains ineffective.
 </li>
 <li>
-<div class="sourceCode" id="cb488"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb488-1" title="1"><span class="ex">andcoz@...</span>:~<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="bu">eval</span> <span class="va">$(</span> <span class="bu">echo</span> VAR=value <span class="va">)</span></a>
-<a class="sourceLine" id="cb488-2" title="2"><span class="ex">andcoz@...</span>:~<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="bu">echo</span> <span class="va">$VAR</span></a>
+<div class="sourceCode" id="cb488"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb488-1" title="1"><span class="ex">andcoz@...</span>:~<span class="op">&gt;</span> eval <span class="va">$(</span> <span class="bu">echo</span> VAR=value <span class="va">)</span></a>
+<a class="sourceLine" id="cb488-2" title="2"><span class="ex">andcoz@...</span>:~<span class="op">&gt;</span> echo <span class="va">$VAR</span></a>
 <a class="sourceLine" id="cb488-3" title="3"><span class="ex">value</span></a></code></pre></div>
 The shell merges (concatenates) the two strings <code>echo</code> and <code>VAR=value</code>, parses this single unit according to appropriate rules and executes it.
 </li>
@@ -4839,11 +4839,11 @@ The shell merges (concatenates) the two strings <code>echo</code> and <code>VAR=
 <div class="sourceCode" id="cb498"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb498-1" title="1"><span class="kw"> [[</span> <span class="ot">!</span>  <span class="ot">-z</span>  <span class="va">$param</span>  ]]</a></code></pre></div>
 <p>For example:</p>
 <div class="sourceCode" id="cb499"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb499-1" title="1"><span class="va">param=</span><span class="st">&quot;&quot;</span></a>
-<a class="sourceLine" id="cb499-2" title="2"><span class="kw">[[</span> <span class="ot">!</span>  <span class="ot">-z</span>  <span class="va">$param</span>  ]] &amp;amp;&amp;amp; echo <span class="st">&quot;I am not zero&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb499-2" title="2"><span class="kw">[[</span> <span class="ot">!</span>  <span class="ot">-z</span>  <span class="va">$param</span>  ]] &amp;&amp; echo <span class="st">&quot;I am not zero&quot;</span></a></code></pre></div>
 <p>No output and its fine.</p>
 <p>But when <code>param</code> is empty except for one (or more) space characters, then the case is different:</p>
 <div class="sourceCode" id="cb500"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb500-1" title="1"><span class="va">param=</span><span class="st">&quot; &quot;</span> <span class="co"># one space</span></a>
-<a class="sourceLine" id="cb500-2" title="2"><span class="kw">[[</span> <span class="ot">!</span>  <span class="ot">-z</span>  <span class="va">$param</span>  ]] &amp;amp;&amp;amp; echo <span class="st">&quot;I am not zero&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb500-2" title="2"><span class="kw">[[</span> <span class="ot">!</span>  <span class="ot">-z</span>  <span class="va">$param</span>  ]] &amp;&amp; echo <span class="st">&quot;I am not zero&quot;</span></a></code></pre></div>
 <p>“I am not zero” is output.</p>
 <p>How can I change the test to consider variables that contain only space characters as empty?</p>
 </section>
@@ -5310,7 +5310,7 @@ FYI
 <p>This will list your connections, with the first column being the SSID, and the second column being the UUID of the connection.</p>
 <p>Copy the UUID of the SSID you want to connect to so you can paste it into the next command.</p>
 <p>Next, run</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb563-1" title="1"><span class="ex">nmcli</span> c up uuid <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">paste</span> uuid here<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb563"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb563-1" title="1"><span class="ex">nmcli</span> c up uuid <span class="op">&lt;</span>paste uuid here<span class="op">&gt;</span></a></code></pre></div>
 <p>and this will, using the same stuff as the ‘standard Ubuntu tool’ connect to your wifi!</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -5321,7 +5321,7 @@ FYI
 <h4>Question</h4>
 <p>How can I delete all lines in a file using vi?</p>
 <p>At moment I do that using something like this to remove all lines in a file:</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb564-1" title="1"><span class="bu">echo</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">test.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb564"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb564-1" title="1"><span class="bu">echo</span> <span class="op">&gt;</span> test.txt</a></code></pre></div>
 <p>How can I delete all lines using <code>vi</code>?</p>
 <p>
 <strong>Note:</strong> Using <code>dd</code> is not a good option. There can be many lines.
@@ -5354,7 +5354,7 @@ The <code>:</code> introduces a command (and moves the cursor to the bottom).<br
 </li>
 </ul>
 <p>On the command line,</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb567-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">test.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb567"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb567-1" title="1"><span class="op">&gt;</span> <span class="ex">test.txt</span></a></code></pre></div>
 <p>will do also.</p>
 <p>What is the problem with dd?</p>
 <div class="sourceCode" id="cb568"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb568-1" title="1"><span class="fu">dd</span> if=/dev/null of=test.txt</a></code></pre></div>
@@ -5374,7 +5374,7 @@ The <code>:</code> introduces a command (and moves the cursor to the bottom).<br
 <section id="answer-3-score-53-1" class="level4">
 <h4>Answer 3 (score 53)</h4>
 <p>I’d recommend that you just do this (should work in any POSIX-compliant shell):</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb569-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">test.txt</span></a></code></pre></div>
+<div class="sourceCode" id="cb569"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb569-1" title="1"><span class="op">&gt;</span> <span class="ex">test.txt</span></a></code></pre></div>
 <p>If you really want to do it with vi, you can do:</p>
 <ul>
 <li>
@@ -5512,7 +5512,7 @@ It is part of the package <code>net-tools</code>, which is not installed by defa
 <a class="sourceLine" id="cb586-10" title="10"><span class="bu">[</span> ...<span class="bu"> ]</span></a></code></pre></div>
 <p>and</p>
 <div class="sourceCode" id="cb587"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb587-1" title="1">$ <span class="ex">ip</span> address</a>
-<a class="sourceLine" id="cb587-2" title="2"><span class="ex">1</span>: lo: <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">LOOPBACK</span>,UP,LOWER_UP<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">mtu</span> 65536 qdisc noqueue state UNKNOWN group default</a>
+<a class="sourceLine" id="cb587-2" title="2"><span class="ex">1</span>: lo: <span class="op">&lt;</span>LOOPBACK,UP,LOWER_UP<span class="op">&gt;</span> mtu 65536 qdisc noqueue state UNKNOWN group default</a>
 <a class="sourceLine" id="cb587-3" title="3">    <span class="ex">link/loopback</span> 00:00:00:00:00:00 brd 00:00:00:00:00:00</a>
 <a class="sourceLine" id="cb587-4" title="4">    <span class="ex">inet</span> 127.0.0.1/8 scope host lo</a>
 <a class="sourceLine" id="cb587-5" title="5">       <span class="ex">valid_lft</span> forever preferred_lft forever</a>
@@ -5524,7 +5524,7 @@ Note the output is more terse: It does not show counts of packets handled in nor
 </p>
 <p>For that, add the option <code>-s</code> (<code>-stats</code>, <code>-statistics</code>):</p>
 <div class="sourceCode" id="cb588"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb588-1" title="1">$ <span class="ex">ip</span> -s addr</a>
-<a class="sourceLine" id="cb588-2" title="2"><span class="ex">1</span>: lo: <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">LOOPBACK</span>,UP,LOWER_UP<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">mtu</span> 65536 qdisc noqueue state UNKNOWN group default</a>
+<a class="sourceLine" id="cb588-2" title="2"><span class="ex">1</span>: lo: <span class="op">&lt;</span>LOOPBACK,UP,LOWER_UP<span class="op">&gt;</span> mtu 65536 qdisc noqueue state UNKNOWN group default</a>
 <a class="sourceLine" id="cb588-3" title="3">    <span class="ex">link/loopback</span> 00:00:00:00:00:00 brd 00:00:00:00:00:00</a>
 <a class="sourceLine" id="cb588-4" title="4">    <span class="ex">inet</span> 127.0.0.1/8 scope host lo</a>
 <a class="sourceLine" id="cb588-5" title="5">       <span class="ex">valid_lft</span> forever preferred_lft forever</a>
@@ -5536,7 +5536,7 @@ Note the output is more terse: It does not show counts of packets handled in nor
 <a class="sourceLine" id="cb588-11" title="11">    <span class="ex">74423</span>      703      0       0       0       0</a></code></pre></div>
 <p>But what you actually want to see may be this:</p>
 <div class="sourceCode" id="cb589"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb589-1" title="1">$ <span class="ex">ip</span> -stats -color -human addr</a>
-<a class="sourceLine" id="cb589-2" title="2"><span class="ex">1</span>: lo: <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">LOOPBACK</span>,UP,LOWER_UP<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">mtu</span> 65536 qdisc noqueue state UNKNOWN group default</a>
+<a class="sourceLine" id="cb589-2" title="2"><span class="ex">1</span>: lo: <span class="op">&lt;</span>LOOPBACK,UP,LOWER_UP<span class="op">&gt;</span> mtu 65536 qdisc noqueue state UNKNOWN group default</a>
 <a class="sourceLine" id="cb589-3" title="3">    <span class="ex">link/loopback</span> 00:00:00:00:00:00 brd 00:00:00:00:00:00</a>
 <a class="sourceLine" id="cb589-4" title="4">    <span class="ex">inet</span> 127.0.0.1/8 scope host lo</a>
 <a class="sourceLine" id="cb589-5" title="5">       <span class="ex">valid_lft</span> forever preferred_lft forever</a>
@@ -5643,9 +5643,9 @@ Sometimes, I want to see full log, from start. It could have 1000s of rows.<br> 
 <div class="sourceCode" id="cb602"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb602-1" title="1">$ <span class="fu">wc</span> -c somefile.txt</a>
 <a class="sourceLine" id="cb602-2" title="2">    <span class="ex">1160</span> somefile.txt</a></code></pre></div>
 <p>If you would like to avoid chaining a full interpreted language or stream editor just to get a file size count, just redirect the input from the file so that <code>wc</code> never sees the filename:</p>
-<div class="sourceCode" id="cb603"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb603-1" title="1"><span class="fu">wc</span> -c <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb603"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb603-1" title="1"><span class="fu">wc</span> -c <span class="op">&lt;</span> <span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span></a></code></pre></div>
 <p>This last form can be used with command substitution to easily grab the value you were seeking as a shell variable, as mentioned by <a href="https://unix.stackexchange.com/users/885/gilles">Gilles</a> below.</p>
-<div class="sourceCode" id="cb604"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb604-1" title="1"><span class="va">size=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">wc</span> -c <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb604"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb604-1" title="1"><span class="va">size=</span><span class="st">&quot;</span><span class="va">$(</span><span class="fu">wc</span> -c <span class="op">&lt;</span><span class="st">&quot;</span><span class="va">$filename</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span></a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -5663,28 +5663,28 @@ Sometimes, I want to see full log, from start. It could have 1000s of rows.<br> 
 </section>
 <section id="answer-2-score-112" class="level4">
 <h4>Answer 2 (score 112)</h4>
-<div class="sourceCode" id="cb607"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb607-1" title="1">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">cat</span> ./deploymLog.sh </a>
+<div class="sourceCode" id="cb607"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb607-1" title="1">$<span class="op">&gt;</span> <span class="fu">cat</span> ./deploymLog.sh </a>
 <a class="sourceLine" id="cb607-2" title="2"><span class="co">#!/bin/bash</span></a>
 <a class="sourceLine" id="cb607-3" title="3"></a>
 <a class="sourceLine" id="cb607-4" title="4"><span class="va">name=$1</span></a>
 <a class="sourceLine" id="cb607-5" title="5"><span class="va">log_file=</span><span class="st">&quot;Logone.txt&quot;</span></a>
 <a class="sourceLine" id="cb607-6" title="6"></a>
 <a class="sourceLine" id="cb607-7" title="7"><span class="kw">if [[</span> <span class="ot">-n</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">&quot;</span><span class="kw"> ]]</span>; <span class="kw">then</span></a>
-<a class="sourceLine" id="cb607-8" title="8">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">=</span><span class="va">$(</span> <span class="fu">date</span> +%s <span class="va">)</span><span class="st">&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">${log_file}</span></a>
+<a class="sourceLine" id="cb607-8" title="8">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">=</span><span class="va">$(</span> <span class="fu">date</span> +%s <span class="va">)</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">${log_file}</span></a>
 <a class="sourceLine" id="cb607-9" title="9"><span class="kw">else</span></a>
 <a class="sourceLine" id="cb607-10" title="10">    <span class="bu">echo</span> <span class="st">&quot;argument error&quot;</span></a>
 <a class="sourceLine" id="cb607-11" title="11"><span class="kw">fi</span></a></code></pre></div>
 <p>
 The first argument from a command line can be found with the positional parameter <code>$1</code>. <code>[[ -n &quot;$name&quot; ]]</code> tests to see if <code>$name</code> is not empty. <code>date +%s</code> returns the current timestamp in Unix time. The <code>&amp;gt;&amp;gt;</code> operator is used to write to a file by appending to the existing data in the file.
 </p>
-<div class="sourceCode" id="cb608"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb608-1" title="1">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">./deploymLog.sh</span> tt</a>
+<div class="sourceCode" id="cb608"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb608-1" title="1">$<span class="op">&gt;</span> <span class="ex">./deploymLog.sh</span> tt</a>
 <a class="sourceLine" id="cb608-2" title="2"></a>
-<a class="sourceLine" id="cb608-3" title="3">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">cat</span> Logone.txt </a>
+<a class="sourceLine" id="cb608-3" title="3">$<span class="op">&gt;</span> <span class="fu">cat</span> Logone.txt </a>
 <a class="sourceLine" id="cb608-4" title="4"><span class="va">tt=</span>1329810941</a>
 <a class="sourceLine" id="cb608-5" title="5"></a>
-<a class="sourceLine" id="cb608-6" title="6">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">./deploymLog.sh</span> rr</a>
+<a class="sourceLine" id="cb608-6" title="6">$<span class="op">&gt;</span> <span class="ex">./deploymLog.sh</span> rr</a>
 <a class="sourceLine" id="cb608-7" title="7"></a>
-<a class="sourceLine" id="cb608-8" title="8">$<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="fu">cat</span> Logone.txt </a>
+<a class="sourceLine" id="cb608-8" title="8">$<span class="op">&gt;</span> <span class="fu">cat</span> Logone.txt </a>
 <a class="sourceLine" id="cb608-9" title="9"><span class="va">tt=</span>1329810941</a>
 <a class="sourceLine" id="cb608-10" title="10"><span class="va">rr=</span>1329810953</a></code></pre></div>
 <p>For more readable timestamp you could play with <code>date</code> arguments.</p>
@@ -5706,12 +5706,12 @@ The first argument from a command line can be found with the positional paramete
 <p>Now <code>$now</code> contains the current date and time.</p>
 <p>So you can create your log file thus:</p>
 <div class="sourceCode" id="cb611"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb611-1" title="1"><span class="va">logfile=</span>/path/to/log/file/mylogfile.<span class="va">$now</span></a>
-<a class="sourceLine" id="cb611-2" title="2"><span class="bu">echo</span> <span class="st">&quot;[</span><span class="va">$name</span><span class="st">]=[</span><span class="va">$now</span><span class="st">]&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">$logfile</span></a></code></pre></div>
+<a class="sourceLine" id="cb611-2" title="2"><span class="bu">echo</span> <span class="st">&quot;[</span><span class="va">$name</span><span class="st">]=[</span><span class="va">$now</span><span class="st">]&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$logfile</span></a></code></pre></div>
 <p>You are better off using a shell function to log your messages as it will be easier to use:</p>
 <div class="sourceCode" id="cb612"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb612-1" title="1"><span class="kw">function</span><span class="fu"> logit</span></a>
 <a class="sourceLine" id="cb612-2" title="2"><span class="kw">{</span></a>
 <a class="sourceLine" id="cb612-3" title="3">    <span class="va">now=$(</span><span class="fu">date</span> +%Y%m%d%H%M%S<span class="va">)</span></a>
-<a class="sourceLine" id="cb612-4" title="4">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$now</span><span class="st">: </span><span class="va">$*</span><span class="st">&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">$logfile</span></a>
+<a class="sourceLine" id="cb612-4" title="4">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$now</span><span class="st">: </span><span class="va">$*</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$logfile</span></a>
 <a class="sourceLine" id="cb612-5" title="5"><span class="kw">}</span></a></code></pre></div>
 <p>Note that shell functions access their own arguments in the same way as the script (via <code>$1</code> etc.)</p>
 <p>So the initial script looks like this:</p>
@@ -5720,7 +5720,7 @@ The first argument from a command line can be found with the positional paramete
 <a class="sourceLine" id="cb613-3" title="3"><span class="kw">function</span><span class="fu"> logit</span></a>
 <a class="sourceLine" id="cb613-4" title="4"><span class="kw">{</span></a>
 <a class="sourceLine" id="cb613-5" title="5">    <span class="va">now=$(</span><span class="fu">date</span> +%Y%m%d%H%M%S<span class="va">)</span></a>
-<a class="sourceLine" id="cb613-6" title="6">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$now</span><span class="st">: </span><span class="va">$*</span><span class="st">&quot;</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="va">$logfile</span></a>
+<a class="sourceLine" id="cb613-6" title="6">    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$now</span><span class="st">: </span><span class="va">$*</span><span class="st">&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$logfile</span></a>
 <a class="sourceLine" id="cb613-7" title="7"><span class="kw">}</span></a>
 <a class="sourceLine" id="cb613-8" title="8"></a>
 <a class="sourceLine" id="cb613-9" title="9"><span class="kw">if</span><span class="bu"> [</span> <span class="va">$#</span> <span class="ot">-ne</span> 1<span class="bu"> ]</span>; <span class="kw">then</span></a>
@@ -5774,11 +5774,11 @@ The first argument from a command line can be found with the positional paramete
 <section id="answer-3-score-67" class="level4">
 <h4>Answer 3 (score 67)</h4>
 <p>for removing the last <code>n</code> characters from a line that makes no use of <code>sed</code> OR <code>awk</code>:</p>
-<div class="sourceCode" id="cb618"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb618-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="bu">echo</span> lkj <span class="kw">|</span> <span class="fu">rev</span> <span class="kw">|</span> <span class="fu">cut</span> -c (n+1)<span class="ex">-</span> <span class="kw">|</span> <span class="fu">rev</span></a></code></pre></div>
+<div class="sourceCode" id="cb618"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb618-1" title="1"><span class="op">&gt;</span> <span class="bu">echo</span> lkj <span class="kw">|</span> <span class="fu">rev</span> <span class="kw">|</span> <span class="fu">cut</span> -c (n+1)<span class="ex">-</span> <span class="kw">|</span> <span class="fu">rev</span></a></code></pre></div>
 <p>so for example you can delete the last character <code>one character</code> using this:</p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb619-1" title="1"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="bu">echo</span> lkj <span class="kw">|</span> <span class="fu">rev</span> <span class="kw">|</span> <span class="fu">cut</span> -c 2- <span class="kw">|</span> <span class="fu">rev</span></a>
+<div class="sourceCode" id="cb619"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb619-1" title="1"><span class="op">&gt;</span> <span class="bu">echo</span> lkj <span class="kw">|</span> <span class="fu">rev</span> <span class="kw">|</span> <span class="fu">cut</span> -c 2- <span class="kw">|</span> <span class="fu">rev</span></a>
 <a class="sourceLine" id="cb619-2" title="2"></a>
-<a class="sourceLine" id="cb619-3" title="3"><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">lk</span></a></code></pre></div>
+<a class="sourceLine" id="cb619-3" title="3"><span class="op">&gt;</span> <span class="ex">lk</span></a></code></pre></div>
 <p>from <code>rev</code> manpage:</p>
 <blockquote>
 <p>
@@ -5838,12 +5838,12 @@ First you need to decide if your VM connected to your host machine via a bridge 
 </p>
 <div class="sourceCode" id="cb621"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb621-1" title="1"><span class="ex">VM</span> <span class="co"># ip addr show</span></a>
 <a class="sourceLine" id="cb621-2" title="2"></a>
-<a class="sourceLine" id="cb621-3" title="3"><span class="ex">1</span>: lo: <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">LOOPBACK</span>,UP,LOWER_UP<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">mtu</span> 16436 qdisc noqueue state UNKNOWN </a>
+<a class="sourceLine" id="cb621-3" title="3"><span class="ex">1</span>: lo: <span class="op">&lt;</span>LOOPBACK,UP,LOWER_UP<span class="op">&gt;</span> mtu 16436 qdisc noqueue state UNKNOWN </a>
 <a class="sourceLine" id="cb621-4" title="4">    <span class="ex">link/loopback</span> 00:00:00:00:00:00 brd 00:00:00:00:00:00</a>
 <a class="sourceLine" id="cb621-5" title="5">    <span class="ex">inet</span> 127.0.0.1/8 scope host lo</a>
 <a class="sourceLine" id="cb621-6" title="6">    <span class="ex">inet6</span> ::1/128 scope host </a>
 <a class="sourceLine" id="cb621-7" title="7">       <span class="ex">valid_lft</span> forever preferred_lft forever</a>
-<a class="sourceLine" id="cb621-8" title="8"><span class="ex">2</span>: eth0: <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">BROADCAST</span>,MULTICAST,UP,LOWER_UP<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">mtu</span> 1500 qdisc pfifo_fast state UP qlen 1000</a>
+<a class="sourceLine" id="cb621-8" title="8"><span class="ex">2</span>: eth0: <span class="op">&lt;</span>BROADCAST,MULTICAST,UP,LOWER_UP<span class="op">&gt;</span> mtu 1500 qdisc pfifo_fast state UP qlen 1000</a>
 <a class="sourceLine" id="cb621-9" title="9">    <span class="ex">link/ether</span> 52:54:00:d9:16:b3 brd ff:ff:ff:ff:ff:ff</a>
 <a class="sourceLine" id="cb621-10" title="10">    <span class="ex">inet</span> 10.0.2.15/24 brd 10.0.2.1 scope global eth0</a>
 <a class="sourceLine" id="cb621-11" title="11">       <span class="ex">valid_lft</span> forever preferred_lft forever</a></code></pre></div>
@@ -5879,14 +5879,14 @@ First you need to decide if your VM connected to your host machine via a bridge 
 <h4>Answer accepted (score 272)</h4>
 <p>I found it: <a href="http://www.linuxquestions.org/questions/linux-desktop-74/applying-default-permissions-for-newly-created-files-within-a-specific-folder-605129/">Applying default permissions</a></p>
 <p>From the article:</p>
-<div class="sourceCode" id="cb627"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb627-1" title="1"><span class="fu">chmod</span> g+s <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span>  <span class="ex">//set</span> gid </a>
-<a class="sourceLine" id="cb627-2" title="2"><span class="ex">setfacl</span> -d -m g::rwx /<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span>  <span class="ex">//set</span> group to rwx default </a>
-<a class="sourceLine" id="cb627-3" title="3"><span class="ex">setfacl</span> -d -m o::rx /<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span>   <span class="ex">//set</span> other</a></code></pre></div>
+<div class="sourceCode" id="cb627"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb627-1" title="1"><span class="fu">chmod</span> g+s <span class="op">&lt;</span>directory<span class="op">&gt;</span>  //set gid </a>
+<a class="sourceLine" id="cb627-2" title="2"><span class="ex">setfacl</span> -d -m g::rwx /<span class="op">&lt;</span>directory<span class="op">&gt;</span>  //set group to rwx default </a>
+<a class="sourceLine" id="cb627-3" title="3"><span class="ex">setfacl</span> -d -m o::rx /<span class="op">&lt;</span>directory<span class="op">&gt;</span>   //set other</a></code></pre></div>
 <p>Next we can verify:</p>
-<div class="sourceCode" id="cb628"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb628-1" title="1"><span class="ex">getfacl</span> /<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb628"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb628-1" title="1"><span class="ex">getfacl</span> /<span class="op">&lt;</span>directory<span class="op">&gt;</span></a></code></pre></div>
 <p>Output:</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb629-1" title="1"><span class="co"># file: ../&amp;lt;directory&amp;gt;/</span></a>
-<a class="sourceLine" id="cb629-2" title="2"><span class="co"># owner: &amp;lt;user&amp;gt;</span></a>
+<div class="sourceCode" id="cb629"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb629-1" title="1"><span class="co"># file: ../&lt;directory&gt;/</span></a>
+<a class="sourceLine" id="cb629-2" title="2"><span class="co"># owner: &lt;user&gt;</span></a>
 <a class="sourceLine" id="cb629-3" title="3"><span class="co"># group: media</span></a>
 <a class="sourceLine" id="cb629-4" title="4"><span class="co"># flags: -s-</span></a>
 <a class="sourceLine" id="cb629-5" title="5"><span class="ex">user</span>::rwx</a>
@@ -5900,14 +5900,14 @@ First you need to decide if your VM connected to your host machine via a bridge 
 <h4>Answer 2 (score 27)</h4>
 <p>This is an addition to Chris’ answer, it’s based on my experience on my Arch Linux rig.</p>
 <p>Using the default switch (-d) and the modify switch (-m) will only modify the the default permissions but leave the existing ones intact:</p>
-<div class="sourceCode" id="cb630"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb630-1" title="1"><span class="ex">setfacl</span> -d -m g::rwx /<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb630"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb630-1" title="1"><span class="ex">setfacl</span> -d -m g::rwx /<span class="op">&lt;</span>directory<span class="op">&gt;</span></a></code></pre></div>
 <p>If you want to change folder’s entire permission structure including the existing ones (you’ll have to do an extra line and make it recursive -R:</p>
-<div class="sourceCode" id="cb631"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb631-1" title="1"><span class="ex">setfacl</span> -R -m g::rwx /<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb631"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb631-1" title="1"><span class="ex">setfacl</span> -R -m g::rwx /<span class="op">&lt;</span>directory<span class="op">&gt;</span></a></code></pre></div>
 <p>eg.</p>
-<div class="sourceCode" id="cb632"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb632-1" title="1"><span class="ex">setfacl</span> -R -m g::rwx /home/limited.users/<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">//</span> gives group read,write,exec permissions for currently existing files and folders, recursively</a>
-<a class="sourceLine" id="cb632-2" title="2"><span class="ex">setfacl</span> -R -m o::x /home/limited.users/<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">//revokes</span> read and write permission for everyone else in existing folder and subfolders </a>
-<a class="sourceLine" id="cb632-3" title="3"><span class="ex">setfacl</span> -R -d -m g::rwx /home/limited.users/<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">//</span> gives group rwx permissions by default, recursively</a>
-<a class="sourceLine" id="cb632-4" title="4"><span class="ex">setfacl</span> -R -d -m o::--- /home/limited.users/<span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span><span class="ex">directory</span><span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">//revokes</span> read, write and execute permissions for everyone else. </a></code></pre></div>
+<div class="sourceCode" id="cb632"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb632-1" title="1"><span class="ex">setfacl</span> -R -m g::rwx /home/limited.users/<span class="op">&lt;</span>directory<span class="op">&gt;</span> // gives group read,write,exec permissions for currently existing files and folders, recursively</a>
+<a class="sourceLine" id="cb632-2" title="2"><span class="ex">setfacl</span> -R -m o::x /home/limited.users/<span class="op">&lt;</span>directory<span class="op">&gt;</span> //revokes read and write permission for everyone else in existing folder and subfolders </a>
+<a class="sourceLine" id="cb632-3" title="3"><span class="ex">setfacl</span> -R -d -m g::rwx /home/limited.users/<span class="op">&lt;</span>directory<span class="op">&gt;</span> // gives group rwx permissions by default, recursively</a>
+<a class="sourceLine" id="cb632-4" title="4"><span class="ex">setfacl</span> -R -d -m o::--- /home/limited.users/<span class="op">&lt;</span>directory<span class="op">&gt;</span> //revokes read, write and execute permissions for everyone else. </a></code></pre></div>
 <p>(<strong>CREDIT</strong> to markdwite in comments for the synthax of the revoke all privileges line)</p>
 </section>
 <section id="answer-3-score-0-2" class="level4">
@@ -5991,13 +5991,13 @@ First you need to decide if your VM connected to your host machine via a bridge 
 <section id="answer-accepted-score-165-1" class="level4">
 <h4>Answer accepted (score 165)</h4>
 <p>I guess you’re looking for:</p>
-<div class="sourceCode" id="cb644"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb644-1" title="1"><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$PHONE_TYPE</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;NORTEL&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$PHONE_TYPE</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;NEC&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span></a>
+<div class="sourceCode" id="cb644"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb644-1" title="1"><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$PHONE_TYPE</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;NORTEL&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$PHONE_TYPE</span><span class="st">&quot;</span> <span class="ot">!=</span> <span class="st">&quot;NEC&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span></a>
 <a class="sourceLine" id="cb644-2" title="2">   [ <span class="st">&quot;</span><span class="va">$PHONE_TYPE</span><span class="st">&quot;</span> != <span class="st">&quot;CISCO&quot;</span> ]</a></code></pre></div>
 <p>The rules for these equivalents are called <a href="https://en.wikipedia.org/wiki/De_Morgan%27s_laws" rel="noreferrer">De Morgan’s laws</a> and in your case meant:</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb645-1" title="1"><span class="ex">not</span>(A <span class="kw">||</span> <span class="ex">B</span> <span class="kw">||</span> <span class="ex">C</span>) =<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">not</span>(A) <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="ex">not</span>(B) <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="ex">not</span> (C)</a></code></pre></div>
+<div class="sourceCode" id="cb645"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb645-1" title="1"><span class="ex">not</span>(A <span class="kw">||</span> <span class="ex">B</span> <span class="kw">||</span> <span class="ex">C</span>) =<span class="op">&gt;</span> <span class="ex">not</span>(A) <span class="kw">&amp;&amp;</span> <span class="ex">not</span>(B) <span class="kw">&amp;&amp;</span> <span class="ex">not</span> (C)</a></code></pre></div>
 <p>Note the change in the boolean operator or and and.</p>
 <p>Whereas you tried to do:</p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb646-1" title="1"><span class="ex">not</span>(A <span class="kw">||</span> <span class="ex">B</span> <span class="kw">||</span> <span class="ex">C</span>) =<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">not</span>(A) <span class="kw">||</span> <span class="ex">not</span>(B) <span class="kw">||</span> <span class="ex">not</span>(C)</a></code></pre></div>
+<div class="sourceCode" id="cb646"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb646-1" title="1"><span class="ex">not</span>(A <span class="kw">||</span> <span class="ex">B</span> <span class="kw">||</span> <span class="ex">C</span>) =<span class="op">&gt;</span> <span class="ex">not</span>(A) <span class="kw">||</span> <span class="ex">not</span>(B) <span class="kw">||</span> <span class="ex">not</span>(C)</a></code></pre></div>
 <p>Which obviously doesn’t work.</p>
 </section>
 <section id="answer-2-score-29-3" class="level4">
@@ -6152,7 +6152,7 @@ For the most trivial cases, you can do without the script and execute a certain 
 <a class="sourceLine" id="cb655-3" title="3"></a>
 <a class="sourceLine" id="cb655-4" title="4">[<span class="ex">Service</span>]</a>
 <a class="sourceLine" id="cb655-5" title="5"><span class="va">Type=</span>oneshot</a>
-<a class="sourceLine" id="cb655-6" title="6"><span class="va">ExecStart=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo OFF &amp;gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
+<a class="sourceLine" id="cb655-6" title="6"><span class="va">ExecStart=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo OFF &gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
 <a class="sourceLine" id="cb655-7" title="7"></a>
 <a class="sourceLine" id="cb655-8" title="8">[<span class="ex">Install</span>]</a>
 <a class="sourceLine" id="cb655-9" title="9"><span class="va">WantedBy=</span>multi-user.target</a></code></pre></div>
@@ -6162,8 +6162,8 @@ For the most trivial cases, you can do without the script and execute a certain 
 <a class="sourceLine" id="cb656-3" title="3"></a>
 <a class="sourceLine" id="cb656-4" title="4">[<span class="ex">Service</span>]</a>
 <a class="sourceLine" id="cb656-5" title="5"><span class="va">Type=</span>oneshot</a>
-<a class="sourceLine" id="cb656-6" title="6"><span class="va">ExecStart=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo OFF &amp;gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
-<a class="sourceLine" id="cb656-7" title="7"><span class="va">ExecStop=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo ON &amp;gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
+<a class="sourceLine" id="cb656-6" title="6"><span class="va">ExecStart=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo OFF &gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
+<a class="sourceLine" id="cb656-7" title="7"><span class="va">ExecStop=</span>/bin/sh <span class="ex">-c</span> <span class="st">&quot;echo ON &gt; /whatever/vga_pwr_gadget/switch&quot;</span></a>
 <a class="sourceLine" id="cb656-8" title="8"><span class="va">RemainAfterExit=</span>yes</a>
 <a class="sourceLine" id="cb656-9" title="9"></a>
 <a class="sourceLine" id="cb656-10" title="10">[<span class="ex">Install</span>]</a>
@@ -6314,25 +6314,25 @@ yes!
 <p>It works by being run each time you open up a new terminal, window or pane.</p>
 <p>You can see mine here <a href="https://i.stack.imgur.com/DQnGN.png" rel="noreferrer">(pic with syntax highlighting)</a>:</p>
 <div class="sourceCode" id="cb670"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb670-1" title="1"><span class="va">HISTCONTROL=</span>ignoreboth:erasedups <span class="va">HISTSIZE=</span>100000 <span class="va">HISTFILESIZE=</span>200000</a>
-<a class="sourceLine" id="cb670-2" title="2"><span class="fu">ls</span> --color=al <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/dev/null</span> 2<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="ex">1</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">alias</span> ls=<span class="st">&#39;ls -F --color=al&#39;</span> <span class="kw">||</span> <span class="bu">alias</span> ls=<span class="st">&#39;ls -G&#39;</span></a>
-<a class="sourceLine" id="cb670-3" title="3"><span class="fu">md ()</span> <span class="kw">{</span><span class="bu"> [</span> <span class="va">$#</span> <span class="ot">=</span> 1<span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="fu">mkdir</span> -p <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;Error - no directory passed!&quot;</span><span class="kw">;</span> <span class="kw">}</span></a>
-<a class="sourceLine" id="cb670-4" title="4"><span class="fu">git_branch ()</span> <span class="kw">{</span> <span class="fu">git</span> branch 2<span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span> <span class="ex">/dev/null</span> <span class="kw">|</span> <span class="fu">sed</span> -e <span class="st">&#39;/^[^*]/d&#39;</span> -e <span class="st">&#39;s/* \(.*\)/\1/&#39;</span><span class="kw">;</span> <span class="kw">}</span></a>
+<a class="sourceLine" id="cb670-2" title="2"><span class="fu">ls</span> --color=al <span class="op">&gt;</span> /dev/null <span class="op">2&gt;&amp;1</span> <span class="kw">&amp;&amp;</span> <span class="bu">alias</span> ls=<span class="st">&#39;ls -F --color=al&#39;</span> <span class="kw">||</span> <span class="bu">alias</span> ls=<span class="st">&#39;ls -G&#39;</span></a>
+<a class="sourceLine" id="cb670-3" title="3"><span class="fu">md ()</span> <span class="kw">{</span><span class="bu"> [</span> <span class="va">$#</span> <span class="ot">=</span> 1<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="fu">mkdir</span> -p <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;Error - no directory passed!&quot;</span><span class="kw">;</span> <span class="kw">}</span></a>
+<a class="sourceLine" id="cb670-4" title="4"><span class="fu">git_branch ()</span> <span class="kw">{</span> <span class="fu">git</span> branch <span class="op">2&gt;</span> /dev/null <span class="kw">|</span> <span class="fu">sed</span> -e <span class="st">&#39;/^[^*]/d&#39;</span> -e <span class="st">&#39;s/* \(.*\)/\1/&#39;</span><span class="kw">;</span> <span class="kw">}</span></a>
 <a class="sourceLine" id="cb670-5" title="5"><span class="va">HOST=</span><span class="st">&#39;\033[02;36m\]\h&#39;</span>; <span class="va">HOST=</span><span class="st">&#39; &#39;</span><span class="va">$HOST</span></a>
 <a class="sourceLine" id="cb670-6" title="6"><span class="va">TIME=</span><span class="st">&#39;\033[01;31m\]\t \033[01;32m\]&#39;</span></a>
 <a class="sourceLine" id="cb670-7" title="7"><span class="va">LOCATION=</span><span class="st">&#39; \033[01;34m\]`pwd | sed &quot;s#\(/[^/]\{1,\}/[^/]\{1,\}/[^/]\{1,\}/\).*\(/[^/]\{1,\}/[^/]\{1,\}\)/\{0,1\}#\1_\2#g&quot;`&#39;</span></a>
 <a class="sourceLine" id="cb670-8" title="8"><span class="va">BRANCH=</span><span class="st">&#39; \033[00;33m\]$(git_branch)\[\033[00m\]\n\$ &#39;</span></a>
 <a class="sourceLine" id="cb670-9" title="9"><span class="va">PS1=$TIME$USER$HOST$LOCATION$BRANCH</span></a>
-<a class="sourceLine" id="cb670-10" title="10"><span class="va">PS2=</span><span class="st">&#39;\[\033[01;36m\]&amp;gt;&#39;</span></a>
+<a class="sourceLine" id="cb670-10" title="10"><span class="va">PS2=</span><span class="st">&#39;\[\033[01;36m\]&gt;&#39;</span></a>
 <a class="sourceLine" id="cb670-11" title="11"><span class="kw">set</span> <span class="ex">-o</span> vi <span class="co"># vi at command line</span></a>
 <a class="sourceLine" id="cb670-12" title="12"><span class="bu">export</span> <span class="va">EDITOR=</span>vim</a>
-<a class="sourceLine" id="cb670-13" title="13"><span class="bu">test</span> -f ~/.bash_aliases <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">.</span> <span class="va">$_</span></a>
-<a class="sourceLine" id="cb670-14" title="14"><span class="bu">test</span> -f ~/.git-completion.bash <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">.</span> <span class="va">$_</span></a>
-<a class="sourceLine" id="cb670-15" title="15"><span class="bu">test</span> -s ~/.autojump/etc/profile.d/autojump <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">.</span> <span class="va">$_</span></a>
-<a class="sourceLine" id="cb670-16" title="16"><span class="bu">[</span> <span class="va">${BASH_VERSINFO[0]}</span> <span class="ot">-ge</span> 4<span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">shopt</span> -s autocd</a>
-<a class="sourceLine" id="cb670-17" title="17"><span class="bu">[</span> <span class="ot">-f</span> /etc/bash_completion<span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> ! <span class="bu">shopt</span> -oq posix <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">.</span> <span class="ex">/etc/bash_completion</span></a>
-<a class="sourceLine" id="cb670-18" title="18"><span class="bu">[</span> <span class="ot">-z</span> <span class="va">$TMUX</span><span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">export</span> <span class="va">TERM=</span>xterm-256color <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">exec</span> tmux</a>
+<a class="sourceLine" id="cb670-13" title="13"><span class="bu">test</span> -f ~/.bash_aliases <span class="kw">&amp;&amp;</span> <span class="bu">.</span> <span class="va">$_</span></a>
+<a class="sourceLine" id="cb670-14" title="14"><span class="bu">test</span> -f ~/.git-completion.bash <span class="kw">&amp;&amp;</span> <span class="bu">.</span> <span class="va">$_</span></a>
+<a class="sourceLine" id="cb670-15" title="15"><span class="bu">test</span> -s ~/.autojump/etc/profile.d/autojump <span class="kw">&amp;&amp;</span> <span class="bu">.</span> <span class="va">$_</span></a>
+<a class="sourceLine" id="cb670-16" title="16"><span class="bu">[</span> <span class="va">${BASH_VERSINFO[0]}</span> <span class="ot">-ge</span> 4<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">shopt</span> -s autocd</a>
+<a class="sourceLine" id="cb670-17" title="17"><span class="bu">[</span> <span class="ot">-f</span> /etc/bash_completion<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> ! <span class="bu">shopt</span> -oq posix <span class="kw">&amp;&amp;</span> <span class="bu">.</span> <span class="ex">/etc/bash_completion</span></a>
+<a class="sourceLine" id="cb670-18" title="18"><span class="bu">[</span> <span class="ot">-z</span> <span class="va">$TMUX</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">export</span> <span class="va">TERM=</span>xterm-256color <span class="kw">&amp;&amp;</span> <span class="bu">exec</span> tmux</a>
 <a class="sourceLine" id="cb670-19" title="19"><span class="bu">export</span> <span class="va">PATH=</span><span class="st">&quot;</span><span class="va">$PATH</span><span class="st">:</span><span class="va">$HOME</span><span class="st">/.rvm/bin&quot;</span> <span class="co"># Add RVM to PATH for scripting</span></a>
-<a class="sourceLine" id="cb670-20" title="20"><span class="kw">[[</span> <span class="ot">-s</span> <span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/.rvm/scripts/rvm&quot;</span><span class="kw"> ]]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="bu">source</span> <span class="st">&quot;</span><span class="va">$home</span><span class="st">/.rvm/scripts/rvm&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb670-20" title="20"><span class="kw">[[</span> <span class="ot">-s</span> <span class="st">&quot;</span><span class="va">$HOME</span><span class="st">/.rvm/scripts/rvm&quot;</span><span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">source</span> <span class="st">&quot;</span><span class="va">$home</span><span class="st">/.rvm/scripts/rvm&quot;</span></a></code></pre></div>
 <p>Explanation:</p>
 <p>
 -1. Set up my history file to ignore duplicates and be much larger than the default.<br> -2. Color option for <code>ls</code> depending on if you are using linux or OSX<br> -3. Function “<code>md</code>” to make and cd into a directory with one command<br> -4. Find the current git branch if in a git repo and…<br> -5. -9. Define an awesome PS1 prompt, as in <img src="https://i.stack.imgur.com/slR41.png" alt="&lt;code&gt;20:00:43 durrantm Castle2012 /hom/durrantm/Dropnot/_/rails_apps/linker master \n $ _&lt;/code&gt;"><br> -10. Improved PS2 prompt<br> -11. Set vi as the editor at the command line<br> -12. Set vi as the default editor<br> -13. execute my <code>.bash_aliases</code> file if it exists<br> -14. Execute my git tab completion script (for remotes and branches) if it exists.<br> -15. Execute autojump if it exists<br> -16. Allow cd’ing without typing the cd part if the bash version &gt;= 4<br> -17. Execute a bash completion script if it exists<br> -18. Use TMUX if it is present<br> -19. Add rvm to my PATH<br> -20. Use rvm if it exists.
@@ -6423,7 +6423,7 @@ This also makes it easier to use the entire file immediately on a new machine wi
 <a class="sourceLine" id="cb672-26" title="26">[<span class="ex">19114.243778</span>] sd 6:0:0:0: [sdc] Assuming drive cache: write through</a>
 <a class="sourceLine" id="cb672-27" title="27">[<span class="ex">19114.252797</span>] sd 6:0:0:0: [sdc] No Caching mode page present</a>
 <a class="sourceLine" id="cb672-28" title="28">[<span class="ex">19114.252807</span>] sd 6:0:0:0: [sdc] Assuming drive cache: write through</a>
-<a class="sourceLine" id="cb672-29" title="29">[<span class="ex">19114.280407</span>]  sdc: sdc1 <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">sdc5</span> <span class="kw">&amp;</span><span class="ex">gt</span><span class="kw">;</span></a>
+<a class="sourceLine" id="cb672-29" title="29">[<span class="ex">19114.280407</span>]  sdc: sdc1 <span class="op">&lt;</span> sdc5 <span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb672-30" title="30">[<span class="ex">19114.289774</span>] sd 6:0:0:0: [sdc] No Caching mode page present</a>
 <a class="sourceLine" id="cb672-31" title="31">[<span class="ex">19114.289779</span>] sd 6:0:0:0: [sdc] Assuming drive cache: write through</a>
 <a class="sourceLine" id="cb672-32" title="32">[<span class="ex">19114.289783</span>] sd 6:0:0:0: [sdc] Attached SCSI disk</a></code></pre></div>
@@ -6443,7 +6443,7 @@ This also makes it easier to use the entire file immediately on a new machine wi
 I personally made this to run on a monthly basis from cron. Of course you need to check if you receive the cron mails in your mailbox (which is often not the case by default). These mails end up in <code>/var/mail/$USER</code> or similar.
 </p>
 <p>I created <code>/etc/cron.d/badblocks</code>:</p>
-<div class="sourceCode" id="cb673"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb673-1" title="1"><span class="ex">30</span> 4 * * 3 root [ -x /sbin/badblocks ] <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span><span class="bu"> [</span> <span class="va">$(</span><span class="fu">date</span> +\%d<span class="va">)</span> <span class="ot">-le</span> 7<span class="bu"> ]</span> <span class="kw">&amp;</span><span class="ex">amp</span><span class="kw">;&amp;</span><span class="ex">amp</span><span class="kw">;</span> <span class="ex">/sbin/badblocks</span> /dev/sda</a></code></pre></div>
+<div class="sourceCode" id="cb673"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb673-1" title="1"><span class="ex">30</span> 4 * * 3 root [ -x /sbin/badblocks ] <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="va">$(</span><span class="fu">date</span> +\%d<span class="va">)</span> <span class="ot">-le</span> 7<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="ex">/sbin/badblocks</span> /dev/sda</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -6466,7 +6466,7 @@ I personally made this to run on a monthly basis from cron. Of course you need t
 Background
 </h3>
 <p>The main reason why you need <em>any</em> program like <code>minicom</code> to communicate over a serial port is that the port needs to be <em>set up</em> prior to initiating a connection. If it weren’t set up appropriately, the <code>cat</code> and <code>echo</code> commands would not do for you what you might have expected. Notice that once you run a program like <code>minicom</code>, the port is left with the settings that <code>minicom</code> used. You can query the communication settings using the <code>stty</code> program like this:</p>
-<div class="sourceCode" id="cb675"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb675-1" title="1"><span class="fu">stty</span> <span class="kw">&amp;</span><span class="ex">lt</span><span class="kw">;</span> <span class="ex">/dev/ttyS0</span></a></code></pre></div>
+<div class="sourceCode" id="cb675"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb675-1" title="1"><span class="fu">stty</span> <span class="op">&lt;</span> /dev/ttyS0</a></code></pre></div>
 <p>If you have done it right; after booting the computer and before running any other program like <code>minicom,</code> the communication settings will be at their default settings. These are probably different than what you will need to make your connection. In this situation, sending the commands <code>cat</code> or <code>echo</code> to the port will either produce garbage or not work at all.</p>
 <p>Run <code>stty</code> again <em>after</em> using <code>minicom</code>, and you’ll notice the settings are set to what the program was using.</p>
 <h5>

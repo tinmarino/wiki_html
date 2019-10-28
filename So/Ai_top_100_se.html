@@ -991,7 +991,7 @@ Euclidean distance between word embeddings of the words
 <blockquote>
 <strong>Code example:</strong>
 </blockquote>
-<pre class="text"><code>#Requirements: Tensorflow&amp;gt;=1.7 tensorflow-hub numpy
+<pre class="text"><code>#Requirements: Tensorflow&gt;=1.7 tensorflow-hub numpy
 
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -1058,9 +1058,9 @@ with tf.Session() as session:
 <p>Simple adaptive parsing is running in the lab here as a part of social networking automation, but only for limited sets of symbols and sequential patterns. It does scale without reconfiguration to an arbitrarily large base linguistic units, prefixes, endings, and suffixes, limited only by our hardware capacities and throughput. The existence of regular expression libraries was helpful to keep the design simple. We use the PCRE version 8 series library fed by a ansiotropic form of DCNN for feature extraction from a window moving through the input text with a configurable windows size and move increment size. Heuristics applied to input text statistics gathered in a first pass produce a set of hypothetical PCREs arranged in two layers.</p>
 <p>Optimization occurs to apply higher probabilistic weights to the best PCREs in a chaotically perturbed text search. It uses the same gradient descent convergence strategies used in NN back propagation in training. It is a naive approach that does not make assumptions like the existence of back-traces, files, or errors. It would adapt equally to Arabic messages and Spanish ones.</p>
 <p>The output is an arbitrary directed graph in memory, which is similar to a dump of an object oriented database.</p>
-<pre class="text"><code>قنبلة -&amp;gt; dangereux -&amp;gt; 4anlyss
-bomba -&amp;gt; dangereux
-ambiguïté -&amp;gt; 4anlyss -&amp;gt; préemption -&amp;gt; قنبلة</code></pre>
+<pre class="text"><code>قنبلة -&gt; dangereux -&gt; 4anlyss
+bomba -&gt; dangereux
+ambiguïté -&gt; 4anlyss -&gt; préemption -&gt; قنبلة</code></pre>
 <p>Although a re-entrant algorithm for a reinforcement version is stubbed out and the wellness signal is already available, other work preempted furthering the adaptive parser or working toward the next step to use the work for natural language: Matching the directed graphs to persisted directed graph filters representing ideas, which would mimic the idea recollection aspect of language comprehension.</p>
 <p><strong>Final Comments</strong></p>
 <p>The system has components and process architecture similar to the log analysis problem and prove the concepts listed above. Of course, the more disorganization in the way logging is done between developers of the system doing the logging, the more difficult it is for a human or artificial agent to disambiguate the entries. Some system logging has been so poorly quality control for so long that the log is nearly useless.</p>
@@ -2298,9 +2298,9 @@ Altering <strong>one pixel</strong> can cause these errors:
 <section id="answer-2-score-7" class="level4">
 <h4>Answer 2 (score 7)</h4>
 <p>Imagine, you want to re-compute the last layer of a pre-trained model :</p>
-<pre class="text"><code>Input-&amp;gt;[Freezed-Layers]-&amp;gt;[Last-Layer-To-Re-Compute]-&amp;gt;Output</code></pre>
+<pre class="text"><code>Input-&gt;[Freezed-Layers]-&gt;[Last-Layer-To-Re-Compute]-&gt;Output</code></pre>
 <p>To train <em>[Last-Layer-To-Re-Compute]</em>, you need to evaluate outputs of <em>[Freezed-Layers]</em> multiple times for a given input data. In order to save time, you can compute these ouputs <strong>only once</strong>.</p>
-<pre class="text"><code>Input#1-&amp;gt;[Freezed-Layers]-&amp;gt;Bottleneck-Features-Of-Input#1</code></pre>
+<pre class="text"><code>Input#1-&gt;[Freezed-Layers]-&gt;Bottleneck-Features-Of-Input#1</code></pre>
 <p>Then, you store all <em>Bottleneck-Features-Of-Input#i</em> and directly use them to train [Last-Layer-To-Re-Compute].</p>
 <p>Explanations from the “cache_bottlenecks” function of the “image_retraining” example :</p>
 <blockquote>

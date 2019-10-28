@@ -194,9 +194,9 @@ e99f33420f577ee8ce54b67080<b>2</b>80d1e c69821bcb6a8839396f965<b>a</b>b6ff72a70
 <p>A <a href="http://marc-stevens.nl/research/md5-1block-collision/">new result</a> shows how to generate <em>single block</em> MD5 collisions, including an example collision:</p>
 <p><a href="http://marc-stevens.nl/research/md5-1block-collision/message1.bin">Message 1</a></p>
 <p><a href="http://marc-stevens.nl/research/md5-1block-collision/message2.bin">Message 2</a></p>
-<pre class="text"><code>&amp;gt; md5sum message1.bin message2.bin
-&amp;gt; 008ee33a9d58b51cfeb425b0959121c9 message1.bin
-&amp;gt; 008ee33a9d58b51cfeb425b0959121c9 message2.bin</code></pre>
+<pre class="cryptography"><code>&gt; md5sum message1.bin message2.bin
+&gt; 008ee33a9d58b51cfeb425b0959121c9 message1.bin
+&gt; 008ee33a9d58b51cfeb425b0959121c9 message2.bin</code></pre>
 <p>There is an earlier example of a single block collision but not technique for generating it was published.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -485,7 +485,7 @@ So here’s my recommendations: Use a Zip file with ZipCrypto if you want to sen
 <h4>Question</h4>
 <p>I was researching about how to encrypt with RSA. I understood everything but not the format of the private keys.</p>
 <p>In the phpseclib (RSA in PHP), you can import your private key (private.key format) and in the key file there is text like this:</p>
-<pre class="text"><code>-----BEGIN RSA PRIVATE KEY-----
+<pre class="cryptography"><code>-----BEGIN RSA PRIVATE KEY-----
 MIIBOQIBAAJBAIOLepgdqXrM07O4dV/nJ5gSA12jcjBeBXK5mZO7Gc778HuvhJi+
 RvqhSi82EuN9sHPx1iQqaCuXuS1vpuqvYiUCAwEAAQJATRDbCuFd2EbFxGXNxhjL
 loj/Fc3a6UE8GeFoeydDUIJjWifbCAQsptSPIT5vhcudZgWEMDSXrIn79nXvyPy5
@@ -509,7 +509,7 @@ But when I decode this with Base64 and then convert it to decimal it is just <st
 <p>
 The ASN.1 syntax for that DER-encoded string is described in <a href="https://tools.ietf.org/html/rfc3447#appendix-A.1" rel="nofollow noreferrer">RFC3447</a> (aka <a href="https://en.wikipedia.org/wiki/PKCS_1" rel="nofollow noreferrer">PKCS1</a>):
 </p>
-<pre class="text"><code>  Version ::= INTEGER { two-prime(0), multi(1) }
+<pre class="cryptography"><code>  Version ::= INTEGER { two-prime(0), multi(1) }
       (CONSTRAINED BY
       {-- version must be multi if otherPrimeInfos present --})
 
@@ -528,7 +528,7 @@ The ASN.1 syntax for that DER-encoded string is described in <a href="https://to
 <p>
 DER encoding uses a tag-length-value notation. So here’s a sample private key:
 </p>
-<pre class="text"><code>-----BEGIN RSA PRIVATE KEY-----
+<pre class="cryptography"><code>-----BEGIN RSA PRIVATE KEY-----
 MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUp
 wmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ5
 1s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh
@@ -542,7 +542,7 @@ U9VQQSQzY1oZMVX8i1m5WUTLPz2yLJIBQVdXqhMCQBGoiuSoSjafUhV7i1cEGpb88h5NBYZzWXGZ
 37sJ5QsW+sJyoNde3xH8vdXhzU7eT82D6X/scw9RZz+/6rCJ4p0=
 -----END RSA PRIVATE KEY-----</code></pre>
 <p>Here’s the hex encoding:</p>
-<pre class="text"><code>3082025c02010002818100aa18aba43b50deef38598faf87d2ab634e4571c130a9bca7b878267414
+<pre class="cryptography"><code>3082025c02010002818100aa18aba43b50deef38598faf87d2ab634e4571c130a9bca7b878267414
 faab8b471bd8965f5c9fc3818485eaf529c26246f3055064a8de19c8c338be5496cbaeb059dc0b35
 8143b44a35449eb264113121a455bd7fde3fac919e94b56fb9bb4f651cdb23ead439d6cd523eb081
 91e75b35fd13a7419b3090f24787bd4f4e196702030100010281801628e4a39ebea86c8df0cd1157
@@ -803,7 +803,7 @@ and if that first byte is <code>00</code>, then the next byte (if present) must 
 <section id="answer-3-score-9" class="level4">
 <h4>Answer 3 (score 9)</h4>
 <p>To conclude the answers here’s a note about the simplest way (on linux at least) to view the contents of such keys with openssl:</p>
-<pre class="text"><code>$ openssl rsa -in test.key -text
+<pre class="cryptography"><code>$ openssl rsa -in test.key -text
 Private-Key: (512 bit)
 modulus:
     00:83:8b:7a:98:1d:a9:7a:cc:d3:b3:b8:75:5f:e7:
@@ -1411,7 +1411,7 @@ EDIT: Having statistical analysis of <span class="math inline">\(aLetter \oplus 
 </li>
 </ul>
 <p>I think the <strong>short answer</strong> is best explained with a table:</p>
-<pre class="text"><code>Cryptographic primitive | Hash |    MAC    | Digital
+<pre class="cryptography"><code>Cryptographic primitive | Hash |    MAC    | Digital
 Security Goal           |      |           | signature
 ------------------------+------+-----------+-------------
 Integrity               |  Yes |    Yes    |   Yes
@@ -1475,7 +1475,7 @@ The derivation of the round keys looks a bit different.
 </ul>
 <p>For AES-128, we need 11 round keys, each of which consisting of 128 bits, i.e. 4 32-bit columns. The original cipher key consists of 128 bits (i.e. 4 columns). Call these <span class="math inline">\(k_0\)</span>, <span class="math inline">\(k_1\)</span>, <span class="math inline">\(k_2\)</span> and <span class="math inline">\(k_3\)</span>. The key expansion algorithm now expands these to <span class="math inline">\(k_0\)</span> to <span class="math inline">\(k_{43}\)</span> (so we get 44 columns in total).</p>
 <p>The key expansion works in a way that <span class="math inline">\(k_i\)</span> only depends directly on <span class="math inline">\(k_{i-1}\)</span> and <span class="math inline">\(k_{i -N_k}\)</span> (where <span class="math inline">\(N_k\)</span> is the number of columns in the key, i.e. 4 for AES-128). In most cases it is a simple <span class="math inline">\(\oplus\)</span>, but after each <span class="math inline">\(N_k\)</span> key columns, a non-linear function <span class="math inline">\(f_i\)</span> is applied.</p>
-<pre class="text"><code>                              ┏━━━┓
+<pre class="cryptography"><code>                              ┏━━━┓
    k_0    k_1    k_2    k_3 ─→┃f_1┃─╮
     │      │      │      │    ┗━━━┛ │
  ╭──│──────│──────│──────│──────────╯
@@ -1504,7 +1504,7 @@ The derivation of the round keys looks a bit different.
 <p>Then the key selection algorithm simply takes <span class="math inline">\(k_0 \dots k_3\)</span> as the first round key, <span class="math inline">\(k_4\dots k_7\)</span> as the second one, until <span class="math inline">\(k_{40} \dots k_{43}\)</span> as the last one.</p>
 <p>AES-192 looks almost the same, but with six columns in parallel (A similar diagram you can see in <a href="https://crypto.stackexchange.com/a/2496/58">my answer to a different question</a>). As we need 13 round keys (=52 key columns), this will be done until <span class="math inline">\(k_{51}\)</span> (i.e. 8 full rows and four keys in the ninth row).</p>
 <p>For AES-256 (and all variants of Rijndael with more than 192 bits of key), there is an additional non-linear transformation after the fourth column:</p>
-<pre class="text"><code>                                                             ┏━━━┓
+<pre class="cryptography"><code>                                                             ┏━━━┓
   k_0    k_1    k_2    k_3       k_4    k_5    k_6    k_7 ──→┃f_1┃─╮
    │      │      │      │         │      │      │      │     ┗━━━┛ │
 ╭──│──────│──────│──────│─────────│──────│──────│──────│───────────╯
@@ -1582,7 +1582,7 @@ The derivation of the round keys looks a bit different.
 <section id="question-21" class="level4">
 <h4>Question</h4>
 <p>I am studying the RSA cryptosystem. The public key consists of <span class="math inline">\((n, e)\)</span>, the modulus (product of two large primes), and the encryption exponent. I want to separate the modulus <span class="math inline">\(n\)</span> and exponent <span class="math inline">\(e\)</span>. A typical public key is expressed in base64, and is of the following type:</p>
-<pre class="text"><code> -----BEGIN PUBLIC KEY-----
+<pre class="cryptography"><code> -----BEGIN PUBLIC KEY-----
 
  MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
  FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
@@ -1595,7 +1595,7 @@ The derivation of the round keys looks a bit different.
 <h4>Answer accepted (score 17)</h4>
 <p>RSA key formats are defined in at least <a href="http://www.ietf.org/rfc/rfc3447.txt" rel="noreferrer">RFC 3447</a> and <a href="http://www.ietf.org/rfc/rfc5280.txt" rel="noreferrer">RFC 5280</a>. The format is based on ASN.1 and includes more than just the raw modulus and exponent.</p>
 <p>If you decode the base 64 encoded ASN.1, you will find some wrapping (like an object identifier) as well as an internal ASN.1 bitstring, which decodes as:</p>
-<pre class="text"><code>(
+<pre class="cryptography"><code>(
     119445732379544598056145200053932732877863846799652384989588303737527328743970559883211146487286317168142202446955508902936035124709397221178664495721428029984726868375359168203283442617134197706515425366188396513684446494070223079865755643116690165578452542158755074958452695530623055205290232290667934914919, 
     65537
 )</code></pre>
@@ -1609,7 +1609,7 @@ The derivation of the round keys looks a bit different.
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQAB
 </blockquote>
 <p>You then decode it into hex:</p>
-<pre class="text"><code>30 81 9F 30 0D 06 09 2A  86 48 86 F7 0D 01 01 01
+<pre class="cryptography"><code>30 81 9F 30 0D 06 09 2A  86 48 86 F7 0D 01 01 01
 05 00 03 81 8D 00 30 81  89 02 81 81 00 AA 18 AB
 A4 3B 50 DE EF 38 59 8F  AF 87 D2 AB 63 4E 45 71
 C1 30 A9 BC A7 B8 78 26  74 14 FA AB 8B 47 1B D8
@@ -1621,7 +1621,7 @@ BD 7F DE 3F AC 91 9E 94  B5 6F B9 BB 4F 65 1C DB
 A7 41 9B 30 90 F2 47 87  BD 4F 4E 19 67 02 03 01
 00 01 </code></pre>
 <p>So the question is: what is this? Well it’s actually the DER variant of ASN.1 encoding. ASN.1 is a horrible monstrosity, but you can use <a href="https://lapo.it/asn1js/" rel="noreferrer">the web-based ASN.1 decoder</a> to find that the values are actually this:</p>
-<pre class="text"><code>30 81 9F             ;30=SEQUENCE (0x9F = 159 bytes)
+<pre class="cryptography"><code>30 81 9F             ;30=SEQUENCE (0x9F = 159 bytes)
 |  30 0D             ;30=SEQUENCE (0x0D = 13 bytes)
 |  |  06 09          ;06=OBJECT_IDENTIFIER (0x09 = 9 bytes)
 |  |  2A 86 48 86    ;Hex encoding of 1.2.840.113549.1.1
@@ -1659,7 +1659,7 @@ A7 41 9B 30 90 F2 47 87  BD 4F 4E 19 67 02 03 01
 <section id="answer-3-score-22-1" class="level4">
 <h4>Answer 3 (score 22)</h4>
 <p>In practice, one can use <code>openssl</code> to extract the information:</p>
-<pre class="text"><code>$ cat pubkey.txt
+<pre class="cryptography"><code>$ cat pubkey.txt
 -----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0
 FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/
@@ -1906,11 +1906,11 @@ CCM, GCM, GMAC, CMAC, HMAC
 <hr>
 <p>Here’s my work so far:</p>
 <p>First I use the Euclid algorithm to calculate:</p>
-<pre class="text"><code>40 = 2(17) + 6 
+<pre class="cryptography"><code>40 = 2(17) + 6 
 17 = 2(6) + 5
 6 = 1(5) + 1 = gcd</code></pre>
 <p>So I know the GCD is 1. Applying the ‘extended’ section of the algorithm:</p>
-<pre class="text"><code>6 = 40-2(17)
+<pre class="cryptography"><code>6 = 40-2(17)
 5 = 17-2(6)
 1 = 6-1(5)
 1 = 6-1(17-2(6))
@@ -2028,10 +2028,10 @@ A useful way to understand the extended Euclidean algorithm is in terms of linea
 <hr>
 <p>Ps. As fgrieu notes in their answer, it’s not actually necessary to keep track of the <span class="math inline">\(k_i\)</span> coefficients if we’re only interested in <span class="math inline">\(d\)</span> (and <span class="math inline">\(r\)</span>). Thus, an implementation of this algorithm only needs to store <span class="math inline">\(r_i\)</span>, <span class="math inline">\(d_i\)</span>, <span class="math inline">\(r_{i-1}\)</span>, <span class="math inline">\(d_{i-1}\)</span> and the temporary value <span class="math inline">\(a_i\)</span>. (Some other temporary values may also be needed in practice, although it should be noted that <span class="math inline">\(r_{i+1}\)</span> and <span class="math inline">\(d_{i+1}\)</span> do <em>not</em> need to be stored separately in general, since they can immediately overwrite <span class="math inline">\(r_{i-1}\)</span> and <span class="math inline">\(d_{i-1}\)</span>.)</p>
 <p>Here’s a simple implementation in Python (which, conveniently, has arbitrary-precision integers built in):</p>
-<pre class="text"><code>def modinv(e, phi):
+<pre class="cryptography"><code>def modinv(e, phi):
     d_old = 0; r_old = phi
     d_new = 1; r_new = e
-    while r_new &amp;gt; 0:
+    while r_new &gt; 0:
         a = r_old // r_new
         (d_old, d_new) = (d_new, d_old - a * d_new)
         (r_old, r_new) = (r_new, r_old - a * r_new)
@@ -2096,8 +2096,8 @@ After that I compared all corresponding characters in <span class="math inline">
 <h4>Answer 2 (score 28)</h4>
 <p>In general, knowledge of <span class="math inline">\(m_1 \oplus m_2\)</span> is not enough to uniquely determine <span class="math inline">\(m_1\)</span> and <span class="math inline">\(m_2\)</span>, even if both are known to be, say, English text. For a simple example, <span class="math display">\[\text{&quot;one one&quot;} \oplus \text{&quot;two two&quot;} = \text{&quot;one two&quot;} \oplus \text{&quot;two one&quot;}.\]</span></p>
 <p>However, in practice it <em>may</em> be possible to obtain fairly good guesses for <span class="math inline">\(m_1\)</span> and <span class="math inline">\(m_2\)</span>; the typical methods are similar to those used for breaking classical ciphers, and rely on the fact that there’s a lot of redundancy in English text (and in many other types of data).</p>
-<p>For example, one might start by guessing that at least one of the messages is likely to contain the word “the”, probably surrounded by spaces. So one can take the five-character string “<code>&amp;nbsp;the&amp;nbsp;</code>”, XOR it with every five-character substring of <span class="math inline">\(m_1 \oplus m_2\)</span> and look for results that look like English (either by eye or by computer using statistical analysis).</p>
-<p>Now, let’s say that one of the five-character substrings thus obtained is, say, “<code>messa</code>”. Now we (or a computer) could guess that the next two characters are likely to be “<code>ge</code>” (or perhaps “<code>gi</code>”). We can now XOR that with the next two characters of <span class="math inline">\(m_1 \oplus m_2\)</span> and see if the result fits naturally after “<code>&amp;nbsp;the&amp;nbsp;</code>”; if the result is, say, “<code>la</code>”, we might tentatively assume our guess to have been right; if it’s “<code>q%</code>”, we <em>probably</em> guessed wrong. We can proceed in this manner to confirm and extend our guess further, and perhaps eventually to connect separate guessed fragments together until we have a reasonable guess of all, or at least most, of the content of the two messages.</p>
+<p>For example, one might start by guessing that at least one of the messages is likely to contain the word “the”, probably surrounded by spaces. So one can take the five-character string “<code>the</code>”, XOR it with every five-character substring of <span class="math inline">\(m_1 \oplus m_2\)</span> and look for results that look like English (either by eye or by computer using statistical analysis).</p>
+<p>Now, let’s say that one of the five-character substrings thus obtained is, say, “<code>messa</code>”. Now we (or a computer) could guess that the next two characters are likely to be “<code>ge</code>” (or perhaps “<code>gi</code>”). We can now XOR that with the next two characters of <span class="math inline">\(m_1 \oplus m_2\)</span> and see if the result fits naturally after “<code>the</code>”; if the result is, say, “<code>la</code>”, we might tentatively assume our guess to have been right; if it’s “<code>q%</code>”, we <em>probably</em> guessed wrong. We can proceed in this manner to confirm and extend our guess further, and perhaps eventually to connect separate guessed fragments together until we have a reasonable guess of all, or at least most, of the content of the two messages.</p>
 </section>
 <section id="answer-3-score-7-2" class="level4">
 <h4>Answer 3 (score 7)</h4>
@@ -2292,7 +2292,7 @@ How do I defend my web application from a professional hacker?
 <section id="question-33" class="level4">
 <h4>Question</h4>
 <p>I used AES256-CBC to SSH to a remote server. Recently, it stopped working with the following message:</p>
-<pre class="text"><code>no matching cipher found: client aes256-cbc server  
+<pre class="cryptography"><code>no matching cipher found: client aes256-cbc server  
 aes128-ctr,aes256-ctr,arcfour256,arcfour,3des-cbc</code></pre>
 <p>When I used AES256-CTR as a cipher to SSH to the server, it worked as expected.</p>
 <p>I read <a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation" rel="noreferrer">this</a> article which outlines the following:</p>
@@ -2392,7 +2392,7 @@ There seems to be an attack on SSH when using CBC: <a href="http://www.isg.rhul.
 <h4>Question</h4>
 <p>First off, I know hashes are 1 way. There are an infinite number of inputs that can result in the same hash output. Why can’t we take a hash and convert it to an equivalent string that can be hashed back to the original hash output?</p>
 <p>eg:</p>
-<pre class="text"><code>string: &quot;Hello World&quot;
+<pre class="cryptography"><code>string: &quot;Hello World&quot;
 hashed: a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e 
 
 unhash: &quot;rtjwwm689phrw96kvo48rm64unc8oetb5kmrjiuh7h8huhi6dde5n5&quot;
@@ -2405,7 +2405,7 @@ hashed: a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e </code>
 <p>Take a simple mathematical operation like addition. Addition takes 2 inputs and produces 1 output (the sum of the two inputs). If you know the 2 inputs, the output is easy to calculate - and there’s only one answer.</p>
 <p><code>321 + 607 = 928</code></p>
 <p>But if you only know the output, how do you know what the two inputs are?</p>
-<pre class="text"><code>928 = 119 + 809
+<pre class="cryptography"><code>928 = 119 + 809
 928 = 680 + 248
 928 = 1 + 927
 ...</code></pre>
@@ -2585,11 +2585,11 @@ Does both the Associated Tag (<code>cipher.auth_data</code>) and the Authenticat
 <p>
 Finally, can someone explain further what is meant by the Associated Tag? The example in the answer that was given in OP’s thread was that we can use a database id to ensure that the data belongs to a certain database user. Let’s say that a user has the following database fields:
 </p>
-<pre class="text"><code>User
+<pre class="cryptography"><code>User
 - primary_id
 - encrypted_email</code></pre>
 <p>And we want to encrypt the User’s email before insertion. With User <code>primary_id==10</code> (modifying OP’s ruby code):</p>
-<pre class="text"><code>cipher = OpenSSL::Cipher::AES.new(128, :GCM)
+<pre class="cryptography"><code>cipher = OpenSSL::Cipher::AES.new(128, :GCM)
 cipher.encrypt
 key = cipher.random_key
 iv = cipher.random_iv
@@ -3265,10 +3265,10 @@ One can solve discrete logarithm “modulo the Frobenius endomorphism” which m
 <p><strong>Here’s what I have tried:</strong></p>
 <p>Read many posts like this one online and tried to decrypt the ‘.enc’ file: <a href="http://www.czeskis.com/random/openssl-encrypt-file.html" rel="noreferrer">http://www.czeskis.com/random/openssl-encrypt-file.html</a></p>
 <p>I tried the following command for decryption: openssl rsautl -decrypt -in public_key.pem -out key.bin. I got the this error:</p>
-<pre class="text"><code> no keyfile specified
+<pre class="cryptography"><code> no keyfile specified
  unable to load Private Key</code></pre>
 <p>Yes, but that’s because private key is not provided to me. If I try to use the public_key.pem as infile, I get this error:</p>
-<pre class="text"><code>unable to load Private Key
+<pre class="cryptography"><code>unable to load Private Key
 139914348455592:error:0906D06C:PEM routines:PEM_read_bio:no start line:pem_lib.c:703:Expecting: ANY PRIVATE KEY</code></pre>
 <p>Tried the tool ‘openssl’ in Linux in several ways to try to decrypt the file.</p>
 <p>Here is the 3 files zipped in tarball, if anyone wants to analyse them: <a href="http://www.filedropper.com/chaltar" rel="noreferrer">http://www.filedropper.com/chaltar</a></p>
@@ -3288,7 +3288,7 @@ Files: Only three files, public_key.pem, file.enc, and a random file that I decr
 </section>
 <section id="answer-accepted-score-3" class="level4">
 <h4>Answer accepted (score 3)</h4>
-<pre class="text"><code>openssl rsa -pubin -inform PEM -text -noout &amp;lt; public_key.pem
+<pre class="cryptography"><code>openssl rsa -pubin -inform PEM -text -noout &lt; public_key.pem
 Public-Key: (64 bit)
 Modulus: 16513720463601767803 (0xe52c8544a915157b)
 Exponent: 65537 (0x10001)</code></pre>
@@ -3395,7 +3395,7 @@ Love, Bob
 <section id="answer-accepted-score-62-1" class="level4">
 <h4>Answer accepted (score 62)</h4>
 <p>This isn’t necessarily unexpected. 32-bit platforms vs 64-bit platforms can make a significant difference, as well as the amount of data you’re hashing.</p>
-<pre class="text"><code>$ uname -m
+<pre class="cryptography"><code>$ uname -m
 x86_64
 
 $ openssl speed sha256 sha512
@@ -3443,7 +3443,7 @@ Memory: 16GiB DDR4 2400MHz (single-channel)
 <p>
 CPU flags (<code>grep flags /proc/cpuinfo</code>):
 </p>
-<pre class="text"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d</code></pre>
+<pre class="cryptography"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp flush_l1d</code></pre>
 </li>
 </ul>
 <p><strong>Methodology:</strong></p>
@@ -3457,7 +3457,7 @@ Starting with rebooting the laptop.
 <p>
 For speed measurement the <code>pv</code> utility (<a href="https://linux.die.net/man/1/pv" rel="noreferrer">man page</a>) has been used:
 </p>
-<pre class="text"><code>pv --average-rate BigFile10GiBinRAM | sha512sum --binary
+<pre class="cryptography"><code>pv --average-rate BigFile10GiBinRAM | sha512sum --binary
 pv --average-rate BigFile10GiBinRAM | sha256sum --binary</code></pre>
 </li>
 <li>
@@ -3519,7 +3519,7 @@ Memory: 16GiB DDR3 1600MHz (dual-channel)
 <p>
 CPU flags (<code>grep flags /proc/cpuinfo</code>):
 </p>
-<pre class="text"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts</code></pre>
+<pre class="cryptography"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts</code></pre>
 </li>
 </ul>
 <p><strong>Methodology:</strong></p>
@@ -3533,7 +3533,7 @@ Starting with rebooting the laptop.
 <p>
 For speed measurement the <code>pv</code> utility (<a href="https://linux.die.net/man/1/pv" rel="noreferrer">man page</a>) has been used:
 </p>
-<pre class="text"><code>pv --average-rate BigFile103GiB | sha512sum --binary
+<pre class="cryptography"><code>pv --average-rate BigFile103GiB | sha512sum --binary
 pv --average-rate BigFile103GiB | sha256sum --binary</code></pre>
 </li>
 <li>
@@ -3595,7 +3595,7 @@ Memory: 32GiB DDR3 1600MHz (dual-channel) UDIMM <a href="https://en.wikipedia.or
 <p>
 CPU flags (<code>grep flags /proc/cpuinfo</code>):
 </p>
-<pre class="text"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts</code></pre>
+<pre class="cryptography"><code>fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts</code></pre>
 </li>
 </ul>
 <p><strong>Methodology:</strong></p>
@@ -3609,7 +3609,7 @@ Starting with rebooting the server.
 <p>
 For speed measurement the <code>pv</code> utility (<a href="https://linux.die.net/man/1/pv" rel="noreferrer">man page</a>) has been used:
 </p>
-<pre class="text"><code>pv --average-rate BigFile24GiBinRAM | sha512sum --binary
+<pre class="cryptography"><code>pv --average-rate BigFile24GiBinRAM | sha512sum --binary
 pv --average-rate BigFile24GiBinRAM | sha256sum --binary</code></pre>
 </li>
 <li>
@@ -3775,7 +3775,7 @@ IKE negotiation takes place in two phases. The first phase serves to establish a
 <hr />
 <p>Let’s see with a bit more technical details. In RSA, let <span class="math inline">\(n\)</span> be the public modulus. Let <span class="math inline">\(M\)</span> be a message to encrypt with <span class="math inline">\(n\)</span> (in the case of SSL, <span class="math inline">\(M\)</span> is the pre-master secret, of length 48 bytes). The PKCS#1 v1.5 padding, for encryption, consists in adding some bytes to the left, so that the total length after padding is equal to that of <span class="math inline">\(n\)</span>. For instance, if the server’s public key is a 2048-bit RSA key, then <span class="math inline">\(n\)</span> has length 256 bytes, so the padded <span class="math inline">\(M\)</span> should also have length 256 bytes.</p>
 <p>A <em>properly padded</em> message <span class="math inline">\(M\)</span> has the following format:</p>
-<pre class="text"><code>0x00 0x02 [some non-zero bytes] 0x00 [here goes M]</code></pre>
+<pre class="cryptography"><code>0x00 0x02 [some non-zero bytes] 0x00 [here goes M]</code></pre>
 <p>so the sequence of bytes will begin with a byte of value 0, then a byte of value 2, then some bytes which should have random values (but not zero), then a byte of value 0, then <span class="math inline">\(M\)</span> itself. The number of non-zero bytes is adjusted so that the total length is equal to the length of <span class="math inline">\(n\)</span>. Upon decryption, the server will look at the first two bytes, and require them to be equal to 0x00 and 0x02, in that order. Then it will scan for the next byte of value 0, thus skipping over all the random non-zero bytes. This way, the padding can be unambiguously removed.</p>
 <p>It follows that if the client sends a random string of bytes, then it has probability roughly between <span class="math inline">\(2^{-15}\)</span> and <span class="math inline">\(2^{-17}\)</span> to follow the PKCS#1 padding format (that’s the probability that the first two bytes are 0x00 0x02, and that there is at least one byte of value 0 afterwards; exact probability depends on the length and value of <span class="math inline">\(n\)</span>).</p>
 <p><strong>The attack scenario</strong> is the following:</p>
@@ -3800,7 +3800,7 @@ The attacker eavesdropped on a connection, and would like to decrypt it. He obse
 <section id="question-54" class="level4">
 <h4>Question</h4>
 <p>I’m encrypting a file with sensitive information with</p>
-<p><code>cat secret | openssl aes-256-cbc -a -salt &amp;gt; secret.enc</code></p>
+<p><code>cat secret | openssl aes-256-cbc -a -salt &gt; secret.enc</code></p>
 <p>I am choosing a random encryption password with <code>openssl rand -base64 32 | head -c [password-length]</code></p>
 <p>Is there any standard, how long it should be? Given the password length, how long would it take to crack and view the contents of the file?</p>
 <p>I have read <a href="https://www.reddit.com/r/theydidthemath/comments/1x50xl/time_and_energy_required_to_bruteforce_a_aes256/" rel="noreferrer">this</a> article, but it seems it supposes that you use a password size of 256 bits.</p>
@@ -3829,7 +3829,7 @@ initialization vector - 128 bits long
 </li>
 </ul>
 <p>You can generate them using the command I found <a href="http://www.ibm.com/support/knowledgecenter/SSLVY3_9.7.0/com.ibm.einstall.doc/topics/t_einstall_GenerateAESkey.html" rel="nofollow noreferrer">here</a>:</p>
-<pre class="text"><code>openssl enc -aes-256-cbc -k secret -P -md sha1</code></pre>
+<pre class="cryptography"><code>openssl enc -aes-256-cbc -k secret -P -md sha1</code></pre>
 <p>where the “secret” is your password.</p>
 <p>I suggest not using a truly random key and IV, because you have to save them somewhere, and adversary can just read it from your hard drive. It’s much better to use a long and complicated password that he has to read from a post-it-note glued to your monitor, and derive the key and IV from it.</p>
 <p>As for security, let me put it this way. If I wanted to crack 256 bits long key and 128 bit long IV on my work laptop, I would probably be around a fifth of way done when the universe would collapse. It’s much simpler to use <a href="https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis" rel="nofollow noreferrer">rubber-hose cryptanalysis</a> in <a href="https://xkcd.com/538/" rel="nofollow noreferrer">this case</a>.</p>
@@ -4176,7 +4176,7 @@ Anything else that I should know, feel free to tell me. I’m completely new to 
 Can my choice of certificate authority hinder the use of Perfect Forward Secrecy?
 </p>
 </blockquote>
-<p>No. Perfect forward secrecy protects against the revelation of master keys. CAs do not have access to private (master) keys; a certificate from a CA is a signed <em>public key</em>. The CA is there to say “okay, client, I have verified that the public key here is indeed associated with <code>&amp;lt;host&amp;gt;</code>, it’s safe.” (Or, rather, the fact that it’s signed by the CA says this.) Thus, your choice of CA will not impact PFS in any way.</p>
+<p>No. Perfect forward secrecy protects against the revelation of master keys. CAs do not have access to private (master) keys; a certificate from a CA is a signed <em>public key</em>. The CA is there to say “okay, client, I have verified that the public key here is indeed associated with <code>&lt;host&gt;</code>, it’s safe.” (Or, rather, the fact that it’s signed by the CA says this.) Thus, your choice of CA will not impact PFS in any way.</p>
 <blockquote>
 <p>
 How can I create the strongest certificate using ONLY Perfect Forward Secrecy (meaning if the browser can’t use PFS, it won’t load anything)?
@@ -4184,7 +4184,7 @@ How can I create the strongest certificate using ONLY Perfect Forward Secrecy (m
 </blockquote>
 <p>As you can see, certificates are unconnected with the choice of ciphersuite (and hence PFS).</p>
 <p>Instead, the web server you use probably has a ciphersuite configuration in its SSL configuration. There are usually two relevant options: first, the ciphersuites that you want your server to use, and second, how the server picks the ciphersuite. Here is the relevant section in my nginx configuration:</p>
-<pre class="text"><code>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+<pre class="cryptography"><code>ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES128-SHA:RC4:HIGH:!MD5:!aNULL:!EDH;
 ssl_prefer_server_ciphers on;</code></pre>
 <p>The first line tells nginx to use those four protocols, as is apparent. The third line tells nginx to prefer its own ciphersuites <em>over</em> the client’s. The point here is that we want to control exactly which ciphersuite will be selected. A client may send an ordering that suggests a non-PFS ciphersuite; hence, we trust the server.</p>
@@ -4207,13 +4207,13 @@ ssl_prefer_server_ciphers on;</code></pre>
 <section id="question-61" class="level4">
 <h4>Question</h4>
 <p>Can I remove new lines from the RSA public key file to get a one line string? So the question is if the key looks like this</p>
-<pre class="text"><code>AAA
+<pre class="cryptography"><code>AAA
 BBB
 CCC</code></pre>
 <p>or</p>
-<pre class="text"><code>AAA\n\rBBB\n\rCCC\n\r</code></pre>
+<pre class="cryptography"><code>AAA\n\rBBB\n\rCCC\n\r</code></pre>
 <p>is this the same as</p>
-<pre class="text"><code>AAABBBCCC</code></pre>
+<pre class="cryptography"><code>AAABBBCCC</code></pre>
 </section>
 <section id="answer-accepted-score-26-1" class="level4">
 <h4>Answer accepted (score 26)</h4>
@@ -4249,14 +4249,14 @@ A key file is a text file, containing a sequence of lines. Each line in the file
 <p><strong>Edit:</strong></p>
 <p>I’m creating the X.509 cert with PHP 5.2. When I change the ‘digest_alg’ to ‘md5’, both properties of the Microsoft Cert Tool changes to md5. So, as mentioned in one answer below, it seems to be an issue/invention of the Microsoft Cert Tool.</p>
 <p>Change to md5:</p>
-<pre class="text"><code>           $configs = array(
-                            &#39;config&#39;             =&amp;gt; &#39;test.cnf&#39;,
-                            &#39;digest_alg&#39;         =&amp;gt; &#39;md5&#39;,
-                            &#39;x509_extensions&#39;    =&amp;gt; &#39;v3_ca&#39;,
-                            &#39;req_extensions&#39;     =&amp;gt; &#39;v3_req&#39;,
-                            &#39;private_key_bits&#39;   =&amp;gt; 2048,
-                            &#39;private_key_type&#39;   =&amp;gt; OPENSSL_KEYTYPE_RSA,
-                            &#39;encrypt_key&#39;        =&amp;gt;
+<pre class="cryptography"><code>           $configs = array(
+                            &#39;config&#39;             =&gt; &#39;test.cnf&#39;,
+                            &#39;digest_alg&#39;         =&gt; &#39;md5&#39;,
+                            &#39;x509_extensions&#39;    =&gt; &#39;v3_ca&#39;,
+                            &#39;req_extensions&#39;     =&gt; &#39;v3_req&#39;,
+                            &#39;private_key_bits&#39;   =&gt; 2048,
+                            &#39;private_key_type&#39;   =&gt; OPENSSL_KEYTYPE_RSA,
+                            &#39;encrypt_key&#39;        =&gt;
                         );</code></pre>
 <p><strong>Result:</strong></p>
 <p><img src="https://i.stack.imgur.com/4bm19.png" alt="enter image description here"></p>
@@ -4285,7 +4285,7 @@ A key file is a text file, containing a sequence of lines. Each line in the file
 <p>The affine transformation works similar to MixColumns, but operates on an array of 8 bits instead of 4 bytes. Confusion in various descriptions of the affine transform in AES comes from where the LSB of the input byte is located. Some show it at the top of the column, others show it at the bottom. I will be using the version shown in the Rijndael paper, with the LSB at the top of the column.</p>
 <p>The matrix used in AES is a rotational matrix based on the value <code>0x1F</code>, which is <code>00011111</code> in binary. The multiplication is performed in the field GF(2), as is the addition of the final vector <code>0x63</code>. Addition in GF(2) is the same as xor.</p>
 <p>The bit indexes for the matrix are <code>76543210</code>, with <code>0</code> being the least significant bit and <code>7</code> being the most significant. Each column is the previous column rotated to the left by a single bit, as shown here:</p>
-<pre class="text"><code>0  7  6  5  4  3  2  1
+<pre class="cryptography"><code>0  7  6  5  4  3  2  1
 1  0  7  6  5  4  3  2
 2  1  0  7  6  5  4  3
 3  2  1  0  7  6  5  4
@@ -4294,7 +4294,7 @@ A key file is a text file, containing a sequence of lines. Each line in the file
 6  5  4  3  2  1  0  7
 7  6  5  4  3  2  1  0</code></pre>
 <p>For the AES 0x1F affine matrix, the bits are arranged in the following way:</p>
-<pre class="text"><code>1  0  0  0  1  1  1  1
+<pre class="cryptography"><code>1  0  0  0  1  1  1  1
 1  1  0  0  0  1  1  1
 1  1  1  0  0  0  1  1
 1  1  1  1  0  0  0  1
@@ -4304,7 +4304,7 @@ A key file is a text file, containing a sequence of lines. Each line in the file
 0  0  0  1  1  1  1  1</code></pre>
 <p>For an input of <code>0x53</code> in AES, we first find its inverse, which is <code>0xCA</code>, represented in binary as <code>11001010</code></p>
 <p>The affine transformation is as follows. The input bits are multiplied against the bits of a given row, with the first bit the LSB of the input. Input bit 0 is only multiplied by row bit 0, and so on. Only when both values are one (logical AND) is the result one. Finally, all bits are XORd against eachother within that row to generate the transformed bit for that row.</p>
-<pre class="text"><code>Input = 0  1  0  1  0  0  1  1 (LSB First)
+<pre class="cryptography"><code>Input = 0  1  0  1  0  0  1  1 (LSB First)
 Row 0 = 1  0  0  0  1  1  1  1
 Bit 0 = 0  0  0  0  0  0  1  1 = 0
 
@@ -5087,11 +5087,11 @@ I agree. For my purposes I’ve been prepending the plaintext with a block of ra
 <p>
 The first important thing here is the encoding of that text. “Hello World!” as such cannot be encrypted since characters are a non-numerical concept. So an encoding is used convert the characters of that text to numeric values (e.g. the ASCII / Unicode table, but there are many others, especially for non-latin characters). Using Unicode-8, “Hello World” turns into this sequence of bytes (hex-notation):
 </p>
-<pre class="text"><code>48 65 6C 6C 6F 20 57 6F 72 6C 64</code></pre>
+<pre class="cryptography"><code>48 65 6C 6C 6F 20 57 6F 72 6C 64</code></pre>
 <p>Such a sequence of bytes can then be interpreted as a number by assigning a most-significant and least-significant byte (e.g. the more left-sided, the more significant). That sequence would then equal the number</p>
-<pre class="text"><code>0x48656C6C6F20576F726C64 or 87521618088882538408046480</code></pre>
+<pre class="cryptography"><code>0x48656C6C6F20576F726C64 or 87521618088882538408046480</code></pre>
 <p>But since such a small number would not produce a secure ciphertext (as <span class="citation" data-cites="SEJPM">@SEJPM</span> already said), a <a href="https://en.wikipedia.org/wiki/Padding_(cryptography)">padding</a> is applied. The sequence of bytes then might look something like this:</p>
-<pre class="text"><code>01 48 65 6C 6C 6F 20 57 6F 72 6C 64 98 9C 38 83 E1 64 E7 0B BC F2 43 C0 6B
+<pre class="cryptography"><code>01 48 65 6C 6C 6F 20 57 6F 72 6C 64 98 9C 38 83 E1 64 E7 0B BC F2 43 C0 6B
 26 D4 5E AC 9B C9 DC 2F 1B 87 46 3D 2E 6F 86 66 5E 1B CB 44 DA 5A 50 79 2F
 40 79 88 83 84 3E 16 9D 7F 1F 05 2C DF F2 9B 9B 07 11 F6 7A CB 1C 35 9B 76
 BD 8D 46 1C E0 09 2A 9F C5 B8 A9 FB 61 41 ... up to the bitsize of N</code></pre>
@@ -5408,7 +5408,7 @@ How do we know that the password we gave is the right one in order to perform th
 <section id="question-90" class="level4">
 <h4>Question</h4>
 <p>Why is Google using RC4 for their HTTPS/SSL?</p>
-<pre class="text"><code>$ openssl s_client -connect www.google.com:443 | grep &quot;Cipher is&quot;
+<pre class="cryptography"><code>$ openssl s_client -connect www.google.com:443 | grep &quot;Cipher is&quot;
 New, TLSv1/SSLv3, Cipher is RC4-SHA</code></pre>
 <p>Isn’t RC4 unsafe to use?</p>
 </section>
@@ -5475,7 +5475,7 @@ Because prime numbers are rare in comparison to regular integers, does restricti
 <p>Assume <span class="math inline">\(n\)</span> is 21. If you try to find the possible factors you have to try around until you find 3 and 7. This is of course easy because of the small numbers, but there is no effective way to do that for big numbers. (And those used in RSA are really big)</p>
 <p>Now assume <span class="math inline">\(n\)</span> is 32. You can split that into 2 * 2 * 2 * 2 * 2. Now you only have to multipy those (bruteforce) until you get two numbers.</p>
 <p>Possible Combinations here would be:</p>
-<pre class="text"><code>0,32 / 2,16 / 4, 8 / 8,4 / 16,2 / 32,0</code></pre>
+<pre class="cryptography"><code>0,32 / 2,16 / 4, 8 / 8,4 / 16,2 / 32,0</code></pre>
 <p>(that means: one of those few combinations has to be the right answer)</p>
 <p>Now that of course gets more complicated with bigger numbers too, but still quite easy/fast. So basically if those numbers are not primes, that you can just split up <span class="math inline">\(n\)</span> as much as possible and from there you have an easier way to find <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>. If both are primes you have to try values for <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> until you find exactly the right values.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -5647,33 +5647,33 @@ For instance, suppose you generate a random IV using this generator (and send it
 <p>I have a question about RCON</p>
 <p>here is my illustration…</p>
 <p>this is the 128 bit key..</p>
-<pre class="text"><code>[2b] [28] [ab] [09]
+<pre class="cryptography"><code>[2b] [28] [ab] [09]
 [7e] [ae] [f7] [cf]
 [15] [d2] [15] [4f]
 [16] [a6] [88] [3c]</code></pre>
 <p>and then I will get this..</p>
-<pre class="text"><code>[09]
+<pre class="cryptography"><code>[09]
 [cf]
 [4f]
 [3c]</code></pre>
 <p>and then I will put down the first 8bit(1byte) where it is the 09:</p>
-<pre class="text"><code>[cf]
+<pre class="cryptography"><code>[cf]
 [4f]
 [3c]
 [09]</code></pre>
 <p>after that I will change their value according to s-box..</p>
-<pre class="text"><code>[8a]
+<pre class="cryptography"><code>[8a]
 [84]
 [eb]
 [01]</code></pre>
 <p>and then I will xor that substituted 32 bit value to</p>
-<pre class="text"><code>[2b]        [8a]        [01]
-[7e]  XOR   [84]  XOR   [00] &amp;lt;--- that is a RCON(4)
+<pre class="cryptography"><code>[2b]        [8a]        [01]
+[7e]  XOR   [84]  XOR   [00] &lt;--- that is a RCON(4)
 [15]        [eb]        [00]
 [16]        [01]        [00]</code></pre>
 <p>My question is: How will I determine the RCON that I will use? Or will I only used this one?</p>
-<pre class="text"><code>[01]
-[00] &amp;lt;--- that is a RCON(4)
+<pre class="cryptography"><code>[01]
+[00] &lt;--- that is a RCON(4)
 [00]
 [00]</code></pre>
 <p>But why?</p>
@@ -5697,33 +5697,33 @@ As you see, <span class="math inline">\(RCON[i]\)</span> consists mainly of zero
 </li>
 </ul>
 <p>So, in your example, you have this column 3 of the original key:</p>
-<pre class="text"><code>[09]
+<pre class="cryptography"><code>[09]
 [cf]
 [4f]
 [3c]</code></pre>
 <p>Now we rotate this by one:</p>
-<pre class="text"><code>[cf]
+<pre class="cryptography"><code>[cf]
 [4f]
 [3c]
 [09]</code></pre>
 <p>Now we put this through the AES S-box (component wise):</p>
-<pre class="text"><code>[8a]
+<pre class="cryptography"><code>[8a]
 [84]
 [eb]
 [01]</code></pre>
 <p>And now the round step: This is round 1, thus we need <span class="math inline">\(RCON[1] = [\mathtt{01}, \mathtt{00}, \mathtt{00}, \mathtt{00}]\)</span>:</p>
-<pre class="text"><code>[8a ⊕ 01]   [8b]
+<pre class="cryptography"><code>[8a ⊕ 01]   [8b]
 [84 ⊕ 00] = [84]
 [eb ⊕ 00]   [eb]
 [01 ⊕ 00]   [01]</code></pre>
 <p>This was <span class="math inline">\(f_1\)</span>, and we’ll now XOR this result with column 0 of the original key to obtain column 4 of the expanded key:</p>
-<pre class="text"><code>[8b ⊕ 2b]   [a0]
+<pre class="cryptography"><code>[8b ⊕ 2b]   [a0]
 [84 ⊕ 7e] = [fa]
 [eb ⊕ 15]   [fe]
 [01 ⊕ 16]   [17]</code></pre>
 <p>After three more simple XOR steps to get column 5-7 we would then apply <span class="math inline">\(f_2\)</span> (which uses <span class="math inline">\(RCON[ 2] = [\mathtt{02},\mathtt{00}, \mathtt{00}, \mathtt{00}]\)</span>) on column 7 and XOR the result with column 4 to get column 8, and so on.</p>
 <p>The <code>Rcon</code>-array on Wikipedia contains the precomputed constants <span class="math inline">\(x^{i-1}\)</span> for <span class="math inline">\(i\)</span> from <span class="math inline">\(0\)</span> to <span class="math inline">\(255\)</span>, so you would put <span class="math inline">\(RCON[i] = [\mathtt{Rcon[i]}, \mathtt{00}, \mathtt{00}, \mathtt{00}]\)</span>. For AES-128, you only need the RCONs from <span class="math inline">\(1\)</span> to <span class="math inline">\(10\)</span> (as you need 44 columns of round key material), and here are these as a table (in hexadecimal form, as all constants in code font here):</p>
-<pre class="text"><code>   i        1     2     3     4     5     6     7     8     9    10
+<pre class="cryptography"><code>   i        1     2     3     4     5     6     7     8     9    10
 --------------------------------------------------------------------
           [01]  [02]  [04]  [08]  [10]  [20]  [40]  [80]  [1b]  [36]
 RCON[i]   [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]
@@ -5731,8 +5731,8 @@ RCON[i]   [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]
           [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]  [00]</code></pre>
 <p>For AES-192 and AES-256 you need even less of these round constants, so putting all 255 of them in Wikipedia is a bit superfluous. Even for Rijndael-256-128 (i.e. 256-bit blocks and 128-bit keys) we would need only <span class="math inline">\((14+1)·8/4-1 = 29\)</span> of these.</p>
 <p>As mentioned by fgrieu in a comment, you can also <strong>calculate the <span class="math inline">\(\mathtt{Rcon[i]}\)</span> on the fly</strong>, as each of them is obtained from the previous by an doubling in <span class="math inline">\(GF(2^8)\)</span>, which in the representation used in Rijndael is just a left-shift followed with a conditional XOR with a constant. In C-like syntax (using a twos-complement representation like every usual computer nowadays) this looks like this:</p>
-<pre class="text"><code>rcon = (rcon&amp;lt;&amp;lt;1) ^ (0x11b &amp;amp; -(rcon&amp;gt;&amp;gt;7));</code></pre>
-<p><sub>An explanation: <code>(rcon&amp;lt;&amp;lt;1)</code> is the pure doubling (multiplication by <span class="math inline">\(x\)</span> in <span class="math inline">\(\mathbb{Z}_2[x]\)</span>). <code>rcon &amp;gt;&amp;gt; 7</code> is the first bit of <code>rcon</code>, i.e. either <span class="math inline">\(\mathtt{0}\)</span> or <span class="math inline">\(\mathtt{1}\)</span>. <code>-(rcon&amp;gt;&amp;gt;7)</code> then is <span class="math inline">\(\mathtt{0}\)</span> or -1 (= <span class="math inline">\(\mathtt{f...ff}\)</span>, i.e. all bits set). Thus <code>(0x11b &amp;amp; -(rcon&amp;gt;&amp;gt;7))</code> is either <span class="math inline">\(\mathtt{0}\)</span> or <span class="math inline">\(\mathtt{11b}\)</span>, and XORing with this just is reduction modulo the Rijndael polynomial <span class="math inline">\(x^8 + x^4 + x^3 + x + 1\)</span>.</sub></p>
+<pre class="cryptography"><code>rcon = (rcon&lt;&lt;1) ^ (0x11b &amp; -(rcon&gt;&gt;7));</code></pre>
+<p><sub>An explanation: <code>(rcon&lt;&lt;1)</code> is the pure doubling (multiplication by <span class="math inline">\(x\)</span> in <span class="math inline">\(\mathbb{Z}_2[x]\)</span>). <code>rcon &gt;&gt; 7</code> is the first bit of <code>rcon</code>, i.e. either <span class="math inline">\(\mathtt{0}\)</span> or <span class="math inline">\(\mathtt{1}\)</span>. <code>-(rcon&gt;&gt;7)</code> then is <span class="math inline">\(\mathtt{0}\)</span> or -1 (= <span class="math inline">\(\mathtt{f...ff}\)</span>, i.e. all bits set). Thus <code>(0x11b &amp; -(rcon&gt;&gt;7))</code> is either <span class="math inline">\(\mathtt{0}\)</span> or <span class="math inline">\(\mathtt{11b}\)</span>, and XORing with this just is reduction modulo the Rijndael polynomial <span class="math inline">\(x^8 + x^4 + x^3 + x + 1\)</span>.</sub></p>
 <p><a href="https://crypto.stackexchange.com/a/2403/58">The same doubling operation is used in the MixColumns-step</a> of the actual encryption operation, so you need to implement it anyways.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -5847,11 +5847,11 @@ Operations in RSA: The RSA algorithm involves three steps:
 </ol>
 <p>• public key: (N,e) Encrypt: C = M^e(mod N)</p>
 <p>• private key: d Decrypt: C^d = M (mod N)</p>
-<pre class="text"><code>                           (M Î ZN)</code></pre>
+<pre class="cryptography"><code>                           (M Î ZN)</code></pre>
 <ol start="3" type="1">
 <li>Completely insecure cryptosystem:</li>
 </ol>
-<pre class="text"><code> • Does not satisfy basic definitions of security.
+<pre class="cryptography"><code> • Does not satisfy basic definitions of security.
  • Many attacks exist.</code></pre>
 <ol start="4" type="1">
 <li><p>The RSA trapdoor permutation is not a cryptosystem.</p></li>
@@ -5863,7 +5863,7 @@ Operations in RSA: The RSA algorithm involves three steps:
 <p>
 Session-key K is 64 bits. View K {0,…,264}
 </p>
-<pre class="text"><code>           Eavesdropper sees: C = K^e(mod N) .</code></pre>
+<pre class="cryptography"><code>           Eavesdropper sees: C = K^e(mod N) .</code></pre>
 </li>
 <li>
 <p>

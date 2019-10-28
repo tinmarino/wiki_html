@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Vim_top_100_se.md – Vi &lt;- StackEchange top 100</title>
+  <title>Vim_top_100_se.md – Vim &lt;- StackEchange top 100</title>
   <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
@@ -18,7 +18,7 @@
 </head>
 <body>
 <header>
-<h1 class="title">Vi &lt;- StackEchange top 100</h1>
+<h1 class="title">Vim &lt;- StackEchange top 100</h1>
 </header>
 <nav id="TOC">
 <ul>
@@ -173,10 +173,10 @@ You can use these registers as any register. For example, using the PRIMARY clip
 </li>
 </ul>
 <p>You could maybe use this as more convenient keybinds:</p>
-<pre class="language-vim"><code>noremap &amp;lt;Leader&amp;gt;y &quot;*y
-noremap &amp;lt;Leader&amp;gt;p &quot;*p
-noremap &amp;lt;Leader&amp;gt;Y &quot;+y
-noremap &amp;lt;Leader&amp;gt;P &quot;+p</code></pre>
+<pre class="language-vim"><code>noremap &lt;Leader&gt;y &quot;*y
+noremap &lt;Leader&gt;p &quot;*p
+noremap &lt;Leader&gt;Y &quot;+y
+noremap &lt;Leader&gt;P &quot;+p</code></pre>
 <p>
 If you want to “automatically” interface with the system’s clipboard instead of referring to it manually all the time, you can set the <code>clipboard</code> variable:
 </p>
@@ -335,18 +335,18 @@ unnamedplus     A variant of the &quot;unnamed&quot; flag which uses the
 <p>Taken from <code>:h hex-editing</code>:</p>
 <pre class="language-vim"><code>If one has a particular extension that one uses for binary files (such as exe,
 bin, etc), you may find it helpful to automate the process with the following
-bit of autocmds for your &amp;lt;.vimrc&amp;gt;.  Change that &quot;*.bin&quot; to whatever
+bit of autocmds for your &lt;.vimrc&gt;.  Change that &quot;*.bin&quot; to whatever
 comma-separated list of extension(s) you find yourself wanting to edit:
 
 &quot; vim -b : edit binary using xxd-format!
 augroup Binary
   au!
-  au BufReadPre  *.bin let &amp;amp;bin=1
-  au BufReadPost *.bin if &amp;amp;bin | %!xxd
+  au BufReadPre  *.bin let &amp;bin=1
+  au BufReadPost *.bin if &amp;bin | %!xxd
   au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &amp;amp;bin | %!xxd -r
+  au BufWritePre *.bin if &amp;bin | %!xxd -r
   au BufWritePre *.bin endif
-  au BufWritePost *.bin if &amp;amp;bin | %!xxd
+  au BufWritePost *.bin if &amp;bin | %!xxd
   au BufWritePost *.bin set nomod | endif
 augroup END</code></pre>
 <p>You may want to look at: <a href="https://vi.stackexchange.com/q/2136/778">How do I navigate to topics in Vim’s documentation?</a></p>
@@ -519,7 +519,7 @@ git clone https://github.com/tpope/vim-surround</code></pre>
 <section id="answer-2-score-123" class="level4">
 <h4>Answer 2 (score 123)</h4>
 <p>vim has this functionality built in (with the correct command line flag).</p>
-<pre class="language-vim"><code>vim -d &amp;lt;file1&amp;gt; &amp;lt;file2&amp;gt;</code></pre>
+<pre class="language-vim"><code>vim -d &lt;file1&gt; &lt;file2&gt;</code></pre>
 <p>
 This opens each file in a view and highlights the differences.<br> Any code that is identical is <code>folded</code> away so you do not need to look at identical code or scroll through huge chunks of identical code.
 </p>
@@ -532,14 +532,14 @@ This opens each file in a view and highlights the differences.<br> Any code that
 <p>Some basic commands that are useful in <code>vimdiff</code></p>
 <pre class="language-vim"><code>dp             diffput: puts changes under the cursor into the other file
                         making them identical (thus removing the diff).
-do             diffget: (o =&amp;gt; obtain). The change under the cursor is replaced
+do             diffget: (o =&gt; obtain). The change under the cursor is replaced
                         by the content of the other file making them identical.
 
 
 ]c             Jump to the next diff
 [c             Jump to the previous diff</code></pre>
 <p>Other vim settings I use to work with highliting with vimdiff</p>
-<pre class="language-vim"><code>if &amp;amp;diff
+<pre class="language-vim"><code>if &amp;diff
     highlight! link DiffText MatchParen
 endif</code></pre>
 <p>This turns off highlighting on the bits of code that are changed. So the line that is changed is highlighted so I can spot the changes, but the actual text that has changed stands out on the line (as it is not highlighted).</p>
@@ -573,8 +573,8 @@ endif</code></pre>
 <h4>Answer 2 (score 120)</h4>
 <p>Yes, use listchars:</p>
 <pre class="language-vim"><code>set list
-set listchars=tab:&amp;gt;-</code></pre>
-<p>If you put these two lines in your .vimrc, tabs will be shown as <code>&amp;gt;</code> for the start position and <code>-</code> through the rest of the tab.</p>
+set listchars=tab:&gt;-</code></pre>
+<p>If you put these two lines in your .vimrc, tabs will be shown as <code>&gt;</code> for the start position and <code>-</code> through the rest of the tab.</p>
 <p>(Sidenote: listchars can also show trailing spaces with <code>trail:x</code> (replace <code>x</code> with the character you want to use for a trailing space), which can be useful as well.)</p>
 </section>
 <section id="answer-3-score-58" class="level4">
@@ -582,7 +582,7 @@ set listchars=tab:&amp;gt;-</code></pre>
 <p>The basic answer is <code>:set list</code>, which causes tabs to display as <code>^I</code>.</p>
 <p>However, I recommend going beyond that. Just <code>:set list</code> is problematic in that it fails to preserve visual alignment on screen. For example:</p>
 <pre class="language-vim"><code>%.o: %.cpp
-^Ig++ -c $&amp;lt;</code></pre>
+^Ig++ -c $&lt;</code></pre>
 <p>doesn’t look good, especially when you expect the <code>g</code> of <code>g++</code> to appear under the first <code>p</code> of <code>cpp</code> (assuming <code>tabstop=8</code>).</p>
 <p>Therefore, I suggest that in your <code>.vimrc</code> you put something like <code>:set listchars=tab:␉·</code> (To be clear, that’s Unicode character <a href="https://codepoints.net/U+2409">U+2409 SYMBOL FOR HORIZONTAL TABULATION</a> followed by <a href="https://codepoints.net/U+00B7">U+00B7 MIDDLE DOT</a>.)</p>
 <p>As explained in <a href="https://vimhelp.appspot.com/options.txt.html#%27listchars%27"><code>:help listchars</code></a>, a two-character setting for <code>tab:xy</code> causes visual alignment to be preserved:</p>
@@ -590,12 +590,12 @@ set listchars=tab:&amp;gt;-</code></pre>
 <pre class="language-vim"><code>tab:xy        Two characters to be used to show a tab.  The first
               char is used once.  The second char is repeated to
               fill the space that the tab normally occupies.
-              &quot;tab:&amp;gt;-&quot; will show a tab that takes four spaces as
-              &quot;&amp;gt;---&quot;.  When omitted, a tab is show as ^I.</code></pre>
+              &quot;tab:&gt;-&quot; will show a tab that takes four spaces as
+              &quot;&gt;---&quot;.  When omitted, a tab is show as ^I.</code></pre>
 </blockquote>
 <p>The example above would appear on screen as:</p>
 <pre class="language-vim"><code>%.o: %.cpp
-␉·······g++ -c $&amp;lt;</code></pre>
+␉·······g++ -c $&lt;</code></pre>
 <hr>
 <p>Personally, I go all-out with my <code>listchars</code>:</p>
 <pre class="language-vim"><code>:set listchars=eol:⏎,tab:␉·,trail:␠,nbsp:⎵</code></pre>
@@ -645,7 +645,7 @@ Longer answer
 </h1>
 <p>Though the default behaviour may be surprising, the backspace “not working” can be considered a <em>feature</em>; it can prevents you from accidentally removing indentation, and from removing too much text by restricting it to the current line and/or the start of the insert.</p>
 <p><a href="http://vimhelp.appspot.com/options.txt.html#%27backspace%27" rel="noreferrer"><code>:help 'backspace'</code></a> tells us:</p>
-<pre class="language-vim"><code>Influences the working of `&amp;lt;BS&amp;gt;`, `&amp;lt;Del&amp;gt;`, `CTRL-W` and `CTRL-U` in Insert
+<pre class="language-vim"><code>Influences the working of `&lt;BS&gt;`, `&lt;Del&gt;`, `CTRL-W` and `CTRL-U` in Insert
 mode.  This is a list of items, separated by commas.  Each item allows
 a way to backspace over something:
 
@@ -694,13 +694,13 @@ Normal mode
 <p>In normal mode, the Backspace acts as <code>h</code>, it just goes to the left.</p>
 <p>By default, the backspace will go to the previous line if at the start of a line (as if <code>eol</code> was in <code>backspace</code>); you can control this behaviour with the <a href="http://vimhelp.appspot.com/options.txt.html#%27ww%27" rel="noreferrer"><code>'whichwrap'</code></a> option through the <code>b</code> flag (enabled by default).</p>
 <p>You can also make backspace delete characters by mapping it to the <code>X</code> command:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;BS&amp;gt; X</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;BS&gt; X</code></pre>
 </section>
 <section id="answer-2-score-5" class="level4">
 <h4>Answer 2 (score 5)</h4>
-<p>Just in case anyone is experience not explainable <code>&amp;lt;BS&amp;gt;</code> behavior using ConEmu on Windows, you may have to remap the <code>&amp;lt;BS&amp;gt;</code> key to:</p>
-<pre class="language-vim"><code>inoremap &amp;lt;Char-0x07F&amp;gt; &amp;lt;BS&amp;gt;
-nnoremap &amp;lt;Char-0x07F&amp;gt; &amp;lt;BS&amp;gt;</code></pre>
+<p>Just in case anyone is experience not explainable <code>&lt;BS&gt;</code> behavior using ConEmu on Windows, you may have to remap the <code>&lt;BS&gt;</code> key to:</p>
+<pre class="language-vim"><code>inoremap &lt;Char-0x07F&gt; &lt;BS&gt;
+nnoremap &lt;Char-0x07F&gt; &lt;BS&gt;</code></pre>
 <p><a href="https://conemu.github.io/en/VimXterm.html#vim-bs-issue" rel="nofollow noreferrer">More information</a></p>
 </section>
 <section id="answer-3-score-1" class="level4">
@@ -732,16 +732,16 @@ Use a keybinding to strip all trailing whitespace
 </h2>
 <p>Since some pages that I edit actually need trailing whitespaces (e.g. markdown) and others don’t, I set up a keybinding to <kbd>F5</kbd> so that it’s trivial to do without being automatic. To do so, add the <a href="http://vim.wikia.com/wiki/Remove_unwanted_spaces#Simple_commands_to_remove_unwanted_whitespace" rel="noreferrer">code below (from vim.wikia)</a> or some variation of it to your <code>.vimrc</code>:</p>
 <pre class="language-vim"><code>&quot;Remove all trailing whitespace by pressing F5
-nnoremap &amp;lt;F5&amp;gt; :let _s=@/&amp;lt;Bar&amp;gt;:%s/\s\+$//e&amp;lt;Bar&amp;gt;:let @/=_s&amp;lt;Bar&amp;gt;&amp;lt;CR&amp;gt;</code></pre>
+nnoremap &lt;F5&gt; :let _s=@/&lt;Bar&gt;:%s/\s\+$//e&lt;Bar&gt;:let @/=_s&lt;Bar&gt;&lt;CR&gt;</code></pre>
 <ul>
 <li>
-<code>nnoremap &amp;lt;F5&amp;gt;</code> does a nonrecursive mapping to the key <code>F5</code> in normal mode
+<code>nnoremap &lt;F5&gt;</code> does a nonrecursive mapping to the key <code>F5</code> in normal mode
 </li>
 <li>
 <code>:let _s=@/</code> stores the last search term (from the macro <code>@/</code>) in the variable <code>_s</code>
 </li>
 <li>
-<code>&amp;lt;Bar&amp;gt;</code> Functions as a pipe symbol <code>|</code> to separate commands, however <code>|</code> would end a command in this context, so <code>&amp;lt;Bar&amp;gt;</code> must be used instead.
+<code>&lt;Bar&gt;</code> Functions as a pipe symbol <code>|</code> to separate commands, however <code>|</code> would end a command in this context, so <code>&lt;Bar&gt;</code> must be used instead.
 </li>
 <li>
 <code>:%s/\s\+$//e</code> searches for trailing whitespace and deletes it everywhere in the buffer (see <a href="https://vi.stackexchange.com/a/456/1111">CarpetSmoker’s answer</a> for a detailed breakdown of this expression)
@@ -750,7 +750,7 @@ nnoremap &amp;lt;F5&amp;gt; :let _s=@/&amp;lt;Bar&amp;gt;:%s/\s\+$//e&amp;lt;Bar
 <code>let @/=_s</code> restores your last search term to the macro <code>@/</code>, so that it will be available the next time you hit <code>n</code>.
 </li>
 <li>
-<code>&amp;lt;CR&amp;gt;</code> ends the mapping
+<code>&lt;CR&gt;</code> ends the mapping
 </li>
 </ul>
 <hr>
@@ -758,7 +758,7 @@ nnoremap &amp;lt;F5&amp;gt; :let _s=@/&amp;lt;Bar&amp;gt;:%s/\s\+$//e&amp;lt;Bar
 … or be more selective
 </h2>
 <p>If you have cases in which you don’t want to strip all of the trailing whitespace, you can use a pattern to be more selective. For example, the following code shows how I strip trailing whitespace only if it comes after a semicolon (here it’s tied to <kbd>F8</kbd>).</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;F8&amp;gt; :let _s=@/&amp;lt;Bar&amp;gt;:%s/;\s\+$/;/e&amp;lt;Bar&amp;gt;:let @/=_s&amp;lt;Bar&amp;gt;&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;F8&gt; :let _s=@/&lt;Bar&gt;:%s/;\s\+$/;/e&lt;Bar&gt;:let @/=_s&lt;Bar&gt;&lt;CR&gt;</code></pre>
 <p>This is useful if, like me, you have some files with markdown-like <a href="https://en.wikipedia.org/wiki/Here_document" rel="noreferrer">heredocs</a> interspersed among semicolon-terminated programming statements.</p>
 </section>
 <section id="answer-2-score-177" class="level4">
@@ -818,11 +818,11 @@ The last-used search term is automatically restored after leaving a function, so
 <p>Which can be be used without the <code>:call</code>:</p>
 <pre class="language-vim"><code>:TrimWitespace</code></pre>
 <p>And you can of course bind it to a key:</p>
-<pre class="language-vim"><code>:noremap &amp;lt;Leader&amp;gt;w :call TrimWhitespace()&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>:noremap &lt;Leader&gt;w :call TrimWhitespace()&lt;CR&gt;</code></pre>
 <hr>
 <p>Some people like to automatically do this before they write a file to disk, like so:</p>
 <pre class="language-vim"><code>autocmd BufWritePre * :call TrimWhitespace()</code></pre>
-<p>I don’t like it, as some formats require trailing whitespace (such as Markdown), and on some other occasions you even want trailing whitespace in your code (such as formatting an email, and using the <code>--&amp;lt;Space&amp;gt;</code> marker to indicate the start of a signature).</p>
+<p>I don’t like it, as some formats require trailing whitespace (such as Markdown), and on some other occasions you even want trailing whitespace in your code (such as formatting an email, and using the <code>--&lt;Space&gt;</code> marker to indicate the start of a signature).</p>
 <hr>
 <p>Shameless plug mode: a while ago I <a href="http://code.arp242.net/sanitize_files/src" rel="noreferrer">wrote a little Python script</a> to clean up whitespace for an entire project at once.</p>
 </section>
@@ -1020,7 +1020,7 @@ no lazy loading
 </li>
 </ul>
 <p>To install it download <a href="https://github.com/tpope/vim-pathogen/blob/master/autoload/pathogen.vim"><code>pathogen.vim</code></a> to <code>~/.vim/autoload</code>:</p>
-<pre class="language-vim"><code>mkdir -p ~/.vim/autoload ~/.vim/bundle &amp;amp;&amp;amp; \
+<pre class="language-vim"><code>mkdir -p ~/.vim/autoload ~/.vim/bundle &amp;&amp; \
 curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim</code></pre>
 <p>And add to your <code>.vimrc</code>:</p>
 <pre class="language-vim"><code>call pathogen#infect()
@@ -1163,7 +1163,7 @@ You can use the <code>:retab</code> command. From <a href="http://vimhelp.appspo
 </p>
 <blockquote>
 <p>
-Replace all sequences of white-space containing a <code>&amp;lt;Tab&amp;gt;</code> with new strings of white-space using the new tabstop value given. If you do not specify a new tabstop size or it is zero, Vim uses the current value of <code>'tabstop'</code>. […] With <code>'expandtab'</code> on, Vim replaces all tabs with the appropriate number of spaces.
+Replace all sequences of white-space containing a <code>&lt;Tab&gt;</code> with new strings of white-space using the new tabstop value given. If you do not specify a new tabstop size or it is zero, Vim uses the current value of <code>'tabstop'</code>. […] With <code>'expandtab'</code> on, Vim replaces all tabs with the appropriate number of spaces.
 </p>
 </blockquote>
 <p>
@@ -1185,23 +1185,23 @@ end</code></pre>
 <p>So, I wrote a little function to change <em>only</em> tabs/spaces at the <em>start</em> of the line:</p>
 <pre class="language-vim"><code>&quot; :retab changes *everything*, not just start of lines
 fun! Retab(expandtab)
-    let l:spaces = repeat(&#39; &#39;, &amp;amp;tabstop)
+    let l:spaces = repeat(&#39; &#39;, &amp;tabstop)
 
     &quot; Replace tabs with spaces
     if a:expandtab
-        silent! execute &#39;%substitute#^\%(&#39; . l:spaces . &#39;\)\+#\=repeat(&quot;\t&quot;, len(submatch(0)) / &amp;amp;tabstop)#e&#39;
+        silent! execute &#39;%substitute#^\%(&#39; . l:spaces . &#39;\)\+#\=repeat(&quot;\t&quot;, len(submatch(0)) / &amp;tabstop)#e&#39;
     &quot; Replace spaces with tabs
     else
         silent! execute &#39;%substitute#^\%(\t\)\+#\=repeat(&quot;&#39; . l:spaces . &#39;&quot;, len(submatch(0)))#e&#39;
     endif
 endfun</code></pre>
 <p>
-With this version, you have to manually specify <code>expandtab</code> in the function call (ie. <code>:call Retab(1)</code> to change tabs to spaces), but you could also modify it to take the current value of <code>&amp;amp;expandtab</code> (as it already does with <code>&amp;amp;tabstop</code>) just like <code>:retab</code> does. (I happen to prefer to specify it manually).
+With this version, you have to manually specify <code>expandtab</code> in the function call (ie. <code>:call Retab(1)</code> to change tabs to spaces), but you could also modify it to take the current value of <code>&amp;expandtab</code> (as it already does with <code>&amp;tabstop</code>) just like <code>:retab</code> does. (I happen to prefer to specify it manually).
 </p>
 </section>
 <section id="answer-3-score-11-1" class="level4">
 <h4>Answer 3 (score 11)</h4>
-<p>Vim provides <code>!retab</code> command which will replace all sequences of <code>&amp;lt;Tab&amp;gt;</code> with new strings of white-space using the new tabstop (e.g. <code>:set tabstop=2</code>) value given, but <strong>all tabs inside of strings can be modified</strong> (e.g. in a C program, you should use <code>\t</code> to avoid this)!</p>
+<p>Vim provides <code>!retab</code> command which will replace all sequences of <code>&lt;Tab&gt;</code> with new strings of white-space using the new tabstop (e.g. <code>:set tabstop=2</code>) value given, but <strong>all tabs inside of strings can be modified</strong> (e.g. in a C program, you should use <code>\t</code> to avoid this)!</p>
 <p>So alternatively you can change all tabs into spaces using the following command:</p>
 <pre class="language-vim"><code>:%s/\t/  /g</code></pre>
 <p>or as suggested by <a href="https://vi.stackexchange.com/questions/495/how-to-replace-tabs-with-spaces/844?noredirect=1#comment20357_844"><span class="citation" data-cites="Shahbaz">@Shahbaz</span></a>:</p>
@@ -1224,9 +1224,9 @@ With this version, you have to manually specify <code>expandtab</code> in the fu
 </ul>
 <p>Then to correct indentation of the entire file, you may try: <kbd>gg=G</kbd>. Check: <a href="https://vi.stackexchange.com/q/236/467">Re-indenting badly indented code</a> for more details.</p>
 <p>To use spaces by default instead of tabs, you need to add the following settings into your <code>.vimrc</code> file:</p>
-<pre class="language-vim"><code>set tabstop=2     &quot; (ts) width (in spaces) that a &amp;lt;tab&amp;gt; is displayed as
+<pre class="language-vim"><code>set tabstop=2     &quot; (ts) width (in spaces) that a &lt;tab&gt; is displayed as
 set expandtab     &quot; (et) expand tabs to spaces (use :retab to redo entire file)
-set shiftwidth=2  &quot; (sw) width (in spaces) used in each step of autoindent (aswell as &amp;lt;&amp;lt; and &amp;gt;&amp;gt;)</code></pre>
+set shiftwidth=2  &quot; (sw) width (in spaces) used in each step of autoindent (aswell as &lt;&lt; and &gt;&gt;)</code></pre>
 <p>Alternative solution is to use <code>tidy</code></p>
 <hr>
 <p>Related:</p>
@@ -1293,15 +1293,15 @@ options will be changed (also when it already was on):
         &#39;modeline&#39;   will be off
         &#39;expandtab&#39;  will be off
 Also, &#39;fileformat&#39; and &#39;fileformats&#39; options will not be used, the
-file is read and written like &#39;fileformat&#39; was &quot;unix&quot; (a single &amp;lt;NL&amp;gt;
+file is read and written like &#39;fileformat&#39; was &quot;unix&quot; (a single &lt;NL&gt;
 separates lines).
 The &#39;fileencoding&#39; and &#39;fileencodings&#39; options will not be used, the
 file is read without conversion.
 
 [..]
 
-When writing a file the &amp;lt;EOL&amp;gt; for the last line is only written if
-there was one in the original file (normally Vim appends an &amp;lt;EOL&amp;gt; to
+When writing a file the &lt;EOL&gt; for the last line is only written if
+there was one in the original file (normally Vim appends an &lt;EOL&gt; to
 the last line if there is none; this would make the file longer).  See
 the &#39;endofline&#39; option.</code></pre>
 <p>
@@ -1313,7 +1313,7 @@ You can verify this by opening a file, and just using <code>:w</code>. It is now
 <p>
 I personally also prefer to <em>disable</em> <code>set wrap</code> for binary, although others might prefer to <em>enable</em> it. YMMV. Another useful thing to do is <code>:set display=uhex</code>. From <code>:help 'display'</code>:
 </p>
-<pre class="language-vim"><code>uhex            Show unprintable characters hexadecimal as &amp;lt;xx&amp;gt;
+<pre class="language-vim"><code>uhex            Show unprintable characters hexadecimal as &lt;xx&gt;
                 instead of using ^C and ~C.</code></pre>
 <p>
 And as a last tip, you can show the hex value of the character under the cursor in the ruler with <code>%B</code> (<code>:set rulerformat=0x%B</code>).
@@ -1332,7 +1332,7 @@ You can use the <code>xxd(1)</code> tool to convert a file to more readable form
 Now make your changes, you need to do that on the left-hand side of the display (the hex numbers), changes to the right-hand side (printable representation) are ignored on write.
 </p>
 <p>To save it, use <code>xxd -r</code>:</p>
-<pre class="language-vim"><code>:%!xxd -r &amp;gt; new-ls</code></pre>
+<pre class="language-vim"><code>:%!xxd -r &gt; new-ls</code></pre>
 <p>This will save the file to <code>new-ls</code>.</p>
 <p>Or to load the binary in the current buffer:</p>
 <pre class="language-vim"><code>:%!xxd -r</code></pre>
@@ -1349,10 +1349,10 @@ And then just use <code>:w</code> to write it. (<strong>beware</strong>: you wan
 </p>
 <p>Complementary keybinds to make this a bit easier:</p>
 <pre class="language-vim"><code>&quot; Hex read
-nmap &amp;lt;Leader&amp;gt;hr :%!xxd&amp;lt;CR&amp;gt; :set filetype=xxd&amp;lt;CR&amp;gt;
+nmap &lt;Leader&gt;hr :%!xxd&lt;CR&gt; :set filetype=xxd&lt;CR&gt;
 
 &quot; Hex write
-nmap &amp;lt;Leader&amp;gt;hw :%!xxd -r&amp;lt;CR&amp;gt; :set binary&amp;lt;CR&amp;gt; :set filetype=&amp;lt;CR&amp;gt;</code></pre>
+nmap &lt;Leader&gt;hw :%!xxd -r&lt;CR&gt; :set binary&lt;CR&gt; :set filetype=&lt;CR&gt;</code></pre>
 <p>
 This is also available from the menu if you’re using gVim, under ‘Tools ➙ Convert to HEX’ and ‘Tools ➙ Convert back’.
 </p>
@@ -1378,12 +1378,12 @@ If the filtering step after opening and before closing sounds tedious, and you o
 <pre class="language-vim"><code>&quot; for hex editing
 augroup Binary
   au!
-  au BufReadPre  *.bin let &amp;amp;bin=1
-  au BufReadPost *.bin if &amp;amp;bin | %!xxd
+  au BufReadPre  *.bin let &amp;bin=1
+  au BufReadPost *.bin if &amp;bin | %!xxd
   au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &amp;amp;bin | %!xxd -r
+  au BufWritePre *.bin if &amp;bin | %!xxd -r
   au BufWritePre *.bin endif
-  au BufWritePost *.bin if &amp;amp;bin | %!xxd
+  au BufWritePost *.bin if &amp;bin | %!xxd
   au BufWritePost *.bin set nomod | endif
 augroup END</code></pre>
 </section>
@@ -1589,16 +1589,16 @@ use <a href="https://vi.stackexchange.com/a/2279/205">“magic”</a> by beginni
 <p>There are several window commands that allow you to do this:</p>
 <ul>
 <li>
-<kbd>Ctrl+W</kbd> <kbd>+/-</kbd>: increase/decrease height (ex. <code>20&amp;lt;C-w&amp;gt;+</code>)
+<kbd>Ctrl+W</kbd> <kbd>+/-</kbd>: increase/decrease height (ex. <code>20&lt;C-w&gt;+</code>)
 </li>
 <li>
-<kbd>Ctrl+W</kbd> <kbd>&gt;/&lt;</kbd>: increase/decrease width (ex. <code>30&amp;lt;C-w&amp;gt;&amp;lt;</code>)
+<kbd>Ctrl+W</kbd> <kbd>&gt;/&lt;</kbd>: increase/decrease width (ex. <code>30&lt;C-w&gt;&lt;</code>)
 </li>
 <li>
-<kbd>Ctrl+W</kbd> <kbd>_</kbd>: set height (ex. <code>50&amp;lt;C-w&amp;gt;_</code>)
+<kbd>Ctrl+W</kbd> <kbd>_</kbd>: set height (ex. <code>50&lt;C-w&gt;_</code>)
 </li>
 <li>
-<kbd>Ctrl+W</kbd> <kbd>|</kbd>: set width (ex. <code>50&amp;lt;C-w&amp;gt;|</code>)
+<kbd>Ctrl+W</kbd> <kbd>|</kbd>: set width (ex. <code>50&lt;C-w&gt;|</code>)
 </li>
 <li>
 <kbd>Ctrl+W</kbd> <kbd>=</kbd>: equalize width and height of all windows
@@ -1657,15 +1657,15 @@ The difference is that <code>:noh</code> leaves the search term in the search re
 <section id="answer-2-score-31" class="level4">
 <h4>Answer 2 (score 31)</h4>
 <p>Simply type</p>
-<pre class="language-vim"><code>:noh&amp;lt;cr&amp;gt;</code></pre>
-<p>(Where <code>&amp;lt;cr&amp;gt;</code> symbolizes a carriage return, i.e. Enter.) The full non-abbreviated version of this command is <code>:nohlsearch</code>.</p>
+<pre class="language-vim"><code>:noh&lt;cr&gt;</code></pre>
+<p>(Where <code>&lt;cr&gt;</code> symbolizes a carriage return, i.e. Enter.) The full non-abbreviated version of this command is <code>:nohlsearch</code>.</p>
 <p>For convenience, you can have a mapping such as</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;Leader&amp;gt;&amp;lt;space&amp;gt; :noh&amp;lt;cr&amp;gt;</code></pre>
-<p>in your <code>.vimrc</code>. Since my leader is Space, this allows me to clear highlighting simply by tapping space twice. (By default, <code>&amp;lt;Leader&amp;gt;</code> is set to <code>\</code>)</p>
+<pre class="language-vim"><code>nnoremap &lt;Leader&gt;&lt;space&gt; :noh&lt;cr&gt;</code></pre>
+<p>in your <code>.vimrc</code>. Since my leader is Space, this allows me to clear highlighting simply by tapping space twice. (By default, <code>&lt;Leader&gt;</code> is set to <code>\</code>)</p>
 <p>Another popular option is to bind it to <kbd>Ctrl</kbd>+<kbd>L</kbd>, since this is more or less the default for ‘redrawn terminal screen’, which is <em>very roughly what you’re</em> doing:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;silent&amp;gt; &amp;lt;C-L&amp;gt; :nohlsearch&amp;lt;CR&amp;gt;&amp;lt;C-L&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;silent&gt; &lt;C-L&gt; :nohlsearch&lt;CR&gt;&lt;C-L&gt;</code></pre>
 <p>
-This has the side-effect of <em>also</em> redrawing the terminal screen, which might be slow if your terminal connection is slow (which is very rare these days).<br> NOTE: If you’re using <a href="http://github.com/tpope/vim-sensible" rel="noreferrer">tpope/vim-sensible</a> then it already offers the <code>&amp;lt;C-l&amp;gt;</code> mapping listed above.
+This has the side-effect of <em>also</em> redrawing the terminal screen, which might be slow if your terminal connection is slow (which is very rare these days).<br> NOTE: If you’re using <a href="http://github.com/tpope/vim-sensible" rel="noreferrer">tpope/vim-sensible</a> then it already offers the <code>&lt;C-l&gt;</code> mapping listed above.
 </p>
 </section>
 <section id="answer-3-score-21" class="level4">
@@ -1685,7 +1685,7 @@ Clear highlight until next search
 <h5>
 Clear highlight on pressing <kbd>ESC</kbd>
 </h2>
-<pre class="language-vim"><code>nnoremap &amp;lt;esc&amp;gt; :noh&amp;lt;return&amp;gt;&amp;lt;esc&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;esc&gt; :noh&lt;return&gt;&lt;esc&gt;</code></pre>
 <hr>
 <h5>
 Clear highlight on pressing another key or custom map
@@ -1695,13 +1695,13 @@ Clear highlight on pressing another key or custom map
 <p>
 Clear highlights on pressing <kbd>&lt;/kbd&gt; (backslash)
 </p>
-<pre class="language-vim"><code>nnoremap \ :noh&amp;lt;return&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap \ :noh&lt;return&gt;</code></pre>
 </li>
 <li>
 <p>
 Clear highlights on hitting <kbd>ESC</kbd> twice
 </p>
-<pre class="language-vim"><code>nnoremap &amp;lt;esc&amp;gt;&amp;lt;esc&amp;gt; :noh&amp;lt;return&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;esc&gt;&lt;esc&gt; :noh&lt;return&gt;</code></pre>
 </li>
 </ul>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -1763,7 +1763,7 @@ Press <kbd> d </kbd>
 <section id="answer-accepted-score-60" class="level4">
 <h4>Answer accepted (score 60)</h4>
 <p>A common binding you’ll see is <strong>jj</strong>, because it works well for QWERTY layouts if you use home row positioning.</p>
-<pre class="language-vim"><code>inoremap jj &amp;lt;ESC&amp;gt;</code></pre>
+<pre class="language-vim"><code>inoremap jj &lt;ESC&gt;</code></pre>
 <p>In that case, to type a literal <code>jj</code> - you should wait for 1 sec (by default) between typing the second character. (see <a href="http://vimhelp.appspot.com/options.txt.html#%27timeout%27" rel="noreferrer"><code>:help 'timeout'</code></a> for details)</p>
 <p>There is also <code>c-o</code> which will take you out of insert, letting you do <strong>one</strong> normal command, and then put you right back into insert.</p>
 <p><a href="http://vim.wikia.com/wiki/Avoid_the_escape_key" rel="noreferrer">http://vim.wikia.com/wiki/Avoid_the_escape_key</a></p>
@@ -1771,7 +1771,7 @@ Press <kbd> d </kbd>
 <section id="answer-2-score-38" class="level4">
 <h4>Answer 2 (score 38)</h4>
 <p>
-Beside the built-in alternatives <code>&amp;lt;C-[&amp;gt;</code> and <code>&amp;lt;C-c&amp;gt;</code> to <code>&amp;lt;Esc&amp;gt;</code> key cited by others, another popular solution is to remap <code>&amp;lt;CapsLock&amp;gt;</code> as an additional Escape. This both on a Qwerty and Dvorak keyboard.
+Beside the built-in alternatives <code>&lt;C-[&gt;</code> and <code>&lt;C-c&gt;</code> to <code>&lt;Esc&gt;</code> key cited by others, another popular solution is to remap <code>&lt;CapsLock&gt;</code> as an additional Escape. This both on a Qwerty and Dvorak keyboard.
 </p>
 <p>This way you can press Esc very easily with the left little finger, without removing hands from the HomeRow (incidentally, CapsLock is where Escape used to be on the keyboards when vi was invented).</p>
 <p>Remapping can be done:</p>
@@ -1809,8 +1809,8 @@ as an <code>Esc</code> key by pressing and quickly releasing it.
 <section id="answer-3-score-28" class="level4">
 <h4>Answer 3 (score 28)</h4>
 <p>The mappings that I use are:</p>
-<pre class="language-vim"><code>inoremap jk &amp;lt;esc&amp;gt;
-inoremap kj &amp;lt;esc&amp;gt;</code></pre>
+<pre class="language-vim"><code>inoremap jk &lt;esc&gt;
+inoremap kj &lt;esc&gt;</code></pre>
 <p>This way, you can simply hit <kbd>j</kbd> and <kbd>k</kbd> at the same time, without having to worry about which one you press first.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -1843,38 +1843,38 @@ inoremap kj &amp;lt;esc&amp;gt;</code></pre>
 <p>I have the following in my .vimrc to change font size quickly without changing the font. Works on Windows and GTK. I haven’t tested other GUIs. I’m sure I originally copied it from somebody else, but it’s been in my rc file so long I don’t remember where it came from.</p>
 <pre class="language-vim"><code>if has(&quot;unix&quot;)
     function! FontSizePlus ()
-      let l:gf_size_whole = matchstr(&amp;amp;guifont, &#39;\( \)\@&amp;lt;=\d\+$&#39;)
+      let l:gf_size_whole = matchstr(&amp;guifont, &#39;\( \)\@&lt;=\d\+$&#39;)
       let l:gf_size_whole = l:gf_size_whole + 1
       let l:new_font_size = &#39; &#39;.l:gf_size_whole
-      let &amp;amp;guifont = substitute(&amp;amp;guifont, &#39; \d\+$&#39;, l:new_font_size, &#39;&#39;)
+      let &amp;guifont = substitute(&amp;guifont, &#39; \d\+$&#39;, l:new_font_size, &#39;&#39;)
     endfunction
 
     function! FontSizeMinus ()
-      let l:gf_size_whole = matchstr(&amp;amp;guifont, &#39;\( \)\@&amp;lt;=\d\+$&#39;)
+      let l:gf_size_whole = matchstr(&amp;guifont, &#39;\( \)\@&lt;=\d\+$&#39;)
       let l:gf_size_whole = l:gf_size_whole - 1
       let l:new_font_size = &#39; &#39;.l:gf_size_whole
-      let &amp;amp;guifont = substitute(&amp;amp;guifont, &#39; \d\+$&#39;, l:new_font_size, &#39;&#39;)
+      let &amp;guifont = substitute(&amp;guifont, &#39; \d\+$&#39;, l:new_font_size, &#39;&#39;)
     endfunction
 else
     function! FontSizePlus ()
-      let l:gf_size_whole = matchstr(&amp;amp;guifont, &#39;\(:h\)\@&amp;lt;=\d\+$&#39;)
+      let l:gf_size_whole = matchstr(&amp;guifont, &#39;\(:h\)\@&lt;=\d\+$&#39;)
       let l:gf_size_whole = l:gf_size_whole + 1
       let l:new_font_size = &#39;:h&#39;.l:gf_size_whole
-      let &amp;amp;guifont = substitute(&amp;amp;guifont, &#39;:h\d\+$&#39;, l:new_font_size, &#39;&#39;)
+      let &amp;guifont = substitute(&amp;guifont, &#39;:h\d\+$&#39;, l:new_font_size, &#39;&#39;)
     endfunction
 
     function! FontSizeMinus ()
-      let l:gf_size_whole = matchstr(&amp;amp;guifont, &#39;\(:h\)\@&amp;lt;=\d\+$&#39;)
+      let l:gf_size_whole = matchstr(&amp;guifont, &#39;\(:h\)\@&lt;=\d\+$&#39;)
       let l:gf_size_whole = l:gf_size_whole - 1
       let l:new_font_size = &#39;:h&#39;.l:gf_size_whole
-      let &amp;amp;guifont = substitute(&amp;amp;guifont, &#39;:h\d\+$&#39;, l:new_font_size, &#39;&#39;)
+      let &amp;guifont = substitute(&amp;guifont, &#39;:h\d\+$&#39;, l:new_font_size, &#39;&#39;)
     endfunction
 endif
 
 
 if has(&quot;gui_running&quot;)
-    nmap &amp;lt;S-F12&amp;gt; :call FontSizeMinus()&amp;lt;CR&amp;gt;
-    nmap &amp;lt;F12&amp;gt; :call FontSizePlus()&amp;lt;CR&amp;gt;
+    nmap &lt;S-F12&gt; :call FontSizeMinus()&lt;CR&gt;
+    nmap &lt;F12&gt; :call FontSizePlus()&lt;CR&gt;
 endif</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -2068,21 +2068,21 @@ Handling the delicate flower of Windows (assuming GVim)
 <h4>Answer 2 (score 36)</h4>
 <p>The easiest is: <code>:m+</code> or <code>:m-2</code> which is abbreviation for <code>:move</code> as Ingo suggested.</p>
 <p>Or using visual mode (<kbd>V</kbd>) by cutting the line (<kbd>d</kbd>/<kbd>x</kbd>) then paste it (<kbd>p</kbd> - below cursor, <kbd>P</kbd> above cursor) after you moved your cursor to the right place before pasting (so in summary it’s <kbd>Vxp</kbd>/<kbd>Vdp</kbd>).</p>
-<p>When moving multiple lines in visual mode, then you’ve to use <code>:m '&amp;gt;+1</code> (to move one line down) or <code>:m '&amp;lt;-2</code> (to move one line up).</p>
+<p>When moving multiple lines in visual mode, then you’ve to use <code>:m '&gt;+1</code> (to move one line down) or <code>:m '&lt;-2</code> (to move one line up).</p>
 <hr>
 <p>Here is sample useful mapping (<kbd>Shift+ ↑</kbd>/<kbd>Shift+↓</kbd>):</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;S-Up&amp;gt; :m-2&amp;lt;CR&amp;gt;
-nnoremap &amp;lt;S-Down&amp;gt; :m+&amp;lt;CR&amp;gt;
-inoremap &amp;lt;S-Up&amp;gt; &amp;lt;Esc&amp;gt;:m-2&amp;lt;CR&amp;gt;
-inoremap &amp;lt;S-Down&amp;gt; &amp;lt;Esc&amp;gt;:m+&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;S-Up&gt; :m-2&lt;CR&gt;
+nnoremap &lt;S-Down&gt; :m+&lt;CR&gt;
+inoremap &lt;S-Up&gt; &lt;Esc&gt;:m-2&lt;CR&gt;
+inoremap &lt;S-Down&gt; &lt;Esc&gt;:m+&lt;CR&gt;</code></pre>
 <p>which is similar to Sublime Text (<a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/reference/keyboard_shortcuts_win.html" rel="noreferrer">Win</a> / <a href="http://sublime-text-unofficial-documentation.readthedocs.org/en/latest/reference/keyboard_shortcuts_osx.html" rel="noreferrer">OSX</a>).</p>
 <p>Here are some suggested at <a href="http://vim.wikia.com/wiki/Moving_lines_up_or_down" rel="noreferrer">vim wikia</a>:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;A-j&amp;gt; :m .+1&amp;lt;CR&amp;gt;==
-nnoremap &amp;lt;A-k&amp;gt; :m .-2&amp;lt;CR&amp;gt;==
-inoremap &amp;lt;A-j&amp;gt; &amp;lt;Esc&amp;gt;:m .+1&amp;lt;CR&amp;gt;==gi
-inoremap &amp;lt;A-k&amp;gt; &amp;lt;Esc&amp;gt;:m .-2&amp;lt;CR&amp;gt;==gi
-vnoremap &amp;lt;A-j&amp;gt; :m &#39;&amp;gt;+1&amp;lt;CR&amp;gt;gv=gv
-vnoremap &amp;lt;A-k&amp;gt; :m &#39;&amp;lt;-2&amp;lt;CR&amp;gt;gv=gv</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;A-j&gt; :m .+1&lt;CR&gt;==
+nnoremap &lt;A-k&gt; :m .-2&lt;CR&gt;==
+inoremap &lt;A-j&gt; &lt;Esc&gt;:m .+1&lt;CR&gt;==gi
+inoremap &lt;A-k&gt; &lt;Esc&gt;:m .-2&lt;CR&gt;==gi
+vnoremap &lt;A-j&gt; :m &#39;&gt;+1&lt;CR&gt;gv=gv
+vnoremap &lt;A-k&gt; :m &#39;&lt;-2&lt;CR&gt;gv=gv</code></pre>
 <blockquote>
 <p>In normal mode or in insert mode, press Alt-j to move the current line down, or press Alt-k to move the current line up.</p>
 After visually selecting a block of lines (for example, by pressing V then moving the cursor down), press Alt-j to move the whole block down, or press Alt-k to move the block up.
@@ -2345,15 +2345,15 @@ Organizing swap files
 <section id="question-25" class="level4">
 <h4>Question</h4>
 <p>Vim has an Ex mode that can be entered by entering <kbd>Q</kbd>, and a command line mode that can be entered with <kbd>q</kbd><kbd>:</kbd>. A common complaint amongst new vim users is that they enter these modes accidentally when trying to quit vim. As such, I disable these keys in my <code>~/.vimrc</code> to stop myself hitting them accidentally (particularly <kbd>q</kbd><kbd>:</kbd>):</p>
-<pre class="language-vim"><code>map q: &amp;lt;Nop&amp;gt;
-nnoremap Q &amp;lt;nop&amp;gt;</code></pre>
+<pre class="language-vim"><code>map q: &lt;Nop&gt;
+nnoremap Q &lt;nop&gt;</code></pre>
 <p>Although I’ve read the <a href="http://vimdoc.sourceforge.net/htmldoc/intro.html#Ex" rel="noreferrer">vim documentation on Ex</a>, am a moderately experienced Vim user, and understand the basic idea behind it, I still struggle to find any use for it in my daily vim use. In general it seems less useful than just entering a standard vim command-line command prefixed with <kbd>:</kbd>, as changes are not echoed straight away.</p>
 <p>Does Ex have any practical everyday use in modern Vim? Is there anything that’s easier to do in Ex mode than with standard commands? What is the difference between command line mode and ex mode?</p>
 </section>
 <section id="answer-accepted-score-81" class="level4">
 <h4>Answer accepted (score 81)</h4>
 <p><code>Q</code> is, as you found, ex mode. It’s not entirely useful to use interactively, but it exists because Vim can be used to emulate the old <code>ex</code> binary. In fact, many systems provide the <code>ex</code> command by simply symlinking it to <code>vim</code>.</p>
-<p><code>q:</code>, or <code>:&amp;lt;C-f&amp;gt;</code>, instead provides a way to browse your command-line history and edit it like a normal buffer. This makes it easy to find a previous command you ran, edit it with normal Vim commands, and then run the modified command. The <code>q/</code> and <code>q?</code> commands exist to provide the same functionality for the search history.</p>
+<p><code>q:</code>, or <code>:&lt;C-f&gt;</code>, instead provides a way to browse your command-line history and edit it like a normal buffer. This makes it easy to find a previous command you ran, edit it with normal Vim commands, and then run the modified command. The <code>q/</code> and <code>q?</code> commands exist to provide the same functionality for the search history.</p>
 </section>
 <section id="answer-2-score-65-1" class="level4">
 <h4>Answer 2 (score 65)</h4>
@@ -2387,10 +2387,10 @@ Ex is the root of a family of editors: <code>edit</code>, <code>ex</code> and <c
 <hr>
 <p>Other things which I find useful in Ex mode is to use it as a playground (similar to <code>python</code> console) where you can execute many commands in a row, working/debugging regular expressions, checking vim configuration, executing external commands or working with registers, etc.</p>
 <p>For example:</p>
-<pre class="language-vim"><code>let @d = &#39;&amp;lt;td&amp;gt;&amp;lt;/td&amp;gt;&#39;
-let @r = &#39;&amp;lt;tr&amp;gt;&#39; . repeat(@d, 5) . &#39;&amp;lt;/tr&amp;gt;&#39;
+<pre class="language-vim"><code>let @d = &#39;&lt;td&gt;&lt;/td&gt;&#39;
+let @r = &#39;&lt;tr&gt;&#39; . repeat(@d, 5) . &#39;&lt;/tr&gt;&#39;
 echo @r
-let @t = &#39;&amp;lt;table&amp;gt;&#39; . repeat(@r, 5) . &#39;&amp;lt;/table&amp;gt;&#39;
+let @t = &#39;&lt;table&gt;&#39; . repeat(@r, 5) . &#39;&lt;/table&gt;&#39;
 reg</code></pre>
 <p>which is more easier in Ex mode than in normal mode (where you can see only your last command).</p>
 <hr>
@@ -2442,12 +2442,12 @@ alias retab=&quot;ex +&#39;set ts=2&#39; +&#39;bufdo retab&#39; -scxa&quot;</cod
 <section id="question-26" class="level4">
 <h4>Question</h4>
 <p>Some editors (such as visual studio on windows) do C++ autocompletion which understand C++. For example, given:</p>
-<pre class="language-vim"><code>#include &amp;lt;vector&amp;gt;
+<pre class="language-vim"><code>#include &lt;vector&gt;
 
 int main(void) {
-  std::vector&amp;lt;int&amp;gt; v;
+  std::vector&lt;int&gt; v;
   v.i</code></pre>
-<p>In visual studio the auto-completion knows the only method on <code>std::vector&amp;lt;int&amp;gt;</code> that starts with an i is <code>insert</code>.</p>
+<p>In visual studio the auto-completion knows the only method on <code>std::vector&lt;int&gt;</code> that starts with an i is <code>insert</code>.</p>
 <p>Is it possible to get this kind of autocompletion in vim?</p>
 </section>
 <section id="answer-accepted-score-27" class="level4">
@@ -2544,9 +2544,9 @@ cd fontd
 <p>You need to compile Vim yourself or get a prebuilt Vim package that was compiled with Python support.</p>
 <p>If you’re on a Debian based system, the easiest way is to download the vim-gnome or vim-gtk package from <code>apt</code> (<code>apt install vim-gtk</code> for instance). Other distros might have a similar package with python support built in.</p>
 <p>If you’d prefer to compile Vim yourself, download the Vim repository and pass in <code>--enable-pythoninterp</code> like so:</p>
-<pre class="language-vim"><code>cd /tmp &amp;amp;&amp;amp; git clone https://github.com/vim/vim.git &amp;amp;&amp;amp; cd vim
+<pre class="language-vim"><code>cd /tmp &amp;&amp; git clone https://github.com/vim/vim.git &amp;&amp; cd vim
 ./configure --enable-pythoninterp --prefix=/usr
-make &amp;amp;&amp;amp; sudo make install</code></pre>
+make &amp;&amp; sudo make install</code></pre>
 <p>On Windows, you can get the Gvim package from <a href="https://github.com/vim/vim-win32-installer/releases/tag/v8.0.0003" rel="noreferrer">here</a> which includes Python support.</p>
 </section>
 <section id="answer-2-score-6" class="level4">
@@ -2600,7 +2600,7 @@ Remove Vim if you already have
 <h5>
 configure and make
 </h1>
-<pre class="language-vim"><code>cd /usr &amp;amp;&amp;amp; sudo git clone https://github.com/vim/vim.git &amp;amp;&amp;amp; cd vim  
+<pre class="language-vim"><code>cd /usr &amp;&amp; sudo git clone https://github.com/vim/vim.git &amp;&amp; cd vim  
 
 sudo ./configure --with-features=huge \
 --enable-multibyte \
@@ -2621,7 +2621,7 @@ Preparing deb package using <a href="https://wiki.debian.org/CheckInstall" rel="
 <p>
 And install that package
 </p>
-<pre class="language-vim"><code>cd /usr/vim &amp;amp;&amp;amp; sudo checkinstall</code></pre>
+<pre class="language-vim"><code>cd /usr/vim &amp;&amp; sudo checkinstall</code></pre>
 </li>
 <li>
 <p>
@@ -2815,13 +2815,13 @@ There’s a caveat though: the original buffer remains in the list of buffers. I
 <pre class="language-vim"><code>function! RenameFile()
     let old_name = expand(&#39;%&#39;)
     let new_name = input(&#39;New file name: &#39;, expand(&#39;%&#39;), &#39;file&#39;)
-    if new_name != &#39;&#39; &amp;amp;&amp;amp; new_name != old_name
+    if new_name != &#39;&#39; &amp;&amp; new_name != old_name
         exec &#39;:saveas &#39; . new_name
         exec &#39;:silent !rm &#39; . old_name
         redraw!
     endif
 endfunction
-map &amp;lt;leader&amp;gt;n :call RenameFile()&amp;lt;cr&amp;gt;</code></pre>
+map &lt;leader&gt;n :call RenameFile()&lt;cr&gt;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -2835,7 +2835,7 @@ map &amp;lt;leader&amp;gt;n :call RenameFile()&amp;lt;cr&amp;gt;</code></pre>
 <code>q</code> to stop recording if I am in normal or visual mode.
 </li>
 <li>
-<code>&amp;lt;c-o&amp;gt;q</code> to stop recording if I am in insert mode.
+<code>&lt;c-o&gt;q</code> to stop recording if I am in insert mode.
 </li>
 <li>
 <p>
@@ -2851,8 +2851,8 @@ How do I stop recording if my macro ends in command mode?
 <p><code>Ctrl-f</code> allows you to open the command line window, in which you can edit the command in normal mode. To validate the command, simply use enter.</p>
 <hr>
 <p>Therefore, after having added something like:</p>
-<pre class="language-vim"><code>cnoremap &amp;lt;c-q&amp;gt; &amp;lt;c-f&amp;gt;i&amp;lt;c-o&amp;gt;q</code></pre>
-<p>in your <code>.vimrc</code>, you can use <code>&amp;lt;c-q&amp;gt;</code> to stop recording a macro while in command mode.</p>
+<pre class="language-vim"><code>cnoremap &lt;c-q&gt; &lt;c-f&gt;i&lt;c-o&gt;q</code></pre>
+<p>in your <code>.vimrc</code>, you can use <code>&lt;c-q&gt;</code> to stop recording a macro while in command mode.</p>
 <hr>
 <p>Florent</p>
 </section>
@@ -2884,12 +2884,12 @@ that’s it: run your macro: <code>@q</code>.
 <h4>Answer 3 (score 3)</h4>
 <p>Having read your comment about the use case, it looks like you could use a key mapping instead of a macro.</p>
 <p>I have this line in my .vimrc (don’t remember where I found it):</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;Leader&amp;gt;s :%s/\&amp;lt;&amp;lt;C-r&amp;gt;&amp;lt;C-w&amp;gt;\&amp;gt;//g&amp;lt;Left&amp;gt;&amp;lt;Left&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;Leader&gt;s :%s/\&lt;&lt;C-r&gt;&lt;C-w&gt;\&gt;//g&lt;Left&gt;&lt;Left&gt;</code></pre>
 <p>It has a similar effect to the use case you described, putting you on the command line so the only thing you have to do is type the replacement and press enter, but in this case, replacing all occurrences of the word that was under your cursor.</p>
 <p>To just replace within the current block, I think something like the following should work:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;Leader&amp;gt;s m&#39;va{&amp;lt;ESC&amp;gt;``:&#39;&amp;lt;,&#39;&amp;gt;s/\&amp;lt;&amp;lt;C-r&amp;gt;&amp;lt;C-w&amp;gt;\&amp;gt;//g&amp;lt;Left&amp;gt;&amp;lt;Left&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;Leader&gt;s m&#39;va{&lt;ESC&gt;``:&#39;&lt;,&#39;&gt;s/\&lt;&lt;C-r&gt;&lt;C-w&gt;\&gt;//g&lt;Left&gt;&lt;Left&gt;</code></pre>
 <p>Of course, you can map it to whatever key you want.</p>
-<p>What the above does: mark the current position using the unnamed marker, visually select the current block, leave visual mode and return the cursor to the saved position (the visual selection markers are still set), enter command mode and type out the substitute command, inserting the word that was under the cursor with <code>&amp;lt;C-r&amp;gt;&amp;lt;C-w&amp;gt;</code>, and positioning your cursor to type out the replacement.</p>
+<p>What the above does: mark the current position using the unnamed marker, visually select the current block, leave visual mode and return the cursor to the saved position (the visual selection markers are still set), enter command mode and type out the substitute command, inserting the word that was under the cursor with <code>&lt;C-r&gt;&lt;C-w&gt;</code>, and positioning your cursor to type out the replacement.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -3012,7 +3012,7 @@ hi IndentGuidesOdd ctermbg=236</code></pre>
 <h3>37: How to execute shell commands silently? (score <a href="https://stackoverflow.com/q/1942.html">31968</a> in 2015)</h3>
 <section id="question-36" class="level4">
 <h4>Question</h4>
-<p><code>:!&amp;lt;command&amp;gt;</code> can be used to execute a command in the shell. But this “takes over” my terminal and fills it with <code>stdout</code> of that particular command.</p>
+<p><code>:!&lt;command&gt;</code> can be used to execute a command in the shell. But this “takes over” my terminal and fills it with <code>stdout</code> of that particular command.</p>
 <p>How do I execute a command in the background that only notifies me on a non-zero exit code?</p>
 </section>
 <section id="answer-2-score-52" class="level4">
@@ -3032,7 +3032,7 @@ Press ENTER or type command to continue
 <pre class="language-vim"><code>:silent !echo Hello</code></pre>
 <p>Then press <kbd>Ctrl</kbd>+<kbd>L</kbd> (or <code>:redraw!</code>) to refresh the screen when back to Vim.</p>
 <p>To avoid need for refresh, you can define your own custom command, like:</p>
-<pre class="language-vim"><code>:command! -nargs=1 Silent execute &#39;:silent !&#39;.&amp;lt;q-args&amp;gt; | execute &#39;:redraw!&#39;</code></pre>
+<pre class="language-vim"><code>:command! -nargs=1 Silent execute &#39;:silent !&#39;.&lt;q-args&gt; | execute &#39;:redraw!&#39;</code></pre>
 <p>Now, you can use the new Vim command to run a shell command (note: without <em>!</em> and with capital <em>S</em>):</p>
 <pre class="language-vim"><code>:Silent ps</code></pre>
 <p>Source: <a href="http://vim.wikia.com/wiki/Avoiding_the_%22Hit_ENTER_to_continue%22_prompts" rel="noreferrer">Avoiding the “Hit ENTER to continue” prompts</a> at the Vim Wikia site</p>
@@ -3089,7 +3089,7 @@ set expandtab
 &quot; show existing tab with 2 spaces width
 set tabstop=2
 set softtabstop=2
-&quot; when indenting with &#39;&amp;gt;&#39;, use 2 spaces width
+&quot; when indenting with &#39;&gt;&#39;, use 2 spaces width
 set shiftwidth=2</code></pre>
 <p>However, when I attempt to use 2 spaces, it continues to default to 4 spaces per tab. I have tried moving <code>set expandtab</code> to the bottom of these declarations. I have tried removing the <code>softtabstop</code> declaration. I’ve scoured the various answers given to other questions as well. If anyone can help me out that would be amazing.</p>
 </section>
@@ -3106,12 +3106,12 @@ set shiftwidth=2</code></pre>
 <h4>Question</h4>
 <p>One of the plugins I have installed (probably Supertab) provides a nice view of documentation for the currently highlighted item in the completion menu:</p>
 <p><a href="https://i.stack.imgur.com/fVILE.png"><img src="https://i.stack.imgur.com/fVILE.png" alt="enter image description here"></a></p>
-<p>The (apparently) scratch buffer remains open even after I exit the completion (by pressing <kbd>Enter</kbd> or <kbd>Space</kbd>). Then, to quit it, I do <code>&amp;lt;c-w&amp;gt;↑:q</code>, but I find having to press <kbd>Ctrl</kbd> extremely annoying (one reason why I avoid splits).</p>
+<p>The (apparently) scratch buffer remains open even after I exit the completion (by pressing <kbd>Enter</kbd> or <kbd>Space</kbd>). Then, to quit it, I do <code>&lt;c-w&gt;↑:q</code>, but I find having to press <kbd>Ctrl</kbd> extremely annoying (one reason why I avoid splits).</p>
 <p>What’s a quick way to close this scratch buffer? Is there a native way, or do I have to write a mapping?</p>
 </section>
 <section id="answer-accepted-score-66" class="level4">
 <h4>Answer accepted (score 66)</h4>
-<p>The top window is called the preview window. So any of <code>&amp;lt;c-w&amp;gt;z</code>, <code>&amp;lt;c-w&amp;gt;&amp;lt;c-z&amp;gt;</code> or <code>:pc[lose][!]</code> should work.</p>
+<p>The top window is called the preview window. So any of <code>&lt;c-w&gt;z</code>, <code>&lt;c-w&gt;&lt;c-z&gt;</code> or <code>:pc[lose][!]</code> should work.</p>
 <p>The below is the help for <code>:help :pclose</code></p>
 <pre>
 CTRL-W z        CTRL-W_z
@@ -3147,9 +3147,9 @@ triggered because there is no &#39;preview&#39; string in &#39;completeopt&#39;,
 irrelevant. See the |g:ycm_add_preview_to_completeopt| option for more details.
 
 Default: &#39;0&#39;
-&amp;gt;
+&gt;
   let g:ycm_autoclose_preview_window_after_completion = 0
-&amp;lt;
+&lt;
 -------------------------------------------------------------------------------
 The *g:ycm_autoclose_preview_window_after_insertion* option
 
@@ -3160,7 +3160,7 @@ window is triggered. See the |g:ycm_add_preview_to_completeopt| option for more
 details.
 
 Default: &#39;0&#39;
-&amp;gt;
+&gt;
   let g:ycm_autoclose_preview_window_after_insertion = 0</code></pre>
 </section>
 <section id="answer-3-score-4-2" class="level4">
@@ -3374,24 +3374,24 @@ function package () {
 }
 (
 set_group ruby
-package https://github.com/tpope/vim-rails.git &amp;amp;
-package https://github.com/tpope/vim-rake.git &amp;amp;
-package https://github.com/tpope/vim-bundler.git &amp;amp;
-package https://github.com/tpope/vim-endwise.git &amp;amp;
+package https://github.com/tpope/vim-rails.git &amp;
+package https://github.com/tpope/vim-rake.git &amp;
+package https://github.com/tpope/vim-bundler.git &amp;
+package https://github.com/tpope/vim-endwise.git &amp;
 wait
-) &amp;amp;
+) &amp;
 (
 set_group syntax
-package https://github.com/kchmck/vim-coffee-script.git &amp;amp;
-package https://github.com/tpope/vim-markdown.git &amp;amp;
-package https://github.com/ap/vim-css-color.git &amp;amp;
+package https://github.com/kchmck/vim-coffee-script.git &amp;
+package https://github.com/tpope/vim-markdown.git &amp;
+package https://github.com/ap/vim-css-color.git &amp;
 wait
-) &amp;amp;
+) &amp;
 (
 set_group colorschemes
-package https://github.com/altercation/vim-colors-solarized.git &amp;amp;
+package https://github.com/altercation/vim-colors-solarized.git &amp;
 wait
-) &amp;amp;
+) &amp;
 wait</code></pre>
 </section>
 <section id="answer-3-score-4-3" class="level4">
@@ -3522,15 +3522,15 @@ vim-gnome:
 <h4>Answer 2 (score 19)</h4>
 <p>As an addendum to Kevin’s answer, you can have multiple colorcolumns. When I code, I sometimes have a “soft” limit at 80 columns and a “hard” limit at 120 columns. So I want a line at 80, and then every column after 120 to be colored.</p>
 <p>I do this with</p>
-<pre class="language-vim"><code>let &amp;amp;colorcolumn=&quot;80,&quot;.join(range(120,999),&quot;,&quot;)</code></pre>
+<pre class="language-vim"><code>let &amp;colorcolumn=&quot;80,&quot;.join(range(120,999),&quot;,&quot;)</code></pre>
 <p>Of course, this can be easily modified to other preferences.</p>
 </section>
 <section id="answer-3-score-14-1" class="level4">
 <h4>Answer 3 (score 14)</h4>
 <p>Vim 7.3 brings the <code>colorcolumn</code> option, as detailed very well in other answers.</p>
 <p>However, if you don’t have version 7.3 for whatever reason, you can still achieve a visual indication that you are exceeding a particular column count using vim’s <code>match</code> functionality (see <code>:help match</code> for details).</p>
-<p>Essentially, the match commands allow you to create persistent highlights for text matching a given regular expression. <code>:match ColorColumn &quot;\%80v.&quot;</code> will highlight text in column 80 with the “ColorColumn” group. You can of course substitute any highlight group, and any column value. If you want a strong visual indication, the expression <code>&quot;\%&amp;gt;79v.\+&quot;</code> will highlight column 80 and beyond.</p>
-<p>(<code>\%80v</code> means “match in virtual column 80,” and <code>\%&amp;gt;79v</code> means &quot;match <em>after</em> virtual column 79; see <code>:help /\%c</code> for more.)</p>
+<p>Essentially, the match commands allow you to create persistent highlights for text matching a given regular expression. <code>:match ColorColumn &quot;\%80v.&quot;</code> will highlight text in column 80 with the “ColorColumn” group. You can of course substitute any highlight group, and any column value. If you want a strong visual indication, the expression <code>&quot;\%&gt;79v.\+&quot;</code> will highlight column 80 and beyond.</p>
+<p>(<code>\%80v</code> means “match in virtual column 80,” and <code>\%&gt;79v</code> means &quot;match <em>after</em> virtual column 79; see <code>:help /\%c</code> for more.)</p>
 <p>This approach will only highlight when there are actual characters present in the specified columns, however, which makes it visually less consistent than <code>colorcolumn</code>.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -3735,7 +3735,7 @@ Use the same package manager to manage your macOS, Linux, and Windows systems
 </section>
 <section id="answer-accepted-score-57" class="level4">
 <h4>Answer accepted (score 57)</h4>
-<p>You are supposed to press <code>&amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;</code>.</p>
+<p>You are supposed to press <code>&lt;C-\&gt;&lt;C-n&gt;</code>.</p>
 <p>See <code>:help terminal-emulator</code> for a mapping suggestion.</p>
 </section>
 <section id="answer-2-score-40" class="level4">
@@ -3746,7 +3746,7 @@ Use the same package manager to manage your macOS, Linux, and Windows systems
 <p>
 Terminal mode has its own namespace for mappings, which is accessed with the “t” prefix. It’s possible to use terminal mappings to customize interaction with the terminal. For example, here’s how to map to exit terminal mode:
 </p>
-<pre class="language-vim"><code>:tnoremap &amp;lt;Esc&amp;gt; &amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;</code></pre>
+<pre class="language-vim"><code>:tnoremap &lt;Esc&gt; &lt;C-\&gt;&lt;C-n&gt;</code></pre>
 </blockquote>
 <p>With that knowledge you will most likely need to create some terminal mappings to stay inline with your current workflow (tab/window movement, etc.)</p>
 </section>
@@ -3755,9 +3755,9 @@ Terminal mode has its own namespace for mappings, which is accessed with the “
 <h5>
 Exit &amp; close
 </h1>
-<pre class="language-vim"><code>tnoremap &amp;lt;Esc&amp;gt; &amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;:q!&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>tnoremap &lt;Esc&gt; &lt;C-\&gt;&lt;C-n&gt;:q!&lt;CR&gt;</code></pre>
 <p>In Vim 8, this also works:</p>
-<pre class="language-vim"><code>tnoremap &amp;lt;ESC&amp;gt; &amp;lt;C-w&amp;gt;:q!&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>tnoremap &lt;ESC&gt; &lt;C-w&gt;:q!&lt;CR&gt;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -3776,18 +3776,18 @@ Exit &amp; close
 <p>Along with SibiCoder’s answer, if you have a clear idea of what you want to do you can use the following:</p>
 <pre class="language-vim"><code>:%X</code></pre>
 <p>Where <code>X</code> is a command, for example:</p>
-<pre class="language-vim"><code>:%d             -&amp;gt; delete every line
-:%y             -&amp;gt; yank every line
-:%normal! &amp;gt;&amp;gt;    -&amp;gt; indent every line</code></pre>
+<pre class="language-vim"><code>:%d             -&gt; delete every line
+:%y             -&gt; yank every line
+:%normal! &gt;&gt;    -&gt; indent every line</code></pre>
 <p>You have also the global command <code>:g</code> which, with the search pattern <code>^</code>, can do the same thing:</p>
-<pre class="language-vim"><code>:g/^/d             -&amp;gt; delete every line
-:g/^/y             -&amp;gt; yank every line
-:g/^/normal! &amp;gt;&amp;gt;    -&amp;gt; indent every line</code></pre>
+<pre class="language-vim"><code>:g/^/d             -&gt; delete every line
+:g/^/y             -&gt; yank every line
+:g/^/normal! &gt;&gt;    -&gt; indent every line</code></pre>
 <p>If what you want is selecting the text, then <code>ggVG</code> is fine, but keep in mind these method, in the case you already know what is the next step. Note that it won’t leave the cursor in visual mode.</p>
 <p>See: <code>:h :%</code> and <code>:h :g</code> for reference.</p>
 <hr>
 <p>Note that, even though the <code>C-A</code> mapping is used in vim (see <code>:h CTRL-A</code>), you can map it to do what other editors do:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;C-A&amp;gt; ggVG</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;C-A&gt; ggVG</code></pre>
 </section>
 <section id="answer-3-score-1-2" class="level4">
 <h4>Answer 3 (score 1)</h4>
@@ -3797,7 +3797,7 @@ Exit &amp; close
 Tools -&gt; Options -&gt; VsVim -&gt; Keyboard
 </blockquote>
 <p>From there you can set Ctrl-a to be handled by Visual Studio, rather than VsVim.</p>
-<p>Although I do not recommend this since you will not be able to use vim’s <code>&amp;lt;C-a&amp;gt;</code>, which I find to be an essential feature. Though it’s up to you.</p>
+<p>Although I do not recommend this since you will not be able to use vim’s <code>&lt;C-a&gt;</code>, which I find to be an essential feature. Though it’s up to you.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -3806,8 +3806,8 @@ Tools -&gt; Options -&gt; VsVim -&gt; Keyboard
 <section id="question-47" class="level4">
 <h4>Question</h4>
 <p>I’m trying to map <kbd>Alt</kbd> key in the following way:</p>
-<pre class="language-vim"><code>:map &amp;lt;A-j&amp;gt; j
-:map &amp;lt;A-k&amp;gt; k</code></pre>
+<pre class="language-vim"><code>:map &lt;A-j&gt; j
+:map &lt;A-k&gt; k</code></pre>
 <p>but it doesn’t work (bell is rang on <kbd>Alt + j</kbd>/<kbd>Alt + k</kbd>).</p>
 <p>What I’m missing?</p>
 <p>I’m using Terminal on OSX, the same happens on remote Linux.</p>
@@ -3823,8 +3823,8 @@ Tools -&gt; Options -&gt; VsVim -&gt; Keyboard
 <p>In order to do this I go to console and run <code>sed -n l</code> (you can also use <code>cat</code> for it). Then I press <kbd>ALT</kbd>+<kbd>J</kbd> and see that the chars on the screen are <code>^[j</code> .</p>
 <p>I replace <code>^[</code> with <code>\e</code> (because that’s what is sent by my terminal when I press <kbd>esc</kbd>) and the final string for me is <code>\ej</code>.</p>
 <p>Then I write it to my <code>.vimrc</code>:</p>
-<pre class="language-vim"><code>execute &quot;set &amp;lt;M-j&amp;gt;=\ej&quot;
-nnoremap &amp;lt;M-j&amp;gt; j</code></pre>
+<pre class="language-vim"><code>execute &quot;set &lt;M-j&gt;=\ej&quot;
+nnoremap &lt;M-j&gt; j</code></pre>
 <p>And the mapping works.</p>
 </section>
 <section id="answer-2-score-8-2" class="level4">
@@ -3839,8 +3839,8 @@ nnoremap &amp;lt;M-j&amp;gt; j</code></pre>
 <pre class="language-vim"><code>xrdb -l ~/.Xdefaults</code></pre>
 </blockquote>
 <p>Then standard mappings with <kbd>Alt</kbd> key like:</p>
-<pre class="language-vim"><code>:map &amp;lt;A-j&amp;gt; j
-:map &amp;lt;A-k&amp;gt; k</code></pre>
+<pre class="language-vim"><code>:map &lt;A-j&gt; j
+:map &lt;A-k&gt; k</code></pre>
 <p>works fine.</p>
 <p>For help, see: <a href="http://vimhelp.appspot.com/map.txt.html#%3Amap-alt-keys" rel="nofollow noreferrer"><code>:h :map-alt-keys</code></a>.</p>
 </section>
@@ -3851,8 +3851,8 @@ nnoremap &amp;lt;M-j&amp;gt; j</code></pre>
 <pre class="language-vim"><code>nnoremap </code></pre>
 <p>then hitting <kbd>Ctrl</kbd> + <kbd>V</kbd> then the keystroke to record, e.g. <kbd>Alt</kbd> + <kbd>←</kbd>. This will show as something like this:</p>
 <pre class="language-vim"><code>nnoremap ^[[1;3D</code></pre>
-<p>but each <code>^[</code> is a single, literal escape character and syntax highlighting should show this. Replace the literal escape(s) with the text <code>&amp;lt;Esc&amp;gt;</code>, and append the command you wish to use:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;Esc&amp;gt;[1;3D &amp;lt;C-w&amp;gt;h</code></pre>
+<p>but each <code>^[</code> is a single, literal escape character and syntax highlighting should show this. Replace the literal escape(s) with the text <code>&lt;Esc&gt;</code>, and append the command you wish to use:</p>
+<pre class="language-vim"><code>nnoremap &lt;Esc&gt;[1;3D &lt;C-w&gt;h</code></pre>
 <hr>
 <p>I know OP was mapping <kbd>Alt</kbd> + letters, but I used arrows to show how do it for something that may not be mapped by default.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -3904,9 +3904,9 @@ As akshay pointed out, Vim’s documentation explains, that <code>:x</code> and 
 </p>
 <p>But how in the world do you simply copy a single character under the cursor?</p>
 <p>My motivation is that I’m programming in Perl 6 and some of the operators are Unicode characters. Right now I’m using <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm" rel="noreferrer">tadzik’s Perl 6 Config::INI code</a> as a starting point for a custom parser, for example, and I would have liked to have copied just that one <a href="https://doc.perl6.org/language/operators#postfix_%C2%BB._%2F_postfix_%3E%3E." rel="noreferrer">French quote character (a hyper operator)</a> from <a href="https://github.com/tadzik/perl6-Config-INI/blob/master/lib/Config/INI.pm#L26" rel="noreferrer">this line</a>:</p>
-<pre class="language-vim"><code>my %hash = $&amp;lt;sections&amp;gt;».ast;</code></pre>
-<p>I could use the two character “Texas” version of the hyper operator <code>&amp;gt;&amp;gt;</code>, but I thought that <code>&amp;gt;»</code> looked better and less ambiguous than <code>&amp;gt;&amp;gt;&amp;gt;</code>:</p>
-<pre class="language-vim"><code>my %hash = $&amp;lt;sections&amp;gt;&amp;gt;&amp;gt;.ast;</code></pre>
+<pre class="language-vim"><code>my %hash = $&lt;sections&gt;».ast;</code></pre>
+<p>I could use the two character “Texas” version of the hyper operator <code>&gt;&gt;</code>, but I thought that <code>&gt;»</code> looked better and less ambiguous than <code>&gt;&gt;&gt;</code>:</p>
+<pre class="language-vim"><code>my %hash = $&lt;sections&gt;&gt;&gt;.ast;</code></pre>
 <p>
 <a href="https://i.stack.imgur.com/4MoZx.jpg" rel="noreferrer"><img src="https://i.stack.imgur.com/4MoZx.jpg" alt="enter image description here"></a><br> <a href="https://i.stack.imgur.com/eK1EC.jpg" rel="noreferrer"><img src="https://i.stack.imgur.com/eK1EC.jpg" alt="enter image description here"></a>
 </p>
@@ -3933,11 +3933,11 @@ As akshay pointed out, Vim’s documentation explains, that <code>:x</code> and 
 <h4>Question</h4>
 <p>One way to select a buffer in vim could be to browse the buffers list, using standard commands as <code>:ls</code>, or with <a href="https://vi.stackexchange.com/questions/2121/how-do-i-have-buffers-listed-in-a-quickfix-window-in-vim">some external plugin / vimscript code to browse a list in a window</a>.</p>
 <p>Let’s say I want to jump to a buffer directly, as fast as possible.</p>
-<p>To traverse the buffer list in sequential mode, I now use <code>&amp;lt;C-J&amp;gt;</code> <code>&amp;lt;C-K&amp;gt;</code> shortcuts, having set in my .vimrc:</p>
+<p>To traverse the buffer list in sequential mode, I now use <code>&lt;C-J&gt;</code> <code>&lt;C-K&gt;</code> shortcuts, having set in my .vimrc:</p>
 <pre class="language-vim"><code>&quot; move among buffers with CTRL
-map &amp;lt;C-J&amp;gt; :bnext&amp;lt;CR&amp;gt;
-map &amp;lt;C-K&amp;gt; :bprev&amp;lt;CR&amp;gt;</code></pre>
-<p>Another way (direct access) could be <a href="http://vim.wikia.com/wiki/Easier_buffer_switching#Switching_by_number" rel="noreferrer">switching by number</a>: knowing the buffer number, it is possible to switch directly by entering the buffer number followed by <code>&amp;lt;C-^&amp;gt;</code>. So if I want to switch to buffer number 5, I would press <code>5&amp;lt;C-^&amp;gt;</code>.</p>
+map &lt;C-J&gt; :bnext&lt;CR&gt;
+map &lt;C-K&gt; :bprev&lt;CR&gt;</code></pre>
+<p>Another way (direct access) could be <a href="http://vim.wikia.com/wiki/Easier_buffer_switching#Switching_by_number" rel="noreferrer">switching by number</a>: knowing the buffer number, it is possible to switch directly by entering the buffer number followed by <code>&lt;C-^&gt;</code>. So if I want to switch to buffer number 5, I would press <code>5&lt;C-^&gt;</code>.</p>
 <p>But this seem not working for me (I use vim 7.4 on ubuntu box, from a Windows guest, with <em>Italian keyboard</em>). I suspect that’s because the <code>^</code> character is in the upper case key <code>^ì</code> in the Italian keyboard, so in fact to got <code>^</code> I need to press <code>SHIFT-^</code></p>
 <p>Any ideas?</p>
 </section>
@@ -3973,13 +3973,13 @@ map &amp;lt;C-K&amp;gt; :bprev&amp;lt;CR&amp;gt;</code></pre>
 <section id="answer-3-score-15-2" class="level4">
 <h4>Answer 3 (score 15)</h4>
 <p>This is what I use:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;Leader&amp;gt;b :ls&amp;lt;CR&amp;gt;:b&amp;lt;Space&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;Leader&gt;b :ls&lt;CR&gt;:b&lt;Space&gt;</code></pre>
 <p>Now pressing <code>\b</code> will <strong>list the available buffers</strong> and prepare <code>:b</code> for you.</p>
 <p>Then you can just type the <strong>buffer number</strong>, and hit Enter.</p>
 <p>Or you can type <strong>part of the filename</strong>, and hit Enter. (However I usually hit Tab before hitting Enter, to check I got the right buffer. If not, I continue cycling with Tab until I get the one I wanted.)</p>
 <hr>
 <p>In fact, I use a slightly tweaked version of the above:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;C-e&amp;gt; :set nomore &amp;lt;Bar&amp;gt; :ls &amp;lt;Bar&amp;gt; :set more &amp;lt;CR&amp;gt;:b&amp;lt;Space&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;C-e&gt; :set nomore &lt;Bar&gt; :ls &lt;Bar&gt; :set more &lt;CR&gt;:b&lt;Space&gt;</code></pre>
 <p>This will prevent the <code>-- More --</code> prompt from appearing when you have more buffers than available lines to display them.</p>
 <p>But if you usually have the <code>'more'</code> option disabled anyway, this mapping will really annoy you, because it re-enables the <code>'more'</code> option after doing <code>ls</code>!</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -4083,8 +4083,8 @@ This plugin makes GVim-only colorschemes Just Work in terminal Vim, as long as t
 <section id="answer-accepted-score-23" class="level4">
 <h4>Answer accepted (score 23)</h4>
 <p>In your <code>vimrc</code> add</p>
-<pre class="language-vim"><code>nmap &amp;lt;F6&amp;gt; :NERDTreeToggle&amp;lt;CR&amp;gt;</code></pre>
-<p>where <code>&amp;lt;F6&amp;gt;</code> is the key you want to map.</p>
+<pre class="language-vim"><code>nmap &lt;F6&gt; :NERDTreeToggle&lt;CR&gt;</code></pre>
+<p>where <code>&lt;F6&gt;</code> is the key you want to map.</p>
 </section>
 <section id="answer-2-score-8-3" class="level4">
 <h4>Answer 2 (score 8)</h4>
@@ -4107,25 +4107,25 @@ This plugin makes GVim-only colorschemes Just Work in terminal Vim, as long as t
 <h3>54: How can I find out what <Leader> is set to? And is it possible to remap <Leader>? (score <a href="https://stackoverflow.com/q/281.html">22707</a> in 2015)</h3>
 <section id="question-53" class="level4">
 <h4>Question</h4>
-<p>How can I figure out which key is set as my <code>&amp;lt;Leader&amp;gt;</code>, and how do I remap it?</p>
+<p>How can I figure out which key is set as my <code>&lt;Leader&gt;</code>, and how do I remap it?</p>
 </section>
 <section id="answer-accepted-score-62" class="level4">
 <h4>Answer accepted (score 62)</h4>
-<p>By default your <code>&amp;lt;leader&amp;gt;</code> is <code>\</code>, backslash. You can check it with:</p>
+<p>By default your <code>&lt;leader&gt;</code> is <code>\</code>, backslash. You can check it with:</p>
 <pre class="language-vim"><code>:echo mapleader</code></pre>
 <p>If this gives you an <code>E121: Undefined variable: mapleader</code>, it means it’s set to the default of <code>\</code>. If it gives you something else, then it’s that :-)</p>
 <p>You can easily remap it. I mapped it to the space-bar:</p>
-<pre class="language-vim"><code>:let mapleader = &quot;\&amp;lt;Space&amp;gt;&quot;</code></pre>
+<pre class="language-vim"><code>:let mapleader = &quot;\&lt;Space&gt;&quot;</code></pre>
 <p>Note that the value of <code>mapleader</code> is used at the moment the mapping is defined. So this example:</p>
 <pre class="language-vim"><code>let mapleader = &quot;,&quot;
-nnoremap &amp;lt;Leader&amp;gt;a :echo &quot;Hey there ,&quot;&amp;lt;CR&amp;gt;
+nnoremap &lt;Leader&gt;a :echo &quot;Hey there ,&quot;&lt;CR&gt;
 
-let mapleader = &quot;\&amp;lt;Space&amp;gt;&quot;
-nnoremap &amp;lt;Leader&amp;gt;a :echo &quot;Hey there space&quot;&amp;lt;CR&amp;gt;</code></pre>
-<p>Will produce <em>two</em> mappings: <code>,a</code> and <code>&amp;lt;Space&amp;gt;a</code>.</p>
+let mapleader = &quot;\&lt;Space&gt;&quot;
+nnoremap &lt;Leader&gt;a :echo &quot;Hey there space&quot;&lt;CR&gt;</code></pre>
+<p>Will produce <em>two</em> mappings: <code>,a</code> and <code>&lt;Space&gt;a</code>.</p>
 <p>This means that the <em>current</em> value of <code>mapleader</code> is not necessarily the value that was used to define your mappings!</p>
-<p>In addition, there’s the <code>maplocalleader</code>, which is the same as <code>mapleader</code>, except that it’s used by <code>&amp;lt;LocalLeader&amp;gt;</code> and that it’s local to the current buffer.</p>
-<p>More information about <code>&amp;lt;Leader&amp;gt;</code> can be found in Vim’s help with <a href="http://vimhelp.appspot.com/map.txt.html#mapleader"><code>:help mapleader</code></a>.</p>
+<p>In addition, there’s the <code>maplocalleader</code>, which is the same as <code>mapleader</code>, except that it’s used by <code>&lt;LocalLeader&gt;</code> and that it’s local to the current buffer.</p>
+<p>More information about <code>&lt;Leader&gt;</code> can be found in Vim’s help with <a href="http://vimhelp.appspot.com/map.txt.html#mapleader"><code>:help mapleader</code></a>.</p>
 </section>
 <section id="answer-2-score-8-4" class="level4">
 <h4>Answer 2 (score 8)</h4>
@@ -4243,7 +4243,7 @@ I am running GVim when this happens and do not want to be forced to <strong>clos
 You can set <code>shiftwidth</code> to any number of spaces. This works both in <code>vi</code> and <code>vim</code>.
 </p>
 <pre class="language-vim"><code>:set shiftwidth=2</code></pre>
-<p>Now, the width shifted for each <code>&amp;gt;&amp;gt;</code> and <code>&amp;lt;&amp;lt;</code> will be 2.</p>
+<p>Now, the width shifted for each <code>&gt;&gt;</code> and <code>&lt;&lt;</code> will be 2.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -4380,14 +4380,14 @@ set relativenumber             &quot; Show relative line numbers</code></pre>
 <section id="answer-3-score-5-2" class="level4">
 <h4>Answer 3 (score 5)</h4>
 <pre class="language-vim"><code>function! NumberToggle()
-  if(&amp;amp;relativenumber == 1)
+  if(&amp;relativenumber == 1)
     set norelativenumber
   else
     set relativenumber
   endif
 endfunc
 
-nnoremap &amp;lt;leader&amp;gt;nt :call NumberToggle()&amp;lt;cr&amp;gt;</code></pre>
+nnoremap &lt;leader&gt;nt :call NumberToggle()&lt;cr&gt;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -4477,23 +4477,23 @@ endif</code></pre>
 <h4>Answer 2 (score 2)</h4>
 <p>See the example below,</p>
 <pre class="language-vim"><code>// Start vim without loading your vimrc. set only tabstop=8 softtabstop=4.
-// This makes &amp;lt;Tab&amp;gt; in insert mode equals to 4 &amp;lt;Space&amp;gt; length at max.
+// This makes &lt;Tab&gt; in insert mode equals to 4 &lt;Space&gt; length at max.
 
-// In insert mode, type 12, one &amp;lt;Tab&amp;gt;, 5. We get insertion below,
+// In insert mode, type 12, one &lt;Tab&gt;, 5. We get insertion below,
 12··5
-// Quit insert mode. Move cursor back, we find 2 &amp;lt;Space&amp;gt; inserted.
+// Quit insert mode. Move cursor back, we find 2 &lt;Space&gt; inserted.
 
-// In insert mode, type 12, two &amp;lt;Tab&amp;gt;, 9. We get insertion below,
+// In insert mode, type 12, two &lt;Tab&gt;, 9. We get insertion below,
 12······9
-// Quit insert mode. Move cursor back, you find a &amp;lt;Tab&amp;gt; inserted.
+// Quit insert mode. Move cursor back, you find a &lt;Tab&gt; inserted.
 
-// In insert mode, type 12, three &amp;lt;Tab&amp;gt;, 3. We get insertion below,
+// In insert mode, type 12, three &lt;Tab&gt;, 3. We get insertion below,
 12··········3
-// Move the cursor back, you find a &amp;lt;Tab&amp;gt; and 4 &amp;lt;Space&amp;gt; inserted.
+// Move the cursor back, you find a &lt;Tab&gt; and 4 &lt;Space&gt; inserted.
 
-// We can even set sotftabstop=12, but this time we only need type one &amp;lt;Tab&amp;gt;, then 3.
+// We can even set sotftabstop=12, but this time we only need type one &lt;Tab&gt;, then 3.
 12··········3
-// Move the cursor back, you find a &amp;lt;Tab&amp;gt; and 4 &amp;lt;Sapce&amp;gt; inserted.</code></pre>
+// Move the cursor back, you find a &lt;Tab&gt; and 4 &lt;Sapce&gt; inserted.</code></pre>
 <p>So <code>tabstop</code> is about how wide a <code>Tab</code> is defined, while <code>softtabstop</code> is about how far cursor moves while <strong>typing</strong> <code>Tab</code>. When they are not set to be the same value, it means that if you hit the <code>Tab</code> keystroke, it does not imply trivially a <code>Tab</code>character. In whatever cases, It is vim who decide once you quit insert mode. Vim will first try to match the insertion by as many <code>tabstop</code> as it can; if at last it cannot make a full <code>tabstop</code>, vim simply compensates by <code>Space</code>.</p>
 <p>To speak a little bit more, if you set <code>expandtab</code>, it is equal to say to vim:</p>
 <blockquote>
@@ -4526,16 +4526,16 @@ c) item 3</code></pre>
 <section id="answer-accepted-score-26" class="level4">
 <h4>Answer accepted (score 26)</h4>
 <p><strong>Visual-block selection:</strong></p>
-<pre class="language-vim"><code>&amp;lt;C-v&amp;gt;
+<pre class="language-vim"><code>&lt;C-v&gt;
 jjl
 c*
-&amp;lt;Esc&amp;gt;</code></pre>
+&lt;Esc&gt;</code></pre>
 <p><strong><code>:normal</code>:</strong></p>
 <pre class="language-vim"><code>:,+2norm! cE*</code></pre>
 <p><strong>Substitution:</strong></p>
 <pre class="language-vim"><code>:,+2s/^.\{2}/*</code></pre>
 <p><strong>Dot formula:</strong></p>
-<pre class="language-vim"><code>cE*&amp;lt;Esc&amp;gt;
+<pre class="language-vim"><code>cE*&lt;Esc&gt;
 j.
 j.</code></pre>
 </section>
@@ -4748,7 +4748,7 @@ In fact Neovim ignores all <code>t_*</code> options, see <code>:help t_xx</code>
 </ul>
 </li>
 <li>
-Neovim doesn’t allow <code>&amp;amp;term</code> to be set because it is meaningless. Neovim uses <a href="https://github.com/mauke/unibilium" rel="nofollow noreferrer">unibilium</a> and other mechanisms to detect terminal capabilities.
+Neovim doesn’t allow <code>&amp;term</code> to be set because it is meaningless. Neovim uses <a href="https://github.com/mauke/unibilium" rel="nofollow noreferrer">unibilium</a> and other mechanisms to detect terminal capabilities.
 </li>
 </ul>
 </section>
@@ -4872,7 +4872,7 @@ It performs a recursive diff on two directories and generate a diff “window”
 </p>
 </blockquote>
 <p>Usage:</p>
-<pre class="language-vim"><code>:DirDiff &amp;lt;dir1&amp;gt; &amp;lt;dir2&amp;gt;</code></pre>
+<pre class="language-vim"><code>:DirDiff &lt;dir1&gt; &lt;dir2&gt;</code></pre>
 <p>For more information / help: <code>:help dirdiff</code></p>
 <p>See the screenshot:</p>
 <p><a href="https://github.com/will133/vim-dirdiff#vim-dirdiff" rel="noreferrer"><img src="https://i.stack.imgur.com/CM7U2.png" alt="wlee screenshot"></a></p>
@@ -4905,7 +4905,7 @@ Be aware that some checks (like the one for binary files, or if the files are th
 from __future__ import print_function
 import hashlib, os, subprocess, sys
 
-if len(sys.argv) &amp;lt; 3:
+if len(sys.argv) &lt; 3:
     print(&#39;Usage: {} dir1 dir2&#39;.format(sys.argv[0]))
     sys.exit(1)
 
@@ -4918,7 +4918,7 @@ for root, dirs, files in os.walk(dir1):
         f2 = f1.replace(dir1, dir2, 1)
 
         # Don&#39;t diff files over 1MiB
-        if os.stat(f1).st_size &amp;gt; 1048576 or os.stat(f2).st_size &amp;gt; 1048576: continue
+        if os.stat(f1).st_size &gt; 1048576 or os.stat(f2).st_size &gt; 1048576: continue
 
         # Check if files are the same; in which case a diff is useless
         h1 = hashlib.sha256(open(f1, &#39;rb&#39;).read()).hexdigest()
@@ -4926,7 +4926,7 @@ for root, dirs, files in os.walk(dir1):
         if h1 == h2: continue
 
         # Don&#39;t diff binary files
-        if open(f1, &#39;rb&#39;).read().find(b&#39;\000&#39;) &amp;gt;= 0: continue
+        if open(f1, &#39;rb&#39;).read().find(b&#39;\000&#39;) &gt;= 0: continue
 
         subprocess.call([&#39;vimdiff&#39;, f1, f2])</code></pre>
 </section>
@@ -4945,7 +4945,7 @@ git config --global diff.tool vdwrap</code></pre>
 <h3>70: How to jump to function call? (score <a href="https://stackoverflow.com/q/4955.html">15853</a> in )</h3>
 <section id="question-69" class="level4">
 <h4>Question</h4>
-<p>After generating a tags file with <code>exuberant-ctags</code> I can jump from a function call to its declaration with <code>&amp;lt;C-]&amp;gt;</code> which is pretty convenient.</p>
+<p>After generating a tags file with <code>exuberant-ctags</code> I can jump from a function call to its declaration with <code>&lt;C-]&gt;</code> which is pretty convenient.</p>
 <p>My question is how to do it in the other way? When my cursor is on the definition of a function, how can I go to the lines where the function is called?</p>
 <p>When I look to the file generated by ctags I only see informations related to the location of the definition and not of the calls, does it means that I can’t do that, that Vim as a clever workaround or that I need to use something else than <code>exuberant-ctags</code>?</p>
 </section>
@@ -4982,7 +4982,7 @@ You can use the <code>'formatoptions'</code> option to influence how Vim formats
 </blockquote>
 <p>Note that the statement about the “defaults” is somewhat misleading, since many filetypes change the formatoptions to best suit the file type; for example in <code>/usr/share/vim/vim74/ftplugin/vim.vim</code>:</p>
 <pre class="language-vim"><code>&quot; Set &#39;formatoptions&#39; to break comment lines but not other lines,
-&quot; and insert the comment leader when hitting &amp;lt;CR&amp;gt; or using &quot;o&quot;.
+&quot; and insert the comment leader when hitting &lt;CR&gt; or using &quot;o&quot;.
 setlocal fo-=t fo+=croql</code></pre>
 <p>You can view the current <code>formatoptions</code> with:</p>
 <pre class="language-vim"><code>:set fo?
@@ -4993,7 +4993,7 @@ setlocal fo-=t fo+=croql</code></pre>
       Last set from /usr/share/vim/vim74/ftplugin/vim.vim</code></pre>
 <p>In this case, you want to remove the <code>r</code> flag, but perhaps also the <code>c</code> and <code>o</code> flags:</p>
 <pre class="language-vim"><code>r       Automatically insert the current comment leader after hitting
-        &amp;lt;Enter&amp;gt; in Insert mode.
+        &lt;Enter&gt; in Insert mode.
 c       Auto-wrap comments using textwidth, inserting the current comment
         leader automatically.
 o       Automatically insert the current comment leader after hitting &#39;o&#39; or
@@ -5046,7 +5046,7 @@ We’re running Vim 7.5 or later.
 </li>
 </ul>
 <p>You can also use the form of <code>has('patch399')</code>, which is typically used like:</p>
-<pre class="language-vim"><code>if v:version == 704 &amp;amp;&amp;amp; has(&#39;patch399&#39;)</code></pre>
+<pre class="language-vim"><code>if v:version == 704 &amp;&amp; has(&#39;patch399&#39;)</code></pre>
 <p>But be aware; this will be <em>false</em> for Vim 7.5; use this only in very specific cases.</p>
 <p>See <a href="http://vimhelp.appspot.com/eval.txt.html#feature-list"><code>:help feature-list</code></a> for some more information.</p>
 <hr>
@@ -5097,7 +5097,7 @@ If you haven’t already, you probably want to save a backup copy of your vimrc 
 Check the plugins
 </h2>
 <p>
-The next thing you probably want to do is disable all plugins first; plugins can alter quite a bit in Vim. If this fixes the problem, then try to find out <em>which</em> plugin by re-enabling them one-by-one. After you’ve found out which plugin exactly causes the problem, you can try &amp; fix it by reading this plugin’s documentation, and/or by asking a question tagged with <code>plugin-&amp;lt;name&amp;gt;</code>.
+The next thing you probably want to do is disable all plugins first; plugins can alter quite a bit in Vim. If this fixes the problem, then try to find out <em>which</em> plugin by re-enabling them one-by-one. After you’ve found out which plugin exactly causes the problem, you can try &amp; fix it by reading this plugin’s documentation, and/or by asking a question tagged with <code>plugin-&lt;name&gt;</code>.
 </p>
 <p>
 If it’s <em>not</em> a plugin, and you don’t have <em>any</em> idea what’s causing your problem, then it’s a trial-and-error procedure. Comment out one or more lines in your vimrc, start Vim, check if the problem occurs, and repeat this procedure until the problem stops occurring. The fastest way of doing this is:
@@ -5212,7 +5212,7 @@ You now have a minimal vimrc with just this single plugin.
 <h4>Answer 2 (score 40)</h4>
 <p>I don’t know if this is really relevant any more, but I’m an old-timer so here’s a bit of history.</p>
 <p>
-In the old days, VT100 terminals had arrow keys, but pressing one transmitted an escape sequence like <code>&amp;lt;ESC&amp;gt;[A</code> for up, <code>&amp;lt;ESC&amp;gt;[B</code> for down, etc.<br> Also, being a serial terminal communicating at 9600 baud, it was possible for the user to press the keys too fast to transmit the whole sequence which would cause one key press to interrupt the sequence of the previous key press and confuse vi.
+In the old days, VT100 terminals had arrow keys, but pressing one transmitted an escape sequence like <code>&lt;ESC&gt;[A</code> for up, <code>&lt;ESC&gt;[B</code> for down, etc.<br> Also, being a serial terminal communicating at 9600 baud, it was possible for the user to press the keys too fast to transmit the whole sequence which would cause one key press to interrupt the sequence of the previous key press and confuse vi.
 </p>
 <p>This would cause vi to inexplicably go into insert mode and insert [B[B[B[B[B[B into your file if you held down the down arrow. I say inexplicably because there’s nothing about this sequence that should enter insert mode and the fact that each sequence starts with an ESC character should have exited insert mode. But still, it would insert garbage. Not always - just when you were in a hurry.</p>
 <p>One quickly got tired of this and decided to just stick to the <code>hjkl</code> keys.</p>
@@ -5259,7 +5259,7 @@ AG,17.060816,-61.796428,Antigua and Barbuda,1</code></pre>
 
 [&quot;x]d{motion}           Delete text that {motion} moves over [into register x].</code></pre>
 <p>Alternatively you can select your text in visual mode and you can do :</p>
-<pre class="language-vim"><code>:&#39;&amp;lt;,&#39;&amp;gt;normal d2w</code></pre>
+<pre class="language-vim"><code>:&#39;&lt;,&#39;&gt;normal d2w</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -5279,7 +5279,7 @@ AG,17.060816,-61.796428,Antigua and Barbuda,1</code></pre>
 <p>Step 1: For Debian-like systems, get the required packages:</p>
 <pre class="language-vim"><code>sudo apt-get build-dep vim</code></pre>
 <p>Step 2: Clone Vim’s source code:</p>
-<pre class="language-vim"><code>cd /tmp &amp;amp;&amp;amp; git clone https://github.com/vim/vim.git &amp;amp;&amp;amp; cd vim</code></pre>
+<pre class="language-vim"><code>cd /tmp &amp;&amp; git clone https://github.com/vim/vim.git &amp;&amp; cd vim</code></pre>
 <p>Step 3: Configure, Make, Install</p>
 <pre class="language-vim"><code>./configure --with-features=huge --enable-multibyte --enable-python3interp \
     --enable-gui=gtk-2 --prefix=/usr
@@ -5536,7 +5536,7 @@ vim -O foo bar baz</code></pre>
 <pre class="language-vim"><code>function! NewFile()
         let filename = input(&quot;Filename:&quot;)
 endfunction
-command NewFile :call NewFile()&amp;lt;cr&amp;gt;</code></pre>
+command NewFile :call NewFile()&lt;cr&gt;</code></pre>
 <p>(of course my real <code>.vimrc</code> is more complex, but I’ve recreated this small test case with no plugins etc.)</p>
 <p>My intent is to write a function that supports creating a new file according to a template. Some input items will be asked from the vi user, such as the name of the file.</p>
 <p>The function isn’t that sophisticated yet (understatement!) - all it does is ask for the filename. When I use the command <code>NewFile</code> from the vi command line, it starts, but then once I enter the filename and hit Enter, I get the error:</p>
@@ -5546,7 +5546,7 @@ command NewFile :call NewFile()&amp;lt;cr&amp;gt;</code></pre>
 <section id="answer-accepted-score-21-1" class="level4">
 <h4>Answer accepted (score 21)</h4>
 <p>
-Remove the trailing <code>&amp;lt;cr&amp;gt;</code> That is only needed for mappings, but not for commands.
+Remove the trailing <code>&lt;cr&gt;</code> That is only needed for mappings, but not for commands.
 </p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -5585,7 +5585,7 @@ ln -s .config/nvim/init.vim .vimrc</code></pre>
 <hr>
 <p>The below lines will add the existing paths and <code>~/.vimrc</code> file to your nvim setup.</p>
 <pre class="language-vim"><code>set runtimepath^=~/.vim runtimepath+=~/.vim/after
-let &amp;amp;packpath=&amp;amp;runtimepath
+let &amp;packpath=&amp;runtimepath
 source ~/.vimrc</code></pre>
 <p>For Linux and macOS, just add the above lines to the top of your <code>~/.config/nvim/init.vim</code>, or <code>%LOCALAPPDATA%\nvim\init.vim</code> for Windows.</p>
 <p>Credit goes to 👉 <a href="http://vimcasts.org/episodes/meet-neovim/" rel="noreferrer">this</a></p>
@@ -5598,7 +5598,7 @@ cheers 🍻<br /> Chris
 <p>You can use <code>if has('nvim')</code>. Here are complete examples:</p>
 <p><strong>Configuration only for Neovim:</strong></p>
 <pre class="language-vim"><code>if has(&#39;nvim&#39;)
-        tnoremap &amp;lt;Esc&amp;gt; &amp;lt;C-\&amp;gt;&amp;lt;C-n&amp;gt;
+        tnoremap &lt;Esc&gt; &lt;C-\&gt;&lt;C-n&gt;
 endif</code></pre>
 <p><strong>Configuration only for Vim</strong></p>
 <pre class="language-vim"><code>if !has(&#39;nvim&#39;)
@@ -5655,7 +5655,7 @@ fun! JoinSpaceless()
 endfun
 
 &quot; Map it to a key
-nnoremap &amp;lt;Leader&amp;gt;J :call JoinSpaceless()&amp;lt;CR&amp;gt;</code></pre>
+nnoremap &lt;Leader&gt;J :call JoinSpaceless()&lt;CR&gt;</code></pre>
 <p>See also: <code>:help J</code>, <code>:help 'joinspaces'</code></p>
 </section>
 <section id="answer-2-score-8-5" class="level4">
@@ -5813,7 +5813,7 @@ echo c</code></pre>
 <pre class="language-vim"><code>function! GetFiletypes()
     &quot; Get a list of all the runtime directories by taking the value of that
     &quot; option and splitting it using a comma as the separator.
-    let rtps = split(&amp;amp;runtimepath, &quot;,&quot;)
+    let rtps = split(&amp;runtimepath, &quot;,&quot;)
     &quot; This will be the list of filetypes that the function returns
     let filetypes = []
 
@@ -5846,7 +5846,7 @@ endfunction</code></pre>
 <code>:help :let</code>
 </li>
 <li>
-<code>:help :let-&amp;amp;</code>
+<code>:help :let-&amp;</code>
 </li>
 <li>
 <code>:help split()</code>
@@ -5897,11 +5897,11 @@ Note: unlike solutions that parse the file names and directory names in <code>$V
 <ol type="1">
 <li></li>
 </ol>
-<pre class="language-vim"><code>cd $(vim -e -T dumb --cmd &#39;exe &quot;set t_cm=\&amp;lt;C-M&amp;gt;&quot;|echo $VIMRUNTIME|quit&#39; | tr -d &#39;\015&#39;)</code></pre>
+<pre class="language-vim"><code>cd $(vim -e -T dumb --cmd &#39;exe &quot;set t_cm=\&lt;C-M&gt;&quot;|echo $VIMRUNTIME|quit&#39; | tr -d &#39;\015&#39;)</code></pre>
 <ol start="2" type="1">
 <li></li>
 </ol>
-<pre class="language-vim"><code>cat &amp;lt;(ls -1 ftplugin/*.vim) &amp;lt;(ls -1 syntax/*.vim) | tr &#39;\n&#39; &#39;\0&#39; | xargs -0 -n 1 basename | sort | uniq | cut -f 1 -d &#39;.&#39;</code></pre>
+<pre class="language-vim"><code>cat &lt;(ls -1 ftplugin/*.vim) &lt;(ls -1 syntax/*.vim) | tr &#39;\n&#39; &#39;\0&#39; | xargs -0 -n 1 basename | sort | uniq | cut -f 1 -d &#39;.&#39;</code></pre>
 <p>First command simply navigates to your vim runtime path (for me it was <em>/usr/share/vim/vim80</em>).</p>
 <p>Second command lists all the file type names in the two folders where vim stores the file type definitions.</p>
 <h5>
@@ -6014,18 +6014,18 @@ DESCRIPTION
     off with |:nohlsearch|.  This does **not change the option value**, as
     soon as you use a search command, the highlighting comes back.</code></pre>
 <p>However, this solution isn’t perfect, since you still have to type out <code>:nohls</code> which is pain to do after every search. You can get around this with a mapping, e.g.</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;esc&amp;gt;&amp;lt;esc&amp;gt; :silent! nohls&amp;lt;cr&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;esc&gt;&lt;esc&gt; :silent! nohls&lt;cr&gt;</code></pre>
 <p>But there is an even <em>better</em> solution! <a href="https://github.com/haya14busa/incsearch.vim">haya14busa/incsearch.vim</a>. This is, at least in my opinion, an <em>essential</em> vim plugin. The main feature is that <strong>all</strong> search matches are highlighted in real time, as you are typing out your regex. For example:</p>
 <p><a href="https://i.stack.imgur.com/UUHD4.gif"><img src="https://i.stack.imgur.com/UUHD4.gif" alt="enter image description here"></a></p>
 <p>However, a secondary feature that is also provided is the option to <em>immediately</em> toggle hlsearch on and off when you start/stop searching. To enable this feature, you will have to add</p>
 <pre class="language-vim"><code>set hlsearch
 let g:incsearch#auto_nohlsearch = 1
-map n  &amp;lt;Plug&amp;gt;(incsearch-nohl-n)
-map N  &amp;lt;Plug&amp;gt;(incsearch-nohl-N)
-map *  &amp;lt;Plug&amp;gt;(incsearch-nohl-*)
-map #  &amp;lt;Plug&amp;gt;(incsearch-nohl-#)
-map g* &amp;lt;Plug&amp;gt;(incsearch-nohl-g*)
-map g# &amp;lt;Plug&amp;gt;(incsearch-nohl-g#)</code></pre>
+map n  &lt;Plug&gt;(incsearch-nohl-n)
+map N  &lt;Plug&gt;(incsearch-nohl-N)
+map *  &lt;Plug&gt;(incsearch-nohl-*)
+map #  &lt;Plug&gt;(incsearch-nohl-#)
+map g* &lt;Plug&gt;(incsearch-nohl-g*)
+map g# &lt;Plug&gt;(incsearch-nohl-g#)</code></pre>
 <p>to your <code>.vimrc</code>.</p>
 <p>If you have any other <code>n</code> mappings, you will have to turn these off. For example, I used to have</p>
 <pre class="language-vim"><code>nnoremap n nzz
@@ -6062,23 +6062,23 @@ this is line two</code></pre>
 <h4>Answer accepted (score 9)</h4>
 <p>I use a mapping for that:</p>
 <pre class="language-vim"><code>&quot; Quickly insert an empty new line without entering insert mode
-    nnoremap &amp;lt;Leader&amp;gt;o o&amp;lt;Esc&amp;gt;
-    nnoremap &amp;lt;Leader&amp;gt;O O&amp;lt;Esc&amp;gt;</code></pre>
-<p>This way you can insert a line under your cursor with <code>&amp;lt;Leader&amp;gt;o</code> and one on the previous line with <code>&amp;lt;Leader&amp;gt;O</code>.</p>
-<p><strong>Note:</strong> One could argue that it requires as many keystrokes as <code>o&amp;lt;Esc&amp;gt;</code> but hopefully you choosed your leader to make this kind of mapping easy. Also I’m really not sure there is a built-in way to do this.</p>
+    nnoremap &lt;Leader&gt;o o&lt;Esc&gt;
+    nnoremap &lt;Leader&gt;O O&lt;Esc&gt;</code></pre>
+<p>This way you can insert a line under your cursor with <code>&lt;Leader&gt;o</code> and one on the previous line with <code>&lt;Leader&gt;O</code>.</p>
+<p><strong>Note:</strong> One could argue that it requires as many keystrokes as <code>o&lt;Esc&gt;</code> but hopefully you choosed your leader to make this kind of mapping easy. Also I’m really not sure there is a built-in way to do this.</p>
 </section>
 <section id="answer-2-score-8-7" class="level4">
 <h4>Answer 2 (score 8)</h4>
 <p>A solution that doesn’t go through insert mode, doesn’t move the cursor, and allows you to use a counter to append several lines at once (<kbd>3</kbd><kbd>&lt;/kbd&gt;<kbd>o</kbd> etc.):</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;o :&amp;lt;C-u&amp;gt;call append(line(&quot;.&quot;),   repeat([&quot;&quot;], v:count1))&amp;lt;CR&amp;gt;
-nnoremap &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;O :&amp;lt;C-u&amp;gt;call append(line(&quot;.&quot;)-1, repeat([&quot;&quot;], v:count1))&amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;silent&gt; &lt;leader&gt;o :&lt;C-u&gt;call append(line(&quot;.&quot;),   repeat([&quot;&quot;], v:count1))&lt;CR&gt;
+nnoremap &lt;silent&gt; &lt;leader&gt;O :&lt;C-u&gt;call append(line(&quot;.&quot;)-1, repeat([&quot;&quot;], v:count1))&lt;CR&gt;</code></pre>
 </section>
 <section id="answer-3-score-4-9" class="level4">
 <h4>Answer 3 (score 4)</h4>
-<p>I personally recommend using Tim Pope’s <a href="https://github.com/tpope/vim-unimpaired" rel="nofollow">Unimpaired plugin</a>. It provides many mappings but the ones you will looking for are <code>[&amp;lt;space&amp;gt;</code> and <code>]&amp;lt;space&amp;gt;</code> which create blank lines above and below the current line respectively. Unimpaired also provides nice mappings for moving through the quickfix list, buffer list, option toggling, and many others. See <code>:h unimpaired</code> for more.</p>
+<p>I personally recommend using Tim Pope’s <a href="https://github.com/tpope/vim-unimpaired" rel="nofollow">Unimpaired plugin</a>. It provides many mappings but the ones you will looking for are <code>[&lt;space&gt;</code> and <code>]&lt;space&gt;</code> which create blank lines above and below the current line respectively. Unimpaired also provides nice mappings for moving through the quickfix list, buffer list, option toggling, and many others. See <code>:h unimpaired</code> for more.</p>
 <p>If you do not want to use unimpaired plugin but like the mappings below are some quick mappings to put in your <code>~/.vimrc</code> file:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;silent&amp;gt; [&amp;lt;space&amp;gt;  :&amp;lt;c-u&amp;gt;put!=repeat([&#39;&#39;],v:count)&amp;lt;bar&amp;gt;&#39;]+1&amp;lt;cr&amp;gt;
-nnoremap &amp;lt;silent&amp;gt; ]&amp;lt;space&amp;gt;  :&amp;lt;c-u&amp;gt;put =repeat([&#39;&#39;],v:count)&amp;lt;bar&amp;gt;&#39;[-1&amp;lt;cr&amp;gt;</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;silent&gt; [&lt;space&gt;  :&lt;c-u&gt;put!=repeat([&#39;&#39;],v:count)&lt;bar&gt;&#39;]+1&lt;cr&gt;
+nnoremap &lt;silent&gt; ]&lt;space&gt;  :&lt;c-u&gt;put =repeat([&#39;&#39;],v:count)&lt;bar&gt;&#39;[-1&lt;cr&gt;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -6113,12 +6113,12 @@ endif</code></pre>
 </section>
 <section id="answer-accepted-score-30-1" class="level4">
 <h4>Answer accepted (score 30)</h4>
-<p>As <span class="citation" data-cites="lcd047">@lcd047</span> said in his comment, vimscript use C-like operators <code>&amp;amp;&amp;amp;</code> and <code>||</code>.</p>
+<p>As <span class="citation" data-cites="lcd047">@lcd047</span> said in his comment, vimscript use C-like operators <code>&amp;&amp;</code> and <code>||</code>.</p>
 <p>You can find description of their usage on <a href="http://vimdoc.sourceforge.net/htmldoc/eval.html#expr2"><code>:h expr2</code></a>. Some important points mentioned by the doc are the following</p>
-<p>You’ll find that the operators can be concatenated and <code>&amp;amp;&amp;amp;</code> takes precedence over <code>||</code>, so</p>
-<pre class="language-vim"><code>&amp;amp;nu || &amp;amp;list &amp;amp;&amp;amp; &amp;amp;shell == &quot;csh&quot;</code></pre>
+<p>You’ll find that the operators can be concatenated and <code>&amp;&amp;</code> takes precedence over <code>||</code>, so</p>
+<pre class="language-vim"><code>&amp;nu || &amp;list &amp;&amp; &amp;shell == &quot;csh&quot;</code></pre>
 <p>Is equivalent to</p>
-<pre class="language-vim"><code>&amp;amp;nu || (&amp;amp;list &amp;amp;&amp;amp; &amp;amp;shell == &quot;csh&quot;)</code></pre>
+<pre class="language-vim"><code>&amp;nu || (&amp;list &amp;&amp; &amp;shell == &quot;csh&quot;)</code></pre>
 <p>Also once the result is known, the expression “short-circuits”, that is, further arguments are not evaluated. This is like what happens in C.</p>
 <p>If you use:</p>
 <pre class="language-vim"><code>if a || b</code></pre>
@@ -6155,12 +6155,12 @@ endif</code></pre>
 |  B  |
 </pre>
 <p>The order of A and B is not quite natural. It would be better if B was on top.</p>
-<p>However, if I go <code>&amp;lt;C-w&amp;gt;K</code>, B will be the very top of all windows, which is not what I want. How can I put B above A, but not above any other window that is already above A?</p>
+<p>However, if I go <code>&lt;C-w&gt;K</code>, B will be the very top of all windows, which is not what I want. How can I put B above A, but not above any other window that is already above A?</p>
 <p>And if two windows are vertically split, how can I change them to horizontally split?</p>
 </section>
 <section id="answer-2-score-33-2" class="level4">
 <h4>Answer 2 (score 33)</h4>
-<p>To swap the two parts of a split window simply do: <code>&amp;lt;C-w&amp;gt; &amp;lt;C-r&amp;gt;</code></p>
+<p>To swap the two parts of a split window simply do: <code>&lt;C-w&gt; &lt;C-r&gt;</code></p>
 </section>
 <section id="answer-3-score-6-4" class="level4">
 <h4>Answer 3 (score 6)</h4>
@@ -6182,7 +6182,7 @@ In order to swap <code>window</code> positions, the effect is equivalent to swap
 endfunction
 
 command! Wswap :call WinBufSwap()
-map &amp;lt;Leader&amp;gt;bs &amp;lt;C-c&amp;gt;:call WinBufSwap()&amp;lt;CR&amp;gt;</code></pre>
+map &lt;Leader&gt;bs &lt;C-c&gt;:call WinBufSwap()&lt;CR&gt;</code></pre>
 <ol>
 <li>
 Select window A
@@ -6369,14 +6369,14 @@ I use gnu <code>screen</code> and I run <code>vim file1.txt</code> and <code>vim
 <section id="answer-2-score-1-3" class="level4">
 <h4>Answer 2 (score 1)</h4>
 <p>I usually end up using <a href="https://linux.die.net/man/1/xsel" rel="nofollow noreferrer">xsel</a> to copy to/from the system clipboard:</p>
-<pre class="language-vim"><code>vmap &amp;lt;leader&amp;gt;y !xsel -i -b &amp;amp;&amp;amp; xsel -b &amp;lt;CR&amp;gt;
-nmap &amp;lt;leader&amp;gt;p :r !xsel -b &amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>vmap &lt;leader&gt;y !xsel -i -b &amp;&amp; xsel -b &lt;CR&gt;
+nmap &lt;leader&gt;p :r !xsel -b &lt;CR&gt;</code></pre>
 </section>
 <section id="answer-3-score-1-7" class="level4">
 <h4>Answer 3 (score 1)</h4>
 <p>I usually end up using <a href="https://linux.die.net/man/1/xsel" rel="nofollow noreferrer">xsel</a> to copy to/from the system clipboard:</p>
-<pre class="language-vim"><code>vmap &amp;lt;leader&amp;gt;y !xsel -i -b &amp;amp;&amp;amp; xsel -b &amp;lt;CR&amp;gt;
-nmap &amp;lt;leader&amp;gt;p :r !xsel -b &amp;lt;CR&amp;gt;</code></pre>
+<pre class="language-vim"><code>vmap &lt;leader&gt;y !xsel -i -b &amp;&amp; xsel -b &lt;CR&gt;
+nmap &lt;leader&gt;p :r !xsel -b &lt;CR&gt;</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -6444,7 +6444,7 @@ text, highlight the text in Visual mode and then execute &quot;_j&quot;.</code><
 <p>and—if you want—automatic text wrapping by setting the <code>t</code>-flag via</p>
 <pre class="language-vim"><code>set formatoptions+=t</code></pre>
 <p>If you want, you can set a mapping in your .vimrc to do the entire thing for you:</p>
-<pre class="language-vim"><code>nnoremap &amp;lt;C-j&amp;gt; gggqG_j</code></pre>
+<pre class="language-vim"><code>nnoremap &lt;C-j&gt; gggqG_j</code></pre>
 <p>This moves to the beginning of the file (<code>gg</code>), wraps all the lines (<code>gq</code> until <code>G</code>), and then <code>_j</code>ustifies the text.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>

@@ -1339,7 +1339,7 @@ And <a href="http://silverspaceship.com/src/svt/" rel="noreferrer">Sean’s pres
 <br/> <br/>
 </p>
 <p>So the finished function is:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" title="1">float2 CalculatePhysicalTexUV(float2 virtTexUV, Texture2D<span class="op">&amp;</span>lt<span class="op">;</span>float2<span class="op">&amp;</span>gt<span class="op">;</span> lookupTable, uint2 physicalTexSize, uint2 virtualTexSize, uint2 numTiles) {</a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb18-1" title="1">float2 CalculatePhysicalTexUV(float2 virtTexUV, Texture2D<span class="op">&lt;</span>float2<span class="op">&gt;</span> lookupTable, uint2 physicalTexSize, uint2 virtualTexSize, uint2 numTiles) {</a>
 <a class="sourceLine" id="cb18-2" title="2">    float2 pageLocInPhysicalTex <span class="op">=</span> lookupTable.Sample(virtTexUV, nearestNeighborSampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb18-3" title="3"></a>
 <a class="sourceLine" id="cb18-4" title="4">    float2 inPageLocation <span class="op">=</span> virtTexUV <span class="op">*</span> exp2(sqrt(numTiles))<span class="op">;</span></a>
@@ -1424,8 +1424,8 @@ Row vectors
 <a class="sourceLine" id="cb27-19" title="19">{</a>
 <a class="sourceLine" id="cb27-20" title="20">    vec3 diffuse <span class="op">=</span> texture(screenTexture, TexCoords.st).rgb<span class="op">;</span></a>
 <a class="sourceLine" id="cb27-21" title="21">    mat3 I<span class="op">;</span></a>
-<a class="sourceLine" id="cb27-22" title="22">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&amp;</span>lt<span class="op">;</span><span class="dv">3</span><span class="op">;</span> i<span class="op">++</span>) {</a>
-<a class="sourceLine" id="cb27-23" title="23">        <span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j<span class="op">&amp;</span>lt<span class="op">;</span><span class="dv">3</span><span class="op">;</span> j<span class="op">++</span>) {</a>
+<a class="sourceLine" id="cb27-22" title="22">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span><span class="dv">3</span><span class="op">;</span> i<span class="op">++</span>) {</a>
+<a class="sourceLine" id="cb27-23" title="23">        <span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j<span class="op">&lt;</span><span class="dv">3</span><span class="op">;</span> j<span class="op">++</span>) {</a>
 <a class="sourceLine" id="cb27-24" title="24">            vec3 sample  <span class="op">=</span> texelFetch(screenTexture, ivec2(gl_FragCoord) <span class="op">+</span> ivec2(i<span class="dv">-1</span>,j<span class="dv">-1</span>), <span class="dv">0</span> ).rgb<span class="op">;</span></a>
 <a class="sourceLine" id="cb27-25" title="25">            I[i][j] <span class="op">=</span> length(sample)<span class="op">;</span> </a>
 <a class="sourceLine" id="cb27-26" title="26">    }</a>
@@ -2084,16 +2084,16 @@ After so much reading about transformations it is time to implement a trackball 
 <a class="sourceLine" id="cb51-10" title="10">}</a>
 <a class="sourceLine" id="cb51-11" title="11"></a>
 <a class="sourceLine" id="cb51-12" title="12">void MouseMove(WPARAM buttonState, <span class="bu">int</span> x, <span class="bu">int</span> y) {</a>
-<a class="sourceLine" id="cb51-13" title="13">    <span class="cf">if</span> ((buttonState <span class="op">&amp;</span>amp<span class="op">;</span> MK_LBUTTON) <span class="op">!=</span> <span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb51-14" title="14">        <span class="cf">if</span> (GetKeyState(VK_MENU) <span class="op">&amp;</span>amp<span class="op">;</span> <span class="bn">0x8000</span>) {</a>
+<a class="sourceLine" id="cb51-13" title="13">    <span class="cf">if</span> ((buttonState <span class="op">&amp;</span> MK_LBUTTON) <span class="op">!=</span> <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-14" title="14">        <span class="cf">if</span> (GetKeyState(VK_MENU) <span class="op">&amp;</span> <span class="bn">0x8000</span>) {</a>
 <a class="sourceLine" id="cb51-15" title="15">            <span class="op">//</span> Calculate the new phi <span class="kw">and</span> theta based on mouse position relative to where the user clicked</a>
 <a class="sourceLine" id="cb51-16" title="16">            <span class="bu">float</span> dPhi <span class="op">=</span> ((<span class="bu">float</span>)(m_mouseLastPos.y <span class="op">-</span> y) <span class="op">/</span> <span class="dv">300</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb51-17" title="17">            <span class="bu">float</span> dTheta <span class="op">=</span> ((<span class="bu">float</span>)(m_mouseLastPos.x <span class="op">-</span> x) <span class="op">/</span> <span class="dv">300</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb51-18" title="18"></a>
 <a class="sourceLine" id="cb51-19" title="19">            m_camera.Rotate(<span class="op">-</span>dTheta, dPhi)<span class="op">;</span></a>
 <a class="sourceLine" id="cb51-20" title="20">        }</a>
-<a class="sourceLine" id="cb51-21" title="21">    } <span class="cf">else</span> <span class="cf">if</span> ((buttonState <span class="op">&amp;</span>amp<span class="op">;</span> MK_MBUTTON) <span class="op">!=</span> <span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb51-22" title="22">        <span class="cf">if</span> (GetKeyState(VK_MENU) <span class="op">&amp;</span>amp<span class="op">;</span> <span class="bn">0x8000</span>) {</a>
+<a class="sourceLine" id="cb51-21" title="21">    } <span class="cf">else</span> <span class="cf">if</span> ((buttonState <span class="op">&amp;</span> MK_MBUTTON) <span class="op">!=</span> <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb51-22" title="22">        <span class="cf">if</span> (GetKeyState(VK_MENU) <span class="op">&amp;</span> <span class="bn">0x8000</span>) {</a>
 <a class="sourceLine" id="cb51-23" title="23">            <span class="bu">float</span> dx <span class="op">=</span> ((<span class="bu">float</span>)(m_mouseLastPos.x <span class="op">-</span> x))<span class="op">;</span></a>
 <a class="sourceLine" id="cb51-24" title="24">            <span class="bu">float</span> dy <span class="op">=</span> ((<span class="bu">float</span>)(m_mouseLastPos.y <span class="op">-</span> y))<span class="op">;</span></a>
 <a class="sourceLine" id="cb51-25" title="25"></a>
@@ -2236,9 +2236,9 @@ Note that this is a form of stratified sampling, and poisson disk sampling is a 
 <a class="sourceLine" id="cb52-6" title="6"></a>
 <a class="sourceLine" id="cb52-7" title="7">RGBColor<span class="op">*</span> image <span class="op">=</span> CreateImageBuffer(width, height)<span class="op">;</span></a>
 <a class="sourceLine" id="cb52-8" title="8"></a>
-<a class="sourceLine" id="cb52-9" title="9"><span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j <span class="op">&amp;</span>lt<span class="op">;</span> height<span class="op">;</span> <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb52-9" title="9"><span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> height<span class="op">;</span> <span class="op">++</span>i)</a>
 <a class="sourceLine" id="cb52-10" title="10">{</a>
-<a class="sourceLine" id="cb52-11" title="11">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> width<span class="op">;</span> <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb52-11" title="11">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> width<span class="op">;</span> <span class="op">++</span>i)</a>
 <a class="sourceLine" id="cb52-12" title="12">    {</a>
 <a class="sourceLine" id="cb52-13" title="13">        <span class="bu">float</span> x <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> (<span class="bu">float</span>)i <span class="op">/</span> (<span class="bu">float</span>)<span class="bu">max</span>(width, height) <span class="op">-</span> <span class="fl">1.0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb52-14" title="14">        <span class="bu">float</span> y <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> (<span class="bu">float</span>)j <span class="op">/</span> (<span class="bu">float</span>)<span class="bu">max</span>(width, height) <span class="op">-</span> <span class="fl">1.0</span><span class="op">;</span></a>
@@ -2257,15 +2257,15 @@ Note that this is a form of stratified sampling, and poisson disk sampling is a 
 <a class="sourceLine" id="cb53-5" title="5">     <span class="fl">1.0</span><span class="op">/</span><span class="fl">4.0</span>, <span class="fl">-3.0</span><span class="op">/</span><span class="fl">4.0</span>,</a>
 <a class="sourceLine" id="cb53-6" title="6">}<span class="op">;</span></a>
 <a class="sourceLine" id="cb53-7" title="7"></a>
-<a class="sourceLine" id="cb53-8" title="8"><span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j <span class="op">&amp;</span>lt<span class="op">;</span> height<span class="op">;</span> <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb53-8" title="8"><span class="cf">for</span> (<span class="bu">int</span> j<span class="op">=</span><span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> height<span class="op">;</span> <span class="op">++</span>i)</a>
 <a class="sourceLine" id="cb53-9" title="9">{</a>
-<a class="sourceLine" id="cb53-10" title="10">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> width<span class="op">;</span> <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb53-10" title="10">    <span class="cf">for</span> (<span class="bu">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> width<span class="op">;</span> <span class="op">++</span>i)</a>
 <a class="sourceLine" id="cb53-11" title="11">    {</a>
 <a class="sourceLine" id="cb53-12" title="12">        <span class="op">//</span> Init the pixel to <span class="dv">100</span><span class="op">%</span> black (no light).</a>
 <a class="sourceLine" id="cb53-13" title="13">        image[width <span class="op">*</span> j <span class="op">+</span> i] <span class="op">=</span> RGBColor(<span class="fl">0.0</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb53-14" title="14"></a>
 <a class="sourceLine" id="cb53-15" title="15">        <span class="op">//</span> Accumulate light <span class="cf">for</span> N samples.</a>
-<a class="sourceLine" id="cb53-16" title="16">        <span class="cf">for</span> (<span class="bu">int</span> sample <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> sample <span class="op">&amp;</span>lt<span class="op">;</span> <span class="dv">4</span><span class="op">;</span> <span class="op">++</span>sample)</a>
+<a class="sourceLine" id="cb53-16" title="16">        <span class="cf">for</span> (<span class="bu">int</span> sample <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> sample <span class="op">&lt;</span> <span class="dv">4</span><span class="op">;</span> <span class="op">++</span>sample)</a>
 <a class="sourceLine" id="cb53-17" title="17">        {</a>
 <a class="sourceLine" id="cb53-18" title="18">            <span class="bu">float</span> x <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> (i <span class="op">+</span> jitterMatrix[<span class="dv">2</span><span class="op">*</span>sample]) <span class="op">/</span> (<span class="bu">float</span>)<span class="bu">max</span>(width, height) <span class="op">-</span> <span class="fl">1.0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb53-19" title="19">            <span class="bu">float</span> y <span class="op">=</span> <span class="fl">2.0</span> <span class="op">*</span> (i <span class="op">+</span> jitterMatrix[<span class="dv">2</span><span class="op">*</span>sample<span class="op">+</span><span class="dv">1</span>]) <span class="op">/</span> (<span class="bu">float</span>)<span class="bu">max</span>(width, height) <span class="op">-</span> <span class="fl">1.0</span><span class="op">;</span></a>
@@ -2807,7 +2807,7 @@ Golar’s radiosity: <code>ED*L</code>
 <div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb59-1" title="1">For vertex <span class="kw">in</span> faceVertex:</a>
 <a class="sourceLine" id="cb59-2" title="2">    normal <span class="op">=</span> vertex.normal</a>
 <a class="sourceLine" id="cb59-3" title="3">    For adjVertex <span class="kw">in</span> adjacentVertices:</a>
-<a class="sourceLine" id="cb59-4" title="4">        <span class="cf">if</span> anglebetween(vertex.normal, adjVertex.normal )  <span class="op">&amp;</span>lt<span class="op">;</span> treshold:</a>
+<a class="sourceLine" id="cb59-4" title="4">        <span class="cf">if</span> anglebetween(vertex.normal, adjVertex.normal )  <span class="op">&lt;</span> treshold:</a>
 <a class="sourceLine" id="cb59-5" title="5">            normal <span class="op">+=</span> adjVertex.normal</a>
 <a class="sourceLine" id="cb59-6" title="6">    normal <span class="op">=</span> normalize(normal)</a></code></pre></div>
 <p>That works, but you can simply avoid all of this at creation time because you understand that separate planes are working differently. So only the curved sides need normal direction merging. And in fact you can just directly calulate them from the underlying mathematical shape.</p>
@@ -2832,8 +2832,8 @@ Vertex normals
 <div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb61-1" title="1">vec3 computeNormal(vertex a)</a>
 <a class="sourceLine" id="cb61-2" title="2">{</a>
 <a class="sourceLine" id="cb61-3" title="3">    vec3 <span class="bu">sum</span> <span class="op">=</span> vec3(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb61-4" title="4">    <span class="bu">list</span><span class="op">&amp;</span>lt<span class="op">;</span>vertex<span class="op">&amp;</span>gt<span class="op">;</span> adjacentVertices <span class="op">=</span> getAdjacentVertices(a)<span class="op">;</span></a>
-<a class="sourceLine" id="cb61-5" title="5">    <span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> adjacentVertices<span class="op">;</span> <span class="op">++</span>i)</a>
+<a class="sourceLine" id="cb61-4" title="4">    <span class="bu">list</span><span class="op">&lt;</span>vertex<span class="op">&gt;</span> adjacentVertices <span class="op">=</span> getAdjacentVertices(a)<span class="op">;</span></a>
+<a class="sourceLine" id="cb61-5" title="5">    <span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> adjacentVertices<span class="op">;</span> <span class="op">++</span>i)</a>
 <a class="sourceLine" id="cb61-6" title="6">    {</a>
 <a class="sourceLine" id="cb61-7" title="7">        vec3 b <span class="op">=</span> adjacentVertices[i <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb61-8" title="8">        vec3 c <span class="op">=</span> adjacentVertices[i]<span class="op">;</span></a>
@@ -3165,27 +3165,27 @@ You could try a quadratic instead: <span class="math inline">\(y=ax^2+bx+c\)</sp
 <p>For example splitting screen into four parts and rendering the same scene four times to each corner with different uniforms and different viewports:</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb73-1" title="1">bindFramebuffer()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-2" title="2">glClear(GL_COLOR_BUFFER_BIT <span class="op">|</span> GL_DEPTH_BUFFER_BIT)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-3" title="3">scene<span class="op">-&amp;</span>gt<span class="op">;</span>setConstPerFrameUniforms()<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-3" title="3">scene<span class="op">-&gt;</span>setConstPerFrameUniforms()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-4" title="4"></a>
 <a class="sourceLine" id="cb73-5" title="5"><span class="op">//</span>left bottom</a>
 <a class="sourceLine" id="cb73-6" title="6">glViewport(<span class="dv">0</span>, <span class="dv">0</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-7" title="7">scene<span class="op">-&amp;</span>gt<span class="op">;</span>setVarPerFrameUniforms(<span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-8" title="8">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-7" title="7">scene<span class="op">-&gt;</span>setVarPerFrameUniforms(<span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-8" title="8">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-9" title="9"></a>
 <a class="sourceLine" id="cb73-10" title="10"><span class="op">//</span>right bottom</a>
 <a class="sourceLine" id="cb73-11" title="11">glViewport(WindowWidth<span class="op">*</span><span class="fl">0.5</span>, <span class="dv">0</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-12" title="12">scene<span class="op">-&amp;</span>gt<span class="op">;</span>setVarPerFrameUniforms(<span class="dv">2</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-13" title="13">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-12" title="12">scene<span class="op">-&gt;</span>setVarPerFrameUniforms(<span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-13" title="13">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-14" title="14"></a>
 <a class="sourceLine" id="cb73-15" title="15"><span class="op">//</span>left top</a>
 <a class="sourceLine" id="cb73-16" title="16">glViewport(<span class="dv">0</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-17" title="17">scene<span class="op">-&amp;</span>gt<span class="op">;</span>setVarPerFrameUniforms(<span class="dv">3</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-18" title="18">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-17" title="17">scene<span class="op">-&gt;</span>setVarPerFrameUniforms(<span class="dv">3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-18" title="18">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-19" title="19"></a>
 <a class="sourceLine" id="cb73-20" title="20"><span class="op">//</span>right top</a>
 <a class="sourceLine" id="cb73-21" title="21">glViewport(WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-22" title="22">scene<span class="op">-&amp;</span>gt<span class="op">;</span>setVarPerFrameUniforms(<span class="dv">4</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb73-23" title="23">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-22" title="22">scene<span class="op">-&gt;</span>setVarPerFrameUniforms(<span class="dv">4</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb73-23" title="23">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb73-24" title="24"></a>
 <a class="sourceLine" id="cb73-25" title="25">glViewport(<span class="dv">0</span>, <span class="dv">0</span>, WindowWidth, WindowHeight)<span class="op">;</span> <span class="op">//</span>restore default</a></code></pre></div>
 </section>
@@ -3215,19 +3215,19 @@ set the build in variable output variable gl_ViewportIndex in the Fragment Shade
 <p>This is a copy of <span class="citation" data-cites="narthex">@narthex</span>’s answer, except with only the viewports since that is all you need. I’m not sure why the frame buffer / blend stuff is included in his answer.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb74-1" title="1"><span class="op">//</span>left bottom</a>
 <a class="sourceLine" id="cb74-2" title="2">glViewport(<span class="dv">0</span>, <span class="dv">0</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb74-3" title="3">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-3" title="3">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb74-4" title="4"></a>
 <a class="sourceLine" id="cb74-5" title="5"><span class="op">//</span>right bottom</a>
 <a class="sourceLine" id="cb74-6" title="6">glViewport(WindowWidth<span class="op">*</span><span class="fl">0.5</span>, <span class="dv">0</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb74-7" title="7">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-7" title="7">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb74-8" title="8"></a>
 <a class="sourceLine" id="cb74-9" title="9"><span class="op">//</span>left top</a>
 <a class="sourceLine" id="cb74-10" title="10">glViewport(<span class="dv">0</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb74-11" title="11">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-11" title="11">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb74-12" title="12"></a>
 <a class="sourceLine" id="cb74-13" title="13"><span class="op">//</span>right top</a>
 <a class="sourceLine" id="cb74-14" title="14">glViewport(WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>, WindowWidth<span class="op">*</span><span class="fl">0.5</span>, WindowHeight<span class="op">*</span><span class="fl">0.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb74-15" title="15">scene<span class="op">-&amp;</span>gt<span class="op">;</span>draw()<span class="op">;</span></a>
+<a class="sourceLine" id="cb74-15" title="15">scene<span class="op">-&gt;</span>draw()<span class="op">;</span></a>
 <a class="sourceLine" id="cb74-16" title="16"></a>
 <a class="sourceLine" id="cb74-17" title="17">glViewport(<span class="dv">0</span>, <span class="dv">0</span>, WindowWidth, WindowHeight)<span class="op">;</span> <span class="op">//</span>restore default</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -3514,14 +3514,14 @@ Putting it in Practice
 </h2>
 <p>Let’s look at a basic backwards path tracer:</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb77-1" title="1">void RenderPixel(uint x, uint y, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb77-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&gt;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-3" title="3"></a>
 <a class="sourceLine" id="cb77-4" title="4">    float3 color(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-5" title="5">    float3 throughput(<span class="fl">1.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-6" title="6"></a>
 <a class="sourceLine" id="cb77-7" title="7">    <span class="op">//</span> Bounce the ray around the scene</a>
-<a class="sourceLine" id="cb77-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&amp;</span>lt<span class="op">;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
-<a class="sourceLine" id="cb77-9" title="9">        m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Intersect(ray)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
+<a class="sourceLine" id="cb77-9" title="9">        m_scene<span class="op">-&gt;</span>Intersect(ray)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-10" title="10"></a>
 <a class="sourceLine" id="cb77-11" title="11">        <span class="op">//</span> The ray missed. Return the background color</a>
 <a class="sourceLine" id="cb77-12" title="12">        <span class="cf">if</span> (ray.geomID <span class="op">==</span> RTC_INVALID_GEOMETRY_ID) {</a>
@@ -3532,14 +3532,14 @@ Putting it in Practice
 <a class="sourceLine" id="cb77-17" title="17">        <span class="op">//</span> We hit an <span class="bu">object</span></a>
 <a class="sourceLine" id="cb77-18" title="18"></a>
 <a class="sourceLine" id="cb77-19" title="19">        <span class="op">//</span> Fetch the material</a>
-<a class="sourceLine" id="cb77-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-21" title="21">        <span class="op">//</span> The <span class="bu">object</span> might be emissive. If so, it will have a corresponding light</a>
 <a class="sourceLine" id="cb77-22" title="22">        <span class="op">//</span> Otherwise, GetLight will <span class="cf">return</span> nullptr</a>
-<a class="sourceLine" id="cb77-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetLight(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetLight(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-24" title="24"></a>
 <a class="sourceLine" id="cb77-25" title="25">        <span class="op">//</span> If we hit a light, add the emmisive light</a>
 <a class="sourceLine" id="cb77-26" title="26">        <span class="cf">if</span> (light <span class="op">!=</span> nullptr) {</a>
-<a class="sourceLine" id="cb77-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Le()<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&gt;</span>Le()<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-28" title="28">        }</a>
 <a class="sourceLine" id="cb77-29" title="29"></a>
 <a class="sourceLine" id="cb77-30" title="30">        float3 normal <span class="op">=</span> normalize(ray.Ng)<span class="op">;</span></a>
@@ -3548,11 +3548,11 @@ Putting it in Practice
 <a class="sourceLine" id="cb77-33" title="33"></a>
 <a class="sourceLine" id="cb77-34" title="34">        <span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb77-35" title="35">        <span class="op">//</span> Choose the direction based on the material</a>
-<a class="sourceLine" id="cb77-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb77-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(wi, normal)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&gt;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>Pdf(wi, normal)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-38" title="38"></a>
 <a class="sourceLine" id="cb77-39" title="39">        <span class="op">//</span> Accumulate the brdf attenuation</a>
-<a class="sourceLine" id="cb77-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-41" title="41"></a>
 <a class="sourceLine" id="cb77-42" title="42"></a>
 <a class="sourceLine" id="cb77-43" title="43">        <span class="op">//</span> Shoot a new ray</a>
@@ -3571,18 +3571,18 @@ Putting it in Practice
 <a class="sourceLine" id="cb77-56" title="56">        ray.time <span class="op">=</span> <span class="fl">0.0</span>f<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-57" title="57">    }</a>
 <a class="sourceLine" id="cb77-58" title="58"></a>
-<a class="sourceLine" id="cb77-59" title="59">    m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
+<a class="sourceLine" id="cb77-59" title="59">    m_scene<span class="op">-&gt;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
 <a class="sourceLine" id="cb77-60" title="60">}</a></code></pre></div>
 <p>IE. we bounce around the scene, accumulating color and light attenuation as we go. At each bounce, we have to choose a new direction for the ray. As mentioned above, we <strong><em>could</em></strong> uniformly sample the hemisphere to generate the new ray. However, the code is smarter; it importance samples the new direction based on the BRDF. (Note: This is the input direction, because we are a backwards path tracer)</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb78-1" title="1"><span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb78-2" title="2"><span class="op">//</span> Choose the direction based on the material</a>
-<a class="sourceLine" id="cb78-3" title="3">float3 wi <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb78-4" title="4"><span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(wi, normal)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb78-3" title="3">float3 wi <span class="op">=</span> material<span class="op">-&gt;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb78-4" title="4"><span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>Pdf(wi, normal)<span class="op">;</span></a></code></pre></div>
 <p>Which could be implemented as:</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb79-1" title="1">void LambertBRDF::Sample(float3 outputDirection, float3 normal, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb79-2" title="2">    <span class="bu">float</span> rand <span class="op">=</span> sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat()<span class="op">;</span></a>
+<a class="sourceLine" id="cb79-2" title="2">    <span class="bu">float</span> rand <span class="op">=</span> sampler<span class="op">-&gt;</span>NextFloat()<span class="op">;</span></a>
 <a class="sourceLine" id="cb79-3" title="3">    <span class="bu">float</span> r <span class="op">=</span> std::sqrtf(rand) <span class="op">*</span> radius<span class="op">;</span></a>
-<a class="sourceLine" id="cb79-4" title="4">    <span class="bu">float</span> theta <span class="op">=</span> sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat() <span class="op">*</span> <span class="fl">2.0</span>f <span class="op">*</span> M_PI<span class="op">;</span></a>
+<a class="sourceLine" id="cb79-4" title="4">    <span class="bu">float</span> theta <span class="op">=</span> sampler<span class="op">-&gt;</span>NextFloat() <span class="op">*</span> <span class="fl">2.0</span>f <span class="op">*</span> M_PI<span class="op">;</span></a>
 <a class="sourceLine" id="cb79-5" title="5"></a>
 <a class="sourceLine" id="cb79-6" title="6">    <span class="bu">float</span> x <span class="op">=</span> r <span class="op">*</span> std::cosf(theta)<span class="op">;</span></a>
 <a class="sourceLine" id="cb79-7" title="7">    <span class="bu">float</span> y <span class="op">=</span> r <span class="op">*</span> std::sinf(theta)<span class="op">;</span></a>
@@ -3593,12 +3593,12 @@ Putting it in Practice
 <a class="sourceLine" id="cb79-12" title="12">    <span class="cf">return</span> normalize(TransformToWorld(x, y, z, normal))<span class="op">;</span></a>
 <a class="sourceLine" id="cb79-13" title="13">}</a>
 <a class="sourceLine" id="cb79-14" title="14"></a>
-<a class="sourceLine" id="cb79-15" title="15">float3a TransformToWorld(<span class="bu">float</span> x, <span class="bu">float</span> y, <span class="bu">float</span> z, float3a <span class="op">&amp;</span>amp<span class="op">;</span>normal) {</a>
+<a class="sourceLine" id="cb79-15" title="15">float3a TransformToWorld(<span class="bu">float</span> x, <span class="bu">float</span> y, <span class="bu">float</span> z, float3a <span class="op">&amp;</span>normal) {</a>
 <a class="sourceLine" id="cb79-16" title="16">    <span class="op">//</span> Find an axis that <span class="kw">is</span> <span class="kw">not</span> parallel to normal</a>
 <a class="sourceLine" id="cb79-17" title="17">    float3a majorAxis<span class="op">;</span></a>
-<a class="sourceLine" id="cb79-18" title="18">    <span class="cf">if</span> (<span class="bu">abs</span>(normal.x) <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">0.57735026919</span>f <span class="op">/*</span> <span class="dv">1</span> <span class="op">/</span> sqrt(<span class="dv">3</span>) <span class="op">*/</span>) {</a>
+<a class="sourceLine" id="cb79-18" title="18">    <span class="cf">if</span> (<span class="bu">abs</span>(normal.x) <span class="op">&lt;</span> <span class="fl">0.57735026919</span>f <span class="op">/*</span> <span class="dv">1</span> <span class="op">/</span> sqrt(<span class="dv">3</span>) <span class="op">*/</span>) {</a>
 <a class="sourceLine" id="cb79-19" title="19">        majorAxis <span class="op">=</span> float3a(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb79-20" title="20">    } <span class="cf">else</span> <span class="cf">if</span> (<span class="bu">abs</span>(normal.y) <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">0.57735026919</span>f <span class="op">/*</span> <span class="dv">1</span> <span class="op">/</span> sqrt(<span class="dv">3</span>) <span class="op">*/</span>) {</a>
+<a class="sourceLine" id="cb79-20" title="20">    } <span class="cf">else</span> <span class="cf">if</span> (<span class="bu">abs</span>(normal.y) <span class="op">&lt;</span> <span class="fl">0.57735026919</span>f <span class="op">/*</span> <span class="dv">1</span> <span class="op">/</span> sqrt(<span class="dv">3</span>) <span class="op">*/</span>) {</a>
 <a class="sourceLine" id="cb79-21" title="21">        majorAxis <span class="op">=</span> float3a(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb79-22" title="22">    } <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb79-23" title="23">        majorAxis <span class="op">=</span> float3a(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)<span class="op">;</span></a>
@@ -3621,7 +3621,7 @@ Putting it in Practice
 <a class="sourceLine" id="cb79-40" title="40">}</a></code></pre></div>
 <p>After we sample the inputDirection (‘wi’ in the code), we use that to calculate the value of the BRDF. And then we divide by the pdf as per the Monte Carlo formula:</p>
 <div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb80-1" title="1"><span class="op">//</span> Accumulate the brdf attenuation</a>
-<a class="sourceLine" id="cb80-2" title="2">throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb80-2" title="2">throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a></code></pre></div>
 <p>Where <em>Eval()</em> is just the BRDF function itself (Lambert, Blinn-Phong, Cook-Torrance, etc.):</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb81-1" title="1">float3 LambertBRDF::Eval(float3 inputDirection, float3 outputDirection, float3 normal) const override {</a>
 <a class="sourceLine" id="cb81-2" title="2">    <span class="cf">return</span> m_albedo <span class="op">*</span> M_1_PI <span class="op">*</span> dot(inputDirection, normal)<span class="op">;</span></a>
@@ -3739,7 +3739,7 @@ Both hlsl and glsl offer derivative functions. In GLSL you have <a href="https:/
 </p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb84-1" title="1">  <span class="bu">float</span> luminance <span class="op">=</span> dot(yourFinalColour,vec3(<span class="fl">0.2126</span>, <span class="fl">0.7152</span>, <span class="fl">0.0722</span>))<span class="op">;</span></a>
 <a class="sourceLine" id="cb84-2" title="2">  <span class="bu">float</span> gradient <span class="op">=</span> fwidth(luminance )<span class="op">;</span></a>
-<a class="sourceLine" id="cb84-3" title="3">  <span class="bu">float</span> isEdge <span class="op">=</span> gradient <span class="op">&amp;</span>gt<span class="op">;</span> threshold<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb84-3" title="3">  <span class="bu">float</span> isEdge <span class="op">=</span> gradient <span class="op">&gt;</span> threshold<span class="op">;</span></a></code></pre></div>
 <p>With an high threshold you will find coarser edges and you might miss some, conversely, with a low threshold you might detect false edges. You have to experiment to find the threshold that better suits your needs.</p>
 <p><em>The reason why these functions work is worth mentioning but I don’t have time for it now, I am likely to update this answer later on :)</em></p>
 <h5>
@@ -3831,14 +3831,14 @@ Is Russian Roulette <em>necessary</em> for an unbiased result?
 <h4>Answer 2 (score 24)</h4>
 <p>In order to understand Russian Roulette, let’s look at a very basic backward path tracer:</p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb87-1" title="1">void RenderPixel(uint x, uint y, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb87-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&gt;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-3" title="3"></a>
 <a class="sourceLine" id="cb87-4" title="4">    float3 color(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-5" title="5">    float3 throughput(<span class="fl">1.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-6" title="6"></a>
 <a class="sourceLine" id="cb87-7" title="7">    <span class="op">//</span> Bounce the ray around the scene</a>
-<a class="sourceLine" id="cb87-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&amp;</span>lt<span class="op">;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
-<a class="sourceLine" id="cb87-9" title="9">        m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Intersect(ray)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
+<a class="sourceLine" id="cb87-9" title="9">        m_scene<span class="op">-&gt;</span>Intersect(ray)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-10" title="10"></a>
 <a class="sourceLine" id="cb87-11" title="11">        <span class="op">//</span> The ray missed. Return the background color</a>
 <a class="sourceLine" id="cb87-12" title="12">        <span class="cf">if</span> (ray.geomID <span class="op">==</span> RTC_INVALID_GEOMETRY_ID) {</a>
@@ -3849,14 +3849,14 @@ Is Russian Roulette <em>necessary</em> for an unbiased result?
 <a class="sourceLine" id="cb87-17" title="17">        <span class="op">//</span> We hit an <span class="bu">object</span></a>
 <a class="sourceLine" id="cb87-18" title="18"></a>
 <a class="sourceLine" id="cb87-19" title="19">        <span class="op">//</span> Fetch the material</a>
-<a class="sourceLine" id="cb87-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-21" title="21">        <span class="op">//</span> The <span class="bu">object</span> might be emissive. If so, it will have a corresponding light</a>
 <a class="sourceLine" id="cb87-22" title="22">        <span class="op">//</span> Otherwise, GetLight will <span class="cf">return</span> nullptr</a>
-<a class="sourceLine" id="cb87-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetLight(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetLight(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-24" title="24"></a>
 <a class="sourceLine" id="cb87-25" title="25">        <span class="op">//</span> If we hit a light, add the emmisive light</a>
 <a class="sourceLine" id="cb87-26" title="26">        <span class="cf">if</span> (light <span class="op">!=</span> nullptr) {</a>
-<a class="sourceLine" id="cb87-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Le()<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&gt;</span>Le()<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-28" title="28">        }</a>
 <a class="sourceLine" id="cb87-29" title="29"></a>
 <a class="sourceLine" id="cb87-30" title="30">        float3 normal <span class="op">=</span> normalize(ray.Ng)<span class="op">;</span></a>
@@ -3865,11 +3865,11 @@ Is Russian Roulette <em>necessary</em> for an unbiased result?
 <a class="sourceLine" id="cb87-33" title="33"></a>
 <a class="sourceLine" id="cb87-34" title="34">        <span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb87-35" title="35">        <span class="op">//</span> Choose the direction based on the material</a>
-<a class="sourceLine" id="cb87-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb87-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(wi, normal)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&gt;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>Pdf(wi, normal)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-38" title="38"></a>
 <a class="sourceLine" id="cb87-39" title="39">        <span class="op">//</span> Accumulate the brdf attenuation</a>
-<a class="sourceLine" id="cb87-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-41" title="41"></a>
 <a class="sourceLine" id="cb87-42" title="42"></a>
 <a class="sourceLine" id="cb87-43" title="43">        <span class="op">//</span> Shoot a new ray</a>
@@ -3888,7 +3888,7 @@ Is Russian Roulette <em>necessary</em> for an unbiased result?
 <a class="sourceLine" id="cb87-56" title="56">        ray.time <span class="op">=</span> <span class="fl">0.0</span>f<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-57" title="57">    }</a>
 <a class="sourceLine" id="cb87-58" title="58"></a>
-<a class="sourceLine" id="cb87-59" title="59">    m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
+<a class="sourceLine" id="cb87-59" title="59">    m_scene<span class="op">-&gt;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
 <a class="sourceLine" id="cb87-60" title="60">}</a></code></pre></div>
 <p>IE. we bounce around the scene, accumulating color and light attenuation as we go. In order to be completely mathematically unbiased, bounces <em>should</em> go to infinity. But this is unrealistic, and as you noted, not visually necessary; for most scenes, after a certain number of bounces, say 10, the amount of contribution to the final color is very very minimal.</p>
 <p>So in order to save computing resources, many path tracers have a hard limit to the number of bounces. This adds bias.</p>
@@ -3900,14 +3900,14 @@ That said, it’s hard to choose what that hard limit should be. Some scenes loo
 <p>Clamping after a threshold, will <em>work</em>, but again, how do we choose the threshold? If we choose too large, the image will be visibly biased, too small, and we’re wasting resources.</p>
 <p>Russian Roulette attempts to solve these problems in an unbiased way. First, here is the code:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb88-1" title="1">void RenderPixel(uint x, uint y, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb88-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&gt;</span>Camera.CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-3" title="3"></a>
 <a class="sourceLine" id="cb88-4" title="4">    float3 color(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-5" title="5">    float3 throughput(<span class="fl">1.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-6" title="6"></a>
 <a class="sourceLine" id="cb88-7" title="7">    <span class="op">//</span> Bounce the ray around the scene</a>
-<a class="sourceLine" id="cb88-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&amp;</span>lt<span class="op">;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
-<a class="sourceLine" id="cb88-9" title="9">        m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Intersect(ray)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-8" title="8">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> <span class="op">++</span>bounces) {</a>
+<a class="sourceLine" id="cb88-9" title="9">        m_scene<span class="op">-&gt;</span>Intersect(ray)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-10" title="10"></a>
 <a class="sourceLine" id="cb88-11" title="11">        <span class="op">//</span> The ray missed. Return the background color</a>
 <a class="sourceLine" id="cb88-12" title="12">        <span class="cf">if</span> (ray.geomID <span class="op">==</span> RTC_INVALID_GEOMETRY_ID) {</a>
@@ -3918,14 +3918,14 @@ That said, it’s hard to choose what that hard limit should be. Some scenes loo
 <a class="sourceLine" id="cb88-17" title="17">        <span class="op">//</span> We hit an <span class="bu">object</span></a>
 <a class="sourceLine" id="cb88-18" title="18"></a>
 <a class="sourceLine" id="cb88-19" title="19">        <span class="op">//</span> Fetch the material</a>
-<a class="sourceLine" id="cb88-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetMaterial(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-21" title="21">        <span class="op">//</span> The <span class="bu">object</span> might be emissive. If so, it will have a corresponding light</a>
 <a class="sourceLine" id="cb88-22" title="22">        <span class="op">//</span> Otherwise, GetLight will <span class="cf">return</span> nullptr</a>
-<a class="sourceLine" id="cb88-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetLight(ray.geomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetLight(ray.geomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-24" title="24"></a>
 <a class="sourceLine" id="cb88-25" title="25">        <span class="op">//</span> If we hit a light, add the emmisive light</a>
 <a class="sourceLine" id="cb88-26" title="26">        <span class="cf">if</span> (light <span class="op">!=</span> nullptr) {</a>
-<a class="sourceLine" id="cb88-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Le()<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&gt;</span>Le()<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-28" title="28">        }</a>
 <a class="sourceLine" id="cb88-29" title="29"></a>
 <a class="sourceLine" id="cb88-30" title="30">        float3 normal <span class="op">=</span> normalize(ray.Ng)<span class="op">;</span></a>
@@ -3934,17 +3934,17 @@ That said, it’s hard to choose what that hard limit should be. Some scenes loo
 <a class="sourceLine" id="cb88-33" title="33"></a>
 <a class="sourceLine" id="cb88-34" title="34">        <span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb88-35" title="35">        <span class="op">//</span> Choose the direction based on the material</a>
-<a class="sourceLine" id="cb88-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb88-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(wi, normal)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-36" title="36">        float3 wi <span class="op">=</span> material<span class="op">-&gt;</span>Sample(wo, normal, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-37" title="37">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>Pdf(wi, normal)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-38" title="38"></a>
 <a class="sourceLine" id="cb88-39" title="39">        <span class="op">//</span> Accumulate the brdf attenuation</a>
-<a class="sourceLine" id="cb88-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-40" title="40">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>Eval(wi, wo, normal) <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-41" title="41"></a>
 <a class="sourceLine" id="cb88-42" title="42"></a>
 <a class="sourceLine" id="cb88-43" title="43">        <span class="op">//</span> Russian Roulette</a>
 <a class="sourceLine" id="cb88-44" title="44">        <span class="op">//</span> Randomly terminate a path <span class="cf">with</span> a probability inversely equal to the throughput</a>
 <a class="sourceLine" id="cb88-45" title="45">        <span class="bu">float</span> p <span class="op">=</span> std::<span class="bu">max</span>(throughput.x, std::<span class="bu">max</span>(throughput.y, throughput.z))<span class="op">;</span></a>
-<a class="sourceLine" id="cb88-46" title="46">        <span class="cf">if</span> (sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat() <span class="op">&amp;</span>gt<span class="op">;</span> p) {</a>
+<a class="sourceLine" id="cb88-46" title="46">        <span class="cf">if</span> (sampler<span class="op">-&gt;</span>NextFloat() <span class="op">&gt;</span> p) {</a>
 <a class="sourceLine" id="cb88-47" title="47">            <span class="cf">break</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb88-48" title="48">        }</a>
 <a class="sourceLine" id="cb88-49" title="49"></a>
@@ -3968,7 +3968,7 @@ That said, it’s hard to choose what that hard limit should be. Some scenes loo
 <a class="sourceLine" id="cb88-67" title="67">        ray.time <span class="op">=</span> <span class="fl">0.0</span>f<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-68" title="68">    }</a>
 <a class="sourceLine" id="cb88-69" title="69"></a>
-<a class="sourceLine" id="cb88-70" title="70">    m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
+<a class="sourceLine" id="cb88-70" title="70">    m_scene<span class="op">-&gt;</span>Camera.FrameBuffer.SplatPixel(x, y, color)<span class="op">;</span></a>
 <a class="sourceLine" id="cb88-71" title="71">}</a></code></pre></div>
 <p>Russian Roulette randomly terminates a path with a probability inversely equal to the throughput. So paths with low throughput that won’t contribute much to the scene are more likely to be terminated.</p>
 <p>If we stop there, we’re still biased. We ‘lose’ the energy of the path we randomly terminate. To make it unbiased, we boost the energy of the non-terminated paths by their probability to be terminated. This, along with being random, makes Russian Roulette unbiased.</p>
@@ -4313,7 +4313,7 @@ Additionally, you want to map any point with <span class="math-container"><span 
 <a class="sourceLine" id="cb89-3" title="3"><span class="bu">int</span> x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb89-4" title="4"><span class="bu">int</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb89-5" title="5"></a>
-<a class="sourceLine" id="cb89-6" title="6"><span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> maxPoints<span class="op">;</span> i<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb89-6" title="6"><span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> maxPoints<span class="op">;</span> i<span class="op">++</span>)</a>
 <a class="sourceLine" id="cb89-7" title="7">{</a>
 <a class="sourceLine" id="cb89-8" title="8">    dx <span class="op">=</span> sin(i <span class="op">*</span> PI <span class="op">/</span> <span class="dv">2</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb89-9" title="9">    dy <span class="op">=</span> cos(<span class="op">-</span>i <span class="op">*</span> PI <span class="op">/</span> <span class="dv">2</span>)<span class="op">;</span></a>
@@ -4339,7 +4339,7 @@ Additionally, you want to map any point with <span class="math-container"><span 
 <a class="sourceLine" id="cb90-5" title="5"><span class="op">//</span> Space between the spirals</a>
 <a class="sourceLine" id="cb90-6" title="6"><span class="bu">int</span> a <span class="op">=</span> <span class="dv">2</span>, b <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb90-7" title="7"></a>
-<a class="sourceLine" id="cb90-8" title="8"><span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> maxPoints<span class="op">;</span> i<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb90-8" title="8"><span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> maxPoints<span class="op">;</span> i<span class="op">++</span>)</a>
 <a class="sourceLine" id="cb90-9" title="9">{</a>
 <a class="sourceLine" id="cb90-10" title="10">    angle <span class="op">=</span> <span class="fl">0.1</span> <span class="op">*</span> i<span class="op">;</span></a>
 <a class="sourceLine" id="cb90-11" title="11">    x <span class="op">=</span> (a <span class="op">+</span> b <span class="op">*</span> angle) <span class="op">*</span> cos(angle)<span class="op">;</span></a>
@@ -4628,7 +4628,7 @@ I recently noticed that in some locations you could switch to a 3d mapping mode 
 <h4>Answer accepted (score 17)</h4>
 <p>There are multiple areas in path tracing that can be importance sampled. In addition, each of those areas can also use Multiple Importance Sampling, first proposed in Veach and Guibas’s <a href="https://sites.fas.harvard.edu/~cs278/papers/veach.pdf" rel="noreferrer">1995 paper</a>. To better explain, let’s look at a backwards path tracer:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb93-1" title="1">void RenderPixel(uint x, uint y, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb93-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera<span class="op">-&amp;</span>gt<span class="op">;</span>CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&gt;</span>Camera<span class="op">-&gt;</span>CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-3" title="3"></a>
 <a class="sourceLine" id="cb93-4" title="4">    float3 color(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-5" title="5">    float3 throughput(<span class="fl">1.0</span>f)<span class="op">;</span></a>
@@ -4636,38 +4636,38 @@ I recently noticed that in some locations you could switch to a 3d mapping mode 
 <a class="sourceLine" id="cb93-7" title="7"></a>
 <a class="sourceLine" id="cb93-8" title="8">    <span class="op">//</span> Bounce the ray around the scene</a>
 <a class="sourceLine" id="cb93-9" title="9">    const uint maxBounces <span class="op">=</span> <span class="dv">15</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb93-10" title="10">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&amp;</span>lt<span class="op">;</span> maxBounces<span class="op">;</span> <span class="op">++</span>bounces) {</a>
-<a class="sourceLine" id="cb93-11" title="11">        m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Intersect(ray)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-10" title="10">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&lt;</span> maxBounces<span class="op">;</span> <span class="op">++</span>bounces) {</a>
+<a class="sourceLine" id="cb93-11" title="11">        m_scene<span class="op">-&gt;</span>Intersect(ray)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-12" title="12"></a>
 <a class="sourceLine" id="cb93-13" title="13">        <span class="op">//</span> The ray missed. Return the background color</a>
 <a class="sourceLine" id="cb93-14" title="14">        <span class="cf">if</span> (ray.GeomID <span class="op">==</span> INVALID_GEOMETRY_ID) {</a>
-<a class="sourceLine" id="cb93-15" title="15">            color <span class="op">+=</span> throughput <span class="op">*</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>BackgroundColor<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-15" title="15">            color <span class="op">+=</span> throughput <span class="op">*</span> m_scene<span class="op">-&gt;</span>BackgroundColor<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-16" title="16">            <span class="cf">break</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb93-17" title="17">        }</a>
 <a class="sourceLine" id="cb93-18" title="18"></a>
 <a class="sourceLine" id="cb93-19" title="19">        <span class="op">//</span> Fetch the material</a>
-<a class="sourceLine" id="cb93-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetMaterial(ray.GeomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetMaterial(ray.GeomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-21" title="21">        <span class="op">//</span> The <span class="bu">object</span> might be emissive. If so, it will have a corresponding light</a>
 <a class="sourceLine" id="cb93-22" title="22">        <span class="op">//</span> Otherwise, GetLight will <span class="cf">return</span> nullptr</a>
-<a class="sourceLine" id="cb93-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetLight(ray.GeomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetLight(ray.GeomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-24" title="24"></a>
 <a class="sourceLine" id="cb93-25" title="25">        <span class="op">//</span> If we hit a light, add the emission</a>
 <a class="sourceLine" id="cb93-26" title="26">        <span class="cf">if</span> (light <span class="op">!=</span> nullptr) {</a>
-<a class="sourceLine" id="cb93-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Le()<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-27" title="27">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&gt;</span>Le()<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-28" title="28">        }</a>
 <a class="sourceLine" id="cb93-29" title="29"></a>
 <a class="sourceLine" id="cb93-30" title="30">        interaction.Position <span class="op">=</span> ray.Origin <span class="op">+</span> ray.Direction <span class="op">*</span> ray.TFar<span class="op">;</span></a>
-<a class="sourceLine" id="cb93-31" title="31">        interaction.Normal <span class="op">=</span> normalize(m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>InterpolateNormal(ray.GeomID, ray.PrimID, ray.U, ray.V))<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-31" title="31">        interaction.Normal <span class="op">=</span> normalize(m_scene<span class="op">-&gt;</span>InterpolateNormal(ray.GeomID, ray.PrimID, ray.U, ray.V))<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-32" title="32">        interaction.OutputDirection <span class="op">=</span> normalize(<span class="op">-</span>ray.Direction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-33" title="33"></a>
 <a class="sourceLine" id="cb93-34" title="34"></a>
 <a class="sourceLine" id="cb93-35" title="35">        <span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb93-36" title="36">        <span class="op">//</span> Choose the direction based on the bsdf        </a>
-<a class="sourceLine" id="cb93-37" title="37">        material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(interaction, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb93-38" title="38">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-37" title="37">        material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Sample(interaction, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-38" title="38">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-39" title="39"></a>
 <a class="sourceLine" id="cb93-40" title="40">        <span class="op">//</span> Accumulate the weight</a>
-<a class="sourceLine" id="cb93-41" title="41">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-41" title="41">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-42" title="42"></a>
 <a class="sourceLine" id="cb93-43" title="43">        <span class="op">//</span> Shoot a new ray</a>
 <a class="sourceLine" id="cb93-44" title="44"></a>
@@ -4681,9 +4681,9 @@ I recently noticed that in some locations you could switch to a 3d mapping mode 
 <a class="sourceLine" id="cb93-52" title="52"></a>
 <a class="sourceLine" id="cb93-53" title="53"></a>
 <a class="sourceLine" id="cb93-54" title="54">        <span class="op">//</span> Russian Roulette</a>
-<a class="sourceLine" id="cb93-55" title="55">        <span class="cf">if</span> (bounces <span class="op">&amp;</span>gt<span class="op">;</span> <span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb93-55" title="55">        <span class="cf">if</span> (bounces <span class="op">&gt;</span> <span class="dv">3</span>) {</a>
 <a class="sourceLine" id="cb93-56" title="56">            <span class="bu">float</span> p <span class="op">=</span> std::<span class="bu">max</span>(throughput.x, std::<span class="bu">max</span>(throughput.y, throughput.z))<span class="op">;</span></a>
-<a class="sourceLine" id="cb93-57" title="57">            <span class="cf">if</span> (sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat() <span class="op">&amp;</span>gt<span class="op">;</span> p) {</a>
+<a class="sourceLine" id="cb93-57" title="57">            <span class="cf">if</span> (sampler<span class="op">-&gt;</span>NextFloat() <span class="op">&gt;</span> p) {</a>
 <a class="sourceLine" id="cb93-58" title="58">                <span class="cf">break</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb93-59" title="59">            }</a>
 <a class="sourceLine" id="cb93-60" title="60"></a>
@@ -4691,7 +4691,7 @@ I recently noticed that in some locations you could switch to a 3d mapping mode 
 <a class="sourceLine" id="cb93-62" title="62">        }</a>
 <a class="sourceLine" id="cb93-63" title="63">    }</a>
 <a class="sourceLine" id="cb93-64" title="64"></a>
-<a class="sourceLine" id="cb93-65" title="65">    m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera<span class="op">-&amp;</span>gt<span class="op">;</span>FrameBufferData.SplatPixel(x, y, color)<span class="op">;</span></a>
+<a class="sourceLine" id="cb93-65" title="65">    m_scene<span class="op">-&gt;</span>Camera<span class="op">-&gt;</span>FrameBufferData.SplatPixel(x, y, color)<span class="op">;</span></a>
 <a class="sourceLine" id="cb93-66" title="66">}</a></code></pre></div>
 <p><strong>In English:</strong></p>
 <ol>
@@ -4723,7 +4723,7 @@ Goto 1
 <p>With this code, we only get color if the ray eventually hits a light. In addition, it doesn’t support punctual light sources, since they have no area.</p>
 <p>To fix this, we sample the lights directly at every bounce. We have to do a few small changes:</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb94-1" title="1">void RenderPixel(uint x, uint y, UniformSampler <span class="op">*</span>sampler) {</a>
-<a class="sourceLine" id="cb94-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera<span class="op">-&amp;</span>gt<span class="op">;</span>CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-2" title="2">    Ray ray <span class="op">=</span> m_scene<span class="op">-&gt;</span>Camera<span class="op">-&gt;</span>CalculateRayFromPixel(x, y, sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-3" title="3"></a>
 <a class="sourceLine" id="cb94-4" title="4">    float3 color(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-5" title="5">    float3 throughput(<span class="fl">1.0</span>f)<span class="op">;</span></a>
@@ -4731,43 +4731,43 @@ Goto 1
 <a class="sourceLine" id="cb94-7" title="7"></a>
 <a class="sourceLine" id="cb94-8" title="8">    <span class="op">//</span> Bounce the ray around the scene</a>
 <a class="sourceLine" id="cb94-9" title="9">    const uint maxBounces <span class="op">=</span> <span class="dv">15</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb94-10" title="10">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&amp;</span>lt<span class="op">;</span> maxBounces<span class="op">;</span> <span class="op">++</span>bounces) {</a>
-<a class="sourceLine" id="cb94-11" title="11">        m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Intersect(ray)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-10" title="10">    <span class="cf">for</span> (uint bounces <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> bounces <span class="op">&lt;</span> maxBounces<span class="op">;</span> <span class="op">++</span>bounces) {</a>
+<a class="sourceLine" id="cb94-11" title="11">        m_scene<span class="op">-&gt;</span>Intersect(ray)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-12" title="12"></a>
 <a class="sourceLine" id="cb94-13" title="13">        <span class="op">//</span> The ray missed. Return the background color</a>
 <a class="sourceLine" id="cb94-14" title="14">        <span class="cf">if</span> (ray.GeomID <span class="op">==</span> INVALID_GEOMETRY_ID) {</a>
-<a class="sourceLine" id="cb94-15" title="15">            color <span class="op">+=</span> throughput <span class="op">*</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>BackgroundColor<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-15" title="15">            color <span class="op">+=</span> throughput <span class="op">*</span> m_scene<span class="op">-&gt;</span>BackgroundColor<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-16" title="16">            <span class="cf">break</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb94-17" title="17">        }</a>
 <a class="sourceLine" id="cb94-18" title="18"></a>
 <a class="sourceLine" id="cb94-19" title="19">        <span class="op">//</span> Fetch the material</a>
-<a class="sourceLine" id="cb94-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetMaterial(ray.GeomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-20" title="20">        Material <span class="op">*</span>material <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetMaterial(ray.GeomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-21" title="21">        <span class="op">//</span> The <span class="bu">object</span> might be emissive. If so, it will have a corresponding light</a>
 <a class="sourceLine" id="cb94-22" title="22">        <span class="op">//</span> Otherwise, GetLight will <span class="cf">return</span> nullptr</a>
-<a class="sourceLine" id="cb94-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>GetLight(ray.GeomID)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-23" title="23">        Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>GetLight(ray.GeomID)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-24" title="24"></a>
 <a class="sourceLine" id="cb94-25" title="25">        <span class="op">//</span> If this <span class="kw">is</span> the first bounce <span class="kw">or</span> <span class="cf">if</span> we just had a specular bounce,</a>
 <a class="sourceLine" id="cb94-26" title="26">        <span class="op">//</span> we need to add the emmisive light</a>
-<a class="sourceLine" id="cb94-27" title="27">        <span class="cf">if</span> ((bounces <span class="op">==</span> <span class="dv">0</span> <span class="op">||</span> (interaction.SampledLobe <span class="op">&amp;</span>amp<span class="op">;</span> BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) <span class="op">&amp;</span>amp<span class="op">;&amp;</span>amp<span class="op">;</span> light <span class="op">!=</span> nullptr) {</a>
-<a class="sourceLine" id="cb94-28" title="28">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Le()<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-27" title="27">        <span class="cf">if</span> ((bounces <span class="op">==</span> <span class="dv">0</span> <span class="op">||</span> (interaction.SampledLobe <span class="op">&amp;</span> BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) <span class="op">&amp;&amp;</span> light <span class="op">!=</span> nullptr) {</a>
+<a class="sourceLine" id="cb94-28" title="28">            color <span class="op">+=</span> throughput <span class="op">*</span> light<span class="op">-&gt;</span>Le()<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-29" title="29">        }</a>
 <a class="sourceLine" id="cb94-30" title="30"></a>
 <a class="sourceLine" id="cb94-31" title="31">        interaction.Position <span class="op">=</span> ray.Origin <span class="op">+</span> ray.Direction <span class="op">*</span> ray.TFar<span class="op">;</span></a>
-<a class="sourceLine" id="cb94-32" title="32">        interaction.Normal <span class="op">=</span> normalize(m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>InterpolateNormal(ray.GeomID, ray.PrimID, ray.U, ray.V))<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-32" title="32">        interaction.Normal <span class="op">=</span> normalize(m_scene<span class="op">-&gt;</span>InterpolateNormal(ray.GeomID, ray.PrimID, ray.U, ray.V))<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-33" title="33">        interaction.OutputDirection <span class="op">=</span> normalize(<span class="op">-</span>ray.Direction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-34" title="34"></a>
 <a class="sourceLine" id="cb94-35" title="35"></a>
 <a class="sourceLine" id="cb94-36" title="36">        <span class="op">//</span> Calculate the direct lighting</a>
-<a class="sourceLine" id="cb94-37" title="37">        color <span class="op">+=</span> throughput <span class="op">*</span> SampleLights(sampler, interaction, material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf, light)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-37" title="37">        color <span class="op">+=</span> throughput <span class="op">*</span> SampleLights(sampler, interaction, material<span class="op">-&gt;</span>bsdf, light)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-38" title="38"></a>
 <a class="sourceLine" id="cb94-39" title="39"></a>
 <a class="sourceLine" id="cb94-40" title="40">        <span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb94-41" title="41">        <span class="op">//</span> Choose the direction based on the bsdf        </a>
-<a class="sourceLine" id="cb94-42" title="42">        material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(interaction, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb94-43" title="43">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-42" title="42">        material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Sample(interaction, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-43" title="43">        <span class="bu">float</span> pdf <span class="op">=</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-44" title="44"></a>
 <a class="sourceLine" id="cb94-45" title="45">        <span class="op">//</span> Accumulate the weight</a>
-<a class="sourceLine" id="cb94-46" title="46">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-46" title="46">        throughput <span class="op">=</span> throughput <span class="op">*</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-47" title="47"></a>
 <a class="sourceLine" id="cb94-48" title="48">        <span class="op">//</span> Shoot a new ray</a>
 <a class="sourceLine" id="cb94-49" title="49"></a>
@@ -4781,9 +4781,9 @@ Goto 1
 <a class="sourceLine" id="cb94-57" title="57"></a>
 <a class="sourceLine" id="cb94-58" title="58"></a>
 <a class="sourceLine" id="cb94-59" title="59">        <span class="op">//</span> Russian Roulette</a>
-<a class="sourceLine" id="cb94-60" title="60">        <span class="cf">if</span> (bounces <span class="op">&amp;</span>gt<span class="op">;</span> <span class="dv">3</span>) {</a>
+<a class="sourceLine" id="cb94-60" title="60">        <span class="cf">if</span> (bounces <span class="op">&gt;</span> <span class="dv">3</span>) {</a>
 <a class="sourceLine" id="cb94-61" title="61">            <span class="bu">float</span> p <span class="op">=</span> std::<span class="bu">max</span>(throughput.x, std::<span class="bu">max</span>(throughput.y, throughput.z))<span class="op">;</span></a>
-<a class="sourceLine" id="cb94-62" title="62">            <span class="cf">if</span> (sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat() <span class="op">&amp;</span>gt<span class="op">;</span> p) {</a>
+<a class="sourceLine" id="cb94-62" title="62">            <span class="cf">if</span> (sampler<span class="op">-&gt;</span>NextFloat() <span class="op">&gt;</span> p) {</a>
 <a class="sourceLine" id="cb94-63" title="63">                <span class="cf">break</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb94-64" title="64">            }</a>
 <a class="sourceLine" id="cb94-65" title="65"></a>
@@ -4791,7 +4791,7 @@ Goto 1
 <a class="sourceLine" id="cb94-67" title="67">        }</a>
 <a class="sourceLine" id="cb94-68" title="68">    }</a>
 <a class="sourceLine" id="cb94-69" title="69"></a>
-<a class="sourceLine" id="cb94-70" title="70">    m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Camera<span class="op">-&amp;</span>gt<span class="op">;</span>FrameBufferData.SplatPixel(x, y, color)<span class="op">;</span></a>
+<a class="sourceLine" id="cb94-70" title="70">    m_scene<span class="op">-&gt;</span>Camera<span class="op">-&gt;</span>FrameBufferData.SplatPixel(x, y, color)<span class="op">;</span></a>
 <a class="sourceLine" id="cb94-71" title="71">}</a></code></pre></div>
 <p>First, we add “color += throughput * SampleLights(…)”. I’ll go into detail about SampleLights() in a bit. But, essentially, it loops through all the lights, and returns their contribution to the color, attenuated by the BSDF.</p>
 <p>This is great, but we need to make one more change in order to make it correct; specifically, what happens when we hit a light. In the old code, we added the light’s emission to the color accumulation. But now we directly sample the light every bounce, so if we added the light’s emission, we would “double dip”. Therefore, the correct thing to do is… nothing; we skip accumulating the light’s emission.</p>
@@ -4808,11 +4808,11 @@ Perfectly specular bounces (aka mirrors)
 <p>When you hit a perfectly specular surfaces you can’t directly sample a light, because an input ray has only one output. Well, technically, we <em>could</em> check if the input ray is going to hit a light, but there’s no point; the main Path Tracing loop is going to do that anyway. Therefore, if we hit a light just after we hit a specular surface, we need to accumulate the color. If we don’t, lights will be black in mirrors.</p>
 <p>Now, let’s delve into SampleLights():</p>
 <div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb95-1" title="1">float3 SampleLights(UniformSampler <span class="op">*</span>sampler, SurfaceInteraction interaction, BSDF <span class="op">*</span>bsdf, Light <span class="op">*</span>hitLight) const {</a>
-<a class="sourceLine" id="cb95-2" title="2">    std::size_t numLights <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>NumLights()<span class="op">;</span></a>
+<a class="sourceLine" id="cb95-2" title="2">    std::size_t numLights <span class="op">=</span> m_scene<span class="op">-&gt;</span>NumLights()<span class="op">;</span></a>
 <a class="sourceLine" id="cb95-3" title="3"></a>
 <a class="sourceLine" id="cb95-4" title="4">    float3 L(<span class="fl">0.0</span>f)<span class="op">;</span></a>
-<a class="sourceLine" id="cb95-5" title="5">    <span class="cf">for</span> (uint i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> numLights<span class="op">;</span> <span class="op">++</span>i) {</a>
-<a class="sourceLine" id="cb95-6" title="6">        Light <span class="op">*</span>light <span class="op">=</span> <span class="op">&amp;</span>amp<span class="op">;</span>m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>Lights[i]<span class="op">;</span></a>
+<a class="sourceLine" id="cb95-5" title="5">    <span class="cf">for</span> (uint i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> numLights<span class="op">;</span> <span class="op">++</span>i) {</a>
+<a class="sourceLine" id="cb95-6" title="6">        Light <span class="op">*</span>light <span class="op">=</span> <span class="op">&amp;</span>m_scene<span class="op">-&gt;</span>Lights[i]<span class="op">;</span></a>
 <a class="sourceLine" id="cb95-7" title="7"></a>
 <a class="sourceLine" id="cb95-8" title="8">        <span class="op">//</span> Don<span class="st">&#39;t let a light contribute light to itself</span></a>
 <a class="sourceLine" id="cb95-9" title="9"><span class="st">        if (light == hitLight) {</span></a>
@@ -4846,27 +4846,27 @@ Return the direct lighting
 </ol>
 <p>Finally, EstimateDirect() is just evaluating <span class="math inline">\(BSDF(p, \omega_{\text{i}}, \omega_{\text{o}}) L_{\text{i}}(p, \omega_{\text{i}})\)</span></p>
 <p>For punctual light sources, this is simple as:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb96-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>amp<span class="op">;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb96-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
 <a class="sourceLine" id="cb96-2" title="2">    <span class="op">//</span> Only sample <span class="cf">if</span> the BRDF <span class="kw">is</span> non<span class="op">-</span>specular </a>
-<a class="sourceLine" id="cb96-3" title="3">    <span class="cf">if</span> ((bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>SupportedLobes <span class="op">&amp;</span>amp<span class="op">;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb96-3" title="3">    <span class="cf">if</span> ((bsdf<span class="op">-&gt;</span>SupportedLobes <span class="op">&amp;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
 <a class="sourceLine" id="cb96-4" title="4">        <span class="cf">return</span> float3(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb96-5" title="5">    }</a>
 <a class="sourceLine" id="cb96-6" title="6"></a>
-<a class="sourceLine" id="cb96-7" title="7">    interaction.InputDirection <span class="op">=</span> normalize(light<span class="op">-&amp;</span>gt<span class="op">;</span>Origin <span class="op">-</span> interaction.Position)<span class="op">;</span></a>
-<a class="sourceLine" id="cb96-8" title="8">    <span class="cf">return</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">*</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>Li<span class="op">;</span></a>
+<a class="sourceLine" id="cb96-7" title="7">    interaction.InputDirection <span class="op">=</span> normalize(light<span class="op">-&gt;</span>Origin <span class="op">-</span> interaction.Position)<span class="op">;</span></a>
+<a class="sourceLine" id="cb96-8" title="8">    <span class="cf">return</span> bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">*</span> light<span class="op">-&gt;</span>Li<span class="op">;</span></a>
 <a class="sourceLine" id="cb96-9" title="9">}</a></code></pre></div>
 <p>However, if we want lights to have area, we first need to sample a point on the light. Therefore, the full definition is:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb97-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>amp<span class="op">;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb97-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
 <a class="sourceLine" id="cb97-2" title="2">    float3 directLighting <span class="op">=</span> float3(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb97-3" title="3"></a>
 <a class="sourceLine" id="cb97-4" title="4">    <span class="op">//</span> Only sample <span class="cf">if</span> the BRDF <span class="kw">is</span> non<span class="op">-</span>specular </a>
-<a class="sourceLine" id="cb97-5" title="5">    <span class="cf">if</span> ((bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>SupportedLobes <span class="op">&amp;</span>amp<span class="op">;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb97-5" title="5">    <span class="cf">if</span> ((bsdf<span class="op">-&gt;</span>SupportedLobes <span class="op">&amp;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
 <a class="sourceLine" id="cb97-6" title="6">        <span class="bu">float</span> pdf<span class="op">;</span></a>
-<a class="sourceLine" id="cb97-7" title="7">        float3 Li <span class="op">=</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>amp<span class="op">;</span>pdf)<span class="op">;</span></a>
+<a class="sourceLine" id="cb97-7" title="7">        float3 Li <span class="op">=</span> light<span class="op">-&gt;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>pdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb97-8" title="8"></a>
 <a class="sourceLine" id="cb97-9" title="9">        <span class="op">//</span> Make sure the pdf isn<span class="st">&#39;t zero and the radiance isn&#39;</span>t black</a>
-<a class="sourceLine" id="cb97-10" title="10">        <span class="cf">if</span> (pdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;</span>amp<span class="op">;&amp;</span>amp<span class="op">;</span> <span class="op">!</span><span class="bu">all</span>(Li)) {</a>
-<a class="sourceLine" id="cb97-11" title="11">            directLighting <span class="op">+=</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">*</span> Li <span class="op">/</span> pdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb97-10" title="10">        <span class="cf">if</span> (pdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="bu">all</span>(Li)) {</a>
+<a class="sourceLine" id="cb97-11" title="11">            directLighting <span class="op">+=</span> bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">*</span> Li <span class="op">/</span> pdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb97-12" title="12">        }</a>
 <a class="sourceLine" id="cb97-13" title="13">    }</a>
 <a class="sourceLine" id="cb97-14" title="14"></a>
@@ -4875,7 +4875,7 @@ Return the direct lighting
 <p>We can implement light-&gt;SampleLi however we want; we can choose the point uniformly, or importance sample. In either case, we divide the radiosity by the pdf of choosing the point. Again, to satisfy the requirements of Monte Carlo.</p>
 <p>If the BRDF is highly view dependent, it may be better to choose a point based on the BRDF, instead of a random point on the light. But how do we choose? Sample based on the light, or based on the BRDF?</p>
 <p>Why not both? Enter Multiple Importance Sampling. In short, we evaluate <span class="math inline">\(BSDF(p, \omega_{\text{i}}, \omega_{\text{o}}) L_{\text{i}}(p, \omega_{\text{i}})\)</span> multiple times, using different sampling techniques, then average them together using weights based on their pdfs. In code this is:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb98-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>amp<span class="op">;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb98-1" title="1">float3 EstimateDirect(Light <span class="op">*</span>light, UniformSampler <span class="op">*</span>sampler, SurfaceInteraction <span class="op">&amp;</span>interaction, BSDF <span class="op">*</span>bsdf) const {</a>
 <a class="sourceLine" id="cb98-2" title="2">    float3 directLighting <span class="op">=</span> float3(<span class="fl">0.0</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-3" title="3">    float3 f<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-4" title="4">    <span class="bu">float</span> lightPdf, scatteringPdf<span class="op">;</span></a>
@@ -4883,16 +4883,16 @@ Return the direct lighting
 <a class="sourceLine" id="cb98-6" title="6"></a>
 <a class="sourceLine" id="cb98-7" title="7">    <span class="op">//</span> Sample lighting <span class="cf">with</span> multiple importance sampling</a>
 <a class="sourceLine" id="cb98-8" title="8">    <span class="op">//</span> Only sample <span class="cf">if</span> the BRDF <span class="kw">is</span> non<span class="op">-</span>specular </a>
-<a class="sourceLine" id="cb98-9" title="9">    <span class="cf">if</span> ((bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>SupportedLobes <span class="op">&amp;</span>amp<span class="op">;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb98-10" title="10">        float3 Li <span class="op">=</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>amp<span class="op">;</span>lightPdf)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-9" title="9">    <span class="cf">if</span> ((bsdf<span class="op">-&gt;</span>SupportedLobes <span class="op">&amp;</span> <span class="op">~</span>BSDFLobe::Specular) <span class="op">!=</span> <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb98-10" title="10">        float3 Li <span class="op">=</span> light<span class="op">-&gt;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>lightPdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-11" title="11"></a>
 <a class="sourceLine" id="cb98-12" title="12">        <span class="op">//</span> Make sure the pdf isn<span class="st">&#39;t zero and the radiance isn&#39;</span>t black</a>
-<a class="sourceLine" id="cb98-13" title="13">        <span class="cf">if</span> (lightPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;</span>amp<span class="op">;&amp;</span>amp<span class="op">;</span> <span class="op">!</span><span class="bu">all</span>(Li)) {</a>
+<a class="sourceLine" id="cb98-13" title="13">        <span class="cf">if</span> (lightPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="bu">all</span>(Li)) {</a>
 <a class="sourceLine" id="cb98-14" title="14">            <span class="op">//</span> Calculate the brdf value</a>
-<a class="sourceLine" id="cb98-15" title="15">            f <span class="op">=</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction)<span class="op">;</span></a>
-<a class="sourceLine" id="cb98-16" title="16">            scatteringPdf <span class="op">=</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-15" title="15">            f <span class="op">=</span> bsdf<span class="op">-&gt;</span>Eval(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-16" title="16">            scatteringPdf <span class="op">=</span> bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-17" title="17"></a>
-<a class="sourceLine" id="cb98-18" title="18">            <span class="cf">if</span> (scatteringPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;</span>amp<span class="op">;&amp;</span>amp<span class="op">;</span> <span class="op">!</span><span class="bu">all</span>(f)) {</a>
+<a class="sourceLine" id="cb98-18" title="18">            <span class="cf">if</span> (scatteringPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="bu">all</span>(f)) {</a>
 <a class="sourceLine" id="cb98-19" title="19">                <span class="bu">float</span> weight <span class="op">=</span> PowerHeuristic(<span class="dv">1</span>, lightPdf, <span class="dv">1</span>, scatteringPdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-20" title="20">                directLighting <span class="op">+=</span> f <span class="op">*</span> Li <span class="op">*</span> weight <span class="op">/</span> lightPdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-21" title="21">            }</a>
@@ -4901,18 +4901,18 @@ Return the direct lighting
 <a class="sourceLine" id="cb98-24" title="24"></a>
 <a class="sourceLine" id="cb98-25" title="25"></a>
 <a class="sourceLine" id="cb98-26" title="26">    <span class="op">//</span> Sample brdf <span class="cf">with</span> multiple importance sampling</a>
-<a class="sourceLine" id="cb98-27" title="27">    bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(interaction, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb98-28" title="28">    f <span class="op">=</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction)<span class="op">;</span></a>
-<a class="sourceLine" id="cb98-29" title="29">    scatteringPdf <span class="op">=</span> bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
-<a class="sourceLine" id="cb98-30" title="30">    <span class="cf">if</span> (scatteringPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;</span>amp<span class="op">;&amp;</span>amp<span class="op">;</span> <span class="op">!</span><span class="bu">all</span>(f)) {</a>
-<a class="sourceLine" id="cb98-31" title="31">        lightPdf <span class="op">=</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>PdfLi(m_scene, interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-27" title="27">    bsdf<span class="op">-&gt;</span>Sample(interaction, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-28" title="28">    f <span class="op">=</span> bsdf<span class="op">-&gt;</span>Eval(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-29" title="29">    scatteringPdf <span class="op">=</span> bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb98-30" title="30">    <span class="cf">if</span> (scatteringPdf <span class="op">!=</span> <span class="fl">0.0</span>f <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="bu">all</span>(f)) {</a>
+<a class="sourceLine" id="cb98-31" title="31">        lightPdf <span class="op">=</span> light<span class="op">-&gt;</span>PdfLi(m_scene, interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb98-32" title="32">        <span class="cf">if</span> (lightPdf <span class="op">==</span> <span class="fl">0.0</span>f) {</a>
 <a class="sourceLine" id="cb98-33" title="33">            <span class="op">//</span> We didn<span class="st">&#39;t hit anything, so ignore the brdf sample</span></a>
 <a class="sourceLine" id="cb98-34" title="34"><span class="st">            return directLighting;</span></a>
 <a class="sourceLine" id="cb98-35" title="35"><span class="st">        }</span></a>
 <a class="sourceLine" id="cb98-36" title="36"></a>
 <a class="sourceLine" id="cb98-37" title="37"><span class="st">        float weight = PowerHeuristic(1, scatteringPdf, 1, lightPdf);</span></a>
-<a class="sourceLine" id="cb98-38" title="38"><span class="st">        float3 Li = light-&amp;gt;Le();</span></a>
+<a class="sourceLine" id="cb98-38" title="38"><span class="st">        float3 Li = light-&gt;Le();</span></a>
 <a class="sourceLine" id="cb98-39" title="39"><span class="st">        directLighting += f * Li * weight / scatteringPdf;</span></a>
 <a class="sourceLine" id="cb98-40" title="40"><span class="st">    }</span></a>
 <a class="sourceLine" id="cb98-41" title="41"></a>
@@ -5033,13 +5033,13 @@ Average
 <p>As N gets large, the estimate will converge to the correct solution.</p>
 <p>We can apply this same principle to light sampling. Instead of sampling every light, we randomly pick one, and multiply the result by the number of lights (This is the same as dividing by the fractional pdf):</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb100-1" title="1">float3 SampleOneLight(UniformSampler <span class="op">*</span>sampler, SurfaceInteraction interaction, BSDF <span class="op">*</span>bsdf, Light <span class="op">*</span>hitLight) const {</a>
-<a class="sourceLine" id="cb100-2" title="2">    std::size_t numLights <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>NumLights()<span class="op">;</span></a>
+<a class="sourceLine" id="cb100-2" title="2">    std::size_t numLights <span class="op">=</span> m_scene<span class="op">-&gt;</span>NumLights()<span class="op">;</span></a>
 <a class="sourceLine" id="cb100-3" title="3"></a>
 <a class="sourceLine" id="cb100-4" title="4">    <span class="op">//</span> Return black <span class="cf">if</span> there are no lights</a>
 <a class="sourceLine" id="cb100-5" title="5">    <span class="op">//</span> And don<span class="st">&#39;t let a light contribute light to itself</span></a>
 <a class="sourceLine" id="cb100-6" title="6"><span class="st">    // Aka, if we hit a light</span></a>
 <a class="sourceLine" id="cb100-7" title="7"><span class="st">    // This is the special case where there is only 1 light</span></a>
-<a class="sourceLine" id="cb100-8" title="8"><span class="st">    if (numLights == 0 || numLights == 1 &amp;amp;&amp;amp; hitLight != nullptr) {</span></a>
+<a class="sourceLine" id="cb100-8" title="8"><span class="st">    if (numLights == 0 || numLights == 1 &amp;&amp; hitLight != nullptr) {</span></a>
 <a class="sourceLine" id="cb100-9" title="9"><span class="st">        return float3(0.0f);</span></a>
 <a class="sourceLine" id="cb100-10" title="10"><span class="st">    }</span></a>
 <a class="sourceLine" id="cb100-11" title="11"></a>
@@ -5047,7 +5047,7 @@ Average
 <a class="sourceLine" id="cb100-13" title="13">    <span class="op">//</span> Choose another one</a>
 <a class="sourceLine" id="cb100-14" title="14">    Light <span class="op">*</span>light<span class="op">;</span></a>
 <a class="sourceLine" id="cb100-15" title="15">    do {</a>
-<a class="sourceLine" id="cb100-16" title="16">        light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>RandomOneLight(sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb100-16" title="16">        light <span class="op">=</span> m_scene<span class="op">-&gt;</span>RandomOneLight(sampler)<span class="op">;</span></a>
 <a class="sourceLine" id="cb100-17" title="17">    } <span class="cf">while</span> (light <span class="op">==</span> hitLight)<span class="op">;</span></a>
 <a class="sourceLine" id="cb100-18" title="18"></a>
 <a class="sourceLine" id="cb100-19" title="19">    <span class="cf">return</span> numLights <span class="op">*</span> EstimateDirect(light, sampler, interaction, bsdf)<span class="op">;</span></a>
@@ -5062,31 +5062,31 @@ Multiple Importance Sampling the “New Ray” Direction
 <div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb101-1" title="1"><span class="op">//</span> Get the new ray direction</a>
 <a class="sourceLine" id="cb101-2" title="2"></a>
 <a class="sourceLine" id="cb101-3" title="3"><span class="op">//</span> Randomly (uniform) choose whether to sample based on the BSDF <span class="kw">or</span> the Lights</a>
-<a class="sourceLine" id="cb101-4" title="4"><span class="bu">float</span> p <span class="op">=</span> sampler<span class="op">-&amp;</span>gt<span class="op">;</span>NextFloat()<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-4" title="4"><span class="bu">float</span> p <span class="op">=</span> sampler<span class="op">-&gt;</span>NextFloat()<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-5" title="5"></a>
-<a class="sourceLine" id="cb101-6" title="6">Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&amp;</span>gt<span class="op">;</span>RandomLight()<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-6" title="6">Light <span class="op">*</span>light <span class="op">=</span> m_scene<span class="op">-&gt;</span>RandomLight()<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-7" title="7"></a>
-<a class="sourceLine" id="cb101-8" title="8"><span class="cf">if</span> (p <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">0.5</span>f) {</a>
+<a class="sourceLine" id="cb101-8" title="8"><span class="cf">if</span> (p <span class="op">&lt;</span> <span class="fl">0.5</span>f) {</a>
 <a class="sourceLine" id="cb101-9" title="9">    <span class="op">//</span> Choose the direction based on the bsdf </a>
-<a class="sourceLine" id="cb101-10" title="10">    material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Sample(interaction, sampler)<span class="op">;</span></a>
-<a class="sourceLine" id="cb101-11" title="11">    <span class="bu">float</span> bsdfPdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-10" title="10">    material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Sample(interaction, sampler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-11" title="11">    <span class="bu">float</span> bsdfPdf <span class="op">=</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-12" title="12"></a>
-<a class="sourceLine" id="cb101-13" title="13">    <span class="bu">float</span> lightPdf <span class="op">=</span> light<span class="op">-&amp;</span>gt<span class="op">;</span>PdfLi(m_scene, interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-13" title="13">    <span class="bu">float</span> lightPdf <span class="op">=</span> light<span class="op">-&gt;</span>PdfLi(m_scene, interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-14" title="14">    <span class="bu">float</span> weight <span class="op">=</span> PowerHeuristic(<span class="dv">1</span>, bsdfPdf, <span class="dv">1</span>, lightPdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-15" title="15"></a>
 <a class="sourceLine" id="cb101-16" title="16">    <span class="op">//</span> Accumulate the throughput</a>
-<a class="sourceLine" id="cb101-17" title="17">    throughput <span class="op">=</span> throughput <span class="op">*</span> weight <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">/</span> bsdfPdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-17" title="17">    throughput <span class="op">=</span> throughput <span class="op">*</span> weight <span class="op">*</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">/</span> bsdfPdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-18" title="18"></a>
 <a class="sourceLine" id="cb101-19" title="19">} <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb101-20" title="20">    <span class="op">//</span> Choose the direction based on a light</a>
 <a class="sourceLine" id="cb101-21" title="21">    <span class="bu">float</span> lightPdf<span class="op">;</span></a>
-<a class="sourceLine" id="cb101-22" title="22">    light<span class="op">-&amp;</span>gt<span class="op">;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>amp<span class="op">;</span>lightPdf)<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-22" title="22">    light<span class="op">-&gt;</span>SampleLi(sampler, m_scene, interaction, <span class="op">&amp;</span>lightPdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-23" title="23"></a>
-<a class="sourceLine" id="cb101-24" title="24">    <span class="bu">float</span> bsdfPdf <span class="op">=</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Pdf(interaction)<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-24" title="24">    <span class="bu">float</span> bsdfPdf <span class="op">=</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Pdf(interaction)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-25" title="25">    <span class="bu">float</span> weight <span class="op">=</span> PowerHeuristic(<span class="dv">1</span>, lightPdf, <span class="dv">1</span>, bsdfPdf)<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-26" title="26"></a>
 <a class="sourceLine" id="cb101-27" title="27">    <span class="op">//</span> Accumulate the throughput</a>
-<a class="sourceLine" id="cb101-28" title="28">    throughput <span class="op">=</span> throughput <span class="op">*</span> weight <span class="op">*</span> material<span class="op">-&amp;</span>gt<span class="op">;</span>bsdf<span class="op">-&amp;</span>gt<span class="op">;</span>Eval(interaction) <span class="op">/</span> lightPdf<span class="op">;</span></a>
+<a class="sourceLine" id="cb101-28" title="28">    throughput <span class="op">=</span> throughput <span class="op">*</span> weight <span class="op">*</span> material<span class="op">-&gt;</span>bsdf<span class="op">-&gt;</span>Eval(interaction) <span class="op">/</span> lightPdf<span class="op">;</span></a>
 <a class="sourceLine" id="cb101-29" title="29">}</a></code></pre></div>
 <p>That all said, do we really <strong><em>want</em></strong> to importance sample the “New Ray” direction based on the light? For <em>direct</em> lighting, the radiosity is affected by both the BSDF of the surface, and the direction of the light. But for <em>indirect</em> lighting, the radiosity is almost exclusively defined by the BSDF of the surface hit before. So, adding light importance sampling doesn’t give us anything.</p>
 <p>Therefore, it is common to only importance sample the “New Direction” with the BSDF, but apply Multiple Importance Sampling to the direct lighting.</p>
@@ -5312,22 +5312,22 @@ Discrete which almost every other algorithm than polygon mesh optimization, cons
 <p>I have multiple problems with this. One I can’t find the line number on which the error has occurred, second it doesn’t tell me properly why the error occurred (not a big problem though) and lastly I have to include a while loop after each OpenGL function call.</p>
 <p>Here’s an example,</p>
 <div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb105-1" title="1">unsigned <span class="bu">int</span> <span class="bu">buffer</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb105-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span>amp<span class="op">;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb105-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb105-3" title="3">glBindBuffer(GL_ARRAY_BUFFER, <span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb105-4" title="4">glBufferData(GL_ARRAY_BUFFER, <span class="dv">8</span> <span class="op">*</span> sizeof(<span class="bu">float</span>), vertices, GL_STATIC_DRAW)<span class="op">;</span> </a></code></pre></div>
 <p>Now if I write it with <code>glGetError()</code>, it would look something like</p>
 <div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb106-1" title="1">unsigned <span class="bu">int</span> err <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb106-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span>amp<span class="op">;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb106-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb106-3" title="3"><span class="cf">while</span>( <span class="op">!</span>(err <span class="op">=</span> glGetError()) ){</a>
-<a class="sourceLine" id="cb106-4" title="4">    std::cout <span class="op">&amp;</span>lt<span class="op">;&amp;</span>lt<span class="op">;</span> err<span class="op">;</span></a>
+<a class="sourceLine" id="cb106-4" title="4">    std::cout <span class="op">&lt;&lt;</span> err<span class="op">;</span></a>
 <a class="sourceLine" id="cb106-5" title="5">}  </a>
 <a class="sourceLine" id="cb106-6" title="6">glBindBuffer(GL_ARRAY_BUFFER, <span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb106-7" title="7"><span class="cf">while</span>( <span class="op">!</span>(err <span class="op">=</span> glGetError()) ){</a>
-<a class="sourceLine" id="cb106-8" title="8">    std::cout <span class="op">&amp;</span>lt<span class="op">;&amp;</span>lt<span class="op">;</span> err<span class="op">;</span></a>
+<a class="sourceLine" id="cb106-8" title="8">    std::cout <span class="op">&lt;&lt;</span> err<span class="op">;</span></a>
 <a class="sourceLine" id="cb106-9" title="9">}  </a>
 <a class="sourceLine" id="cb106-10" title="10">glBufferData(GL_ARRAY_BUFFER, <span class="dv">8</span> <span class="op">*</span> sizeof(<span class="bu">float</span>), vertices, GL_STATIC_DRAW)<span class="op">;</span> </a>
 <a class="sourceLine" id="cb106-11" title="11"><span class="cf">while</span>( <span class="op">!</span>(err <span class="op">=</span> glGetError()) ){</a>
-<a class="sourceLine" id="cb106-12" title="12">    std::cout <span class="op">&amp;</span>lt<span class="op">;&amp;</span>lt<span class="op">;</span> err<span class="op">;</span></a>
+<a class="sourceLine" id="cb106-12" title="12">    std::cout <span class="op">&lt;&lt;</span> err<span class="op">;</span></a>
 <a class="sourceLine" id="cb106-13" title="13">}  </a></code></pre></div>
 <p>Surely this isn’t the way to go, right ? The source code looks so ugly.</p>
 <p>How do I do proper error handling with OpenGL ?</p>
@@ -5352,12 +5352,12 @@ Discrete which almost every other algorithm than polygon mesh optimization, cons
 <a class="sourceLine" id="cb107-2" title="2">{</a>
 <a class="sourceLine" id="cb107-3" title="3">    GLenum err<span class="op">;</span></a>
 <a class="sourceLine" id="cb107-4" title="4">    <span class="cf">while</span>( <span class="op">!</span>(err <span class="op">=</span> glGetError()) ){</a>
-<a class="sourceLine" id="cb107-5" title="5">        std::cout <span class="op">&amp;</span>lt<span class="op">;&amp;</span>lt<span class="op">;</span> err<span class="op">;</span></a>
+<a class="sourceLine" id="cb107-5" title="5">        std::cout <span class="op">&lt;&lt;</span> err<span class="op">;</span></a>
 <a class="sourceLine" id="cb107-6" title="6">    }  </a>
 <a class="sourceLine" id="cb107-7" title="7">}</a></code></pre></div>
 <p>That reduces your code to:</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb108-1" title="1">unsigned <span class="bu">int</span> <span class="bu">buffer</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb108-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span>amp<span class="op">;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb108-2" title="2">glGenBuffers(<span class="dv">1</span>, <span class="op">&amp;</span><span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb108-3" title="3">checkGLError()<span class="op">;</span></a>
 <a class="sourceLine" id="cb108-4" title="4">glBindBuffer(GL_ARRAY_BUFFER, <span class="bu">buffer</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb108-5" title="5">checkGLError()<span class="op">;</span></a>
@@ -5489,8 +5489,8 @@ There seem to be various implementations, as suggested by the tests illustrated 
 <a class="sourceLine" id="cb110-27" title="27"><span class="st">   1.  Fx is continuous and monotonically increasing in |du/dx| and |dv/dx|.</span></a>
 <a class="sourceLine" id="cb110-28" title="28"><span class="st">       Fy is continuous and monotonically increasing in |du/dy| and |dv/dy|.</span></a>
 <a class="sourceLine" id="cb110-29" title="29"></a>
-<a class="sourceLine" id="cb110-30" title="30"><span class="st">   2.  max(|du/dx|,|dv/dx|} &amp;lt;= Fx &amp;lt;= |du/dx| + |dv/dx|.</span></a>
-<a class="sourceLine" id="cb110-31" title="31"><span class="st">       max(|du/dy|,|dv/dy|} &amp;lt;= Fy &amp;lt;= |du/dy| + |dv/dy|.</span></a>
+<a class="sourceLine" id="cb110-30" title="30"><span class="st">   2.  max(|du/dx|,|dv/dx|} &lt;= Fx &lt;= |du/dx| + |dv/dx|.</span></a>
+<a class="sourceLine" id="cb110-31" title="31"><span class="st">       max(|du/dy|,|dv/dy|} &lt;= Fy &lt;= |du/dy| + |dv/dy|.</span></a>
 <a class="sourceLine" id="cb110-32" title="32"></a>
 <a class="sourceLine" id="cb110-33" title="33"><span class="st"> Instead of a single sample, Tau, at (u,v,Lamda), &#39;</span>N<span class="st">&#39; locations in the mipmap</span></a>
 <a class="sourceLine" id="cb110-34" title="34"><span class="st"> at LOD Lamda, are sampled within the texture footprint of the pixel.</span></a>
@@ -5504,14 +5504,14 @@ There seem to be various implementations, as suggested by the tests illustrated 
 <a class="sourceLine" id="cb110-42" title="42"></a>
 <a class="sourceLine" id="cb110-43" title="43"><span class="st">                i=N</span></a>
 <a class="sourceLine" id="cb110-44" title="44"><span class="st">                ---</span></a>
-<a class="sourceLine" id="cb110-45" title="45"><span class="st"> TauAniso = 1/N \ Tau(u(x - 1/2 + i/(N+1), y), v(x - 1/2 + i/(N+1), y)),  Px &amp;gt; Py</span></a>
+<a class="sourceLine" id="cb110-45" title="45"><span class="st"> TauAniso = 1/N \ Tau(u(x - 1/2 + i/(N+1), y), v(x - 1/2 + i/(N+1), y)),  Px &gt; Py</span></a>
 <a class="sourceLine" id="cb110-46" title="46"><span class="st">                /</span></a>
 <a class="sourceLine" id="cb110-47" title="47"><span class="st">                ---</span></a>
 <a class="sourceLine" id="cb110-48" title="48"><span class="st">                i=1</span></a>
 <a class="sourceLine" id="cb110-49" title="49"></a>
 <a class="sourceLine" id="cb110-50" title="50"><span class="st">                i=N</span></a>
 <a class="sourceLine" id="cb110-51" title="51"><span class="st">                ---</span></a>
-<a class="sourceLine" id="cb110-52" title="52"><span class="st"> TauAniso = 1/N \ Tau(u(x, y - 1/2 + i/(N+1)), v(x, y - 1/2 + i/(N+1))),  Py &amp;gt;= Px</span></a>
+<a class="sourceLine" id="cb110-52" title="52"><span class="st"> TauAniso = 1/N \ Tau(u(x, y - 1/2 + i/(N+1)), v(x, y - 1/2 + i/(N+1))),  Py &gt;= Px</span></a>
 <a class="sourceLine" id="cb110-53" title="53"><span class="st">                /</span></a>
 <a class="sourceLine" id="cb110-54" title="54"><span class="st">                ---</span></a>
 <a class="sourceLine" id="cb110-55" title="55"><span class="st">                i=1</span></a>
@@ -5522,14 +5522,14 @@ There seem to be various implementations, as suggested by the tests illustrated 
 <a class="sourceLine" id="cb110-60" title="60"></a>
 <a class="sourceLine" id="cb110-61" title="61"><span class="st">                i=N</span></a>
 <a class="sourceLine" id="cb110-62" title="62"><span class="st">                ---</span></a>
-<a class="sourceLine" id="cb110-63" title="63"><span class="st"> TauAniso = 1/N \ Tau(u(x,y)+dudx(i/(N+1)-1/2), v(x,y)+dvdx(i/(N+1)-1/2)), Px &amp;gt; Py</span></a>
+<a class="sourceLine" id="cb110-63" title="63"><span class="st"> TauAniso = 1/N \ Tau(u(x,y)+dudx(i/(N+1)-1/2), v(x,y)+dvdx(i/(N+1)-1/2)), Px &gt; Py</span></a>
 <a class="sourceLine" id="cb110-64" title="64"><span class="st">                /</span></a>
 <a class="sourceLine" id="cb110-65" title="65"><span class="st">                ---</span></a>
 <a class="sourceLine" id="cb110-66" title="66"><span class="st">                i=1</span></a>
 <a class="sourceLine" id="cb110-67" title="67"></a>
 <a class="sourceLine" id="cb110-68" title="68"><span class="st">                i=N</span></a>
 <a class="sourceLine" id="cb110-69" title="69"><span class="st">                ---</span></a>
-<a class="sourceLine" id="cb110-70" title="70"><span class="st"> TauAniso = 1/N \ Tau(u(x,y)+dudy(i/(N+1)-1/2), v(x,y)+dvdy(i/(N+1)-1/2)), Py &amp;gt;= Px</span></a>
+<a class="sourceLine" id="cb110-70" title="70"><span class="st"> TauAniso = 1/N \ Tau(u(x,y)+dudy(i/(N+1)-1/2), v(x,y)+dvdy(i/(N+1)-1/2)), Py &gt;= Px</span></a>
 <a class="sourceLine" id="cb110-71" title="71"><span class="st">                /</span></a>
 <a class="sourceLine" id="cb110-72" title="72"><span class="st">                ---</span></a>
 <a class="sourceLine" id="cb110-73" title="73"><span class="st">                i=1 </span></a></code></pre></div>
@@ -5719,8 +5719,8 @@ Normally woth rotating objects in 3d you have a pivot. With rotation matrices it
 <a class="sourceLine" id="cb116-6" title="6">        X <span class="op">=</span> math.degrees(math.atan2(t0, t1))</a>
 <a class="sourceLine" id="cb116-7" title="7"></a>
 <a class="sourceLine" id="cb116-8" title="8">        t2 <span class="op">=</span> <span class="fl">+2.0</span> <span class="op">*</span> (w <span class="op">*</span> y <span class="op">-</span> z <span class="op">*</span> x)</a>
-<a class="sourceLine" id="cb116-9" title="9">        t2 <span class="op">=</span> <span class="fl">+1.0</span> <span class="cf">if</span> t2 <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">+1.0</span> <span class="cf">else</span> t2</a>
-<a class="sourceLine" id="cb116-10" title="10">        t2 <span class="op">=</span> <span class="fl">-1.0</span> <span class="cf">if</span> t2 <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">-1.0</span> <span class="cf">else</span> t2</a>
+<a class="sourceLine" id="cb116-9" title="9">        t2 <span class="op">=</span> <span class="fl">+1.0</span> <span class="cf">if</span> t2 <span class="op">&gt;</span> <span class="fl">+1.0</span> <span class="cf">else</span> t2</a>
+<a class="sourceLine" id="cb116-10" title="10">        t2 <span class="op">=</span> <span class="fl">-1.0</span> <span class="cf">if</span> t2 <span class="op">&lt;</span> <span class="fl">-1.0</span> <span class="cf">else</span> t2</a>
 <a class="sourceLine" id="cb116-11" title="11">        Y <span class="op">=</span> math.degrees(math.asin(t2))</a>
 <a class="sourceLine" id="cb116-12" title="12"></a>
 <a class="sourceLine" id="cb116-13" title="13">        t3 <span class="op">=</span> <span class="fl">+2.0</span> <span class="op">*</span> (w <span class="op">*</span> z <span class="op">+</span> x <span class="op">*</span> y)</a>
@@ -5757,8 +5757,8 @@ Normally woth rotating objects in 3d you have a pivot. With rotation matrices it
 <a class="sourceLine" id="cb119-4" title="4">    t1 <span class="op">=</span> <span class="fl">+1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> (x <span class="op">*</span> x <span class="op">+</span> y <span class="op">*</span> y)</a>
 <a class="sourceLine" id="cb119-5" title="5">    roll <span class="op">=</span> math.atan2(t0, t1)</a>
 <a class="sourceLine" id="cb119-6" title="6">    t2 <span class="op">=</span> <span class="fl">+2.0</span> <span class="op">*</span> (w <span class="op">*</span> y <span class="op">-</span> z <span class="op">*</span> x)</a>
-<a class="sourceLine" id="cb119-7" title="7">    t2 <span class="op">=</span> <span class="fl">+1.0</span> <span class="cf">if</span> t2 <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">+1.0</span> <span class="cf">else</span> t2</a>
-<a class="sourceLine" id="cb119-8" title="8">    t2 <span class="op">=</span> <span class="fl">-1.0</span> <span class="cf">if</span> t2 <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">-1.0</span> <span class="cf">else</span> t2</a>
+<a class="sourceLine" id="cb119-7" title="7">    t2 <span class="op">=</span> <span class="fl">+1.0</span> <span class="cf">if</span> t2 <span class="op">&gt;</span> <span class="fl">+1.0</span> <span class="cf">else</span> t2</a>
+<a class="sourceLine" id="cb119-8" title="8">    t2 <span class="op">=</span> <span class="fl">-1.0</span> <span class="cf">if</span> t2 <span class="op">&lt;</span> <span class="fl">-1.0</span> <span class="cf">else</span> t2</a>
 <a class="sourceLine" id="cb119-9" title="9">    pitch <span class="op">=</span> math.asin(t2)</a>
 <a class="sourceLine" id="cb119-10" title="10">    t3 <span class="op">=</span> <span class="fl">+2.0</span> <span class="op">*</span> (w <span class="op">*</span> z <span class="op">+</span> x <span class="op">*</span> y)</a>
 <a class="sourceLine" id="cb119-11" title="11">    t4 <span class="op">=</span> <span class="fl">+1.0</span> <span class="op">-</span> <span class="fl">2.0</span> <span class="op">*</span> (y <span class="op">*</span> y <span class="op">+</span> z <span class="op">*</span> z)</a>
@@ -5804,7 +5804,7 @@ Normally woth rotating objects in 3d you have a pivot. With rotation matrices it
 <a class="sourceLine" id="cb120-3" title="3">    <span class="bu">float</span> t <span class="op">=</span> <span class="fl">0.0</span>f<span class="op">;</span></a>
 <a class="sourceLine" id="cb120-4" title="4">    <span class="bu">float</span> amplitude <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb120-5" title="5">    <span class="bu">float</span> amplitudeSum <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb120-6" title="6">    <span class="cf">for</span>(<span class="bu">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&amp;</span>lt<span class="op">;</span> octaves<span class="op">;</span> <span class="op">++</span>k)</a>
+<a class="sourceLine" id="cb120-6" title="6">    <span class="cf">for</span>(<span class="bu">int</span> k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> k <span class="op">&lt;</span> octaves<span class="op">;</span> <span class="op">++</span>k)</a>
 <a class="sourceLine" id="cb120-7" title="7">    {</a>
 <a class="sourceLine" id="cb120-8" title="8">        t <span class="op">+=</span> <span class="bu">min</span>(snoise(P <span class="op">*</span> frequency)<span class="op">+</span>addition, <span class="fl">1.0</span>) <span class="op">*</span> amplitude<span class="op">;</span></a>
 <a class="sourceLine" id="cb120-9" title="9">        amplitudeSum <span class="op">+=</span> amplitude<span class="op">;</span></a>
@@ -5923,9 +5923,9 @@ f_r = \frac{DFG}{4(n\cdot w_i)(n \cdot w_o)},
 <div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb123-1" title="1">const <span class="bu">int</span> NUM_POINTS <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb123-2" title="2">uint32_t angle <span class="op">=</span> <span class="dv">360</span><span class="op">/</span>NUM_POINTS<span class="op">;</span></a>
 <a class="sourceLine" id="cb123-3" title="3">Vertex vertex<span class="op">;</span></a>
-<a class="sourceLine" id="cb123-4" title="4">std::vector<span class="op">&amp;</span>lt<span class="op">;</span>Vertex<span class="op">&amp;</span>gt<span class="op">;</span> vertices<span class="op">;</span></a>
+<a class="sourceLine" id="cb123-4" title="4">std::vector<span class="op">&lt;</span>Vertex<span class="op">&gt;</span> vertices<span class="op">;</span></a>
 <a class="sourceLine" id="cb123-5" title="5"></a>
-<a class="sourceLine" id="cb123-6" title="6"><span class="cf">for</span>(uint32_t i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;=</span> <span class="dv">360</span><span class="op">;</span> i<span class="op">+=</span>angle){</a>
+<a class="sourceLine" id="cb123-6" title="6"><span class="cf">for</span>(uint32_t i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">360</span><span class="op">;</span> i<span class="op">+=</span>angle){</a>
 <a class="sourceLine" id="cb123-7" title="7">  vertex.pos.x <span class="op">=</span> cos(glm::radians(<span class="bu">float</span>(i)))<span class="op">;</span></a>
 <a class="sourceLine" id="cb123-8" title="8">  vertex.pos.y <span class="op">=</span> sin(glm::radians(<span class="bu">float</span>(i)))<span class="op">;</span></a>
 <a class="sourceLine" id="cb123-9" title="9">  vertices.push_back(vertex)<span class="op">;</span></a>
@@ -6085,7 +6085,7 @@ Is E(v) &lt;= L(v) where v is direction?
 <a class="sourceLine" id="cb128-2" title="2"><span class="cf">for</span> each light source</a>
 <a class="sourceLine" id="cb128-3" title="3">    direction of light <span class="op">=</span> light point <span class="op">-</span> point on the <span class="bu">object</span></a>
 <a class="sourceLine" id="cb128-4" title="4">    test <span class="cf">for</span> an intersection starting at the point on the <span class="bu">object</span>, until you hit something</a>
-<a class="sourceLine" id="cb128-5" title="5">    <span class="cf">if</span> (the intersection test returned a distance <span class="op">&amp;</span>gt<span class="op">;</span> distance <span class="im">from</span> point on <span class="bu">object</span> to light point)</a>
+<a class="sourceLine" id="cb128-5" title="5">    <span class="cf">if</span> (the intersection test returned a distance <span class="op">&gt;</span> distance <span class="im">from</span> point on <span class="bu">object</span> to light point)</a>
 <a class="sourceLine" id="cb128-6" title="6">    (do  diffuse <span class="kw">and</span> specular shading)</a></code></pre></div>
 <p>A one quick thing to mention about my implementation: the intersection test will return 9999999 if there is no intersection.</p>
 <p>Some of the things I’ve tried are: inverting the direction of the shadow ray - no effect. Making the comparison intersection distance - light distance &gt; (some small epsilon value) - no change. Manually moving the light source to the opposite side - the specular reflection moved to a new spot, but otherwise, no change.</p>
@@ -6094,17 +6094,17 @@ Is E(v) &lt;= L(v) where v is direction?
 <p>Any help would be greatly appreciated.</p>
 <p>Here’s the relevant part of my code:</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb129-1" title="1">    <span class="op">//</span>iterate through <span class="bu">all</span> lights</a>
-<a class="sourceLine" id="cb129-2" title="2">    <span class="cf">if</span> (myLights.size() <span class="op">&amp;</span>gt<span class="op">;</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb129-2" title="2">    <span class="cf">if</span> (myLights.size() <span class="op">&gt;</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb129-3" title="3">    {</a>
-<a class="sourceLine" id="cb129-4" title="4">        <span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> myLights.size()<span class="op">;</span> i<span class="op">++</span>)</a>
+<a class="sourceLine" id="cb129-4" title="4">        <span class="cf">for</span> (<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> myLights.size()<span class="op">;</span> i<span class="op">++</span>)</a>
 <a class="sourceLine" id="cb129-5" title="5">        {</a>
 <a class="sourceLine" id="cb129-6" title="6">            <span class="op">//</span>calculate the direction of the light</a>
 <a class="sourceLine" id="cb129-7" title="7">            glm::vec3 ldir <span class="op">=</span> (myLights[i].position <span class="op">-</span> surfacePoint)<span class="op">;</span></a>
 <a class="sourceLine" id="cb129-8" title="8">            <span class="op">//</span>this the length of the distance between the light <span class="kw">and</span> the surface</a>
 <a class="sourceLine" id="cb129-9" title="9">            <span class="bu">float</span> ldist<span class="op">=</span> sqrt(<span class="bu">pow</span>(ldir.x, <span class="fl">2.0</span>f) <span class="op">+</span> <span class="bu">pow</span>(ldir.y, <span class="fl">2.0</span>f) <span class="op">+</span> <span class="bu">pow</span>(ldir.z, <span class="fl">2.0</span>f))<span class="op">;</span> </a>
 <a class="sourceLine" id="cb129-10" title="10"><span class="op">//</span>check <span class="cf">if</span> the light can see the surface point</a>
-<a class="sourceLine" id="cb129-11" title="11">            <span class="bu">float</span> intersections <span class="op">=</span> myObjGroup<span class="op">-&amp;</span>gt<span class="op">;</span>testIntersections(surfacePoint, normalize(ldir))<span class="op">;</span></a>
-<a class="sourceLine" id="cb129-12" title="12">            <span class="cf">if</span> (<span class="bu">abs</span>(intersections<span class="op">-</span>ldist)  <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">0.0000001</span>f)</a>
+<a class="sourceLine" id="cb129-11" title="11">            <span class="bu">float</span> intersections <span class="op">=</span> myObjGroup<span class="op">-&gt;</span>testIntersections(surfacePoint, normalize(ldir))<span class="op">;</span></a>
+<a class="sourceLine" id="cb129-12" title="12">            <span class="cf">if</span> (<span class="bu">abs</span>(intersections<span class="op">-</span>ldist)  <span class="op">&gt;</span> <span class="fl">0.0000001</span>f)</a>
 <a class="sourceLine" id="cb129-13" title="13">            {</a>
 <a class="sourceLine" id="cb129-14" title="14">                <span class="op">//</span>diffuse <span class="kw">and</span> specular shading have been cut <span class="cf">for</span> brevity</a>
 <a class="sourceLine" id="cb129-15" title="15">            }</a>
@@ -6117,7 +6117,7 @@ edit: New image: <a href="https://i.stack.imgur.com/2pAxT.jpg" rel="noreferrer">
 <section id="answer-accepted-score-6" class="level4">
 <h4>Answer accepted (score 6)</h4>
 <p>Your <code>if</code> condition makes me suspicious. You should include the diffuse and specular shading if the intersection test <strong>didn’t</strong> hit an object; that is, if <code>intersections &amp;gt; ldist</code>. So, your code should look as follows:</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb130-1" title="1"><span class="cf">if</span> (intersections <span class="op">&amp;</span>gt<span class="op">;</span> ldist)</a>
+<div class="sourceCode" id="cb130"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb130-1" title="1"><span class="cf">if</span> (intersections <span class="op">&gt;</span> ldist)</a>
 <a class="sourceLine" id="cb130-2" title="2">{</a>
 <a class="sourceLine" id="cb130-3" title="3">    colour <span class="op">+=</span> diffuse(...)<span class="op">;</span></a>
 <a class="sourceLine" id="cb130-4" title="4">    colour <span class="op">+=</span> specular(...)<span class="op">;</span></a>
@@ -6125,7 +6125,7 @@ edit: New image: <a href="https://i.stack.imgur.com/2pAxT.jpg" rel="noreferrer">
 <p>Your comparison with 0.0000001f suggests that you’ve also been having trouble with self-intersections (that is, with the ray intersecting the object being shaded). In a one-hit tracer, you can’t fix that problem by simply discarding the intersection, because you still don’t know whether the shadow ray would have intersected another object further along. To avoid self-intersections, you need to push the start point of the ray along its direction by epsilon:</p>
 <div class="sourceCode" id="cb131"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb131-1" title="1">glm::vec3 direction <span class="op">=</span> normalize(ldir)<span class="op">;</span></a>
 <a class="sourceLine" id="cb131-2" title="2">glm::vec3 start <span class="op">=</span> surfacePoint <span class="op">+</span> epsilon <span class="op">*</span> direction<span class="op">;</span></a>
-<a class="sourceLine" id="cb131-3" title="3"><span class="bu">float</span> intersections <span class="op">=</span> myObjGroup<span class="op">-&amp;</span>gt<span class="op">;</span>testIntersections(start, direction)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb131-3" title="3"><span class="bu">float</span> intersections <span class="op">=</span> myObjGroup<span class="op">-&gt;</span>testIntersections(start, direction)<span class="op">;</span></a></code></pre></div>
 <p>One more thing: don’t forget to test that the light is in front of the surface that you’re illuminating. You can do this with the dot product of <code>ldir</code> and the surface normal: if the dot product is positive, the light is on the correct side; if it’s negative, the light is behind the surface and thus shadowed before you even cast a ray.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -6140,12 +6140,12 @@ edit: New image: <a href="https://i.stack.imgur.com/2pAxT.jpg" rel="noreferrer">
 <a class="sourceLine" id="cb132-3" title="3"></a>
 <a class="sourceLine" id="cb132-4" title="4">void main()</a>
 <a class="sourceLine" id="cb132-5" title="5">{</a>
-<a class="sourceLine" id="cb132-6" title="6">    <span class="cf">for</span>(<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> size<span class="op">;</span> i<span class="op">++</span>) {</a>
+<a class="sourceLine" id="cb132-6" title="6">    <span class="cf">for</span>(<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++</span>) {</a>
 <a class="sourceLine" id="cb132-7" title="7">        <span class="op">/*</span> Do Some Calculation <span class="op">*/</span></a>
 <a class="sourceLine" id="cb132-8" title="8">    }</a>
 <a class="sourceLine" id="cb132-9" title="9">}</a></code></pre></div>
 <p>And this would be my C++ file:</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb133-1" title="1"><span class="cf">for</span> (GLuint i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> pointLights.size()<span class="op">;</span> i<span class="op">++</span>) {</a>
+<div class="sourceCode" id="cb133"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb133-1" title="1"><span class="cf">for</span> (GLuint i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> pointLights.size()<span class="op">;</span> i<span class="op">++</span>) {</a>
 <a class="sourceLine" id="cb133-2" title="2">    glUniform3f(glGetUniformLocation(shader, (<span class="st">&quot;pointLights[&quot;</span> <span class="op">+</span> std::to_string(i) <span class="op">+</span> <span class="st">&quot;].position&quot;</span>).c_str()), lights[i].someValue)<span class="op">;</span></a>
 <a class="sourceLine" id="cb133-3" title="3">}</a></code></pre></div>
 <p>I would like to do this because I have a file with the positions of all the light sources in my scene (this may vary for each scene) so I would like to have a dynamic array which will allow me to send different numbers of lights to my shader.</p>
@@ -6161,7 +6161,7 @@ edit: New image: <a href="https://i.stack.imgur.com/2pAxT.jpg" rel="noreferrer">
 <a class="sourceLine" id="cb134-5" title="5"></a>
 <a class="sourceLine" id="cb134-6" title="6">void main()</a>
 <a class="sourceLine" id="cb134-7" title="7">{</a>
-<a class="sourceLine" id="cb134-8" title="8">    <span class="cf">for</span>(<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&amp;</span>lt<span class="op">;</span> size<span class="op">;</span> i<span class="op">++</span>) {</a>
+<a class="sourceLine" id="cb134-8" title="8">    <span class="cf">for</span>(<span class="bu">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i<span class="op">++</span>) {</a>
 <a class="sourceLine" id="cb134-9" title="9">        <span class="op">/*</span> Do Some Calculation <span class="op">*/</span></a>
 <a class="sourceLine" id="cb134-10" title="10">    }</a>
 <a class="sourceLine" id="cb134-11" title="11">}</a></code></pre></div>
@@ -6525,12 +6525,12 @@ Frostbite uses a squared remapping. ie. Roughness = (1 − Smoothness)^2 Details
 <p><a href="https://i.stack.imgur.com/bnVxb.jpg" rel="noreferrer"><img src="https://i.stack.imgur.com/bnVxb.jpg" alt="GGX geometry term using the macro surface normal"></a></p>
 <p>To my untrained eye this seems way closer to the desired result. But I have the feeling this is not correct? The majority of the articles I read use the half vector but not all of them. Is there a reason for this difference?</p>
 <p>I use the following code as my geometry term:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb141-1" title="1"><span class="bu">float</span> RayTracer::GeometryGGX(const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> v, const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> l, const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> n, const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> h, <span class="bu">float</span> a)</a>
+<div class="sourceCode" id="cb141"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb141-1" title="1"><span class="bu">float</span> RayTracer::GeometryGGX(const Vector3<span class="op">&amp;</span> v, const Vector3<span class="op">&amp;</span> l, const Vector3<span class="op">&amp;</span> n, const Vector3<span class="op">&amp;</span> h, <span class="bu">float</span> a)</a>
 <a class="sourceLine" id="cb141-2" title="2">{</a>
 <a class="sourceLine" id="cb141-3" title="3">    <span class="cf">return</span> G1GGX(v, h, a) <span class="op">*</span> G1GGX(l, h, a)<span class="op">;</span></a>
 <a class="sourceLine" id="cb141-4" title="4">}</a>
 <a class="sourceLine" id="cb141-5" title="5"></a>
-<a class="sourceLine" id="cb141-6" title="6"><span class="bu">float</span> RayTracer::G1GGX(const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> v, const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> h, <span class="bu">float</span> a)</a>
+<a class="sourceLine" id="cb141-6" title="6"><span class="bu">float</span> RayTracer::G1GGX(const Vector3<span class="op">&amp;</span> v, const Vector3<span class="op">&amp;</span> h, <span class="bu">float</span> a)</a>
 <a class="sourceLine" id="cb141-7" title="7">{</a>
 <a class="sourceLine" id="cb141-8" title="8">    <span class="bu">float</span> NoV <span class="op">=</span> Util::Clamp01(cml::dot(v, h))<span class="op">;</span></a>
 <a class="sourceLine" id="cb141-9" title="9">    <span class="bu">float</span> a2 <span class="op">=</span> a <span class="op">*</span> a<span class="op">;</span></a>
@@ -6538,7 +6538,7 @@ Frostbite uses a squared remapping. ie. Roughness = (1 − Smoothness)^2 Details
 <a class="sourceLine" id="cb141-11" title="11">    <span class="cf">return</span> (<span class="fl">2.0</span>f <span class="op">*</span> NoV) <span class="op">/</span> std::<span class="bu">max</span>(NoV <span class="op">+</span> sqrt(a2 <span class="op">+</span> (<span class="fl">1.0</span>f <span class="op">-</span> a2) <span class="op">*</span> NoV <span class="op">*</span> NoV), <span class="fl">1e-7</span>f)<span class="op">;</span></a>
 <a class="sourceLine" id="cb141-12" title="12">}</a></code></pre></div>
 <p>And for reference, this is my normal distribution function:</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb142-1" title="1"><span class="bu">float</span> RayTracer::DistributionGGX(const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> n, const Vector3<span class="op">&amp;</span>amp<span class="op">;</span> h, <span class="bu">float</span> alpha)</a>
+<div class="sourceCode" id="cb142"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb142-1" title="1"><span class="bu">float</span> RayTracer::DistributionGGX(const Vector3<span class="op">&amp;</span> n, const Vector3<span class="op">&amp;</span> h, <span class="bu">float</span> alpha)</a>
 <a class="sourceLine" id="cb142-2" title="2">{</a>
 <a class="sourceLine" id="cb142-3" title="3">    <span class="bu">float</span> alpha2 <span class="op">=</span> alpha <span class="op">*</span> alpha<span class="op">;</span></a>
 <a class="sourceLine" id="cb142-4" title="4">    <span class="bu">float</span> NoH <span class="op">=</span> Util::Clamp01(cml::dot(n, h))<span class="op">;</span></a>
@@ -6569,19 +6569,19 @@ Frostbite uses a squared remapping. ie. Roughness = (1 − Smoothness)^2 Details
 <p>Your implementation, on the other hand, uses the half vector to compute the cosine of the <span class="math inline">\(\omega_{v}\)</span> direction with respect to the microfacet, which leads to computation of something else than the presented formulae.</p>
 <p>If it is of any help, then this is my implementation of the <span class="math inline">\(G1\)</span> factor:</p>
 <div class="sourceCode" id="cb143"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb143-1" title="1"><span class="bu">float</span> SmithMaskingFunctionGgx(</a>
-<a class="sourceLine" id="cb143-2" title="2">    const Vec3f <span class="op">&amp;</span>amp<span class="op">;</span>aDir,  <span class="op">//</span> the direction to compute masking <span class="cf">for</span> (either incoming <span class="kw">or</span> outgoing)</a>
-<a class="sourceLine" id="cb143-3" title="3">    const Vec3f <span class="op">&amp;</span>amp<span class="op">;</span>aMicrofacetNormal,</a>
+<a class="sourceLine" id="cb143-2" title="2">    const Vec3f <span class="op">&amp;</span>aDir,  <span class="op">//</span> the direction to compute masking <span class="cf">for</span> (either incoming <span class="kw">or</span> outgoing)</a>
+<a class="sourceLine" id="cb143-3" title="3">    const Vec3f <span class="op">&amp;</span>aMicrofacetNormal,</a>
 <a class="sourceLine" id="cb143-4" title="4">    const <span class="bu">float</span>  aRoughnessAlpha)</a>
 <a class="sourceLine" id="cb143-5" title="5">{</a>
 <a class="sourceLine" id="cb143-6" title="6">    PG3_ASSERT_VEC3F_NORMALIZED(aDir)<span class="op">;</span></a>
 <a class="sourceLine" id="cb143-7" title="7">    PG3_ASSERT_VEC3F_NORMALIZED(aMicrofacetNormal)<span class="op">;</span></a>
 <a class="sourceLine" id="cb143-8" title="8">    PG3_ASSERT_FLOAT_NONNEGATIVE(aRoughnessAlpha)<span class="op">;</span></a>
 <a class="sourceLine" id="cb143-9" title="9"></a>
-<a class="sourceLine" id="cb143-10" title="10">    <span class="cf">if</span> (aMicrofacetNormal.z <span class="op">&amp;</span>lt<span class="op">;=</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb143-10" title="10">    <span class="cf">if</span> (aMicrofacetNormal.z <span class="op">&lt;=</span> <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb143-11" title="11">        <span class="cf">return</span> <span class="fl">0.0</span>f<span class="op">;</span></a>
 <a class="sourceLine" id="cb143-12" title="12"></a>
 <a class="sourceLine" id="cb143-13" title="13">    const <span class="bu">float</span> cosThetaVM <span class="op">=</span> Dot(aDir, aMicrofacetNormal)<span class="op">;</span></a>
-<a class="sourceLine" id="cb143-14" title="14">    <span class="cf">if</span> ((aDir.z <span class="op">*</span> cosThetaVM) <span class="op">&amp;</span>lt<span class="op">;</span> <span class="fl">0.0</span>f)</a>
+<a class="sourceLine" id="cb143-14" title="14">    <span class="cf">if</span> ((aDir.z <span class="op">*</span> cosThetaVM) <span class="op">&lt;</span> <span class="fl">0.0</span>f)</a>
 <a class="sourceLine" id="cb143-15" title="15">        <span class="cf">return</span> <span class="fl">0.0</span>f<span class="op">;</span> <span class="op">//</span> up direction <span class="kw">is</span> below microfacet <span class="kw">or</span> vice versa</a>
 <a class="sourceLine" id="cb143-16" title="16"></a>
 <a class="sourceLine" id="cb143-17" title="17">    const <span class="bu">float</span> roughnessAlphaSqr <span class="op">=</span> aRoughnessAlpha <span class="op">*</span> aRoughnessAlpha<span class="op">;</span></a>

@@ -304,7 +304,7 @@ R
 <a class="sourceLine" id="cb5-9" title="9">aov1 <span class="op">=</span> aov(val <span class="op">~</span> fac)</a>
 <a class="sourceLine" id="cb5-10" title="10">summary(aov1)</a></code></pre></div>
 <p>Output is</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">            Df Sum Sq Mean Sq F value  Pr(<span class="op">&amp;</span>gt<span class="op">;</span>F)   </a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">            Df Sum Sq Mean Sq F value  Pr(<span class="op">&gt;</span>F)   </a>
 <a class="sourceLine" id="cb6-2" title="2">fac          <span class="dv">3</span>   <span class="dv">1636</span>   <span class="fl">545.5</span>   <span class="fl">5.406</span> <span class="fl">0.00688</span> <span class="op">**</span></a>
 <a class="sourceLine" id="cb6-3" title="3">Residuals   <span class="dv">20</span>   <span class="dv">2018</span>   <span class="fl">100.9</span>                   </a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="op">---</span></a>
@@ -363,10 +363,10 @@ Another way to connect coarse outputs to dense pixels is interpolation. For inst
 <h4>Answer 2 (score 49)</h4>
 <p>I think one way to get a really basic level intuition behind convolution is that you are sliding K filters, which you can think of as K stencils, over the input image and produce K activations - each one representing a degree of match with a particular stencil. The inverse operation of that would be to take K activations and expand them into a preimage of the convolution operation. The intuitive explanation of the inverse operation is therefore, roughly, image reconstruction given the stencils (filters) and activations (the degree of the match for each stencil) and therefore at the basic intuitive level we want to blow up each activation by the stencil’s mask and add them up.</p>
 <p>Another way to approach understanding deconv would be to examine the deconvolution layer implementation in Caffe, see the following relevant bits of code:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1">DeconvolutionLayer<span class="op">&amp;</span>lt<span class="op">;</span>Dtype<span class="op">&amp;</span>gt<span class="op">;</span>::Forward_gpu</a>
-<a class="sourceLine" id="cb7-2" title="2">ConvolutionLayer<span class="op">&amp;</span>lt<span class="op">;</span>Dtype<span class="op">&amp;</span>gt<span class="op">;</span>::Backward_gpu</a>
-<a class="sourceLine" id="cb7-3" title="3">CuDNNConvolutionLayer<span class="op">&amp;</span>lt<span class="op">;</span>Dtype<span class="op">&amp;</span>gt<span class="op">;</span>::Backward_gpu</a>
-<a class="sourceLine" id="cb7-4" title="4">BaseConvolutionLayer<span class="op">&amp;</span>lt<span class="op">;</span>Dtype<span class="op">&amp;</span>gt<span class="op">;</span>::backward_cpu_gemm</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1">DeconvolutionLayer<span class="op">&lt;</span>Dtype<span class="op">&gt;</span>::Forward_gpu</a>
+<a class="sourceLine" id="cb7-2" title="2">ConvolutionLayer<span class="op">&lt;</span>Dtype<span class="op">&gt;</span>::Backward_gpu</a>
+<a class="sourceLine" id="cb7-3" title="3">CuDNNConvolutionLayer<span class="op">&lt;</span>Dtype<span class="op">&gt;</span>::Backward_gpu</a>
+<a class="sourceLine" id="cb7-4" title="4">BaseConvolutionLayer<span class="op">&lt;</span>Dtype<span class="op">&gt;</span>::backward_cpu_gemm</a></code></pre></div>
 <p>You can see that it’s implemented in Caffe exactly as backprop for a regular forward convolutional layer (to me it was more obvious after i compared the implementation of backprop in cuDNN conv layer vs ConvolutionLayer::Backward_gpu implemented using GEMM). So if you work through how backpropagation is done for regular convolution you will understand what happens on a mechanical computation level. The way this computation works matches the intuition described in the first paragraph of this blurb.</p>
 <blockquote>
 However, I don’t know how the learning of convolutional layers works. (I understand how simple MLPs learn with gradient descent, if that helps).
@@ -388,13 +388,13 @@ However, I don’t know how the learning of convolutional layers works. (I under
 <a class="sourceLine" id="cb9-2" title="2"><span class="im">import</span> numpy <span class="im">as</span> np</a>
 <a class="sourceLine" id="cb9-3" title="3"></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="kw">def</span> test_conv2d_transpose():</a>
-<a class="sourceLine" id="cb9-5" title="5">    <span class="co"># input batch shape = (1, 2, 2, 1) -&amp;gt; (batch_size, height, width, channels) - 2x2x1 image in batch of 1</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="co"># input batch shape = (1, 2, 2, 1) -&gt; (batch_size, height, width, channels) - 2x2x1 image in batch of 1</span></a>
 <a class="sourceLine" id="cb9-6" title="6">    x <span class="op">=</span> tf.constant(np.array([[</a>
 <a class="sourceLine" id="cb9-7" title="7">        [[<span class="dv">1</span>], [<span class="dv">2</span>]], </a>
 <a class="sourceLine" id="cb9-8" title="8">        [[<span class="dv">3</span>], [<span class="dv">4</span>]]</a>
 <a class="sourceLine" id="cb9-9" title="9">    ]]), tf.float32)</a>
 <a class="sourceLine" id="cb9-10" title="10"></a>
-<a class="sourceLine" id="cb9-11" title="11">    <span class="co"># shape = (3, 3, 1, 1) -&amp;gt; (height, width, input_channels, output_channels) - 3x3x1 filter</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="co"># shape = (3, 3, 1, 1) -&gt; (height, width, input_channels, output_channels) - 3x3x1 filter</span></a>
 <a class="sourceLine" id="cb9-12" title="12">    f <span class="op">=</span> tf.constant(np.array([</a>
 <a class="sourceLine" id="cb9-13" title="13">        [[[<span class="dv">1</span>]], [[<span class="dv">1</span>]], [[<span class="dv">1</span>]]], </a>
 <a class="sourceLine" id="cb9-14" title="14">        [[[<span class="dv">1</span>]], [[<span class="dv">1</span>]], [[<span class="dv">1</span>]]], </a>
@@ -543,7 +543,7 @@ Thirdly and lastly add it to the model fitting
 <a class="sourceLine" id="cb15-11" title="11"></a>
 <a class="sourceLine" id="cb15-12" title="12">    <span class="cf">for</span> key <span class="kw">in</span> keys:</a>
 <a class="sourceLine" id="cb15-13" title="13">        score <span class="op">=</span> math.log(mu<span class="op">*</span>total<span class="op">/</span><span class="bu">float</span>(labels_dict[key]))</a>
-<a class="sourceLine" id="cb15-14" title="14">        class_weight[key] <span class="op">=</span> score <span class="cf">if</span> score <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">1.0</span> <span class="cf">else</span> <span class="fl">1.0</span></a>
+<a class="sourceLine" id="cb15-14" title="14">        class_weight[key] <span class="op">=</span> score <span class="cf">if</span> score <span class="op">&gt;</span> <span class="fl">1.0</span> <span class="cf">else</span> <span class="fl">1.0</span></a>
 <a class="sourceLine" id="cb15-15" title="15"></a>
 <a class="sourceLine" id="cb15-16" title="16">    <span class="cf">return</span> class_weight</a>
 <a class="sourceLine" id="cb15-17" title="17"></a>
@@ -1231,10 +1231,10 @@ With this, you can draw networks like these: <a href="https://i.stack.imgur.com/
 <section id="question-13" class="level4">
 <h4>Question</h4>
 <p>I have a factor variable in my data frame with values where in the original CSV “NA” was intended to mean simply “None”, not missing data. Hence I want replace every value in the given column with “None” factor value. I tried this:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb40-1" title="1">DF$col[<span class="kw">is</span>.na(DF$col)] <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="st">&quot;None&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb40-1" title="1">DF$col[<span class="kw">is</span>.na(DF$col)] <span class="op">&lt;-</span> <span class="st">&quot;None&quot;</span></a></code></pre></div>
 <p>but this throws the following error:</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb41-1" title="1"><span class="pp">Warning</span> message:</a>
-<a class="sourceLine" id="cb41-2" title="2">In `[<span class="op">&amp;</span>lt<span class="op">;-</span>.factor`(`<span class="op">*</span>tmp<span class="op">*</span>`, <span class="kw">is</span>.na(DF$col), value <span class="op">=</span> c(NA, NA,  :</a>
+<a class="sourceLine" id="cb41-2" title="2">In `[<span class="op">&lt;-</span>.factor`(`<span class="op">*</span>tmp<span class="op">*</span>`, <span class="kw">is</span>.na(DF$col), value <span class="op">=</span> c(NA, NA,  :</a>
 <a class="sourceLine" id="cb41-3" title="3">  invalid factor level, NA generated</a></code></pre></div>
 <p>I guess this is because originally there is no “None” factor level in the column, but is it the true reason? If so, how could I add a new “None” level to the factor?</p>
 <p>(In case you would ask why didn’t I convert NAs into “None” in the <code>read.csv</code> phase: in other columns NA really does mean missing data).</p>
@@ -1242,21 +1242,21 @@ With this, you can draw networks like these: <a href="https://i.stack.imgur.com/
 <section id="answer-accepted-score-5" class="level4">
 <h4>Answer accepted (score 5)</h4>
 <p>You need to add “None” to the factor level and refactor the column DF$col. I added an example script using the iris dataset.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb42-1" title="1">df <span class="op">&amp;</span>lt<span class="op">;-</span> iris</a>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb42-1" title="1">df <span class="op">&lt;-</span> iris</a>
 <a class="sourceLine" id="cb42-2" title="2"></a>
 <a class="sourceLine" id="cb42-3" title="3"><span class="co"># set 20 Species to NA</span></a>
 <a class="sourceLine" id="cb42-4" title="4"><span class="bu">set</span>.seed(<span class="dv">1234</span>)</a>
-<a class="sourceLine" id="cb42-5" title="5">s <span class="op">&amp;</span>lt<span class="op">;-</span> sample(nrow(df), <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb42-6" title="6">df$Species[s] <span class="op">&amp;</span>lt<span class="op">;-</span> NA</a>
+<a class="sourceLine" id="cb42-5" title="5">s <span class="op">&lt;-</span> sample(nrow(df), <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb42-6" title="6">df$Species[s] <span class="op">&lt;-</span> NA</a>
 <a class="sourceLine" id="cb42-7" title="7"></a>
 <a class="sourceLine" id="cb42-8" title="8"><span class="co"># Get levels and add &quot;None&quot;</span></a>
-<a class="sourceLine" id="cb42-9" title="9">levels <span class="op">&amp;</span>lt<span class="op">;-</span> levels(df$Species)</a>
-<a class="sourceLine" id="cb42-10" title="10">levels[length(levels) <span class="op">+</span> <span class="dv">1</span>] <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="st">&quot;None&quot;</span></a>
+<a class="sourceLine" id="cb42-9" title="9">levels <span class="op">&lt;-</span> levels(df$Species)</a>
+<a class="sourceLine" id="cb42-10" title="10">levels[length(levels) <span class="op">+</span> <span class="dv">1</span>] <span class="op">&lt;-</span> <span class="st">&quot;None&quot;</span></a>
 <a class="sourceLine" id="cb42-11" title="11"></a>
 <a class="sourceLine" id="cb42-12" title="12"><span class="co"># refactor Species to include &quot;None&quot; as a factor level</span></a>
 <a class="sourceLine" id="cb42-13" title="13"><span class="co"># and replace NA with &quot;None&quot;</span></a>
-<a class="sourceLine" id="cb42-14" title="14">df$Species <span class="op">&amp;</span>lt<span class="op">;-</span> factor(df$Species, levels <span class="op">=</span> levels)</a>
-<a class="sourceLine" id="cb42-15" title="15">df$Species[<span class="kw">is</span>.na(df$Species)] <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="st">&quot;None&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb42-14" title="14">df$Species <span class="op">&lt;-</span> factor(df$Species, levels <span class="op">=</span> levels)</a>
+<a class="sourceLine" id="cb42-15" title="15">df$Species[<span class="kw">is</span>.na(df$Species)] <span class="op">&lt;-</span> <span class="st">&quot;None&quot;</span></a></code></pre></div>
 </section>
 <section id="answer-2-score-9" class="level4">
 <h4>Answer 2 (score 9)</h4>
@@ -1272,17 +1272,17 @@ Usage
 <p>It can be used within the mutate function and piped to edit DF directly:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb44-1" title="1">library(tidyverse) <span class="co"># for tidy data packages, automatically loads dplyr</span></a>
 <a class="sourceLine" id="cb44-2" title="2">library(magrittr) <span class="co"># for piping</span></a>
-<a class="sourceLine" id="cb44-3" title="3">DF <span class="op">%&amp;</span>lt<span class="op">;&amp;</span>gt<span class="op">;%</span> mutate(cols <span class="op">=</span> fct_explicit_na(col, na_level <span class="op">=</span> <span class="st">&quot;None&quot;</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb44-3" title="3">DF <span class="op">%&lt;&gt;%</span> mutate(cols <span class="op">=</span> fct_explicit_na(col, na_level <span class="op">=</span> <span class="st">&quot;None&quot;</span>))</a></code></pre></div>
 <p>Note that “col” needs to be a factor for this to work.</p>
 </section>
 <section id="answer-3-score-2" class="level4">
 <h4>Answer 3 (score 2)</h4>
 <p>Your original approach was right, and your intuition about the missing level too. To do what you want you just needed to add add the level “None”.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb45-1" title="1"><span class="co">#Create a factor for the example</span></a>
-<a class="sourceLine" id="cb45-2" title="2">x<span class="op">&amp;</span>lt<span class="op">;-</span>factor(c(<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,NA,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>))</a>
+<a class="sourceLine" id="cb45-2" title="2">x<span class="op">&lt;-</span>factor(c(<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,NA,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;S&quot;</span>,NA,<span class="st">&quot;M&quot;</span>))</a>
 <a class="sourceLine" id="cb45-3" title="3"></a>
-<a class="sourceLine" id="cb45-4" title="4">levels(x)<span class="op">&amp;</span>lt<span class="op">;-</span>c(levels(x),<span class="st">&quot;None&quot;</span>)  <span class="co">#Add the extra level to your factor</span></a>
-<a class="sourceLine" id="cb45-5" title="5">x[<span class="kw">is</span>.na(x)] <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="st">&quot;None&quot;</span>           <span class="co">#Change NA to &quot;None&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb45-4" title="4">levels(x)<span class="op">&lt;-</span>c(levels(x),<span class="st">&quot;None&quot;</span>)  <span class="co">#Add the extra level to your factor</span></a>
+<a class="sourceLine" id="cb45-5" title="5">x[<span class="kw">is</span>.na(x)] <span class="op">&lt;-</span> <span class="st">&quot;None&quot;</span>           <span class="co">#Change NA to &quot;None&quot;</span></a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
 </section>
@@ -1319,25 +1319,25 @@ Usage
 <section id="question-15" class="level4">
 <h4>Question</h4>
 <p>I have a dataset like the one below. I want to remove all characters after the character ©. How can I do that in R?</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb48-1" title="1">data_clean_phrase <span class="op">&amp;</span>lt<span class="op">;-</span> c(<span class="st">&quot;Copyright © The Society of Geomagnetism and Earth&quot;</span>, </a>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb48-1" title="1">data_clean_phrase <span class="op">&lt;-</span> c(<span class="st">&quot;Copyright © The Society of Geomagnetism and Earth&quot;</span>, </a>
 <a class="sourceLine" id="cb48-2" title="2"><span class="st">&quot;© 2013 Chinese National Committee &quot;</span>)</a>
 <a class="sourceLine" id="cb48-3" title="3"></a>
-<a class="sourceLine" id="cb48-4" title="4">data_clean_df <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="im">as</span>.data.frame(data_clean_phrase)</a></code></pre></div>
+<a class="sourceLine" id="cb48-4" title="4">data_clean_df <span class="op">&lt;-</span> <span class="im">as</span>.data.frame(data_clean_phrase)</a></code></pre></div>
 </section>
 <section id="answer-accepted-score-17" class="level4">
 <h4>Answer accepted (score 17)</h4>
 <p>For instance:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb49-1" title="1"> rs<span class="op">&amp;</span>lt<span class="op">;-</span>c(<span class="st">&quot;copyright @ The Society of mo&quot;</span>,<span class="st">&quot;I want you to meet me @ the coffeshop&quot;</span>)</a>
-<a class="sourceLine" id="cb49-2" title="2"> s<span class="op">&amp;</span>lt<span class="op">;-</span>gsub(<span class="st">&quot;@.*&quot;</span>,<span class="st">&quot;&quot;</span>,rs)</a>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb49-1" title="1"> rs<span class="op">&lt;-</span>c(<span class="st">&quot;copyright @ The Society of mo&quot;</span>,<span class="st">&quot;I want you to meet me @ the coffeshop&quot;</span>)</a>
+<a class="sourceLine" id="cb49-2" title="2"> s<span class="op">&lt;-</span>gsub(<span class="st">&quot;@.*&quot;</span>,<span class="st">&quot;&quot;</span>,rs)</a>
 <a class="sourceLine" id="cb49-3" title="3"> s</a>
 <a class="sourceLine" id="cb49-4" title="4"> [<span class="dv">1</span>] <span class="st">&quot;copyright &quot;</span>             <span class="st">&quot;I want you to meet me &quot;</span></a></code></pre></div>
 <p>Or, if you want to keep the @ character:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" title="1"> s<span class="op">&amp;</span>lt<span class="op">;-</span>gsub(<span class="st">&quot;(@).*&quot;</span>,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>,rs)</a>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb50-1" title="1"> s<span class="op">&lt;-</span>gsub(<span class="st">&quot;(@).*&quot;</span>,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>,rs)</a>
 <a class="sourceLine" id="cb50-2" title="2"> s</a>
 <a class="sourceLine" id="cb50-3" title="3"> [<span class="dv">1</span>] <span class="st">&quot;copyright @&quot;</span>             <span class="st">&quot;I want you to meet me @&quot;</span></a></code></pre></div>
 <p>EDIT: If what you want is to remove everything from the last @ on you just have to follow this previous example with the appropriate regex. Example:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb51-1" title="1">rs<span class="op">&amp;</span>lt<span class="op">;-</span>c(<span class="st">&quot;copyright @ The Society of mo located @ my house&quot;</span>,<span class="st">&quot;I want you to meet me @ the coffeshop&quot;</span>)</a>
-<a class="sourceLine" id="cb51-2" title="2">s<span class="op">&amp;</span>lt<span class="op">;-</span>gsub(<span class="st">&quot;(.*)@.*&quot;</span>,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>,rs)</a>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb51-1" title="1">rs<span class="op">&lt;-</span>c(<span class="st">&quot;copyright @ The Society of mo located @ my house&quot;</span>,<span class="st">&quot;I want you to meet me @ the coffeshop&quot;</span>)</a>
+<a class="sourceLine" id="cb51-2" title="2">s<span class="op">&lt;-</span>gsub(<span class="st">&quot;(.*)@.*&quot;</span>,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>,rs)</a>
 <a class="sourceLine" id="cb51-3" title="3">s</a>
 <a class="sourceLine" id="cb51-4" title="4">[<span class="dv">1</span>] <span class="st">&quot;copyright @ The Society of mo located &quot;</span> <span class="st">&quot;I want you to meet me &quot;</span></a></code></pre></div>
 <p>Given the matching we are looking for, both sub and gsub will give you the same answer.</p>
@@ -1644,11 +1644,11 @@ To detect <code>NaN</code> values pandas uses either <code>.isna()</code> or <co
 <h4>Question</h4>
 <p>Fairly new to Python but building out my first RF model based on some classification data. I’ve converted all of the labels into int64 numerical data and loaded into X and Y as a numpy array, but I am hitting an error when I am trying to train the models.</p>
 <p>Here is what my arrays look like:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb64-1" title="1"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> X <span class="op">=</span> np.array([[df.tran_cityname, df.tran_signupos, df.tran_signupchannel, df.tran_vmake, df.tran_vmodel, df.tran_vyear]])</a>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb64-1" title="1"><span class="op">&gt;&gt;&gt;</span> X <span class="op">=</span> np.array([[df.tran_cityname, df.tran_signupos, df.tran_signupchannel, df.tran_vmake, df.tran_vmodel, df.tran_vyear]])</a>
 <a class="sourceLine" id="cb64-2" title="2"></a>
-<a class="sourceLine" id="cb64-3" title="3"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> Y <span class="op">=</span> np.array(df[<span class="st">&#39;completed_trip_status&#39;</span>].values.tolist())</a>
+<a class="sourceLine" id="cb64-3" title="3"><span class="op">&gt;&gt;&gt;</span> Y <span class="op">=</span> np.array(df[<span class="st">&#39;completed_trip_status&#39;</span>].values.tolist())</a>
 <a class="sourceLine" id="cb64-4" title="4"></a>
-<a class="sourceLine" id="cb64-5" title="5"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> X</a>
+<a class="sourceLine" id="cb64-5" title="5"><span class="op">&gt;&gt;&gt;</span> X</a>
 <a class="sourceLine" id="cb64-6" title="6">array([[[   <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">3</span>,    <span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb64-7" title="7">            <span class="dv">3</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">2</span>,    <span class="dv">1</span>,    <span class="dv">3</span>,    <span class="dv">1</span>,    <span class="dv">3</span>,    <span class="dv">3</span>,</a>
 <a class="sourceLine" id="cb64-8" title="8">            <span class="dv">2</span>,    <span class="dv">3</span>,    <span class="dv">3</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>,    <span class="dv">1</span>],</a>
@@ -1668,16 +1668,16 @@ To detect <code>NaN</code> values pandas uses either <code>.isna()</code> or <co
 <a class="sourceLine" id="cb64-22" title="22">            <span class="dv">0</span>, <span class="dv">2015</span>,    <span class="dv">0</span>,    <span class="dv">0</span>, <span class="dv">2015</span>,    <span class="dv">0</span>,    <span class="dv">0</span>,    <span class="dv">0</span>,    <span class="dv">0</span>, <span class="dv">2015</span>,    <span class="dv">0</span>,</a>
 <a class="sourceLine" id="cb64-23" title="23">            <span class="dv">0</span>,    <span class="dv">0</span>,    <span class="dv">0</span>,    <span class="dv">0</span>, <span class="dv">2016</span>, <span class="dv">2016</span>, <span class="dv">2010</span>]]])</a>
 <a class="sourceLine" id="cb64-24" title="24"></a>
-<a class="sourceLine" id="cb64-25" title="25"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> Y</a>
+<a class="sourceLine" id="cb64-25" title="25"><span class="op">&gt;&gt;&gt;</span> Y</a>
 <a class="sourceLine" id="cb64-26" title="26">array([<span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;YES&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;YES&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>,</a>
 <a class="sourceLine" id="cb64-27" title="27">       <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;YES&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;YES&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>,</a>
 <a class="sourceLine" id="cb64-28" title="28">       <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>, <span class="st">&#39;NO&#39;</span>], </a>
 <a class="sourceLine" id="cb64-29" title="29">      dtype<span class="op">=</span><span class="st">&#39;|S3&#39;</span>)</a>
 <a class="sourceLine" id="cb64-30" title="30"></a>
-<a class="sourceLine" id="cb64-31" title="31"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X, Y, test_size<span class="op">=</span><span class="fl">0.3</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb64-31" title="31"><span class="op">&gt;&gt;&gt;</span> X_train, X_test, Y_train, Y_test <span class="op">=</span> train_test_split(X, Y, test_size<span class="op">=</span><span class="fl">0.3</span>)</a></code></pre></div>
 <blockquote>
 <p>Traceback (most recent call last):</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb65-1" title="1">  File <span class="st">&quot;&amp;lt;stdin&amp;gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>module<span class="op">&amp;</span>gt<span class="op">;</span></a>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb65-1" title="1">  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb65-2" title="2">  File <span class="st">&quot;/Library/Python/2.7/site-packages/sklearn/cross_validation.py&quot;</span>, line</a></code></pre></div>
 <p>
 2039, in train_test_split arrays = indexable(<em>arrays) File “/Library/Python/2.7/site-packages/sklearn/utils/validation.py”, line 206, in indexable check_consistent_length(</em>result) File “/Library/Python/2.7/site-packages/sklearn/utils/validation.py”, line 181, in check_consistent_length &quot; samples: %r&quot; % [int(l) for l in lengths])
@@ -1688,9 +1688,9 @@ To detect <code>NaN</code> values pandas uses either <code>.isna()</code> or <co
 <section id="answer-accepted-score-14" class="level4">
 <h4>Answer accepted (score 14)</h4>
 <p>You are running into that error because your <code>X</code> and <code>Y</code> don’t have the same length (which is what <code>train_test_split</code> requires), i.e., <code>X.shape[0] != Y.shape[0]</code>. Given your current code:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb67-1" title="1"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> X.shape</a>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb67-1" title="1"><span class="op">&gt;&gt;&gt;</span> X.shape</a>
 <a class="sourceLine" id="cb67-2" title="2">(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">29</span>)</a>
-<a class="sourceLine" id="cb67-3" title="3"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> Y.shape</a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="op">&gt;&gt;&gt;</span> Y.shape</a>
 <a class="sourceLine" id="cb67-4" title="4">(<span class="dv">29</span>,)</a></code></pre></div>
 <p>To fix this error:</p>
 <ol>
@@ -1865,7 +1865,7 @@ Statistical Way
 <a class="sourceLine" id="cb68-3" title="3">events<span class="op">=</span> []</a>
 <a class="sourceLine" id="cb68-4" title="4">ind <span class="op">=</span> []</a>
 <a class="sourceLine" id="cb68-5" title="5"><span class="cf">for</span> ii <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(TimeSEries)):</a>
-<a class="sourceLine" id="cb68-6" title="6">    <span class="cf">if</span> TimeSEries[ii] <span class="op">&amp;</span>gt<span class="op">;</span> MOV[ii]<span class="op">+</span>STD:</a>
+<a class="sourceLine" id="cb68-6" title="6">    <span class="cf">if</span> TimeSEries[ii] <span class="op">&gt;</span> MOV[ii]<span class="op">+</span>STD:</a>
 <a class="sourceLine" id="cb68-7" title="7">        events.append(TimeSEries[ii])</a></code></pre></div>
 <h5>
 Probabilistic Way
@@ -1894,7 +1894,7 @@ I hope I could help :) Good Luck!
 <a class="sourceLine" id="cb69-13" title="13">    predictors <span class="op">=</span> <span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">784</span>)</a>
 <a class="sourceLine" id="cb69-14" title="14">    resp <span class="op">=</span> <span class="dv">784</span></a>
 <a class="sourceLine" id="cb69-15" title="15"></a>
-<a class="sourceLine" id="cb69-16" title="16">    <span class="co"># unsupervised -&amp;gt; drop the response column (digit: 0-9)</span></a>
+<a class="sourceLine" id="cb69-16" title="16">    <span class="co"># unsupervised -&gt; drop the response column (digit: 0-9)</span></a>
 <a class="sourceLine" id="cb69-17" title="17">    train <span class="op">=</span> train[predictors]</a>
 <a class="sourceLine" id="cb69-18" title="18">    test <span class="op">=</span> test[predictors]</a>
 <a class="sourceLine" id="cb69-19" title="19"></a>
@@ -2152,7 +2152,7 @@ The implementation is based on libsvm. The fit time complexity is more than quad
 <h4>Answer 3 (score 2)</h4>
 <p>How about using recursion?</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">def</span> union_all(dfs):</a>
-<a class="sourceLine" id="cb86-2" title="2">    <span class="cf">if</span> <span class="bu">len</span>(dfs) <span class="op">&amp;</span>gt<span class="op">;</span> <span class="dv">1</span>:</a>
+<a class="sourceLine" id="cb86-2" title="2">    <span class="cf">if</span> <span class="bu">len</span>(dfs) <span class="op">&gt;</span> <span class="dv">1</span>:</a>
 <a class="sourceLine" id="cb86-3" title="3">        <span class="cf">return</span> dfs[<span class="dv">0</span>].unionAll(union_all(dfs[<span class="dv">1</span>:]))</a>
 <a class="sourceLine" id="cb86-4" title="4">    <span class="cf">else</span>:</a>
 <a class="sourceLine" id="cb86-5" title="5">        <span class="cf">return</span> dfs[<span class="dv">0</span>]</a>
@@ -2191,18 +2191,18 @@ How can I import a .csv file into pyspark dataframes? I even tried to read csv f
 <p>The other method would be to read in the text file as an rdd using</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb91-1" title="1">myrdd <span class="op">=</span> sc.textFile(<span class="st">&quot;yourfile.csv&quot;</span>).<span class="bu">map</span>(<span class="kw">lambda</span> line: line.split(<span class="st">&quot;,&quot;</span>))</a></code></pre></div>
 <p>Then transform your data so that every item is in the correct format for the schema (i.e. Ints, Strings, Floats, etc.). You’ll want to then use</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb92-1" title="1"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> <span class="im">from</span> pyspark.sql <span class="im">import</span> Row</a>
-<a class="sourceLine" id="cb92-2" title="2"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> Person <span class="op">=</span> Row(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;age&#39;</span>)</a>
-<a class="sourceLine" id="cb92-3" title="3"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> person <span class="op">=</span> rdd.<span class="bu">map</span>(<span class="kw">lambda</span> r: Person(<span class="op">*</span>r))</a>
-<a class="sourceLine" id="cb92-4" title="4"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> df2 <span class="op">=</span> sqlContext.createDataFrame(person)</a>
-<a class="sourceLine" id="cb92-5" title="5"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> df2.collect()</a>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb92-1" title="1"><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql <span class="im">import</span> Row</a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="op">&gt;&gt;&gt;</span> Person <span class="op">=</span> Row(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;age&#39;</span>)</a>
+<a class="sourceLine" id="cb92-3" title="3"><span class="op">&gt;&gt;&gt;</span> person <span class="op">=</span> rdd.<span class="bu">map</span>(<span class="kw">lambda</span> r: Person(<span class="op">*</span>r))</a>
+<a class="sourceLine" id="cb92-4" title="4"><span class="op">&gt;&gt;&gt;</span> df2 <span class="op">=</span> sqlContext.createDataFrame(person)</a>
+<a class="sourceLine" id="cb92-5" title="5"><span class="op">&gt;&gt;&gt;</span> df2.collect()</a>
 <a class="sourceLine" id="cb92-6" title="6">[Row(name<span class="op">=</span><span class="st">u&#39;Alice&#39;</span>, age<span class="op">=</span><span class="dv">1</span>)]</a>
-<a class="sourceLine" id="cb92-7" title="7"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> <span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></a>
-<a class="sourceLine" id="cb92-8" title="8"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> schema <span class="op">=</span> StructType([</a>
+<a class="sourceLine" id="cb92-7" title="7"><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb92-8" title="8"><span class="op">&gt;&gt;&gt;</span> schema <span class="op">=</span> StructType([</a>
 <a class="sourceLine" id="cb92-9" title="9">...    StructField(<span class="st">&quot;name&quot;</span>, StringType(), <span class="va">True</span>),</a>
 <a class="sourceLine" id="cb92-10" title="10">...    StructField(<span class="st">&quot;age&quot;</span>, IntegerType(), <span class="va">True</span>)])</a>
-<a class="sourceLine" id="cb92-11" title="11"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> df3 <span class="op">=</span> sqlContext.createDataFrame(rdd, schema)</a>
-<a class="sourceLine" id="cb92-12" title="12"><span class="op">&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;&amp;</span>gt<span class="op">;</span> df3.collect()</a>
+<a class="sourceLine" id="cb92-11" title="11"><span class="op">&gt;&gt;&gt;</span> df3 <span class="op">=</span> sqlContext.createDataFrame(rdd, schema)</a>
+<a class="sourceLine" id="cb92-12" title="12"><span class="op">&gt;&gt;&gt;</span> df3.collect()</a>
 <a class="sourceLine" id="cb92-13" title="13">[Row(name<span class="op">=</span><span class="st">u&#39;Alice&#39;</span>, age<span class="op">=</span><span class="dv">1</span>)]</a></code></pre></div>
 <p>Reference: <a href="http://spark.apache.org/docs/1.6.1/api/python/pyspark.sql.html#pyspark.sql.Row" rel="noreferrer">http://spark.apache.org/docs/1.6.1/api/python/pyspark.sql.html#pyspark.sql.Row</a></p>
 <p>“Also, please tell me how can I import xlsx file?” – Excel files are not used in “Big Data”; Spark is meant to be used with large files or databases. If you have an Excel file that is 50GB in size, then you’re doing things wrong. Excel wouldn’t even be able to open a file that size; from my experience, anything above 20MB and Excel dies.</p>
@@ -2212,7 +2212,7 @@ How can I import a .csv file into pyspark dataframes? I even tried to read csv f
 <p>Following worked well for me:</p>
 <div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb93-1" title="1"><span class="im">from</span> pyspark.sql.types <span class="im">import</span> <span class="op">*</span></a>
 <a class="sourceLine" id="cb93-2" title="2">schema <span class="op">=</span> StructType([StructField(<span class="st">&quot;name&quot;</span>, StringType(), <span class="va">True</span>),StructField(<span class="st">&quot;age&quot;</span>, StringType(), <span class="va">True</span>)]</a>
-<a class="sourceLine" id="cb93-3" title="3">pd_df <span class="op">=</span> pd.read_csv(<span class="st">&quot;&amp;lt;inputcsvfile&amp;gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb93-3" title="3">pd_df <span class="op">=</span> pd.read_csv(<span class="st">&quot;&lt;inputcsvfile&gt;&quot;</span>)</a>
 <a class="sourceLine" id="cb93-4" title="4">sp_df <span class="op">=</span> spark.createDataFrame(pd_df, schema<span class="op">=</span>schema)</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -2710,8 +2710,8 @@ df.groupby(‘receipt’).receipt.count()
 <div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb116-1" title="1">      country            female_percent   male_percent </a>
 <a class="sourceLine" id="cb116-2" title="2"><span class="dv">1</span>      Austia              <span class="fl">26.73</span>            <span class="fl">73.26</span>        </a></code></pre></div>
 <p>I am trying to do this in R. I tried the below function, but my R session is not producing any result and it is terminating.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb117-1" title="1">  df <span class="op">%&amp;</span>gt<span class="op">;%</span></a>
-<a class="sourceLine" id="cb117-2" title="2">  group_by(country, gender) <span class="op">%&amp;</span>gt<span class="op">;%</span></a>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb117-1" title="1">  df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb117-2" title="2">  group_by(country, gender) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb117-3" title="3">  summarise_each(funs(<span class="bu">sum</span>))</a></code></pre></div>
 <p>Could someone help me in achieving this output? I think this can be achieved using dplyr function, but I am struck inbetween.</p>
 </section>
@@ -2719,10 +2719,10 @@ df.groupby(‘receipt’).receipt.count()
 <h4>Answer 2 (score 4)</h4>
 <div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb118-1" title="1">library(dplyr)</a>
 <a class="sourceLine" id="cb118-2" title="2">library(tidyr)     </a>
-<a class="sourceLine" id="cb118-3" title="3">df <span class="op">%&amp;</span>gt<span class="op">;%</span> group_by(country, gender) <span class="op">%&amp;</span>gt<span class="op">;%</span> </a>
-<a class="sourceLine" id="cb118-4" title="4">       summarise(total_loan_amount <span class="op">=</span><span class="bu">sum</span>(loan_amount)) <span class="op">%&amp;</span>gt<span class="op">;%</span> </a>
-<a class="sourceLine" id="cb118-5" title="5">       spread(gender, total_loan_amount) <span class="op">%&amp;</span>gt<span class="op">;%</span> </a>
-<a class="sourceLine" id="cb118-6" title="6">       ungroup() <span class="op">%&amp;</span>gt<span class="op">;%</span></a>
+<a class="sourceLine" id="cb118-3" title="3">df <span class="op">%&gt;%</span> group_by(country, gender) <span class="op">%&gt;%</span> </a>
+<a class="sourceLine" id="cb118-4" title="4">       summarise(total_loan_amount <span class="op">=</span><span class="bu">sum</span>(loan_amount)) <span class="op">%&gt;%</span> </a>
+<a class="sourceLine" id="cb118-5" title="5">       spread(gender, total_loan_amount) <span class="op">%&gt;%</span> </a>
+<a class="sourceLine" id="cb118-6" title="6">       ungroup() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb118-7" title="7">       transmute(country <span class="op">=</span> country,  female_percent <span class="op">=</span> F <span class="op">/</span> (F<span class="op">+</span>M), male_percent <span class="op">=</span> M <span class="op">/</span>(F<span class="op">+</span>M))</a></code></pre></div>
 <p>results in</p>
 <div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb119-1" title="1"> Source: local data frame [<span class="dv">1</span> x <span class="dv">3</span>]</a>
@@ -2735,12 +2735,12 @@ df.groupby(‘receipt’).receipt.count()
 <h4>Answer 3 (score 1)</h4>
 <p>I am sure there are better ways of doing it. Below is my simplistic take.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb120-1" title="1">library(dplyr)<span class="op">;</span> library(reshape2)</a>
-<a class="sourceLine" id="cb120-2" title="2">Summary <span class="op">&amp;</span>lt<span class="op">;-</span> df <span class="op">%&amp;</span>gt<span class="op">;%</span></a>
-<a class="sourceLine" id="cb120-3" title="3">  group_by(country, gender) <span class="op">%&amp;</span>gt<span class="op">;%</span></a>
+<a class="sourceLine" id="cb120-2" title="2">Summary <span class="op">&lt;-</span> df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb120-3" title="3">  group_by(country, gender) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb120-4" title="4">  summarise(Net <span class="op">=</span> <span class="bu">sum</span>(loan_amount))</a>
 <a class="sourceLine" id="cb120-5" title="5"></a>
-<a class="sourceLine" id="cb120-6" title="6">  final <span class="op">&amp;</span>lt<span class="op">;-</span> recast(Summary, country<span class="op">~</span>gender, <span class="bu">id</span>.var <span class="op">=</span> c(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;gender&quot;</span>))</a>
-<a class="sourceLine" id="cb120-7" title="7">  final <span class="op">&amp;</span>lt<span class="op">;-</span> mutate(final, F_percent <span class="op">=</span> final$F<span class="op">/</span>(final$F<span class="op">+</span>final$M), M_percent <span class="op">=</span> final$M<span class="op">/</span>(final$F<span class="op">+</span>final$M) )</a></code></pre></div>
+<a class="sourceLine" id="cb120-6" title="6">  final <span class="op">&lt;-</span> recast(Summary, country<span class="op">~</span>gender, <span class="bu">id</span>.var <span class="op">=</span> c(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;gender&quot;</span>))</a>
+<a class="sourceLine" id="cb120-7" title="7">  final <span class="op">&lt;-</span> mutate(final, F_percent <span class="op">=</span> final$F<span class="op">/</span>(final$F<span class="op">+</span>final$M), M_percent <span class="op">=</span> final$M<span class="op">/</span>(final$F<span class="op">+</span>final$M) )</a></code></pre></div>
 <p>Naming the columns with better names and retaining or dropping certain columns should now be easy.</p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -2982,11 +2982,11 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <a class="sourceLine" id="cb121-19" title="19"><span class="co">        X - pandas.DataFrame with candidate features</span></a>
 <a class="sourceLine" id="cb121-20" title="20"><span class="co">        y - list-like with the target</span></a>
 <a class="sourceLine" id="cb121-21" title="21"><span class="co">        initial_list - list of features to start with (column names of X)</span></a>
-<a class="sourceLine" id="cb121-22" title="22"><span class="co">        threshold_in - include a feature if its p-value &amp;lt; threshold_in</span></a>
-<a class="sourceLine" id="cb121-23" title="23"><span class="co">        threshold_out - exclude a feature if its p-value &amp;gt; threshold_out</span></a>
+<a class="sourceLine" id="cb121-22" title="22"><span class="co">        threshold_in - include a feature if its p-value &lt; threshold_in</span></a>
+<a class="sourceLine" id="cb121-23" title="23"><span class="co">        threshold_out - exclude a feature if its p-value &gt; threshold_out</span></a>
 <a class="sourceLine" id="cb121-24" title="24"><span class="co">        verbose - whether to print the sequence of inclusions and exclusions</span></a>
 <a class="sourceLine" id="cb121-25" title="25"><span class="co">    Returns: list of selected features </span></a>
-<a class="sourceLine" id="cb121-26" title="26"><span class="co">    Always set threshold_in &amp;lt; threshold_out to avoid infinite looping.</span></a>
+<a class="sourceLine" id="cb121-26" title="26"><span class="co">    Always set threshold_in &lt; threshold_out to avoid infinite looping.</span></a>
 <a class="sourceLine" id="cb121-27" title="27"><span class="co">    See https://en.wikipedia.org/wiki/Stepwise_regression for the details</span></a>
 <a class="sourceLine" id="cb121-28" title="28"><span class="co">    &quot;&quot;&quot;</span></a>
 <a class="sourceLine" id="cb121-29" title="29">    included <span class="op">=</span> <span class="bu">list</span>(initial_list)</a>
@@ -2999,7 +2999,7 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <a class="sourceLine" id="cb121-36" title="36">            model <span class="op">=</span> sm.OLS(y, sm.add_constant(pd.DataFrame(X[included<span class="op">+</span>[new_column]]))).fit()</a>
 <a class="sourceLine" id="cb121-37" title="37">            new_pval[new_column] <span class="op">=</span> model.pvalues[new_column]</a>
 <a class="sourceLine" id="cb121-38" title="38">        best_pval <span class="op">=</span> new_pval.<span class="bu">min</span>()</a>
-<a class="sourceLine" id="cb121-39" title="39">        <span class="cf">if</span> best_pval <span class="op">&amp;</span>lt<span class="op">;</span> threshold_in:</a>
+<a class="sourceLine" id="cb121-39" title="39">        <span class="cf">if</span> best_pval <span class="op">&lt;</span> threshold_in:</a>
 <a class="sourceLine" id="cb121-40" title="40">            best_feature <span class="op">=</span> new_pval.argmin()</a>
 <a class="sourceLine" id="cb121-41" title="41">            included.append(best_feature)</a>
 <a class="sourceLine" id="cb121-42" title="42">            changed<span class="op">=</span><span class="va">True</span></a>
@@ -3011,7 +3011,7 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <a class="sourceLine" id="cb121-48" title="48">        <span class="co"># use all coefs except intercept</span></a>
 <a class="sourceLine" id="cb121-49" title="49">        pvalues <span class="op">=</span> model.pvalues.iloc[<span class="dv">1</span>:]</a>
 <a class="sourceLine" id="cb121-50" title="50">        worst_pval <span class="op">=</span> pvalues.<span class="bu">max</span>() <span class="co"># null if pvalues is empty</span></a>
-<a class="sourceLine" id="cb121-51" title="51">        <span class="cf">if</span> worst_pval <span class="op">&amp;</span>gt<span class="op">;</span> threshold_out:</a>
+<a class="sourceLine" id="cb121-51" title="51">        <span class="cf">if</span> worst_pval <span class="op">&gt;</span> threshold_out:</a>
 <a class="sourceLine" id="cb121-52" title="52">            changed<span class="op">=</span><span class="va">True</span></a>
 <a class="sourceLine" id="cb121-53" title="53">            worst_feature <span class="op">=</span> pvalues.argmax()</a>
 <a class="sourceLine" id="cb121-54" title="54">            included.remove(worst_feature)</a>
@@ -3052,7 +3052,7 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <p>First of all this is a Python/Anaconda question and should probably be asked in a different stack exchange subsite.</p>
 <hr>
 <p>As for the question itself - you can export your Anaconda environment using:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb123-1" title="1">conda env export <span class="op">&amp;</span>gt<span class="op">;</span> environment.yml</a></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb123-1" title="1">conda env export <span class="op">&gt;</span> environment.yml</a></code></pre></div>
 <p>And recreate it using:</p>
 <div class="sourceCode" id="cb124"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb124-1" title="1">conda env create <span class="op">-</span>f environment.yml</a></code></pre></div>
 <p>Please note that as others suggested - you should use virtual environments which allows you to create a certain environment that is separated from that of your machine and manage it more easily.</p>
@@ -3072,9 +3072,9 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <section id="answer-3-score-4-2" class="level4">
 <h4>Answer 3 (score 4)</h4>
 <p>First export environment configuration of your current conda environment using:</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb127-1" title="1">conda<span class="op">-</span>env  export <span class="op">-</span>n your_env_name <span class="op">&amp;</span>gt<span class="op">;</span> your_env_name.yml</a></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb127-1" title="1">conda<span class="op">-</span>env  export <span class="op">-</span>n your_env_name <span class="op">&gt;</span> your_env_name.yml</a></code></pre></div>
 <p>example:</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb128-1" title="1">conda<span class="op">-</span>env  export <span class="op">-</span>n base<span class="op">&amp;</span>gt<span class="op">;</span> base.yml</a></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb128-1" title="1">conda<span class="op">-</span>env  export <span class="op">-</span>n base<span class="op">&gt;</span> base.yml</a></code></pre></div>
 <p>After running above command their should be yml configuration file in your current directory which contain information of your conda environment</p>
 <p>To create new environment using yml configuration file run:</p>
 <div class="sourceCode" id="cb129"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb129-1" title="1">conda<span class="op">-</span>env create <span class="op">-</span>n new_env <span class="op">-</span>f<span class="op">=\</span>path<span class="op">\</span>to<span class="op">\</span>base.yml </a></code></pre></div>
@@ -3114,7 +3114,7 @@ If you still want vanilla stepwise regression, it is easier to base it on <code>
 <h4>Answer 2 (score 31)</h4>
 <p>If it’s a csv file and you do not need to access all of the data at once when training your algorithm, you can read it in chunks. The <code>pandas.read_csv</code> method allows you to read a file in chunks like this:</p>
 <div class="sourceCode" id="cb133"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb133-1" title="1"><span class="im">import</span> pandas <span class="im">as</span> pd</a>
-<a class="sourceLine" id="cb133-2" title="2"><span class="cf">for</span> chunk <span class="kw">in</span> pd.read_csv(<span class="op">&amp;</span>lt<span class="op">;</span>filepath<span class="op">&amp;</span>gt<span class="op">;</span>, chunksize<span class="op">=&amp;</span>lt<span class="op">;</span>your_chunksize_here<span class="op">&amp;</span>gt<span class="op">;</span>)</a>
+<a class="sourceLine" id="cb133-2" title="2"><span class="cf">for</span> chunk <span class="kw">in</span> pd.read_csv(<span class="op">&lt;</span>filepath<span class="op">&gt;</span>, chunksize<span class="op">=&lt;</span>your_chunksize_here<span class="op">&gt;</span>)</a>
 <a class="sourceLine" id="cb133-3" title="3">    do_processing()</a>
 <a class="sourceLine" id="cb133-4" title="4">    train_algorithm()</a></code></pre></div>
 <p>Here is the method’s <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html" rel="noreferrer">documentation</a></p>
@@ -3241,20 +3241,20 @@ Edit: I checked for other combinations as well, the ratio is not constant. Below
 <a class="sourceLine" id="cb135-5" title="5"><span class="dv">5</span> <span class="dv">6</span> NaN</a></code></pre></div>
 <p>I hope to generate value for missing value based rule that first product second column</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb136-1" title="1"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb136-2" title="2"><span class="dv">4</span> <span class="dv">5</span> <span class="dv">20</span> <span class="op">&amp;</span>lt<span class="op">;--</span><span class="dv">4</span><span class="op">*</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb136-2" title="2"><span class="dv">4</span> <span class="dv">5</span> <span class="dv">20</span> <span class="op">&lt;--</span><span class="dv">4</span><span class="op">*</span><span class="dv">5</span></a>
 <a class="sourceLine" id="cb136-3" title="3"><span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span></a>
-<a class="sourceLine" id="cb136-4" title="4"><span class="dv">3</span> <span class="dv">2</span> <span class="dv">6</span> <span class="op">&amp;</span>lt<span class="op">;--</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb136-5" title="5"><span class="dv">5</span> <span class="dv">6</span> <span class="dv">30</span> <span class="op">&amp;</span>lt<span class="op">;--</span> <span class="dv">5</span><span class="op">*</span><span class="dv">6</span></a></code></pre></div>
+<a class="sourceLine" id="cb136-4" title="4"><span class="dv">3</span> <span class="dv">2</span> <span class="dv">6</span> <span class="op">&lt;--</span> <span class="dv">3</span><span class="op">*</span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb136-5" title="5"><span class="dv">5</span> <span class="dv">6</span> <span class="dv">30</span> <span class="op">&lt;--</span> <span class="dv">5</span><span class="op">*</span><span class="dv">6</span></a></code></pre></div>
 <p>How can I do it use data frame? Thanks.</p>
 <p>How to add condition to calculate missing value like this?</p>
 <p>
 <code>if 1st % 2 == 0 then 3rd = 1st * 2nd else 3rd = 1st + 2nd</code>
 </p>
 <div class="sourceCode" id="cb137"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb137-1" title="1"><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></a>
-<a class="sourceLine" id="cb137-2" title="2"><span class="dv">4</span> <span class="dv">5</span> <span class="dv">20</span> <span class="op">&amp;</span>lt<span class="op">;--</span> <span class="dv">4</span><span class="op">*</span><span class="dv">5</span> because <span class="dv">4</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb137-2" title="2"><span class="dv">4</span> <span class="dv">5</span> <span class="dv">20</span> <span class="op">&lt;--</span> <span class="dv">4</span><span class="op">*</span><span class="dv">5</span> because <span class="dv">4</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb137-3" title="3"><span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span></a>
-<a class="sourceLine" id="cb137-4" title="4"><span class="dv">3</span> <span class="dv">2</span> <span class="dv">5</span> <span class="op">&amp;</span>lt<span class="op">;--</span> <span class="dv">3</span><span class="op">+</span><span class="dv">2</span> because <span class="dv">3</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb137-5" title="5"><span class="dv">5</span> <span class="dv">6</span> <span class="dv">11</span> <span class="op">&amp;</span>lt<span class="op">;--</span> <span class="dv">5</span><span class="op">+</span><span class="dv">6</span> because <span class="dv">5</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">1</span></a></code></pre></div>
+<a class="sourceLine" id="cb137-4" title="4"><span class="dv">3</span> <span class="dv">2</span> <span class="dv">5</span> <span class="op">&lt;--</span> <span class="dv">3</span><span class="op">+</span><span class="dv">2</span> because <span class="dv">3</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb137-5" title="5"><span class="dv">5</span> <span class="dv">6</span> <span class="dv">11</span> <span class="op">&lt;--</span> <span class="dv">5</span><span class="op">+</span><span class="dv">6</span> because <span class="dv">5</span><span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">1</span></a></code></pre></div>
 </section>
 <section id="answer-accepted-score-16-3" class="level4">
 <h4>Answer accepted (score 16)</h4>
@@ -3485,7 +3485,7 @@ I’m trying to create a contour map from two variables which store some tempera
 <a href="https://plot.ly/pandas/contour-plots/" rel="nofollow noreferrer">https://plot.ly/pandas/contour-plots/</a>
 </blockquote>
 <p>I’m not able to convert the pandas dataframe created, into a 1d array. And the kde_scipy doesn’t work with a nd-array. I tried converting the dataframe into a 1d array using .as_matrix() but this is the error I am receiving.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb152-1" title="1">Degrees of freedom <span class="op">&amp;</span>lt<span class="op">;=</span> <span class="dv">0</span> <span class="cf">for</span> <span class="bu">slice</span></a></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb152-1" title="1">Degrees of freedom <span class="op">&lt;=</span> <span class="dv">0</span> <span class="cf">for</span> <span class="bu">slice</span></a></code></pre></div>
 <p>How can I convert this CSV file (with 3 columns of data) imported as a dataframe into individual columns of data? Or can I directly import each column of data into a 1d array and use it in the function kde_scipy?</p>
 </section>
 <section id="answer-2-score-2-4" class="level4">
@@ -3623,7 +3623,7 @@ However, there is no universal “best” measure. There is the best model for y
 <a class="sourceLine" id="cb155-15" title="15"></a>
 <a class="sourceLine" id="cb155-16" title="16"><span class="bu">print</span>(X_train)</a></code></pre></div>
 <p>Here comes the error :</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb156-1" title="1">  File <span class="st">&quot;predict01.py&quot;</span>, line <span class="dv">14</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>module<span class="op">&amp;</span>gt<span class="op">;</span></a>
+<div class="sourceCode" id="cb156"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb156-1" title="1">  File <span class="st">&quot;predict01.py&quot;</span>, line <span class="dv">14</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb156-2" title="2">    nb_predict_train.predict(X_train)</a>
 <a class="sourceLine" id="cb156-3" title="3"><span class="pp">AttributeError</span>: <span class="st">&#39;numpy.ndarray&#39;</span> <span class="bu">object</span> has no attribute <span class="st">&#39;predict&#39;</span></a></code></pre></div>
 </section>
@@ -3660,7 +3660,7 @@ However, there is no universal “best” measure. There is the best model for y
 <a class="sourceLine" id="cb159-8" title="8"><span class="pp">KeyError</span>                                  Traceback (most recent call last)</a>
 <a class="sourceLine" id="cb159-9" title="9">C:<span class="op">\</span>get_loc(<span class="va">self</span>, key, method, tolerance)</a>
 <a class="sourceLine" id="cb159-10" title="10">   <span class="dv">2133</span>             <span class="cf">try</span>:</a>
-<a class="sourceLine" id="cb159-11" title="11"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">2134</span>                 <span class="cf">return</span> <span class="va">self</span>._engine.get_loc(key)</a>
+<a class="sourceLine" id="cb159-11" title="11"><span class="op">-&gt;</span> <span class="dv">2134</span>                 <span class="cf">return</span> <span class="va">self</span>._engine.get_loc(key)</a>
 <a class="sourceLine" id="cb159-12" title="12">   <span class="dv">2135</span>             <span class="cf">except</span> <span class="pp">KeyError</span>:</a>
 <a class="sourceLine" id="cb159-13" title="13"></a>
 <a class="sourceLine" id="cb159-14" title="14">pandas<span class="op">\</span>index.pyx <span class="kw">in</span> pandas.index.IndexEngine.get_loc (pandas<span class="op">\</span>index.c:<span class="dv">4433</span>)()</a>
@@ -3676,42 +3676,42 @@ However, there is no universal “best” measure. There is the best model for y
 <a class="sourceLine" id="cb159-24" title="24">During handling of the above exception, another exception occurred:</a>
 <a class="sourceLine" id="cb159-25" title="25"></a>
 <a class="sourceLine" id="cb159-26" title="26"><span class="pp">KeyError</span>                                  Traceback (most recent call last)</a>
-<a class="sourceLine" id="cb159-27" title="27"><span class="op">&amp;</span>lt<span class="op">;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="dv">-50</span><span class="op">-</span>dce34398f1e1<span class="op">&amp;</span>gt<span class="op">;</span> <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>module<span class="op">&amp;</span>gt<span class="op">;</span>()</a>
+<a class="sourceLine" id="cb159-27" title="27"><span class="op">&lt;</span>ipython<span class="op">-</span><span class="bu">input</span><span class="dv">-50</span><span class="op">-</span>dce34398f1e1<span class="op">&gt;</span> <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span>()</a>
 <a class="sourceLine" id="cb159-28" title="28">      <span class="dv">1</span> <span class="cf">for</span> <span class="bu">id</span> <span class="kw">in</span> unique_bank_id:</a>
-<a class="sourceLine" id="cb159-29" title="29"><span class="op">----&amp;</span>gt<span class="op">;</span> <span class="dv">2</span>     new_df <span class="op">=</span> df[df[<span class="st">&#39;id&#39;</span>] <span class="op">==</span> <span class="bu">id</span>]</a>
+<a class="sourceLine" id="cb159-29" title="29"><span class="op">----&gt;</span> <span class="dv">2</span>     new_df <span class="op">=</span> df[df[<span class="st">&#39;id&#39;</span>] <span class="op">==</span> <span class="bu">id</span>]</a>
 <a class="sourceLine" id="cb159-30" title="30"></a>
 <a class="sourceLine" id="cb159-31" title="31">C:<span class="op">\</span> <span class="kw">in</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, key)</a>
 <a class="sourceLine" id="cb159-32" title="32">   <span class="dv">2057</span>             <span class="cf">return</span> <span class="va">self</span>._getitem_multilevel(key)</a>
 <a class="sourceLine" id="cb159-33" title="33">   <span class="dv">2058</span>         <span class="cf">else</span>:</a>
-<a class="sourceLine" id="cb159-34" title="34"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">2059</span>             <span class="cf">return</span> <span class="va">self</span>._getitem_column(key)</a>
+<a class="sourceLine" id="cb159-34" title="34"><span class="op">-&gt;</span> <span class="dv">2059</span>             <span class="cf">return</span> <span class="va">self</span>._getitem_column(key)</a>
 <a class="sourceLine" id="cb159-35" title="35">   <span class="dv">2060</span> </a>
 <a class="sourceLine" id="cb159-36" title="36">   <span class="dv">2061</span>     <span class="kw">def</span> _getitem_column(<span class="va">self</span>, key):</a>
 <a class="sourceLine" id="cb159-37" title="37"></a>
 <a class="sourceLine" id="cb159-38" title="38">C:<span class="op">\</span> <span class="kw">in</span> _getitem_column(<span class="va">self</span>, key)</a>
 <a class="sourceLine" id="cb159-39" title="39">   <span class="dv">2064</span>         <span class="co"># get column</span></a>
 <a class="sourceLine" id="cb159-40" title="40">   <span class="dv">2065</span>         <span class="cf">if</span> <span class="va">self</span>.columns.is_unique:</a>
-<a class="sourceLine" id="cb159-41" title="41"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">2066</span>             <span class="cf">return</span> <span class="va">self</span>._get_item_cache(key)</a>
+<a class="sourceLine" id="cb159-41" title="41"><span class="op">-&gt;</span> <span class="dv">2066</span>             <span class="cf">return</span> <span class="va">self</span>._get_item_cache(key)</a>
 <a class="sourceLine" id="cb159-42" title="42">   <span class="dv">2067</span> </a>
-<a class="sourceLine" id="cb159-43" title="43">   <span class="dv">2068</span>         <span class="co"># duplicate columns &amp;amp; possible reduce dimensionality</span></a>
+<a class="sourceLine" id="cb159-43" title="43">   <span class="dv">2068</span>         <span class="co"># duplicate columns &amp; possible reduce dimensionality</span></a>
 <a class="sourceLine" id="cb159-44" title="44"></a>
 <a class="sourceLine" id="cb159-45" title="45">C:<span class="op">\</span> <span class="kw">in</span> _get_item_cache(<span class="va">self</span>, item)</a>
 <a class="sourceLine" id="cb159-46" title="46">   <span class="dv">1384</span>         res <span class="op">=</span> cache.get(item)</a>
 <a class="sourceLine" id="cb159-47" title="47">   <span class="dv">1385</span>         <span class="cf">if</span> res <span class="kw">is</span> <span class="va">None</span>:</a>
-<a class="sourceLine" id="cb159-48" title="48"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">1386</span>             values <span class="op">=</span> <span class="va">self</span>._data.get(item)</a>
+<a class="sourceLine" id="cb159-48" title="48"><span class="op">-&gt;</span> <span class="dv">1386</span>             values <span class="op">=</span> <span class="va">self</span>._data.get(item)</a>
 <a class="sourceLine" id="cb159-49" title="49">   <span class="dv">1387</span>             res <span class="op">=</span> <span class="va">self</span>._box_item_values(item, values)</a>
 <a class="sourceLine" id="cb159-50" title="50">   <span class="dv">1388</span>             cache[item] <span class="op">=</span> res</a>
 <a class="sourceLine" id="cb159-51" title="51"></a>
 <a class="sourceLine" id="cb159-52" title="52">C:<span class="op">\</span> <span class="kw">in</span> get(<span class="va">self</span>, item, fastpath)</a>
 <a class="sourceLine" id="cb159-53" title="53">   <span class="dv">3541</span> </a>
 <a class="sourceLine" id="cb159-54" title="54">   <span class="dv">3542</span>             <span class="cf">if</span> <span class="kw">not</span> isnull(item):</a>
-<a class="sourceLine" id="cb159-55" title="55"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">3543</span>                 loc <span class="op">=</span> <span class="va">self</span>.items.get_loc(item)</a>
+<a class="sourceLine" id="cb159-55" title="55"><span class="op">-&gt;</span> <span class="dv">3543</span>                 loc <span class="op">=</span> <span class="va">self</span>.items.get_loc(item)</a>
 <a class="sourceLine" id="cb159-56" title="56">   <span class="dv">3544</span>             <span class="cf">else</span>:</a>
 <a class="sourceLine" id="cb159-57" title="57">   <span class="dv">3545</span>                 indexer <span class="op">=</span> np.arange(<span class="bu">len</span>(<span class="va">self</span>.items))[isnull(<span class="va">self</span>.items)]</a>
 <a class="sourceLine" id="cb159-58" title="58"></a>
 <a class="sourceLine" id="cb159-59" title="59">C:<span class="op">\</span> <span class="kw">in</span> get_loc(<span class="va">self</span>, key, method, tolerance)</a>
 <a class="sourceLine" id="cb159-60" title="60">   <span class="dv">2134</span>                 <span class="cf">return</span> <span class="va">self</span>._engine.get_loc(key)</a>
 <a class="sourceLine" id="cb159-61" title="61">   <span class="dv">2135</span>             <span class="cf">except</span> <span class="pp">KeyError</span>:</a>
-<a class="sourceLine" id="cb159-62" title="62"><span class="op">-&amp;</span>gt<span class="op">;</span> <span class="dv">2136</span>                 <span class="cf">return</span> <span class="va">self</span>._engine.get_loc(<span class="va">self</span>._maybe_cast_indexer(key))</a>
+<a class="sourceLine" id="cb159-62" title="62"><span class="op">-&gt;</span> <span class="dv">2136</span>                 <span class="cf">return</span> <span class="va">self</span>._engine.get_loc(<span class="va">self</span>._maybe_cast_indexer(key))</a>
 <a class="sourceLine" id="cb159-63" title="63">   <span class="dv">2137</span> </a>
 <a class="sourceLine" id="cb159-64" title="64">   <span class="dv">2138</span>         indexer <span class="op">=</span> <span class="va">self</span>.get_indexer([key], method<span class="op">=</span>method, tolerance<span class="op">=</span>tolerance)</a>
 <a class="sourceLine" id="cb159-65" title="65"></a>
@@ -4060,11 +4060,11 @@ More sick people being classified as healthy (But then, they might die without t
 <h4>Answer 2 (score 4)</h4>
 <p>Using the <code>data.table</code> structure (see the <a href="https://github.com/Rdatatable/data.table/wiki" rel="nofollow">wiki</a>),</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb173-1" title="1">library(data.table)</a>
-<a class="sourceLine" id="cb173-2" title="2">D <span class="op">&amp;</span>lt<span class="op">;-</span> data.table(x <span class="op">=</span> c(<span class="dv">1155</span>, <span class="dv">1156</span>, <span class="dv">1157</span>, <span class="dv">1158</span>),</a>
+<a class="sourceLine" id="cb173-2" title="2">D <span class="op">&lt;-</span> data.table(x <span class="op">=</span> c(<span class="dv">1155</span>, <span class="dv">1156</span>, <span class="dv">1157</span>, <span class="dv">1158</span>),</a>
 <a class="sourceLine" id="cb173-3" title="3">                date <span class="op">=</span> <span class="im">as</span>.Date(c(<span class="st">&quot;2010-05-02&quot;</span>, <span class="st">&quot;2010-05-05&quot;</span>, <span class="st">&quot;2010-05-08&quot;</span>, <span class="st">&quot;2010-05-11&quot;</span>)),</a>
 <a class="sourceLine" id="cb173-4" title="4">                y <span class="op">=</span> c(<span class="fl">2.7200</span>, <span class="fl">2.6000</span>, <span class="fl">2.6700</span>, <span class="fl">3.5700</span>),</a>
 <a class="sourceLine" id="cb173-5" title="5">                <span class="bu">id</span> <span class="op">=</span> c(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb173-6" title="6">counts <span class="op">&amp;</span>lt<span class="op">;-</span> D[, .(rowCount <span class="op">=</span> .N), by <span class="op">=</span> <span class="bu">id</span>]</a>
+<a class="sourceLine" id="cb173-6" title="6">counts <span class="op">&lt;-</span> D[, .(rowCount <span class="op">=</span> .N), by <span class="op">=</span> <span class="bu">id</span>]</a>
 <a class="sourceLine" id="cb173-7" title="7">counts</a></code></pre></div>
 <p>This will return</p>
 <div class="sourceCode" id="cb174"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb174-1" title="1">counts</a>
@@ -4076,8 +4076,8 @@ More sick people being classified as healthy (But then, they might die without t
 <section id="answer-3-score-3-4" class="level4">
 <h4>Answer 3 (score 3)</h4>
 <p>Another way is simply with the “table” function.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb175-1" title="1">ids<span class="op">&amp;</span>lt<span class="op">;-</span>c(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb175-2" title="2">counts<span class="op">&amp;</span>lt<span class="op">;-</span>data.frame(table(ids))</a>
+<div class="sourceCode" id="cb175"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb175-1" title="1">ids<span class="op">&lt;-</span>c(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb175-2" title="2">counts<span class="op">&lt;-</span>data.frame(table(ids))</a>
 <a class="sourceLine" id="cb175-3" title="3">counts</a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -4123,7 +4123,7 @@ This suggests that all the training examples have a fixed sequence length, namel
 <a class="sourceLine" id="cb176-22" title="22">        y_train <span class="op">=</span> x_train[:, :, <span class="dv">0</span>]</a>
 <a class="sourceLine" id="cb176-23" title="23">        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>):</a>
 <a class="sourceLine" id="cb176-24" title="24">            y_train[:, i:] <span class="op">+=</span> x_train[:, :<span class="op">-</span>i, i]</a>
-<a class="sourceLine" id="cb176-25" title="25">        y_train <span class="op">=</span> to_categorical(y_train <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">2.5</span>)</a>
+<a class="sourceLine" id="cb176-25" title="25">        y_train <span class="op">=</span> to_categorical(y_train <span class="op">&gt;</span> <span class="fl">2.5</span>)</a>
 <a class="sourceLine" id="cb176-26" title="26">        <span class="cf">yield</span> x_train, y_train</a>
 <a class="sourceLine" id="cb176-27" title="27"></a>
 <a class="sourceLine" id="cb176-28" title="28">model.fit_generator(train_generator(), steps_per_epoch<span class="op">=</span><span class="dv">30</span>, epochs<span class="op">=</span><span class="dv">10</span>, verbose<span class="op">=</span><span class="dv">1</span>)</a></code></pre></div>
@@ -4352,8 +4352,8 @@ I have a table in R. It just has two columns and many rows. Each element is a st
 <section id="answer-2-score-2-5" class="level4">
 <h4>Answer 2 (score 2)</h4>
 <p>You may use <code>gsub</code> function</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb179-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> c <span class="op">&amp;</span>lt<span class="op">;-</span>  <span class="st">&quot;ce7382&quot;</span></a>
-<a class="sourceLine" id="cb179-2" title="2"><span class="op">&amp;</span>gt<span class="op">;</span> gsub(<span class="st">&quot;[a-zA-Z ]&quot;</span>, <span class="st">&quot;&quot;</span>, c)</a>
+<div class="sourceCode" id="cb179"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb179-1" title="1"><span class="op">&gt;</span> c <span class="op">&lt;-</span>  <span class="st">&quot;ce7382&quot;</span></a>
+<a class="sourceLine" id="cb179-2" title="2"><span class="op">&gt;</span> gsub(<span class="st">&quot;[a-zA-Z ]&quot;</span>, <span class="st">&quot;&quot;</span>, c)</a>
 <a class="sourceLine" id="cb179-3" title="3">[<span class="dv">1</span>] <span class="st">&quot;7382&quot;</span></a></code></pre></div>
 <p>Feel free to add other characters you need to remove to the regexp and / or to cast the result to number with <code>as.numeric</code>.</p>
 </section>
@@ -4363,16 +4363,16 @@ I have a table in R. It just has two columns and many rows. Each element is a st
 <div class="sourceCode" id="cb180"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb180-1" title="1">library(roperators)</a>
 <a class="sourceLine" id="cb180-2" title="2"></a>
 <a class="sourceLine" id="cb180-3" title="3"><span class="co"># either </span></a>
-<a class="sourceLine" id="cb180-4" title="4">this_text <span class="op">&amp;</span>lt<span class="op">;-</span> c(<span class="st">&#39;ce7380&#39;</span>, <span class="st">&#39;ce5932&#39;</span>, <span class="st">&#39;ce1234&#39;</span>)</a>
+<a class="sourceLine" id="cb180-4" title="4">this_text <span class="op">&lt;-</span> c(<span class="st">&#39;ce7380&#39;</span>, <span class="st">&#39;ce5932&#39;</span>, <span class="st">&#39;ce1234&#39;</span>)</a>
 <a class="sourceLine" id="cb180-5" title="5"></a>
 <a class="sourceLine" id="cb180-6" title="6"><span class="co"># make a new text vector:</span></a>
-<a class="sourceLine" id="cb180-7" title="7">new_text <span class="op">&amp;</span>lt<span class="op">;-</span> this_text <span class="op">%-%</span> <span class="st">&#39;[a-z]&#39;</span></a>
+<a class="sourceLine" id="cb180-7" title="7">new_text <span class="op">&lt;-</span> this_text <span class="op">%-%</span> <span class="st">&#39;[a-z]&#39;</span></a>
 <a class="sourceLine" id="cb180-8" title="8"></a>
 <a class="sourceLine" id="cb180-9" title="9"><span class="co"># or make an integer vector:</span></a>
-<a class="sourceLine" id="cb180-10" title="10">new_number <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="bu">int</span>(this_text <span class="op">%-%</span> <span class="st">&#39;[a-z]&#39;</span>)</a>
+<a class="sourceLine" id="cb180-10" title="10">new_number <span class="op">&lt;-</span> <span class="bu">int</span>(this_text <span class="op">%-%</span> <span class="st">&#39;[a-z]&#39;</span>)</a>
 <a class="sourceLine" id="cb180-11" title="11"></a>
 <a class="sourceLine" id="cb180-12" title="12"><span class="co"># OR change this_text in-place</span></a>
-<a class="sourceLine" id="cb180-13" title="13">this_text <span class="op">&amp;</span>lt<span class="op">;-</span> c(<span class="st">&#39;ce7380&#39;</span>, <span class="st">&#39;ce5932&#39;</span>, <span class="st">&#39;ce1234&#39;</span>)</a>
+<a class="sourceLine" id="cb180-13" title="13">this_text <span class="op">&lt;-</span> c(<span class="st">&#39;ce7380&#39;</span>, <span class="st">&#39;ce5932&#39;</span>, <span class="st">&#39;ce1234&#39;</span>)</a>
 <a class="sourceLine" id="cb180-14" title="14"></a>
 <a class="sourceLine" id="cb180-15" title="15">this_text <span class="op">%-=%</span> <span class="st">&#39;[a-z]&#39;</span></a></code></pre></div>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -4383,10 +4383,10 @@ I have a table in R. It just has two columns and many rows. Each element is a st
 <section id="question-67" class="level4">
 <h4>Question</h4>
 <p>The below predict function is giving -ve values as well so it cannot be probabilities.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb181-1" title="1">param <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="bu">list</span>(<span class="bu">max</span>.depth <span class="op">=</span> <span class="dv">5</span>, eta <span class="op">=</span> <span class="fl">0.01</span>,  objective<span class="op">=</span><span class="st">&quot;binary:logistic&quot;</span>,subsample<span class="op">=</span><span class="fl">0.9</span>)</a>
-<a class="sourceLine" id="cb181-2" title="2">bst <span class="op">&amp;</span>lt<span class="op">;-</span> xgboost(param, data <span class="op">=</span> x_mat, label <span class="op">=</span> y_mat,nround <span class="op">=</span> <span class="dv">3000</span>)</a>
+<div class="sourceCode" id="cb181"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb181-1" title="1">param <span class="op">&lt;-</span> <span class="bu">list</span>(<span class="bu">max</span>.depth <span class="op">=</span> <span class="dv">5</span>, eta <span class="op">=</span> <span class="fl">0.01</span>,  objective<span class="op">=</span><span class="st">&quot;binary:logistic&quot;</span>,subsample<span class="op">=</span><span class="fl">0.9</span>)</a>
+<a class="sourceLine" id="cb181-2" title="2">bst <span class="op">&lt;-</span> xgboost(param, data <span class="op">=</span> x_mat, label <span class="op">=</span> y_mat,nround <span class="op">=</span> <span class="dv">3000</span>)</a>
 <a class="sourceLine" id="cb181-3" title="3"></a>
-<a class="sourceLine" id="cb181-4" title="4">pred_s <span class="op">&amp;</span>lt<span class="op">;-</span> predict(bst, x_mat_s2)</a></code></pre></div>
+<a class="sourceLine" id="cb181-4" title="4">pred_s <span class="op">&lt;-</span> predict(bst, x_mat_s2)</a></code></pre></div>
 <p>
 I google &amp; tried <code>pred_s &amp;lt;- predict(bst, x_mat_s2,type=&quot;response&quot;)</code> but it didn’t work.
 </p>
@@ -4517,7 +4517,7 @@ Rue, Havard, and Oyvind Salvesen. “Prediction and retrospective analysis of so
 <a class="sourceLine" id="cb186-8" title="8">            nwords <span class="op">=</span> nwords<span class="op">+</span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb186-9" title="9">            featureVec <span class="op">=</span> np.add(featureVec, model[word])</a>
 <a class="sourceLine" id="cb186-10" title="10"></a>
-<a class="sourceLine" id="cb186-11" title="11">    <span class="cf">if</span> nwords<span class="op">&amp;</span>gt<span class="op">;</span><span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb186-11" title="11">    <span class="cf">if</span> nwords<span class="op">&gt;</span><span class="dv">0</span>:</a>
 <a class="sourceLine" id="cb186-12" title="12">        featureVec <span class="op">=</span> np.divide(featureVec, nwords)</a>
 <a class="sourceLine" id="cb186-13" title="13">    <span class="cf">return</span> featureVec</a></code></pre></div>
 <p>Calculate Similarity</p>
@@ -4718,9 +4718,9 @@ Compute the <strong>cosine similarity</strong> between this representation and e
 <a class="sourceLine" id="cb197-3" title="3"><span class="im">import</span> cv2</a></code></pre></div>
 <p>It gives the following error:</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb198-1" title="1">Traceback (most recent call last):</a>
-<a class="sourceLine" id="cb198-2" title="2">  File <span class="st">&quot;&amp;lt;stdin&amp;gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>module<span class="op">&amp;</span>gt<span class="op">;</span></a>
-<a class="sourceLine" id="cb198-3" title="3">  File <span class="st">&quot;C:/Users/Kshitiz/AppData/Local/Programs/Python/Python36-32/Lib/site-packages\cv2\__init__.py&quot;</span>, line <span class="dv">7</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>modul</a>
-<a class="sourceLine" id="cb198-4" title="4">e<span class="op">&amp;</span>gt<span class="op">;</span></a>
+<a class="sourceLine" id="cb198-2" title="2">  File <span class="st">&quot;&lt;stdin&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb198-3" title="3">  File <span class="st">&quot;C:/Users/Kshitiz/AppData/Local/Programs/Python/Python36-32/Lib/site-packages\cv2\__init__.py&quot;</span>, line <span class="dv">7</span>, <span class="kw">in</span> <span class="op">&lt;</span>modul</a>
+<a class="sourceLine" id="cb198-4" title="4">e<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb198-5" title="5">    <span class="im">from</span> . <span class="im">import</span> cv2</a>
 <a class="sourceLine" id="cb198-6" title="6"><span class="pp">ImportError</span>: cannot <span class="im">import</span> name <span class="st">&#39;cv2&#39;</span></a></code></pre></div>
 <p>I have searched a lot but cannot find anything relevant. Please suggest what needs to be done.</p>
@@ -4966,7 +4966,7 @@ What is k=5 doing, since it is never used (the graph still lists all of the feat
 <a class="sourceLine" id="cb214-2" title="2">  invalid first argument</a></code></pre></div>
 <p>Appreciate any help!</p>
 <p>str(model) looks like this:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb215-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> <span class="bu">str</span>(model)</a>
+<div class="sourceCode" id="cb215"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb215-1" title="1"><span class="op">&gt;</span> <span class="bu">str</span>(model)</a>
 <a class="sourceLine" id="cb215-2" title="2">    List of <span class="dv">13</span></a>
 <a class="sourceLine" id="cb215-3" title="3">     $ data            :List of <span class="dv">1</span></a>
 <a class="sourceLine" id="cb215-4" title="4">      ..$ : num [<span class="dv">1</span>:<span class="dv">1000</span>, <span class="dv">1</span>:<span class="dv">56</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> ...</a>
@@ -5005,7 +5005,7 @@ What is k=5 doing, since it is never used (the graph still lists all of the feat
 <section id="answer-accepted-score-1" class="level4">
 <h4>Answer accepted (score 1)</h4>
 <p>Your data boils down to something like this structure:</p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb216-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> <span class="bu">str</span>(model)</a>
+<div class="sourceCode" id="cb216"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb216-1" title="1"><span class="op">&gt;</span> <span class="bu">str</span>(model)</a>
 <a class="sourceLine" id="cb216-2" title="2">List of <span class="dv">2</span></a>
 <a class="sourceLine" id="cb216-3" title="3"> $ data:List of <span class="dv">1</span></a>
 <a class="sourceLine" id="cb216-4" title="4">  ..$ : <span class="bu">int</span> [<span class="dv">1</span>:<span class="dv">3</span>, <span class="dv">1</span>:<span class="dv">4</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</a>
@@ -5017,14 +5017,14 @@ What is k=5 doing, since it is never used (the graph still lists all of the feat
 <p><code>model</code> is a list of 2 (for me) and 13 (for you) parts.</p>
 <p>The <code>$data</code> component is also a “List of 1” component.</p>
 <p>So <code>colnames(model$data)</code> is trying to get the <code>colnames</code> of a list, and failing:</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb217-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> colnames(model$data)</a>
+<div class="sourceCode" id="cb217"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb217-1" title="1"><span class="op">&gt;</span> colnames(model$data)</a>
 <a class="sourceLine" id="cb217-2" title="2">NULL</a></code></pre></div>
 <p>Which you would have spotted if you’d tried running <code>colnames(model$data)</code> yourself.</p>
 <p>You want the <code>colnames</code> of the first element of the list <code>model$data</code>:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb218-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> colnames(model$data[[<span class="dv">1</span>]])</a>
+<div class="sourceCode" id="cb218"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb218-1" title="1"><span class="op">&gt;</span> colnames(model$data[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb218-2" title="2">[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span></a></code></pre></div>
 <p>and hence:</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb219-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> sample(colnames(model$data[[<span class="dv">1</span>]]),<span class="dv">1</span>)</a>
+<div class="sourceCode" id="cb219"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb219-1" title="1"><span class="op">&gt;</span> sample(colnames(model$data[[<span class="dv">1</span>]]),<span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb219-2" title="2">[<span class="dv">1</span>] <span class="st">&quot;b&quot;</span></a></code></pre></div>
 <p>Its possible that because this is a “kohonen” class object that there are functions that get these data matrices for you. You’ll need to read the documentation to figure this out. What I’ve shown above is digging in the structure to find the data you want.</p>
 </section>
@@ -5036,7 +5036,7 @@ $ is not valid as part of the data set (or frame) name since R uses it to denote
 <div class="sourceCode" id="cb220"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb220-1" title="1">names(model)</a></code></pre></div>
 <p>And rename model$data to model</p>
 <p>str(model)</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb221-1" title="1"><span class="op">&amp;</span>gt<span class="op">;</span> <span class="bu">str</span>(model)</a>
+<div class="sourceCode" id="cb221"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb221-1" title="1"><span class="op">&gt;</span> <span class="bu">str</span>(model)</a>
 <a class="sourceLine" id="cb221-2" title="2">List of <span class="dv">13</span></a>
 <a class="sourceLine" id="cb221-3" title="3"> $ data            :List of <span class="dv">1</span></a>
 <a class="sourceLine" id="cb221-4" title="4">  ..$ : num [<span class="dv">1</span>:<span class="dv">1000</span>, <span class="dv">1</span>:<span class="dv">56</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> ...</a>
@@ -5177,7 +5177,7 @@ Compute the confusion matrix based on the label predictions
 <div class="sourceCode" id="cb226"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb226-1" title="1"><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix</a>
 <a class="sourceLine" id="cb226-2" title="2"></a>
 <a class="sourceLine" id="cb226-3" title="3">y_true <span class="op">=</span> np.array([<span class="dv">0</span>] <span class="op">*</span> <span class="dv">1000</span> <span class="op">+</span> [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">1000</span>)</a>
-<a class="sourceLine" id="cb226-4" title="4">y_pred <span class="op">=</span> probabilities <span class="op">&amp;</span>gt<span class="op">;</span> <span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb226-4" title="4">y_pred <span class="op">=</span> probabilities <span class="op">&gt;</span> <span class="fl">0.5</span></a>
 <a class="sourceLine" id="cb226-5" title="5"></a>
 <a class="sourceLine" id="cb226-6" title="6">confusion_matrix(y_true, y_pred)</a></code></pre></div>
 <hr>
@@ -5413,7 +5413,7 @@ Question
 <h4>Question</h4>
 <p>XGBoost have been doing a great job, when it comes to dealing with both categorical and continuous dependant variables. But, how do I select the optimized parameters for an XGBoost problem?</p>
 <p>This is how I applied the parameters for a recent Kaggle problem:</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb235-1" title="1">param <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="bu">list</span>(  objective           <span class="op">=</span> <span class="st">&quot;reg:linear&quot;</span>, </a>
+<div class="sourceCode" id="cb235"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb235-1" title="1">param <span class="op">&lt;-</span> <span class="bu">list</span>(  objective           <span class="op">=</span> <span class="st">&quot;reg:linear&quot;</span>, </a>
 <a class="sourceLine" id="cb235-2" title="2">                booster <span class="op">=</span> <span class="st">&quot;gbtree&quot;</span>,</a>
 <a class="sourceLine" id="cb235-3" title="3">                eta                 <span class="op">=</span> <span class="fl">0.02</span>, <span class="co"># 0.06, #0.01,</span></a>
 <a class="sourceLine" id="cb235-4" title="4">                max_depth           <span class="op">=</span> <span class="dv">10</span>, <span class="co">#changed from default of 8</span></a>
@@ -5425,7 +5425,7 @@ Question
 <a class="sourceLine" id="cb235-10" title="10">)</a>
 <a class="sourceLine" id="cb235-11" title="11"></a>
 <a class="sourceLine" id="cb235-12" title="12"></a>
-<a class="sourceLine" id="cb235-13" title="13">clf <span class="op">&amp;</span>lt<span class="op">;-</span> xgb.train(   params              <span class="op">=</span> param, </a>
+<a class="sourceLine" id="cb235-13" title="13">clf <span class="op">&lt;-</span> xgb.train(   params              <span class="op">=</span> param, </a>
 <a class="sourceLine" id="cb235-14" title="14">                    data                <span class="op">=</span> dtrain, </a>
 <a class="sourceLine" id="cb235-15" title="15">                    nrounds             <span class="op">=</span> <span class="dv">3000</span>, <span class="co">#300, #280, #125, #250, # changed from 300</span></a>
 <a class="sourceLine" id="cb235-16" title="16">                    verbose             <span class="op">=</span> <span class="dv">0</span>,</a>
@@ -5457,27 +5457,27 @@ See this answer on Cross Validated for a thorough explanation on how to use the 
 <p>I often begin with a few assumptions based on <a href="https://www.kaggle.com/owenzhang1">Owen Zhang</a>’s slides on <a href="http://www.slideshare.net/OwenZhang2/tips-for-data-science-competitions">tips for data science</a> P. 14</p>
 <p><a href="https://i.stack.imgur.com/9GgQK.jpg"><img src="https://i.stack.imgur.com/9GgQK.jpg" alt="enter image description here"></a></p>
 <p>Here you can see that you’ll mostly need to tune row sampling, column sampling and maybe maximum tree depth. This is how I do a custom row sampling and column sampling search for a problem I am working on at the moment:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb236-1" title="1">searchGridSubCol <span class="op">&amp;</span>lt<span class="op">;-</span> expand.grid(subsample <span class="op">=</span> c(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>), </a>
+<div class="sourceCode" id="cb236"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb236-1" title="1">searchGridSubCol <span class="op">&lt;-</span> expand.grid(subsample <span class="op">=</span> c(<span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>), </a>
 <a class="sourceLine" id="cb236-2" title="2">                                colsample_bytree <span class="op">=</span> c(<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb236-3" title="3">ntrees <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="dv">100</span></a>
+<a class="sourceLine" id="cb236-3" title="3">ntrees <span class="op">&lt;-</span> <span class="dv">100</span></a>
 <a class="sourceLine" id="cb236-4" title="4"></a>
 <a class="sourceLine" id="cb236-5" title="5"><span class="co">#Build a xgb.DMatrix object</span></a>
-<a class="sourceLine" id="cb236-6" title="6">DMMatrixTrain <span class="op">&amp;</span>lt<span class="op">;-</span> xgb.DMatrix(data <span class="op">=</span> yourMatrix, label <span class="op">=</span> yourTarget)</a>
+<a class="sourceLine" id="cb236-6" title="6">DMMatrixTrain <span class="op">&lt;-</span> xgb.DMatrix(data <span class="op">=</span> yourMatrix, label <span class="op">=</span> yourTarget)</a>
 <a class="sourceLine" id="cb236-7" title="7"></a>
-<a class="sourceLine" id="cb236-8" title="8">rmseErrorsHyperparameters <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="bu">apply</span>(searchGridSubCol, <span class="dv">1</span>, function(parameterList){</a>
+<a class="sourceLine" id="cb236-8" title="8">rmseErrorsHyperparameters <span class="op">&lt;-</span> <span class="bu">apply</span>(searchGridSubCol, <span class="dv">1</span>, function(parameterList){</a>
 <a class="sourceLine" id="cb236-9" title="9"></a>
 <a class="sourceLine" id="cb236-10" title="10">    <span class="co">#Extract Parameters to test</span></a>
-<a class="sourceLine" id="cb236-11" title="11">    currentSubsampleRate <span class="op">&amp;</span>lt<span class="op">;-</span> parameterList[[<span class="st">&quot;subsample&quot;</span>]]</a>
-<a class="sourceLine" id="cb236-12" title="12">    currentColsampleRate <span class="op">&amp;</span>lt<span class="op">;-</span> parameterList[[<span class="st">&quot;colsample_bytree&quot;</span>]]</a>
+<a class="sourceLine" id="cb236-11" title="11">    currentSubsampleRate <span class="op">&lt;-</span> parameterList[[<span class="st">&quot;subsample&quot;</span>]]</a>
+<a class="sourceLine" id="cb236-12" title="12">    currentColsampleRate <span class="op">&lt;-</span> parameterList[[<span class="st">&quot;colsample_bytree&quot;</span>]]</a>
 <a class="sourceLine" id="cb236-13" title="13"></a>
-<a class="sourceLine" id="cb236-14" title="14">    xgboostModelCV <span class="op">&amp;</span>lt<span class="op">;-</span> xgb.cv(data <span class="op">=</span>  DMMatrixTrain, nrounds <span class="op">=</span> ntrees, nfold <span class="op">=</span> <span class="dv">5</span>, showsd <span class="op">=</span> TRUE, </a>
+<a class="sourceLine" id="cb236-14" title="14">    xgboostModelCV <span class="op">&lt;-</span> xgb.cv(data <span class="op">=</span>  DMMatrixTrain, nrounds <span class="op">=</span> ntrees, nfold <span class="op">=</span> <span class="dv">5</span>, showsd <span class="op">=</span> TRUE, </a>
 <a class="sourceLine" id="cb236-15" title="15">                           metrics <span class="op">=</span> <span class="st">&quot;rmse&quot;</span>, verbose <span class="op">=</span> TRUE, <span class="st">&quot;eval_metric&quot;</span> <span class="op">=</span> <span class="st">&quot;rmse&quot;</span>,</a>
 <a class="sourceLine" id="cb236-16" title="16">                           <span class="st">&quot;objective&quot;</span> <span class="op">=</span> <span class="st">&quot;reg:linear&quot;</span>, <span class="st">&quot;max.depth&quot;</span> <span class="op">=</span> <span class="dv">15</span>, <span class="st">&quot;eta&quot;</span> <span class="op">=</span> <span class="dv">2</span><span class="op">/</span>ntrees,                               </a>
 <a class="sourceLine" id="cb236-17" title="17">                           <span class="st">&quot;subsample&quot;</span> <span class="op">=</span> currentSubsampleRate, <span class="st">&quot;colsample_bytree&quot;</span> <span class="op">=</span> currentColsampleRate)</a>
 <a class="sourceLine" id="cb236-18" title="18"></a>
-<a class="sourceLine" id="cb236-19" title="19">    xvalidationScores <span class="op">&amp;</span>lt<span class="op">;-</span> <span class="im">as</span>.data.frame(xgboostModelCV)</a>
+<a class="sourceLine" id="cb236-19" title="19">    xvalidationScores <span class="op">&lt;-</span> <span class="im">as</span>.data.frame(xgboostModelCV)</a>
 <a class="sourceLine" id="cb236-20" title="20">    <span class="co">#Save rmse of the last iteration</span></a>
-<a class="sourceLine" id="cb236-21" title="21">    rmse <span class="op">&amp;</span>lt<span class="op">;-</span> tail(xvalidationScores$test.rmse.mean, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb236-21" title="21">    rmse <span class="op">&lt;-</span> tail(xvalidationScores$test.rmse.mean, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb236-22" title="22"></a>
 <a class="sourceLine" id="cb236-23" title="23">    <span class="cf">return</span>(c(rmse, currentSubsampleRate, currentColsampleRate))</a>
 <a class="sourceLine" id="cb236-24" title="24"></a>
@@ -6075,9 +6075,9 @@ have lots of input parameters to tune.
 <div class="sourceCode" id="cb245"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb245-1" title="1">GraphViz<span class="st">&#39;s Executables not found</span></a></code></pre></div>
 <p><strong>EDIT</strong>: I had not posted a terminal <code>log</code> with the error originally. I’m using <code>Ubuntu</code> now so I won’t be able to reproduce the exact same error I got in the past (a year ago, so far away in the past…). However, I’ve been experiencing a similar — if not the same — error in my current setup; even while using a virtual environment with <code>pipenv</code>. The error seems to come from lines that were described in <a href="https://datascience.stackexchange.com/a/48563/57429"><span class="citation" data-cites="张乾元">@张乾元</span>’s answer</a>:</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb246-1" title="1">Traceback (most recent call last):</a>
-<a class="sourceLine" id="cb246-2" title="2">  File <span class="st">&quot;example.py&quot;</span>, line <span class="dv">49</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span>module<span class="op">&amp;</span>gt<span class="op">;</span></a>
+<a class="sourceLine" id="cb246-2" title="2">  File <span class="st">&quot;example.py&quot;</span>, line <span class="dv">49</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb246-3" title="3">    Image(graph.create_png())</a>
-<a class="sourceLine" id="cb246-4" title="4">  File <span class="st">&quot;/home/philippe/.local/lib/python3.6/site-packages/pydotplus/graphviz.py&quot;</span>, line <span class="dv">1797</span>, <span class="kw">in</span> <span class="op">&amp;</span>lt<span class="op">;</span><span class="kw">lambda</span><span class="op">&amp;</span>gt<span class="op">;</span></a>
+<a class="sourceLine" id="cb246-4" title="4">  File <span class="st">&quot;/home/philippe/.local/lib/python3.6/site-packages/pydotplus/graphviz.py&quot;</span>, line <span class="dv">1797</span>, <span class="kw">in</span> <span class="op">&lt;</span><span class="kw">lambda</span><span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb246-5" title="5">    <span class="kw">lambda</span> f<span class="op">=</span>frmt, prog<span class="op">=</span><span class="va">self</span>.prog: <span class="va">self</span>.create(<span class="bu">format</span><span class="op">=</span>f, prog<span class="op">=</span>prog)</a>
 <a class="sourceLine" id="cb246-6" title="6">  File <span class="st">&quot;/home/philippe/.local/lib/python3.6/site-packages/pydotplus/graphviz.py&quot;</span>, line <span class="dv">1960</span>, <span class="kw">in</span> create</a>
 <a class="sourceLine" id="cb246-7" title="7">    <span class="co">&#39;GraphViz</span><span class="ch">\&#39;</span><span class="co">s executables not found&#39;</span>)</a>
