@@ -16,201 +16,34 @@
 <body>
 <section id="custom-shortcut-aliases" class="level1">
 <h1>Custom shortcut / aliases</h1>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Cmd</th>
-<th>Vim</th>
-<th>Git</th>
-<th>File</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>A</td>
-<td></td>
-<td></td>
-<td>Add</td>
-<td>Aliases</td>
-</tr>
-<tr class="even">
-<td>B</td>
-<td></td>
-<td>Backup %</td>
-<td>Branch</td>
-<td>BashRc</td>
-</tr>
-<tr class="odd">
-<td>C</td>
-<td></td>
-<td></td>
-<td>Commit</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>D</td>
-<td></td>
-<td></td>
-<td>Diff</td>
-<td>Done</td>
-</tr>
-<tr class="odd">
-<td>E</td>
-<td></td>
-<td>Edit $file</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>F</td>
-<td></td>
-<td></td>
-<td>Fetch</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>G</td>
-<td>Git</td>
-<td></td>
-<td></td>
-<td>Gitconfig</td>
-</tr>
-<tr class="even">
-<td>H</td>
-<td></td>
-<td></td>
-<td>pusH</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>I</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>J</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>K</td>
-<td></td>
-<td>Kalendar</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>L</td>
-<td></td>
-<td>List</td>
-<td>Log</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>N</td>
-<td></td>
-<td>NerdTree</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>O</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>P</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Q</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>R</td>
-<td></td>
-<td></td>
-<td>Rebase</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>S</td>
-<td></td>
-<td>Source %</td>
-<td>Status</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>T</td>
-<td>Todo</td>
-<td>Todo</td>
-<td></td>
-<td>.Tmux.conf</td>
-</tr>
-<tr class="odd">
-<td>U</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>V</td>
-<td>Vim</td>
-<td></td>
-<td></td>
-<td>.Vimrc</td>
-</tr>
-<tr class="odd">
-<td>W</td>
-<td>Wiki</td>
-<td>Wiki</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>X</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Y</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Z</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="line-block">  | Cmd | Vim | Git | File | Dir |<br />
+- | — | — | — | — | |<br />
+A | | | Add | Aliases | |<br />
+B | | Backup % | Branch | BashRc | ~/.vim/Bin |<br />
+C | | Compile | Commit | | |<br />
+D | | | Diff | Done | |<br />
+E | | Edit $file | | | |<br />
+F | | | Fetch | | |<br />
+G | Git | | | Gitconfig | |<br />
+H | | | pusH | | |<br />
+I | | | | | |<br />
+J | | | | | |<br />
+K | | Kalendar | gitK | | |<br />
+L | | List | Log | | |<br />
+M | Man | | | | |<br />
+N | | NerdTree | | | |<br />
+O | | | | | |<br />
+P | | | | | ~/.vim/Pack/bundle/opt/ |<br />
+Q | | | | | |<br />
+R | | | Rebase | | |<br />
+S | | Source % | Status | | |<br />
+T | Todo | Todo | | .Tmux.conf | ~/w/Todo |<br />
+U | | | | | |<br />
+V | Vim | | | .Vimrc | ~/.Vim |<br />
+W | Wiki | Wiki | | | ~/w/Wiki |<br />
+X | | | | | |<br />
+Y | | | | | |<br />
+Z | | | | | |</div>
 </section>
 <section id="see-deeper" class="level1">
 <h1>See deeper</h1>
@@ -218,7 +51,8 @@
 <li>Cmd in .bash_aliases</li>
 <li>Vim in .vimrc search alias</li>
 <li>Git in .gitconfig</li>
-<li>Dir in … nowhere yet !</li>
+<li>File in .vimrc</li>
+<li>Dir in .bashrc</li>
 </ul>
 </section>
 </body>
