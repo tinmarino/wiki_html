@@ -11,13 +11,196 @@
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+  </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<section id="font" class="level1">
-<h1>Font</h1>
+<section id="charcode" class="level3">
+<h3>Charcode</h3>
+<p>: transform @ as a letter so it can be ised in a macro name. so not use it in .sty or .cls class</p>
+<pre><code>0 = Escape character, normally \
+1 = Begin grouping, normally {
+2 = End grouping, normally }
+3 = Math shift, normally $
+4 = Alignment tab, normally &amp;
+5 = End of line, normally &lt;return&gt;
+6 = Parameter, normally #
+7 = Superscript, normally ^
+8 = Subscript, normally _
+9 = Ignored character, normally &lt;null&gt;
+10 = Space, normally &lt;space&gt; and &lt;tab&gt;
+11 = Letter, normally only contains the letters a,...,z and A,...,Z. These characters can be used in command names
+12 = Other, normally everything else not listed in the other categories
+13 = Active character, for example ~
+14 = Comment character, normally %
+15 = Invalid character, normally &lt;delete&gt;</code></pre>
+</section>
+<section id="math" class="level3">
+<h3>Math</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode tex"><code class="sourceCode latex"><a class="sourceLine" id="cb2-1" title="1"><span class="bu">\usepackage</span>{<span class="ex">pgf</span>}</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">\pgfmathparse</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">\pgfmathsetmacro</span>{<span class="fu">\x</span>}{int(2 * 2)}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode tex"><code class="sourceCode latex"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">\usepackage</span>{<span class="ex">calc</span>}</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">\newlength\len</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="fu">\setlength</span>{<span class="fu">\textwidth+</span>1cm}</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="fu">\newcounter</span>{cnt}</a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="fu">\setcounter</span>{cnt}{1+1}</a></code></pre></div>
+</section>
+<section id="tex4ht-or-htxelatex" class="level1">
+<h1>Tex4ht or Htxelatex</h1>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">htxelatex</span> martin_tourneboeuf_cv_english.tex  <span class="kw">&amp;&amp;</span> <span class="ex">iconv</span> -t utf-8  martin_tourneboeuf_cv_english.html <span class="kw">|</span> <span class="ex">pandoc</span> --self-contained -o  martin_tourneboeuf_cv_english.html</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode tex"><code class="sourceCode latex"><a class="sourceLine" id="cb5-1" title="1"><span class="co">% Css for html</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="fu">\ifx\HCode\undefined</span> <span class="fu">\else</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="fu">\Css</span>{table.longtable{margin-left:0; margin-right:0;}}</a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="fu">\Css</span>{table.tabular{margin-left:0; margin-right:0;}}</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="fu">\fi</span></a></code></pre></div>
+<p>% Doc : https://texfaq.org/FAQ-patch &amp;&amp; http://texblog.net/latex-archive/plaintex/full-justification-with-typewriter-font/ &amp;&amp; https://tex.stackexchange.com/questions/264224/increase-word-space-between-words-in-small-caps/264248#264248 ebb -x TestImage.png to get .xbb file (image size) # Font</p>
 
 <p>(default)    </p>
+<section id="texlive" class="level3">
+<h3>Texlive</h3>
+<pre><code>                      texlive-latex-extra
+                         |   |   :   :
+       +-----------------+   |   :   :..................
+       |                     |   :                     :
+       v                     |   :                     v
+texlive-pictures             |   :           texlive-plain-generic
+       |                     |   :
+       |    +----------------+   :...............
+       |    |                                   :
+       |    |              texlive              :
+       |    |               | | |               :
+       |    |    +----------+ | +----------+    :
+       |    |    |            |            |    :
+       v    v    v            |            v    v
+texlive-latex-recommended     |  texlive-fonts-recommended
+                 |            |            :
+                 |            |            v
+                 |            |           tipa
+                 |            |            |
+                 +----------+ | +----------+
+                            | | |
+                            v v v
+                     texlive-latex-base</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Package</th>
+<th>Archives</th>
+<th>Disk Space</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">texlive-latex-base</td>
+<td>59 MB</td>
+<td>216 MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">texlive-latex-recommended</td>
+<td>74 MB</td>
+<td>248 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">texlive-pictures</td>
+<td>83 MB</td>
+<td>277 MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">texlive-fonts-recommended</td>
+<td>83 MB</td>
+<td>281 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">texlive</td>
+<td>98 MB</td>
+<td>314 MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">texlive-plain-generic</td>
+<td>82 MB</td>
+<td>261 MB</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">texlive-latex-extra</td>
+<td>144 MB</td>
+<td>452 MB</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">texlive-full</td>
+<td>2804 MB</td>
+<td>5358 MB</td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 </body>
 </html>

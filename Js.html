@@ -21,7 +21,7 @@
 <section id="cheat" class="level1">
 <h1>Cheat</h1>
 <ul>
-<li>XmlHttpRequest <code>js   const req = new XMLHttpRequest();   req.open(&quot;GET&quot;, &quot;url&quot;, true);   req.send(null);   console.log(req.responseText);</code>
+<li>XmlHttpRequest <code>js   const req = new XMLHttpRequest();   req.open("GET", "url", true);   req.send(null);   console.log(req.responseText);</code>
 <ul>
 <li>req.onreadystatechange = function(){console.log(“ready”)}</li>
 <li>req.readyState // === 4 (request finished)</li>
@@ -36,14 +36,14 @@
 <li>go(1) &amp;&amp; go(-1)</li>
 <li>length</li>
 </ul></li>
-<li><p>Save <code>js   window.document.execCommand(&quot;saveAs&quot;, true, &quot;test.txt&quot;)</code></p></li>
-<li><p>Scroll to bottom of page (dynamically appending content) <code>html   &lt;body id='body' onLoad='main()'&gt;       &lt;div id=&quot;top&quot;&gt;&lt;/div&gt;       &lt;div id=&quot;bottom&quot;&gt;&lt;/div&gt;   &lt;/body&gt;   &lt;script&gt;       document.getElementById('bottom').scrollIntoView();   &lt;/script&gt;</code></p></li>
+<li><p>Save <code>js   window.document.execCommand("saveAs", true, "test.txt")</code></p></li>
+<li><p>Scroll to bottom of page (dynamically appending content) <code>html   &lt;body id='body' onLoad='main()'&gt;       &lt;div id="top"&gt;&lt;/div&gt;       &lt;div id="bottom"&gt;&lt;/div&gt;   &lt;/body&gt;   &lt;script&gt;       document.getElementById('bottom').scrollIntoView();   &lt;/script&gt;</code></p></li>
 <li>Change url :
 <ul>
-<li>Load page on click <code>html   &lt;input id=&quot;btntest&quot; type=&quot;button&quot; value=&quot;Check&quot;   onclick=&quot;window.location.href = 'http://www.google.com'&quot; /&gt;</code></li>
+<li>Load page on click <code>html   &lt;input id="btntest" type="button" value="Check"   onclick="window.location.href = 'http://www.google.com'" /&gt;</code></li>
 <li><code>window.open(url)</code> # open url in new tab</li>
-<li><code>window.navigate(&quot;index.html&quot;)</code> # open url <strong>same</strong> tab (navigate)</li>
-<li><code>document.location.replace(&quot;index.html&quot;)</code> # open url <strong>same</strong> tab (replace)</li>
+<li><code>window.navigate("index.html")</code> # open url <strong>same</strong> tab (navigate)</li>
+<li><code>document.location.replace("index.html")</code> # open url <strong>same</strong> tab (replace)</li>
 <li><code>window.location.href</code> # url</li>
 <li><code>window.location.hostname</code> # domain name</li>
 <li><code>window.location.pathname</code> # path and filename of current page</li>
@@ -57,6 +57,13 @@
 <li>window.origin -&gt; get the url origin of myself</li>
 </ul></li>
 <li><p>Passing additional parameters to a Promise .then P.then( doWork.bind(‘text’, null) ); P.then( function(data) {return doWork(‘text’, data);} ); P.then( data =&gt; doWork(‘text’, data) );</p></li>
+</ul>
+</section>
+<section id="idioms" class="level1">
+<h1>Idioms</h1>
+<ul>
+<li><p>Run other thread setTimeout(func, 0)</p></li>
+<li><p>Global (<strong>The</strong> correct way) window.myglobal = 3;</p></li>
 </ul>
 </section>
 <section id="vars" class="level1">
@@ -78,7 +85,15 @@
 <td>block</td>
 </tr>
 <tr class="odd">
+<td>const</td>
+<td>constant</td>
+</tr>
+<tr class="even">
 <td>[]</td>
+<td>global</td>
+</tr>
+<tr class="odd">
+<td>window.</td>
 <td>global</td>
 </tr>
 </tbody>
@@ -101,7 +116,7 @@
 <ul>
 <li>Substring</li>
 <li><a href="Js-RegExp.html">RegExp</a></li>
-<li><code>unescape(&quot;hello%20world&quot;)</code></li>
+<li><code>unescape("hello%20world")</code></li>
 <li><code>substr(from, length)</code></li>
 <li><code>substring(from, to)</code></li>
 </ul>
@@ -128,7 +143,7 @@ var res = str.substring(-3)</p>
 <section id="object" class="level1">
 <h1>Object</h1>
 <ul>
-<li><code>var o = {1:2, &quot;toto&quot;:3}</code></li>
+<li><code>var o = {1:2, "toto":3}</code></li>
 <li><code>Object.keys(o).length</code></li>
 <li><code>var a = 1; window['a'];</code></li>
 <li><code>for (var prerty in obj){}</code></li>

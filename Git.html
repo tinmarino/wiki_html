@@ -14,11 +14,18 @@
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<header>
+<header id="title-block-header">
 <h1 class="title">Git Wiki</h1>
 </header>
 <section id="tips" class="level1">
 <h1>Tips</h1>
+<section id="reset-one-commit" class="level3">
+<h3>Reset one commit</h3>
+<ul>
+<li>git reset –hard HEAD^ # One</li>
+<li>git reset –hard HEAD~2 # Two</li>
+</ul>
+</section>
 <section id="ugly-tips-from-draft" class="level3">
 <h3>Ugly tips from draft</h3>
 <ul>
@@ -47,17 +54,17 @@
 </ul></li>
 <li>Merge commit
 <ul>
-<li><code>git reset --soft &quot;HEAD~10&quot;</code> # Merge last 10 commits into 1</li>
+<li><code>git reset --soft "HEAD~10"</code> # Merge last 10 commits into 1</li>
 </ul></li>
 <li>Display
 <ul>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
 <li><code>git log --diff-filter=D --summary | grep delete</code></li>
 <li><code>git log --all --{file_path}</code> : file_path can have * inside</li>
-<li><code>git log --pretty=format:&quot;%h&quot;</code></li>
+<li><code>git log --pretty=format:"%h"</code></li>
 <li><code>git log --pretty=oneline</code></li>
 <li><code>git log -S watever [--source --all] [--decorate] [--reverse]</code></li>
-<li><code>git log -G &quot;^(\s)*function foo[(][)](\s.html)**{$&quot;</code> : regex</li>
+<li><code>git log -G "^(\s)*function foo[(][)](\s.html)**{$"</code> : regex</li>
 <li><code>git reflog</code></li>
 <li><code>git show &lt;COMMIT_ID&gt; -- &lt;FILE_PATH&gt;</code> : show deleted files</li>
 <li><code>git checkout &lt;SHA&gt;^ -- &lt;FILE_PATH&gt;</code></li>
@@ -89,7 +96,7 @@
 <ul>
 <li><code>git log -S'regex'</code></li>
 <li><code>git log -S'regex'</code></li>
-<li><code>git grep &quot;regex&quot;</code></li>
+<li><code>git grep "regex"</code></li>
 </ul></li>
 <li>Compress
 <ul>
@@ -200,13 +207,13 @@
 </ul></li>
 <li>Filter
 <ul>
-<li><code>git filter-branch --index-filter &quot;git rm --cached --ignore-unmach file.txt&quot; [HEAD~5..HEAD</code> # file?txt can have a *</li>
+<li><code>git filter-branch --index-filter "git rm --cached --ignore-unmach file.txt" [HEAD~5..HEAD</code> # file?txt can have a *</li>
 </ul></li>
 <li>Clean
 <ul>
 <li><code>git rebase -i &lt;commit&gt;~1</code> # Can edit or delete commits<br />
 </li>
-<li><code>git commit --amend --author=&quot;tinwin &lt;tin@windows&gt;</code></li>
+<li><code>git commit --amend --author="tinwin &lt;tin@windows&gt;</code></li>
 </ul></li>
 </ul>
 </section>

@@ -82,7 +82,7 @@ code span.wa { color: #da4453; } /* Warning */
   <script type="text/javascript" src="../Css/js_masonry_desandro.js"></script>
 </head>
 <body>
-<header>
+<header id="title-block-header">
 <h1 class="title">Vim Advanced cheatsheet</h1>
 </header>
 <section id="commands" class="level2">
@@ -447,7 +447,7 @@ echo toto
 redir END</code></pre>
 <ul>
 <li><p><code>let @a=getcwd()</code></p></li>
-<li><p><code>:@&quot;</code>: Execute what is yanked</p></li>
+<li><p><code>:@"</code>: Execute what is yanked</p></li>
 </ul>
 <pre class="language-vim"><code>&quot;Examples: 
 &quot;:call Exec(&#39;buffers&#39;)
@@ -487,10 +487,10 @@ endfunct! </code></pre>
 <h4>Get filetype of a buffer</h4>
 <pre><code>* `:let bufFiletype = getbufvar(bufNr, &#39;&amp;filetype&#39;)`</code></pre>
 </section>
-<section id="show-highlight-sytnax-type" class="level4">
-<h4>Show highlight sytnax type</h4>
+<section id="show-highlight-syntax-type" class="level4">
+<h4>Show highlight syntax type</h4>
 <ul>
-<li><code>:echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, &quot;name&quot;)')</code></li>
+<li><code>:echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')</code></li>
 </ul>
 </section>
 <section id="get-filetype-of-a-buffer-1" class="level4">

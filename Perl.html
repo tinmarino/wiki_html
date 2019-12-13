@@ -35,6 +35,10 @@
 <section id="tips" class="level1">
 <h1>Tips</h1>
 <ul>
+<li>Remove AnsiEscaped colors
+<ul>
+<li><code>perl -pe 's/\e\[[0-9;]*m(?:\e\[K)?//g' # Adam Katz's trick</code></li>
+</ul></li>
 <li>use Number::Format ‘format_number’</li>
 <li>glob</li>
 <li>.perldlrc # to edit and load automatically some libs</li>
@@ -46,14 +50,14 @@
 <ul>
 <li>Interpolate code in string = <code>@{[LIST EXPR]}</code> or <code>${\(SCALAR EXPR)}</code>
 <ul>
-<li><code>say &quot;@{[ 3 + 4 ]}&quot;</code></li>
-<li><code>say &quot;${\ function }&quot;</code> -&gt; <code>say &quot;${\ do { 3 + 4 }}&quot;</code> or <code>say &quot;${\( 3 + 4 )}&quot;</code></li>
+<li><code>say "@{[ 3 + 4 ]}"</code></li>
+<li><code>say "${\ function }"</code> -&gt; <code>say "${\ do { 3 + 4 }}"</code> or <code>say "${\( 3 + 4 )}"</code></li>
 <li>Use dot operator</li>
-<li><code>print &lt;&lt;&quot;EOT&quot;; This is $x EOT</code> : interpolates</li>
+<li><code>print &lt;&lt;"EOT"; This is $x EOT</code> : interpolates</li>
 <li><code>print &lt;&lt;'EOT'; This is $x EOT</code> : do NOT interpolate</li>
 </ul></li>
 </ul>
-<p>my <span class="math inline">$foo = &quot;zombies are the bombies&quot;;if ($</span>foo =~ / zombie # sorry pirates /x ) { print “urg. brains.”;} /x modifier for pretty regzx print</p>
+<p>my <span class="math inline">$foo = "zombies are the bombies";if ($</span>foo =~ / zombie # sorry pirates /x ) { print “urg. brains.”;} /x modifier for pretty regzx print</p>
 <p>Even without the /x modifier, you can enclose comments in (?# … ):my $foo = “zombies are the bombies”;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print “urg. brains.”;}</p>
 <p>Add to path use lib qw(.); # Will add your cwd to <span class="citation" data-cites="INC">@INC</span> use lib qw(. /path/to/my/home /some/other/dir); # will add those dirs perl -I/path/to/include script</p>
 <p>Get package path perl -MTime::HiRes -e ‘print $INC{“Time/HiRes.pm”}’ or perldoc -l Time::HiRes cpan -D Time::HiRes</p>
@@ -149,7 +153,7 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </tr>
 <tr class="even">
 <td></td>
-<td><code>ls -l &lt;bar&gt; perl -lane 'print &quot;$F[7] $F[1]&quot;'</code></td>
+<td><code>ls -l &lt;bar&gt; perl -lane 'print "$F[7] $F[1]"'</code></td>
 </tr>
 <tr class="odd">
 <td>-F:</td>
@@ -169,7 +173,7 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </tr>
 <tr class="odd">
 <td></td>
-<td><code>perl -MList::Util=max -ape 's/$/&quot; &quot; . max(@F)/e unless $.==1' input</code></td>
+<td><code>perl -MList::Util=max -ape 's/$/" " . max(@F)/e unless $.==1' input</code></td>
 </tr>
 <tr class="even">
 <td></td>
