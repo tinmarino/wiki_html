@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>objcguide.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="google-objective-c-style-guidetoto" class="level1">
+<h1>Google Objective-C Style Guidetoto</h1>
+<blockquote>
+<p>Objective-C is a dynamic, object-oriented extension of C. It’s designed to be easy to use and read, while enabling sophisticated object-oriented design. It is the primary development language for applications on OS X and on iOS.</p>
+<p>Apple has already written a very good, and widely accepted, <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html">Cocoa Coding Guidelines</a> for Objective-C. Please read it in addition to this guide.</p>
+<p>The purpose of this document is to describe the Objective-C (and Objective-C++) coding guidelines and practices that should be used for iOS and OS X code. These guidelines have evolved and been proven over time on other projects and teams. Open-source projects developed by Google conform to the requirements in this guide.</p>
+<p>Note that this guide is not an Objective-C tutorial. We assume that the reader is familiar with the language. If you are new to Objective-C or need a refresher, please read <a href="https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html">Programming with Objective-C</a>.toto</p>
+</blockquote>
+<section id="principlestoto" class="level2">
+<h2>Principlestoto</h2>
+<section id="optimize-for-the-reader-not-the-writertoto" class="level3">
+<h3>Optimize for the reader, not the writertoto</h3>
+<p>Codebases often have extended lifetimes and more time is spent reading the code than writing it. We explicitly choose to optimize for the experience of our average software engineer reading, maintaining, and debugging code in our codebase rather than the ease of writing said code. For example, when something surprising or unusual is happening in a snippet of code, leaving textual hints for the reader is valuable.</p>
+</section>
+<section id="be-consistenttoto" class="level3">
+<h3>Be consistenttoto</h3>
+<p>When the style guide allows multiple options it is preferable to pick one option over mixed usage of multiple options. Using one style consistently throughout a codebase lets engineers focus on other (more important) issues. Consistency also enables better automation because consistent code allows more efficient development and operation of tools that format or refactor code. In many cases, rules that are attributed to “Be Consistent” boil down to “Just pick one and stop worrying about it”; the potential value of allowing flexibility on these points is outweighed by the cost of having people argue over them.</p>
+</section>
+<section id="be-consistent-with-apple-sdkstoto" class="level3">
+<h3>Be consistent with Apple SDKstoto</h3>
+<p>Consistency with the way Apple SDKs use Objective-C has value for the same reasons as consistency within our code base. If an Objective-C feature solves a problem that’s an argument for using it. However, sometimes language features and idioms are flawed, or were just designed with assumptions that are not universal. In those cases it is appropriate to constrain or ban language features or idioms.</p>
+</section>
+<section id="style-rules-should-pull-their-weighttoto" class="level3">
+<h3>Style rules should pull their weighttoto</h3>
+<p>The benefit of a style rule must be large enough to justify asking engineers to remember it. The benefit is measured relative to the codebase we would get without the rule, so a rule against a very harmful practice may still have a small benefit if people are unlikely to do it anyway. This principle mostly explains the rules we don’t have, rather than the rules we do: for example, goto contravenes many of the following principles, but is not discussed due to its extreme rarity.</p>
+</section>
+</section>
+<section id="example-toto" class="level2">
+<h2>Example toto</h2>
+<p>They say an example is worth a thousand words, so let’s start off with an example that should give you a feel for the style, spacing, naming, and so on.</p>
+<p>Here is an example header file, demonstrating the correct commenting and spacing for an <code>@interface</code> declaration.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="pp">#import </span><span class="im">&lt;Foundation/Foundation.h&gt;</span><span class="pp">toto</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">@class</span> Bar;</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">/**</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"> * A sample class demonstrating good Objective-C style. All interfaces,</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co"> * categories, and protocols (read: all non-trivial top-level declarations</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"> * in a header) MUST be commented. Comments must also be adjacent to the</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"> * object they&#39;re documenting.</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"> */</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="kw">@interface</span> Foo : NSObject</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">/** The retained Bar. */</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>@property(nonatomic) Bar *bar;</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co">/** The current drawing attributes. */</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>@property(nonatomic, copy) NSDictionary&lt;NSString *, NSNumber *&gt; *attributes;</span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="co">/**</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="co"> * Convenience creation method.</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="co"> * See -initWithBar: for details about @c bar.</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co"> *</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="co"> * @param bar The string for fooing.</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co"> * @return An instance of Foo.</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="co"> */</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>+ (instancetype)fooWithBar:(Bar *)bar;</span>
+<span id="cb1-30"><a href="#cb1-30"></a></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co">/**</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="co"> * Initializes and returns a Foo object using the provided Bar instance.</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="co"> *</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="co"> * @param bar A string that represents a thing that does a thing.</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="co"> */</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>- (instancetype)initWithBar:(Bar *)bar NS_DESIGNATED_INITIALIZER;</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="co">/**</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co"> * Does some work with @c blah.</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="co"> *</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="co"> * @param blah</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="co"> * @return YES if the work was completed; NO otherwise.</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="co"> */</span></span>
+<span id="cb1-44"><a href="#cb1-44"></a>- (BOOL)doWorkWithBlah:(NSString *)blah;</span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="kw">@end</span></span></code></pre></div>
+<p>An example source file, demonstrating the correct commenting and spacing for the <code>@implementation</code> of an interface.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="pp">#import </span><span class="im">&quot;Shared/Util/Foo.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">@implementation</span> Foo {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>  <span class="co">/** The string used for displaying &quot;hi&quot;. */</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  NSString *_string;</span>
+<span id="cb2-9"><a href="#cb2-9"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>+ (instancetype)fooWithBar:(Bar *)bar {</span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="kw">return</span> [[<span class="kw">self</span> alloc] initWithBar:bar];</span>
+<span id="cb2-13"><a href="#cb2-13"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a>- (instancetype)init {</span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="co">// Classes with a custom designated initializer should always override</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>  <span class="co">// the superclass&#39;s designated initializer.</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>  <span class="kw">return</span> [<span class="kw">self</span> initWithBar:nil];</span>
+<span id="cb2-19"><a href="#cb2-19"></a>}</span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a>- (instancetype)initWithBar:(Bar *)bar {</span>
+<span id="cb2-22"><a href="#cb2-22"></a>  <span class="kw">self</span> = [<span class="kw">super</span> init];</span>
+<span id="cb2-23"><a href="#cb2-23"></a>  <span class="kw">if</span> (<span class="kw">self</span>) {</span>
+<span id="cb2-24"><a href="#cb2-24"></a>    _bar = [bar copy];</span>
+<span id="cb2-25"><a href="#cb2-25"></a>    _string = [[NSString alloc] initWithFormat:<span class="st">@&quot;hi %d&quot;</span>, <span class="dv">3</span>];</span>
+<span id="cb2-26"><a href="#cb2-26"></a>    _attributes = @{</span>
+<span id="cb2-27"><a href="#cb2-27"></a>      <span class="st">@&quot;color&quot;</span> : [UIColor blueColor],</span>
+<span id="cb2-28"><a href="#cb2-28"></a>      <span class="st">@&quot;hidden&quot;</span> : @NO</span>
+<span id="cb2-29"><a href="#cb2-29"></a>    };</span>
+<span id="cb2-30"><a href="#cb2-30"></a>  }</span>
+<span id="cb2-31"><a href="#cb2-31"></a>  <span class="kw">return</span> <span class="kw">self</span>;</span>
+<span id="cb2-32"><a href="#cb2-32"></a>}</span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a>- (BOOL)doWorkWithBlah:(NSString *)blah {</span>
+<span id="cb2-35"><a href="#cb2-35"></a>  <span class="co">// Work should be done here.</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>  <span class="kw">return</span> NO;</span>
+<span id="cb2-37"><a href="#cb2-37"></a>}</span>
+<span id="cb2-38"><a href="#cb2-38"></a></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+<section id="naming-toto" class="level2">
+<h2>Naming toto</h2>
+<p>Names should be as descriptive as possible, within reason. Follow standard <a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html">Objective-C naming rules</a>.</p>
+<p>Avoid non-standard abbreviations (including non-standard acronyms and initialisms). Don’t worry about saving horizontal space as it is far more important to make your code immediately understandable by a new reader. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">// Good names.</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="dt">int</span> numberOfErrors = <span class="dv">0</span>;</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">int</span> completedConnectionsCount = <span class="dv">0</span>;</span>
+<span id="cb3-6"><a href="#cb3-6"></a>tickets = [[NSMutableArray alloc] init];</span>
+<span id="cb3-7"><a href="#cb3-7"></a>userInfo = [someObject object];</span>
+<span id="cb3-8"><a href="#cb3-8"></a>port = [network port];</span>
+<span id="cb3-9"><a href="#cb3-9"></a>NSDate *gAppLaunchDate;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">// Names to avoid.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="dt">int</span> w;</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">int</span> nerr;</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="dt">int</span> nCompConns;</span>
+<span id="cb4-7"><a href="#cb4-7"></a>tix = [[NSMutableArray alloc] init];</span>
+<span id="cb4-8"><a href="#cb4-8"></a>obj = [someObject object];</span>
+<span id="cb4-9"><a href="#cb4-9"></a>p = [network port];</span></code></pre></div>
+<p>Any class, category, method, function, or variable name should use all capitals for acronyms and <a href="https://en.wikipedia.org/wiki/Initialism.html">initialisms</a> within the name. This follows Apple’s standard of using all capitals within a name for acronyms such as URL, ID, TIFF, and EXIF.</p>
+<p>Names of C functions and typedefs should be capitalized and use camel case as appropriate for the surrounding code.</p>
+<section id="file-names-toto" class="level3">
+<h3>File Names toto</h3>
+<p>File names should reflect the name of the class implementation that they contain—including case.</p>
+<p>Follow the convention that your project uses. File extensions should be as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Extension</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.h</td>
+<td>C/C++/Objective-C header file</td>
+</tr>
+<tr class="even">
+<td>.m</td>
+<td>Objective-C implementation file</td>
+</tr>
+<tr class="odd">
+<td>.mm</td>
+<td>Objective-C++ implementation file</td>
+</tr>
+<tr class="even">
+<td>.cc</td>
+<td>Pure C++ implementation file</td>
+</tr>
+<tr class="odd">
+<td>.c</td>
+<td>C implementation file</td>
+</tr>
+</tbody>
+</table>
+<p>Files containing code that may be shared across projects or used in a large project should have a clearly unique name, typically including the project or class <a href="#prefixes">prefix</a>.toto</p>
+<p>File names for categories should include the name of the class being extended, like GTMNSString+Utils.h or NSTextView+GTMAutocomplete.h</p>
+</section>
+<section id="prefixestoto" class="level3">
+<h3>Prefixestoto</h3>
+<p>Prefixes are commonly required in Objective-C to avoid naming collisions in a global namespace. Classes, protocols, global functions, and global constants should generally be named with a prefix that begins with a capital letter followed by one or more capital letters or numbers.</p>
+<p>WARNING: Apple reserves two-letter prefixes—see <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html.html">Conventions in Programming with Objective-C</a>—so prefixes with a minimum of three characters are considered best practice.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">/** An example error domain. */</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">extern</span> NSString *GTMExampleErrorDomain;</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">/** Gets the default time zone. */</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">extern</span> NSTimeZone *GTMGetDefaultTimeZone(<span class="dt">void</span>);</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">/** An example delegate. */</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">@protocol</span> GTMExampleDelegate &lt;NSObject&gt;</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="kw">@end</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">/** An example class. */</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="kw">@interface</span> GTMExample : NSObject</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+<section id="class-names-toto" class="level3">
+<h3>Class Names toto</h3>
+<p>Class names (along with category and protocol names) should start as uppercase and use mixed case to delimit words.</p>
+<p>Classes and protocols in code shared across multiple applications must have an appropriate <a href="#prefixes">prefix</a> (e.g. GTMSendMessage). Prefixes are recommended,toto</p>
+<p>but not required, for other classes and protocols.</p>
+</section>
+<section id="category-naming-toto" class="level3">
+<h3>Category Naming toto</h3>
+<p>Category names should start with an appropriate <a href="#prefixes">prefix</a> identifyingtoto</p>
+<p>the category as part of a project or open for general use.</p>
+<p>Category source file names should begin with the class being extended followed by a plus sign and the name of the category, e.g., <code>NSString+GTMParsing.h</code>. Methods in a category should be prefixed with a lowercase version of the prefix used for the category name followed by an underscore (e.g., <code>gtm_myCategoryMethodOnAString:</code>) in order to prevent collisions in Objective-C’s global namespace.</p>
+<p>There should be a single space between the class name and the opening parenthesis of the category.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">// UIViewController+GTMCrashReporting.h</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">/** A category that adds metadata to include in crash reports to UIViewController. */</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">@interface</span> UIViewController (GTMCrashReporting)</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">/** A unique identifier to represent the view controller in crash reports. */</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>@property(nonatomic, setter=gtm_setUniqueIdentifier:) <span class="dt">int</span> gtm_uniqueIdentifier;</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">/** Returns an encoded representation of the view controller&#39;s current state. */</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>- (nullable NSData *)gtm_encodedState;</span>
+<span id="cb6-13"><a href="#cb6-13"></a></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">@end</span></span></code></pre></div>
+<p>If a class is not shared with other projects, categories extending it may omit name prefixes and method name prefixes.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">/** This category extends a class that is not shared with other projects. */</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">@interface</span> XYZDataObject (Storage)</span>
+<span id="cb7-5"><a href="#cb7-5"></a>- (NSString *)storageIdentifier;</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+<section id="objective-c-method-names-toto" class="level3">
+<h3>Objective-C Method Names toto</h3>
+<p>Method and parameter names typically start as lowercase and then use mixed case.</p>
+<p>Proper capitalization should be respected, including at the beginning of names.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>+ (NSURL *)URLWithString:(NSString *)URLString;</span></code></pre></div>
+<p>The method name should read like a sentence if possible, meaning you should choose parameter names that flow with the method name. Objective-C method names tend to be very long, but this has the benefit that a block of code can almost read like prose, thus rendering many implementation comments unnecessary.</p>
+<p>Use prepositions and conjunctions like “with”, “from”, and “to” in the second and later parameter names only where necessary to clarify the meaning or behavior of the method.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>- (<span class="dt">void</span>)addTarget:(id)target action:(SEL)action;                          <span class="co">// GOOD; no conjunction needed</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>- (CGPoint)convertPoint:(CGPoint)point fromView:(UIView *)view;           <span class="co">// GOOD; conjunction clarifies parameter</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>- (<span class="dt">void</span>)replaceCharactersInRange:(NSRange)aRange</span>
+<span id="cb9-6"><a href="#cb9-6"></a>            withAttributedString:(NSAttributedString *)attributedString;  <span class="co">// GOOD.</span></span></code></pre></div>
+<p>A method that returns an object should have a name beginning with a noun identifying the object returned:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>- (Sandwich *)sandwich;      <span class="co">// GOOD.</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a></span>
+<span id="cb11-3"><a href="#cb11-3"></a>- (Sandwich *)makeSandwich;  <span class="co">// AVOID.</span></span></code></pre></div>
+<p>An accessor method should be named the same as the object it’s getting, but it should not be prefixed with the word <code>get</code>. For example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a>- (id)delegate;     <span class="co">// GOOD.</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>- (id)getDelegate;  <span class="co">// AVOID.</span></span></code></pre></div>
+<p>Accessors that return the value of boolean adjectives have method names beginning with <code>is</code>, but property names for those methods omit the <code>is</code>.</p>
+<p>Dot notation is used only with property names, not with method names.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb14-1"><a href="#cb14-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>@property(nonatomic, getter=isGlorious) BOOL glorious;</span>
+<span id="cb14-4"><a href="#cb14-4"></a>- (BOOL)isGlorious;</span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a>BOOL isGood = object.glorious;      <span class="co">// GOOD.</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>BOOL isGood = [object isGlorious];  <span class="co">// GOOD.</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb15-1"><a href="#cb15-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a>BOOL isGood = object.isGlorious;    <span class="co">// AVOID.</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a>NSArray&lt;Frog *&gt; *frogs = [NSArray&lt;Frog *&gt; arrayWithObject:frog];</span>
+<span id="cb16-4"><a href="#cb16-4"></a>NSEnumerator *enumerator = [frogs reverseObjectEnumerator];  <span class="co">// GOOD.</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb17-1"><a href="#cb17-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a>NSEnumerator *enumerator = frogs.reverseObjectEnumerator;    <span class="co">// AVOID.</span></span></code></pre></div>
+<p>See <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingMethods.html#//apple_ref/doc/uid/20001282-BCIGIJJF">Apple’s Guide to Naming Methods</a>toto</p>
+<p>for more details on Objective-C naming.</p>
+<p>These guidelines are for Objective-C methods only. C++ method names continue to follow the rules set in the C++ style guide.</p>
+</section>
+<section id="function-names-toto" class="level3">
+<h3>Function Names toto</h3>
+<p>Function names should start with a capital letter and have a capital letter for each new word (a.k.a. “<a href="https://en.wikipedia.org/wiki/Camel_case.html">camel case</a>” or “Pascal case”).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="dt">static</span> <span class="dt">void</span> AddTableEntry(NSString *tableEntry);</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="dt">static</span> BOOL DeleteFile(<span class="dt">const</span> <span class="dt">char</span> *filename);</span></code></pre></div>
+<p>Because Objective-C does not provide namespacing, non-static functions should have a <a href="#prefixes">prefix</a> that minimizes the chance of a name collision.toto</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb19-1"><a href="#cb19-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">extern</span> NSTimeZone *GTMGetDefaultTimeZone(<span class="dt">void</span>);</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">extern</span> NSString *GTMGetURLScheme(NSURL *URL);</span></code></pre></div>
+</section>
+<section id="variable-names-toto" class="level3">
+<h3>Variable Names toto</h3>
+<p>Variable names typically start with a lowercase and use mixed case to delimit words.</p>
+<p>Instance variables have leading underscores. File scope or global variables have a prefix <code>g</code>. For example: <code>myLocalVariable</code>, <code>_myInstanceVariable</code>, <code>gMyGlobalVariable</code>.</p>
+<section id="common-variable-names-toto" class="level4">
+<h4>Common Variable Names toto</h4>
+<p>Readers should be able to infer the variable type from the name, but do not use Hungarian notation for syntactic attributes, such as the static type of a variable (int or pointer).</p>
+<p>File scope or global variables (as opposed to constants) declared outside the scope of a method or function should be rare, and should have the prefix g.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb20-1"><a href="#cb20-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="dt">static</span> <span class="dt">int</span> gGlobalCounter;</span></code></pre></div>
+</section>
+<section id="instance-variables-toto" class="level4">
+<h4>Instance Variables toto</h4>
+<p>Instance variable names are mixed case and should be prefixed with an underscore, like <code>_usernameTextField</code>.</p>
+<p>NOTE: Google’s previous convention for Objective-C ivars was a trailing underscore. Existing projects may opt to continue using trailing underscores in new code in order to maintain consistency within the project codebase. Consistency of prefix or suffix underscores should be maintained within each class.</p>
+</section>
+<section id="constants-toto" class="level4">
+<h4>Constants toto</h4>
+<p>Constant symbols (const global and static variables and constants created with#define) should use mixed case to delimit words.toto</p>
+<p>Global and file scope constants should have an appropriate <a href="#prefixes">prefix</a>.toto</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">extern</span> NSString *<span class="dt">const</span> GTLServiceErrorDomain;</span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="kw">typedef</span> NS_ENUM(NSInteger, GTLServiceError) {</span>
+<span id="cb21-6"><a href="#cb21-6"></a>  GTLServiceErrorQueryResultMissing = <span class="dv">-3000</span>,</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  GTLServiceErrorWaitTimedOut       = <span class="dv">-3001</span>,</span>
+<span id="cb21-8"><a href="#cb21-8"></a>};</span></code></pre></div>
+<p>Because Objective-C does not provide namespacing, constants with external linkage should have a prefix that minimizes the chance of a name collision, typically like <code>ClassNameConstantName</code> or <code>ClassNameEnumName</code>.</p>
+<p>For interoperability with Swift code, enumerated values should have names that extend the typedef name:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">typedef</span> NS_ENUM(NSInteger, DisplayTinge) {</span>
+<span id="cb22-4"><a href="#cb22-4"></a>  DisplayTingeGreen = <span class="dv">1</span>,</span>
+<span id="cb22-5"><a href="#cb22-5"></a>  DisplayTingeBlue = <span class="dv">2</span>,</span>
+<span id="cb22-6"><a href="#cb22-6"></a>};</span></code></pre></div>
+<p>A lowercase k can be used as a standalone prefix for constants of static storage duration declared within implementation files:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="dt">static</span> <span class="dt">const</span> <span class="dt">int</span> kFileCount = <span class="dv">12</span>;</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="dt">static</span> NSString *<span class="dt">const</span> kUserKey = <span class="st">@&quot;kUserKey&quot;</span>;</span></code></pre></div>
+<p>NOTE: Previous convention was for public constant names to begin with a lowercase k followed by a project-specific <a href="#prefixes">prefix</a>. This practice istoto</p>
+<p>no longer recommended.</p>
+</section>
+</section>
+</section>
+<section id="types-and-declarations-toto" class="level2">
+<h2>Types and Declarations toto</h2>
+<section id="method-declarations-toto" class="level3">
+<h3>Method Declarations toto</h3>
+<p>As shown in the <a href="#Example">example</a>, the recommended ordertoto</p>
+<p>for declarations in an <code>@interface</code> declaration are: properties, class methods, initializers, and then finally instance methods. The class methods section should begin with any convenience constructors.</p>
+</section>
+<section id="local-variables-toto" class="level3">
+<h3>Local Variables toto</h3>
+<p>Declare variables in the narrowest practical scopes, and close to their use. Initialize variables in their declarations.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a>CLLocation *location = [<span class="kw">self</span> lastKnownLocation];</span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="kw">for</span> (<span class="dt">int</span> meters = <span class="dv">1</span>; meters &lt; <span class="dv">10</span>; meters++) {</span>
+<span id="cb24-5"><a href="#cb24-5"></a>  reportFrogsWithinRadius(location, meters);</span>
+<span id="cb24-6"><a href="#cb24-6"></a>}</span></code></pre></div>
+<p>Occasionally, efficiency will make it more appropriate to declare a variable outside the scope of its use. This example declares meters separate from initialization, and needlessly sends the lastKnownLocation message each time through the loop:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="dt">int</span> meters;                                         <span class="co">// AVOID.</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">for</span> (meters = <span class="dv">1</span>; meters &lt; <span class="dv">10</span>; meters++) {</span>
+<span id="cb25-5"><a href="#cb25-5"></a>  CLLocation *location = [<span class="kw">self</span> lastKnownLocation];  <span class="co">// AVOID.</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>  reportFrogsWithinRadius(location, meters);</span>
+<span id="cb25-7"><a href="#cb25-7"></a>}</span></code></pre></div>
+<p>Under Automatic Reference Counting, strong and weak pointers to Objective-C objects are automatically initialized to <code>nil</code>, so explicit initialization to <code>nil</code> is not required for those common cases. However, automatic initialization does <em>not</em> occur for many Objective-C pointer types, including object pointers declared with the <code>__unsafe_unretained</code> ownership qualifier and CoreFoundation object pointer types. When in doubt, prefer to initialize all Objective-C local variables.</p>
+</section>
+<section id="unsigned-integers-toto" class="level3">
+<h3>Unsigned Integers toto</h3>
+<p>Avoid unsigned integers except when matching types used by system interfaces.</p>
+<p>Subtle errors crop up when doing math or counting down to zero using unsigned integers. Rely only on signed integers in math expressions except when matching NSUInteger in system interfaces.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a>NSUInteger numberOfObjects = array.count;</span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="kw">for</span> (NSInteger counter = numberOfObjects - <span class="dv">1</span>; counter &gt; <span class="dv">0</span>; --counter)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="kw">for</span> (NSUInteger counter = numberOfObjects - <span class="dv">1</span>; counter &gt; <span class="dv">0</span>; --counter)  <span class="co">// AVOID.</span></span></code></pre></div>
+<p>Unsigned integers may be used for flags and bitmasks, though often NS_OPTIONS or NS_ENUM will be more appropriate.</p>
+</section>
+<section id="types-with-inconsistent-sizes-toto" class="level3">
+<h3>Types with Inconsistent Sizes toto</h3>
+<p>Due to sizes that differ in 32- and 64-bit builds, avoid types long, NSInteger, NSUInteger, and CGFloat except when matching system interfaces.</p>
+<p>Types long, NSInteger, NSUInteger, and CGFloat vary in size between 32- and 64-bit builds. Use of these types is appropriate when handling values exposed by system interfaces, but they should be avoided for most other computations.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>int32_t scalar1 = proto.intValue;</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>int64_t scalar2 = proto.longValue;</span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a>NSUInteger numberOfObjects = array.count;</span>
+<span id="cb28-8"><a href="#cb28-8"></a></span>
+<span id="cb28-9"><a href="#cb28-9"></a>CGFloat offset = view.bounds.origin.x;</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb29-1"><a href="#cb29-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>NSInteger scalar2 = proto.longValue;  <span class="co">// AVOID.</span></span></code></pre></div>
+<p>File and buffer sizes often exceed 32-bit limits, so they should be declared using <code>int64_t</code>, not with <code>long</code>, <code>NSInteger</code>, or <code>NSUInteger</code>.</p>
+</section>
+</section>
+<section id="comments-toto" class="level2">
+<h2>Comments toto</h2>
+<p>Comments are absolutely vital to keeping our code readable. The following rules describe what you should comment and where. But remember: while comments are important, the best code is self-documenting. Giving sensible names to types and variables is much better than using obscure names and then trying to explain them through comments.</p>
+<p>Pay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.</p>
+<p>Comments should be as readable as narrative text, with proper capitalization and punctuation. In many cases, complete sentences are more readable than sentence fragments. Shorter comments, such as comments at the end of a line of code, can sometimes be less formal, but use a consistent style. When writing your comments, write for your audience: the next contributor who will need to understand your code. Be generous—the next one may be you!</p>
+<section id="file-comments-toto" class="level3">
+<h3>File Comments toto</h3>
+<p>A file may optionally start with a description of its contents. Every file may contain the following items, in order: * License boilerplate if necessary. Choose the appropriate boilerplate for the license used by the project. * A basic description of the contents of the file if necessary.</p>
+<p>If you make significant changes to a file with an author line, consider deleting the author line since revision history already provides a more detailed and accurate record of authorship.</p>
+</section>
+<section id="declaration-comments-toto" class="level3">
+<h3>Declaration Comments toto</h3>
+<p>Every non-trivial interface, public and private, should have an accompanying comment describing its purpose and how it fits into the larger picture.</p>
+<p>Comments should be used to document classes, properties, ivars, functions, categories, protocol declarations, and enums.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb30-1"><a href="#cb30-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="co">/**</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="co"> * A delegate for NSApplication to handle notifications about app</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="co"> * launch and shutdown. Owned by the main app controller.</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a><span class="co"> */</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a><span class="kw">@interface</span> MyAppDelegate : NSObject {</span>
+<span id="cb30-8"><a href="#cb30-8"></a>  <span class="co">/**</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="co">   * The background task in progress, if any. This is initialized</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a><span class="co">   * to the value UIBackgroundTaskInvalid.</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a><span class="co">   */</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>  UIBackgroundTaskIdentifier _backgroundTaskID;</span>
+<span id="cb30-13"><a href="#cb30-13"></a>}</span>
+<span id="cb30-14"><a href="#cb30-14"></a></span>
+<span id="cb30-15"><a href="#cb30-15"></a><span class="co">/** The factory that creates and manages fetchers for the app. */</span></span>
+<span id="cb30-16"><a href="#cb30-16"></a>@property(nonatomic) GTMSessionFetcherService *fetcherService;</span>
+<span id="cb30-17"><a href="#cb30-17"></a></span>
+<span id="cb30-18"><a href="#cb30-18"></a><span class="kw">@end</span></span></code></pre></div>
+<p>Doxygen-style comments are encouraged for interfaces as they are parsed by Xcode to display formatted documentation. There is a wide variety of Doxygen commands; use them consistently within a project.</p>
+<p>If you have already described an interface in detail in the comments at the top of your file, feel free to simply state, “See comment at top of file for a complete description”, but be sure to have some sort of comment.</p>
+<p>Additionally, each method should have a comment explaining its function, arguments, return value, thread or queue assumptions, and any side effects. Documentation comments should be in the header for public methods, or immediately preceding the method for non-trivial private methods.</p>
+<p>Use descriptive form (“Opens the file”) rather than imperative form (“Open the file”) for method and function comments. The comment describes the function; it does not tell the function what to do.</p>
+<p>Document the thread usage assumptions the class, properties, or methods make, if any. If an instance of the class can be accessed by multiple threads, take extra care to document the rules and invariants surrounding multithreaded use.</p>
+<p>Any sentinel values for properties and ivars, such as <code>NULL</code> or <code>-1</code>, should be documented in comments.</p>
+<p>Declaration comments explain how a method or function is used. Comments explaining how a method or function is implemented should be with the implementation rather than with the declaration.</p>
+</section>
+<section id="implementation-comments-toto" class="level3">
+<h3>Implementation Comments toto</h3>
+<p>Provide comments explaining tricky, subtle, or complicated sections of code.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb31-1"><a href="#cb31-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="co">// Set the property to nil before invoking the completion handler to</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="co">// avoid the risk of reentrancy leading to the callback being</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="co">// invoked again.</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>CompletionHandler handler = <span class="kw">self</span>.completionHandler;</span>
+<span id="cb31-7"><a href="#cb31-7"></a><span class="kw">self</span>.completionHandler = nil;</span>
+<span id="cb31-8"><a href="#cb31-8"></a>handler();</span></code></pre></div>
+<p>When useful, also provide comments about implementation approaches that were considered or abandoned.</p>
+<p>End-of-line comments should be separated from the code by at least 2 spaces. If you have several comments on subsequent lines, it can often be more readable to line them up.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a></span>
+<span id="cb32-3"><a href="#cb32-3"></a>[<span class="kw">self</span> doSomethingWithALongName];  <span class="co">// Two spaces before the comment.</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a>[<span class="kw">self</span> doSomethingShort];          <span class="co">// More spacing to align the comment.</span></span></code></pre></div>
+</section>
+<section id="disambiguating-symbols-toto" class="level3">
+<h3>Disambiguating Symbols toto</h3>
+<p>Where needed to avoid ambiguity, use backticks or vertical bars to quote variable names and symbols in comments in preference to using quotation marks or naming the symbols inline.</p>
+<p>In Doxygen-style comments, prefer demarcating symbols with a monospace text command, such as <code>@c</code>.</p>
+<p>Demarcation helps provide clarity when a symbol is a common word that might make the sentence read like it was poorly constructed. A common example is the symbol <code>count</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="co">// Sometimes `count` will be less than zero.</span></span></code></pre></div>
+<p>or when quoting something which already contains quotes</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co">// Remember to call `StringWithoutSpaces(&quot;foo bar baz&quot;)`</span></span></code></pre></div>
+<p>Backticks or vertical bars are not needed when a symbol is self-apparent.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="co">// This class serves as a delegate to GTMDepthCharge.</span></span></code></pre></div>
+<p>Doxygen formatting is also suitable for identifying symbols.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="co">/** @param maximum The highest value for @c count. */</span></span></code></pre></div>
+</section>
+<section id="object-ownership-toto" class="level3">
+<h3>Object Ownership toto</h3>
+<p>For objects not managed by ARC, make the pointer ownership model as explicit as possible when it falls outside the most common Objective-C usage idioms.</p>
+<section id="manual-reference-counting-toto" class="level4">
+<h4>Manual Reference Counting toto</h4>
+<p>Instance variables for NSObject-derived objects are presumed to be retained; if they are not retained, they should be either commented as weak or declared with the <code>__weak</code> lifetime qualifier.</p>
+<p>An exception is in Mac software for instance variables labeled as <code>@IBOutlets</code>, which are presumed to not be retained.</p>
+<p>Where instance variables are pointers to Core Foundation, C++, and other non-Objective-C objects, they should always be declared with strong and weak comments to indicate which pointers are and are not retained. Core Foundation and other non-Objective-C object pointers require explicit memory management, even when building for automatic reference counting.</p>
+<p>Examples of strong and weak declarations:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">@interface</span> MyDelegate : NSObject</span>
+<span id="cb37-4"><a href="#cb37-4"></a></span>
+<span id="cb37-5"><a href="#cb37-5"></a>@property(nonatomic) NSString *doohickey;</span>
+<span id="cb37-6"><a href="#cb37-6"></a>@property(nonatomic, weak) NSString *parent;</span>
+<span id="cb37-7"><a href="#cb37-7"></a></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="kw">@end</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a></span>
+<span id="cb37-10"><a href="#cb37-10"></a></span>
+<span id="cb37-11"><a href="#cb37-11"></a><span class="kw">@implementation</span> MyDelegate {</span>
+<span id="cb37-12"><a href="#cb37-12"></a>  IBOutlet NSButton *_okButton;  <span class="co">// Normal NSControl; implicitly weak on Mac only</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a></span>
+<span id="cb37-14"><a href="#cb37-14"></a>  AnObjcObject *_doohickey;  <span class="co">// My doohickey</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a>  __weak MyObjcParent *_parent;  <span class="co">// To send messages back (owns this instance)</span></span>
+<span id="cb37-16"><a href="#cb37-16"></a></span>
+<span id="cb37-17"><a href="#cb37-17"></a>  <span class="co">// non-NSObject pointers...</span></span>
+<span id="cb37-18"><a href="#cb37-18"></a>  CWackyCPPClass *_wacky;  <span class="co">// Strong, some cross-platform object</span></span>
+<span id="cb37-19"><a href="#cb37-19"></a>  CFDictionaryRef *_dict;  <span class="co">// Strong</span></span>
+<span id="cb37-20"><a href="#cb37-20"></a>}</span>
+<span id="cb37-21"><a href="#cb37-21"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+<section id="automatic-reference-counting-toto" class="level4">
+<h4>Automatic Reference Counting toto</h4>
+<p>Object ownership and lifetime are explicit when using ARC, so no additional comments are required for automatically retained objects.</p>
+</section>
+</section>
+</section>
+<section id="c-language-features-toto" class="level2">
+<h2>C Language Features toto</h2>
+<section id="macros-toto" class="level3">
+<h3>Macros toto</h3>
+<p>Avoid macros, especially where <code>const</code> variables, enums, XCode snippets, or C functions may be used instead.</p>
+<p>Macros make the code you see different from the code the compiler sees. Modern C renders traditional uses of macros for constants and utility functions unnecessary. Macros should only be used when there is no other solution available.</p>
+<p>Where a macro is needed, use a unique name to avoid the risk of a symbol collision in the compilation unit. If practical, keep the scope limited by <code>#undefining</code> the macro after its use.toto</p>
+<p>Macro names should use <code>SHOUTY_SNAKE_CASE</code>—all uppercase letters with underscores between words. Function-like macros may use C function naming practices. Do not define macros that appear to be C or Objective-C keywords.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb38-1"><a href="#cb38-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a></span>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="pp">#define GTM_EXPERIMENTAL_BUILD ...      </span><span class="co">// GOODtoto</span></span>
+<span id="cb38-4"><a href="#cb38-4"></a></span>
+<span id="cb38-5"><a href="#cb38-5"></a></span>
+<span id="cb38-6"><a href="#cb38-6"></a><span class="co">// Assert unless X &gt; Y</span></span>
+<span id="cb38-7"><a href="#cb38-7"></a><span class="pp">#define GTM_ASSERT_GT(X, Y) ...         </span><span class="co">// GOOD, macro style.toto</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a></span>
+<span id="cb38-9"><a href="#cb38-9"></a></span>
+<span id="cb38-10"><a href="#cb38-10"></a><span class="co">// Assert unless X &gt; Y</span></span>
+<span id="cb38-11"><a href="#cb38-11"></a><span class="pp">#define GTMAssertGreaterThan(X, Y) ...  </span><span class="co">// GOOD, function style.toto</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb39-1"><a href="#cb39-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a></span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="pp">#define kIsExperimentalBuild ...        </span><span class="co">// AVOIDtoto</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a></span>
+<span id="cb39-5"><a href="#cb39-5"></a></span>
+<span id="cb39-6"><a href="#cb39-6"></a><span class="pp">#define unless(X) if(!(X))              </span><span class="co">// AVOIDtoto</span></span></code></pre></div>
+<p>Avoid macros that expand to unbalanced C or Objective-C constructs. Avoid macros that introduce scope, or may obscure the capturing of values in blocks.</p>
+<p>Avoid macros that generate class, property, or method definitions in headers to be used as public API. These only make the code hard to understand, and the language already has better ways of doing this.</p>
+<p>Avoid macros that generate method implementations, or that generate declarations of variables that are later used outside of the macro. Macros shouldn’t make code hard to understand by hiding where and how a variable is declared.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb40-1"><a href="#cb40-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a></span>
+<span id="cb40-3"><a href="#cb40-3"></a><span class="pp">#define ARRAY_ADDER(CLASS) \toto</span></span>
+<span id="cb40-4"><a href="#cb40-4"></a></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  -(<span class="dt">void</span>)add## CLASS ## :(CLASS *)obj toArray:(NSMutableArray *)arraytoto</span>
+<span id="cb40-6"><a href="#cb40-6"></a></span>
+<span id="cb40-7"><a href="#cb40-7"></a></span>
+<span id="cb40-8"><a href="#cb40-8"></a>ARRAY_ADDER(NSString) {</span>
+<span id="cb40-9"><a href="#cb40-9"></a>  <span class="kw">if</span> (array.count &gt; <span class="dv">5</span>) {              <span class="co">// AVOID -- where is &#39;array&#39; defined?</span></span>
+<span id="cb40-10"><a href="#cb40-10"></a>    ...</span>
+<span id="cb40-11"><a href="#cb40-11"></a>  }</span>
+<span id="cb40-12"><a href="#cb40-12"></a>}</span></code></pre></div>
+<p>Examples of acceptable macro use include assertion and debug logging macros that are conditionally compiled based on build settings—often, these are not compiled into release builds.</p>
+</section>
+<section id="nonstandard-extensions-toto" class="level3">
+<h3>Nonstandard Extensions toto</h3>
+<p>Nonstandard extensions to C/Objective-C may not be used unless otherwise specified.</p>
+<p>Compilers support various extensions that are not part of standard C. Examples include compound statement expressions (e.g. <code>foo = ({ int x; Bar(&amp;x); x })</code>).</p>
+<p><code>__attribute__</code> is an approved exception, as it is used in Objective-C API specifications.</p>
+<p>The binary form of the conditional operator, <code>A ?: B</code>, is an approved exception.</p>
+</section>
+</section>
+<section id="cocoa-and-objective-c-features-toto" class="level2">
+<h2>Cocoa and Objective-C Features toto</h2>
+<section id="identify-designated-initializer-toto" class="level3">
+<h3>Identify Designated Initializer toto</h3>
+<p>Clearly identify your designated initializer.</p>
+<p>It is important for those who might be subclassing your class that the designated initializer be clearly identified. That way, they only need to override a single initializer (of potentially several) to guarantee the initializer of their subclass is called. It also helps those debugging your class in the future understand the flow of initialization code if they need to step through it. Identify the designated initializer using comments or the <code>NS_DESIGNATED_INITIALIZER</code> macro. If you use <code>NS_DESIGNATED_INITIALIZER</code>, mark unsupported initializers with <code>NS_UNAVAILABLE</code>.</p>
+</section>
+<section id="override-designated-initializer-toto" class="level3">
+<h3>Override Designated Initializer toto</h3>
+<p>When writing a subclass that requires an <code>init...</code> method, make sure you override the designated initializer of the superclass.</p>
+<p>If you fail to override the designated initializer of the superclass, your initializer may not be called in all cases, leading to subtle and very difficult to find bugs.</p>
+</section>
+<section id="overridden-nsobject-method-placement-toto" class="level3">
+<h3>Overridden NSObject Method Placement toto</h3>
+<p>Put overridden methods of NSObject at the top of an <code>@implementation</code>.</p>
+<p>This commonly applies to (but is not limited to) the <code>init...</code>, <code>copyWithZone:</code>, and <code>dealloc</code> methods. The <code>init...</code> methods should be grouped together, followed by other typical <code>NSObject</code> methods such as <code>description</code>, <code>isEqual:</code>, and <code>hash</code>.</p>
+<p>Convenience class factory methods for creating instances may precede the <code>NSObject</code> methods.</p>
+</section>
+<section id="initialization-toto" class="level3">
+<h3>Initialization toto</h3>
+<p>Don’t initialize instance variables to <code>0</code> or <code>nil</code> in the <code>init</code> method; doing so is redundant.</p>
+<p>All instance variables for a newly allocated object are <a href="https://developer.apple.com/library/mac/documentation/General/Conceptual/CocoaEncyclopedia/ObjectAllocation/ObjectAllocation.html">initialized to</a> <code>0</code> (except for isa), so don’t clutter up the init method by re-initializing variables to <code>0</code> or <code>nil</code>.</p>
+</section>
+<section id="instance-variables-in-headers-should-be-protected-or-private-toto" class="level3">
+<h3>Instance Variables In Headers Should Be <span class="citation" data-cites="protected">@protected</span> or <span class="citation" data-cites="private">@private</span> toto</h3>
+<p>Instance variables should typically be declared in implementation files or auto-synthesized by properties. When ivars are declared in a header file, they should be marked <code>@protected</code> or <code>@private</code>.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb41-1"><a href="#cb41-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="kw">@interface</span> MyClass : NSObject {</span>
+<span id="cb41-4"><a href="#cb41-4"></a> <span class="kw">@protected</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>  id _myInstanceVariable;</span>
+<span id="cb41-6"><a href="#cb41-6"></a>}</span>
+<span id="cb41-7"><a href="#cb41-7"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+<section id="do-not-use-new-toto" class="level3">
+<h3>Do Not Use +new toto</h3>
+<p>Do not invoke the <code>NSObject</code> class method <code>new</code>, nor override it in a subclass. <code>+new</code> is rarely used and contrasts greatly with initializer usage. Instead, use <code>+alloc</code> and <code>-init</code> methods to instantiate retained objects.</p>
+</section>
+<section id="keep-the-public-api-simple-toto" class="level3">
+<h3>Keep the Public API Simple toto</h3>
+<p>Keep your class simple; avoid “kitchen-sink” APIs. If a method doesn’t need to be public, keep it out of the public interface.</p>
+<p>Unlike C++, Objective-C doesn’t differentiate between public and private methods; any message may be sent to an object. As a result, avoid placing methods in the public API unless they are actually expected to be used by a consumer of the class. This helps reduce the likelihood they’ll be called when you’re not expecting it. This includes methods that are being overridden from the parent class.</p>
+<p>Since internal methods are not really private, it’s easy to accidentally override a superclass’s “private” method, thus making a very difficult bug to squash. In general, private methods should have a fairly unique name that will prevent subclasses from unintentionally overriding them.</p>
+</section>
+<section id="import-and-include-toto" class="level3">
+<h3>#import and #include toto</h3>
+<p><code>#import</code> Objective-C and Objective-C++ headers, and <code>#include</code> C/C++ headers.toto</p>
+<p>C/C++ headers include other C/C++ headers using <code>#include</code>. Using <code>#import</code>toto</p>
+<p>on C/C++ headers prevents future inclusions using <code>#include</code> and could result intoto</p>
+<p>unintended compilation behavior. C/C++ headers should provide their own <code>#define</code> guard.toto</p>
+</section>
+<section id="order-of-includes-toto" class="level3">
+<h3>Order of Includes toto</h3>
+<p>The standard order for header inclusion is the related header, operating system headers, language library headers, and finally groups of headers for other dependencies.</p>
+<p>The related header precedes others to ensure it has no hidden dependencies. For implementation files the related header is the header file. For test files the related header is the header containing the tested interface.</p>
+<p>A blank line may separate logically distinct groups of included headers.</p>
+<p>Within each group the includes should be ordered alphabetically.</p>
+<p>Import headers using their path relative to the project’s source directory.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb42-1"><a href="#cb42-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="pp">#import </span><span class="im">&quot;ProjectX/BazViewController.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a></span>
+<span id="cb42-5"><a href="#cb42-5"></a></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="pp">#import </span><span class="im">&lt;Foundation/Foundation.h&gt;</span><span class="pp">toto</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a></span>
+<span id="cb42-8"><a href="#cb42-8"></a></span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="pp">#include </span><span class="im">&lt;unistd.h&gt;</span><span class="pp">toto</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a></span>
+<span id="cb42-11"><a href="#cb42-11"></a><span class="pp">#include </span><span class="im">&lt;vector&gt;</span><span class="pp">toto</span></span>
+<span id="cb42-12"><a href="#cb42-12"></a></span>
+<span id="cb42-13"><a href="#cb42-13"></a></span>
+<span id="cb42-14"><a href="#cb42-14"></a><span class="pp">#include </span><span class="im">&quot;base/basictypes.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb42-15"><a href="#cb42-15"></a></span>
+<span id="cb42-16"><a href="#cb42-16"></a><span class="pp">#include </span><span class="im">&quot;base/integral_types.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb42-17"><a href="#cb42-17"></a></span>
+<span id="cb42-18"><a href="#cb42-18"></a><span class="pp">#include </span><span class="im">&quot;util/math/mathutil.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb42-19"><a href="#cb42-19"></a></span>
+<span id="cb42-20"><a href="#cb42-20"></a></span>
+<span id="cb42-21"><a href="#cb42-21"></a><span class="pp">#import </span><span class="im">&quot;ProjectX/BazModel.h&quot;</span><span class="pp">toto</span></span>
+<span id="cb42-22"><a href="#cb42-22"></a></span>
+<span id="cb42-23"><a href="#cb42-23"></a><span class="pp">#import </span><span class="im">&quot;Shared/Util/Foo.h&quot;</span><span class="pp">toto</span></span></code></pre></div>
+</section>
+<section id="use-umbrella-headers-for-system-frameworks-toto" class="level3">
+<h3>Use Umbrella Headers for System Frameworks toto</h3>
+<p>Import umbrella headers for system frameworks and system libraries rather than include individual files.</p>
+<p>While it may seem tempting to include individual system headers from a framework such as Cocoa or Foundation, in fact it’s less work on the compiler if you include the top-level root framework. The root framework is generally pre-compiled and can be loaded much more quickly. In addition, remember to use <code>@import</code> or <code>#import</code> rather than <code>#include</code> for Objective-C frameworks.toto</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb43-1"><a href="#cb43-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a>@import UIKit;     <span class="co">// GOOD.</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="pp">#import </span><span class="im">&lt;Foundation/Foundation.h&gt;</span><span class="pp">     </span><span class="co">// GOOD.toto</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb44-1"><a href="#cb44-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="pp">#import </span><span class="im">&lt;Foundation/NSArray.h&gt;</span><span class="pp">        </span><span class="co">// AVOID.toto</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="pp">#import </span><span class="im">&lt;Foundation/NSString.h&gt;</span><span class="pp">toto</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a></span>
+<span id="cb44-7"><a href="#cb44-7"></a>...</span></code></pre></div>
+</section>
+<section id="avoid-messaging-the-current-object-within-initializers-and--dealloctoto" class="level3">
+<h3>Avoid Messaging the Current Object Within Initializers and <code>-dealloc</code>toto</h3>
+<p>Code in initializers and <code>-dealloc</code> should avoid invoking instance methods.</p>
+<p>Superclass initialization completes before subclass initialization. Until all classes have had a chance to initialize their instance state any method invocation on self may lead to a subclass operating on uninitialized instance state.</p>
+<p>A similar issue exists for <code>-dealloc</code>, where a method invocation may cause a class to operate on state that has been deallocated.</p>
+<p>One case where this is less obvious is property accessors. These can be overridden just like any other selector. Whenever practical, directly assign to and release ivars in initializers and <code>-dealloc</code>, rather than rely on accessors.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb45-1"><a href="#cb45-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a></span>
+<span id="cb45-3"><a href="#cb45-3"></a>- (instancetype)init {</span>
+<span id="cb45-4"><a href="#cb45-4"></a>  <span class="kw">self</span> = [<span class="kw">super</span> init];</span>
+<span id="cb45-5"><a href="#cb45-5"></a>  <span class="kw">if</span> (<span class="kw">self</span>) {</span>
+<span id="cb45-6"><a href="#cb45-6"></a>    _bar = <span class="dv">23</span>;  <span class="co">// GOOD.</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>  }</span>
+<span id="cb45-8"><a href="#cb45-8"></a>  <span class="kw">return</span> <span class="kw">self</span>;</span>
+<span id="cb45-9"><a href="#cb45-9"></a>}</span></code></pre></div>
+<p>Beware of factoring common initialization code into helper methods:</p>
+<ul>
+<li>Methods can be overridden in subclasses, either deliberately, or accidentally due to naming collisions.</li>
+<li>When editing a helper method, it may not be obvious that the code is being run from an initializer.</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb46-1"><a href="#cb46-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a></span>
+<span id="cb46-3"><a href="#cb46-3"></a>- (instancetype)init {</span>
+<span id="cb46-4"><a href="#cb46-4"></a>  <span class="kw">self</span> = [<span class="kw">super</span> init];</span>
+<span id="cb46-5"><a href="#cb46-5"></a>  <span class="kw">if</span> (<span class="kw">self</span>) {</span>
+<span id="cb46-6"><a href="#cb46-6"></a>    <span class="kw">self</span>.bar = <span class="dv">23</span>;  <span class="co">// AVOID.</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a>    [<span class="kw">self</span> sharedMethod];  <span class="co">// AVOID. Fragile to subclassing or future extension.</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a>  }</span>
+<span id="cb46-9"><a href="#cb46-9"></a>  <span class="kw">return</span> <span class="kw">self</span>;</span>
+<span id="cb46-10"><a href="#cb46-10"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb47-1"><a href="#cb47-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a></span>
+<span id="cb47-3"><a href="#cb47-3"></a>- (<span class="dt">void</span>)dealloc {</span>
+<span id="cb47-4"><a href="#cb47-4"></a>  [_notifier removeObserver:<span class="kw">self</span>];  <span class="co">// GOOD.</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb48-1"><a href="#cb48-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a></span>
+<span id="cb48-3"><a href="#cb48-3"></a>- (<span class="dt">void</span>)dealloc {</span>
+<span id="cb48-4"><a href="#cb48-4"></a>  [<span class="kw">self</span> removeNotifications];  <span class="co">// AVOID.</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>}</span></code></pre></div>
+</section>
+<section id="setters-copy-nsstrings-toto" class="level3">
+<h3>Setters copy NSStrings toto</h3>
+<p>Setters taking an <code>NSString</code> should always copy the string it accepts. This is often also appropriate for collections like <code>NSArray</code> and <code>NSDictionary</code>.</p>
+<p>Never just retain the string, as it may be a <code>NSMutableString</code>. This avoids the caller changing it under you without your knowledge.</p>
+<p>Code receiving and holding collection objects should also consider that the passed collection may be mutable, and thus the collection could be more safely held as a copy or mutable copy of the original.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb49-1"><a href="#cb49-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb49-2"><a href="#cb49-2"></a></span>
+<span id="cb49-3"><a href="#cb49-3"></a>@property(nonatomic, copy) NSString *name;</span>
+<span id="cb49-4"><a href="#cb49-4"></a></span>
+<span id="cb49-5"><a href="#cb49-5"></a>- (<span class="dt">void</span>)setZigfoos:(NSArray&lt;Zigfoo *&gt; *)zigfoos {</span>
+<span id="cb49-6"><a href="#cb49-6"></a>  <span class="co">// Ensure that we&#39;re holding an immutable collection.</span></span>
+<span id="cb49-7"><a href="#cb49-7"></a>  _zigfoos = [zigfoos copy];</span>
+<span id="cb49-8"><a href="#cb49-8"></a>}</span></code></pre></div>
+</section>
+<section id="use-lightweight-generics-to-document-contained-types-toto" class="level3">
+<h3>Use Lightweight Generics to Document Contained Types toto</h3>
+<p>All projects compiling on Xcode 7 or newer versions should make use of the Objective-C lightweight generics notation to type contained objects.</p>
+<p>Every <code>NSArray</code>, <code>NSDictionary</code>, or <code>NSSet</code> reference should be declared using lightweight generics for improved type safety and to explicitly document usage.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb50-1"><a href="#cb50-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a></span>
+<span id="cb50-3"><a href="#cb50-3"></a>@property(nonatomic, copy) NSArray&lt;Location *&gt; *locations;</span>
+<span id="cb50-4"><a href="#cb50-4"></a>@property(nonatomic, copy, readonly) NSSet&lt;NSString *&gt; *identifiers;</span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-6"><a href="#cb50-6"></a>NSMutableArray&lt;MyLocation *&gt; *mutableLocations = [otherObject.locations mutableCopy];</span></code></pre></div>
+<p>If the fully-annotated types become complex, consider using a typedef to preserve readability.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb51-1"><a href="#cb51-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="kw">typedef</span> NSSet&lt;NSDictionary&lt;NSString *, NSDate *&gt; *&gt; TimeZoneMappingSet;</span>
+<span id="cb51-4"><a href="#cb51-4"></a>TimeZoneMappingSet *timeZoneMappings = [TimeZoneMappingSet setWithObjects:...];</span></code></pre></div>
+<p>Use the most descriptive common superclass or protocol available. In the most generic case when nothing else is known, declare the collection to be explicitly heterogenous using id.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb52-1"><a href="#cb52-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a></span>
+<span id="cb52-3"><a href="#cb52-3"></a>@property(nonatomic, copy) NSArray&lt;id&gt; *unknowns;</span></code></pre></div>
+</section>
+<section id="avoid-throwing-exceptions-toto" class="level3">
+<h3>Avoid Throwing Exceptions toto</h3>
+<p>Don’t <code>@throw</code> Objective-C exceptions, but you should be prepared to catch them from third-party or OS calls.</p>
+<p>This follows the recommendation to use error objects for error delivery in <a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Exceptions/Exceptions.html">Apple’s Introduction to Exception Programming Topics for Cocoa</a>.</p>
+<p>We do compile with <code>-fobjc-exceptions</code> (mainly so we get <code>@synchronized</code>), but we don’t <code>@throw</code>. Use of <code>@try</code>, <code>@catch</code>, and <code>@finally</code> are allowed when required to properly use 3rd party code or libraries. If you do use them, please document exactly which methods you expect to throw.</p>
+</section>
+<section id="nil-checks-toto" class="level3">
+<h3><code>nil</code> Checks toto</h3>
+<p>Avoid <code>nil</code> pointer checks that exist only to prevent sending messages to <code>nil</code>. Sending a message to <code>nil</code> <a href="http://www.sealiesoftware.com/blog/archive/2012/2/29/objc_explain_return_value_of_message_to_nil.html">reliably returns</a> <code>nil</code> as a pointer, zero as an integer or floating-point value, structs initialized to <code>0</code>, and <code>_Complex</code> values equal to <code>{0, 0}</code>.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb53-1"><a href="#cb53-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a></span>
+<span id="cb53-3"><a href="#cb53-3"></a><span class="kw">if</span> (dataSource) {  <span class="co">// AVOID.</span></span>
+<span id="cb53-4"><a href="#cb53-4"></a>  [dataSource moveItemAtIndex:<span class="dv">1</span> toIndex:<span class="dv">0</span>];</span>
+<span id="cb53-5"><a href="#cb53-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb54-1"><a href="#cb54-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a></span>
+<span id="cb54-3"><a href="#cb54-3"></a>[dataSource moveItemAtIndex:<span class="dv">1</span> toIndex:<span class="dv">0</span>];  <span class="co">// GOOD.</span></span></code></pre></div>
+<p>Note that this applies to <code>nil</code> as a message target, not as a parameter value. Individual methods may or may not safely handle <code>nil</code> parameter values.</p>
+<p>Note too that this is distinct from checking C/C++ pointers and block pointers against <code>NULL</code>, which the runtime does not handle and will cause your application to crash. You still need to make sure you do not dereference a <code>NULL</code> pointer.</p>
+</section>
+<section id="nullabilitytoto" class="level3">
+<h3>Nullabilitytoto</h3>
+<p>Interfaces can be decorated with nullability annotations to describe how the interface should be used and how it behaves. Use of nullability regions (e.g., <code>NS_ASSUME_NONNULL_BEGIN</code> and <code>NS_ASSUME_NONNULL_END</code>) and explicit nullability annotations are both accepted. Prefer using the <code>_Nullable</code> and <code>_Nonnull</code> keywords over the <code>__nullable</code> and <code>__nonnull</code> keywords. For Objective-C methods and properties prefer using the context-sensitive, non-underscored keywords, e.g., <code>nonnull</code> and <code>nullable</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb55-1"><a href="#cb55-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a></span>
+<span id="cb55-3"><a href="#cb55-3"></a><span class="co">/** A class representing an owned book. */</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a><span class="kw">@interface</span> GTMBook : NSObject</span>
+<span id="cb55-5"><a href="#cb55-5"></a></span>
+<span id="cb55-6"><a href="#cb55-6"></a><span class="co">/** The title of the book. */</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>@property(readonly, copy, nonnull) NSString *title;</span>
+<span id="cb55-8"><a href="#cb55-8"></a></span>
+<span id="cb55-9"><a href="#cb55-9"></a><span class="co">/** The author of the book, if one exists. */</span></span>
+<span id="cb55-10"><a href="#cb55-10"></a>@property(readonly, copy, nullable) NSString *author;</span>
+<span id="cb55-11"><a href="#cb55-11"></a></span>
+<span id="cb55-12"><a href="#cb55-12"></a><span class="co">/** The owner of the book. Setting nil resets to the default owner. */</span></span>
+<span id="cb55-13"><a href="#cb55-13"></a>@property(copy, null_resettable) NSString *owner;</span>
+<span id="cb55-14"><a href="#cb55-14"></a></span>
+<span id="cb55-15"><a href="#cb55-15"></a><span class="co">/** Initializes a book with a title and an optional author. */</span></span>
+<span id="cb55-16"><a href="#cb55-16"></a>- (nonnull instancetype)initWithTitle:(nonnull NSString *)title</span>
+<span id="cb55-17"><a href="#cb55-17"></a>                               author:(nullable NSString *)author</span>
+<span id="cb55-18"><a href="#cb55-18"></a>    NS_DESIGNATED_INITIALIZER;</span>
+<span id="cb55-19"><a href="#cb55-19"></a></span>
+<span id="cb55-20"><a href="#cb55-20"></a><span class="co">/** Returns nil because a book is expected to have a title. */</span></span>
+<span id="cb55-21"><a href="#cb55-21"></a>- (nullable instancetype)init;</span>
+<span id="cb55-22"><a href="#cb55-22"></a></span>
+<span id="cb55-23"><a href="#cb55-23"></a><span class="kw">@end</span></span>
+<span id="cb55-24"><a href="#cb55-24"></a></span>
+<span id="cb55-25"><a href="#cb55-25"></a><span class="co">/** Loads books from the file specified by the given path. */</span></span>
+<span id="cb55-26"><a href="#cb55-26"></a>NSArray&lt;GTMBook *&gt; *_Nullable GTMLoadBooksFromFile(NSString *_Nonnull path);</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb56-1"><a href="#cb56-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a></span>
+<span id="cb56-3"><a href="#cb56-3"></a>NSArray&lt;GTMBook *&gt; *__nullable GTMLoadBooksFromTitle(NSString *__nonnull path);</span></code></pre></div>
+<p>Be careful assuming that a pointer is not null based on a non-null qualifier because the compiler may not guarantee that the pointer is not null.</p>
+</section>
+<section id="bool-pitfalls-toto" class="level3">
+<h3>BOOL Pitfalls toto</h3>
+<p>Be careful when converting general integral values to <code>BOOL</code>. Avoid comparing directly with <code>YES</code>.</p>
+<p><code>BOOL</code> in OS X and in 32-bit iOS builds is defined as a signed <code>char</code>, so it may have values other than <code>YES</code> (<code>1</code>) and <code>NO</code> (<code>0</code>). Do not cast or convert general integral values directly to <code>BOOL</code>.</p>
+<p>Common mistakes include casting or converting an array’s size, a pointer value, or the result of a bitwise logic operation to a <code>BOOL</code> that could, depending on the value of the last byte of the integer value, still result in a <code>NO</code> value. When converting a general integral value to a <code>BOOL</code>, use ternary operators to return a <code>YES</code> or <code>NO</code> value.</p>
+<p>You can safely interchange and convert <code>BOOL</code>, <code>_Bool</code> and <code>bool</code> (see C++ Std 4.7.4, 4.12 and C99 Std 6.3.1.2). Use <code>BOOL</code> in Objective-C method signatures.</p>
+<p>Using logical operators (<code>&amp;&amp;</code>, <code>||</code> and <code>!</code>) with <code>BOOL</code> is also valid and will return values that can be safely converted to <code>BOOL</code> without the need for a ternary operator.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb57-1"><a href="#cb57-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a></span>
+<span id="cb57-3"><a href="#cb57-3"></a>- (BOOL)isBold {</span>
+<span id="cb57-4"><a href="#cb57-4"></a>  <span class="kw">return</span> [<span class="kw">self</span> fontTraits] &amp; NSFontBoldTrait;  <span class="co">// AVOID.</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a>}</span>
+<span id="cb57-6"><a href="#cb57-6"></a>- (BOOL)isValid {</span>
+<span id="cb57-7"><a href="#cb57-7"></a>  <span class="kw">return</span> [<span class="kw">self</span> stringValue];  <span class="co">// AVOID.</span></span>
+<span id="cb57-8"><a href="#cb57-8"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb58-1"><a href="#cb58-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a></span>
+<span id="cb58-3"><a href="#cb58-3"></a>- (BOOL)isBold {</span>
+<span id="cb58-4"><a href="#cb58-4"></a>  <span class="kw">return</span> ([<span class="kw">self</span> fontTraits] &amp; NSFontBoldTrait) ? YES : NO;</span>
+<span id="cb58-5"><a href="#cb58-5"></a>}</span>
+<span id="cb58-6"><a href="#cb58-6"></a>- (BOOL)isValid {</span>
+<span id="cb58-7"><a href="#cb58-7"></a>  <span class="kw">return</span> [<span class="kw">self</span> stringValue] != nil;</span>
+<span id="cb58-8"><a href="#cb58-8"></a>}</span>
+<span id="cb58-9"><a href="#cb58-9"></a>- (BOOL)isEnabled {</span>
+<span id="cb58-10"><a href="#cb58-10"></a>  <span class="kw">return</span> [<span class="kw">self</span> isValid] &amp;&amp; [<span class="kw">self</span> isBold];</span>
+<span id="cb58-11"><a href="#cb58-11"></a>}</span></code></pre></div>
+<p>Also, don’t directly compare <code>BOOL</code> variables directly with <code>YES</code>. Not only is it harder to read for those well-versed in C, but the first point above demonstrates that return values may not always be what you expect.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb59-1"><a href="#cb59-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a>BOOL great = [foo isGreat];</span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="kw">if</span> (great == YES) {  <span class="co">// AVOID.</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a>  <span class="co">// ...be great!</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb60-1"><a href="#cb60-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a></span>
+<span id="cb60-3"><a href="#cb60-3"></a>BOOL great = [foo isGreat];</span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="kw">if</span> (great) {         <span class="co">// GOOD.</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>  <span class="co">// ...be great!</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a>}</span></code></pre></div>
+</section>
+<section id="interfaces-without-instance-variables-toto" class="level3">
+<h3>Interfaces Without Instance Variables toto</h3>
+<p>Omit the empty set of braces on interfaces that do not declare any instance variables.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb61-1"><a href="#cb61-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="kw">@interface</span> MyClass : NSObject</span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="co">// Does a lot of stuff.</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a>- (<span class="dt">void</span>)fooBarBam;</span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="kw">@end</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb62-1"><a href="#cb62-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="kw">@interface</span> MyClass : NSObject {</span>
+<span id="cb62-4"><a href="#cb62-4"></a>}</span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="co">// Does a lot of stuff.</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a>- (<span class="dt">void</span>)fooBarBam;</span>
+<span id="cb62-7"><a href="#cb62-7"></a><span class="kw">@end</span></span></code></pre></div>
+</section>
+</section>
+<section id="cocoa-patterns-toto" class="level2">
+<h2>Cocoa Patterns toto</h2>
+<section id="delegate-pattern-toto" class="level3">
+<h3>Delegate Pattern toto</h3>
+<p>Delegates, target objects, and block pointers should not be retained when doing so would create a retain cycle.</p>
+<p>To avoid causing a retain cycle, a delegate or target pointer should be released as soon as it is clear there will no longer be a need to message the object.</p>
+<p>If there is no clear time at which the delegate or target pointer is no longer needed, the pointer should only be retained weakly.</p>
+<p>Block pointers cannot be retained weakly. To avoid causing retain cycles in the client code, block pointers should be used for callbacks only where they can be explicitly released after they have been called or once they are no longer needed. Otherwise, callbacks should be done via weak delegate or target pointers.</p>
+</section>
+</section>
+<section id="objective-c-toto" class="level2">
+<h2>Objective-C++ toto</h2>
+<section id="style-matches-the-language-toto" class="level3">
+<h3>Style Matches the Language toto</h3>
+<p>Within an Objective-C++ source file, follow the style for the language of the function or method you’re implementing. In order to minimize clashes between the differing naming styles when mixing Cocoa/Objective-C and C++, follow the style of the method being implemented.</p>
+<p>For code in an <code>@implementation</code> block, use the Objective-C naming rules. For code in a method of a C++ class, use the C++ naming rules.</p>
+<p>For code in an Objective-C++ file outside of a class implementation, be consistent within the file.</p>
+<pre class="objectivec++"><code>// GOOD:
+
+// file: cross_platform_header.h
+
+class CrossPlatformAPI {
+ public:
+  ...
+  int DoSomethingPlatformSpecific();  // impl on each platform
+ private:
+  int an_instance_var_;
+};
+
+// file: mac_implementation.mm
+#include &quot;cross_platform_header.h&quot;toto
+
+
+/** A typical Objective-C class, using Objective-C naming. */
+@interface MyDelegate : NSObject {
+ @private
+  int _instanceVar;
+  CrossPlatformAPI* _backEndObject;
+}
+
+- (void)respondToSomething:(id)something;
+
+@end
+
+@implementation MyDelegate
+
+- (void)respondToSomething:(id)something {
+  // bridge from Cocoa through our C++ backend
+  _instanceVar = _backEndObject-&gt;DoSomethingPlatformSpecific();
+  NSString* tempString = [NSString stringWithFormat:@&quot;%d&quot;, _instanceVar];
+  NSLog(@&quot;%@&quot;, tempString);
+}
+
+@end
+
+/** The platform-specific implementation of the C++ class, using C++ naming. */
+int CrossPlatformAPI::DoSomethingPlatformSpecific() {
+  NSString* temp_string = [NSString stringWithFormat:@&quot;%d&quot;, an_instance_var_];
+  NSLog(@&quot;%@&quot;, temp_string);
+  return [temp_string intValue];
+}</code></pre>
+<p>Projects may opt to use an 80 column line length limit for consistency with Google’s C++ style guide.</p>
+</section>
+</section>
+<section id="spacing-and-formatting-toto" class="level2">
+<h2>Spacing and Formatting toto</h2>
+<section id="spaces-vs.-tabs-toto" class="level3">
+<h3>Spaces vs. Tabs toto</h3>
+<p>Use only spaces, and indent 2 spaces at a time. We use spaces for indentation. Do not use tabs in your code.</p>
+<p>You should set your editor to emit spaces when you hit the tab key, and to trim trailing spaces on lines.</p>
+</section>
+<section id="line-length-toto" class="level3">
+<h3>Line Length toto</h3>
+<p>The maximum line length for Objective-C files is 100 columns.</p>
+<p>You can make violations easier to spot by enabling <em>Preferences &gt; Text Editing &gt; Page guide at column: 100</em> in Xcode.</p>
+</section>
+<section id="method-declarations-and-definitions-toto" class="level3">
+<h3>Method Declarations and Definitions toto</h3>
+<p>One space should be used between the <code>-</code> or <code>+</code> and the return type, and no spacing in the parameter list except between parameters.</p>
+<p>Methods should look like this:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb64-1"><a href="#cb64-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a></span>
+<span id="cb64-3"><a href="#cb64-3"></a>- (<span class="dt">void</span>)doSomethingWithString:(NSString *)theString {</span>
+<span id="cb64-4"><a href="#cb64-4"></a>  ...</span>
+<span id="cb64-5"><a href="#cb64-5"></a>}</span></code></pre></div>
+<p>The spacing before the asterisk is optional. When adding new code, be consistent with the surrounding file’s style.</p>
+<p>If a method declaration does not fit on a single line, put each parameter on its own line. All lines except the first should be indented at least four spaces. Colons before parameters should be aligned on all lines. If the colon before the parameter on the first line of a method declaration is positioned such that colon alignment would cause indentation on a subsequent line to be less than four spaces, then colon alignment is only required for all lines except the first.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb65-1"><a href="#cb65-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a></span>
+<span id="cb65-3"><a href="#cb65-3"></a>- (<span class="dt">void</span>)doSomethingWithFoo:(GTMFoo *)theFoo</span>
+<span id="cb65-4"><a href="#cb65-4"></a>                      rect:(NSRect)theRect</span>
+<span id="cb65-5"><a href="#cb65-5"></a>                  interval:(<span class="dt">float</span>)theInterval {</span>
+<span id="cb65-6"><a href="#cb65-6"></a>  ...</span>
+<span id="cb65-7"><a href="#cb65-7"></a>}</span>
+<span id="cb65-8"><a href="#cb65-8"></a></span>
+<span id="cb65-9"><a href="#cb65-9"></a>- (<span class="dt">void</span>)shortKeyword:(GTMFoo *)theFoo</span>
+<span id="cb65-10"><a href="#cb65-10"></a>            longerKeyword:(NSRect)theRect</span>
+<span id="cb65-11"><a href="#cb65-11"></a>    someEvenLongerKeyword:(<span class="dt">float</span>)theInterval</span>
+<span id="cb65-12"><a href="#cb65-12"></a>                    error:(NSError **)theError {</span>
+<span id="cb65-13"><a href="#cb65-13"></a>  ...</span>
+<span id="cb65-14"><a href="#cb65-14"></a>}</span>
+<span id="cb65-15"><a href="#cb65-15"></a></span>
+<span id="cb65-16"><a href="#cb65-16"></a>- (id&lt;UIAdaptivePresentationControllerDelegate&gt;)</span>
+<span id="cb65-17"><a href="#cb65-17"></a>    adaptivePresentationControllerDelegateForViewController:(UIViewController *)viewController;</span>
+<span id="cb65-18"><a href="#cb65-18"></a></span>
+<span id="cb65-19"><a href="#cb65-19"></a>- (<span class="dt">void</span>)presentWithAdaptivePresentationControllerDelegate:</span>
+<span id="cb65-20"><a href="#cb65-20"></a>    (id&lt;UIAdaptivePresentationControllerDelegate&gt;)delegate;</span></code></pre></div>
+</section>
+<section id="function-declarations-and-definitionstoto" class="level3">
+<h3>Function Declarations and Definitionstoto</h3>
+<p>Prefer putting the return type on the same line as the function name and append all parameters on the same line if they will fit. Wrap parameter lists which do not fit on a single line as you would wrap arguments in a <a href="#Function_Calls">function call</a>.toto</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb66-1"><a href="#cb66-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a></span>
+<span id="cb66-3"><a href="#cb66-3"></a>NSString *GTMVersionString(<span class="dt">int</span> majorVersion, minorVersion) {</span>
+<span id="cb66-4"><a href="#cb66-4"></a>  ...</span>
+<span id="cb66-5"><a href="#cb66-5"></a>}</span>
+<span id="cb66-6"><a href="#cb66-6"></a></span>
+<span id="cb66-7"><a href="#cb66-7"></a><span class="dt">void</span> GTMSerializeDictionaryToFileOnDispatchQueue(</span>
+<span id="cb66-8"><a href="#cb66-8"></a>    NSDictionary&lt;NSString *, NSString *&gt; *dictionary,</span>
+<span id="cb66-9"><a href="#cb66-9"></a>    NSString *filename,</span>
+<span id="cb66-10"><a href="#cb66-10"></a>    dispatch_queue_t queue) {</span>
+<span id="cb66-11"><a href="#cb66-11"></a>  ...</span>
+<span id="cb66-12"><a href="#cb66-12"></a>}</span></code></pre></div>
+<p>Function declarations and definitions should also satisfy the following conditions:</p>
+<ul>
+<li>The opening parenthesis must always be on the same line as the function name.</li>
+<li>If you cannot fit the return type and the function name on a single line, break between them and do not indent the function name.</li>
+<li>There should never be a space before the opening parenthesis.</li>
+<li>There should never be a space between function parentheses and parameters.</li>
+<li>The open curly brace is always on the end of the last line of the function declaration, not the start of the next line.</li>
+<li>The close curly brace is either on the last line by itself or on the same line as the open curly brace.</li>
+<li>There should be a space between the close parenthesis and the open curly brace.</li>
+<li>All parameters should be aligned if possible.</li>
+<li>Function scopes should be indented 2 spaces.</li>
+<li>Wrapped parameters should have a 4 space indent.</li>
+</ul>
+</section>
+<section id="conditionals-toto" class="level3">
+<h3>Conditionals toto</h3>
+<p>Include a space after <code>if</code>, <code>while</code>, <code>for</code>, and <code>switch</code>, and around comparison operators.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb67-1"><a href="#cb67-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">5</span>; ++i) {</span>
+<span id="cb67-4"><a href="#cb67-4"></a>}</span>
+<span id="cb67-5"><a href="#cb67-5"></a></span>
+<span id="cb67-6"><a href="#cb67-6"></a><span class="kw">while</span> (test) {};</span></code></pre></div>
+<p>Braces may be omitted when a loop body or conditional statement fits on a single line.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb68-1"><a href="#cb68-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="kw">if</span> (hasSillyName) LaughOutLoud();</span>
+<span id="cb68-4"><a href="#cb68-4"></a></span>
+<span id="cb68-5"><a href="#cb68-5"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++) {</span>
+<span id="cb68-6"><a href="#cb68-6"></a>  BlowTheHorn();</span>
+<span id="cb68-7"><a href="#cb68-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb69-1"><a href="#cb69-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="kw">if</span> (hasSillyName)</span>
+<span id="cb69-4"><a href="#cb69-4"></a>  LaughOutLoud();               <span class="co">// AVOID.</span></span>
+<span id="cb69-5"><a href="#cb69-5"></a></span>
+<span id="cb69-6"><a href="#cb69-6"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++)</span>
+<span id="cb69-7"><a href="#cb69-7"></a>  BlowTheHorn();                <span class="co">// AVOID.</span></span></code></pre></div>
+<p>If an <code>if</code> clause has an <code>else</code> clause, both clauses should use braces.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb70-1"><a href="#cb70-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a></span>
+<span id="cb70-3"><a href="#cb70-3"></a><span class="kw">if</span> (hasBaz) {</span>
+<span id="cb70-4"><a href="#cb70-4"></a>  foo();</span>
+<span id="cb70-5"><a href="#cb70-5"></a>} <span class="kw">else</span> {  <span class="co">// The else goes on the same line as the closing brace.</span></span>
+<span id="cb70-6"><a href="#cb70-6"></a>  bar();</span>
+<span id="cb70-7"><a href="#cb70-7"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb71-1"><a href="#cb71-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a></span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="kw">if</span> (hasBaz) foo();</span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="kw">else</span> bar();        <span class="co">// AVOID.</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a></span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="kw">if</span> (hasBaz) {</span>
+<span id="cb71-7"><a href="#cb71-7"></a>  foo();</span>
+<span id="cb71-8"><a href="#cb71-8"></a>} <span class="kw">else</span> bar();      <span class="co">// AVOID.</span></span></code></pre></div>
+<p>Intentional fall-through to the next case should be documented with a comment unless the case has no intervening code before the next case.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb72-1"><a href="#cb72-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a></span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="kw">switch</span> (i) {</span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="kw">case</span> <span class="dv">1</span>:</span>
+<span id="cb72-5"><a href="#cb72-5"></a>    ...</span>
+<span id="cb72-6"><a href="#cb72-6"></a>    <span class="kw">break</span>;</span>
+<span id="cb72-7"><a href="#cb72-7"></a>  <span class="kw">case</span> <span class="dv">2</span>:</span>
+<span id="cb72-8"><a href="#cb72-8"></a>    j++;</span>
+<span id="cb72-9"><a href="#cb72-9"></a>    <span class="co">// Falls through.</span></span>
+<span id="cb72-10"><a href="#cb72-10"></a>  <span class="kw">case</span> <span class="dv">3</span>: {</span>
+<span id="cb72-11"><a href="#cb72-11"></a>    <span class="dt">int</span> k;</span>
+<span id="cb72-12"><a href="#cb72-12"></a>    ...</span>
+<span id="cb72-13"><a href="#cb72-13"></a>    <span class="kw">break</span>;</span>
+<span id="cb72-14"><a href="#cb72-14"></a>  }</span>
+<span id="cb72-15"><a href="#cb72-15"></a>  <span class="kw">case</span> <span class="dv">4</span>:</span>
+<span id="cb72-16"><a href="#cb72-16"></a>  <span class="kw">case</span> <span class="dv">5</span>:</span>
+<span id="cb72-17"><a href="#cb72-17"></a>  <span class="kw">case</span> <span class="dv">6</span>: <span class="kw">break</span>;</span>
+<span id="cb72-18"><a href="#cb72-18"></a>}</span></code></pre></div>
+</section>
+<section id="expressions-toto" class="level3">
+<h3>Expressions toto</h3>
+<p>Use a space around binary operators and assignments. Omit a space for a unary operator. Do not add spaces inside parentheses.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb73-1"><a href="#cb73-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a></span>
+<span id="cb73-3"><a href="#cb73-3"></a>x = <span class="dv">0</span>;</span>
+<span id="cb73-4"><a href="#cb73-4"></a>v = w * x + y / z;</span>
+<span id="cb73-5"><a href="#cb73-5"></a>v = -y * (x + z);</span></code></pre></div>
+<p>Factors in an expression may omit spaces.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb74-1"><a href="#cb74-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a></span>
+<span id="cb74-3"><a href="#cb74-3"></a>v = w*x + y/z;</span></code></pre></div>
+</section>
+<section id="method-invocations-toto" class="level3">
+<h3>Method Invocations toto</h3>
+<p>Method invocations should be formatted much like method declarations.</p>
+<p>When there’s a choice of formatting styles, follow the convention already used in a given source file. Invocations should have all arguments on one line:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb75-1"><a href="#cb75-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb75-2"><a href="#cb75-2"></a></span>
+<span id="cb75-3"><a href="#cb75-3"></a>[myObject doFooWith:arg1 name:arg2 error:arg3];</span></code></pre></div>
+<p>or have one argument per line, with colons aligned:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb76-1"><a href="#cb76-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a></span>
+<span id="cb76-3"><a href="#cb76-3"></a>[myObject doFooWith:arg1</span>
+<span id="cb76-4"><a href="#cb76-4"></a>               name:arg2</span>
+<span id="cb76-5"><a href="#cb76-5"></a>              error:arg3];</span></code></pre></div>
+<p>Don’t use any of these styles:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb77-1"><a href="#cb77-1"></a><span class="co">// AVOID:</span></span>
+<span id="cb77-2"><a href="#cb77-2"></a></span>
+<span id="cb77-3"><a href="#cb77-3"></a>[myObject doFooWith:arg1 name:arg2  <span class="co">// some lines with &gt;1 arg</span></span>
+<span id="cb77-4"><a href="#cb77-4"></a>              error:arg3];</span>
+<span id="cb77-5"><a href="#cb77-5"></a></span>
+<span id="cb77-6"><a href="#cb77-6"></a>[myObject doFooWith:arg1</span>
+<span id="cb77-7"><a href="#cb77-7"></a>               name:arg2 error:arg3];</span>
+<span id="cb77-8"><a href="#cb77-8"></a></span>
+<span id="cb77-9"><a href="#cb77-9"></a>[myObject doFooWith:arg1</span>
+<span id="cb77-10"><a href="#cb77-10"></a>          name:arg2  <span class="co">// aligning keywords instead of colons</span></span>
+<span id="cb77-11"><a href="#cb77-11"></a>          error:arg3];</span></code></pre></div>
+<p>As with declarations and definitions, when the first keyword is shorter than the others, indent the later lines by at least four spaces, maintaining colon alignment:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb78-1"><a href="#cb78-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb78-2"><a href="#cb78-2"></a></span>
+<span id="cb78-3"><a href="#cb78-3"></a>[myObj <span class="dt">short</span>:arg1</span>
+<span id="cb78-4"><a href="#cb78-4"></a>          longKeyword:arg2</span>
+<span id="cb78-5"><a href="#cb78-5"></a>    evenLongerKeyword:arg3</span>
+<span id="cb78-6"><a href="#cb78-6"></a>                error:arg4];</span></code></pre></div>
+<p>Invocations containing multiple inlined blocks may have their parameter names left-aligned at a four space indent.</p>
+</section>
+<section id="function-calls-toto" class="level3">
+<h3>Function Calls toto</h3>
+<p>Function calls should include as many parameters as fit on each line, except where shorter lines are needed for clarity or documentation of the parameters.</p>
+<p>Continuation lines for function parameters may be indented to align with the opening parenthesis, or may have a four-space indent.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb79-1"><a href="#cb79-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a></span>
+<span id="cb79-3"><a href="#cb79-3"></a>CFArrayRef array = CFArrayCreate(kCFAllocatorDefault, objects, numberOfObjects,</span>
+<span id="cb79-4"><a href="#cb79-4"></a>                                 &amp;kCFTypeArrayCallBacks);</span>
+<span id="cb79-5"><a href="#cb79-5"></a></span>
+<span id="cb79-6"><a href="#cb79-6"></a>NSString *string = NSLocalizedStringWithDefaultValue(<span class="st">@&quot;FEET&quot;</span>, <span class="st">@&quot;DistanceTable&quot;</span>,</span>
+<span id="cb79-7"><a href="#cb79-7"></a>    resourceBundle,  <span class="st">@&quot;%@ feet&quot;</span>, <span class="st">@&quot;Distance for multiple feet&quot;</span>);</span>
+<span id="cb79-8"><a href="#cb79-8"></a></span>
+<span id="cb79-9"><a href="#cb79-9"></a>UpdateTally(scores[x] * y + bases[x],  <span class="co">// Score heuristic.</span></span>
+<span id="cb79-10"><a href="#cb79-10"></a>            x, y, z);</span>
+<span id="cb79-11"><a href="#cb79-11"></a></span>
+<span id="cb79-12"><a href="#cb79-12"></a>TransformImage(image,</span>
+<span id="cb79-13"><a href="#cb79-13"></a>               x1, x2, x3,</span>
+<span id="cb79-14"><a href="#cb79-14"></a>               y1, y2, y3,</span>
+<span id="cb79-15"><a href="#cb79-15"></a>               z1, z2, z3);</span></code></pre></div>
+<p>Use local variables with descriptive names to shorten function calls and reduce nesting of calls.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb80-1"><a href="#cb80-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb80-2"><a href="#cb80-2"></a></span>
+<span id="cb80-3"><a href="#cb80-3"></a><span class="dt">double</span> scoreHeuristic = scores[x] * y + bases[x];</span>
+<span id="cb80-4"><a href="#cb80-4"></a>UpdateTally(scoreHeuristic, x, y, z);</span></code></pre></div>
+</section>
+<section id="exceptions-toto" class="level3">
+<h3>Exceptions toto</h3>
+<p>Format exceptions with <code>@catch</code> and <code>@finally</code> labels on the same line as the preceding <code>}</code>. Add a space between the <code>@</code> label and the opening brace (<code>{</code>), as well as between the <code>@catch</code> and the caught object declaration. If you must use Objective-C exceptions, format them as follows. However, see <a href="#Avoid_Throwing_Exceptions">Avoid Throwing Exceptions</a> for reasons why you should not be usingtoto</p>
+<p>exceptions.</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode objectivec"><code class="sourceCode objectivec"><span id="cb81-1"><a href="#cb81-1"></a><span class="co">// GOOD:</span></span>
+<span id="cb81-2"><a href="#cb81-2"></a></span>
+<span id="cb81-3"><a href="#cb81-3"></a>@try {</span>
+<span id="cb81-4"><a href="#cb81-4"></a>  foo();</span>
+<span id="cb81-5"><a href="#cb81-5"></a>} @catch (NSException *ex) {</span>
+<span id="cb81-6"><a href="#cb81-6"></a>  bar(ex);</span>
+<span id="cb81-7"><a href="#cb81-7"></a>} @finally {</span>
+<span id="cb81-8"><a href="#cb81-8"></a>  baz();</span>
+<span id="cb81-9"><a href="#cb81-9"></a>}</span></code></pre></div>
+</section>
+<section id="function-length-toto" class="level3">
+<h3>Function Length toto</h3>
+<p>Prefer small and focused functions.</p>
+<p>Long functions and methods are occasionally appropriate, so no hard limit is placed on function length. If a function exceeds about 40 lines, think about whether it can be broken up without harming the structure of the program.</p>
+<p>Even if your long function works perfectly now, someone modifying it in a few months may add new behavior. This could result in bugs that are hard to find. Keeping your functions short and simple makes it easier for other people to read and modify your code.</p>
+<p>When updating legacy code, consider also breaking long functions into smaller and more manageable pieces.</p>
+</section>
+<section id="vertical-whitespace-toto" class="level3">
+<h3>Vertical Whitespace toto</h3>
+<p>Use vertical whitespace sparingly.</p>
+<p>To allow more code to be easily viewed on a screen, avoid putting blank lines just inside the braces of functions.</p>
+<p>Limit blank lines to one or two between functions and between logical groups of code.</p>
+</section>
+</section>
+<section id="objective-c-style-exceptions-toto" class="level2">
+<h2>Objective-C Style Exceptions toto</h2>
+<section id="indicating-style-exceptions-toto" class="level3">
+<h3>Indicating style exceptions toto</h3>
+<p>Lines of code that are not expected to adhere to these style recommendations require <code>// NOLINT</code> at the end of the line or <code>// NOLINTNEXTLINE</code> at the end of the previous line. Sometimes it is required that parts of Objective-C code must ignore these style recommendations (for example code may be machine generated or code constructs are such that its not possible to style correctly).</p>
+<p>A <code>// NOLINT</code> comment on that line or <code>// NOLINTNEXTLINE</code> on the previous line can be used to indicate to the reader that code is intentionally ignoring style guidelines. In addition these annotations can also be picked up by automated tools such as linters and handle code correctly. Note that there is a single space between <code>//</code> and <code>NOLINT*</code>.</p>
+</section>
+</section>
+</section>
+</body>
+</html>

@@ -4,18 +4,122 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Vim.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Vim.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <ul>
 <li><a href="Vim-Menu.html">Vim Menu</a></li>
 </ul>
+<section id="snippet" class="level2">
+<h2>Snippet</h2>
+<pre class="language-vim"><code>&quot; Make it AutoScroll
+augroup JupyterTerm
+    autocmd!
+    autocmd TextChanged __jupyter_term__ call cursor(&#39;$&#39;, 0)
+augroup END
+echo getregtype(&#39;a&#39;) &quot; To see if in Visual or v</code></pre>
+<section id="location-list" class="level3">
+<h3>Location list</h3>
+<p>call setqflist([])</p>
+</section>
+<section id="compile" class="level3">
+<h3>Compile</h3>
+<p>./configure<br />
+–with-features=huge<br />
+–prefix=/usr/local<br />
+–disable-netbeans<br />
+–enable-gui=auto<br />
+<br />
+–enable-cscope<br />
+–enable-fail-if-missing<br />
+–enable-largefile<br />
+–enable-luainterp<br />
+–enable-multibyte<br />
+<br />
+–enable-perlinterp=dynamic<br />
+–enable-python3interp=dynamic<br />
+–with-python3-config-dir=<span class="math inline">(<em>p</em><em>y</em><em>t</em><em>h</em><em>o</em><em>n</em>3 − <em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em> −  − <em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em><em>d</em><em>i</em><em>r</em>)  −  − <em>e</em><em>n</em><em>a</em><em>b</em><em>l</em><em>e</em> − <em>r</em><em>u</em><em>b</em><em>y</em><em>i</em><em>n</em><em>t</em><em>e</em><em>r</em><em>p</em> = <em>d</em><em>y</em><em>n</em><em>a</em><em>m</em><em>i</em><em>c</em>  −  − <em>w</em><em>i</em><em>t</em><em>h</em> − <em>r</em><em>u</em><em>b</em><em>y</em> − <em>c</em><em>o</em><em>m</em><em>m</em><em>a</em><em>n</em><em>d</em>=</span>(which ruby)<br />
+–with-luajit<br />
+<br />
+<br />
+–with-compiledby=“Tinmarino”<br />
+</p>
+<p><strong>Notes</strong>: * Cannot make py2 and py3 in debian (choose only one) * Dynamic loading impossible in debian</p>
+</section>
+<section id="match-non-ascii" class="level3">
+<h3>Match non ascii</h3>
+<ul>
+<li><p><code>/[^\x00-\x7F]</code></p></li>
+<li><p><code>[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]</code> ## Prompt press enter</p></li>
+<li><p>For a confirmation, I would use <code>:call confirm('My warning here')</code>; this uses a popup window in GVIM.</p></li>
+<li><p>To wait for <em>any</em> character, you can use <code>:call getchar()</code>.</p></li>
+<li><p>For a confirmation with <kbd>Enter</kbd>, the already mentioned <code>:call input('Press enter to continue')</code></p></li>
+</ul>
+</section>
+</section>
+<section id="debug-timing-function" class="level1">
+<h1>Debug timing function</h1>
+<pre class="language-vim"><code>function! Foo()
+    &quot; do your thing
+    for i in range(1,8)
+        let @a = i
+    endfor
+endfunction
+
+&quot; save current time
+let start_time = reltime()
+
+&quot; call your function
+call Foo()
+
+&quot; echo elapsed time expressed in seconds
+echo &quot;elapsed time:&quot; reltimestr(reltime(start_time))</code></pre>
+<section id="vim-as-hex-interpreter" class="level3">
+<h3>Vim as hex interpreter</h3>
+<p>vim -s -e ‘<cmd>’ * s for silent * e for ex mode * -V1 for verbose (to see errors) * -N non-compatible * -S <file> : source the script &lt;file</p>
+<p>example: <code>vim -i NONE -u NORC -U NONE -V1 -nNesS script-cmd -c'echo""|qall!' -- args...</code></p>
+</section>
+<section id="youcompleteme-stop" class="level3">
+<h3>YouCompleteMe Stop</h3>
+<pre class="language-vim"><code>call youcompleteme#DisableCursorMovedAutocommands()
+
+&quot; do your stuff
+call youcompleteme#EnableCursorMovedAutocommands()
+</code></pre>
+</section>
+<section id="exit" class="level3">
+<h3>Exit</h3>
+<p>ZZ</p>
+</section>
+<section id="jump-matching-endif" class="level3">
+<h3>Jump matching endif</h3>
+<p>runtime macros/matchit.vim</p>
+</section>
+<section id="not-clearing-screen-after-leaving-for-git-diff" class="level3">
+<h3>Not clearing screen after leaving (for git diff)</h3>
+<p><code>set t_te=</code> By default VIM, when terminating, sends the string configured with the option t_te to the hosting terminal to tell it to clear the screen. To avoid it just :set t_te= to send nothing to the terminal and avoid screen clearing. See :help term form more information about terminal capabilities.</p>
+</section>
+<section id="copy-all-match" class="level3">
+<h3>Copy all match</h3>
+<pre class="language-vim"><code>qaq
+:%s//\=setreg(&#39;A&#39;, submatch(0), &#39;V&#39;)/gn</code></pre>
+</section>
+<section id="version-and-patch" class="level3">
+<h3>Version and patch</h3>
+<p>if v:version == 704 &amp;&amp; has(‘patch399’)</p>
+</section>
+</section>
 </body>
 </html>

@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pyguide.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="google-python-style-guidetoto" class="level1">
+<h1>Google Python Style Guidetoto</h1>
+<section id="contentstoto" class="level2">
+<h2>Contentstoto</h2>
+<ul>
+<li><p><a href="#Google%20Python%20Style%20Guide">Google Python Style Guide</a>toto</p>
+<ul>
+<li><p><a href="#Google%20Python%20Style%20Guide#1%20Background">1 Background</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules">2 Python Language Rules</a>toto</p>
+<ul>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.1%20Lint">2.1 Lint</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.2%20Imports">2.2 Imports</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.3%20Packages">2.3 Packages</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.4%20Exceptions">2.4 Exceptions</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.5%20Global%20variables">2.5 Global variables</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.6%20Nested/Local/Inner%20Classes%20and%20Functions">2.6 Nested/Local/Inner Classes and Functions</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.7%20Comprehensions%20&amp;%20Generator%20Expressions">2.7 Comprehensions &amp; Generator Expressions</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.8%20Default%20Iterators%20and%20Operators">2.8 Default Iterators and Operators</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.9%20Generators">2.9 Generators</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.10%20Lambda%20Functions">2.10 Lambda Functions</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.11%20Conditional%20Expressions">2.11 Conditional Expressions</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.12%20Default%20Argument%20Values">2.12 Default Argument Values</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.13%20Properties">2.13 Properties</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.14%20True/False%20Evaluations">2.14 True/False Evaluations</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.15%20Deprecated%20Language%20Features">2.15 Deprecated Language Features</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.16%20Lexical%20Scoping">2.16 Lexical Scoping</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.17%20Function%20and%20Method%20Decorators">2.17 Function and Method Decorators</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.18%20Threading">2.18 Threading</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.19%20Power%20Features">2.19 Power Features</a>toto</p></li>
+<li><p><a href="#too_long">2.20 Modern Python</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#2%20Python%20Language%20Rules#2.21%20Type%20Annotated%20Code">2.21 Type Annotated Code</a>toto</p></li>
+</ul></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules">3 Python Style Rules</a>toto</p>
+<ul>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.1%20Semicolons">3.1 Semicolons</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.2%20Line%20length">3.2 Line length</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.3%20Parentheses">3.3 Parentheses</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.4%20Indentation">3.4 Indentation</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.4.1%20Trailing%20commas%20in%20sequences%20of%20items?">3.4.1 Trailing commas in sequences of items?</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.5%20Blank%20Lines">3.5 Blank Lines</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.6%20Whitespace">3.6 Whitespace</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.7%20Shebang%20Line">3.7 Shebang Line</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.8%20Comments%20and%20Docstrings">3.8 Comments and Docstrings</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.9%20Classes">3.9 Classes</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.10%20Strings">3.10 Strings</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.11%20Files%20and%20Sockets">3.11 Files and Sockets</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.12%20TODO%20Comments">3.12 TODO Comments</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.13%20Imports%20formatting">3.13 Imports formatting</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.14%20Statements">3.14 Statements</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.15%20Accessors">3.15 Accessors</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.16%20Naming">3.16 Naming</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.17%20Main">3.17 Main</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.18%20Function%20length">3.18 Function length</a>toto</p></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#3%20Python%20Style%20Rules#3.19%20Type%20Annotations">3.19 Type Annotations</a>toto</p></li>
+</ul></li>
+<li><p><a href="#Google%20Python%20Style%20Guide#4%20Parting%20Words">4 Parting Words</a>toto</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="background-toto" class="level2">
+<h2>1 Background toto</h2>
+<p>Python is the main dynamic language used at Google. This style guide is a list of <em>dos and don’ts</em> for Python programs.</p>
+<p>To help you format code correctly, we’ve created a <a href="google_python_style.vim">settings file for Vim</a>. For Emacs, the default settings should be fine.</p>
+<p>Many teams use the <a href="https://github.com/google/yapf/.html">yapf</a> auto-formatter to avoid arguing over formatting.</p>
+</section>
+<section id="python-language-rules-toto" class="level2">
+<h2>2 Python Language Rules toto</h2>
+<section id="lint-toto" class="level3">
+<h3>2.1 Lint toto</h3>
+<p>Run <code>pylint</code> over your code.</p>
+<section id="definition-toto" class="level4">
+<h4>2.1.1 Definition toto</h4>
+<p><code>pylint</code> is a tool for finding bugs and style problems in Python source code. It finds problems that are typically caught by a compiler for less dynamic languages like C and C++. Because of the dynamic nature of Python, some warnings may be incorrect; however, spurious warnings should be fairly infrequent.</p>
+</section>
+<section id="pros-toto" class="level4">
+<h4>2.1.2 Pros toto</h4>
+<p>Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.</p>
+</section>
+<section id="cons-toto" class="level4">
+<h4>2.1.3 Cons toto</h4>
+<p><code>pylint</code> isn’t perfect. To take advantage of it, we’ll need to sometimes: a) Write around it b) Suppress its warnings or c) Improve it.</p>
+</section>
+<section id="decision-toto" class="level4">
+<h4>2.1.4 Decision toto</h4>
+<p>Make sure you run <code>pylint</code> on your code.</p>
+<p>Suppress warnings if they are inappropriate so that other issues are not hidden. To suppress warnings, you can set a line-level comment:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">dict</span> <span class="op">=</span> <span class="st">&#39;something awful&#39;</span><span class="co"># Bad Idea... pylint: disable=redefined-builtintoto</span></span></code></pre></div>
+<p><code>pylint</code> warnings are each identified by symbolic name (<code>empty-docstring</code>) Google-specific warnings start with <code>g-</code>.</p>
+<p>If the reason for the suppression is not clear from the symbolic name, add an explanation.</p>
+<p>Suppressing in this way has the advantage that we can easily search for suppressions and revisit them.</p>
+<p>You can get a list of <code>pylint</code> warnings by doing:</p>
+<pre class="shell"><code>pylint --list-msgs</code></pre>
+<p>To get more information on a particular message, use:</p>
+<pre class="shell"><code>pylint --help-msg=C6409</code></pre>
+<p>Prefer <code>pylint: disable</code> to the deprecated older form <code>pylint: disable-msg</code>.</p>
+<p>Unused argument warnings can be suppressed by deleting the variables at the beginning of the function. Always include a comment explaining why you are deleting it. “Unused.” is sufficient. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> viking_cafe_order(spam, beans, eggs<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="kw">del</span> beans, eggs<span class="co"># Unused by vikings.toto</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="cf">return</span> spam <span class="op">+</span> spam <span class="op">+</span> spam</span></code></pre></div>
+<p>Other common forms of suppressing this warning include using ‘<code>_</code>’ as the identifier for the unused argument, prefixing the argument name with ‘<code>unused_</code>’, or assigning them to ‘<code>_</code>’. These forms are allowed but no longer encouraged. The first two break callers that pass arguments by name, while the last does not enforce that the arguments are actually unused.</p>
+</section>
+</section>
+<section id="imports-toto" class="level3">
+<h3>2.2 Imports toto</h3>
+<p>Use <code>import</code> statements for packages and modules only, not for individual classes or functions. Note that there is an explicit exemption for imports from the <a href="#typing-imports">typing module</a>.toto</p>
+<section id="definition-toto-1" class="level4">
+<h4>2.2.1 Definition toto</h4>
+<p>Reusability mechanism for sharing code from one module to another.</p>
+</section>
+<section id="pros-toto-1" class="level4">
+<h4>2.2.2 Pros toto</h4>
+<p>The namespace management convention is simple. The source of each identifier is indicated in a consistent way; <code>x.Obj</code> says that object <code>Obj</code> is defined in module <code>x</code>.</p>
+</section>
+<section id="cons-toto-1" class="level4">
+<h4>2.2.3 Cons toto</h4>
+<p>Module names can still collide. Some module names are inconveniently long.</p>
+</section>
+<section id="decision-toto-1" class="level4">
+<h4>2.2.4 Decision toto</h4>
+<ul>
+<li>Use <code>import x</code> for importing packages and modules.</li>
+<li>Use <code>from x import y</code> where <code>x</code> is the package prefix and <code>y</code> is the module name with no prefix.</li>
+<li>Use <code>from x import y as z</code> if two modules named <code>y</code> are to be imported or if <code>y</code> is an inconveniently long name.</li>
+<li>Use <code>import y as z</code> only when <code>z</code> is a standard abbreviation (e.g., <code>np</code> for <code>numpy</code>).</li>
+</ul>
+<p>For example the module <code>sound.effects.echo</code> may be imported as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="im">from</span> sound.effects <span class="im">import</span> echo</span>
+<span id="cb5-2"><a href="#cb5-2"></a>...</span>
+<span id="cb5-3"><a href="#cb5-3"></a>echo.EchoFilter(<span class="bu">input</span>, output, delay<span class="op">=</span><span class="fl">0.7</span>, atten<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div>
+<p>Do not use relative names in imports. Even if the module is in the same package, use the full package name. This helps prevent unintentionally importing a package twice.</p>
+<p>Imports from the <a href="#typing-imports">typing module</a> and thetoto</p>
+<p><a href="https://six.readthedocs.io/#module-six.moves">six.moves module</a>toto</p>
+<p>are exempt from this rule.</p>
+</section>
+</section>
+<section id="packages-toto" class="level3">
+<h3>2.3 Packages toto</h3>
+<p>Import each module using the full pathname location of the module.</p>
+<section id="pros-toto-2" class="level4">
+<h4>2.3.1 Pros toto</h4>
+<p>Avoids conflicts in module names or incorrect imports due to the module search path not being what the author expected. Makes it easier to find modules.</p>
+</section>
+<section id="cons-toto-2" class="level4">
+<h4>2.3.2 Cons toto</h4>
+<p>Makes it harder to deploy code because you have to replicate the package hierarchy. Not really a problem with modern deployment mechanisms.</p>
+</section>
+<section id="decision-toto-2" class="level4">
+<h4>2.3.3 Decision toto</h4>
+<p>All new code should import each module by its full package name.</p>
+<p>Imports should be as follows:</p>
+<p>Yes:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Reference absl.flags in code with the complete name (verbose).toto</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="im">import</span> absl.flags</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="im">from</span> doctor.who <span class="im">import</span> jodie</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>FLAGS <span class="op">=</span> absl.flags.FLAGS</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Reference flags in code with just the module name (common).toto</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="im">from</span> absl <span class="im">import</span> flags</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="im">from</span> doctor.who <span class="im">import</span> jodie</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a>FLAGS <span class="op">=</span> flags.FLAGS</span></code></pre></div>
+<p>No: <em>(assume this file lives in <code>doctor/who/</code> where <code>jodie.py</code> also exists)</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Unclear what module the author wanted and what will be imported.  The actualtoto</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># import behavior depends on external factors controlling sys.path.toto</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># Which possible jodie module did the author intend to import?toto</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="im">import</span> jodie</span></code></pre></div>
+<p>The directory the main binary is located in should not be assumed to be in <code>sys.path</code> despite that happening in some environments. This being the case, code should assume that <code>import jodie</code> refers to a third party or top level package named <code>jodie</code>, not a local <code>jodie.py</code>.</p>
+</section>
+</section>
+<section id="exceptions-toto" class="level3">
+<h3>2.4 Exceptions toto</h3>
+<p>Exceptions are allowed but must be used carefully.</p>
+<section id="definition-toto-2" class="level4">
+<h4>2.4.1 Definition toto</h4>
+<p>Exceptions are a means of breaking out of the normal flow of control of a code block to handle errors or other exceptional conditions.</p>
+</section>
+<section id="pros-toto-3" class="level4">
+<h4>2.4.2 Pros toto</h4>
+<p>The control flow of normal operation code is not cluttered by error-handling code. It also allows the control flow to skip multiple frames when a certain condition occurs, e.g., returning from N nested functions in one step instead of having to carry-through error codes.</p>
+</section>
+<section id="cons-toto-3" class="level4">
+<h4>2.4.3 Cons toto</h4>
+<p>May cause the control flow to be confusing. Easy to miss error cases when making library calls.</p>
+</section>
+<section id="decision-toto-3" class="level4">
+<h4>2.4.4 Decision toto</h4>
+<p>Exceptions must follow certain conditions:</p>
+<ul>
+<li><p>Raise exceptions like this: <code>raise MyError('Error message')</code> or <code>raise     MyError()</code>. Do not use the two-argument form (<code>raise MyError, 'Error     message'</code>).</p></li>
+<li><p>Make use of built-in exception classes when it makes sense. For example, raise a <code>ValueError</code> to indicate a programming mistake like a violated precondition (such as if you were passed a negative number but required a positive one). Do not use <code>assert</code> statements for validating argument values of a public API. <code>assert</code> is used to ensure internal correctness, not to enforce correct usage nor to indicate that some unexpected event occurred. If an exception is desired in the latter cases, use a raise statement. For example:</p>
+<p>```python Yes: def connect_to_next_port(self, minimum): """Connects to the next available port.</p>
+<pre><code>Args:
+  minimum: A port value greater or equal to 1024.
+
+Returns:
+  The new minimum port.
+
+Raises:
+  ConnectionError: If no available port is found.
+&quot;&quot;&quot;
+if minimum &lt; 1024:</code></pre>
+<h1 id="note-that-this-raising-of-valueerror-is-not-mentioned-in-the-doctoto">Note that this raising of ValueError is not mentioned in the doctoto</h1></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+<section id="strings-raises-section-because-it-is-not-appropriate-tototo" class="level1">
+<h1>string’s “Raises:” section because it is not appropriate tototo</h1>
+</section>
+<section id="guarantee-this-specific-behavioral-reaction-to-api-misuse.toto" class="level1">
+<h1>guarantee this specific behavioral reaction to API misuse.toto</h1>
+<pre><code>      raise ValueError(&#39;Minimum port must be at least 1024, not %d.&#39; % (minimum,))
+    port = self._find_next_open_port(minimum)
+    if not port:
+      raise ConnectionError(&#39;Could not connect to service on %d or higher.&#39; % (minimum,))
+    assert port &gt;= minimum, &#39;Unexpected port %d when minimum was %d.&#39; % (port, minimum)
+    return port
+```
+
+```python
+No:
+  def connect_to_next_port(self, minimum):
+    &quot;&quot;&quot;Connects to the next available port.
+
+    Args:
+      minimum: A port value greater or equal to 1024.
+
+    Returns:
+      The new minimum port.
+    &quot;&quot;&quot;
+    assert minimum &gt;= 1024, &#39;Minimum port must be at least 1024.&#39;
+    port = self._find_next_open_port(minimum)
+    assert port is not None
+    return port
+```</code></pre>
+<ul>
+<li><p>Libraries or packages may define their own exceptions. When doing so they must inherit from an existing exception class. Exception names should end in <code>Error</code> and should not introduce stutter (<code>foo.FooError</code>).</p></li>
+<li><p>Never use catch-all <code>except:</code> statements, or catch <code>Exception</code> or <code>StandardError</code>, unless you are</p>
+<ul>
+<li>re-raising the exception, or</li>
+<li>creating an isolation point in the program where exceptions are not propagated but are recorded and suppressed instead, such as protecting a thread from crashing by guarding its outermost block.</li>
+</ul>
+<p>Python is very tolerant in this regard and <code>except:</code> will really catch everything including misspelled names, sys.exit() calls, Ctrl+C interrupts, unittest failures and all kinds of other exceptions that you simply don’t want to catch.</p></li>
+<li><p>Minimize the amount of code in a <code>try</code>/<code>except</code> block. The larger the body of the <code>try</code>, the more likely that an exception will be raised by a line of code that you didn’t expect to raise an exception. In those cases, the <code>try</code>/<code>except</code> block hides a real error.</p></li>
+<li><p>Use the <code>finally</code> clause to execute code whether or not an exception is raised in the <code>try</code> block. This is often useful for cleanup, i.e., closing a file.</p></li>
+<li><p>When capturing an exception, use <code>as</code> rather than a comma. For example:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">try</span>:</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="cf">raise</span> Error()</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="cf">except</span> Error <span class="im">as</span> error:</span>
+<span id="cb11-4"><a href="#cb11-4"></a>  <span class="cf">pass</span></span></code></pre></div></li>
+</ul>
+<section id="global-variables-toto" class="level3">
+<h3>2.5 Global variables toto</h3>
+<p>Avoid global variables.</p>
+<section id="definition-toto-3" class="level4">
+<h4>2.5.1 Definition toto</h4>
+<p>Variables that are declared at the module level or as class attributes.</p>
+</section>
+<section id="pros-toto-4" class="level4">
+<h4>2.5.2 Pros toto</h4>
+<p>Occasionally useful.</p>
+</section>
+<section id="cons-toto-4" class="level4">
+<h4>2.5.3 Cons toto</h4>
+<p>Has the potential to change module behavior during the import, because assignments to global variables are done when the module is first imported.</p>
+</section>
+<section id="decision-toto-4" class="level4">
+<h4>2.5.4 Decision toto</h4>
+<p>Avoid global variables.</p>
+<p>While they are technically variables, module-level constants are permitted and encouraged. For example: <code>MAX_HOLY_HANDGRENADE_COUNT = 3</code>. Constants must be named using all caps with underscores. See <a href="#s3.16-naming">Naming</a> below.toto</p>
+<p>If needed, globals should be declared at the module level and made internal to the module by prepending an <code>_</code> to the name. External access must be done through public module-level functions. See <a href="#s3.16-naming">Naming</a> below.toto</p>
+</section>
+</section>
+<section id="nestedlocalinner-classes-and-functions-toto" class="level3">
+<h3>2.6 Nested/Local/Inner Classes and Functions toto</h3>
+<p>Nested local functions or classes are fine when used to close over a local variable. Inner classes are fine.</p>
+<section id="definition-toto-4" class="level4">
+<h4>2.6.1 Definition toto</h4>
+<p>A class can be defined inside of a method, function, or class. A function can be defined inside a method or function. Nested functions have read-only access to variables defined in enclosing scopes.</p>
+</section>
+<section id="pros-toto-5" class="level4">
+<h4>2.6.2 Pros toto</h4>
+<p>Allows definition of utility classes and functions that are only used inside of a very limited scope. Very <a href="http://www.google.com/url?sa=D&amp;q=http://en.wikipedia.org/wiki/Abstract_data_type.html">ADT</a>-y. Commonly used for implementing decorators.</p>
+</section>
+<section id="cons-toto-5" class="level4">
+<h4>2.6.3 Cons toto</h4>
+<p>Instances of nested or local classes cannot be pickled. Nested functions and classes cannot be directly tested. Nesting can make your outer function longer and less readable.</p>
+</section>
+<section id="decision-toto-5" class="level4">
+<h4>2.6.4 Decision toto</h4>
+<p>They are fine with some caveats. Avoid nested functions or classes except when closing over a local value. Do not nest a function just to hide it from users of a module. Instead, prefix its name with an _ at the module level so that it can still be accessed by tests.</p>
+</section>
+</section>
+<section id="comprehensions-generator-expressions-toto" class="level3">
+<h3>2.7 Comprehensions &amp; Generator Expressions toto</h3>
+<p>Okay to use for simple cases.</p>
+<section id="definition-toto-5" class="level4">
+<h4>2.7.1 Definition toto</h4>
+<p>List, Dict, and Set comprehensions as well as generator expressions provide a concise and efficient way to create container types and iterators without resorting to the use of traditional loops, <code>map()</code>, <code>filter()</code>, or <code>lambda</code>.</p>
+</section>
+<section id="pros-toto-6" class="level4">
+<h4>2.7.2 Pros toto</h4>
+<p>Simple comprehensions can be clearer and simpler than other dict, list, or set creation techniques. Generator expressions can be very efficient, since they avoid the creation of a list entirely.</p>
+</section>
+<section id="cons-toto-6" class="level4">
+<h4>2.7.3 Cons toto</h4>
+<p>Complicated comprehensions or generator expressions can be hard to read.</p>
+</section>
+<section id="decision-toto-6" class="level4">
+<h4>2.7.4 Decision toto</h4>
+<p>Okay to use for simple cases. Each portion must fit on one line: mapping expression, <code>for</code> clause, filter expression. Multiple <code>for</code> clauses or filter expressions are not permitted. Use loops instead when things get more complicated.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>Yes:</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  result <span class="op">=</span> [mapping_expr <span class="cf">for</span> value <span class="kw">in</span> iterable <span class="cf">if</span> filter_expr]</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>  result <span class="op">=</span> [{<span class="st">&#39;key&#39;</span>: value} <span class="cf">for</span> value <span class="kw">in</span> iterable</span>
+<span id="cb12-5"><a href="#cb12-5"></a>            <span class="cf">if</span> a_long_filter_expression(value)]</span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a>  result <span class="op">=</span> [complicated_transform(x)</span>
+<span id="cb12-8"><a href="#cb12-8"></a>            <span class="cf">for</span> x <span class="kw">in</span> iterable <span class="cf">if</span> predicate(x)]</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a>  descriptive_name <span class="op">=</span> [</span>
+<span id="cb12-11"><a href="#cb12-11"></a>      transform({<span class="st">&#39;key&#39;</span>: key, <span class="st">&#39;value&#39;</span>: value}, color<span class="op">=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb12-12"><a href="#cb12-12"></a>      <span class="cf">for</span> key, value <span class="kw">in</span> generate_iterable(some_input)</span>
+<span id="cb12-13"><a href="#cb12-13"></a>      <span class="cf">if</span> complicated_condition_is_met(key, value)</span>
+<span id="cb12-14"><a href="#cb12-14"></a>  ]</span>
+<span id="cb12-15"><a href="#cb12-15"></a></span>
+<span id="cb12-16"><a href="#cb12-16"></a>  result <span class="op">=</span> []</span>
+<span id="cb12-17"><a href="#cb12-17"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb12-18"><a href="#cb12-18"></a>      <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb12-19"><a href="#cb12-19"></a>          <span class="cf">if</span> x <span class="op">*</span> y <span class="op">&gt;</span> <span class="dv">10</span>:</span>
+<span id="cb12-20"><a href="#cb12-20"></a>              result.append((x, y))</span>
+<span id="cb12-21"><a href="#cb12-21"></a></span>
+<span id="cb12-22"><a href="#cb12-22"></a>  <span class="cf">return</span> {x: complicated_transform(x)</span>
+<span id="cb12-23"><a href="#cb12-23"></a>          <span class="cf">for</span> x <span class="kw">in</span> long_generator_function(parameter)</span>
+<span id="cb12-24"><a href="#cb12-24"></a>          <span class="cf">if</span> x <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>}</span>
+<span id="cb12-25"><a href="#cb12-25"></a></span>
+<span id="cb12-26"><a href="#cb12-26"></a>  squares_generator <span class="op">=</span> (x<span class="op">**</span><span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb12-27"><a href="#cb12-27"></a></span>
+<span id="cb12-28"><a href="#cb12-28"></a>  unique_names <span class="op">=</span> {user.name <span class="cf">for</span> user <span class="kw">in</span> users <span class="cf">if</span> user <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>}</span>
+<span id="cb12-29"><a href="#cb12-29"></a></span>
+<span id="cb12-30"><a href="#cb12-30"></a>  eat(jelly_bean <span class="cf">for</span> jelly_bean <span class="kw">in</span> jelly_beans</span>
+<span id="cb12-31"><a href="#cb12-31"></a>      <span class="cf">if</span> jelly_bean.color <span class="op">==</span> <span class="st">&#39;black&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>No:</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  result <span class="op">=</span> [complicated_transform(</span>
+<span id="cb13-3"><a href="#cb13-3"></a>                x, some_argument<span class="op">=</span>x<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb13-4"><a href="#cb13-4"></a>            <span class="cf">for</span> x <span class="kw">in</span> iterable <span class="cf">if</span> predicate(x)]</span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a>  result <span class="op">=</span> [(x, y) <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>) <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>) <span class="cf">if</span> x <span class="op">*</span> y <span class="op">&gt;</span> <span class="dv">10</span>]</span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="cf">return</span> ((x, y, z)</span>
+<span id="cb13-9"><a href="#cb13-9"></a>          <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">xrange</span>(<span class="dv">5</span>)</span>
+<span id="cb13-10"><a href="#cb13-10"></a>          <span class="cf">for</span> y <span class="kw">in</span> <span class="bu">xrange</span>(<span class="dv">5</span>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a>          <span class="cf">if</span> x <span class="op">!=</span> y</span>
+<span id="cb13-12"><a href="#cb13-12"></a>          <span class="cf">for</span> z <span class="kw">in</span> <span class="bu">xrange</span>(<span class="dv">5</span>)</span>
+<span id="cb13-13"><a href="#cb13-13"></a>          <span class="cf">if</span> y <span class="op">!=</span> z)</span></code></pre></div>
+</section>
+</section>
+<section id="default-iterators-and-operators-toto" class="level3">
+<h3>2.8 Default Iterators and Operators toto</h3>
+<p>Use default iterators and operators for types that support them, like lists, dictionaries, and files.</p>
+<section id="definition-toto-6" class="level4">
+<h4>2.8.1 Definition toto</h4>
+<p>Container types, like dictionaries and lists, define default iterators and membership test operators (“in” and “not in”).</p>
+</section>
+<section id="pros-toto-7" class="level4">
+<h4>2.8.2 Pros toto</h4>
+<p>The default iterators and operators are simple and efficient. They express the operation directly, without extra method calls. A function that uses default operators is generic. It can be used with any type that supports the operation.</p>
+</section>
+<section id="cons-toto-7" class="level4">
+<h4>2.8.3 Cons toto</h4>
+<p>You can’t tell the type of objects by reading the method names (e.g. has_key() means a dictionary). This is also an advantage.</p>
+</section>
+<section id="decision-toto-7" class="level4">
+<h4>2.8.4 Decision toto</h4>
+<p>Use default iterators and operators for types that support them, like lists, dictionaries, and files. The built-in types define iterator methods, too. Prefer these methods to methods that return lists, except that you should not mutate a container while iterating over it. Never use Python 2 specific iteration methods such as <code>dict.iter*()</code> unless necessary.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>Yes:  <span class="cf">for</span> key <span class="kw">in</span> adict: ...</span>
+<span id="cb14-2"><a href="#cb14-2"></a>      <span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> adict: ...</span>
+<span id="cb14-3"><a href="#cb14-3"></a>      <span class="cf">if</span> obj <span class="kw">in</span> alist: ...</span>
+<span id="cb14-4"><a href="#cb14-4"></a>      <span class="cf">for</span> line <span class="kw">in</span> afile: ...</span>
+<span id="cb14-5"><a href="#cb14-5"></a>      <span class="cf">for</span> k, v <span class="kw">in</span> adict.items(): ...</span>
+<span id="cb14-6"><a href="#cb14-6"></a>      <span class="cf">for</span> k, v <span class="kw">in</span> six.iteritems(adict): ...</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>No:   <span class="cf">for</span> key <span class="kw">in</span> adict.keys(): ...</span>
+<span id="cb15-2"><a href="#cb15-2"></a>      <span class="cf">if</span> <span class="kw">not</span> adict.has_key(key): ...</span>
+<span id="cb15-3"><a href="#cb15-3"></a>      <span class="cf">for</span> line <span class="kw">in</span> afile.readlines(): ...</span>
+<span id="cb15-4"><a href="#cb15-4"></a>      <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">dict</span>.iteritems(): ...</span></code></pre></div>
+</section>
+</section>
+<section id="generators-toto" class="level3">
+<h3>2.9 Generators toto</h3>
+<p>Use generators as needed.</p>
+<section id="definition-toto-7" class="level4">
+<h4>2.9 Definition toto</h4>
+<p>A generator function returns an iterator that yields a value each time it executes a yield statement. After it yields a value, the runtime state of the generator function is suspended until the next value is needed.</p>
+</section>
+<section id="pros-toto-8" class="level4">
+<h4>2.9.2 Pros toto</h4>
+<p>Simpler code, because the state of local variables and control flow are preserved for each call. A generator uses less memory than a function that creates an entire list of values at once.</p>
+</section>
+<section id="cons-toto-8" class="level4">
+<h4>2.9.3 Cons toto</h4>
+<p>None.</p>
+</section>
+<section id="decision-toto-8" class="level4">
+<h4>2.9.4 Decision toto</h4>
+<p>Fine. Use “Yields:” rather than “Returns:” in the docstring for generator functions.</p>
+</section>
+</section>
+<section id="lambda-functions-toto" class="level3">
+<h3>2.10 Lambda Functions toto</h3>
+<p>Okay for one-liners.</p>
+<section id="definition-toto-8" class="level4">
+<h4>2.10.1 Definition toto</h4>
+<p>Lambdas define anonymous functions in an expression, as opposed to a statement. They are often used to define callbacks or operators for higher-order functions like <code>map()</code> and <code>filter()</code>.</p>
+</section>
+<section id="pros-toto-9" class="level4">
+<h4>2.10.2 Pros toto</h4>
+<p>Convenient.</p>
+</section>
+<section id="cons-toto-9" class="level4">
+<h4>2.10.3 Cons toto</h4>
+<p>Harder to read and debug than local functions. The lack of names means stack traces are more difficult to understand. Expressiveness is limited because the function may only contain an expression.</p>
+</section>
+<section id="decision-toto-9" class="level4">
+<h4>2.10.4 Decision toto</h4>
+<p>Okay to use them for one-liners. If the code inside the lambda function is longer than 60-80 chars, it’s probably better to define it as a regular <a href="#lexical-scoping">nested function</a>.toto</p>
+<p>For common operations like multiplication, use the functions from the <code>operator</code> module instead of lambda functions. For example, prefer <code>operator.mul</code> to <code>lambda x, y: x * y</code>.</p>
+</section>
+</section>
+<section id="conditional-expressions-toto" class="level3">
+<h3>2.11 Conditional Expressions toto</h3>
+<p>Okay for simple cases.</p>
+<section id="definition-toto-9" class="level4">
+<h4>2.11.1 Definition toto</h4>
+<p>Conditional expressions (sometimes called a “ternary operator”) are mechanisms that provide a shorter syntax for if statements. For example: <code>x = 1 if cond else 2</code>.</p>
+</section>
+<section id="pros-toto-10" class="level4">
+<h4>2.11.2 Pros toto</h4>
+<p>Shorter and more convenient than an if statement.</p>
+</section>
+<section id="cons-toto-10" class="level4">
+<h4>2.11.3 Cons toto</h4>
+<p>May be harder to read than an if statement. The condition may be difficult to locate if the expression is long.</p>
+</section>
+<section id="decision-toto-10" class="level4">
+<h4>2.11.4 Decision toto</h4>
+<p>Okay to use for simple cases. Each portion must fit on one line: true-expression, if-expression, else-expression. Use a complete if statement when things get more complicated.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>one_line <span class="op">=</span> <span class="st">&#39;yes&#39;</span> <span class="cf">if</span> predicate(value) <span class="cf">else</span> <span class="st">&#39;no&#39;</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>slightly_split <span class="op">=</span> (<span class="st">&#39;yes&#39;</span> <span class="cf">if</span> predicate(value)</span>
+<span id="cb16-3"><a href="#cb16-3"></a>                  <span class="cf">else</span> <span class="st">&#39;no, nein, nyet&#39;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a>the_longest_ternary_style_that_can_be_done <span class="op">=</span> (</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="st">&#39;yes, true, affirmative, confirmed, correct&#39;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="cf">if</span> predicate(value)</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="cf">else</span> <span class="st">&#39;no, false, negative, nay&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>bad_line_breaking <span class="op">=</span> (<span class="st">&#39;yes&#39;</span> <span class="cf">if</span> predicate(value) <span class="cf">else</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>                     <span class="st">&#39;no&#39;</span>)</span>
+<span id="cb17-3"><a href="#cb17-3"></a>portion_too_long <span class="op">=</span> (<span class="st">&#39;yes&#39;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>                    <span class="cf">if</span> some_long_module.some_long_predicate_function(</span>
+<span id="cb17-5"><a href="#cb17-5"></a>                        really_long_variable_name)</span>
+<span id="cb17-6"><a href="#cb17-6"></a>                    <span class="cf">else</span> <span class="st">&#39;no, false, negative, nay&#39;</span>)</span></code></pre></div>
+</section>
+</section>
+<section id="default-argument-values-toto" class="level3">
+<h3>2.12 Default Argument Values toto</h3>
+<p>Okay in most cases.</p>
+<section id="definition-toto-10" class="level4">
+<h4>2.12.1 Definition toto</h4>
+<p>You can specify values for variables at the end of a function’s parameter list, e.g., <code>def foo(a, b=0):</code>. If <code>foo</code> is called with only one argument, <code>b</code> is set to 0. If it is called with two arguments, <code>b</code> has the value of the second argument.</p>
+</section>
+<section id="pros-toto-11" class="level4">
+<h4>2.12.2 Pros toto</h4>
+<p>Often you have a function that uses lots of default values, but on rare occasions you want to override the defaults. Default argument values provide an easy way to do this, without having to define lots of functions for the rare exceptions. As Python does not support overloaded methods/functions, default arguments are an easy way of “faking” the overloading behavior.</p>
+</section>
+<section id="cons-toto-11" class="level4">
+<h4>2.12.3 Cons toto</h4>
+<p>Default arguments are evaluated once at module load time. This may cause problems if the argument is a mutable object such as a list or a dictionary. If the function modifies the object (e.g., by appending an item to a list), the default value is modified.</p>
+</section>
+<section id="decision-toto-11" class="level4">
+<h4>2.12.4 Decision toto</h4>
+<p>Okay to use with the following caveat:</p>
+<p>Do not use mutable objects as default values in the function or method definition.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>Yes: <span class="kw">def</span> foo(a, b<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb18-2"><a href="#cb18-2"></a>         <span class="cf">if</span> b <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb18-3"><a href="#cb18-3"></a>             b <span class="op">=</span> []</span>
+<span id="cb18-4"><a href="#cb18-4"></a>Yes: <span class="kw">def</span> foo(a, b: Optional[Sequence] <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb18-5"><a href="#cb18-5"></a>         <span class="cf">if</span> b <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb18-6"><a href="#cb18-6"></a>             b <span class="op">=</span> []</span>
+<span id="cb18-7"><a href="#cb18-7"></a>Yes: <span class="kw">def</span> foo(a, b: Sequence <span class="op">=</span> ()):<span class="co"># Empty tuple OK since tuples are immutabletoto</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a>         ...</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>No:  <span class="kw">def</span> foo(a, b<span class="op">=</span>[]):</span>
+<span id="cb19-2"><a href="#cb19-2"></a>         ...</span>
+<span id="cb19-3"><a href="#cb19-3"></a>No:  <span class="kw">def</span> foo(a, b<span class="op">=</span>time.time()):<span class="co"># The time the module was loaded???toto</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>         ...</span>
+<span id="cb19-6"><a href="#cb19-6"></a>No:  <span class="kw">def</span> foo(a, b<span class="op">=</span>FLAGS.my_thing):<span class="co"># sys.argv has not yet been parsed...toto</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a></span>
+<span id="cb19-8"><a href="#cb19-8"></a>         ...</span></code></pre></div>
+</section>
+</section>
+<section id="properties-toto" class="level3">
+<h3>2.13 Properties toto</h3>
+<p>Use properties for accessing or setting data where you would normally have used simple, lightweight accessor or setter methods.</p>
+<section id="definition-toto-11" class="level4">
+<h4>2.13.1 Definition toto</h4>
+<p>A way to wrap method calls for getting and setting an attribute as a standard attribute access when the computation is lightweight.</p>
+</section>
+<section id="pros-toto-12" class="level4">
+<h4>2.13.2 Pros toto</h4>
+<p>Readability is increased by eliminating explicit get and set method calls for simple attribute access. Allows calculations to be lazy. Considered the Pythonic way to maintain the interface of a class. In terms of performance, allowing properties bypasses needing trivial accessor methods when a direct variable access is reasonable. This also allows accessor methods to be added in the future without breaking the interface.</p>
+</section>
+<section id="cons-toto-12" class="level4">
+<h4>2.13.3 Cons toto</h4>
+<p>Must inherit from <code>object</code> in Python 2. Can hide side-effects much like operator overloading. Can be confusing for subclasses.</p>
+</section>
+<section id="decision-toto-12" class="level4">
+<h4>2.13.4 Decision toto</h4>
+<p>Use properties in new code to access or set data where you would normally have used simple, lightweight accessor or setter methods. Properties should be created with the <code>@property</code> <a href="#s2.17-function-and-method-decorators">decorator</a>.toto</p>
+<p>Inheritance with properties can be non-obvious if the property itself is not overridden. Thus one must make sure that accessor methods are called indirectly to ensure methods overridden in subclasses are called by the property (using the Template Method DP).</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>Yes: <span class="im">import</span> math</span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a>     <span class="kw">class</span> Square(<span class="bu">object</span>):</span>
+<span id="cb20-4"><a href="#cb20-4"></a>         <span class="co">&quot;&quot;&quot;A square with two properties: a writable area and a read-only perimeter.</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">         To use:</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">         &gt;&gt;&gt; sq = Square(3)</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">         &gt;&gt;&gt; sq.area</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">         9</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">         &gt;&gt;&gt; sq.perimeter</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a><span class="co">         12</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a><span class="co">         &gt;&gt;&gt; sq.area = 16</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co">         &gt;&gt;&gt; sq.side</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a><span class="co">         4</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a><span class="co">         &gt;&gt;&gt; sq.perimeter</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a><span class="co">         16</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a><span class="co">         &quot;&quot;&quot;</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a></span>
+<span id="cb20-19"><a href="#cb20-19"></a>         <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, side):</span>
+<span id="cb20-20"><a href="#cb20-20"></a>             <span class="va">self</span>.side <span class="op">=</span> side</span>
+<span id="cb20-21"><a href="#cb20-21"></a></span>
+<span id="cb20-22"><a href="#cb20-22"></a>         <span class="at">@property</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a>         <span class="kw">def</span> area(<span class="va">self</span>):</span>
+<span id="cb20-24"><a href="#cb20-24"></a>             <span class="co">&quot;&quot;&quot;Area of the square.&quot;&quot;&quot;</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a>             <span class="cf">return</span> <span class="va">self</span>._get_area()</span>
+<span id="cb20-26"><a href="#cb20-26"></a></span>
+<span id="cb20-27"><a href="#cb20-27"></a>         <span class="at">@area.setter</span></span>
+<span id="cb20-28"><a href="#cb20-28"></a>         <span class="kw">def</span> area(<span class="va">self</span>, area):</span>
+<span id="cb20-29"><a href="#cb20-29"></a>             <span class="cf">return</span> <span class="va">self</span>._set_area(area)</span>
+<span id="cb20-30"><a href="#cb20-30"></a></span>
+<span id="cb20-31"><a href="#cb20-31"></a>         <span class="kw">def</span> _get_area(<span class="va">self</span>):</span>
+<span id="cb20-32"><a href="#cb20-32"></a>             <span class="co">&quot;&quot;&quot;Indirect accessor to calculate the &#39;area&#39; property.&quot;&quot;&quot;</span></span>
+<span id="cb20-33"><a href="#cb20-33"></a>             <span class="cf">return</span> <span class="va">self</span>.side <span class="op">**</span> <span class="dv">2</span></span>
+<span id="cb20-34"><a href="#cb20-34"></a></span>
+<span id="cb20-35"><a href="#cb20-35"></a>         <span class="kw">def</span> _set_area(<span class="va">self</span>, area):</span>
+<span id="cb20-36"><a href="#cb20-36"></a>             <span class="co">&quot;&quot;&quot;Indirect setter to set the &#39;area&#39; property.&quot;&quot;&quot;</span></span>
+<span id="cb20-37"><a href="#cb20-37"></a>             <span class="va">self</span>.side <span class="op">=</span> math.sqrt(area)</span>
+<span id="cb20-38"><a href="#cb20-38"></a></span>
+<span id="cb20-39"><a href="#cb20-39"></a>         <span class="at">@property</span></span>
+<span id="cb20-40"><a href="#cb20-40"></a>         <span class="kw">def</span> perimeter(<span class="va">self</span>):</span>
+<span id="cb20-41"><a href="#cb20-41"></a>             <span class="cf">return</span> <span class="va">self</span>.side <span class="op">*</span> <span class="dv">4</span></span></code></pre></div>
+</section>
+</section>
+<section id="truefalse-evaluations-toto" class="level3">
+<h3>2.14 True/False Evaluations toto</h3>
+<p>Use the “implicit” false if at all possible.</p>
+<section id="definition-toto-12" class="level4">
+<h4>2.14.1 Definition toto</h4>
+<p>Python evaluates certain values as <code>False</code> when in a boolean context. A quick “rule of thumb” is that all “empty” values are considered false, so <code>0, None, [], {}, ''</code> all evaluate as false in a boolean context.</p>
+</section>
+<section id="pros-toto-13" class="level4">
+<h4>2.14.2 Pros toto</h4>
+<p>Conditions using Python booleans are easier to read and less error-prone. In most cases, they’re also faster.</p>
+</section>
+<section id="cons-toto-13" class="level4">
+<h4>2.14.3 Cons toto</h4>
+<p>May look strange to C/C++ developers.</p>
+</section>
+<section id="decision-toto-13" class="level4">
+<h4>2.14.4 Decision toto</h4>
+<p>Use the “implicit” false if possible, e.g., <code>if foo:</code> rather than <code>if foo != []:</code>. There are a few caveats that you should keep in mind though:</p>
+<ul>
+<li><p>Always use <code>if foo is None:</code> (or <code>is not None</code>) to check for a <code>None</code> value-e.g., when testing whether a variable or argument that defaults to <code>None</code> was set to some other value. The other value might be a value that’s false in a boolean context!</p></li>
+<li><p>Never compare a boolean variable to <code>False</code> using <code>==</code>. Use <code>if not x:</code> instead. If you need to distinguish <code>False</code> from <code>None</code> then chain the expressions, such as <code>if not x and x is not None:</code>.</p></li>
+<li><p>For sequences (strings, lists, tuples), use the fact that empty sequences are false, so <code>if seq:</code> and <code>if not seq:</code> are preferable to <code>if len(seq):</code> and <code>if not len(seq):</code> respectively.</p></li>
+<li><p>When handling integers, implicit false may involve more risk than benefit (i.e., accidentally handling <code>None</code> as 0). You may compare a value which is known to be an integer (and is not the result of <code>len()</code>) against the integer 0.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>Yes: <span class="cf">if</span> <span class="kw">not</span> users:</span>
+<span id="cb21-2"><a href="#cb21-2"></a>         <span class="bu">print</span>(<span class="st">&#39;no users&#39;</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a>     <span class="cf">if</span> foo <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb21-5"><a href="#cb21-5"></a>         <span class="va">self</span>.handle_zero()</span>
+<span id="cb21-6"><a href="#cb21-6"></a></span>
+<span id="cb21-7"><a href="#cb21-7"></a>     <span class="cf">if</span> i <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb21-8"><a href="#cb21-8"></a>         <span class="va">self</span>.handle_multiple_of_ten()</span>
+<span id="cb21-9"><a href="#cb21-9"></a></span>
+<span id="cb21-10"><a href="#cb21-10"></a>     <span class="kw">def</span> f(x<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb21-11"><a href="#cb21-11"></a>         <span class="cf">if</span> x <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb21-12"><a href="#cb21-12"></a>             x <span class="op">=</span> []</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>No:  <span class="cf">if</span> <span class="bu">len</span>(users) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb22-2"><a href="#cb22-2"></a>         <span class="bu">print</span>(<span class="st">&#39;no users&#39;</span>)</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a>     <span class="cf">if</span> foo <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span> <span class="kw">and</span> <span class="kw">not</span> foo:</span>
+<span id="cb22-5"><a href="#cb22-5"></a>         <span class="va">self</span>.handle_zero()</span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a>     <span class="cf">if</span> <span class="kw">not</span> i <span class="op">%</span> <span class="dv">10</span>:</span>
+<span id="cb22-8"><a href="#cb22-8"></a>         <span class="va">self</span>.handle_multiple_of_ten()</span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a>     <span class="kw">def</span> f(x<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb22-11"><a href="#cb22-11"></a>         x <span class="op">=</span> x <span class="kw">or</span> []</span></code></pre></div></li>
+<li><p>Note that <code>'0'</code> (i.e., <code>0</code> as string) evaluates to true.</p></li>
+</ul>
+</section>
+</section>
+<section id="deprecated-language-features-toto" class="level3">
+<h3>2.15 Deprecated Language Features toto</h3>
+<p>Use string methods instead of the <code>string</code> module where possible. Use function call syntax instead of <code>apply</code>. Use list comprehensions and <code>for</code> loops instead of <code>filter</code> and <code>map</code> when the function argument would have been an inlined lambda anyway. Use <code>for</code> loops instead of <code>reduce</code>.</p>
+<section id="definition-toto-13" class="level4">
+<h4>2.15.1 Definition toto</h4>
+<p>Current versions of Python provide alternative constructs that people find generally preferable.</p>
+</section>
+<section id="decision-toto-14" class="level4">
+<h4>2.15.2 Decision toto</h4>
+<p>We do not use any Python version which does not support these features, so there is no reason not to use the new styles.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>Yes: words <span class="op">=</span> foo.split(<span class="st">&#39;:&#39;</span>)</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a>     [x[<span class="dv">1</span>] <span class="cf">for</span> x <span class="kw">in</span> my_list <span class="cf">if</span> x[<span class="dv">2</span>] <span class="op">==</span> <span class="dv">5</span>]</span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a>     <span class="bu">map</span>(math.sqrt, data)<span class="co"># Ok. No inlined lambda expression.toto</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>     fn(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>No:  words <span class="op">=</span> string.split(foo, <span class="st">&#39;:&#39;</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a></span>
+<span id="cb24-3"><a href="#cb24-3"></a>     <span class="bu">map</span>(<span class="kw">lambda</span> x: x[<span class="dv">1</span>], <span class="bu">filter</span>(<span class="kw">lambda</span> x: x[<span class="dv">2</span>] <span class="op">==</span> <span class="dv">5</span>, my_list))</span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a>     <span class="bu">apply</span>(fn, args, kwargs)</span></code></pre></div>
+</section>
+</section>
+<section id="lexical-scoping-toto" class="level3">
+<h3>2.16 Lexical Scoping toto</h3>
+<p>Okay to use.</p>
+<section id="definition-toto-14" class="level4">
+<h4>2.16.1 Definition toto</h4>
+<p>A nested Python function can refer to variables defined in enclosing functions, but can not assign to them. Variable bindings are resolved using lexical scoping, that is, based on the static program text. Any assignment to a name in a block will cause Python to treat all references to that name as a local variable, even if the use precedes the assignment. If a global declaration occurs, the name is treated as a global variable.</p>
+<p>An example of the use of this feature is:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">def</span> get_adder(summand1):</span>
+<span id="cb25-2"><a href="#cb25-2"></a>    <span class="co">&quot;&quot;&quot;Returns a function that adds numbers to a given number.&quot;&quot;&quot;</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    <span class="kw">def</span> adder(summand2):</span>
+<span id="cb25-4"><a href="#cb25-4"></a>        <span class="cf">return</span> summand1 <span class="op">+</span> summand2</span>
+<span id="cb25-5"><a href="#cb25-5"></a></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="cf">return</span> adder</span></code></pre></div>
+</section>
+<section id="pros-toto-14" class="level4">
+<h4>2.16.2 Pros toto</h4>
+<p>Often results in clearer, more elegant code. Especially comforting to experienced Lisp and Scheme (and Haskell and ML and …) programmers.</p>
+</section>
+<section id="cons-toto-14" class="level4">
+<h4>2.16.3 Cons toto</h4>
+<p>Can lead to confusing bugs. Such as this example based on <a href="http://www.google.com/url?sa=D&amp;q=http://www.python.org/dev/peps/pep-0227/.html">PEP-0227</a>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>i <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="kw">def</span> foo(x):</span>
+<span id="cb26-3"><a href="#cb26-3"></a>    <span class="kw">def</span> bar():</span>
+<span id="cb26-4"><a href="#cb26-4"></a>        <span class="bu">print</span>(i, end<span class="op">=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co"># ...toto</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># A bunch of code heretoto</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a></span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="co"># ...toto</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a></span>
+<span id="cb26-11"><a href="#cb26-11"></a>    <span class="cf">for</span> i <span class="kw">in</span> x:<span class="co"># Ah, i *is* local to foo, so this is what bar seestoto</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a></span>
+<span id="cb26-13"><a href="#cb26-13"></a>        <span class="bu">print</span>(i, end<span class="op">=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb26-14"><a href="#cb26-14"></a>    bar()</span></code></pre></div>
+<p>So <code>foo([1, 2, 3])</code> will print <code>1 2 3 3</code>, not <code>1 2 3 4</code>.</p>
+</section>
+<section id="decision-toto-15" class="level4">
+<h4>2.16.4 Decision toto</h4>
+<p>Okay to use.</p>
+</section>
+</section>
+<section id="function-and-method-decorators-toto" class="level3">
+<h3>2.17 Function and Method Decorators toto</h3>
+<p>Use decorators judiciously when there is a clear advantage. Avoid <code>@staticmethod</code> and limit use of <code>@classmethod</code>.</p>
+<section id="definition-toto-15" class="level4">
+<h4>2.17.1 Definition toto</h4>
+<p><a href="https://docs.python.org/3/glossary.html#term-decorator">Decorators for Functions and Methods</a>toto</p>
+<p>(a.k.a “the <code>@</code> notation”). One common decorator is <code>@property</code>, used for converting ordinary methods into dynamically computed attributes. However, the decorator syntax allows for user-defined decorators as well. Specifically, for some function <code>my_decorator</code>, this:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">class</span> C(<span class="bu">object</span>):</span>
+<span id="cb27-2"><a href="#cb27-2"></a>    <span class="at">@my_decorator</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>    <span class="kw">def</span> method(<span class="va">self</span>):</span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># method body ...toto</span></span></code></pre></div>
+<p>is equivalent to:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">class</span> C(<span class="bu">object</span>):</span>
+<span id="cb28-2"><a href="#cb28-2"></a>    <span class="kw">def</span> method(<span class="va">self</span>):</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="co"># method body ...toto</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>    method <span class="op">=</span> my_decorator(method)</span></code></pre></div>
+</section>
+<section id="pros-toto-15" class="level4">
+<h4>2.17.2 Pros toto</h4>
+<p>Elegantly specifies some transformation on a method; the transformation might eliminate some repetitive code, enforce invariants, etc.</p>
+</section>
+<section id="cons-toto-15" class="level4">
+<h4>2.17.3 Cons toto</h4>
+<p>Decorators can perform arbitrary operations on a function’s arguments or return values, resulting in surprising implicit behavior. Additionally, decorators execute at import time. Failures in decorator code are pretty much impossible to recover from.</p>
+</section>
+<section id="decision-toto-16" class="level4">
+<h4>2.17.4 Decision toto</h4>
+<p>Use decorators judiciously when there is a clear advantage. Decorators should follow the same import and naming guidelines as functions. Decorator pydoc should clearly state that the function is a decorator. Write unit tests for decorators.</p>
+<p>Avoid external dependencies in the decorator itself (e.g. don’t rely on files, sockets, database connections, etc.), since they might not be available when the decorator runs (at import time, perhaps from <code>pydoc</code> or other tools). A decorator that is called with valid parameters should (as much as possible) be guaranteed to succeed in all cases.</p>
+<p>Decorators are a special case of “top level code” - see <a href="#s3.17-main">main</a> fortoto</p>
+<p>more discussion.</p>
+<p>Never use <code>@staticmethod</code> unless forced to in order to integrate with an API defined in an existing library. Write a module level function instead.</p>
+<p>Use <code>@classmethod</code> only when writing a named constructor or a class-specific routine that modifies necessary global state such as a process-wide cache.</p>
+</section>
+</section>
+<section id="threading-toto" class="level3">
+<h3>2.18 Threading toto</h3>
+<p>Do not rely on the atomicity of built-in types.</p>
+<p>While Python’s built-in data types such as dictionaries appear to have atomic operations, there are corner cases where they aren’t atomic (e.g. if <code>__hash__</code> or <code>__eq__</code> are implemented as Python methods) and their atomicity should not be relied upon. Neither should you rely on atomic variable assignment (since this in turn depends on dictionaries).</p>
+<p>Use the Queue module’s <code>Queue</code> data type as the preferred way to communicate data between threads. Otherwise, use the threading module and its locking primitives. Learn about the proper use of condition variables so you can use <code>threading.Condition</code> instead of using lower-level locks.</p>
+</section>
+<section id="power-features-toto" class="level3">
+<h3>2.19 Power Features toto</h3>
+<p>Avoid these features.</p>
+<section id="definition-toto-16" class="level4">
+<h4>2.19.1 Definition toto</h4>
+<p>Python is an extremely flexible language and gives you many fancy features such as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic inheritance, object reparenting, import hacks, reflection (e.g. some uses of <code>getattr()</code>), modification of system internals, etc.</p>
+</section>
+<section id="pros-toto-16" class="level4">
+<h4>2.19.2 Pros toto</h4>
+<p>These are powerful language features. They can make your code more compact.</p>
+</section>
+<section id="cons-toto-16" class="level4">
+<h4>2.19.3 Cons toto</h4>
+<p>It’s very tempting to use these “cool” features when they’re not absolutely necessary. It’s harder to read, understand, and debug code that’s using unusual features underneath. It doesn’t seem that way at first (to the original author), but when revisiting the code, it tends to be more difficult than code that is longer but is straightforward.</p>
+</section>
+<section id="decision-toto-17" class="level4">
+<h4>2.19.4 Decision toto</h4>
+<p>Avoid these features in your code.</p>
+<p>Standard library modules and classes that internally use these features are okay to use (for example, <code>abc.ABCMeta</code>, <code>collections.namedtuple</code>, <code>dataclasses</code>, and <code>enum</code>).</p>
+</section>
+</section>
+<section id="modern-python-python-3-and-from-__future__-imports-toto" class="level3">
+<h3>2.20 Modern Python: Python 3 and from __future__ imports toto</h3>
+<p>Python 3 is here! While not every project is ready to use it yet, all code should be written to be 3 compatible (and tested under 3 when possible).</p>
+<section id="definition-toto-17" class="level4">
+<h4>2.20.1 Definition toto</h4>
+<p>Python 3 is a significant change in the Python language. While existing code is often written with 2.7 in mind, there are some simple things to do to make code more explicit about its intentions and thus better prepared for use under Python 3 without modification.</p>
+</section>
+<section id="pros-toto-17" class="level4">
+<h4>2.20.2 Pros toto</h4>
+<p>Code written with Python 3 in mind is more explicit and easier to get running under Python 3 once all of the dependencies of your project are ready.</p>
+</section>
+<section id="cons-toto-17" class="level4">
+<h4>2.20.3 Cons toto</h4>
+<p>Some people find the additional boilerplate to be ugly. It’s unusual to add imports to a module that doesn’t actually require the features added by the import.</p>
+</section>
+<section id="decision-toto-18" class="level4">
+<h4>2.20.4 Decision toto</h4>
+<section id="from-__future__-importstoto" class="level5">
+<h5>from __future__ importstoto</h5>
+<p>Use of <code>from __future__ import</code> statements is encouraged. All new code should contain the following and existing code should be updated to be compatible when possible:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="im">from</span> __future__ <span class="im">import</span> absolute_import</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="im">from</span> __future__ <span class="im">import</span> division</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="im">from</span> __future__ <span class="im">import</span> print_function</span></code></pre></div>
+<p>If you are not already familiar with those, read up on each here: <a href="https://www.python.org/dev/peps/pep-0328/">absolute imports</a>, <a href="https://www.python.org/dev/peps/pep-0238/">new <code>/</code> division behavior</a>, and <a href="https://www.python.org/dev/peps/pep-3105/">the print function</a>.</p>
+<p>Please don’t omit or remove these imports, even if they’re not currently used in the module, unless the code is Python 3 only. It is better to always have the future imports in all files so that they are not forgotten during later edits when someone starts using such a feature.</p>
+<p>There are other <code>from __future__</code> import statements. Use them as you see fit. We do not include <code>unicode_literals</code> in our recommendations as it is not a clear win due to implicit default codec conversion consequences it introduces in many places within Python 2.7. Most code is better off with explicit use of <code>b''</code> and <code>u''</code> bytes and unicode string literals as necessary.</p>
+</section>
+<section id="the-six-future-or-past-librariestoto" class="level5">
+<h5>The six, future, or past librariestoto</h5>
+<p>When your project needs to actively support use under both Python 2 and 3, use the <a href="https://pypi.org/project/six/.html">six</a>, <a href="https://pypi.org/project/future/.html">future</a>, and <a href="https://pypi.org/project/past/.html">past</a> libraries as you see fit. They exist to make your code cleaner and life easier.</p>
+</section>
+</section>
+</section>
+<section id="type-annotated-code-toto" class="level3">
+<h3>2.21 Type Annotated Code toto</h3>
+<p>You can annotate Python 3 code with type hints according to <a href="https://www.python.org/dev/peps/pep-0484/.html">PEP-484</a>, and type-check the code at build time with a type checking tool like <a href="https://github.com/google/pytype.html">pytype</a>.</p>
+<p>Type annotations can be in the source or in a <a href="https://www.python.org/dev/peps/pep-0484/#stub-files">stub pyi file</a>. Whenever possible,toto</p>
+<p>annotations should be in the source. Use pyi files for third-party or extension modules.</p>
+<section id="definition-toto-18" class="level4">
+<h4>2.21.1 Definition toto</h4>
+<p>Type annotations (or “type hints”) are for function or method arguments and return values:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">def</span> func(a: <span class="bu">int</span>) <span class="op">-&gt;</span> List[<span class="bu">int</span>]:</span></code></pre></div>
+<p>You can also declare the type of a variable using a special comment:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>a <span class="op">=</span> SomeFunc()<span class="co"># type: SomeTypetoto</span></span></code></pre></div>
+</section>
+<section id="pros-toto-18" class="level4">
+<h4>2.21.2 Pros toto</h4>
+<p>Type annotations improve the readability and maintainability of your code. The type checker will convert many runtime errors to build-time errors, and reduce your ability to use <a href="#power-features">Power Features</a>.toto</p>
+</section>
+<section id="cons-toto-18" class="level4">
+<h4>2.21.3 Cons toto</h4>
+<p>You will have to keep the type declarations up to date. You might see type errors that you think are valid code. Use of a <a href="https://github.com/google/pytype.html">type checker</a> may reduce your ability to use <a href="#power-features">Power Features</a>.toto</p>
+</section>
+<section id="decision-toto-19" class="level4">
+<h4>2.21.4 Decision toto</h4>
+<p>You are strongly encouraged to enable Python type analysis when updating code. When adding or modifying public APIs, include type annotations and enable checking via pytype in the build system. As static analysis is relatively new to Python, we acknowledge that undesired side-effects (such as wrongly inferred types) may prevent adoption by some projects. In those situations, authors are encouraged to add a comment with a TODO or link to a bug describing the issue(s) currently preventing type annotation adoption in the BUILD file or in the code itself as appropriate.</p>
+</section>
+</section>
+<section id="python-style-rules-toto" class="level2">
+<h2>3 Python Style Rules toto</h2>
+<section id="semicolons-toto" class="level3">
+<h3>3.1 Semicolons toto</h3>
+<p>Do not terminate your lines with semicolons, and do not use semicolons to put two statements on the same line.</p>
+</section>
+<section id="line-length-toto" class="level3">
+<h3>3.2 Line length toto</h3>
+<p>Maximum line length is <em>80 characters</em>.</p>
+<p>Explicit exceptions to the 80 character limit:</p>
+<ul>
+<li>Long import statements.</li>
+<li>URLs, pathnames, or long flags in comments.</li>
+<li>Long string module level constants not containing whitespace that would be inconvenient to split across lines such as URLs or pathnames.</li>
+<li>Pylint disable comments. (e.g.: <code># pylint: disable=invalid-name</code>)toto</li>
+</ul>
+<p>Do not use backslash line continuation except for <code>with</code> statements requiring three or more context managers.</p>
+<p>Make use of Python’s <a href="http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining">implicit line joining inside parentheses, brackets and braces</a>.toto</p>
+<p>If necessary, you can add an extra pair of parentheses around an expression.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>Yes: foo_bar(<span class="va">self</span>, width, height, color<span class="op">=</span><span class="st">&#39;black&#39;</span>, design<span class="op">=</span><span class="va">None</span>, x<span class="op">=</span><span class="st">&#39;foo&#39;</span>,</span>
+<span id="cb32-2"><a href="#cb32-2"></a>             emphasis<span class="op">=</span><span class="va">None</span>, highlight<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a>     <span class="cf">if</span> (width <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span> height <span class="op">==</span> <span class="dv">0</span> <span class="kw">and</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a>         color <span class="op">==</span> <span class="st">&#39;red&#39;</span> <span class="kw">and</span> emphasis <span class="op">==</span> <span class="st">&#39;strong&#39;</span>):</span></code></pre></div>
+<p>When a literal string won’t fit on a single line, use parentheses for implicit line joining.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>x <span class="op">=</span> (<span class="st">&#39;This will build a very long long &#39;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>     <span class="st">&#39;long long long long long long string&#39;</span>)</span></code></pre></div>
+<p>Within comments, put long URLs on their own line if necessary.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>Yes:<span class="co"># See details attoto</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># http://www.example.com/us/developer/documentation/api/content/v2.0/csv_file_name_extension_full_specification.htmltoto</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>No:<span class="co"># See details attoto</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="co"># http://www.example.com/us/developer/documentation/api/content/\toto</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="co"># v2.0/csv_file_name_extension_full_specification.htmltoto</span></span></code></pre></div>
+<p>It is permissible to use backslash continuation when defining a <code>with</code> statement whose expressions span three or more lines. For two lines of expressions, use a nested <code>with</code> statement:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>Yes:  <span class="cf">with</span> very_long_first_expression_function() <span class="im">as</span> spam, <span class="op">\</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>           very_long_second_expression_function() <span class="im">as</span> beans, <span class="op">\</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>           third_thing() <span class="im">as</span> eggs:</span>
+<span id="cb36-4"><a href="#cb36-4"></a>          place_order(eggs, beans, spam, beans)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>No:  <span class="cf">with</span> VeryLongFirstExpressionFunction() <span class="im">as</span> spam, <span class="op">\</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>          VeryLongSecondExpressionFunction() <span class="im">as</span> beans:</span>
+<span id="cb37-3"><a href="#cb37-3"></a>       PlaceOrder(eggs, beans, spam, beans)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a>Yes:  <span class="cf">with</span> very_long_first_expression_function() <span class="im">as</span> spam:</span>
+<span id="cb38-2"><a href="#cb38-2"></a>          <span class="cf">with</span> very_long_second_expression_function() <span class="im">as</span> beans:</span>
+<span id="cb38-3"><a href="#cb38-3"></a>              place_order(beans, spam)</span></code></pre></div>
+<p>Make note of the indentation of the elements in the line continuation examples above; see the <a href="#s3.4-indentation">indentation</a> section for explanation.toto</p>
+<p>In all other cases where a line exceeds 80 characters, and the <a href="https://github.com/google/yapf/.html">yapf</a> auto-formatter does not help bring the line below the limit, the line is allowed to exceed this maximum.</p>
+</section>
+<section id="parentheses-toto" class="level3">
+<h3>3.3 Parentheses toto</h3>
+<p>Use parentheses sparingly.</p>
+<p>It is fine, though not required, to use parentheses around tuples. Do not use them in return statements or conditional statements unless using parentheses for implied line continuation or to indicate a tuple.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a>Yes: <span class="cf">if</span> foo:</span>
+<span id="cb39-2"><a href="#cb39-2"></a>         bar()</span>
+<span id="cb39-3"><a href="#cb39-3"></a>     <span class="cf">while</span> x:</span>
+<span id="cb39-4"><a href="#cb39-4"></a>         x <span class="op">=</span> bar()</span>
+<span id="cb39-5"><a href="#cb39-5"></a>     <span class="cf">if</span> x <span class="kw">and</span> y:</span>
+<span id="cb39-6"><a href="#cb39-6"></a>         bar()</span>
+<span id="cb39-7"><a href="#cb39-7"></a>     <span class="cf">if</span> <span class="kw">not</span> x:</span>
+<span id="cb39-8"><a href="#cb39-8"></a>         bar()</span>
+<span id="cb39-9"><a href="#cb39-9"></a><span class="co"># For a 1 item tuple the ()s are more visually obvious than the comma.toto</span></span>
+<span id="cb39-10"><a href="#cb39-10"></a></span>
+<span id="cb39-11"><a href="#cb39-11"></a>     onesie <span class="op">=</span> (foo,)</span>
+<span id="cb39-12"><a href="#cb39-12"></a>     <span class="cf">return</span> foo</span>
+<span id="cb39-13"><a href="#cb39-13"></a>     <span class="cf">return</span> spam, beans</span>
+<span id="cb39-14"><a href="#cb39-14"></a>     <span class="cf">return</span> (spam, beans)</span>
+<span id="cb39-15"><a href="#cb39-15"></a>     <span class="cf">for</span> (x, y) <span class="kw">in</span> <span class="bu">dict</span>.items(): ...</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>No:  <span class="cf">if</span> (x):</span>
+<span id="cb40-2"><a href="#cb40-2"></a>         bar()</span>
+<span id="cb40-3"><a href="#cb40-3"></a>     <span class="cf">if</span> <span class="kw">not</span>(x):</span>
+<span id="cb40-4"><a href="#cb40-4"></a>         bar()</span>
+<span id="cb40-5"><a href="#cb40-5"></a>     <span class="cf">return</span> (foo)</span></code></pre></div>
+</section>
+<section id="indentation-toto" class="level3">
+<h3>3.4 Indentation toto</h3>
+<p>Indent your code blocks with <em>4 spaces</em>.</p>
+<p>Never use tabs or mix tabs and spaces. In cases of implied line continuation, you should align wrapped elements either vertically, as per the examples in the <a href="#s3.2-line-length">line length</a> section; or using a hanging indent of 4 spaces,toto</p>
+<p>in which case there should be nothing after the open parenthesis or bracket on the first line.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a>Yes:<span class="co"># Aligned with opening delimitertoto</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a></span>
+<span id="cb41-3"><a href="#cb41-3"></a>       foo <span class="op">=</span> long_function_name(var_one, var_two,</span>
+<span id="cb41-4"><a href="#cb41-4"></a>                                var_three, var_four)</span>
+<span id="cb41-5"><a href="#cb41-5"></a>       meal <span class="op">=</span> (spam,</span>
+<span id="cb41-6"><a href="#cb41-6"></a>               beans)</span>
+<span id="cb41-7"><a href="#cb41-7"></a></span>
+<span id="cb41-8"><a href="#cb41-8"></a><span class="co"># Aligned with opening delimiter in a dictionarytoto</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a></span>
+<span id="cb41-10"><a href="#cb41-10"></a>       foo <span class="op">=</span> {</span>
+<span id="cb41-11"><a href="#cb41-11"></a>           long_dictionary_key: value1 <span class="op">+</span></span>
+<span id="cb41-12"><a href="#cb41-12"></a>                                value2,</span>
+<span id="cb41-13"><a href="#cb41-13"></a>           ...</span>
+<span id="cb41-14"><a href="#cb41-14"></a>       }</span>
+<span id="cb41-15"><a href="#cb41-15"></a></span>
+<span id="cb41-16"><a href="#cb41-16"></a><span class="co"># 4-space hanging indent; nothing on first linetoto</span></span>
+<span id="cb41-17"><a href="#cb41-17"></a></span>
+<span id="cb41-18"><a href="#cb41-18"></a>       foo <span class="op">=</span> long_function_name(</span>
+<span id="cb41-19"><a href="#cb41-19"></a>           var_one, var_two, var_three,</span>
+<span id="cb41-20"><a href="#cb41-20"></a>           var_four)</span>
+<span id="cb41-21"><a href="#cb41-21"></a>       meal <span class="op">=</span> (</span>
+<span id="cb41-22"><a href="#cb41-22"></a>           spam,</span>
+<span id="cb41-23"><a href="#cb41-23"></a>           beans)</span>
+<span id="cb41-24"><a href="#cb41-24"></a></span>
+<span id="cb41-25"><a href="#cb41-25"></a><span class="co"># 4-space hanging indent in a dictionarytoto</span></span>
+<span id="cb41-26"><a href="#cb41-26"></a></span>
+<span id="cb41-27"><a href="#cb41-27"></a>       foo <span class="op">=</span> {</span>
+<span id="cb41-28"><a href="#cb41-28"></a>           long_dictionary_key:</span>
+<span id="cb41-29"><a href="#cb41-29"></a>               long_dictionary_value,</span>
+<span id="cb41-30"><a href="#cb41-30"></a>           ...</span>
+<span id="cb41-31"><a href="#cb41-31"></a>       }</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>No:<span class="co"># Stuff on first line forbiddentoto</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a></span>
+<span id="cb42-3"><a href="#cb42-3"></a>       foo <span class="op">=</span> long_function_name(var_one, var_two,</span>
+<span id="cb42-4"><a href="#cb42-4"></a>           var_three, var_four)</span>
+<span id="cb42-5"><a href="#cb42-5"></a>       meal <span class="op">=</span> (spam,</span>
+<span id="cb42-6"><a href="#cb42-6"></a>           beans)</span>
+<span id="cb42-7"><a href="#cb42-7"></a></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="co"># 2-space hanging indent forbiddentoto</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a></span>
+<span id="cb42-10"><a href="#cb42-10"></a>       foo <span class="op">=</span> long_function_name(</span>
+<span id="cb42-11"><a href="#cb42-11"></a>         var_one, var_two, var_three,</span>
+<span id="cb42-12"><a href="#cb42-12"></a>         var_four)</span>
+<span id="cb42-13"><a href="#cb42-13"></a></span>
+<span id="cb42-14"><a href="#cb42-14"></a><span class="co"># No hanging indent in a dictionarytoto</span></span>
+<span id="cb42-15"><a href="#cb42-15"></a></span>
+<span id="cb42-16"><a href="#cb42-16"></a>       foo <span class="op">=</span> {</span>
+<span id="cb42-17"><a href="#cb42-17"></a>           long_dictionary_key:</span>
+<span id="cb42-18"><a href="#cb42-18"></a>           long_dictionary_value,</span>
+<span id="cb42-19"><a href="#cb42-19"></a>           ...</span>
+<span id="cb42-20"><a href="#cb42-20"></a>       }</span></code></pre></div>
+</section>
+<section id="trailing-commas-in-sequences-of-items-toto" class="level3">
+<h3>3.4.1 Trailing commas in sequences of items? toto</h3>
+<p>Trailing commas in sequences of items are recommended only when the closing container token <code>]</code>, <code>)</code>, or <code>}</code> does not appear on the same line as the final element. The presence of a trailing comma is also used as a hint to our Python code auto-formatter <a href="https://pypi.org/project/yapf/.html">YAPF</a> to direct it to auto-format the container of items to one item per line when the <code>,</code> after the final element is present.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a>Yes:   golomb3 <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>]</span>
+<span id="cb43-2"><a href="#cb43-2"></a>Yes:   golomb4 <span class="op">=</span> [</span>
+<span id="cb43-3"><a href="#cb43-3"></a>           <span class="dv">0</span>,</span>
+<span id="cb43-4"><a href="#cb43-4"></a>           <span class="dv">1</span>,</span>
+<span id="cb43-5"><a href="#cb43-5"></a>           <span class="dv">4</span>,</span>
+<span id="cb43-6"><a href="#cb43-6"></a>           <span class="dv">6</span>,</span>
+<span id="cb43-7"><a href="#cb43-7"></a>       ]</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a>No:    golomb4 <span class="op">=</span> [</span>
+<span id="cb44-2"><a href="#cb44-2"></a>           <span class="dv">0</span>,</span>
+<span id="cb44-3"><a href="#cb44-3"></a>           <span class="dv">1</span>,</span>
+<span id="cb44-4"><a href="#cb44-4"></a>           <span class="dv">4</span>,</span>
+<span id="cb44-5"><a href="#cb44-5"></a>           <span class="dv">6</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>       ]</span></code></pre></div>
+</section>
+<section id="blank-lines-toto" class="level3">
+<h3>3.5 Blank Lines toto</h3>
+<p>Two blank lines between top-level definitions, be they function or class definitions. One blank line between method definitions and between the <code>class</code> line and the first method. No blank line following a <code>def</code> line. Use single blank lines as you judge appropriate within functions or methods.</p>
+</section>
+<section id="whitespace-toto" class="level3">
+<h3>3.6 Whitespace toto</h3>
+<p>Follow standard typographic rules for the use of spaces around punctuation.</p>
+<p>No whitespace inside parentheses, brackets or braces.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>Yes: spam(ham[<span class="dv">1</span>], {eggs: <span class="dv">2</span>}, [])</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1"></a>No:  spam( ham[ <span class="dv">1</span> ], { eggs: <span class="dv">2</span> }, [ ] )</span></code></pre></div>
+<p>No whitespace before a comma, semicolon, or colon. Do use whitespace after a comma, semicolon, or colon, except at the end of the line.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a>Yes: <span class="cf">if</span> x <span class="op">==</span> <span class="dv">4</span>:</span>
+<span id="cb47-2"><a href="#cb47-2"></a>         <span class="bu">print</span>(x, y)</span>
+<span id="cb47-3"><a href="#cb47-3"></a>     x, y <span class="op">=</span> y, x</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a>No:  <span class="cf">if</span> x <span class="op">==</span> <span class="dv">4</span> :</span>
+<span id="cb48-2"><a href="#cb48-2"></a>         <span class="bu">print</span>(x , y)</span>
+<span id="cb48-3"><a href="#cb48-3"></a>     x , y <span class="op">=</span> y , x</span></code></pre></div>
+<p>No whitespace before the open paren/bracket that starts an argument list, indexing or slicing.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>Yes: spam(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a>No:  spam (<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a>Yes: <span class="bu">dict</span>[<span class="st">&#39;key&#39;</span>] <span class="op">=</span> <span class="bu">list</span>[index]</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a>No:  <span class="bu">dict</span> [<span class="st">&#39;key&#39;</span>] <span class="op">=</span> <span class="bu">list</span> [index]</span></code></pre></div>
+<p>No trailing whitespace.</p>
+<p>Surround binary operators with a single space on either side for assignment (<code>=</code>), comparisons (<code>==, &lt;, &gt;, !=, &lt;&gt;, &lt;=, &gt;=, in, not in, is, is not</code>), and Booleans (<code>and, or, not</code>). Use your better judgment for the insertion of spaces around arithmetic operators (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>//</code>, <code>%</code>, <code>**</code>, <code>@</code>).</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a>Yes: x <span class="op">==</span> <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a>No:  x<span class="op">&lt;</span><span class="dv">1</span></span></code></pre></div>
+<p>Never use spaces around <code>=</code> when passing keyword arguments or defining a default parameter value, with one exception: <a href="#typing-default-values">when a type annotation is present</a>, <em>do</em> use spaces around the <code>=</code> for the defaulttoto</p>
+<p>parameter value.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a>Yes: <span class="kw">def</span> <span class="bu">complex</span>(real, imag<span class="op">=</span><span class="fl">0.0</span>): <span class="cf">return</span> Magic(r<span class="op">=</span>real, i<span class="op">=</span>imag)</span>
+<span id="cb55-2"><a href="#cb55-2"></a>Yes: <span class="kw">def</span> <span class="bu">complex</span>(real, imag: <span class="bu">float</span> <span class="op">=</span> <span class="fl">0.0</span>): <span class="cf">return</span> Magic(r<span class="op">=</span>real, i<span class="op">=</span>imag)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1"></a>No:  <span class="kw">def</span> <span class="bu">complex</span>(real, imag <span class="op">=</span> <span class="fl">0.0</span>): <span class="cf">return</span> Magic(r <span class="op">=</span> real, i <span class="op">=</span> imag)</span>
+<span id="cb56-2"><a href="#cb56-2"></a>No:  <span class="kw">def</span> <span class="bu">complex</span>(real, imag: <span class="bu">float</span><span class="op">=</span><span class="fl">0.0</span>): <span class="cf">return</span> Magic(r <span class="op">=</span> real, i <span class="op">=</span> imag)</span></code></pre></div>
+<p>Don’t use spaces to vertically align tokens on consecutive lines, since it becomes a maintenance burden (applies to <code>:</code>, <code>#</code>, <code>=</code>, etc.):toto</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a>Yes:</span>
+<span id="cb57-2"><a href="#cb57-2"></a>  foo <span class="op">=</span> <span class="dv">1000</span><span class="co"># commenttoto</span></span>
+<span id="cb57-3"><a href="#cb57-3"></a></span>
+<span id="cb57-4"><a href="#cb57-4"></a>  long_name <span class="op">=</span> <span class="dv">2</span><span class="co"># comment that should not be alignedtoto</span></span>
+<span id="cb57-5"><a href="#cb57-5"></a></span>
+<span id="cb57-6"><a href="#cb57-6"></a></span>
+<span id="cb57-7"><a href="#cb57-7"></a>  dictionary <span class="op">=</span> {</span>
+<span id="cb57-8"><a href="#cb57-8"></a>      <span class="st">&#39;foo&#39;</span>: <span class="dv">1</span>,</span>
+<span id="cb57-9"><a href="#cb57-9"></a>      <span class="st">&#39;long_name&#39;</span>: <span class="dv">2</span>,</span>
+<span id="cb57-10"><a href="#cb57-10"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1"></a>No:</span>
+<span id="cb58-2"><a href="#cb58-2"></a>  foo       <span class="op">=</span> <span class="dv">1000</span><span class="co"># commenttoto</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a></span>
+<span id="cb58-4"><a href="#cb58-4"></a>  long_name <span class="op">=</span> <span class="dv">2</span><span class="co"># comment that should not be alignedtoto</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a></span>
+<span id="cb58-6"><a href="#cb58-6"></a></span>
+<span id="cb58-7"><a href="#cb58-7"></a>  dictionary <span class="op">=</span> {</span>
+<span id="cb58-8"><a href="#cb58-8"></a>      <span class="st">&#39;foo&#39;</span>      : <span class="dv">1</span>,</span>
+<span id="cb58-9"><a href="#cb58-9"></a>      <span class="st">&#39;long_name&#39;</span>: <span class="dv">2</span>,</span>
+<span id="cb58-10"><a href="#cb58-10"></a>  }</span></code></pre></div>
+</section>
+<section id="shebang-line-toto" class="level3">
+<h3>3.7 Shebang Line toto</h3>
+<p>Most <code>.py</code> files do not need to start with a <code>#!</code> line. Start the main file of atoto</p>
+<p>program with <code>#!/usr/bin/python</code> with an optional single digit <code>2</code> or <code>3</code> suffix pertoto</p>
+<p><a href="https://www.google.com/url?sa=D&amp;q=http://www.python.org/dev/peps/pep-0394/.html">PEP-394</a>.</p>
+<p>This line is used by the kernel to find the Python interpreter, but is ignored by Python when importing modules. It is only necessary on a file that will be executed directly.</p>
+</section>
+<section id="comments-and-docstrings-toto" class="level3">
+<h3>3.8 Comments and Docstrings toto</h3>
+<p>Be sure to use the right style for module, function, method docstrings and inline comments.</p>
+<section id="docstrings-toto" class="level4">
+<h4>3.8.1 Docstrings toto</h4>
+<p>Python uses <em>docstrings</em> to document code. A docstring is a string that is the first statement in a package, module, class or function. These strings can be extracted automatically through the <code>__doc__</code> member of the object and are used by <code>pydoc</code>. (Try running <code>pydoc</code> on your module to see how it looks.) Always use the three double-quote <code>"""</code> format for docstrings (per <a href="https://www.google.com/url?sa=D&amp;q=http://www.python.org/dev/peps/pep-0257/">PEP 257</a>). A docstring should be organized as a summary line (one physical line) terminated by a period, question mark, or exclamation point, followed by a blank line, followed by the rest of the docstring starting at the same cursor position as the first quote of the first line. There are more formatting guidelines for docstrings below.</p>
+</section>
+<section id="modules-toto" class="level4">
+<h4>3.8.2 Modules toto</h4>
+<p>Every file should contain license boilerplate. Choose the appropriate boilerplate for the license used by the project (for example, Apache 2.0, BSD, LGPL, GPL)</p>
+<p>Files should start with a docstring describing the contents and usage of the module.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a><span class="co">&quot;&quot;&quot;A one line summary of the module or program, terminated by a period.</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="co">Leave one blank line.  The rest of this docstring should contain an</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="co">overall description of the module or program.  Optionally, it may also</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="co">contain a brief description of exported classes and functions and/or usage</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a><span class="co">examples.</span></span>
+<span id="cb59-7"><a href="#cb59-7"></a></span>
+<span id="cb59-8"><a href="#cb59-8"></a><span class="co">  Typical usage example:</span></span>
+<span id="cb59-9"><a href="#cb59-9"></a></span>
+<span id="cb59-10"><a href="#cb59-10"></a><span class="co">  foo = ClassFoo()</span></span>
+<span id="cb59-11"><a href="#cb59-11"></a><span class="co">  bar = foo.FunctionBar()</span></span>
+<span id="cb59-12"><a href="#cb59-12"></a><span class="co">&quot;&quot;&quot;</span></span></code></pre></div>
+</section>
+<section id="functions-and-methods-toto" class="level4">
+<h4>3.8.3 Functions and Methods toto</h4>
+<p>In this section, “function” means a method, function, or generator.</p>
+<p>A function must have a docstring, unless it meets all of the following criteria:</p>
+<ul>
+<li>not externally visible</li>
+<li>very short</li>
+<li>obvious</li>
+</ul>
+<p>A docstring should give enough information to write a call to the function without reading the function’s code. The docstring should be descriptive-style (<code>"""Fetches rows from a Bigtable."""</code>) rather than imperative-style (<code>"""Fetch rows from a Bigtable."""</code>), except for <code>@property</code> data descriptors, which should describe the function’s calling syntax and its semantics, not its implementation. For tricky code, comments alongside the code are more appropriate than using docstrings.</p>
+<p>A method that overrides a method from a base class may have a simple docstring sending the reader to its overridden method’s docstring, such as <code>"""See base class."""</code>. The rationale is that there is no need to repeat in many places documentation that is already present in the base method’s docstring. However, if the overriding method’s behavior is substantially different from the overridden method, or details need to be provided (e.g., documenting additional side effects), a docstring with at least those differences is required on the overriding method.</p>
+<p>Certain aspects of a function should be documented in special sections, listed below. Each section begins with a heading line, which ends with a colon. All sections other than the heading should maintain a hanging indent of two or four spaces (be consistent within a file). These sections can be omitted in cases where the function’s name and signature are informative enough that it can be aptly described using a one-line docstring.</p>
+<dl>
+<dt><a href="#doc-function-args"><em>Args:</em></a>toto</dt>
+<dd><p>List each parameter by name. A description should follow the name, and be separated by a colon and a space. If the description is too long to fit on a single 80-character line, use a hanging indent of 2 or 4 spaces (be consistent with the rest of the file).</p>
+<p>The description should include required type(s) if the code does not contain a corresponding type annotation. If a function accepts <code>*foo</code> (variable length argument lists) and/or <code>**bar</code> (arbitrary keyword arguments), they should be listed as <code>*foo</code> and <code>**bar</code>.</p>
+</dd>
+<dt><a href="#doc-function-returns"><em>Returns:</em> (or <em>Yields:</em> for generators)</a>toto</dt>
+<dd><p>Describe the type and semantics of the return value. If the function only returns None, this section is not required. It may also be omitted if the docstring starts with Returns or Yields (e.g. <code>"""Returns row from Bigtable as a tuple of strings."""</code>) and the opening sentence is sufficient to describe return value.</p>
+</dd>
+<dt><a href="#doc-function-raises"><em>Raises:</em></a>toto</dt>
+<dd><p>List all exceptions that are relevant to the interface. You should not document exceptions that get raised if the API specified in the docstring is violated (because this would paradoxically make behavior under violation of the API part of the API).</p>
+</dd>
+</dl>
+<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">def</span> fetch_bigtable_rows(big_table, keys, other_silly_variable<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb60-2"><a href="#cb60-2"></a>    <span class="co">&quot;&quot;&quot;Fetches rows from a Bigtable.</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a></span>
+<span id="cb60-4"><a href="#cb60-4"></a><span class="co">    Retrieves rows pertaining to the given keys from the Table instance</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a><span class="co">    represented by big_table.  Silly things may happen if</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a><span class="co">    other_silly_variable is not None.</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a></span>
+<span id="cb60-8"><a href="#cb60-8"></a><span class="co">    Args:</span></span>
+<span id="cb60-9"><a href="#cb60-9"></a><span class="co">        big_table: An open Bigtable Table instance.</span></span>
+<span id="cb60-10"><a href="#cb60-10"></a><span class="co">        keys: A sequence of strings representing the key of each table row</span></span>
+<span id="cb60-11"><a href="#cb60-11"></a><span class="co">            to fetch.</span></span>
+<span id="cb60-12"><a href="#cb60-12"></a><span class="co">        other_silly_variable: Another optional variable, that has a much</span></span>
+<span id="cb60-13"><a href="#cb60-13"></a><span class="co">            longer name than the other args, and which does nothing.</span></span>
+<span id="cb60-14"><a href="#cb60-14"></a></span>
+<span id="cb60-15"><a href="#cb60-15"></a><span class="co">    Returns:</span></span>
+<span id="cb60-16"><a href="#cb60-16"></a><span class="co">        A dict mapping keys to the corresponding table row data</span></span>
+<span id="cb60-17"><a href="#cb60-17"></a><span class="co">        fetched. Each row is represented as a tuple of strings. For</span></span>
+<span id="cb60-18"><a href="#cb60-18"></a><span class="co">        example:</span></span>
+<span id="cb60-19"><a href="#cb60-19"></a></span>
+<span id="cb60-20"><a href="#cb60-20"></a><span class="co">        {&#39;Serak&#39;: (&#39;Rigel VII&#39;, &#39;Preparer&#39;),</span></span>
+<span id="cb60-21"><a href="#cb60-21"></a><span class="co">         &#39;Zim&#39;: (&#39;Irk&#39;, &#39;Invader&#39;),</span></span>
+<span id="cb60-22"><a href="#cb60-22"></a><span class="co">         &#39;Lrrr&#39;: (&#39;Omicron Persei 8&#39;, &#39;Emperor&#39;)}</span></span>
+<span id="cb60-23"><a href="#cb60-23"></a></span>
+<span id="cb60-24"><a href="#cb60-24"></a><span class="co">        If a key from the keys argument is missing from the dictionary,</span></span>
+<span id="cb60-25"><a href="#cb60-25"></a><span class="co">        then that row was not found in the table.</span></span>
+<span id="cb60-26"><a href="#cb60-26"></a></span>
+<span id="cb60-27"><a href="#cb60-27"></a><span class="co">    Raises:</span></span>
+<span id="cb60-28"><a href="#cb60-28"></a><span class="co">        IOError: An error occurred accessing the bigtable.Table object.</span></span>
+<span id="cb60-29"><a href="#cb60-29"></a><span class="co">    &quot;&quot;&quot;</span></span></code></pre></div>
+</section>
+<section id="classes-toto" class="level4">
+<h4>3.8.4 Classes toto</h4>
+<p>Classes should have a docstring below the class definition describing the class. If your class has public attributes, they should be documented here in an <code>Attributes</code> section and follow the same formatting as a <a href="#doc-function-args">function’s <code>Args</code></a> section.toto</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="kw">class</span> SampleClass(<span class="bu">object</span>):</span>
+<span id="cb61-2"><a href="#cb61-2"></a>    <span class="co">&quot;&quot;&quot;Summary of class here.</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="co">    Longer class information....</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="co">    Longer class information....</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a></span>
+<span id="cb61-7"><a href="#cb61-7"></a><span class="co">    Attributes:</span></span>
+<span id="cb61-8"><a href="#cb61-8"></a><span class="co">        likes_spam: A boolean indicating if we like SPAM or not.</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="co">        eggs: An integer count of the eggs we have laid.</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a></span>
+<span id="cb61-12"><a href="#cb61-12"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, likes_spam<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb61-13"><a href="#cb61-13"></a>        <span class="co">&quot;&quot;&quot;Inits SampleClass with blah.&quot;&quot;&quot;</span></span>
+<span id="cb61-14"><a href="#cb61-14"></a>        <span class="va">self</span>.likes_spam <span class="op">=</span> likes_spam</span>
+<span id="cb61-15"><a href="#cb61-15"></a>        <span class="va">self</span>.eggs <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a></span>
+<span id="cb61-17"><a href="#cb61-17"></a>    <span class="kw">def</span> public_method(<span class="va">self</span>):</span>
+<span id="cb61-18"><a href="#cb61-18"></a>        <span class="co">&quot;&quot;&quot;Performs operation blah.&quot;&quot;&quot;</span></span></code></pre></div>
+</section>
+<section id="block-and-inline-comments-toto" class="level4">
+<h4>3.8.5 Block and Inline Comments toto</h4>
+<p>The final place to have comments is in tricky parts of the code. If you’re going to have to explain it at the next <a href="http://en.wikipedia.org/wiki/Code_review">code review</a>, you should comment it now. Complicated operations get a few lines of comments before the operations commence. Non-obvious ones get comments at the end of the line.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1"></a><span class="co"># We use a weighted dictionary search to find out where i is intoto</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a></span>
+<span id="cb62-3"><a href="#cb62-3"></a><span class="co"># the array.  We extrapolate position based on the largest numtoto</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a></span>
+<span id="cb62-5"><a href="#cb62-5"></a><span class="co"># in the array and the array size and then do binary search tototo</span></span>
+<span id="cb62-6"><a href="#cb62-6"></a></span>
+<span id="cb62-7"><a href="#cb62-7"></a><span class="co"># get the exact number.toto</span></span>
+<span id="cb62-8"><a href="#cb62-8"></a></span>
+<span id="cb62-9"><a href="#cb62-9"></a></span>
+<span id="cb62-10"><a href="#cb62-10"></a><span class="cf">if</span> i <span class="op">&amp;</span> (i<span class="dv">-1</span>) <span class="op">==</span> <span class="dv">0</span>:<span class="co"># True if i is 0 or a power of 2.toto</span></span></code></pre></div>
+<p>To improve legibility, these comments should start at least 2 spaces away from the code with the comment character <code>#</code>, followed by at least one space beforetoto</p>
+<p>the text of the comment itself.</p>
+<p>On the other hand, never describe the code. Assume the person reading the code knows Python (though not what you’re trying to do) better than you do.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="co"># BAD COMMENT: Now go through the b array and make sure whenever i occurstoto</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a></span>
+<span id="cb63-3"><a href="#cb63-3"></a><span class="co"># the next element is i+1toto</span></span></code></pre></div>
+<!-- The next section is copied from the C++ style guide. -->
+</section>
+<section id="punctuation-spelling-and-grammar-toto" class="level4">
+<h4>3.8.6 Punctuation, Spelling and Grammar toto</h4>
+<p>Pay attention to punctuation, spelling, and grammar; it is easier to read well-written comments than badly written ones.</p>
+<p>Comments should be as readable as narrative text, with proper capitalization and punctuation. In many cases, complete sentences are more readable than sentence fragments. Shorter comments, such as comments at the end of a line of code, can sometimes be less formal, but you should be consistent with your style.</p>
+<p>Although it can be frustrating to have a code reviewer point out that you are using a comma when you should be using a semicolon, it is very important that source code maintain a high level of clarity and readability. Proper punctuation, spelling, and grammar help with that goal.</p>
+</section>
+</section>
+<section id="classes-toto-1" class="level3">
+<h3>3.9 Classes toto</h3>
+<p>If a class inherits from no other base classes, explicitly inherit from <code>object</code>. This also applies to nested classes.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1"></a>Yes: <span class="kw">class</span> SampleClass(<span class="bu">object</span>):</span>
+<span id="cb64-2"><a href="#cb64-2"></a>         <span class="cf">pass</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a></span>
+<span id="cb64-4"><a href="#cb64-4"></a></span>
+<span id="cb64-5"><a href="#cb64-5"></a>     <span class="kw">class</span> OuterClass(<span class="bu">object</span>):</span>
+<span id="cb64-6"><a href="#cb64-6"></a></span>
+<span id="cb64-7"><a href="#cb64-7"></a>         <span class="kw">class</span> InnerClass(<span class="bu">object</span>):</span>
+<span id="cb64-8"><a href="#cb64-8"></a>             <span class="cf">pass</span></span>
+<span id="cb64-9"><a href="#cb64-9"></a></span>
+<span id="cb64-10"><a href="#cb64-10"></a></span>
+<span id="cb64-11"><a href="#cb64-11"></a>     <span class="kw">class</span> ChildClass(ParentClass):</span>
+<span id="cb64-12"><a href="#cb64-12"></a>         <span class="co">&quot;&quot;&quot;Explicitly inherits from another class already.&quot;&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a>No: <span class="kw">class</span> SampleClass:</span>
+<span id="cb65-2"><a href="#cb65-2"></a>        <span class="cf">pass</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a></span>
+<span id="cb65-4"><a href="#cb65-4"></a></span>
+<span id="cb65-5"><a href="#cb65-5"></a>    <span class="kw">class</span> OuterClass:</span>
+<span id="cb65-6"><a href="#cb65-6"></a></span>
+<span id="cb65-7"><a href="#cb65-7"></a>        <span class="kw">class</span> InnerClass:</span>
+<span id="cb65-8"><a href="#cb65-8"></a>            <span class="cf">pass</span></span></code></pre></div>
+<p>Inheriting from <code>object</code> is needed to make properties work properly in Python 2 and can protect your code from potential incompatibility with Python 3. It also defines special methods that implement the default semantics of objects including <code>__new__</code>, <code>__init__</code>, <code>__delattr__</code>, <code>__getattribute__</code>, <code>__setattr__</code>, <code>__hash__</code>, <code>__repr__</code>, and <code>__str__</code>.</p>
+</section>
+<section id="strings-toto" class="level3">
+<h3>3.10 Strings toto</h3>
+<p>Use the <code>format</code> method or the <code>%</code> operator for formatting strings, even when the parameters are all strings. Use your best judgment to decide between <code>+</code> and <code>%</code> (or <code>format</code>) though.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1"></a>Yes: x <span class="op">=</span> a <span class="op">+</span> b</span>
+<span id="cb66-2"><a href="#cb66-2"></a>     x <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%s</span><span class="st">!&#39;</span> <span class="op">%</span> (imperative, expletive)</span>
+<span id="cb66-3"><a href="#cb66-3"></a>     x <span class="op">=</span> <span class="st">&#39;</span><span class="sc">{}</span><span class="st">, </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(first, second)</span>
+<span id="cb66-4"><a href="#cb66-4"></a>     x <span class="op">=</span> <span class="st">&#39;name: </span><span class="sc">%s</span><span class="st">; score: </span><span class="sc">%d</span><span class="st">&#39;</span> <span class="op">%</span> (name, n)</span>
+<span id="cb66-5"><a href="#cb66-5"></a>     x <span class="op">=</span> <span class="st">&#39;name: </span><span class="sc">{}</span><span class="st">; score: </span><span class="sc">{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(name, n)</span>
+<span id="cb66-6"><a href="#cb66-6"></a>     x <span class="op">=</span> <span class="ss">f&#39;name: </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">; score: </span><span class="sc">{n}</span><span class="ss">&#39;</span><span class="co"># Python 3.6+toto</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1"></a>No: x <span class="op">=</span> <span class="st">&#39;</span><span class="sc">%s%s</span><span class="st">&#39;</span> <span class="op">%</span> (a, b)<span class="co"># use + in this casetoto</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a></span>
+<span id="cb67-3"><a href="#cb67-3"></a>    x <span class="op">=</span> <span class="st">&#39;</span><span class="sc">{}{}</span><span class="st">&#39;</span>.<span class="bu">format</span>(a, b)<span class="co"># use + in this casetoto</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a></span>
+<span id="cb67-5"><a href="#cb67-5"></a>    x <span class="op">=</span> first <span class="op">+</span> <span class="st">&#39;, &#39;</span> <span class="op">+</span> second</span>
+<span id="cb67-6"><a href="#cb67-6"></a>    x <span class="op">=</span> <span class="st">&#39;name: &#39;</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">&#39;; score: &#39;</span> <span class="op">+</span> <span class="bu">str</span>(n)</span></code></pre></div>
+<p>Avoid using the <code>+</code> and <code>+=</code> operators to accumulate a string within a loop. Since strings are immutable, this creates unnecessary temporary objects and results in quadratic rather than linear running time. Instead, add each substring to a list and <code>''.join</code> the list after the loop terminates (or, write each substring to a <code>io.BytesIO</code> buffer).</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1"></a>Yes: items <span class="op">=</span> [<span class="st">&#39;&lt;table&gt;&#39;</span>]</span>
+<span id="cb68-2"><a href="#cb68-2"></a>     <span class="cf">for</span> last_name, first_name <span class="kw">in</span> employee_list:</span>
+<span id="cb68-3"><a href="#cb68-3"></a>         items.append(<span class="st">&#39;&lt;tr&gt;&lt;td&gt;</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%s</span><span class="st">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="op">%</span> (last_name, first_name))</span>
+<span id="cb68-4"><a href="#cb68-4"></a>     items.append(<span class="st">&#39;&lt;/table&gt;&#39;</span>)</span>
+<span id="cb68-5"><a href="#cb68-5"></a>     employee_table <span class="op">=</span> <span class="st">&#39;&#39;</span>.join(items)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1"></a>No: employee_table <span class="op">=</span> <span class="st">&#39;&lt;table&gt;&#39;</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a>    <span class="cf">for</span> last_name, first_name <span class="kw">in</span> employee_list:</span>
+<span id="cb69-3"><a href="#cb69-3"></a>        employee_table <span class="op">+=</span> <span class="st">&#39;&lt;tr&gt;&lt;td&gt;</span><span class="sc">%s</span><span class="st">, </span><span class="sc">%s</span><span class="st">&lt;/td&gt;&lt;/tr&gt;&#39;</span> <span class="op">%</span> (last_name, first_name)</span>
+<span id="cb69-4"><a href="#cb69-4"></a>    employee_table <span class="op">+=</span> <span class="st">&#39;&lt;/table&gt;&#39;</span></span></code></pre></div>
+<p>Be consistent with your choice of string quote character within a file. Pick <code>'</code> or <code>"</code> and stick with it. It is okay to use the other quote character on a string to avoid the need to <code>\\</code> escape within the string.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1"></a>Yes:</span>
+<span id="cb70-2"><a href="#cb70-2"></a>  Python(<span class="st">&#39;Why are you hiding your eyes?&#39;</span>)</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  Gollum(<span class="st">&quot;I&#39;m scared of lint errors.&quot;</span>)</span>
+<span id="cb70-4"><a href="#cb70-4"></a>  Narrator(<span class="st">&#39;&quot;Good!&quot; thought a happy Python reviewer.&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1"></a>No:</span>
+<span id="cb71-2"><a href="#cb71-2"></a>  Python(<span class="st">&quot;Why are you hiding your eyes?&quot;</span>)</span>
+<span id="cb71-3"><a href="#cb71-3"></a>  Gollum(<span class="st">&#39;The lint. It burns. It burns us.&#39;</span>)</span>
+<span id="cb71-4"><a href="#cb71-4"></a>  Gollum(<span class="st">&quot;Always the great lint. Watching. Watching.&quot;</span>)</span></code></pre></div>
+<p>Prefer <code>"""</code> for multi-line strings rather than <code>'''</code>. Projects may choose to use <code>'''</code> for all non-docstring multi-line strings if and only if they also use <code>'</code> for regular strings. Docstrings must use <code>"""</code> regardless.</p>
+<p>Multi-line strings do not flow with the indentation of the rest of the program. If you need to avoid embedding extra space in the string, use either concatenated single-line strings or a multi-line string with <a href="https://docs.python.org/3/library/textwrap.html#textwrap.dedent"><code>textwrap.dedent()</code></a>toto</p>
+<p>to remove the initial space on each line:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1"></a>  No:</span>
+<span id="cb72-2"><a href="#cb72-2"></a>  long_string <span class="op">=</span> <span class="st">&quot;&quot;&quot;This is pretty ugly.</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="st">Don&#39;t do this.</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="st">&quot;&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1"></a>  Yes:</span>
+<span id="cb73-2"><a href="#cb73-2"></a>  long_string <span class="op">=</span> <span class="st">&quot;&quot;&quot;This is fine if your use case can accept</span></span>
+<span id="cb73-3"><a href="#cb73-3"></a><span class="st">      extraneous leading spaces.&quot;&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1"></a>  Yes:</span>
+<span id="cb74-2"><a href="#cb74-2"></a>  long_string <span class="op">=</span> (<span class="st">&quot;And this is fine if you can not accept</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">+</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a>                 <span class="st">&quot;extraneous leading spaces.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1"></a>  Yes:</span>
+<span id="cb75-2"><a href="#cb75-2"></a>  long_string <span class="op">=</span> (<span class="st">&quot;And this too is fine if you can not accept</span><span class="ch">\n</span><span class="st">&quot;</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a>                 <span class="st">&quot;extraneous leading spaces.&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1"></a>  Yes:</span>
+<span id="cb76-2"><a href="#cb76-2"></a>  <span class="im">import</span> textwrap</span>
+<span id="cb76-3"><a href="#cb76-3"></a></span>
+<span id="cb76-4"><a href="#cb76-4"></a>  long_string <span class="op">=</span> textwrap.dedent(<span class="st">&quot;&quot;&quot;\</span></span>
+<span id="cb76-5"><a href="#cb76-5"></a><span class="st">      This is also fine, because textwrap.dedent()</span></span>
+<span id="cb76-6"><a href="#cb76-6"></a><span class="st">      will collapse common leading spaces in each line.&quot;&quot;&quot;</span>)</span></code></pre></div>
+</section>
+<section id="files-and-sockets-toto" class="level3">
+<h3>3.11 Files and Sockets toto</h3>
+<p>Explicitly close files and sockets when done with them.</p>
+<p>Leaving files, sockets or other file-like objects open unnecessarily has many downsides:</p>
+<ul>
+<li>They may consume limited system resources, such as file descriptors. Code that deals with many such objects may exhaust those resources unnecessarily if they’re not returned to the system promptly after use.</li>
+<li>Holding files open may prevent other actions such as moving or deleting them.</li>
+<li>Files and sockets that are shared throughout a program may inadvertently be read from or written to after logically being closed. If they are actually closed, attempts to read or write from them will throw exceptions, making the problem known sooner.</li>
+</ul>
+<p>Furthermore, while files and sockets are automatically closed when the file object is destructed, tying the lifetime of the file object to the state of the file is poor practice:</p>
+<ul>
+<li>There are no guarantees as to when the runtime will actually run the file’s destructor. Different Python implementations use different memory management techniques, such as delayed Garbage Collection, which may increase the object’s lifetime arbitrarily and indefinitely.</li>
+<li>Unexpected references to the file, e.g. in globals or exception tracebacks, may keep it around longer than intended.</li>
+</ul>
+<p>The preferred way to manage files is using the <a href="http://docs.python.org/reference/compound_stmts.html#the-with-statement">“with” statement</a>:toto</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;hello.txt&quot;</span>) <span class="im">as</span> hello_file:</span>
+<span id="cb77-2"><a href="#cb77-2"></a>    <span class="cf">for</span> line <span class="kw">in</span> hello_file:</span>
+<span id="cb77-3"><a href="#cb77-3"></a>        <span class="bu">print</span>(line)</span></code></pre></div>
+<p>For file-like objects that do not support the “with” statement, use <code>contextlib.closing()</code>:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1"></a><span class="im">import</span> contextlib</span>
+<span id="cb78-2"><a href="#cb78-2"></a></span>
+<span id="cb78-3"><a href="#cb78-3"></a><span class="cf">with</span> contextlib.closing(urllib.urlopen(<span class="st">&quot;http://www.python.org/&quot;</span>)) <span class="im">as</span> front_page:</span>
+<span id="cb78-4"><a href="#cb78-4"></a>    <span class="cf">for</span> line <span class="kw">in</span> front_page:</span>
+<span id="cb78-5"><a href="#cb78-5"></a>        <span class="bu">print</span>(line)</span></code></pre></div>
+</section>
+<section id="todo-comments-toto" class="level3">
+<h3>3.12 TODO Comments toto</h3>
+<p>Use <code>TODO</code> comments for code that is temporary, a short-term solution, or good-enough but not perfect.</p>
+<p>A <code>TODO</code> comment begins with the string <code>TODO</code> in all caps and a parenthesized name, e-mail address, or other identifier of the person or issue with the best context about the problem. This is followed by an explanation of what there is to do.</p>
+<p>The purpose is to have a consistent <code>TODO</code> format that can be searched to find out how to get more details. A <code>TODO</code> is not a commitment that the person referenced will fix the problem. Thus when you create a <code>TODO</code>, it is almost always your name that is given.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">(kl@gmail.com): Use a &quot;*&quot; here for string repetition.toto</span></span>
+<span id="cb79-2"><a href="#cb79-2"></a></span>
+<span id="cb79-3"><a href="#cb79-3"></a><span class="co"># </span><span class="al">TODO</span><span class="co">(Zeke) Change this to use relations.toto</span></span></code></pre></div>
+<p>If your <code>TODO</code> is of the form “At a future date do something” make sure that you either include a very specific date (“Fix by November 2009”) or a very specific event (“Remove this code when all clients can handle XML responses.”).</p>
+</section>
+<section id="imports-formatting-toto" class="level3">
+<h3>3.13 Imports formatting toto</h3>
+<p>Imports should be on separate lines.</p>
+<p>E.g.:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1"></a>Yes: <span class="im">import</span> os</span>
+<span id="cb80-2"><a href="#cb80-2"></a>     <span class="im">import</span> sys</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1"></a>No:  <span class="im">import</span> os, sys</span></code></pre></div>
+<p>Imports are always put at the top of the file, just after any module comments and docstrings and before module globals and constants. Imports should be grouped from most generic to least generic:</p>
+<ol type="1">
+<li><p>Python future import statements. For example:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1"></a><span class="im">from</span> __future__ <span class="im">import</span> absolute_import</span>
+<span id="cb82-2"><a href="#cb82-2"></a><span class="im">from</span> __future__ <span class="im">import</span> division</span>
+<span id="cb82-3"><a href="#cb82-3"></a><span class="im">from</span> __future__ <span class="im">import</span> print_function</span></code></pre></div>
+<p>See <a href="#from-future-imports">above</a> for more information about those.toto</p></li>
+<li><p>Python standard library imports. For example:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1"></a><span class="im">import</span> sys</span></code></pre></div></li>
+<li><p><a href="https://pypi.org/.html">third-party</a> module or package imports. For example:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span></code></pre></div></li>
+<li><p>Code repository sub-package imports. For example:</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1"></a><span class="im">from</span> otherproject.ai <span class="im">import</span> mind</span></code></pre></div></li>
+<li><p><strong>Deprecated:</strong> application-specific imports that are part of the same top level sub-package as this file. For example:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1"></a><span class="im">from</span> myproject.backend.hgwells <span class="im">import</span> time_machine</span></code></pre></div>
+<p>You may find older Google Python Style code doing this, but it is no longer required. <strong>New code is encouraged not to bother with this.</strong> Simply treat application-specific sub-package imports the same as other sub-package imports.</p></li>
+</ol>
+<p>Within each grouping, imports should be sorted lexicographically, ignoring case, according to each module’s full package path. Code may optionally place a blank line between import sections.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1"></a><span class="im">import</span> collections</span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="im">import</span> queue</span>
+<span id="cb87-3"><a href="#cb87-3"></a><span class="im">import</span> sys</span>
+<span id="cb87-4"><a href="#cb87-4"></a></span>
+<span id="cb87-5"><a href="#cb87-5"></a><span class="im">from</span> absl <span class="im">import</span> app</span>
+<span id="cb87-6"><a href="#cb87-6"></a><span class="im">from</span> absl <span class="im">import</span> flags</span>
+<span id="cb87-7"><a href="#cb87-7"></a><span class="im">import</span> bs4</span>
+<span id="cb87-8"><a href="#cb87-8"></a><span class="im">import</span> cryptography</span>
+<span id="cb87-9"><a href="#cb87-9"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb87-10"><a href="#cb87-10"></a></span>
+<span id="cb87-11"><a href="#cb87-11"></a><span class="im">from</span> book.genres <span class="im">import</span> scifi</span>
+<span id="cb87-12"><a href="#cb87-12"></a><span class="im">from</span> myproject.backend.hgwells <span class="im">import</span> time_machine</span>
+<span id="cb87-13"><a href="#cb87-13"></a><span class="im">from</span> myproject.backend.state_machine <span class="im">import</span> main_loop</span>
+<span id="cb87-14"><a href="#cb87-14"></a><span class="im">from</span> otherproject.ai <span class="im">import</span> body</span>
+<span id="cb87-15"><a href="#cb87-15"></a><span class="im">from</span> otherproject.ai <span class="im">import</span> mind</span>
+<span id="cb87-16"><a href="#cb87-16"></a><span class="im">from</span> otherproject.ai <span class="im">import</span> soul</span>
+<span id="cb87-17"><a href="#cb87-17"></a></span>
+<span id="cb87-18"><a href="#cb87-18"></a><span class="co"># Older style code may have these imports down here instead:toto</span></span>
+<span id="cb87-19"><a href="#cb87-19"></a></span>
+<span id="cb87-20"><a href="#cb87-20"></a><span class="co">#from myproject.backend.hgwells import time_machinetoto</span></span>
+<span id="cb87-21"><a href="#cb87-21"></a></span>
+<span id="cb87-22"><a href="#cb87-22"></a><span class="co">#from myproject.backend.state_machine import main_looptoto</span></span></code></pre></div>
+</section>
+<section id="statements-toto" class="level3">
+<h3>3.14 Statements toto</h3>
+<p>Generally only one statement per line.</p>
+<p>However, you may put the result of a test on the same line as the test only if the entire statement fits on one line. In particular, you can never do so with <code>try</code>/<code>except</code> since the <code>try</code> and <code>except</code> can’t both fit on the same line, and you can only do so with an <code>if</code> if there is no <code>else</code>.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="#cb88-1"></a>Yes:</span>
+<span id="cb88-2"><a href="#cb88-2"></a></span>
+<span id="cb88-3"><a href="#cb88-3"></a>  <span class="cf">if</span> foo: bar(foo)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1"></a>No:</span>
+<span id="cb89-2"><a href="#cb89-2"></a></span>
+<span id="cb89-3"><a href="#cb89-3"></a>  <span class="cf">if</span> foo: bar(foo)</span>
+<span id="cb89-4"><a href="#cb89-4"></a>  <span class="cf">else</span>:   baz(foo)</span>
+<span id="cb89-5"><a href="#cb89-5"></a></span>
+<span id="cb89-6"><a href="#cb89-6"></a>  <span class="cf">try</span>:               bar(foo)</span>
+<span id="cb89-7"><a href="#cb89-7"></a>  <span class="cf">except</span> <span class="pp">ValueError</span>: baz(foo)</span>
+<span id="cb89-8"><a href="#cb89-8"></a></span>
+<span id="cb89-9"><a href="#cb89-9"></a>  <span class="cf">try</span>:</span>
+<span id="cb89-10"><a href="#cb89-10"></a>      bar(foo)</span>
+<span id="cb89-11"><a href="#cb89-11"></a>  <span class="cf">except</span> <span class="pp">ValueError</span>: baz(foo)</span></code></pre></div>
+</section>
+<section id="accessors-toto" class="level3">
+<h3>3.15 Accessors toto</h3>
+<p>If an accessor function would be trivial, you should use public variables instead of accessor functions to avoid the extra cost of function calls in Python. When more functionality is added you can use <code>property</code> to keep the syntax consistent.</p>
+<p>On the other hand, if access is more complex, or the cost of accessing the variable is significant, you should use function calls (following the <a href="#s3.16-naming">Naming</a> guidelines) such as <code>get_foo()</code> andtoto</p>
+<p><code>set_foo()</code>. If the past behavior allowed access through a property, do not bind the new accessor functions to the property. Any code still attempting to access the variable by the old method should break visibly so they are made aware of the change in complexity.</p>
+</section>
+<section id="naming-toto" class="level3">
+<h3>3.16 Naming toto</h3>
+<p><code>module_name</code>, <code>package_name</code>, <code>ClassName</code>, <code>method_name</code>, <code>ExceptionName</code>, <code>function_name</code>, <code>GLOBAL_CONSTANT_NAME</code>, <code>global_var_name</code>, <code>instance_var_name</code>, <code>function_parameter_name</code>, <code>local_var_name</code>.</p>
+<p>Function names, variable names, and filenames should be descriptive; eschew abbreviation. In particular, do not use abbreviations that are ambiguous or unfamiliar to readers outside your project, and do not abbreviate by deleting letters within a word.</p>
+<p>Always use a <code>.py</code> filename extension. Never use dashes.</p>
+<section id="names-to-avoid-toto" class="level4">
+<h4>3.16.1 Names to Avoid toto</h4>
+<ul>
+<li>single character names except for counters or iterators. You may use “e” as an exception identifier in try/except statements.</li>
+<li>dashes (<code>-</code>) in any package/module name</li>
+<li><code>__double_leading_and_trailing_underscore__</code> names (reserved by Python)</li>
+</ul>
+</section>
+<section id="naming-conventions-toto" class="level4">
+<h4>3.16.2 Naming Conventions toto</h4>
+<ul>
+<li><p>“Internal” means internal to a module, or protected or private within a class.</p></li>
+<li><p>Prepending a single underscore (<code>_</code>) has some support for protecting module variables and functions (not included with <code>from module import *</code>). While prepending a double underscore (<code>__</code> aka “dunder”) to an instance variable or method effectively makes the variable or method private to its class (using name mangling) we discourage its use as it impacts readability and testability and isn’t <em>really</em> private.</p></li>
+<li><p>Place related classes and top-level functions together in a module. Unlike Java, there is no need to limit yourself to one class per module.</p></li>
+<li><p>Use CapWords for class names, but lower_with_under.py for module names. Although there are some old modules named CapWords.py, this is now discouraged because it’s confusing when the module happens to be named after a class. (“wait – did I write <code>import StringIO</code> or <code>from StringIO import     StringIO</code>?”)</p></li>
+<li><p>Underscores may appear in <em>unittest</em> method names starting with <code>test</code> to separate logical components of the name, even if those components use CapWords. One possible pattern is <code>test&lt;MethodUnderTest&gt;_&lt;state&gt;</code>; for example <code>testPop_EmptyStack</code> is okay. There is no One Correct Way to name test methods.</p></li>
+</ul>
+</section>
+<section id="file-naming-toto" class="level4">
+<h4>3.16.3 File Naming toto</h4>
+<p>Python filenames must have a <code>.py</code> extension and must not contain dashes (<code>-</code>). This allows them to be imported and unittested. If you want an executable to be accessible without the extension, use a symbolic link or a simple bash wrapper containing <code>exec "$0.py" "$@"</code>.</p>
+</section>
+<section id="guidelines-derived-from-guidos-recommendations-toto" class="level4">
+<h4>3.16.4 Guidelines derived from Guido’s Recommendations toto</h4>
+<table rules="all" border="1" summary="Guidelines from Guido's Recommendations"
+       cellspacing="2" cellpadding="2">
+<tr>
+<th>
+Type
+</th>
+<th>
+Public
+</th>
+<th>
+Internal
+</th>
+</tr>
+<tr>
+<td>
+Packages
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+Modules
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+<code>_lower_with_under</code>
+</td>
+</tr>
+<tr>
+<td>
+Classes
+</td>
+<td>
+<code>CapWords</code>
+</td>
+<td>
+<code>_CapWords</code>
+</td>
+</tr>
+<tr>
+<td>
+Exceptions
+</td>
+<td>
+<code>CapWords</code>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+Functions
+</td>
+<td>
+<code>lower_with_under()</code>
+</td>
+<td>
+<code>_lower_with_under()</code>
+</td>
+</tr>
+<tr>
+<td>
+Global/Class Constants
+</td>
+<td>
+<code>CAPS_WITH_UNDER</code>
+</td>
+<td>
+<code>_CAPS_WITH_UNDER</code>
+</td>
+</tr>
+<tr>
+<td>
+Global/Class Variables
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+<code>_lower_with_under</code>
+</td>
+</tr>
+<tr>
+<td>
+Instance Variables
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+<code>_lower_with_under</code> (protected)
+</td>
+</tr>
+<tr>
+<td>
+Method Names
+</td>
+<td>
+<code>lower_with_under()</code>
+</td>
+<td>
+<code>_lower_with_under()</code> (protected)
+</td>
+</tr>
+<tr>
+<td>
+Function/Method Parameters
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+Local Variables
+</td>
+<td>
+<code>lower_with_under</code>
+</td>
+<td>
+</td>
+</tr>
+</table>
+<p>While Python supports making things private by using a leading double underscore <code>__</code> (aka. “dunder”) prefix on a name, this is discouraged. Prefer the use of a single underscore. They are easier to type, read, and to access from small unittests. Lint warnings take care of invalid access to protected members.</p>
+</section>
+</section>
+<section id="main-toto" class="level3">
+<h3>3.17 Main toto</h3>
+<p>Even a file meant to be used as an executable should be importable and a mere import should not have the side effect of executing the program’s main functionality. The main functionality should be in a <code>main()</code> function.</p>
+<p>In Python, <code>pydoc</code> as well as unit tests require modules to be importable. Your code should always check <code>if __name__ == '__main__'</code> before executing your main program so that the main program is not executed when the module is imported.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1"></a><span class="kw">def</span> main():</span>
+<span id="cb90-2"><a href="#cb90-2"></a>    ...</span>
+<span id="cb90-3"><a href="#cb90-3"></a></span>
+<span id="cb90-4"><a href="#cb90-4"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb90-5"><a href="#cb90-5"></a>    main()</span></code></pre></div>
+<p>All code at the top level will be executed when the module is imported. Be careful not to call functions, create objects, or perform other operations that should not be executed when the file is being <code>pydoc</code>ed.</p>
+</section>
+<section id="function-length-toto" class="level3">
+<h3>3.18 Function length toto</h3>
+<p>Prefer small and focused functions.</p>
+<p>We recognize that long functions are sometimes appropriate, so no hard limit is placed on function length. If a function exceeds about 40 lines, think about whether it can be broken up without harming the structure of the program.</p>
+<p>Even if your long function works perfectly now, someone modifying it in a few months may add new behavior. This could result in bugs that are hard to find. Keeping your functions short and simple makes it easier for other people to read and modify your code.</p>
+<p>You could find long and complicated functions when working with some code. Do not be intimidated by modifying existing code: if working with such a function proves to be difficult, you find that errors are hard to debug, or you want to use a piece of it in several different contexts, consider breaking up the function into smaller and more manageable pieces.</p>
+</section>
+<section id="type-annotations-toto" class="level3">
+<h3>3.19 Type Annotations toto</h3>
+<section id="general-rules-toto" class="level4">
+<h4>3.19.1 General Rules toto</h4>
+<ul>
+<li>Familiarize yourself with <a href="https://www.python.org/dev/peps/pep-0484/.html">PEP-484</a>.</li>
+<li>In methods, only annotate <code>self</code>, or <code>cls</code> if it is necessary for proper type information. e.g., <code>@classmethod def create(cls: Type[T]) -&gt; T: return cls()</code></li>
+<li>If any other variable or a returned type should not be expressed, use <code>Any</code>.</li>
+<li>You are not required to annotate all the functions in a module.
+<ul>
+<li>At least annotate your public APIs.</li>
+<li>Use judgment to get to a good balance between safety and clarity on the one hand, and flexibility on the other.</li>
+<li>Annotate code that is prone to type-related errors (previous bugs or complexity).</li>
+<li>Annotate code that is hard to understand.</li>
+<li>Annotate code as it becomes stable from a types perspective. In many cases, you can annotate all the functions in mature code without losing too much flexibility.</li>
+</ul></li>
+</ul>
+</section>
+<section id="line-breaking-toto" class="level4">
+<h4>3.19.2 Line Breaking toto</h4>
+<p>Try to follow the existing <a href="#indentation">indentation</a> rules.toto</p>
+<p>After annotating, many function signatures will become “one parameter per line”.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1"></a><span class="kw">def</span> my_method(<span class="va">self</span>,</span>
+<span id="cb91-2"><a href="#cb91-2"></a>              first_var: <span class="bu">int</span>,</span>
+<span id="cb91-3"><a href="#cb91-3"></a>              second_var: Foo,</span>
+<span id="cb91-4"><a href="#cb91-4"></a>              third_var: Optional[Bar]) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb91-5"><a href="#cb91-5"></a>  ...</span></code></pre></div>
+<p>Always prefer breaking between variables, and not for example between variable names and type annotations. However, if everything fits on the same line, go for it.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1"></a><span class="kw">def</span> my_method(<span class="va">self</span>, first_var: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb92-2"><a href="#cb92-2"></a>  ...</span></code></pre></div>
+<p>If the combination of the function name, the last parameter, and the return type is too long, indent by 4 in a new line.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1"></a><span class="kw">def</span> my_method(</span>
+<span id="cb93-2"><a href="#cb93-2"></a>    <span class="va">self</span>, first_var: <span class="bu">int</span>) <span class="op">-&gt;</span> Tuple[MyLongType1, MyLongType1]:</span>
+<span id="cb93-3"><a href="#cb93-3"></a>  ...</span></code></pre></div>
+<p>When the return type does not fit on the same line as the last parameter, the preferred way is to indent the parameters by 4 on a new line and align the closing parenthesis with the def.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1"></a>Yes:</span>
+<span id="cb94-2"><a href="#cb94-2"></a><span class="kw">def</span> my_method(</span>
+<span id="cb94-3"><a href="#cb94-3"></a>    <span class="va">self</span>, other_arg: Optional[MyLongType]</span>
+<span id="cb94-4"><a href="#cb94-4"></a>) <span class="op">-&gt;</span> Dict[OtherLongType, MyLongType]:</span>
+<span id="cb94-5"><a href="#cb94-5"></a>  ...</span></code></pre></div>
+<p><code>pylint</code> allows you to move the closing parenthesis to a new line and align with the opening one, but this is less readable.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1"></a>No:</span>
+<span id="cb95-2"><a href="#cb95-2"></a><span class="kw">def</span> my_method(<span class="va">self</span>,</span>
+<span id="cb95-3"><a href="#cb95-3"></a>              other_arg: Optional[MyLongType]</span>
+<span id="cb95-4"><a href="#cb95-4"></a>             ) <span class="op">-&gt;</span> Dict[OtherLongType, MyLongType]:</span>
+<span id="cb95-5"><a href="#cb95-5"></a>  ...</span></code></pre></div>
+<p>As in the examples above, prefer not to break types. However, sometimes they are too long to be on a single line (try to keep sub-types unbroken).</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1"></a><span class="kw">def</span> my_method(</span>
+<span id="cb96-2"><a href="#cb96-2"></a>    <span class="va">self</span>,</span>
+<span id="cb96-3"><a href="#cb96-3"></a>    first_var: Tuple[List[MyLongType1],</span>
+<span id="cb96-4"><a href="#cb96-4"></a>                     List[MyLongType2]],</span>
+<span id="cb96-5"><a href="#cb96-5"></a>    second_var: List[Dict[</span>
+<span id="cb96-6"><a href="#cb96-6"></a>        MyLongType3, MyLongType4]]) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb96-7"><a href="#cb96-7"></a>  ...</span></code></pre></div>
+<p>If a single name and type is too long, consider using an <a href="#typing-aliases">alias</a> for the type. The last resort is to break after thetoto</p>
+<p>colon and indent by 4.</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="#cb97-1"></a>Yes:</span>
+<span id="cb97-2"><a href="#cb97-2"></a><span class="kw">def</span> my_function(</span>
+<span id="cb97-3"><a href="#cb97-3"></a>    long_variable_name:</span>
+<span id="cb97-4"><a href="#cb97-4"></a>        long_module_name.LongTypeName,</span>
+<span id="cb97-5"><a href="#cb97-5"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb97-6"><a href="#cb97-6"></a>  ...</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1"></a>No:</span>
+<span id="cb98-2"><a href="#cb98-2"></a><span class="kw">def</span> my_function(</span>
+<span id="cb98-3"><a href="#cb98-3"></a>    long_variable_name: long_module_name.</span>
+<span id="cb98-4"><a href="#cb98-4"></a>        LongTypeName,</span>
+<span id="cb98-5"><a href="#cb98-5"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb98-6"><a href="#cb98-6"></a>  ...</span></code></pre></div>
+</section>
+<section id="forward-declarations-toto" class="level4">
+<h4>3.19.3 Forward Declarations toto</h4>
+<p>If you need to use a class name from the same module that is not yet defined – for example, if you need the class inside the class declaration, or if you use a class that is defined below – use a string for the class name.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1"></a><span class="kw">class</span> MyClass(<span class="bu">object</span>):</span>
+<span id="cb99-2"><a href="#cb99-2"></a></span>
+<span id="cb99-3"><a href="#cb99-3"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>,</span>
+<span id="cb99-4"><a href="#cb99-4"></a>               stack: List[<span class="st">&quot;MyClass&quot;</span>]) <span class="op">-&gt;</span> <span class="va">None</span>:</span></code></pre></div>
+</section>
+<section id="default-values-toto" class="level4">
+<h4>3.19.4 Default Values toto</h4>
+<p>As per <a href="https://www.python.org/dev/peps/pep-0008/#other-recommendations">PEP-008</a>, usetoto</p>
+<p>spaces around the <code>=</code> <em>only</em> for arguments that have both a type annotation and a default value.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1"></a>Yes:</span>
+<span id="cb100-2"><a href="#cb100-2"></a><span class="kw">def</span> func(a: <span class="bu">int</span> <span class="op">=</span> <span class="dv">0</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb100-3"><a href="#cb100-3"></a>  ...</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1"></a>No:</span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="kw">def</span> func(a:<span class="bu">int</span><span class="op">=</span><span class="dv">0</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb101-3"><a href="#cb101-3"></a>  ...</span></code></pre></div>
+</section>
+<section id="nonetype-toto" class="level4">
+<h4>3.19.5 NoneType toto</h4>
+<p>In the Python type system, <code>NoneType</code> is a “first class” type, and for typing purposes, <code>None</code> is an alias for <code>NoneType</code>. If an argument can be <code>None</code>, it has to be declared! You can use <code>Union</code>, but if there is only one other type, use <code>Optional</code>.</p>
+<p>Use explicit <code>Optional</code> instead of implicit <code>Optional</code>. Earlier versions of PEP 484 allowed <code>a: Text = None</code> to be interpretted as <code>a: Optional[Text] = None</code>, but that is no longer the preferred behavior.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1"></a>Yes:</span>
+<span id="cb102-2"><a href="#cb102-2"></a><span class="kw">def</span> func(a: Optional[Text], b: Optional[Text] <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> Text:</span>
+<span id="cb102-3"><a href="#cb102-3"></a>  ...</span>
+<span id="cb102-4"><a href="#cb102-4"></a><span class="kw">def</span> multiple_nullable_union(a: Union[<span class="va">None</span>, Text, <span class="bu">int</span>]) <span class="op">-&gt;</span> Text</span>
+<span id="cb102-5"><a href="#cb102-5"></a>  ...</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1"></a>No:</span>
+<span id="cb103-2"><a href="#cb103-2"></a><span class="kw">def</span> nullable_union(a: Union[<span class="va">None</span>, Text]) <span class="op">-&gt;</span> Text:</span>
+<span id="cb103-3"><a href="#cb103-3"></a>  ...</span>
+<span id="cb103-4"><a href="#cb103-4"></a><span class="kw">def</span> implicit_optional(a: Text <span class="op">=</span> <span class="va">None</span>) <span class="op">-&gt;</span> Text:</span>
+<span id="cb103-5"><a href="#cb103-5"></a>  ...</span></code></pre></div>
+</section>
+<section id="type-aliases-toto" class="level4">
+<h4>3.19.6 Type Aliases toto</h4>
+<p>You can declare aliases of complex types. The name of an alias should be CapWorded. If the alias is used only in this module, it should be _Private.</p>
+<p>For example, if the name of the module together with the name of the type is too long:</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1"></a>_ShortName <span class="op">=</span> module_with_long_name.TypeWithLongName</span>
+<span id="cb104-2"><a href="#cb104-2"></a>ComplexMap <span class="op">=</span> Mapping[Text, List[Tuple[<span class="bu">int</span>, <span class="bu">int</span>]]]</span></code></pre></div>
+<p>Other examples are complex nested types and multiple return variables from a function (as a tuple).</p>
+</section>
+<section id="ignoring-types-toto" class="level4">
+<h4>3.19.7 Ignoring Types toto</h4>
+<p>You can disable type checking on a line with the special comment <code># type: ignore</code>.toto</p>
+<p><code>pytype</code> has a disable option for specific errors (similar to lint):</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1"></a><span class="co"># pytype: disable=attribute-errortoto</span></span></code></pre></div>
+</section>
+<section id="typing-variables-toto" class="level4">
+<h4>3.19.8 Typing Variables toto</h4>
+<p>If an internal variable has a type that is hard or impossible to infer, you can specify its type in a couple ways.</p>
+<dl>
+<dt><a href="#type-comments"><em>Type Comments:</em></a>toto</dt>
+<dd><p>Use a <code># type:</code> comment on the end of the linetoto</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1"></a>a <span class="op">=</span> SomeUndecoratedFunction()<span class="co"># type: Foototo</span></span></code></pre></div>
+</dd>
+<dt><a href="#annotated-assignments"><em>Annotated Assignments</em></a>toto</dt>
+<dd><p>Use a colon and type between the variable name and value, as with function arguments.</p>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1"></a>a: Foo <span class="op">=</span> SomeUndecoratedFunction()</span></code></pre></div>
+</dd>
+</dl>
+</section>
+<section id="tuples-vs-lists-toto" class="level4">
+<h4>3.19.9 Tuples vs Lists toto</h4>
+<p>Unlike Lists, which can only have a single type, Tuples can have either a single repeated type or a set number of elements with different types. The latter is commonly used as return type from a function.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="#cb108-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]<span class="co"># type: List[int]toto</span></span>
+<span id="cb108-2"><a href="#cb108-2"></a></span>
+<span id="cb108-3"><a href="#cb108-3"></a>b <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)<span class="co"># type: Tuple[int, ...]toto</span></span>
+<span id="cb108-4"><a href="#cb108-4"></a></span>
+<span id="cb108-5"><a href="#cb108-5"></a>c <span class="op">=</span> (<span class="dv">1</span>, <span class="st">&quot;2&quot;</span>, <span class="fl">3.5</span>)<span class="co"># type: Tuple[int, Text, float]toto</span></span></code></pre></div>
+</section>
+<section id="typevars-toto" class="level4">
+<h4>3.19.10 TypeVars toto</h4>
+<p>The Python type system has <a href="https://www.python.org/dev/peps/pep-0484/#generics">generics</a>. The factorytoto</p>
+<p>function <code>TypeVar</code> is a common way to use them.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1"></a><span class="im">from</span> typing <span class="im">import</span> List, TypeVar</span>
+<span id="cb109-2"><a href="#cb109-2"></a>T <span class="op">=</span> TypeVar(<span class="st">&quot;T&quot;</span>)</span>
+<span id="cb109-3"><a href="#cb109-3"></a>...</span>
+<span id="cb109-4"><a href="#cb109-4"></a><span class="kw">def</span> <span class="bu">next</span>(l: List[T]) <span class="op">-&gt;</span> T:</span>
+<span id="cb109-5"><a href="#cb109-5"></a>  <span class="cf">return</span> l.pop()</span></code></pre></div>
+<p>A TypeVar can be constrained:</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="#cb110-1"></a>AddableType <span class="op">=</span> TypeVar(<span class="st">&quot;AddableType&quot;</span>, <span class="bu">int</span>, <span class="bu">float</span>, Text)</span>
+<span id="cb110-2"><a href="#cb110-2"></a><span class="kw">def</span> add(a: AddableType, b: AddableType) <span class="op">-&gt;</span> AddableType:</span>
+<span id="cb110-3"><a href="#cb110-3"></a>  <span class="cf">return</span> a <span class="op">+</span> b</span></code></pre></div>
+<p>A common predefined type variable in the <code>typing</code> module is <code>AnyStr</code>. Use it for multiple annotations that can be <code>bytes</code> or <code>unicode</code> and must all be the same type.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1"></a><span class="im">from</span> typing <span class="im">import</span> AnyStr</span>
+<span id="cb111-2"><a href="#cb111-2"></a><span class="kw">def</span> check_length(x: AnyStr) <span class="op">-&gt;</span> AnyStr:</span>
+<span id="cb111-3"><a href="#cb111-3"></a>  <span class="cf">if</span> <span class="bu">len</span>(x) <span class="op">&lt;=</span> <span class="dv">42</span>:</span>
+<span id="cb111-4"><a href="#cb111-4"></a>    <span class="cf">return</span> x</span>
+<span id="cb111-5"><a href="#cb111-5"></a>  <span class="cf">raise</span> <span class="pp">ValueError</span>()</span></code></pre></div>
+</section>
+<section id="string-types-toto" class="level4">
+<h4>3.19.11 String types toto</h4>
+<p>The proper type for annotating strings depends on what versions of Python the code is intended for.</p>
+<p>For Python 3 only code, prefer to use <code>str</code>. <code>Text</code> is also acceptable. Be consistent in using one or the other.</p>
+<p>For Python 2 compatible code, use <code>Text</code>. In some rare cases, <code>str</code> may make sense; typically to aid compatibility when the return types aren’t the same between the two Python versions. Avoid using <code>unicode</code>: it doesn’t exist in Python 3.</p>
+<p>The reason this discrepancy exists is because <code>str</code> means different things depending on the Python version.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1"></a>No:</span>
+<span id="cb112-2"><a href="#cb112-2"></a><span class="kw">def</span> py2_code(x: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">unicode</span>:</span>
+<span id="cb112-3"><a href="#cb112-3"></a>  ...</span></code></pre></div>
+<p>For code that deals with binary data, use <code>bytes</code>.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1"></a><span class="kw">def</span> deals_with_binary_data(x: <span class="bu">bytes</span>) <span class="op">-&gt;</span> <span class="bu">bytes</span>:</span>
+<span id="cb113-2"><a href="#cb113-2"></a>  ...</span></code></pre></div>
+<p>For Python 2 compatible code that processes text data (<code>str</code> or <code>unicode</code> in Python 2, <code>str</code> in Python 3), use <code>Text</code>. For Python 3 only code that process text data, prefer <code>str</code>.</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1"></a><span class="im">from</span> typing <span class="im">import</span> Text</span>
+<span id="cb114-2"><a href="#cb114-2"></a>...</span>
+<span id="cb114-3"><a href="#cb114-3"></a><span class="kw">def</span> py2_compatible(x: Text) <span class="op">-&gt;</span> Text:</span>
+<span id="cb114-4"><a href="#cb114-4"></a>  ...</span>
+<span id="cb114-5"><a href="#cb114-5"></a><span class="kw">def</span> py3_only(x: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
+<span id="cb114-6"><a href="#cb114-6"></a>  ...</span></code></pre></div>
+<p>If the type can be either bytes or text, use <code>Union</code>, with the appropriate text type.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1"></a><span class="im">from</span> typing <span class="im">import</span> Text, Union</span>
+<span id="cb115-2"><a href="#cb115-2"></a>...</span>
+<span id="cb115-3"><a href="#cb115-3"></a><span class="kw">def</span> py2_compatible(x: Union[<span class="bu">bytes</span>, Text]) <span class="op">-&gt;</span> Union[<span class="bu">bytes</span>, Text]:</span>
+<span id="cb115-4"><a href="#cb115-4"></a>  ...</span>
+<span id="cb115-5"><a href="#cb115-5"></a><span class="kw">def</span> py3_only(x: Union[<span class="bu">bytes</span>, <span class="bu">str</span>]) <span class="op">-&gt;</span> Union[<span class="bu">bytes</span>, <span class="bu">str</span>]:</span>
+<span id="cb115-6"><a href="#cb115-6"></a>  ...</span></code></pre></div>
+<p>If all the string types of a function are always the same, for example if the return type is the same as the argument type in the code above, use <a href="#typing-type-var">AnyStr</a>.toto</p>
+<p>Writing it like this will simplify the process of porting the code to Python 3.</p>
+</section>
+<section id="imports-for-typing-toto" class="level4">
+<h4>3.19.12 Imports For Typing toto</h4>
+<p>For classes from the <code>typing</code> module, always import the class itself. You are explicitly allowed to import multiple specific classes on one line from the <code>typing</code> module. Ex:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1"></a><span class="im">from</span> typing <span class="im">import</span> Any, Dict, Optional</span></code></pre></div>
+<p>Given that this way of importing from <code>typing</code> adds items to the local namespace, any names in <code>typing</code> should be treated similarly to keywords, and not be defined in your Python code, typed or not. If there is a collision between a type and an existing name in a module, import it using <code>import x as y</code>.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1"></a><span class="im">from</span> typing <span class="im">import</span> Any <span class="im">as</span> AnyType</span></code></pre></div>
+</section>
+<section id="conditional-imports-toto" class="level4">
+<h4>3.19.13 Conditional Imports toto</h4>
+<p>Use conditional imports only in exceptional cases where the additional imports needed for type checking must be avoided at runtime. This pattern is discouraged; alternatives such as refactoring the code to allow top level imports should be preferred.</p>
+<p>Imports that are needed only for type annotations can be placed within an <code>if TYPE_CHECKING:</code> block.</p>
+<ul>
+<li>Conditionally imported types need to be referenced as strings, to be forward compatible with Python 3.6 where the annotation expressions are actually evaluated.</li>
+<li>Only entities that are used solely for typing should be defined here; this includes aliases. Otherwise it will be a runtime error, as the module will not be imported at runtime.</li>
+<li>The block should be right after all the normal imports.</li>
+<li>There should be no empty lines in the typing imports list.</li>
+<li>Sort this list as if it were a regular imports list.</li>
+</ul>
+<div class="sourceCode" id="cb118"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1"></a><span class="im">import</span> typing</span>
+<span id="cb118-2"><a href="#cb118-2"></a><span class="cf">if</span> typing.TYPE_CHECKING:</span>
+<span id="cb118-3"><a href="#cb118-3"></a>  <span class="im">import</span> sketch</span>
+<span id="cb118-4"><a href="#cb118-4"></a><span class="kw">def</span> f(x: <span class="st">&quot;sketch.Sketch&quot;</span>): ...</span></code></pre></div>
+</section>
+<section id="circular-dependencies-toto" class="level4">
+<h4>3.19.14 Circular Dependencies toto</h4>
+<p>Circular dependencies that are caused by typing are code smells. Such code is a good candidate for refactoring. Although technically it is possible to keep circular dependencies, the <a href="#typing-build-deps">build system</a> will not let youtoto</p>
+<p>do so because each module has to depend on the other.</p>
+<p>Replace modules that create circular dependency imports with <code>Any</code>. Set an <a href="#typing-aliases">alias</a> with a meaningful name, and use the real type name fromtoto</p>
+<p>this module (any attribute of Any is Any). Alias definitions should be separated from the last import by one line.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1"></a><span class="im">from</span> typing <span class="im">import</span> Any</span>
+<span id="cb119-2"><a href="#cb119-2"></a></span>
+<span id="cb119-3"><a href="#cb119-3"></a>some_mod <span class="op">=</span> Any<span class="co"># some_mod.py imports this module.toto</span></span>
+<span id="cb119-4"><a href="#cb119-4"></a></span>
+<span id="cb119-5"><a href="#cb119-5"></a>...</span>
+<span id="cb119-6"><a href="#cb119-6"></a></span>
+<span id="cb119-7"><a href="#cb119-7"></a><span class="kw">def</span> my_method(<span class="va">self</span>, var: some_mod.SomeType) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb119-8"><a href="#cb119-8"></a>  ...</span></code></pre></div>
+</section>
+<section id="generics-toto" class="level4">
+<h4>3.19.15 Generics toto</h4>
+<p>When annotating, prefer to specify type parameters for generic types; otherwise, <a href="https://www.python.org/dev/peps/pep-0484/#the-any-type">the generics’ parameters will be assumed to be <code>Any</code></a>.toto</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1"></a><span class="kw">def</span> get_names(employee_ids: List[<span class="bu">int</span>]) <span class="op">-&gt;</span> Dict[<span class="bu">int</span>, Any]:</span>
+<span id="cb120-2"><a href="#cb120-2"></a>  ...</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1"></a><span class="co"># These are both interpreted as get_names(employee_ids: List[Any]) -&gt; Dict[Any, Any]toto</span></span>
+<span id="cb121-2"><a href="#cb121-2"></a></span>
+<span id="cb121-3"><a href="#cb121-3"></a><span class="kw">def</span> get_names(employee_ids: <span class="bu">list</span>) <span class="op">-&gt;</span> Dict:</span>
+<span id="cb121-4"><a href="#cb121-4"></a>  ...</span>
+<span id="cb121-5"><a href="#cb121-5"></a></span>
+<span id="cb121-6"><a href="#cb121-6"></a><span class="kw">def</span> get_names(employee_ids: List) <span class="op">-&gt;</span> Dict:</span>
+<span id="cb121-7"><a href="#cb121-7"></a>  ...</span></code></pre></div>
+<p>If the best type parameter for a generic is <code>Any</code>, make it explicit, but remember that in many cases <a href="#typing-type-var"><code>TypeVar</code></a> might be moretoto</p>
+<p>appropriate:</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1"></a><span class="kw">def</span> get_names(employee_ids: List[Any]) <span class="op">-&gt;</span> Dict[Any, Text]:</span>
+<span id="cb122-2"><a href="#cb122-2"></a>  <span class="co">&quot;&quot;&quot;Returns a mapping from employee ID to employee name for given IDs.&quot;&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1"></a>T <span class="op">=</span> TypeVar(<span class="st">&#39;T&#39;</span>)</span>
+<span id="cb123-2"><a href="#cb123-2"></a><span class="kw">def</span> get_names(employee_ids: List[T]) <span class="op">-&gt;</span> Dict[T, Text]:</span>
+<span id="cb123-3"><a href="#cb123-3"></a>  <span class="co">&quot;&quot;&quot;Returns a mapping from employee ID to employee name for given IDs.&quot;&quot;&quot;</span></span></code></pre></div>
+</section>
+</section>
+</section>
+<section id="parting-words-toto" class="level2">
+<h2>4 Parting Words toto</h2>
+<p><em>BE CONSISTENT</em>.</p>
+<p>If you’re editing code, take a few minutes to look at the code around you and determine its style. If they use spaces around all their arithmetic operators, you should too. If their comments have little boxes of hash marks around them, make your comments have little boxes of hash marks around them too.</p>
+<p>The point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you’re saying rather than on how you’re saying it. We present global style rules here so people know the vocabulary, but local style is also important. If code you add to a file looks drastically different from the existing code around it, it throws readers out of their rhythm when they go to read it. Avoid this.</p>
+</section>
+</section>
+</body>
+</html>

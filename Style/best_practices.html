@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>best_practices.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="documentation-best-practicestoto" class="level1">
+<h1>Documentation Best Practicestoto</h1>
+<p>“Say what you mean, simply and directly.” - [Brian Kernighan] (https://en.wikipedia.org/wiki/The_Elements_of_Programming_Style)</p>
+<p>Contents:</p>
+<ol type="1">
+<li><p><a href="#minimum-viable-documentation">Minimum viable documentation</a>toto</p></li>
+<li><p><a href="#update-docs-with-code">Update docs with code</a>toto</p></li>
+<li><p><a href="#delete-dead-documentation">Delete dead documentation</a>toto</p></li>
+<li><p><a href="#documentation-is-the-story-of-your-code">Documentation is the story of your code</a>toto</p></li>
+</ol>
+<section id="minimum-viable-documentationtoto" class="level2">
+<h2>Minimum viable documentationtoto</h2>
+<p>A small set of fresh and accurate docs are better than a sprawling, loose assembly of “documentation” in various states of disrepair.</p>
+<p>Write short and useful documents. Cut out everything unnecessary, while also making a habit of continually massaging and improving every doc to suit your changing needs. <strong>Docs work best when they are alive but frequently trimmed, like a bonsai tree</strong>.</p>
+<p>This guide encourages engineers to take ownership of their docs and keep them up to date with the same zeal we keep our tests in good order. Strive for this.</p>
+<ul>
+<li>Identify what you really need: release docs, API docs, testing guidelines.</li>
+<li>Delete cruft frequently and in small batches.</li>
+</ul>
+</section>
+<section id="update-docs-with-codetoto" class="level2">
+<h2>Update docs with codetoto</h2>
+<p><strong>Change your documentation in the same CL as the code change</strong>. This keeps your docs fresh, and is also a good place to explain to your reviewer what you’re doing.</p>
+<p>A good reviewer can at least insist that docstrings, header files, README.md files, and any other docs get updated alongside the CL.</p>
+</section>
+<section id="delete-dead-documentationtoto" class="level2">
+<h2>Delete dead documentationtoto</h2>
+<p>Dead docs are bad. They misinform, they slow down, they incite despair in engineers and laziness in team leads. They set a precedent for leaving behind messes in a code base. If your home is clean, most guests will be clean without being asked.</p>
+<p>Just like any big cleaning project, <strong>it’s easy to be overwhelmed</strong>. If your docs are in bad shape:</p>
+<ul>
+<li>Take it slow, doc health is a gradual accumulation.</li>
+<li>First delete what you’re certain is wrong, ignore what’s unclear.</li>
+<li>Get your whole team involved. Devote time to quickly scan every doc and make a simple decision: Keep or delete?</li>
+<li>Default to delete or leave behind if migrating. Stragglers can always be recovered.</li>
+<li>Iterate.</li>
+</ul>
+</section>
+<section id="prefer-the-good-over-the-perfecttoto" class="level2">
+<h2>Prefer the good over the perfecttoto</h2>
+<p>Your documentation should be as good as possible within a reasonable time frame. The standards for a documentation review are different from the standards for code reviews. Reviewers can and should ask for improvements, but in general, the author should always be able to invoke the “Good Over Perfect Rule”. It’s preferable to allow authors to quickly submit changes that improve the document, instead of forcing rounds of review until it’s “perfect”. Docs are never perfect, and tend to gradually improve as the team learns what they really need to write down.</p>
+</section>
+<section id="documentation-is-the-story-of-your-codetoto" class="level2">
+<h2>Documentation is the story of your codetoto</h2>
+<p>Writing excellent code doesn’t end when your code compiles or even if your test coverage reaches 100%. It’s easy to write something a computer understands, it’s much harder to write something both a human and a computer understand. Your mission as a Code Health-conscious engineer is to <strong>write for humans first, computers second.</strong> Documentation is an important part of this skill.</p>
+<p>There’s a spectrum of engineering documentation that ranges from terse comments to detailed prose:</p>
+<ol type="1">
+<li><p><strong>Inline comments</strong>: The primary purpose of inline comments is to provide information that the code itself cannot contain, such as why the code is there.</p></li>
+<li><p><strong>Method and class comments</strong>:</p>
+<ul>
+<li><p><strong>Method API documentation</strong>: The header / Javadoc / docstring comments that say what methods do and how to use them. This documentation is <strong>the contract of how your code must behave</strong>. The intended audience is future programmers who will use and modify your code.</p>
+<p>It is often reasonable to say that any behavior documented here should have a test verifying it. This documentation details what arguments the method takes, what it returns, any “gotchas” or restrictions, and what exceptions it can throw or errors it can return. It does not usually explain why code behaves a particular way unless that’s relevant to a developer’s understanding of how to use the method. “Why” explanations are for inline comments. Think in practical terms when writing method documentation: “This is a hammer. You use it to pound nails.”</p></li>
+<li><p><strong>Class / Module API documentation</strong>: The header / Javadoc / docstring comments for a class or a whole file. This documentation gives a brief overview of what the class / file does and often gives a few short examples of how you might use the class / file.</p>
+<p>Examples are particularly relevant when there’s several distinct ways to use the class (some advanced, some simple). Always list the simplest use case first.</p></li>
+</ul></li>
+<li><p><strong>README.md</strong>: A good README.md orients the new user to the directory and points to more detailed explanation and user guides:</p>
+<ul>
+<li>What is this directory intended to hold?</li>
+<li>Which files should the developer look at first? Are some files an API?</li>
+<li>Who maintains this directory and where I can learn more?</li>
+</ul>
+<p>See the <a href="READMEs.md.html">README.md guidelines</a>.</p></li>
+</ol>
+</section>
+</section>
+</body>
+</html>

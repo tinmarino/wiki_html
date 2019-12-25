@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>shell.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Revision 1.26</p>
+<p>Paul Armstrong<br />
+Too many more to mention<br />
+</p>
+<p><code>Bash</code> is the only shell scripting language permitted for executables.</p>
+<p>Executables must start with <code>#!/bin/bash</code> and a minimum number of flags.toto</p>
+<p>Use <code>set</code> to set shell options so that calling your script as <code>bash &lt;script_name&gt;</code> does not break its functionality.</p>
+<p>Restricting all executable shell scripts to <strong>bash</strong> gives us a consistent shell language that's installed on all our machines.</p>
+<p>The only exception to this is where you're forced to by whatever you're coding for. One example of this is Solaris SVR4 packages which require plain Bourne shell for any scripts.</p>
+<p>Shell should only be used for small utilities or simple wrapper scripts.</p>
+<p>While shell scripting isn't a development language, it is used for writing various utility scripts throughout Google. This style guide is more a recognition of its use rather than a suggestion that it be used for widespread deployment.</p>
+<p>Some guidelines:</p>
+<ul>
+<li>If you're mostly calling other utilities and are doing relatively little data manipulation, shell is an acceptable choice for the task.</li>
+<li>If performance matters, use something other than shell.</li>
+<li>If you find you need to use arrays for anything more than assignment of <code>${PIPESTATUS}</code>, you should use Python.</li>
+<li>If you are writing a script that is more than 100 lines long, you should probably be writing it in Python instead. Bear in mind that scripts grow. Rewrite your script in another language early to avoid a time-consuming rewrite at a later date.</li>
+</ul>
+<p>Executables should have no extension (strongly preferred) or a <code>.sh</code> extension. Libraries must have a <code>.sh</code> extension and should not be executable.</p>
+<p>It is not necessary to know what language a program is written in when executing it and shell doesn't require an extension so we prefer not to use one for executables.</p>
+<p>However, for libraries it's important to know what language it is and sometimes there's a need to have similar libraries in different languages. This allows library files with identical purposes but different languages to be identically named except for the language-specific suffix.</p>
+<p>SUID and SGID are <em>forbidden</em> on shell scripts.</p>
+<p>There are too many security issues with shell that make it nearly impossible to secure sufficiently to allow SUID/SGID. While bash does make it difficult to run SUID, it's still possible on some platforms which is why we're being explicit about banning it.</p>
+<p>Use <code>sudo</code> to provide elevated access if you need it.</p>
+<p>All error messages should go to <code>STDERR</code>.</p>
+<p>This makes it easier to separate normal status from actual issues.</p>
+<p>A function to print out error messages along with other status information is recommended. err() { echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" &gt;&amp;2 } if ! do_something; then err "Unable to do_something" exit "${E_DID_NOTHING}" fi</p>
+<p>Start each file with a description of its contents.</p>
+<p>Every file must have a top-level comment including a brief overview of its contents. A copyright notice and author information are optional.</p>
+<p>Example: #!/bin/bash # # Perform hot backups of Oracle databases.toto</p>
+<p>Any function that is not both obvious and short must be commented. Any function in a library must be commented regardless of length or complexity.</p>
+<p>It should be possible for someone else to learn how to use your program or to use a function in your library by reading the comments (and self-help, if provided) without reading the code.</p>
+<p>All function comments should contain:</p>
+<ul>
+<li>Description of the function</li>
+<li>Global variables used and modified</li>
+<li>Arguments taken</li>
+<li>Returned values other than the default exit status of the last command run</li>
+</ul>
+<p>Example: #!/bin/bash # # Perform hot backups of Oracle databases.toto</p>
+<p>export PATH='/usr/xpg4/bin:/usr/bin:/opt/csw/bin:/opt/goog/bin' #######################################toto</p>
+<p># Cleanup files from the backup dir # Globals: # BACKUP_DIR #toto</p>
+<p>ORACLE_SID # Arguments: # None # Returns: # Nonetoto</p>
+<p>#######################################toto</p>
+<p>cleanup() { ... }</p>
+<p>Comment tricky, non-obvious, interesting or important parts of your code.</p>
+<p>This follows general Google coding comment practice. Don't comment everything. If there's a complex algorithm or you're doing something out of the ordinary, put a short comment in.</p>
+<p>Use TODO comments for code that is temporary, a short-term solution, or good-enough but not perfect.</p>
+<p>This matches the convention in the <a href="cppguide.html?showone=TODO_Comments#TODO_Comments">C++ Guide</a>.toto</p>
+<p>TODOs should include the string TODO in all caps, followed by your username in parentheses. A colon is optional. It's preferable to put a bug/ticket number next to the TODO item as well.</p>
+<p>Examples: # TODO(mrmonkey): Handle the unlikely edge cases (bugtoto</p>
+<p>####)toto</p>
+<p>While you should follow the style that's already there for files that you're modifying, the following are required for any new code.</p>
+<p>Indent 2 spaces. No tabs.</p>
+<p>Use blank lines between blocks to improve readability. Indentation is two spaces. Whatever you do, don't use tabs. For existing files, stay faithful to the existing indentation.</p>
+<p>Maximum line length is 80 characters.</p>
+<p>If you have to write strings that are longer than 80 characters, this should be done with a here document or an embedded newline if possible. Literal strings that have to be longer than 80 chars and can't sensibly be split are ok, but it's strongly preferred to find a way to make it shorter.</p>
+<p># DO use 'here document's cat &lt;&lt;END; I am an exceptionally longtoto</p>
+<p>string. END # Embedded newlines are ok too long_string="I am antoto</p>
+<p>exceptionally long string."</p>
+<p>Pipelines should be split one per line if they don't all fit on one line.</p>
+<p>If a pipeline all fits on one line, it should be on one line.</p>
+<p>If not, it should be split at one pipe segment per line with the pipe on the newline and a 2 space indent for the next section of the pipe. This applies to a chain of commands combined using '|' as well as to logical compounds using '||' and '&amp;&amp;'. # All fits on one linetoto</p>
+<p>command1 | command2 # Long commands command1 \ | command2 \ |toto</p>
+<p>command3 \ | command4</p>
+<p>Put <code>; do</code> and <code>; then</code> on the same line as the <code>while</code>, <code>for</code> or <code>if</code>.</p>
+<p>Loops in shell are a bit different, but we follow the same principles as with braces when declaring functions. That is: <code>; then</code> and <code>; do</code> should be on the same line as the if/for/while. <code>else</code> should be on its own line and closing statements should be on their own line vertically aligned with the opening statement.</p>
+<p>Example: for dir in ${dirs_to_cleanup}; do if [[ -d "${dir}/${ORACLE_SID}" ]]; then log_date "Cleaning up old files in ${dir}/${ORACLE_SID}" rm "${dir}/${ORACLE_SID}/"* if [[ "$?" -ne 0 ]]; then error_message fi else mkdir -p "${dir}/${ORACLE_SID}" if [[ "$?" -ne 0 ]]; then error_message fi fi done</p>
+<ul>
+<li>Indent alternatives by 2 spaces.</li>
+<li>A one-line alternative needs a space after the close parenthesis of the pattern and before the <code>;;</code>.</li>
+<li>Long or multi-command alternatives should be split over multiple lines with the pattern, actions, and <code>;;</code> on separate lines.</li>
+</ul>
+<p>The matching expressions are indented one level from the 'case' and 'esac'. Multiline actions are indented another level. In general, there is no need to quote match expressions. Pattern expressions should not be preceded by an open parenthesis. Avoid the <code>;&amp;</code> and <code>;;&amp;</code> notations.</p>
+<p>case "${expression}" in a) variable="..." some_command "${variable}" "${other_expr}" ... ;; absolute) actions="relative" another_command "${actions}" "${other_expr}" ... ;; *) error "Unexpected expression '${expression}'" ;; esac</p>
+<p>Simple commands may be put on the same line as the pattern <em>and</em> <code>;;</code> as long as the expression remains readable. This is often appropriate for single-letter option processing. When the actions don't fit on a single line, put the pattern on a line on its own, then the actions, then <code>;;</code> also on a line of its own. When on the same line as the actions, use a space after the close parenthesis of the pattern and another before the <code>;;</code>.</p>
+<p>verbose='false' aflag='' bflag='' files='' while getopts 'abf:v' flag; do case "${flag}" in a) aflag='true' ;; b) bflag='true' ;; f) files="${OPTARG}" ;; v) verbose='true' ;; *) error "Unexpected option ${flag}" ;; esac done</p>
+<p>In order of precedence: Stay consistent with what you find; quote your variables; prefer "${var}" over "$var", but see details.</p>
+<p>These are meant to be guidelines, as the topic seems too controversial for a mandatory regulation.<br />
+They are listed in order of precedence.</p>
+<ol type="1">
+<li><p>Stay consistent with what you find for existing code.</p></li>
+<li><p>Quote variables, see <a href="#Quoting">Quoting section below</a>.toto</p></li>
+<li><p>Don't brace-quote single character shell specials / positional parameters, unless strictly necessary or avoiding deep confusion.<br />
+Prefer brace-quoting all other variables. # Section oftoto</p>
+<p><em>recommended</em> cases. # Preferred style for 'special' variables:toto</p>
+<p>echo "Positional: $1" "$5" "$3" echo "Specials: !=$!, -=$-, _=$_. ?=$?, #=$# *=$* @=$@ \$=$$ ..." #toto</p>
+<p>Braces necessary: echo "many parameters: ${10}" # Bracestoto</p>
+<p>avoiding confusion: # Output is "a0b0c0" set -- a b c echototo</p>
+<p>"${1}0${2}0${3}0" # Preferred style for other variables: echototo</p>
+<p>"PATH=${PATH}, PWD=${PWD}, mine=${some_var}" while read f; do echo "file=${f}" done &lt; &lt;(ls -l /tmp) # Section oftoto</p>
+<p><em>discouraged</em> cases # Unquoted vars, unbraced vars, brace-quotedtoto</p>
+<p>single letter # shell specials. echo a=$avar "b=$bvar"toto</p>
+<p>"PID=${$}" "${1}" # Confusing use: this is expanded astoto</p>
+<p>"${1}0${2}0${3}0", # not "${10}${20}${30} set -- a b ctoto</p>
+<p>echo "$10$20$30"</p></li>
+</ol>
+<ul>
+<li><p>Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required.</p></li>
+<li><p>Prefer quoting strings that are "words" (as opposed to command options or path names).</p></li>
+<li><p>Never quote <em>literal</em> integers.</p></li>
+<li><p>Be aware of the quoting rules for <a href="#Test,_%5B_and_%5B%5B">pattern matches in [[</a>.toto</p></li>
+<li><p>Use "$@" unless you have a specific reason to use $*.</p></li>
+</ul>
+<p># 'Single' quotes indicate that no substitution is desired. #toto</p>
+<p>"Double" quotes indicate that substitution is required/tolerated. #toto</p>
+<p>Simple examples # "quote command substitutions"toto</p>
+<p>flag="$(some_command and its args "$@" 'quoted separately')" #toto</p>
+<p>"quote variables" echo "${flag}" # "never quote literaltoto</p>
+<p>integers" value=32 # "quote command substitutions", even when youtoto</p>
+<p>expect integers number="$(generate_number)" # "prefer quotingtoto</p>
+<p>words", not compulsory readonly USE_INTEGER='true' # "quote shelltoto</p>
+<p>meta characters" echo 'Hello stranger, and well met. Earn lots of $$$' echo "Process $$: Done making \$\$\$." # "commandtoto</p>
+<p>options or path names" # ($1 is assumed to contain a value here) greptoto</p>
+<p>-li Hugo /dev/null "$1" # Less simple examples # "quote variables,toto</p>
+<p>unless proven false": ccs might be empty git send-email --to "${reviewers}" ${ccs:+"--cc" "${ccs}"} # Positional parametertoto</p>
+<p>precautions: $1 might be unset # Single quotes leave regex as-is. greptoto</p>
+<p>-cP '([Ss]pecial|\|?characters*)$' ${1:+"$1"} # Fortoto</p>
+<p>passing on arguments, # "$@" is right almost everytime, and # $*toto</p>
+<p>is wrong almost everytime: # # * $* and $@ will split on spaces,toto</p>
+<p>clobbering up arguments # that contain spaces and dropping emptytoto</p>
+<p>strings; # * "$@" will retain arguments as-is, so no args #toto</p>
+<p>provided will result in no args being passed on; # This is in mosttoto</p>
+<p>cases what you want to use for passing # on arguments. # * "$*"toto</p>
+<p>expands to one argument, with all args joined # by (usually) spaces, #toto</p>
+<p>so no args provided will result in one empty string # being passed on.toto</p>
+<p># (Consult 'man bash' for the nit-grits ;-) set -- 1 "2 two" "3toto</p>
+<p>three tres"; echo $# ; set -- "$*"; echo "$#, $@") set --toto</p>
+<p>1 "2 two" "3 three tres"; echo $# ; set -- "$@"; echo "$#,toto</p>
+<p>$@")</p>
+<p>Use <code>$(command)</code> instead of backticks.</p>
+<p>Nested backticks require escaping the inner ones with <code>\</code>. The <code>$(command)</code> format doesn't change when nested and is easier to read.</p>
+<p>Example: # This is preferred: var="$(command "$(command1)")" #toto</p>
+<p>This is not: var="`command \`command1\``"</p>
+<p><code>[[ ... ]]</code> is preferred over <code>[</code>, <code>test</code> and <code>/usr/bin/[</code>.</p>
+<p><code>[[ ... ]]</code> reduces errors as no pathname expansion or word splitting takes place between <code>[[</code> and <code>]]</code> and <code>[[ ... ]]</code> allows for regular expression matching where <code>[ ... ]</code> does not. # This ensures the stringtoto</p>
+<p>on the left is made up of characters in the # alnum character classtoto</p>
+<p>followed by the string name. # Note that the RHS should not be quotedtoto</p>
+<p>here. # For the gory details, see # E14 attoto</p>
+<p>https://tiswww.case.edu/php/chet/bash/FAQ if [[ "filename" =~ ^[[:alnum:]]+name ]]; then echo "Match" fi # This matches thetoto</p>
+<p>exact pattern "f*" (Does not match in this case) if [[ "filename" == "f*" ]]; then echo "Match" fi # This gives a "too manytoto</p>
+<p>arguments" error as f* is expanded to the # contents of the currenttoto</p>
+<p>directory if [ "filename" == f* ]; then echo "Match" fi</p>
+<p>Use quotes rather than filler characters where possible.</p>
+<p>Bash is smart enough to deal with an empty string in a test. So, given that the code is much easier to read, use tests for empty/non-empty strings or empty strings rather than filler characters. # Do this: iftoto</p>
+<p>[[ "${my_var}" = "some_string" ]]; then do_something fi #toto</p>
+<p>-z (string length is zero) and -n (string length is not zero) are #toto</p>
+<p>preferred over testing for an empty string if [[ -z "${my_var}" ]]; then do_something fi # This is OK (ensure quotes on the emptytoto</p>
+<p>side), but not preferred: if [[ "${my_var}" = "" ]]; then do_something fi # Not this: if [[ "${my_var}X" =toto</p>
+<p>"some_stringX" ]]; then do_something fi</p>
+<p>To avoid confusion about what you're testing for, explicitly use <code>-z</code> or <code>-n</code>. # Use this if [[ -n "${my_var}" ]]; then do_somethingtoto</p>
+<p>fi # Instead of this as errors can occur if ${my_var} expands to atoto</p>
+<p>test # flag if [[ "${my_var}" ]]; then do_something fitoto</p>
+<p>Use an explicit path when doing wildcard expansion of filenames.</p>
+<p>As filenames can begin with a <code>-</code>, it's a lot safer to expand wildcards with <code>./*</code> instead of <code>*</code>. # Here's the contents of the directory: #toto</p>
+<p>-f -r somedir somefile # This deletes almost everything in thetoto</p>
+<p>directory by force psa@bilby$ rm -v * removed directory: `somedir' removed `somefile' # As opposed to: psa@bilby$ rm -v ./* removedtoto</p>
+<p>`./-f' removed `./-r' rm: cannot remove `./somedir': Is a directory removed `./somefile'</p>
+<p><code>eval</code> should be avoided.</p>
+<p>Eval munges the input when used for assignment to variables and can set variables without making it possible to check what those variables were. # What does this set? # Did it succeed? In part or whole? evaltoto</p>
+<p>$(set_my_variables) # What happens if one of the returned values hastoto</p>
+<p>a space in it? variable="$(eval some_function)"</p>
+<p>Use process substitution or for loops in preference to piping to while. Variables modified in a while loop do not propagate to the parent because the loop's commands run in a subshell.</p>
+<p>The implicit subshell in a pipe to while can make it difficult to track down bugs. last_line='NULL' your_command | while read line; do last_line="${line}" done # This will output 'NULL' echototo</p>
+<p>"${last_line}"</p>
+<p>Use a for loop if you are confident that the input will not contain spaces or special characters (usually, this means not user input). total=0 # Only do this if there are no spaces in return values. fortoto</p>
+<p>value in $(command); do total+="${value}" done</p>
+<p>Using process substitution allows redirecting output but puts the commands in an explicit subshell rather than the implicit subshell that bash creates for the while loop. total=0 last_file= while read count filename; do total+="${count}" last_file="${filename}" done &lt; &lt;(your_command | uniq -c) # This will output the second field of thetoto</p>
+<p>last line of output from # the command. echo "Total = ${total}" echototo</p>
+<p>"Last one = ${last_file}"</p>
+<p>Use while loops where it is not necessary to pass complex results to the parent shell - this is typically where some more complex "parsing" is required. Beware that simple examples are probably more easily done with a tool such as awk. This may also be useful where you specifically don't want to change the parent scope variables. # Trivialtoto</p>
+<p>implementation of awk expression: # awk '$3 == "nfs" { print $2 "toto</p>
+<p>maps to " $1 }' /proc/mounts cat /proc/mounts | while read src dest type opts rest; do if [[ ${type} == "nfs" ]]; then echo "NFS ${dest} maps to ${src}" fi done</p>
+<p>Lower-case, with underscores to separate words. Separate libraries with <code>::</code>. Parentheses are required after the function name. The keyword <code>function</code> is optional, but must be used consistently throughout a project.</p>
+<p>If you're writing single functions, use lowercase and separate words with underscore. If you're writing a package, separate package names with <code>::</code>. Braces must be on the same line as the function name (as with other languages at Google) and no space between the function name and the parenthesis. # Single function my_func() { ... } # Part of atoto</p>
+<p>package mypackage::my_func() { ... }</p>
+<p>The <code>function</code> keyword is extraneous when "()" is present after the function name, but enhances quick identification of functions.</p>
+<p>As for function names.</p>
+<p>Variables names for loops should be similarly named for any variable you're looping through. for zone in ${zones}; do something_with "${zone}" done</p>
+<p>All caps, separated with underscores, declared at the top of the file.</p>
+<p>Constants and anything exported to the environment should be capitalized. # Constant readonly PATH_TO_FILES='/some/path' # Bothtoto</p>
+<p>constant and environment declare -xr ORACLE_SID='PROD'</p>
+<p>Some things become constant at their first setting (for example, via getopts). Thus, it's OK to set a constant in getopts or based on a condition, but it should be made readonly immediately afterwards. Note that <code>declare</code> doesn't operate on global variables within functions, so <code>readonly</code> or <code>export</code> is recommended instead.</p>
+<p>VERBOSE='false' while getopts 'v' flag; do case "${flag}" in v) VERBOSE='true' ;; esac done readonly VERBOSE</p>
+<p>Lowercase, with underscores to separate words if desired.</p>
+<p>This is for consistency with other code styles in Google: <code>maketemplate</code> or <code>make_template</code> but not <code>make-template</code>.</p>
+<p>Use <code>readonly</code> or <code>declare -r</code> to ensure they're read only.</p>
+<p>As globals are widely used in shell, it's important to catch errors when working with them. When you declare a variable that is meant to be read-only, make this explicit. zip_version="$(dpkg --status zip | grep Version: | cut -d ' ' -f 2)" if [[ -z "${zip_version}" ]]; then error_message else readonly zip_version fi</p>
+<p>Declare function-specific variables with <code>local</code>. Declaration and assignment should be on different lines.</p>
+<p>Ensure that local variables are only seen inside a function and its children by using <code>local</code> when declaring them. This avoids polluting the global name space and inadvertently setting variables that may have significance outside the function.</p>
+<p>Declaration and assignment must be separate statements when the assignment value is provided by a command substitution; as the 'local' builtin does not propagate the exit code from the command substitution. my_func2() { local name="$1" # Separate lines for declaration andtoto</p>
+<p>assignment: local my_var my_var="$(my_func)" || return # DO NOTtoto</p>
+<p>do this: $? contains the exit code of 'local', not my_func local my_var="$(my_func)" [[ $? -eq 0 ]] || return ... }</p>
+<p>Put all functions together in the file just below constants. Don't hide executable code between functions.</p>
+<p>If you've got functions, put them all together near the top of the file. Only includes, <code>set</code> statements and setting constants may be done before declaring functions.</p>
+<p>Don't hide executable code between functions. Doing so makes the code difficult to follow and results in nasty surprises when debugging.</p>
+<p>A function called <code>main</code> is required for scripts long enough to contain at least one other function.</p>
+<p>In order to easily find the start of the program, put the main program in a function called <code>main</code> as the bottom most function. This provides consistency with the rest of the code base as well as allowing you to define more variables as <code>local</code> (which can't be done if the main code is not a function). The last non-comment line in the file should be a call to <code>main</code>: main "$@"</p>
+<p>Obviously, for short scripts where it's just a linear flow, <code>main</code> is overkill and so is not required.</p>
+<p>Always check return values and give informative return values.</p>
+<p>For unpiped commands, use <code>$?</code> or check directly via an <code>if</code> statement to keep it simple.</p>
+<p>Example: if ! mv "${file_list}" "${dest_dir}/" ; then echo "Unable to move ${file_list} to ${dest_dir}" &gt;&amp;2 exit "${E_BAD_MOVE}" fi # Or mv "${file_list}" "${dest_dir}/"toto</p>
+<p>if [[ "$?" -ne 0 ]]; then echo "Unable to move ${file_list} to ${dest_dir}" &gt;&amp;2 exit "${E_BAD_MOVE}" fi</p>
+<p>Bash also has the <code>PIPESTATUS</code> variable that allows checking of the return code from all parts of a pipe. If it's only necessary to check success or failure of the whole pipe, then the following is acceptable: tar -cf - ./* | ( cd "${dir}" &amp;&amp; tar -xf - ) if [[ "${PIPESTATUS[0]}" -ne 0 || "${PIPESTATUS[1]}" -ne 0 ]]; then echo "Unable to tar files to ${dir}" &gt;&amp;2 fi</p>
+<p>However, as <code>PIPESTATUS</code> will be overwritten as soon as you do any other command, if you need to act differently on errors based on where it happened in the pipe, you'll need to assign <code>PIPESTATUS</code> to another variable immediately after running the command (don't forget that <code>[</code> is a command and will wipe out <code>PIPESTATUS</code>). tar -cf - ./* | ( cd "${DIR}" &amp;&amp; tar -xf - ) return_codes=(${PIPESTATUS[*]}) if [[ "${return_codes[0]}" -ne 0 ]]; then do_something fi if [[ "${return_codes[1]}" -ne 0 ]]; then do_something_else fi</p>
+<p>Given the choice between invoking a shell builtin and invoking a separate process, choose the builtin.</p>
+<p>We prefer the use of builtins such as the <em>Parameter Expansion</em> functions in <code>bash(1)</code> as it's more robust and portable (especially when compared to things like sed).</p>
+<p>Example: # Prefer this: addition=$((${X} + ${Y}))toto</p>
+<p>substitution="${string/#foo/bar}" # Instead of this:toto</p>
+<p>addition="$(expr ${X} + ${Y})" substitution="$(echo "${string}" | sed -e 's/^foo/bar/')"</p>
+<p>Use common sense and <em>BE CONSISTENT</em>.</p>
+<p>Please take a few minutes to read the Parting Words section at the bottom of the <a href="cppguide.html.html">C++ Guide</a>.</p>
+<p>Revision 1.26</p>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>style.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="markdown-style-guidetoto" class="level1">
+<h1>Markdown style guidetoto</h1>
+<p>Much of what makes Markdown great is the ability to write plain text, and get great formatted output as a result. To keep the slate clean for the next author, your Markdown should be simple and consistent with the whole corpus wherever possible.</p>
+<p>We seek to balance three goals:</p>
+<ol type="1">
+<li><em>Source text is readable and portable.</em></li>
+<li><em>Markdown files are maintainable over time and across teams.</em></li>
+<li><em>The syntax is simple and easy to remember.</em></li>
+</ol>
+<p>Contents:</p>
+<ol type="1">
+<li><p><a href="#document-layout">Document layout</a>toto</p></li>
+<li><p><a href="#character-line-limit">Character line limit</a>toto</p></li>
+<li><p><a href="#trailing-whitespace">Trailing whitespace</a>toto</p></li>
+<li><p><a href="#headings">Headings</a>toto</p>
+<ol type="1">
+<li><p><a href="#atx-style-headings">ATX-style headings</a>toto</p></li>
+<li><p><a href="#add-spacing-to-headings">Add spacing to headings</a>toto</p></li>
+</ol></li>
+<li><p><a href="#lists">Lists</a>toto</p>
+<ol type="1">
+<li><p><a href="#use-lazy-numbering-for-long-lists">Use lazy numbering for long lists</a>toto</p></li>
+<li><p><a href="#nested-list-spacing">Nested list spacing</a>toto</p></li>
+</ol></li>
+<li><p><a href="#code">Code</a>toto</p>
+<ol type="1">
+<li><p><a href="#inline">Inline</a>toto</p></li>
+<li><p><a href="#codeblocks">Codeblocks</a>toto</p></li>
+<li><p><a href="#declare-the-language">Declare the language</a>toto</p></li>
+<li><p><a href="#escape-newlines">Escape newlines</a>toto</p></li>
+<li><p><a href="#nest-codeblocks-within-lists">Nest codeblocks within lists</a>toto</p></li>
+</ol></li>
+<li><p><a href="#links">Links</a>toto</p>
+<ol type="1">
+<li><a href="#use-informative-markdown-link-titles">Use informative Markdown link titles</a>toto</li>
+</ol></li>
+<li><p><a href="#images">Images</a>toto</p></li>
+<li><p><a href="#prefer-lists-to-tables">Prefer lists to tables</a>toto</p></li>
+<li><p><a href="#strongly-prefer-markdown-to-html">Strongly prefer Markdown to HTML</a>toto</p></li>
+</ol>
+<section id="document-layouttoto" class="level2">
+<h2>Document layouttoto</h2>
+<p>In general, most documents benefit from some variation of the following layout:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># Document Titletoto</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>Short introduction.</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>[TOC]</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">## Topictoto</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>Content.</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="fu">## See alsototo</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="st">* https://link-to-more-info</span></span></code></pre></div>
+<ol type="1">
+<li><p><code># Document Title</code>: The first heading should be a level one heading, andtoto</p>
+<p>should ideally be the same or nearly the same as the filename. The first level one heading is used as the page <code>&lt;title&gt;</code>.</p></li>
+<li><p><code>author</code>: <em>Optional</em>. If you’d like to claim ownership of the document or if you are very proud of it, add yourself under the title. However, revision history generally suffices.</p></li>
+<li><p><code>Short introduction.</code> 1-3 sentences providing a high-level overview of the topic. Imagine yourself as a complete newbie, who landed on your “Extending Foo” doc and needs to know the most basic assumptions you take for granted. “What is Foo? Why would I extend it?”</p></li>
+<li><p><code>[TOC]</code>: if you use hosting that supports table of contents, such as Gitiles, put <code>[TOC]</code> after the short introduction. See <a href="https://gerrit.googlesource.com/gitiles/+/master/Documentation/markdown.md#Table-of-contents"><code>[TOC]</code> documentation</a>.toto</p></li>
+<li><p><code>## Topic</code>: The rest of your headings should start from level 2.toto</p></li>
+<li><p><code>## See also</code>: Put miscellaneous links at the bottom for the user who wantstoto</p>
+<p>to know more or didn’t find what she needed.</p></li>
+</ol>
+</section>
+<section id="character-line-limittoto" class="level2">
+<h2>Character line limittoto</h2>
+<p>Obey projects’ character line limit wherever possible. Long URLs and tables are the usual suspects when breaking the rule. (Headings also can’t be wrapped, but we encourage keeping them short). Otherwise, wrap your text:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1"></a>Lorem ipsum dolor sit amet, nec eius volumus patrioque cu, nec et commodo</span>
+<span id="cb2-2"><a href="#cb2-2"></a>hendrerit, id nobis saperet fuisset ius.</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st">*   Malorum moderatius vim eu. In vix dico persecuti. Te nam saperet percipitur</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">    interesset. See the </span><span class="ot">[foo docs](https://gerrit.googlesource.com/gitiles/+/master/Documentation/markdown.md.html)</span><span class="st">.</span></span></code></pre></div>
+<p>Often, inserting a newline before a long link preserves readability while minimizing the overflow:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a>Lorem ipsum dolor sit amet. See the</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="ot">[foo docs](https://gerrit.googlesource.com/gitiles/+/master/Documentation/markdown.md.html)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>for details.</span></code></pre></div>
+</section>
+<section id="trailing-whitespacetoto" class="level2">
+<h2>Trailing whitespacetoto</h2>
+<p>Don’t use trailing whitespace, use a trailing backslash.</p>
+<p>The <a href="http://spec.commonmark.org/0.20/#hard-line-breaks">CommonMark spec</a> decreestoto</p>
+<p>that two spaces at the end of a line should insert a <code>&lt;br /&gt;</code> tag. However, many directories have a trailing whitespace presubmit check in place, and many IDEs will clean it up anyway.</p>
+<p>Best practice is to avoid the need for a <code>&lt;br /&gt;</code> altogether. Markdown creates paragraph tags for you simply with newlines: get used to that.</p>
+</section>
+<section id="headingstoto" class="level2">
+<h2>Headingstoto</h2>
+<section id="atx-style-headingstoto" class="level3">
+<h3>ATX-style headingstoto</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">## Heading 2toto</span></span></code></pre></div>
+<p>Headings with <code>=</code> or <code>-</code> underlines can be annoying to maintain and don’t fit with the rest of the heading syntax. The user has to ask: Does <code>---</code> mean H1 or H2?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a>Heading - do you remember what level? DO NOT DO THIS.</span>
+<span id="cb5-2"><a href="#cb5-2"></a>---------</span></code></pre></div>
+</section>
+<section id="add-spacing-to-headingstoto" class="level3">
+<h3>Add spacing to headingstoto</h3>
+<p>Prefer spacing after <code>#</code> and newlines before and after:toto</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a>...text before.</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu"># Heading 1toto</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a>Text after...</span></code></pre></div>
+<p>Lack of spacing makes it a little harder to read in source:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a>...text before.</span>
+<span id="cb7-2"><a href="#cb7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3"></a>#Heading 1toto</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>Text after... DO NOT DO THIS.</span></code></pre></div>
+</section>
+</section>
+<section id="liststoto" class="level2">
+<h2>Liststoto</h2>
+<section id="use-lazy-numbering-for-long-liststoto" class="level3">
+<h3>Use lazy numbering for long liststoto</h3>
+<p>Markdown is smart enough to let the resulting HTML render your numbered lists correctly. For longer lists that may change, especially long nested lists, use “lazy” numbering:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a><span class="st">1.  Foo.</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">1.  Bar.</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">    1.  Foofoo.</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">    1.  Barbar.</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="st">1.  Baz.</span></span></code></pre></div>
+<p>However, if the list is small and you don’t anticipate changing it, prefer fully numbered lists, because it’s nicer to read in source:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="st">1.  Foo.</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">2.  Bar.</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">3.  Baz.</span></span></code></pre></div>
+</section>
+<section id="nested-list-spacingtoto" class="level3">
+<h3>Nested list spacingtoto</h3>
+<p>When nesting lists, use a 4 space indent for both numbered and bulleted lists:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a><span class="st">1.  2 spaces after a numbered list.</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">    4 space indent for wrapped text.</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">2.  2 spaces again.</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="st">*   3 spaces after a bullet.</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="st">    4 space indent for wrapped text.</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="st">    1.  2 spaces after a numbered list.</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">        8 space indent for the wrapped text of a nested list.</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="st">    2.  Looks nice, don&#39;t it?</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="st">*   3 spaces after a bullet.</span></span></code></pre></div>
+<p>The following works, but it’s very messy:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a><span class="st">* One space,</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">with no indent for wrapped text.</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">     1. Irregular nesting... DO NOT DO THIS.</span></span></code></pre></div>
+<p>Even when there’s no nesting, using the 4 space indent makes layout consistent for wrapped text:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="st">*   Foo,</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">    wrapped.</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="st">1.  2 spaces</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="st">    and 4 space indenting.</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="st">2.  2 spaces again.</span></span></code></pre></div>
+<p>However, when lists are small, not nested, and a single line, one space can suffice for both kinds of lists:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="st">* Foo</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">* Bar</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">* Baz.</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st">1. Foo.</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">2. Bar.</span></span></code></pre></div>
+</section>
+</section>
+<section id="codetoto" class="level2">
+<h2>Codetoto</h2>
+<section id="inlinetoto" class="level3">
+<h3>Inlinetoto</h3>
+<p>`Backticks` designate <code>inline code</code>, and will render all wrapped contenttoto</p>
+<p>literally. Use them for short code quotations and field names:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a>You&#39;ll want to run <span class="bn">`really_cool_script.sh arg`</span>.</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>Pay attention to the <span class="bn">`foo_bar_whammy`</span> field in that table.</span></code></pre></div>
+<p>Use inline code when referring to file types in an abstract sense, rather than a specific file:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a>Be sure to update your <span class="bn">`README.md`</span>!</span></code></pre></div>
+<p>Backticks are the most common approach for “escaping” Markdown metacharacters; in most situations where escaping would be needed, code font just makes sense anyway.</p>
+</section>
+<section id="codeblockstoto" class="level3">
+<h3>Codeblockstoto</h3>
+<p>For code quotations longer than a single line, use a codeblock:</p>
+<pre>
+```python
+def Foo(self, bar):
+  self.bar = bar
+```
+</pre>
+<section id="declare-the-languagetoto" class="level4">
+<h4>Declare the languagetoto</h4>
+<p>It is best practice to explicitly declare the language, so that neither the syntax highlighter nor the next editor must guess.</p>
+</section>
+<section id="indented-codeblocks-are-sometimes-cleanertoto" class="level4">
+<h4>Indented codeblocks are sometimes cleanertoto</h4>
+<p>Four-space indenting is also interpreted as a codeblock. These can look cleaner and be easier to read in source, but there is no way to specify the language. We encourage their use when writing many short snippets:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a>You&#39;ll need to run:</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="bn">    bazel run :thing -- --foo</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a>And then:</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="bn">    bazel run :another_thing -- --bar</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a>And again:</span>
+<span id="cb16-10"><a href="#cb16-10"></a></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="bn">    bazel run :yet_again -- --baz</span></span></code></pre></div>
+</section>
+<section id="escape-newlinestoto" class="level4">
+<h4>Escape newlinestoto</h4>
+<p>Because most commandline snippets are intended to be copied and pasted directly into a terminal, it’s best practice to escape any newlines. Use a single backslash at the end of the line:</p>
+<pre>
+```shell
+bazel run :target -- --flag --foo=longlonglonglonglongvalue \
+--bar=anotherlonglonglonglonglonglonglonglonglonglongvalue
+```
+</pre>
+</section>
+<section id="nest-codeblocks-within-liststoto" class="level4">
+<h4>Nest codeblocks within liststoto</h4>
+<p>If you need a codeblock within a list, make sure to indent it so as to not break the list:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1"></a><span class="st">*   Bullet.</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="bn">    ```c++</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="bn">    int foo;</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="bn">    ```</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="st">*   Next bullet.</span></span></code></pre></div>
+<p>You can also create a nested code block with 4 spaces. Simply indent 4 additional spaces from the list indentation:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a><span class="st">*   Bullet.</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="bn">        int foo;</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">*   Next bullet.</span></span></code></pre></div>
+</section>
+</section>
+</section>
+<section id="linkstoto" class="level2">
+<h2>Linkstoto</h2>
+<p>Long links make source Markdown difficult to read and break the 80 character wrapping. <strong>Wherever possible, shorten your links</strong>.</p>
+<section id="use-informative-markdown-link-titlestoto" class="level3">
+<h3>Use informative Markdown link titlestoto</h3>
+<p>Markdown link syntax allows you to set a link title, just as HTML does. Use it wisely.</p>
+<p>Titling your links as “link” or “here” tells the reader precisely nothing when quickly scanning your doc and is a waste of space:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a>See the syntax guide for more info: <span class="ot">[link](syntax_guide.md.html)</span>.</span>
+<span id="cb19-2"><a href="#cb19-2"></a>Or, check out the style guide <span class="ot">[here](style_guide.md.html)</span>.</span>
+<span id="cb19-3"><a href="#cb19-3"></a>DO NOT DO THIS.</span></code></pre></div>
+<p>Instead, write the sentence naturally, then go back and wrap the most appropriate phrase with the link:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1"></a>See the <span class="ot">[syntax guide](syntax_guide.md.html)</span> for more info.</span>
+<span id="cb20-2"><a href="#cb20-2"></a>Or, check out the <span class="ot">[style guide](style_guide.md.html)</span>.</span></code></pre></div>
+</section>
+</section>
+<section id="imagestoto" class="level2">
+<h2>Imagestoto</h2>
+<p>Use images sparingly, and prefer simple screenshots. This guide is designed around the idea that plain text gets users down to the business of communication faster with less reader distraction and author procrastination. However, it’s sometimes very helpful to show what you mean.</p>
+<p>See <a href="https://gerrit.googlesource.com/gitiles/+/master/Documentation/markdown.md#Images">image syntax</a>.toto</p>
+</section>
+<section id="prefer-lists-to-tablestoto" class="level2">
+<h2>Prefer lists to tablestoto</h2>
+<p>Any tables in your Markdown should be small. Complex, large tables are difficult to read in source and most importantly, <strong>a pain to modify later</strong>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1"></a>Fruit | Attribute | Notes</span>
+<span id="cb21-2"><a href="#cb21-2"></a>--- | --- | --- | ---</span>
+<span id="cb21-3"><a href="#cb21-3"></a>Apple | <span class="ot">[Juicy](https://example.com/SomeReallyReallyReallyReallyReallyReallyReallyReallyLongQuery.html)</span>, Firm, Sweet | Apples keep doctors away.</span>
+<span id="cb21-4"><a href="#cb21-4"></a>Banana | <span class="ot">[Convenient](https://example.com/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery.html)</span>, Soft, Sweet | Contrary to popular belief, most apes prefer mangoes.</span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a>DO NOT DO THIS</span></code></pre></div>
+<p><a href="#lists">Lists</a> and subheadings usually suffice to present the same informationtoto</p>
+<p>in a slightly less compact, though much more edit-friendly way:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">## Fruitstoto</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">### Appletoto</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="st">* </span><span class="ot">[Juicy](https://SomeReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyReallyLongURL.html)</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="st">* Firm</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="st">* Sweet</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a></span>
+<span id="cb22-11"><a href="#cb22-11"></a>Apples keep doctors away.</span>
+<span id="cb22-12"><a href="#cb22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="fu">### Bananatoto</span></span>
+<span id="cb22-14"><a href="#cb22-14"></a></span>
+<span id="cb22-15"><a href="#cb22-15"></a></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="st">* </span><span class="ot">[Convenient](https://example.com/SomeDifferentReallyReallyReallyReallyReallyReallyReallyReallyLongQuery.html)</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="st">* Soft</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="st">* Sweet</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a></span>
+<span id="cb22-20"><a href="#cb22-20"></a>Contrary to popular belief, most apes prefer mangoes.</span></code></pre></div>
+<p>However, there are times when a small table is called for:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1"></a>Transport | Favored by | Advantages</span>
+<span id="cb23-2"><a href="#cb23-2"></a>--- | --- | ---</span>
+<span id="cb23-3"><a href="#cb23-3"></a>Swallow | Coconuts | Otherwise unladen</span>
+<span id="cb23-4"><a href="#cb23-4"></a>Bicycle | Miss Gulch | Weatherproof</span>
+<span id="cb23-5"><a href="#cb23-5"></a>X-34 landspeeder | Whiny farmboys | Cheap since the X-38 came out</span></code></pre></div>
+</section>
+<section id="strongly-prefer-markdown-to-htmltoto" class="level2">
+<h2>Strongly prefer Markdown to HTMLtoto</h2>
+<p>Please prefer standard Markdown syntax wherever possible and avoid HTML hacks. If you can’t seem to accomplish what you want, reconsider whether you really need it. Except for <a href="#prefer-lists-to-tables">big tables</a>, Markdown meets almosttoto</p>
+<p>all needs already.</p>
+<p>Every bit of HTML or Javascript hacking reduces the readability and portability. This in turn limits the usefulness of integrations with other tools, which may either present the source as plain text or render it. See <a href="philosophy.md.html">Philosophy</a>.</p>
+<p>Gitiles does not render HTML.</p>
+</section>
+</section>
+</body>
+</html>

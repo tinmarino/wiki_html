@@ -4,21 +4,36 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Git.md – Git Wiki</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Git.md – ipython Git Wiki</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Git Wiki</h1>
+<h1 class="title">ipython Git Wiki</h1>
 </header>
 <section id="tips" class="level1">
 <h1>Tips</h1>
+<p>git push <remote-name> <local-branch-name>:<remote-branch-name> git branch -m old-name new-name # Rename branch g -c merge.driver.union rebase origin/master</p>
+<section id="pickaxe" class="level3">
+<h3>Pickaxe</h3>
+<p>Git can search diffs with the -S option (it’s called pickaxe in the docs)</p>
+<p>git log -Spassword # word like –grep=word git log -Gword # regex</p>
+<p>This will find any commit that added or removed the string password. Here a few options:</p>
+<pre><code>-p: will show the diffs. If you provide a file (-p file), it will generate a patch for you.
+-G: looks for differences whose added or removed line matches the given regexp, as opposed to -S, which &quot;looks for differences that introduce or remove an instance of string&quot;.
+--all: searches over all branches and tags; alternatively, use --branches[=&lt;pattern&gt;] or --tags[=&lt;pattern&gt;]</code></pre>
+</section>
 <section id="reset-one-commit" class="level3">
 <h3>Reset one commit</h3>
 <ul>
@@ -29,41 +44,41 @@
 <section id="ugly-tips-from-draft" class="level3">
 <h3>Ugly tips from draft</h3>
 <ul>
-<li>git push <remote_name> –delete <branch_name> # or -d branch or :branch</li>
-<li>git commit –amend –no-edit # Amend without changing message</li>
-<li>git diff –cached (stage vs currznt dir)</li>
-<li>git diff –staged (stage vs commit)</li>
+<li><p>git push <remote_name> –delete <branch_name> # or -d branch or :branch</p></li>
+<li><p>git commit –amend –no-edit # Amend without changing message</p></li>
+<li><p>git diff –cached (stage vs currznt dir)</p></li>
+<li><p>git diff –staged (stage vs commit)</p></li>
 <li><p>git config –list</p></li>
-<li>Add wisely
+<li><p>Add wisely</p>
 <ul>
 <li><code>git cherrypick &lt;commit_sha1&gt;</code></li>
 <li><code>git add -p # add by chunk (remember patch)</code></li>
 </ul></li>
-<li>Store credentials
+<li><p>Store credentials</p>
 <ul>
 <li><code>git config --global credential.helper cache</code> : Tells Git to keep your password cached in memory for (by default) 15 minutes. You can set a longer timeout with:</li>
 <li><code>git config credential.helper store</code> : Stores permanently</li>
 <li>Note : While this is convenient, Git will store your credentials in clear text in a local file (.git-credentials) under your project directory (see below for the “home” directory). If you don’t like this, delete this file and switch to using the cache option.</li>
 </ul></li>
-<li>Submodules
+<li><p>Submodules</p>
 <ul>
 <li><code>git submodule update --recursive --remote --jobs 8</code></li>
 <li><code>git submodule sync</code> # after modyfing .gitmodules</li>
 <li><code>git pull --recurse-submodules</code></li>
 <li><code>git submodule forech [--recursive] 'git reset --hard'</code></li>
 </ul></li>
-<li>Merge commit
+<li><p>Merge commit</p>
 <ul>
 <li><code>git reset --soft "HEAD~10"</code> # Merge last 10 commits into 1</li>
 </ul></li>
-<li>Display
+<li><p>Display</p>
 <ul>
 <li><code>git log --all --full-history -- **/thefile.*</code></li>
 <li><code>git log --diff-filter=D --summary | grep delete</code></li>
 <li><code>git log --all --{file_path}</code> : file_path can have * inside</li>
 <li><code>git log --pretty=format:"%h"</code></li>
 <li><code>git log --pretty=oneline</code></li>
-<li><code>git log -S watever [--source --all] [--decorate] [--reverse]</code></li>
+<li><code>git log -S watever [--source --all] [--decorate] [--reverse]</code> : pickaxe or pickace</li>
 <li><code>git log -G "^(\s)*function foo[(][)](\s.html)**{$"</code> : regex</li>
 <li><code>git reflog</code></li>
 <li><code>git show &lt;COMMIT_ID&gt; -- &lt;FILE_PATH&gt;</code> : show deleted files</li>
@@ -74,36 +89,36 @@
 <li><code>git cat-file -s</code></li>
 <li><code>git diff-tree</code></li>
 </ul></li>
-<li>Interface
+<li><p>Interface</p>
 <ul>
 <li><code>git add -i</code> : add items without copying full file name</li>
 </ul></li>
-<li>Patch
+<li><p>Patch</p>
 <ul>
 <li><code>git .git/objects/pack SAMPLE</code></li>
 <li><code>git unpack-object &lt; SAMPLE/*.pack</code></li>
 </ul></li>
-<li>Ignore
+<li><p>Ignore</p>
 <ul>
 <li><code>.git/info/exclude</code> : personal gitignore</li>
 </ul></li>
-<li>Clean
+<li><p>Clean</p>
 <ul>
 <li><code>git clean -[xd]n</code> : Show what I will clean</li>
 <li><code>git clean -[xd]f</code> : Do</li>
 </ul></li>
-<li>Grep regex
+<li><p>Grep regex</p>
 <ul>
 <li><code>git log -S'regex'</code></li>
 <li><code>git log -S'regex'</code></li>
 <li><code>git grep "regex"</code></li>
 </ul></li>
-<li>Compress
+<li><p>Compress</p>
 <ul>
 <li><code>git reflog expire --expire=now --all</code></li>
 <li><code>git gc [--agressive --prune=now]</code> : garbage collector</li>
 </ul></li>
-<li>Filter : remove certain files
+<li><p>Filter : remove certain files</p>
 <ul>
 <li><code>git filter-branch --tree-filter 'rm -f pass.txt' ~HEAD</code></li>
 <li>`git filter-branch –tree-filter ‘git clean -f -X’ – –all
@@ -112,52 +127,52 @@
 <li>Aster rebasing with a gitignore at first commit</li>
 </ul></li>
 </ul></li>
-<li>Clone only last commit
+<li><p>Clone only last commit</p>
 <ul>
 <li><code>git clone --depth=1 http://www.github.com/toto/project.git</code></li>
 </ul></li>
-<li>Disable security check (https)
+<li><p>Disable security check (https)</p>
 <ul>
 <li><code>git -c http.sslVerify=false origin master</code></li>
 </ul></li>
-<li>Unstage all
+<li><p>Unstage all</p>
 <ul>
 <li><code>git reset HEAD</code></li>
 </ul></li>
-<li>Stop tracking
+<li><p>Stop tracking</p>
 <ul>
 <li><code>git rm --cached file</code></li>
 </ul></li>
-<li>Ignore Windows newline
+<li><p>Ignore Windows newline</p>
 <ul>
 <li><code>git config --global core.autocrlf true</code></li>
 </ul></li>
-<li>Show word regex in diff</li>
+<li><p>Show word regex in diff</p></li>
 <li><p><code>git diff --word-diff-regex=.</code></p></li>
-<li>Get statistic lines changed stats
+<li><p>Get statistic lines changed stats</p>
 <ul>
 <li><code>git diff --stat</code></li>
 </ul></li>
-<li>Make backup
+<li><p>Make backup</p>
 <ul>
 <li><code>git stash &amp;&amp; git stash apply</code></li>
 </ul></li>
-<li>Aliasing
+<li><p>Aliasing</p>
 <ul>
-<li><code>git config --global alias.wdiff diff --color-words</code></li>
+<li><p><code>git config --global alias.wdiff diff --color-words</code></p></li>
 <li><p>Edit <code>~/.gitconfig</code></p>
 <pre><code>  [alias]
       wdiff = diff --color-words</code></pre></li>
 </ul></li>
-<li>Word by word diff
+<li><p>Word by word diff</p>
 <ul>
 <li><code>git diff --color-words</code></li>
 </ul></li>
-<li>Checkout all the files
+<li><p>Checkout all the files</p>
 <ul>
 <li><code>git checkout -- .</code></li>
 </ul></li>
-<li>Choose ours (master) theirs (current branch) automaticcaly in case of conflict
+<li><p>Choose ours (master) theirs (current branch) automaticcaly in case of conflict</p>
 <ul>
 <li><code>git rebase -Xtheirs branch-b</code></li>
 <li><code>git merge -Xours origin/master</code></li>

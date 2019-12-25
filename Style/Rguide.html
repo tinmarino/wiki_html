@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rguide.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="googles-r-style-guidetoto" class="level1">
+<h1>Google’s R Style Guidetoto</h1>
+<p>R is a high-level programming language used primarily for statistical computing and graphics. The goal of the R Programming Style Guide is to make our R code easier to read, share, and verify.</p>
+<p>The Google R Style Guide is a fork of the <a href="https://style.tidyverse.org/.html">Tidyverse Style Guide</a> by Hadley Wickham <a href="https://creativecommons.org/licenses/by-sa/2.0/.html">license</a>. Google modifications were developed in collaboration with the internal R user community. The rest of this document explains Google’s primary differences with the Tidyverse guide, and why these differences exist.</p>
+<section id="syntaxtoto" class="level2">
+<h2>Syntaxtoto</h2>
+<section id="naming-conventionstoto" class="level3">
+<h3>Naming conventionstoto</h3>
+<p>Google prefers identifying functions with <code>BigCamelCase</code> to clearly distinguish them from other objects.</p>
+<pre><code># Goodtoto
+
+DoNothing &lt;- function() {
+  return(invisible(NULL))
+}</code></pre>
+<p>The names of private functions should begin with a dot. This helps communicate both the origin of the function and its intended use.</p>
+<pre><code># Goodtoto
+
+.DoNothingPrivately &lt;- function() {
+  return(invisible(NULL))
+}</code></pre>
+<p>We previously recommended naming objects with <code>dot.case</code>. We’re moving away from that, as it creates confusion with S3 methods.</p>
+</section>
+<section id="dont-use-attachtoto" class="level3">
+<h3>Don’t use attach()toto</h3>
+<p>The possibilities for creating errors when using <code>attach()</code> are numerous.</p>
+</section>
+</section>
+<section id="pipestoto" class="level2">
+<h2>Pipestoto</h2>
+<section id="right-hand-assignmenttoto" class="level3">
+<h3>Right-hand assignmenttoto</h3>
+<p>We do not support using right-hand assignment.</p>
+<pre><code># Badtoto
+
+iris %&gt;%
+  dplyr::summarize(max_petal = max(Petal.Width)) -&gt; results</code></pre>
+<p>This convention differs substantially from practices in other languages and makes it harder to see in code where an object is defined. E.g. searching for <code>foo &lt;-</code> is easier than searching for <code>foo &lt;-</code> and <code>-&gt; foo</code> (possibly split over lines).</p>
+</section>
+<section id="use-explicit-returnstoto" class="level3">
+<h3>Use explicit returnstoto</h3>
+<p>Do not rely on R’s implicit return feature. It is better to be clear about your intent to <code>return()</code> an object.</p>
+<pre><code># Goodtoto
+
+AddValues &lt;- function(x, y) {
+  return(x + y)
+}
+
+# Badtoto
+
+AddValues &lt;- function(x, y) {
+  x + y
+}</code></pre>
+</section>
+<section id="qualifying-namespacestoto" class="level3">
+<h3>Qualifying namespacestoto</h3>
+<p>Users should explicitly qualify namespaces for all external functions.</p>
+<pre><code># Goodtoto
+
+purrr::map()</code></pre>
+<p>We discourage using the <code>@import</code> Roxygen tag to bring in all functions into a NAMESPACE. Google has a very big R codebase, and importing all functions creates too much risk for name collisions.</p>
+<p>While there is a small performance penalty for using <code>::</code>, it makes it easier to understand dependencies in your code. There are some exceptions to this rule.</p>
+<ul>
+<li>Infix functions (<code>%name%</code>) always need to be imported.</li>
+<li>Certain <code>rlang</code> pronouns, notably <code>.data</code>, need to be imported.</li>
+<li>Functions from default R packages, including <code>datasets</code>, <code>utils</code>, <code>grDevices</code>, <code>graphics</code>, <code>stats</code> and <code>methods</code>. If needed, you can <code>@import</code> the full package.</li>
+</ul>
+<p>When importing functions, place the <code>@importFrom</code> tag in the Roxygen header above the function where the external dependency is used.</p>
+</section>
+</section>
+<section id="documentationtoto" class="level2">
+<h2>Documentationtoto</h2>
+<section id="package-level-documentationtoto" class="level3">
+<h3>Package-level documentationtoto</h3>
+<p>All packages should have a package documentation file, in a <code>packagename-package.R</code> file.</p>
+</section>
+</section>
+</section>
+</body>
+</html>

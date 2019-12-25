@@ -5,21 +5,26 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Numpy_top_100.md – Numpy &lt;- StackOverflow top 100</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="../Css/color_dark_solarized.css" />
   <link rel="stylesheet" href="../Css/layout_toc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
   <script type="text/javascript" src="../Css/js_masonry_desandro.js"></script>
 </head>
 <body>
-<header>
+<header id="title-block-header">
 <h1 class="title">Numpy &lt;- StackOverflow top 100</h1>
 </header>
-<nav id="TOC">
+<nav id="TOC" role="doc-toc">
 <ul>
 <li><a href="#how-do-i-create-an-empty-arraymatrix-in-numpy-score-803995-in-2014">1: How do I create an empty array/matrix in NumPy? (score <span>803995</span> in 2014)</a></li>
 <li><a href="#convert-pandas-dataframe-to-numpy-array-score-765238-in-2019">2: Convert pandas dataframe to NumPy array (score <span>765238</span> in 2019)</a></li>
@@ -170,7 +175,7 @@ array([[ 1.,  2.],
 <section id="answer-2-score-85" class="level4">
 <h4>Answer 2 (score 85)</h4>
 <p>A NumPy array is a very different data structure from a list and is designed to be used in different ways. Your use of <code>hstack</code> is potentially very inefficient… every time you call it, all the data in the existing array is copied into a new one. (The <code>append</code> function will have the same issue.) If you want to build up your matrix one column at a time, you might be best off to keep it in a list until it is finished, and only then convert it into an array.</p>
-<p>e.g.</p>
+<p>e.g. </p>
 <pre><code>numpy
 
 mylist = []
@@ -863,7 +868,7 @@ array([[1],
        [3],
        [5]])</code></pre>
 <p>gives you a column vector, so that you can do concatenate or hstack operation.</p>
-<p>e.g.</p>
+<p>e.g. </p>
 <pre><code>numpy
 &amp;gt;&amp;gt;&amp;gt; np.hstack((test, test[:,[0]]))
 array([[1, 2, 1],
@@ -1002,7 +1007,7 @@ df[&#39;period&#39;] = df[[&#39;Year&#39;, &#39;quarter&#39;]].apply(lambda x: &
    Year quarter  period
 0  2014      q1  2014q1
 1  2015      q2  2015q2</code></pre>
-<p>This method generalizes to an arbitrary number of string columns by replacing <code>df[['Year', 'quarter']]</code> with any column slice of your dataframe, e.g. <code>df.iloc[:,0:2].apply(lambda x: ''.join(x), axis=1)</code>.</p>
+<p>This method generalizes to an arbitrary number of string columns by replacing <code>df[['Year', 'quarter']]</code> with any column slice of your dataframe, e.g. <code>df.iloc[:,0:2].apply(lambda x: ''.join(x), axis=1)</code>.</p>
 <p>You can check more information about apply() method <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html" rel="noreferrer">here</a></p>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
 </section>
@@ -1123,7 +1128,7 @@ numpy.savetxt(&quot;foo.csv&quot;, a, delimiter=&quot;,&quot;)</code></pre>
 <pre><code>numpy
 import pandas as pd 
 pd.DataFrame(np_array).to_csv(&quot;path/to/file.csv&quot;)</code></pre>
-<p>if you don’t want a header or index, use <code>to_csv(&quot;/path/to/file.csv&quot;, header=None, index=None)</code></p>
+<p>if you don’t want a header or index, use <code>to_csv("/path/to/file.csv", header=None, index=None)</code></p>
 </section>
 <section id="answer-3-score-39" class="level4">
 <h4>Answer 3 (score 39)</h4>
@@ -1236,7 +1241,7 @@ ValueError: The truth value of an array with more than one element is ambiguous.
 <section id="answer-accepted-score-138" class="level4">
 <h4>Answer accepted (score 138)</h4>
 <p>
-<code>r</code> is a numpy (rec)array. So <code>r[&quot;dt&quot;] &amp;gt;= startdate</code> is also a (boolean) array. For numpy arrays the <code>&amp;amp;</code> operation returns the elementwise-and of the two boolean arrays.
+<code>r</code> is a numpy (rec)array. So <code>r["dt"] &amp;gt;= startdate</code> is also a (boolean) array. For numpy arrays the <code>&amp;amp;</code> operation returns the elementwise-and of the two boolean arrays.
 </p>
 <p>
 The NumPy developers felt there was no one commonly understood way to evaluate an array in boolean context: it could mean <code>True</code> if <em>any</em> element is <code>True</code>, or it could mean <code>True</code> if <em>all</em> elements are <code>True</code>, or <code>True</code> if the array has non-zero length, just to name three possibilities.
@@ -2306,7 +2311,7 @@ def label_race (row):
       return &#39;White&#39;
    return &#39;Other&#39;</code></pre>
 <p>You may want to go over this, but it seems to do the trick - notice that the parameter going into the function is considered to be a Series object labelled “row”.</p>
-<p>Next, use the apply function in pandas to apply the function - e.g.</p>
+<p>Next, use the apply function in pandas to apply the function - e.g. </p>
 <pre><code>numpy
 df.apply (lambda row: label_race(row), axis=1)</code></pre>
 <p>Note the axis=1 specifier, that means that the application is done at a row, rather than a column level. The results are here:</p>
@@ -2653,7 +2658,7 @@ Copy the downloaded <code>numpy‑1.9.2+mkl‑cp27‑none‑win_amd64.whl</code>
 </li>
 <li>
 <p>
-Still at the command prompt, navigate to the above directory and run:<br><br> <code>pip2.7.exe install &quot;numpy‑1.9.2+mkl‑cp27‑none‑win_amd64.whl&quot;</code>
+Still at the command prompt, navigate to the above directory and run:<br><br> <code>pip2.7.exe install "numpy‑1.9.2+mkl‑cp27‑none‑win_amd64.whl"</code>
 </p>
 </li>
 </ol>
@@ -2661,7 +2666,7 @@ Still at the command prompt, navigate to the above directory and run:<br><br> <c
 <section id="answer-3-score-27" class="level4">
 <h4>Answer 3 (score 27)</h4>
 <p>Download <strong>numpy-1.9.2+mkl-cp27-none-win32.whl</strong> from <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" rel="noreferrer">http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy</a> .</p>
-<p>Copy the file to <strong>C:27</p>
+<p>Copy the file to <strong>C:</strong></p>
 <p>Run cmd from the above location and type</p>
 <pre><code>numpy
 pip install numpy-1.9.2+mkl-cp27-none-win32.whl</code></pre>
@@ -4924,7 +4929,7 @@ In [13]: b = a.ravel()
 
 In [14]: b
 Out[14]: array([1, 2, 3, 4, 5, 6])</code></pre>
-<p>Note that <code>ravel()</code> returns a <code>view</code> of <code>a</code> when possible. So modifying <code>b</code> also modifies <code>a</code>. <code>ravel()</code> returns a <code>view</code> when the 1D elements are contiguous in memory, but would return a <code>copy</code> if, for example, <code>a</code> were made from slicing another array using a non-unit step size (e.g. <code>a = x[::2]</code>).</p>
+<p>Note that <code>ravel()</code> returns a <code>view</code> of <code>a</code> when possible. So modifying <code>b</code> also modifies <code>a</code>. <code>ravel()</code> returns a <code>view</code> when the 1D elements are contiguous in memory, but would return a <code>copy</code> if, for example, <code>a</code> were made from slicing another array using a non-unit step size (e.g. <code>a = x[::2]</code>).</p>
 <p>If you want a copy rather than a view, use</p>
 <pre><code>numpy
 In [15]: c = a.flatten()</code></pre>
@@ -5566,7 +5571,7 @@ for b in valeur&amp;lt;=0.6:
         print (&quot;valeur is too high&quot;)</code></pre>
 <p>This will write 2 lines.</p>
 <p>The error is produced by <code>numpy</code> code when you try to use it a context that expects a single, scalar, value. <code>if b:...</code> can only do one thing. It does not, by itself, iterate through the elements of <code>b</code> doing a different thing for each.</p>
-<p>You could also cast that iteration as list comprehension, e.g.</p>
+<p>You could also cast that iteration as list comprehension, e.g. </p>
 <pre><code>numpy
 [&#39;yes&#39; if b else &#39;no&#39; for b in np.array([True, False, True])]</code></pre>
 <p></b> </em> </i> </small> </strong> </sub> </sup></p>
@@ -5662,7 +5667,7 @@ Specifying dtypes (should always be done)
 <pre><code>numpy
 dtype={&#39;user_id&#39;: int}</code></pre>
 <p>to the <a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html" rel="noreferrer"><code>pd.read_csv()</code></a> call will make pandas know when it starts reading the file, that this is only integers.</p>
-<p>Also worth noting is that if the last line in the file would have <code>&quot;foobar&quot;</code> written in the <code>user_id</code> column, the loading would crash if the above dtype was specified.</p>
+<p>Also worth noting is that if the last line in the file would have <code>"foobar"</code> written in the <code>user_id</code> column, the loading would crash if the above dtype was specified.</p>
 <h5>
 Example of broken data that breaks when dtypes are defined
 </h3>
@@ -6502,7 +6507,7 @@ array([[ 1,  3,  4, 10],
 </section>
 <section id="answer-3-score-7" class="level4">
 <h4>Answer 3 (score 7)</h4>
-<p>One way to do it (may not be the best) is to create another array with the new elements and do column_stack. i.e.</p>
+<p>One way to do it (may not be the best) is to create another array with the new elements and do column_stack. i.e. </p>
 <pre><code>numpy
 &amp;gt;&amp;gt;&amp;gt;a = array([[1,3,4],[1,2,3]...[1,2,1]])
 [[1 3 4]
@@ -7109,7 +7114,7 @@ show() </code></pre>
 2.0000000000000009
 &amp;gt;&amp;gt;&amp;gt; b
 0.99999999999999833</code></pre>
-<p>I should add that I tend to use <code>poly1d</code> here rather than write out &quot;m*x+b&quot; and the higher-order equivalents, so my version of your code would look something like this:</p>
+<p>I should add that I tend to use <code>poly1d</code> here rather than write out "m*x+b" and the higher-order equivalents, so my version of your code would look something like this:</p>
 <pre><code>numpy
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7290,7 +7295,7 @@ plot(x, smooth(y,19), &#39;g-&#39;, lw=2)</code></pre>
 <p>In this example:</p>
 <pre><code>numpy
  np.histogram([1, 2, 1], bins=[0, 1, 2, 3])</code></pre>
-<p>There are 3 bins, for values ranging from 0 to 1 (excl 1.), 1 to 2 (excl. 2) and 2 to 3 (incl. 3), respectively. The way Numpy defines these bins if by giving a list of delimiters (<code>[0, 1, 2, 3]</code>) in this example, although it also returns the bins in the results, since it can choose them automatically from the input, if none are specified. If <code>bins=5</code>, for example, it will use 5 bins of equal width spread between the minimum input value and the maximum input value.</p>
+<p>There are 3 bins, for values ranging from 0 to 1 (excl 1.), 1 to 2 (excl. 2) and 2 to 3 (incl. 3), respectively. The way Numpy defines these bins if by giving a list of delimiters (<code>[0, 1, 2, 3]</code>) in this example, although it also returns the bins in the results, since it can choose them automatically from the input, if none are specified. If <code>bins=5</code>, for example, it will use 5 bins of equal width spread between the minimum input value and the maximum input value.</p>
 <p>The input values are 1, 2 and 1. Therefore, bin “1 to 2” contains two occurrences (the two <code>1</code> values), and bin “2 to 3” contains one occurrence (the <code>2</code>). These results are in the first item in the returned tuple: <code>array([0, 2, 1])</code>.</p>
 <p>Since the bins here are of equal width, you can use the number of occurrences for the height of each bar. When drawn, you would have:</p>
 <ul>
@@ -7528,7 +7533,7 @@ print x
  [ 4  5  6  7]
  [ 8  9 10 11]
  [12 13 14 15]]</code></pre>
-<p>The line and columns to remove are the same. The easiest case is when I want to extract a 2x2 submatrix that is at the beginning or at the end, i.e. :</p>
+<p>The line and columns to remove are the same. The easiest case is when I want to extract a 2x2 submatrix that is at the beginning or at the end, i.e. :</p>
 <pre><code>numpy
 In [33]: x[0:2,0:2]
 Out[33]: 
