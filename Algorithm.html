@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Algorithm.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="sorting" class="level3">
+<h3>Sorting</h3>
+<section id="comparaison" class="level4">
+<h4>Comparaison</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Best-case</th>
+<th>Worst-case</th>
+<th>Average-case</th>
+<th>Space</th>
+<th>Stable?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Merge Sort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n)</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Insertion Sort</td>
+<td>O(n)</td>
+<td>O(n2)</td>
+<td>O(n2)</td>
+<td>O(1)</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Bubble Sort</td>
+<td>O(n)</td>
+<td>O(n2)</td>
+<td>O(n2)</td>
+<td>O (1)</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Quicksort</td>
+<td>O(n log n)</td>
+<td>O(n2)</td>
+<td>O(n log n)</td>
+<td>log n best n avg</td>
+<td>Usually not</td>
+</tr>
+<tr class="odd">
+<td>Heapsort</td>
+<td>O(n log n)</td>
+<td>O(n log n)</td>
+<td>O(n log n )</td>
+<td>O(1)</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Counting Sort</td>
+<td>O(k+n)</td>
+<td>O(k+n)</td>
+<td>O(k+n)</td>
+<td>O(k+n)</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bubble-sort" class="level4">
+<h4>Bubble Sort</h4>
+<ul>
+<li>Swap pairs</li>
+<li><span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span> worst, <span class="math inline">0(<em>n</em>)</span> best, <span class="math inline">0(1)</span> space</li>
+</ul>
+<p>Bubble sort is a comparison​-based algorithm that compares each pair of elements in an array and swaps them if they are out of order until the entire array is sorted. For each element in the list, the algorithm compares every pair of elements.</p>
+</section>
+</section>
+<section id="quick-sort" class="level3">
+<h3>Quick Sort</h3>
+<ul>
+<li>Divide and conquer</li>
+</ul>
+<p>Quicksort is a comparison-based algorithm that uses divide-and-conquer to sort an array. The algorithm picks a pivot element, A[q]A[q]A[q], and then rearranges the array into two subarrays A[p…q−1]A[p q-1]A[p…q−1], such that all elements are less than A[q]A[q]A[q], and A[q+1…r]A[q+1 r]A[q+1…r], such that all elements are greater than or equal to A[q]A[q]A[q].</p>
+<ul>
+<li>Selection Sort.</li>
+<li>Merge Sort.</li>
+<li>Insertion Sort.</li>
+<li>Heap Sort.</li>
+</ul>
+</section>
+</body>
+</html>
