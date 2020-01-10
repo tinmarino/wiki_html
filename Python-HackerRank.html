@@ -116,6 +116,7 @@
 <li><a href="#triple-sum-find-unique">Triple sum (find unique)</a></li>
 <li><a href="#minimum-time-required">Minimum Time Required</a></li>
 <li><a href="#balanced-parenthesis-stack-of-course">Balanced parenthesis (Stack of course)</a></li>
+<li><a href="#maze-castle-on-the-grid">Maze: Castle on the Grid</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -227,7 +228,10 @@
 <span id="cb4-48"><a href="#cb4-48"></a></span>
 <span id="cb4-49"><a href="#cb4-49"></a><span class="co"># # intersection</span></span>
 <span id="cb4-50"><a href="#cb4-50"></a>z <span class="op">=</span> x.intersection(y) </span>
-<span id="cb4-51"><a href="#cb4-51"></a></span></code></pre></div>
+<span id="cb4-51"><a href="#cb4-51"></a></span>
+<span id="cb4-52"><a href="#cb4-52"></a></span>
+<span id="cb4-53"><a href="#cb4-53"></a><span class="co"># Copy nested list (2 dimension)</span></span>
+<span id="cb4-54"><a href="#cb4-54"></a>y <span class="op">=</span> [row[:] <span class="cf">for</span> row <span class="kw">in</span> x]</span></code></pre></div>
 </section>
 <section id="dictionary" class="level3">
 <h3>Dictionary</h3>
@@ -897,6 +901,109 @@
 <span id="cb35-8"><a href="#cb35-8"></a>        <span class="cf">if</span> <span class="kw">not</span> stack <span class="kw">or</span> closer[stack.pop()] <span class="op">!=</span> bracket:</span>
 <span id="cb35-9"><a href="#cb35-9"></a>                <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
 <span id="cb35-10"><a href="#cb35-10"></a>    <span class="cf">return</span> <span class="st">&quot;NO&quot;</span> <span class="cf">if</span> stack <span class="cf">else</span> <span class="st">&quot;YES&quot;</span></span></code></pre></div>
+</section>
+<section id="maze-castle-on-the-grid" class="level3">
+<h3>Maze: Castle on the Grid</h3>
+<ul>
+<li>My solution, kind of dirty: I thought you had to move until the end</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># Complete the minimumMoves function below.</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">def</span> minimumMoves(grid, startX, startY, goalX, goalY):</span>
+<span id="cb36-4"><a href="#cb36-4"></a>    res <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a></span>
+<span id="cb36-6"><a href="#cb36-6"></a>    pos <span class="op">=</span> [ [startX, startY, (<span class="dv">0</span>, <span class="dv">0</span>)] ]</span>
+<span id="cb36-7"><a href="#cb36-7"></a></span>
+<span id="cb36-8"><a href="#cb36-8"></a></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="co"># Create visited bool array to avoid looping</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>    visited <span class="op">=</span> []</span>
+<span id="cb36-11"><a href="#cb36-11"></a>    <span class="cf">for</span> line <span class="kw">in</span> grid:</span>
+<span id="cb36-12"><a href="#cb36-12"></a>        visited.append([<span class="va">False</span>]<span class="op">*</span> <span class="bu">len</span>(line))</span>
+<span id="cb36-13"><a href="#cb36-13"></a>    next_pos <span class="op">=</span> []</span>
+<span id="cb36-14"><a href="#cb36-14"></a></span>
+<span id="cb36-15"><a href="#cb36-15"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb36-16"><a href="#cb36-16"></a>        <span class="cf">for</span> x0, y0, last_move <span class="kw">in</span> pos:</span>
+<span id="cb36-17"><a href="#cb36-17"></a></span>
+<span id="cb36-18"><a href="#cb36-18"></a><span class="co"># Check and mark as visited</span></span>
+<span id="cb36-19"><a href="#cb36-19"></a>            <span class="cf">if</span> (x0, y0) <span class="op">==</span> (goalX, goalY): <span class="cf">return</span> res</span>
+<span id="cb36-20"><a href="#cb36-20"></a>            <span class="cf">if</span> visited[x0][y0]: <span class="cf">continue</span></span>
+<span id="cb36-21"><a href="#cb36-21"></a>            visited[x0][y0] <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb36-22"><a href="#cb36-22"></a></span>
+<span id="cb36-23"><a href="#cb36-23"></a></span>
+<span id="cb36-24"><a href="#cb36-24"></a><span class="co"># Move any number one direction ...</span></span>
+<span id="cb36-25"><a href="#cb36-25"></a>            <span class="cf">for</span> moves <span class="kw">in</span> ((<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">0</span>, <span class="dv">-1</span>) ):</span>
+<span id="cb36-26"><a href="#cb36-26"></a>                <span class="cf">if</span> moves <span class="kw">in</span> (last_move, (<span class="op">-</span>last_move[<span class="dv">0</span>], <span class="op">-</span>last_move[<span class="dv">1</span>])):</span>
+<span id="cb36-27"><a href="#cb36-27"></a>                    <span class="cf">continue</span></span>
+<span id="cb36-28"><a href="#cb36-28"></a>                x, y <span class="op">=</span> x0, y0</span>
+<span id="cb36-29"><a href="#cb36-29"></a></span>
+<span id="cb36-30"><a href="#cb36-30"></a></span>
+<span id="cb36-31"><a href="#cb36-31"></a><span class="co"># ... any number of step</span></span>
+<span id="cb36-32"><a href="#cb36-32"></a>                <span class="cf">while</span> (<span class="dv">0</span> <span class="op">&lt;=</span> x <span class="op">+</span> moves[<span class="dv">0</span>] <span class="op">&lt;</span> <span class="bu">len</span>(grid)</span>
+<span id="cb36-33"><a href="#cb36-33"></a>                        <span class="kw">and</span> <span class="dv">0</span> <span class="op">&lt;=</span> y <span class="op">+</span> moves[<span class="dv">1</span>] <span class="op">&lt;</span> <span class="bu">len</span>(grid[<span class="dv">0</span>])</span>
+<span id="cb36-34"><a href="#cb36-34"></a>                        <span class="kw">and</span> grid[x <span class="op">+</span> moves[<span class="dv">0</span>]][y <span class="op">+</span> moves[<span class="dv">1</span>]] <span class="op">!=</span> <span class="st">&#39;X&#39;</span></span>
+<span id="cb36-35"><a href="#cb36-35"></a>                        ):</span>
+<span id="cb36-36"><a href="#cb36-36"></a>                    x <span class="op">+=</span> moves[<span class="dv">0</span>]</span>
+<span id="cb36-37"><a href="#cb36-37"></a>                    y <span class="op">+=</span> moves[<span class="dv">1</span>]</span>
+<span id="cb36-38"><a href="#cb36-38"></a></span>
+<span id="cb36-39"><a href="#cb36-39"></a></span>
+<span id="cb36-40"><a href="#cb36-40"></a><span class="co"># Return ?</span></span>
+<span id="cb36-41"><a href="#cb36-41"></a>                    <span class="cf">if</span> (x,y) <span class="op">==</span> (goalX, goalY): <span class="cf">return</span> res</span>
+<span id="cb36-42"><a href="#cb36-42"></a></span>
+<span id="cb36-43"><a href="#cb36-43"></a></span>
+<span id="cb36-44"><a href="#cb36-44"></a><span class="co"># Break: comming to late: my line and col is visited already</span></span>
+<span id="cb36-45"><a href="#cb36-45"></a>                    <span class="cf">if</span> visited[x][y]: <span class="cf">break</span></span>
+<span id="cb36-46"><a href="#cb36-46"></a></span>
+<span id="cb36-47"><a href="#cb36-47"></a></span>
+<span id="cb36-48"><a href="#cb36-48"></a><span class="co"># Add this point for a next walk</span></span>
+<span id="cb36-49"><a href="#cb36-49"></a>                    next_pos.append([x, y, moves])</span>
+<span id="cb36-50"><a href="#cb36-50"></a></span>
+<span id="cb36-51"><a href="#cb36-51"></a>        <span class="bu">print</span>(next_pos)            </span>
+<span id="cb36-52"><a href="#cb36-52"></a>        pos <span class="op">=</span> next_pos</span>
+<span id="cb36-53"><a href="#cb36-53"></a>        next_pos <span class="op">=</span> []</span>
+<span id="cb36-54"><a href="#cb36-54"></a>        res <span class="op">+=</span> <span class="dv">1</span></span></code></pre></div>
+<ul>
+<li>Explore bfs-wise, and only increase the level when changing direction</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb37-2"><a href="#cb37-2"></a></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">def</span> minimumMoves(grid, startX, startY, goalX, goalY):</span>
+<span id="cb37-4"><a href="#cb37-4"></a>    <span class="co">&quot;&quot;&quot;standard bfs</span></span>
+<span id="cb37-5"><a href="#cb37-5"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>    start, goal <span class="op">=</span> (startX, startY), (goalX, goalY)</span>
+<span id="cb37-7"><a href="#cb37-7"></a></span>
+<span id="cb37-8"><a href="#cb37-8"></a><span class="co"># special case: dtart == goal</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a>    <span class="cf">if</span> start <span class="op">==</span> goal: <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb37-10"><a href="#cb37-10"></a></span>
+<span id="cb37-11"><a href="#cb37-11"></a><span class="co"># set-up bfs</span></span>
+<span id="cb37-12"><a href="#cb37-12"></a>    q <span class="op">=</span> deque([(start, <span class="dv">0</span>)])</span>
+<span id="cb37-13"><a href="#cb37-13"></a>    parents <span class="op">=</span> {}</span>
+<span id="cb37-14"><a href="#cb37-14"></a>    moves <span class="op">=</span> {<span class="st">&#39;right&#39;</span>:<span class="kw">lambda</span> n: (n[<span class="dv">0</span>], n[<span class="dv">1</span>]<span class="op">+</span><span class="dv">1</span>),</span>
+<span id="cb37-15"><a href="#cb37-15"></a>            <span class="st">&#39;down&#39;</span>:<span class="kw">lambda</span> n: (n[<span class="dv">0</span>]<span class="op">+</span><span class="dv">1</span>, n[<span class="dv">1</span>]),</span>
+<span id="cb37-16"><a href="#cb37-16"></a>            <span class="st">&#39;left&#39;</span>:<span class="kw">lambda</span> n: (n[<span class="dv">0</span>], n[<span class="dv">1</span>]<span class="op">-</span><span class="dv">1</span>),</span>
+<span id="cb37-17"><a href="#cb37-17"></a>            <span class="st">&#39;up&#39;</span>:<span class="kw">lambda</span> n: (n[<span class="dv">0</span>]<span class="op">-</span><span class="dv">1</span>, n[<span class="dv">1</span>])</span>
+<span id="cb37-18"><a href="#cb37-18"></a>            }</span>
+<span id="cb37-19"><a href="#cb37-19"></a>    <span class="kw">def</span> is_valid(node):</span>
+<span id="cb37-20"><a href="#cb37-20"></a>        x, y <span class="op">=</span> node</span>
+<span id="cb37-21"><a href="#cb37-21"></a>        <span class="cf">return</span> (x <span class="op">&lt;</span> <span class="bu">len</span>(grid) <span class="kw">and</span> y <span class="op">&lt;</span> <span class="bu">len</span>(grid)</span>
+<span id="cb37-22"><a href="#cb37-22"></a>                <span class="kw">and</span> x <span class="op">&gt;=</span> <span class="dv">0</span> <span class="kw">and</span> y <span class="op">&gt;=</span> <span class="dv">0</span></span>
+<span id="cb37-23"><a href="#cb37-23"></a>                <span class="kw">and</span> grid[x][y] <span class="op">==</span> <span class="st">&#39;.&#39;</span>)</span>
+<span id="cb37-24"><a href="#cb37-24"></a>    <span class="cf">while</span> q:</span>
+<span id="cb37-25"><a href="#cb37-25"></a>        current_node, level <span class="op">=</span> q.pop()</span>
+<span id="cb37-26"><a href="#cb37-26"></a></span>
+<span id="cb37-27"><a href="#cb37-27"></a><span class="co"># match? we are done...</span></span>
+<span id="cb37-28"><a href="#cb37-28"></a>        <span class="cf">if</span> current_node <span class="op">==</span> goal: <span class="cf">return</span> level</span>
+<span id="cb37-29"><a href="#cb37-29"></a></span>
+<span id="cb37-30"><a href="#cb37-30"></a><span class="co"># explore... bfs wise</span></span>
+<span id="cb37-31"><a href="#cb37-31"></a>        <span class="cf">for</span> move <span class="kw">in</span> <span class="st">&#39;up&#39;</span>, <span class="st">&#39;right&#39;</span>, <span class="st">&#39;down&#39;</span>, <span class="st">&#39;left&#39;</span>:</span>
+<span id="cb37-32"><a href="#cb37-32"></a>            next_node <span class="op">=</span> moves[move](current_node.html)</span>
+<span id="cb37-33"><a href="#cb37-33"></a>            <span class="cf">while</span> is_valid(next_node):</span>
+<span id="cb37-34"><a href="#cb37-34"></a></span>
+<span id="cb37-35"><a href="#cb37-35"></a><span class="co"># no revisiting...</span></span>
+<span id="cb37-36"><a href="#cb37-36"></a>                <span class="cf">if</span> next_node <span class="kw">not</span> <span class="kw">in</span> parents:</span>
+<span id="cb37-37"><a href="#cb37-37"></a>                    q.appendleft((next_node, level<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb37-38"><a href="#cb37-38"></a>                    parents[next_node] <span class="op">=</span> current_node</span>
+<span id="cb37-39"><a href="#cb37-39"></a>                next_node <span class="op">=</span> moves[move](next_node.html)</span>
+<span id="cb37-40"><a href="#cb37-40"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;unreachable&#39;</span>)</span></code></pre></div>
 </section>
 </section>
 </section>
