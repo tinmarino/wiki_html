@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Bash-HackerRank.md – Bash HackerRank tips</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/color_dark_solarized.css" />
+  <link rel="stylesheet" href="Css/layout_toc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="Css/js_masonry_desandro.js"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Bash HackerRank tips</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#looping-and-skipping">Looping and Skipping</a></li>
+<li><a href="#a-personalized-echo">A Personalized Echo</a></li>
+<li><a href="#the-world-of-numbers">The World of Numbers</a></li>
+<li><a href="#comparing-numbers">Comparing Numbers</a></li>
+<li><a href="#getting-started-with-conditionals">Getting started with conditionals</a></li>
+<li><a href="#more-on-conditionals">More on Conditionals</a></li>
+<li><a href="#arithmetic-operations">Arithmetic Operations</a></li>
+<li><a href="#compute-the-average">Compute the Average</a></li>
+<li><a href="#functions-and-fractals---recursive-trees---bash">Functions and Fractals - Recursive Trees - Bash!</a></li>
+<li><a href="#cut">Cut</a></li>
+<li><a href="#head">Head</a></li>
+<li><a href="#middle">Middle</a></li>
+<li><a href="#tail">Tail</a></li>
+<li><a href="#tr">Tr</a></li>
+<li><a href="#sort">Sort</a></li>
+<li><a href="#uniq">Uniq</a></li>
+<li><a href="#paste">Paste</a></li>
+<li><a href="#array">Array</a>
+<ul>
+<li><a href="#read-in-an-array">Read in an Array</a></li>
+<li><a href="#slice-an-array">Slice an Array</a></li>
+<li><a href="#filter-an-array-with-patterns">Filter an Array with Patterns</a></li>
+<li><a href="#concatenate-an-array-with-itself">Concatenate an array with itself</a></li>
+<li><a href="#display-an-element-of-an-array">Display an element of an array</a></li>
+<li><a href="#count-the-number-of-elements-in-an-array">Count the number of elements in an Array</a></li>
+<li><a href="#remove-the-first-capital-letter-from-each-element">Remove the First Capital Letter from Each Element</a></li>
+<li><a href="#lonely-integer---bash">Lonely Integer - Bash!</a></li>
+</ul></li>
+<li><a href="#grep-sed-awk">Grep / Sed / Awk</a>
+<ul>
+<li><a href="#grep">Grep</a></li>
+<li><a href="#sed">Sed</a></li>
+<li><a href="#awk">Awk</a></li>
+</ul></li>
+</ul>
+</nav>
+<section class="level2">
+<section id="looping-and-skipping" class="level3">
+<h3>Looping and Skipping</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">seq</span> 1 2 99<span class="va">)</span><span class="kw">;</span> <span class="kw">do</span> <span class="bu">echo</span> <span class="va">$i</span><span class="kw">;</span> <span class="kw">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">for</span> <span class="ex">number</span> in <span class="dt">{1..99..2}</span><span class="kw">;</span> <span class="kw">do</span> <span class="bu">echo</span> <span class="va">$number</span><span class="kw">;</span> <span class="kw">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">echo</span> -e <span class="st">&quot;\n&quot;</span><span class="dt">{1..99..2}</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="bu">echo</span> -e 1 <span class="st">&quot;\n&quot;</span><span class="dt">{3..99..2}</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="dt">{1..99..2}</span></span></code></pre></div>
+</section>
+<section id="a-personalized-echo" class="level3">
+<h3>A Personalized Echo</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="va">name=</span><span class="kw">`</span><span class="fu">cat</span> -<span class="kw">`</span>; <span class="bu">echo</span> <span class="st">&quot;Welcome </span><span class="va">$name</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">read</span> <span class="va">name</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="bu">echo</span> <span class="st">&quot;Welcome </span><span class="va">$name</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="bu">printf</span> <span class="st">&quot;Welcome &quot;</span><span class="kw">;</span> <span class="fu">cat</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">sed</span> -r <span class="st">&#39;s/(.*)/Welcome \1/g&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="bu">echo</span> <span class="st">&quot;Welcome </span><span class="va">$(</span><span class="fu">cat</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">echo</span> <span class="st">&quot;Welcome </span><span class="va">$(</span><span class="fu">cat</span> <span class="op">&lt;&amp;0</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="bu">echo</span> <span class="st">&quot;Welcome </span><span class="op">$(&lt;</span>/dev/stdin<span class="op">)</span><span class="st">&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">xargs</span> -I ^ echo <span class="st">&quot;Welcome&quot;</span> ^</span></code></pre></div>
+</section>
+<section id="the-world-of-numbers" class="level3">
+<h3>The World of Numbers</h3>
+<ul>
+<li>Read from command line</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="bu">echo</span> -e <span class="st">&quot;3\n3&quot;</span> <span class="kw">|</span> <span class="kw">{</span> <span class="bu">read</span> <span class="va">X</span>; <span class="bu">read</span> <span class="va">Y</span>; <span class="bu">echo</span> <span class="va">$((</span>X + Y<span class="va">))</span><span class="kw">;</span> <span class="kw">}</span> </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="bu">read</span> <span class="va">x</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">read</span> <span class="va">y</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="bu">echo</span> <span class="va">$((</span>x + y<span class="va">))</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="bu">echo</span> <span class="va">$((</span>x - y<span class="va">))</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="bu">echo</span> <span class="va">$((</span>x * y<span class="va">))</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="bu">echo</span> <span class="va">$((</span>x / y<span class="va">))</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="bu">read</span> <span class="va">X</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="bu">read</span> <span class="va">Y</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="bu">printf</span> <span class="st">&quot;%s\n&quot;</span> <span class="va">$X</span><span class="dt">{+,-,*,/}</span><span class="st">&quot;(</span><span class="va">$Y</span><span class="st">)&quot;</span> <span class="kw">|</span> <span class="fu">bc</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a><span class="bu">read</span> <span class="va">x</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="bu">read</span> <span class="va">y</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="dt">{+,-,&quot;*&quot;,/}</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">do</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="va">var=$((</span>(x)<span class="va">$i</span>(y)<span class="va">))</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="bu">echo</span> <span class="va">$var</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="kw">done</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="bu">read</span> <span class="va">x</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="bu">read</span> <span class="va">y</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st">&quot;</span> <span class="ot">-ge</span> <span class="st">&quot;-100&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="ot">-ge</span> <span class="st">&quot;-100&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st">&quot;</span> <span class="ot">-le</span> <span class="st">&quot;100&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="ot">-le</span> <span class="st">&quot;100&quot;</span><span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">$y</span><span class="st">&quot;</span> <span class="ot">-ne</span> <span class="st">&quot;0&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st"> + </span><span class="va">$y</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st"> - </span><span class="va">$y</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st"> * </span><span class="va">$y</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$x</span><span class="st"> / </span><span class="va">$y</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="kw">else</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a></span>
+<span id="cb13-14"><a href="#cb13-14"></a>    <span class="bu">echo</span> <span class="st">&quot;ERROR&quot;</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a></span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="kw">fi</span></span></code></pre></div>
+</section>
+<section id="comparing-numbers" class="level3">
+<h3>Comparing Numbers</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1"></a><span class="bu">read</span> <span class="va">X</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="bu">read</span> <span class="va">Y</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">if</span> <span class="kw">((</span> <span class="va">$X</span> &lt; <span class="va">$Y</span> <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>    <span class="bu">echo</span> <span class="st">&#39;X is less than Y&#39;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="kw">elif</span> <span class="kw">((</span> <span class="va">$X</span> &gt; <span class="va">$Y</span> <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    <span class="bu">echo</span> <span class="st">&#39;X is greater than Y&#39;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="kw">else</span> </span>
+<span id="cb14-9"><a href="#cb14-9"></a>    <span class="bu">echo</span> <span class="st">&#39;X is equal to Y&#39;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="kw">fi</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="bu">read</span> <span class="va">x</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="bu">read</span> <span class="va">y</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">[[</span> <span class="va">$x</span> <span class="ot">-gt</span> <span class="va">$y</span><span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&#39;X is greater than Y&#39;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">[[</span> <span class="va">$x</span> <span class="ot">-eq</span> <span class="va">$y</span><span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&#39;X is equal to Y&#39;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="kw">[[</span> <span class="va">$x</span> <span class="ot">-lt</span> <span class="va">$y</span><span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&#39;X is less than Y&#39;</span></span></code></pre></div>
+</section>
+<section id="getting-started-with-conditionals" class="level3">
+<h3>Getting started with conditionals</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1"></a><span class="bu">read</span> <span class="va">X</span>;</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">${X:0:1}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;n&quot;</span> <span class="ot">-o</span> <span class="st">&quot;</span><span class="va">${X:0:1}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;N&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span> <span class="bu">echo</span> <span class="st">&quot;NO&quot;</span><span class="kw">;</span> <span class="kw">fi</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">if</span><span class="bu"> [</span> <span class="st">&quot;</span><span class="va">${X:0:1}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;y&quot;</span> <span class="ot">-o</span> <span class="st">&quot;</span><span class="va">${X:0:1}</span><span class="st">&quot;</span> <span class="ot">=</span> <span class="st">&quot;Y&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span> <span class="bu">echo</span> <span class="st">&quot;YES&quot;</span><span class="kw">;</span> <span class="kw">fi</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1"></a><span class="bu">read</span> <span class="va">char</span>; <span class="bu">echo</span> -e <span class="st">&quot;YES\nNO\n&quot;</span> <span class="kw">|</span> <span class="fu">grep</span> -i <span class="va">$char</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1"></a><span class="bu">read</span> <span class="va">c</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">[[</span> <span class="st">&quot;</span><span class="va">$c</span><span class="st">&quot;</span> <span class="ot">==</span> [yY]<span class="kw"> ]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;YES&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;NO&quot;</span></span></code></pre></div>
+</section>
+<section id="more-on-conditionals" class="level3">
+<h3>More on Conditionals</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="bu">read</span> <span class="va">X</span>; <span class="bu">read</span> <span class="va">Y</span>; <span class="bu">read</span> <span class="va">Z</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">if</span> <span class="kw">((</span> X == Y &amp;&amp; Y == Z <span class="kw">))</span>; <span class="kw">then</span> <span class="bu">echo</span> <span class="st">&quot;EQUILATERAL&quot;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">elif</span> <span class="kw">((</span> X == Y || Y == Z || X == Z <span class="kw">))</span>; <span class="kw">then</span> <span class="bu">echo</span> <span class="st">&quot;ISOSCELES&quot;</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">else</span> <span class="bu">echo</span> <span class="st">&quot;SCALENE&quot;</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="kw">fi</span></span></code></pre></div>
+<ul>
+<li>Solution based on counting number of unique values</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="va">c=$(</span><span class="fu">cat</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39; &#39;</span> <span class="st">&quot;\n&quot;</span> <span class="kw">|</span> <span class="fu">sort</span> -n -u <span class="kw">|</span> <span class="fu">wc</span> -l<span class="va">)</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="bu">[</span> <span class="va">$c</span> <span class="ot">-eq</span> 1<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> EQUILATERAL</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="bu">[</span> <span class="va">$c</span> <span class="ot">-eq</span> 2<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> ISOSCELES</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="bu">[</span> <span class="va">$c</span> <span class="ot">-eq</span> 3<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> SCALENE</span></code></pre></div>
+<ul>
+<li>Problem tester code</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1"></a><span class="bu">read</span> <span class="va">a</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="bu">read</span> <span class="va">b</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="bu">read</span> <span class="va">c</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="kw">if</span><span class="bu"> [</span> <span class="kw">`</span><span class="va">$a</span> <span class="ex">-eq</span> $<span class="kw">`</span>b<span class="bu"> ]</span> <span class="kw">&amp;&amp;</span><span class="bu"> [</span> <span class="kw">`</span><span class="va">$a</span> <span class="ex">-eq</span> $<span class="kw">`</span>c<span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="bu">echo</span> <span class="st">&quot;EQUILATERAL&quot;</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">elif</span><span class="bu"> [</span> <span class="kw">`</span><span class="va">$a</span> <span class="ex">-eq</span> $<span class="kw">`</span>b<span class="bu"> ]</span> <span class="kw">||</span><span class="bu"> [</span> <span class="kw">`</span><span class="va">$a</span> <span class="ex">-eq</span> $<span class="kw">`</span>c<span class="bu"> ]</span> <span class="kw">||</span><span class="bu"> [</span> <span class="kw">`</span><span class="va">$b</span> <span class="ex">-eq</span> $<span class="kw">`</span>c<span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a>    <span class="bu">echo</span> <span class="st">&quot;ISOSCELES&quot;</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="kw">else</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>    <span class="bu">echo</span> <span class="st">&quot;SCALENE&quot;</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="kw">fi</span></span></code></pre></div>
+</section>
+<section id="arithmetic-operations" class="level3">
+<h3>Arithmetic Operations</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">printf</span> %.3f <span class="va">$(</span><span class="kw">{</span> <span class="bu">echo</span> -n <span class="st">&quot;scale=4; &quot;</span><span class="kw">;</span> <span class="fu">cat</span><span class="kw">;</span> <span class="kw">}</span> <span class="kw">|</span> <span class="fu">bc</span><span class="va">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">cat</span> <span class="kw">|</span> <span class="fu">bc</span> -l <span class="kw">|</span> <span class="fu">xargs</span> printf <span class="st">&quot;%.3f&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1"></a><span class="bu">read</span> <span class="va">a</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="bu">printf</span> <span class="st">&quot;%.3f\n&quot;</span> <span class="va">$(</span><span class="fu">bc</span> -l <span class="op">&lt;&lt;&lt;</span> <span class="st">&quot;</span><span class="va">$a</span><span class="st">&quot;</span><span class="va">)</span></span></code></pre></div>
+</section>
+<section id="compute-the-average" class="level3">
+<h3>Compute the Average</h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1"></a><span class="bu">read</span> <span class="va">n</span>;</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="ex">readarray</span> -t a_num</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="bu">printf</span> <span class="st">&quot;%.3f&quot;</span> <span class="va">$(</span><span class="kw">{</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>    <span class="bu">echo</span> -n <span class="st">&quot;(&quot;</span><span class="kw">;</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="kw">{</span> <span class="va">IFS=</span>+; <span class="bu">echo</span> -n <span class="st">&quot;</span><span class="va">${a_num[*]}</span><span class="st">&quot;</span><span class="kw">;</span> <span class="kw">}</span>;</span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="bu">echo</span> -n <span class="st">&quot;) / </span><span class="va">$n</span><span class="st">&quot;</span><span class="kw">;</span> <span class="kw">}</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="va">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="bu">printf</span> <span class="st">&quot;%.3f&quot;</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;(&quot;</span><span class="va">$(</span><span class="fu">cat</span><span class="va">)</span><span class="st">&quot;)/</span><span class="va">$n</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39; &#39;</span> <span class="st">&#39;+&#39;</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="va">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span> </span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="va">arr=${arr[*]}</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="bu">printf</span> <span class="st">&quot;%.3f&quot;</span> <span class="va">$(</span><span class="bu">echo</span> <span class="va">$((${arr//</span> <span class="va">/</span>+<span class="va">}))</span>/<span class="va">$n</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="va">)</span></span></code></pre></div>
+<ul>
+<li>Problem tester</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="va">sum=</span>0</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="kw">for</span> <span class="kw">((</span>i=0;i&lt;<span class="va">$n</span>;i++<span class="kw">))</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">do</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>    <span class="bu">read</span> <span class="va">temp</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>    <span class="va">sum=</span><span class="kw">`</span><span class="va">$((</span>$<span class="kw">`</span><span class="fu">sum</span>+<span class="va">$temp</span>))</span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="kw">done</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a><span class="bu">printf</span> <span class="st">&quot;%.3f\n&quot;</span> <span class="kw">`</span><span class="va">$(</span><span class="fu">bc</span> -l <span class="op">&lt;&lt;&lt;</span> <span class="st">&quot;$</span><span class="kw">`</span><span class="ex">sum/</span><span class="va">$n</span><span class="st">&quot;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">for</span> <span class="ex">i</span> in <span class="va">$(</span><span class="fu">seq</span> 1 <span class="va">$n)</span><span class="kw">;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>    <span class="kw">do</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>        <span class="bu">read</span> <span class="va">num</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>        <span class="va">sum=$((</span>sum + num<span class="va">))</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>    <span class="kw">done</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="bu">printf</span> <span class="st">&quot;%.3f&quot;</span> <span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$sum</span><span class="st">/</span><span class="va">$n</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">bc</span> -l<span class="va">)</span></span></code></pre></div>
+</section>
+<section id="functions-and-fractals---recursive-trees---bash" class="level3">
+<h3>Functions and Fractals - Recursive Trees - Bash!</h3>
+<p>Too long, I passed !</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1"></a><span class="bu">declare</span> -A <span class="va">arr</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">initialize()</span><span class="kw">{</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a>    <span class="kw">for</span> <span class="ex">r</span> in <span class="dt">{0..62}</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>        <span class="kw">for</span> <span class="ex">c</span> in <span class="dt">{0..99}</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>            <span class="va">arr[$r,$c]=</span><span class="st">&quot;_&quot;</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>        <span class="kw">done</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>    <span class="kw">done</span></span>
+<span id="cb30-9"><a href="#cb30-9"></a><span class="kw">}</span></span>
+<span id="cb30-10"><a href="#cb30-10"></a><span class="fu">print()</span><span class="kw">{</span></span>
+<span id="cb30-11"><a href="#cb30-11"></a>    <span class="kw">for</span> <span class="ex">r</span> in <span class="dt">{0..62}</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb30-12"><a href="#cb30-12"></a>        <span class="kw">for</span> <span class="ex">c</span> in <span class="dt">{0..99}</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb30-13"><a href="#cb30-13"></a>            <span class="bu">echo</span> -n <span class="va">${arr[$r,$c]}</span></span>
+<span id="cb30-14"><a href="#cb30-14"></a>        <span class="kw">done</span></span>
+<span id="cb30-15"><a href="#cb30-15"></a>        <span class="bu">echo</span></span>
+<span id="cb30-16"><a href="#cb30-16"></a>    <span class="kw">done</span></span>
+<span id="cb30-17"><a href="#cb30-17"></a><span class="kw">}</span></span>
+<span id="cb30-18"><a href="#cb30-18"></a></span>
+<span id="cb30-19"><a href="#cb30-19"></a><span class="fu">draw()</span><span class="kw">{</span></span>
+<span id="cb30-20"><a href="#cb30-20"></a>    <span class="bu">local</span> <span class="va">cnt=$1</span></span>
+<span id="cb30-21"><a href="#cb30-21"></a>    <span class="bu">local</span> <span class="va">r=$2</span></span>
+<span id="cb30-22"><a href="#cb30-22"></a>    <span class="bu">local</span> <span class="va">c=$3</span></span>
+<span id="cb30-23"><a href="#cb30-23"></a>    <span class="kw">for</span> <span class="kw">((</span>i=0; i&lt;cnt; i++ <span class="kw">))</span>; <span class="kw">do</span></span>
+<span id="cb30-24"><a href="#cb30-24"></a>        <span class="va">arr[$r,$c]=</span>1</span>
+<span id="cb30-25"><a href="#cb30-25"></a>        <span class="kw">((</span> r -= 1 <span class="kw">))</span></span>
+<span id="cb30-26"><a href="#cb30-26"></a>    <span class="kw">done</span></span>
+<span id="cb30-27"><a href="#cb30-27"></a>    <span class="kw">for</span> <span class="kw">((</span>i=0; i&lt;cnt; i++ <span class="kw">))</span>; <span class="kw">do</span></span>
+<span id="cb30-28"><a href="#cb30-28"></a>        <span class="va">arr[$r,$((</span>c-i-1<span class="va">))]=</span>1</span>
+<span id="cb30-29"><a href="#cb30-29"></a>        <span class="va">arr[$r,$((</span>c+i+1<span class="va">))]=</span>1</span>
+<span id="cb30-30"><a href="#cb30-30"></a>        <span class="kw">((</span> r -= 1 <span class="kw">))</span></span>
+<span id="cb30-31"><a href="#cb30-31"></a>    <span class="kw">done</span></span>
+<span id="cb30-32"><a href="#cb30-32"></a></span>
+<span id="cb30-33"><a href="#cb30-33"></a>    <span class="kw">if [[</span> <span class="va">$4</span> <span class="ot">-gt</span> 1<span class="kw"> ]]</span>; <span class="kw">then</span></span>
+<span id="cb30-34"><a href="#cb30-34"></a>        <span class="ex">draw</span> <span class="va">$(($cnt</span>&gt;&gt;1<span class="va">))</span> <span class="va">$r</span> <span class="va">$(($c</span>-cnt<span class="va">))</span> <span class="va">$(($4</span>-1<span class="va">))</span></span>
+<span id="cb30-35"><a href="#cb30-35"></a>        <span class="ex">draw</span> <span class="va">$(($cnt</span>&gt;&gt;1<span class="va">))</span> <span class="va">$r</span> <span class="va">$(($c</span>+cnt<span class="va">))</span> <span class="va">$(($4</span>-1<span class="va">))</span></span>
+<span id="cb30-36"><a href="#cb30-36"></a>    <span class="kw">fi</span></span>
+<span id="cb30-37"><a href="#cb30-37"></a><span class="kw">}</span></span>
+<span id="cb30-38"><a href="#cb30-38"></a></span>
+<span id="cb30-39"><a href="#cb30-39"></a><span class="ex">initialize</span></span>
+<span id="cb30-40"><a href="#cb30-40"></a></span>
+<span id="cb30-41"><a href="#cb30-41"></a><span class="bu">read</span> <span class="va">x</span></span>
+<span id="cb30-42"><a href="#cb30-42"></a><span class="ex">draw</span> 16 62 49 x</span>
+<span id="cb30-43"><a href="#cb30-43"></a></span>
+<span id="cb30-44"><a href="#cb30-44"></a><span class="ex">print</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1"></a></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">branch()</span> <span class="kw">{</span>    </span>
+<span id="cb31-3"><a href="#cb31-3"></a>    <span class="kw">if</span> <span class="kw">((</span> <span class="va">$1</span> == 0 <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a>        <span class="bu">exit</span><span class="kw">;</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a>    <span class="kw">fi</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>    <span class="bu">let</span> inc=int=ext=rows=<span class="va">$((</span> 64 / 2**<span class="va">$1</span> <span class="va">))</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="kw">for</span> <span class="kw">((</span>i=1;i&lt;=rows;i++<span class="kw">))</span> <span class="kw">do</span>   </span>
+<span id="cb31-8"><a href="#cb31-8"></a>        <span class="va">x=$((</span>buffer<span class="va">))</span></span>
+<span id="cb31-9"><a href="#cb31-9"></a>        <span class="kw">for</span> <span class="kw">((</span>j=0;j&lt;100;j++<span class="kw">))</span> <span class="kw">do</span>  </span>
+<span id="cb31-10"><a href="#cb31-10"></a>            <span class="kw">if</span> <span class="kw">((</span> <span class="va">$1</span> &gt; N <span class="kw">))</span> <span class="kw">||</span> <span class="kw">((</span> j &gt;= (100 - buffer) <span class="kw">))</span> <span class="kw">||</span> <span class="kw">((</span> j != x <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb31-11"><a href="#cb31-11"></a>                <span class="bu">printf</span> <span class="st">&quot;_&quot;</span></span>
+<span id="cb31-12"><a href="#cb31-12"></a>            <span class="kw">else</span></span>
+<span id="cb31-13"><a href="#cb31-13"></a>                <span class="bu">printf</span> <span class="st">&quot;1&quot;</span>                </span>
+<span id="cb31-14"><a href="#cb31-14"></a>                <span class="kw">if</span> <span class="kw">((</span> i &lt;= rows/2 <span class="kw">))</span>; <span class="kw">then</span>               </span>
+<span id="cb31-15"><a href="#cb31-15"></a>                    <span class="kw">if</span> <span class="kw">((</span> inc == int <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb31-16"><a href="#cb31-16"></a>                        <span class="va">inc=$((</span>ext<span class="va">))</span></span>
+<span id="cb31-17"><a href="#cb31-17"></a>                    <span class="kw">else</span></span>
+<span id="cb31-18"><a href="#cb31-18"></a>                        <span class="va">inc=$((</span>int<span class="va">))</span></span>
+<span id="cb31-19"><a href="#cb31-19"></a>                    <span class="kw">fi</span>  </span>
+<span id="cb31-20"><a href="#cb31-20"></a>                <span class="kw">fi</span></span>
+<span id="cb31-21"><a href="#cb31-21"></a>                <span class="va">x=$((</span>x+inc<span class="va">))</span></span>
+<span id="cb31-22"><a href="#cb31-22"></a>            <span class="kw">fi</span></span>
+<span id="cb31-23"><a href="#cb31-23"></a>        <span class="kw">done</span></span>
+<span id="cb31-24"><a href="#cb31-24"></a>        <span class="bu">printf</span> <span class="st">&quot;\n&quot;</span></span>
+<span id="cb31-25"><a href="#cb31-25"></a>        <span class="kw">if</span> <span class="kw">((</span>i &lt;= rows/2 <span class="kw">))</span>; <span class="kw">then</span></span>
+<span id="cb31-26"><a href="#cb31-26"></a>            <span class="va">buffer=$((</span>buffer+1<span class="va">))</span></span>
+<span id="cb31-27"><a href="#cb31-27"></a>            <span class="va">int=$((</span>int-2<span class="va">))</span></span>
+<span id="cb31-28"><a href="#cb31-28"></a>            <span class="va">inc=</span>ext=<span class="va">$((</span>ext+2<span class="va">))</span>           </span>
+<span id="cb31-29"><a href="#cb31-29"></a>        <span class="kw">fi</span></span>
+<span id="cb31-30"><a href="#cb31-30"></a>    <span class="kw">done</span>    </span>
+<span id="cb31-31"><a href="#cb31-31"></a>    <span class="ex">branch</span> <span class="va">$(($1</span>-1<span class="va">))</span></span>
+<span id="cb31-32"><a href="#cb31-32"></a><span class="kw">}</span></span>
+<span id="cb31-33"><a href="#cb31-33"></a><span class="bu">printf</span> <span class="st">&quot;%0.s_&quot;</span> <span class="dt">{1..100}</span> </span>
+<span id="cb31-34"><a href="#cb31-34"></a><span class="bu">printf</span> <span class="st">&quot;\n&quot;</span></span>
+<span id="cb31-35"><a href="#cb31-35"></a><span class="va">buffer=</span>18</span>
+<span id="cb31-36"><a href="#cb31-36"></a><span class="bu">read</span> <span class="va">N</span></span>
+<span id="cb31-37"><a href="#cb31-37"></a><span class="ex">branch</span> 5</span></code></pre></div>
+<ul>
+<li>Recursive</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1"></a></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="bu">declare</span> -A <span class="va">m</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="va">StartLegLength=</span>16</span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="va">maxrows=</span>63</span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="va">maxcols=</span>100</span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="va">iter=$(</span><span class="fu">cat</span><span class="va">)</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a></span>
+<span id="cb32-11"><a href="#cb32-11"></a><span class="kw">function</span><span class="fu"> Y</span> <span class="kw">{</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="bu">typeset</span> -i <span class="va">row=$1</span> <span class="va">col=$2</span> <span class="va">len=$3</span> <span class="va">iter=$4</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>  <span class="bu">typeset</span> -i <span class="va">r=$row</span> <span class="va">x=$len</span> <span class="va">cl=$col</span> <span class="va">cr=$col</span> <span class="va">l=$((</span>len/2<span class="va">))</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a></span>
+<span id="cb32-15"><a href="#cb32-15"></a></span>
+<span id="cb32-16"><a href="#cb32-16"></a><span class="co"># leg</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a>  <span class="kw">while</span> <span class="kw">((</span> x-- &gt; 0 <span class="kw">))</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a>  <span class="kw">do</span> <span class="va">m[$((</span>r--<span class="va">)),$col]=</span>1</span>
+<span id="cb32-19"><a href="#cb32-19"></a>  <span class="kw">done</span></span>
+<span id="cb32-20"><a href="#cb32-20"></a></span>
+<span id="cb32-21"><a href="#cb32-21"></a></span>
+<span id="cb32-22"><a href="#cb32-22"></a><span class="co"># fork</span></span>
+<span id="cb32-23"><a href="#cb32-23"></a>  <span class="va">x=$len</span></span>
+<span id="cb32-24"><a href="#cb32-24"></a>  <span class="kw">while</span> <span class="kw">((</span> x-- &gt; 0 <span class="kw">))</span></span>
+<span id="cb32-25"><a href="#cb32-25"></a>  <span class="kw">do</span> <span class="va">m[$r,$((</span>--cl<span class="va">))]=</span>1</span>
+<span id="cb32-26"><a href="#cb32-26"></a>     <span class="va">m[$r,$((</span>++cr<span class="va">))]=</span>1</span>
+<span id="cb32-27"><a href="#cb32-27"></a>     <span class="kw">((</span>r--<span class="kw">))</span></span>
+<span id="cb32-28"><a href="#cb32-28"></a>  <span class="kw">done</span></span>
+<span id="cb32-29"><a href="#cb32-29"></a></span>
+<span id="cb32-30"><a href="#cb32-30"></a></span>
+<span id="cb32-31"><a href="#cb32-31"></a><span class="co"># subs</span></span>
+<span id="cb32-32"><a href="#cb32-32"></a>  <span class="kw">if</span> <span class="kw">((</span> --iter &gt; 0 <span class="kw">))</span></span>
+<span id="cb32-33"><a href="#cb32-33"></a>  <span class="kw">then</span> <span class="ex">Y</span> <span class="va">$r</span> <span class="va">$cl</span> <span class="va">$l</span> <span class="va">$iter</span></span>
+<span id="cb32-34"><a href="#cb32-34"></a>       <span class="ex">Y</span> <span class="va">$r</span> <span class="va">$cr</span> <span class="va">$l</span> <span class="va">$iter</span></span>
+<span id="cb32-35"><a href="#cb32-35"></a>  <span class="kw">fi</span></span>
+<span id="cb32-36"><a href="#cb32-36"></a><span class="kw">}</span></span>
+<span id="cb32-37"><a href="#cb32-37"></a></span>
+<span id="cb32-38"><a href="#cb32-38"></a></span>
+<span id="cb32-39"><a href="#cb32-39"></a><span class="co"># initialize</span></span>
+<span id="cb32-40"><a href="#cb32-40"></a><span class="kw">for</span> <span class="kw">((</span> row=0; row&lt;maxrows; row++ <span class="kw">))</span></span>
+<span id="cb32-41"><a href="#cb32-41"></a><span class="kw">do</span>  <span class="kw">for</span> <span class="kw">((</span> col=0; col&lt;maxcols; col++<span class="kw">))</span></span>
+<span id="cb32-42"><a href="#cb32-42"></a>    <span class="kw">do</span>  <span class="va">m[$row,$col]=</span>_</span>
+<span id="cb32-43"><a href="#cb32-43"></a>    <span class="kw">done</span></span>
+<span id="cb32-44"><a href="#cb32-44"></a><span class="kw">done</span></span>
+<span id="cb32-45"><a href="#cb32-45"></a></span>
+<span id="cb32-46"><a href="#cb32-46"></a></span>
+<span id="cb32-47"><a href="#cb32-47"></a><span class="co"># recurse</span></span>
+<span id="cb32-48"><a href="#cb32-48"></a><span class="ex">Y</span> <span class="va">$((</span> maxrows-1 <span class="va">))</span> <span class="va">$((</span> (maxcols-1)/2 <span class="va">))</span> <span class="va">$StartLegLength</span> <span class="va">$iter</span></span>
+<span id="cb32-49"><a href="#cb32-49"></a></span>
+<span id="cb32-50"><a href="#cb32-50"></a></span>
+<span id="cb32-51"><a href="#cb32-51"></a><span class="co"># show the result</span></span>
+<span id="cb32-52"><a href="#cb32-52"></a><span class="kw">for</span> <span class="kw">((</span> r=0; r&lt;maxrows; r++ <span class="kw">))</span></span>
+<span id="cb32-53"><a href="#cb32-53"></a><span class="kw">do</span>  <span class="kw">for</span> <span class="kw">((</span> c=0; c&lt;maxcols; c++<span class="kw">))</span></span>
+<span id="cb32-54"><a href="#cb32-54"></a>    <span class="kw">do</span>  <span class="bu">printf</span> <span class="st">&quot;%s&quot;</span> <span class="va">${m[$r,$c]}</span></span>
+<span id="cb32-55"><a href="#cb32-55"></a>    <span class="kw">done</span></span>
+<span id="cb32-56"><a href="#cb32-56"></a>    <span class="bu">printf</span> <span class="st">&quot;\n&quot;</span></span>
+<span id="cb32-57"><a href="#cb32-57"></a><span class="kw">done</span></span></code></pre></div>
+</section>
+<section id="cut" class="level3">
+<h3>Cut</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">cut</span> -f1,3 -d<span class="st">&quot;:&quot;</span> /etc/passwd</span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="co"># Field</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="fu">cut</span> -c1 /etc/passwd</span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="co"># Char</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="fu">cut</span> -c1-5 /etc/passwd</span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="fu">cut</span> -b1 /etc/passwd</span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="co"># Byte</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">cut</span> -c3</span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="fu">cut</span> -c2,7</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="fu">cut</span> -c2-7</span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># Inclusive</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="fu">cut</span> -c0-4</span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="fu">cut</span> -f1-3 -d<span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="co"># Tab delimiter</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a><span class="fu">cut</span> -f1-3 -s</span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="co"># Not containg delimiter</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="fu">cut</span> -c13-</span>
+<span id="cb34-12"><a href="#cb34-12"></a><span class="fu">cut</span> -f4 -d<span class="st">&quot; &quot;</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="fu">cut</span> -f1-3 -d<span class="st">&quot; &quot;</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a><span class="fu">cut</span> -f2-</span></code></pre></div>
+</section>
+<section id="head" class="level3">
+<h3>Head</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">head</span> -n 20</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="co"># Line</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">head</span> -c 20</span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># Character</span></span></code></pre></div>
+</section>
+<section id="middle" class="level3">
+<h3>Middle</h3>
+<div class="sourceCode" id="cb36"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">sed</span> -n <span class="st">&#39;12,22p&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1"></a><span class="fu">head</span> -n 22 <span class="kw">|</span> <span class="fu">tail</span> -n +12</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">cut</span> -d<span class="st">$&#39;</span><span class="dt">\n</span><span class="st">&#39;</span> -f12-22</span></code></pre></div>
+<ul>
+<li>Problem tester:</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">head</span> -22 <span class="kw">|</span> <span class="fu">tail</span> -11</span></code></pre></div>
+</section>
+<section id="tail" class="level3">
+<h3>Tail</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1"></a><span class="fu">tail</span> -n 20</span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="fu">tail</span> -c 20</span></code></pre></div>
+</section>
+<section id="tr" class="level3">
+<h3>Tr</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">tr</span> <span class="st">&#39;()&#39;</span> <span class="st">&#39;[]&#39;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="fu">tr</span> -d [a-z]</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">sed</span> <span class="st">&quot;s/  */ /g&quot;</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="fu">tr</span> -s  <span class="st">&#39; &#39;</span> <span class="st">&#39; &#39;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a><span class="co"># S for squeezze</span></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="fu">tr</span> -s <span class="st">&quot; &quot;</span></span></code></pre></div>
+</section>
+<section id="sort" class="level3">
+<h3>Sort</h3>
+<ul>
+<li>The vanilla sort command simply sorts the lines of the input file in lexicographical order.</li>
+<li>The <code>-n</code> option sorts the file on the basis of the numeric fields available if the first word or column in the file is a number.</li>
+<li>The <code>-r</code> option reverses the sorting order to either the reverse of the usual lexicographical ordering or descending order while sorting in numerical mode.</li>
+<li>The <code>-k</code> option is useful while sorting a table of data (tsv, csv etc.) based on a specified column (or columns).</li>
+<li>The <code>-t</code> option is used while specifying a delimiter in a particular file where columns are separated by tabs, spaces, pipes etc.</li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">sort</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">sort</span> -r</span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="fu">sort</span> -n</span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="fu">sort</span> -rn</span>
+<span id="cb42-5"><a href="#cb42-5"></a><span class="fu">sort</span> -t<span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> -nr -k2</span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="fu">sort</span> -r -n -k2 -t <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a><span class="co"># Same</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a><span class="fu">sort</span> -n -t <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> -k 2</span>
+<span id="cb42-9"><a href="#cb42-9"></a><span class="fu">sort</span> -nr -t <span class="st">&#39;|&#39;</span> -k 2</span></code></pre></div>
+</section>
+<section id="uniq" class="level3">
+<h3>Uniq</h3>
+<ul>
+<li><code>-c</code> count: prefix with the number of lines collaspsed</li>
+<li><code>-d</code> duplicate: only print duplicate lines</li>
+<li><code>-u</code> uniqque: only print unique lines</li>
+<li><code>-w</code> word: Limit comparison only to the first characters</li>
+<li><code>-s</code> paSS: Avoid comparing the first characters</li>
+<li><code>-i</code> ignore case: Ignore variations in case between lines</li>
+<li><code>-f</code> field: Avoid comparing the first fields</li>
+</ul>
+<div class="sourceCode" id="cb43"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">uniq</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">cut</span> -c7-</span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="fu">uniq</span> -c <span class="kw">|</span> <span class="fu">tr</span> -s <span class="st">&quot; &quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -b 2-</span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="co"># Same</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="fu">uniq</span> -ci <span class="kw">|</span> <span class="fu">tr</span> -s <span class="st">&quot; &quot;</span> <span class="kw">|</span> <span class="fu">cut</span> -b 2-</span>
+<span id="cb43-6"><a href="#cb43-6"></a><span class="fu">uniq</span> -u</span></code></pre></div>
+</section>
+<section id="paste" class="level3">
+<h3>Paste</h3>
+<ul>
+<li><code>-s</code> serial</li>
+<li><code>-d";"</code> delimiter separated by ;</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">tr</span> <span class="st">&#39;\n&#39;</span> <span class="st">&#39;;&#39;</span> <span class="kw">|</span> <span class="fu">head</span> -c -1</span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="ex">paste</span> -s -d<span class="st">&quot;;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1"></a><span class="ex">paste</span> -d <span class="st">&quot;;&quot;</span> - - -</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="ex">paste</span> -sd <span class="st">&#39;;;\n&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="ex">paste</span> -s</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1"></a><span class="ex">paste</span> - - -</span></code></pre></div>
+</section>
+</section>
+<section id="array" class="level2">
+<h2>Array</h2>
+<section class="level2">
+<section id="read-in-an-array" class="level3">
+<h3>Read in an Array</h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span>; <span class="bu">echo</span> <span class="va">${arr[@]}</span></span></code></pre></div>
+</section>
+<section id="slice-an-array" class="level3">
+<h3>Slice an Array</h3>
+<ul>
+<li><code>${A[@]:3:5}</code>: From 3 (0 indexed) with 5 elements</li>
+</ul>
+<div class="sourceCode" id="cb49"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1"></a><span class="ex">readarray</span> -t A</span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="va">B=(</span><span class="st">&quot;</span><span class="va">${A[@]:3:5}</span><span class="st">&quot;</span><span class="va">)</span></span>
+<span id="cb49-3"><a href="#cb49-3"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${B[*]}</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb50-1"><a href="#cb50-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="bu">echo</span> <span class="va">${arr[@]:3:5}</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">head</span> -8 <span class="kw">|</span> <span class="fu">tail</span> -5 <span class="kw">|</span> <span class="ex">paste</span> -s -d<span class="st">&#39; &#39;</span></span></code></pre></div>
+</section>
+<section id="filter-an-array-with-patterns" class="level3">
+<h3>Filter an Array with Patterns</h3>
+<div class="sourceCode" id="cb52"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="bu">echo</span> <span class="va">${arr[@]/</span>*[Aa]*<span class="va">/}</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">grep</span> -vi a</span></code></pre></div>
+</section>
+<section id="concatenate-an-array-with-itself" class="level3">
+<h3>Concatenate an array with itself</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb54-1"><a href="#cb54-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${arr[@]}</span><span class="st"> </span><span class="va">${arr[@]}</span><span class="st"> </span><span class="va">${arr[@]}</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1"></a><span class="va">X=$(</span><span class="fu">xargs</span><span class="va">)</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="bu">echo</span> <span class="va">$X</span> <span class="va">$X</span> <span class="va">$X</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1"></a><span class="va">X=$(</span><span class="ex">paste</span> -d<span class="st">&#39; &#39;</span><span class="va">)</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="bu">echo</span> <span class="va">$X</span> <span class="va">$X</span> <span class="va">$X</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">tr</span> <span class="kw">`</span><span class="st">$&#39;</span><span class="dt">\n</span><span class="st">&#39;</span> <span class="st">&#39; &#39;</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $`0 `$0 $`0}&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb58-1"><a href="#cb58-1"></a><span class="va">IFS=</span><span class="st">$&#39;</span><span class="dt">\n</span><span class="st">&#39;</span> <span class="bu">read</span> -d <span class="st">&#39;&#39;</span> -ra <span class="va">countries</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${countries[@]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${countries[@]}</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">${countries[@]}</span><span class="st">&quot;</span></span></code></pre></div>
+</section>
+<section id="display-an-element-of-an-array" class="level3">
+<h3>Display an element of an array</h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb59-1"><a href="#cb59-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="bu">echo</span> <span class="va">${arr[3]}</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">awk</span> <span class="st">&#39;NR==4&#39;</span></span></code></pre></div>
+</section>
+<section id="count-the-number-of-elements-in-an-array" class="level3">
+<h3>Count the number of elements in an Array</h3>
+<div class="sourceCode" id="cb61"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb61-1"><a href="#cb61-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="bu">echo</span> ${</span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="co">#arr[*]}</span></span></code></pre></div>
+</section>
+<section id="remove-the-first-capital-letter-from-each-element" class="level3">
+<h3>Remove the First Capital Letter from Each Element</h3>
+<div class="sourceCode" id="cb62"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb62-1"><a href="#cb62-1"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="bu">echo</span> <span class="va">${arr[@]/</span>?<span class="va">/</span>.<span class="va">}</span></span></code></pre></div>
+</section>
+<section id="lonely-integer---bash" class="level3">
+<h3>Lonely Integer - Bash!</h3>
+<div class="sourceCode" id="cb63"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb63-1"><a href="#cb63-1"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb63-2"><a href="#cb63-2"></a><span class="fu">tr</span> <span class="st">&quot; &quot;</span> <span class="st">&quot;\n&quot;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="kw">|</span> <span class="fu">uniq</span> -u</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb64-1"><a href="#cb64-1"></a><span class="bu">read</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="va">arr=($(</span><span class="fu">cat</span><span class="va">))</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a><span class="va">arr=${arr[*]}</span></span>
+<span id="cb64-4"><a href="#cb64-4"></a><span class="co"># render a new variable of type string from the merging of the array arr delimited by space, i.e., from [1,2,2,2,1] to &quot;1 2 2 2 1&quot;</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="bu">echo</span> <span class="va">$((${arr//</span> <span class="va">/</span>^<span class="va">}))</span></span>
+<span id="cb64-6"><a href="#cb64-6"></a><span class="co"># replaces all spaces &#39; &#39; in the string variable with ^ (bitwise-XOR operator),</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb65-1"><a href="#cb65-1"></a><span class="bu">read</span></span>
+<span id="cb65-2"><a href="#cb65-2"></a><span class="bu">echo</span> <span class="va">$((</span> <span class="kw">`</span><span class="fu">tr</span> <span class="st">&#39; &#39;</span> <span class="st">&#39;^&#39;</span><span class="kw">`</span> <span class="va">))</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb66-1"><a href="#cb66-1"></a></span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="co"># read the input values</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="bu">read</span> <span class="va">n</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a><span class="bu">read</span> -a <span class="va">A</span></span>
+<span id="cb66-5"><a href="#cb66-5"></a></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="co">#echo -e &quot;The size of the array is &#39;${#A[*]}&#39;, and the array is:\n${A[*]}&quot;</span></span>
+<span id="cb66-7"><a href="#cb66-7"></a><span class="va">x=${A[0]}</span></span>
+<span id="cb66-8"><a href="#cb66-8"></a></span>
+<span id="cb66-9"><a href="#cb66-9"></a><span class="co">#echo &quot;A[0] = ${A[0]}, x = $x&quot;</span></span>
+<span id="cb66-10"><a href="#cb66-10"></a><span class="kw">for</span> <span class="kw">((</span> i = 1; i &lt; ${</span>
+<span id="cb66-11"><a href="#cb66-11"></a><span class="co">#A[*]}; i++ )); do</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a></span>
+<span id="cb66-13"><a href="#cb66-13"></a><span class="co">#for (( i = 1; i &lt; n; i++ )); do</span></span>
+<span id="cb66-14"><a href="#cb66-14"></a>    <span class="va">$((</span>x ^= <span class="va">${A[i]}</span> <span class="va">))</span></span>
+<span id="cb66-15"><a href="#cb66-15"></a></span>
+<span id="cb66-16"><a href="#cb66-16"></a><span class="co">#x=$((x ^ ${A[i]} ))</span></span>
+<span id="cb66-17"><a href="#cb66-17"></a></span>
+<span id="cb66-18"><a href="#cb66-18"></a><span class="co">#echo &quot;A[$i] = ${A[i]}, x = $x&quot;</span></span>
+<span id="cb66-19"><a href="#cb66-19"></a></span>
+<span id="cb66-20"><a href="#cb66-20"></a>done</span>
+<span id="cb66-21"><a href="#cb66-21"></a>echo <span class="va">$x</span></span></code></pre></div>
+</section>
+</section>
+</section>
+<section id="grep-sed-awk" class="level2">
+<h2>Grep / Sed / Awk</h2>
+<section class="level2">
+<section id="grep" class="level3">
+<h3>Grep</h3>
+<ul>
+<li>Note: escape <code>|</code> <code>()</code></li>
+</ul>
+<div class="sourceCode" id="cb67"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb67-1"><a href="#cb67-1"></a><span class="fu">grep</span> <span class="st">&quot; the &quot;</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="fu">grep</span> <span class="st">&#39;\bthe\b&#39;</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="fu">grep</span> -w <span class="st">&#39;the&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">grep</span> -viw that</span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="fu">grep</span> -iw <span class="st">&#39;the\|that\|then\|those&#39;</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="fu">grep</span> <span class="st">&#39;\(\d\)\s*\1&#39;</span></span></code></pre></div>
+</section>
+<section id="sed" class="level3">
+<h3>Sed</h3>
+<div class="sourceCode" id="cb69"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb69-1"><a href="#cb69-1"></a><span class="fu">sed</span> <span class="st">&#39;s/\bthe\b/this/&#39;</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="fu">sed</span> -e <span class="st">&#39;s/\&lt;the\&gt;/this/&#39;</span></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="fu">sed</span> <span class="st">&#39;s/\&lt;thy\&gt;/your/gi&#39;</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a><span class="fu">sed</span> <span class="st">&#39;s/\&lt;thy\&gt;/{\0}/gi&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">sed</span> <span class="st">&#39;s/\d\d\d\d \d\d\d\d \d\d\d\d/**** **** ****/&#39;</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="fu">sed</span> <span class="st">&#39;s/[0-9]\+ /**** /g&#39;</span></span>
+<span id="cb70-3"><a href="#cb70-3"></a><span class="fu">sed</span> -e <span class="st">&#39;s/([0-9]){4} /**** /g&#39;</span></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="fu">sed</span> -r <span class="st">&#39;s/[0-9]{4} /**** /g&#39;</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a></span>
+<span id="cb70-6"><a href="#cb70-6"></a><span class="co"># Reverse each line</span></span>
+<span id="cb70-7"><a href="#cb70-7"></a></span>
+<span id="cb70-8"><a href="#cb70-8"></a><span class="co"># Used sed to replace digits with *, starting with the 5th digit</span></span>
+<span id="cb70-9"><a href="#cb70-9"></a></span>
+<span id="cb70-10"><a href="#cb70-10"></a><span class="co"># Reverse each line again</span></span>
+<span id="cb70-11"><a href="#cb70-11"></a><span class="fu">rev</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/[0-9]/*/g5&#39;</span> <span class="kw">|</span> <span class="fu">rev</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb71-1"><a href="#cb71-1"></a><span class="fu">sed</span> -E <span class="st">&#39;s/(\d{4}) (\d{4}) (\d{4}) (\d{4})/\4 \3 \2 \1/&#39;</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="fu">awk</span> <span class="st">&#39;{print $4&quot; &quot;$3&quot; &quot;$2&quot; &quot;$1}&#39;</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="fu">sed</span> -r <span class="st">&#39;s/(.... )(.... )(.... )(....)/\4 \3\2\1/&#39;</span></span></code></pre></div>
+</section>
+<section id="awk" class="level3">
+<h3>Awk</h3>
+<ul>
+<li><code>NF</code> Number of Fields</li>
+</ul>
+<div class="sourceCode" id="cb72"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb72-1"><a href="#cb72-1"></a><span class="fu">awk</span> <span class="st">&#39;{if ($4 == &quot;&quot;) print &quot;Not all scores are available for&quot;,$1;}&#39;</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a><span class="fu">awk</span> <span class="st">&#39;{if(NF &lt; 4) print &quot;Not all scores are available for&quot;,$1;}&#39;</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="fu">awk</span> <span class="st">&#39;{if (NF &lt; 4){print &quot;Not all scores are available for &quot;$1}}&#39;</span></span>
+<span id="cb72-4"><a href="#cb72-4"></a><span class="co"># Removed coma</span></span>
+<span id="cb72-5"><a href="#cb72-5"></a><span class="fu">awk</span> <span class="st">&#39;$4==&quot;&quot; {print &quot;Not all scores are available for &quot; $1} &#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb73-1"><a href="#cb73-1"></a><span class="fu">awk</span> <span class="st">&#39;{printf $1&quot; : &quot;; if ($2+$3+$4 &gt;= 150) {print &quot;Pass&quot;} else {print &quot;Fail&quot;}}&#39;</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a><span class="co"># Wrong but I got lucky</span></span>
+<span id="cb73-3"><a href="#cb73-3"></a><span class="fu">awk</span> <span class="st">&#39;{print $1,&quot;:&quot;, ($2&lt;50||$3&lt;50||$4&lt;50) ? &quot;Fail&quot; : &quot;Pass&quot;}&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb74-1"><a href="#cb74-1"></a><span class="fu">awk</span> <span class="st">&#39;{</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="st">    printf $0&quot; : &quot;;</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a><span class="st">    sum=$2+$3+$4;</span></span>
+<span id="cb74-4"><a href="#cb74-4"></a><span class="st">    if (sum &gt;= 240) {print &quot;A&quot;}</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a><span class="st">    else if (sum &gt;= 180) {print &quot;B&quot;}</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a><span class="st">    else if (sum &gt;= 150) {print &quot;C&quot;}</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a><span class="st">    else {print &quot;FAIL&quot;}</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a><span class="st">    }&#39;</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a><span class="fu">awk</span> <span class="st">&#39;{avg=($2+$3+$4)/3; print $0, &quot;:&quot;, (avg&lt;50)?&quot;FAIL&quot;:(avg&lt;80)?&quot;B&quot;:&quot;A&quot;}&#39;</span></span></code></pre></div>
+<ul>
+<li>Concatenate each 2 lines</li>
+</ul>
+<div class="sourceCode" id="cb75"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb75-1"><a href="#cb75-1"></a><span class="ex">paste</span> -d<span class="st">&quot;;&quot;</span> - -</span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="fu">awk</span> <span class="st">&#39;ORS=NR%2?&quot;;&quot;:&quot;\n&quot;&#39;</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a><span class="fu">awk</span> <span class="st">&#39;NR%2{printf$0&quot;;&quot;}1-NR%2&#39;</span></span>
+<span id="cb75-4"><a href="#cb75-4"></a><span class="fu">awk</span> <span class="st">&#39;{</span></span>
+<span id="cb75-5"><a href="#cb75-5"></a><span class="st">    if ( NR % 2 == 1 )</span></span>
+<span id="cb75-6"><a href="#cb75-6"></a><span class="st">        printf &quot;%s;&quot;, $0</span></span>
+<span id="cb75-7"><a href="#cb75-7"></a><span class="st">    else</span></span>
+<span id="cb75-8"><a href="#cb75-8"></a><span class="st">        printf &quot;%s\n&quot;, $0  </span></span>
+<span id="cb75-9"><a href="#cb75-9"></a><span class="st">}&#39;</span></span></code></pre></div>
+<section id="awk-tricks" class="level4">
+<h4>Awk tricks</h4>
+<div class="sourceCode" id="cb76"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">awk</span> <span class="st">&#39;/^num/ {n++;sum+=$2} END {print n?sum/n:0}&#39;</span> file</span></code></pre></div>
+</section>
+</section>
+</section>
+</section>
+</body>
+</html>
