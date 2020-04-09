@@ -12,71 +12,6 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        background-color: #232629;
-        color: #7a7c7d;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
-    div.sourceCode
-      { color: #cfcfc2; background-color: #232629; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span. { color: #cfcfc2; } /* Normal */
-    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
-    code span.an { color: #3f8058; } /* Annotation */
-    code span.at { color: #2980b9; } /* Attribute */
-    code span.bn { color: #f67400; } /* BaseN */
-    code span.bu { color: #7f8c8d; } /* BuiltIn */
-    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #3daee9; } /* Char */
-    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
-    code span.co { color: #7a7c7d; } /* Comment */
-    code span.cv { color: #7f8c8d; } /* CommentVar */
-    code span.do { color: #a43340; } /* Documentation */
-    code span.dt { color: #2980b9; } /* DataType */
-    code span.dv { color: #f67400; } /* DecVal */
-    code span.er { color: #da4453; text-decoration: underline; } /* Error */
-    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
-    code span.fl { color: #f67400; } /* Float */
-    code span.fu { color: #8e44ad; } /* Function */
-    code span.im { color: #27ae60; } /* Import */
-    code span.in { color: #c45b00; } /* Information */
-    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
-    code span.op { color: #cfcfc2; } /* Operator */
-    code span.ot { color: #27ae60; } /* Other */
-    code span.pp { color: #27ae60; } /* Preprocessor */
-    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
-    code span.sc { color: #3daee9; } /* SpecialChar */
-    code span.ss { color: #da4453; } /* SpecialString */
-    code span.st { color: #f44f4f; } /* String */
-    code span.va { color: #27aeae; } /* Variable */
-    code span.vs { color: #da4453; } /* VerbatimString */
-    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
   <!--[if lt IE 9]>
@@ -87,7 +22,7 @@
 <header id="title-block-header">
 <h1 class="title">BASH Bourne Again SHell</h1>
 </header>
-<p><a href="Bash-Rc.html">Bash Rc</a></p>
+<p><a href="Bash-HackerRank.html">Bash HackerRank</a> <a href="Bash-Rc.html">Bash Rc</a></p>
 <ul>
 <li><code>ps -ef | grep 'myProcessName' | grep -v grep | awk '{print $2}' | xargs -r kill -15</code> : kill all process from name</li>
 <li><code>type find</code> , <code>type vi</code> : see if command is alias or function or binary</li>
@@ -101,11 +36,14 @@
 <li>bind ‘set show-all-if-ambiguous on’</li>
 <li>bind TAB:menu-complete</li>
 </ul>
-<pre class="conf"><code># display all possible matches for an ambiguous pattern at first tab
+<pre class="conf"><code>
+# display all possible matches for an ambiguous pattern at first tab
 set show-all-if-ambiguous on
+
 
 # next tab(s) will cycle through matches
 TAB: menu-complete
+
 # shift tab cycles backward
 &quot;\e[Z&quot;: menu-complete-backward</code></pre>
 </section>
@@ -149,7 +87,7 @@ TAB: menu-complete
 <li><p>Get filename and extension</p>
 <ul>
 <li><code>filename=$(basename -- "$fullfile")</code></li>
-<li><code>extension="${filename##*.}"</code></li>
+<li><code>extension="${filename ##*.}"</code></li>
 <li><code>filename="${filename%.*}"</code></li>
 </ul></li>
 <li><p>Get source directory of a script</p>
@@ -161,31 +99,21 @@ TAB: menu-complete
 <li><p>Faster redirect to null <code>| :</code> instead of <code>&gt; /dev/null</code></p></li>
 <li><p>Center text (read ~/Bin/hi.sh)</p>
 <ul>
-<li><div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="va">title=</span><span class="st">&quot;El terminal de la Ponette&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="bu">printf</span> <span class="st">&quot;%*s\n&quot;</span> <span class="va">$((</span> ( <span class="va">${#title}</span> + <span class="va">$columns</span> ) / 2  <span class="va">))</span> <span class="st">&quot;</span><span class="va">$title</span><span class="st">&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">do</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>        <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$line</span><span class="st">&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="kw">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">jobs</span><span class="op">)</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="kw">while</span> <span class="bu">read</span> -r <span class="va">line</span>  ; <span class="kw">do</span> <span class="bu">echo</span> -e  <span class="st">&quot;ccaca </span><span class="va">$line</span><span class="st">&quot;</span> <span class="kw">;</span> <span class="kw">done</span><span class="op">&lt;</span> <span class="op">&lt;(</span><span class="bu">echo</span> -e <span class="st">&quot;</span><span class="va">$toto</span><span class="st">&quot;</span><span class="op">)</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="va">lines=$(</span><span class="ex">tput</span> lines<span class="va">)</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="va">columns=$(</span><span class="ex">tput</span> cols<span class="va">)</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="va">IFS=</span><span class="st">&#39;&#39;</span> <span class="bu">read</span> -r -d <span class="st">&#39;&#39;</span> <span class="va">String</span> <span class="op">&lt;&lt;&quot;EOF&quot;</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>&lt;?xml version=&quot;1.0&quot; encoding=&#39;UTF-8&#39;?&gt;</span>
-<span id="cb2-16"><a href="#cb2-16"></a> &lt;painting&gt;</span>
-<span id="cb2-17"><a href="#cb2-17"></a>     &lt;img src=&quot;madonna.jpg&quot; alt=&#39;Foligno Madonna, by Raphael&#39;/&gt;</span>
-<span id="cb2-18"><a href="#cb2-18"></a>     &lt;caption&gt;This is Raphael&#39;s &quot;Foligno&quot; Madonna, painted in</span>
-<span id="cb2-19"><a href="#cb2-19"></a>     &lt;date&gt;1511&lt;/date&gt;-&lt;date&gt;1512&lt;/date&gt;.&lt;/caption&gt;</span>
-<span id="cb2-20"><a href="#cb2-20"></a> &lt;/painting&gt;</span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="op">EOF</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="ex">This</span> will put your text into your variable without needing to escape the quotes. It will also handle unbalanced quotes (apostrophes, i.e. <span class="st">&#39;). Putting quotes around the sentinel (EOF) prevents the text from undergoing parameter expansion. The -d&#39;&#39; causes it to read multiple lines (ignore newlines). read is a Bash built-in so it doesn&#39;</span>t require calling an external command such as cat.</span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="ex">And</span> if you are using this multi-line String variable to write to a file, put the variable around <span class="st">&quot;QUOTES&quot;</span> like echo <span class="st">&quot;</span><span class="va">${String}</span><span class="st">&quot;</span> <span class="op">&gt;</span> /tmp/multiline_file.txt or echo <span class="st">&quot;</span><span class="va">${String}</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /tmp/multiline_file.txt. Took me more than an hour to find that.</span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co"># more there : https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</span></span></code></pre></div></li>
+<li><p>```bash title=“El terminal de la Ponette” printf "%*s" $(( ( ${ #title} + <span class="math inline">$columns ) / 2 )) "$</span>title"</p>
+<p>while read -r line do echo “$line” done &lt; &lt;(jobs) while read -r line ; do echo -e “ccaca <span class="math inline">$line" ; done&lt; &lt;(echo -e "$</span>toto”)</p>
+<p>lines=<span class="math inline">(<em>t</em><em>p</em><em>u</em><em>t</em><em>l</em><em>i</em><em>n</em><em>e</em><em>s</em>)<em>c</em><em>o</em><em>l</em><em>u</em><em>m</em><em>n</em><em>s</em>=</span>(tput cols)</p>
+<p>IFS=’’ read -r -d ’’ String &lt;&lt;“EOF” <?xml version="1.0" encoding='UTF-8'?> <painting> <img src="madonna.jpg" alt='Foligno Madonna, by Raphael'/></p>
+<caption>
+<p>This is Raphael’s “Foligno” Madonna, painted in <date>1511</date>-<date>1512</date>.</p>
+</caption>
+<p></painting> EOF This will put your text into your variable without needing to escape the quotes. It will also handle unbalanced quotes (apostrophes, i.e. ‘). Putting quotes around the sentinel (EOF) prevents the text from undergoing parameter expansion. The -d’’ causes it to read multiple lines (ignore newlines). read is a Bash built-in so it doesn’t require calling an external command such as cat. And if you are using this multi-line String variable to write to a file, put the variable around “QUOTES” like echo “<span class="math inline">${String}" &gt; /tmp/multiline_file.txt or echo "$</span>{String}” | tee /tmp/multiline_file.txt. Took me more than an hour to find that.</p></li>
 </ul></li>
+</ul>
+</section>
+<section id="more-there-httpsstackoverflow.comquestions1167746how-to-assign-a-heredoc-value-to-a-variable-in-bash" class="level1">
+<h1>more there : https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</h1>
+<pre><code>    ```</code></pre>
+<ul>
 <li><p>Fork bomb</p>
 <ul>
 <li>:(){ :|:&amp; };:</li>
@@ -250,8 +178,9 @@ TAB: menu-complete
 </li>
 <li><code>dirs</code></li>
 <li><code>cd -</code> # Go back and foward</li>
-<li><code>$CDPATH</code> # is the path bash looks at then,</li>
+<li><code>$CDPATH</code> # is the path bash looks at</li>
 </ul>
+<p>then,</p>
 <p>cd ~ is your home,</p>
 <p>cd ~1 is ~/Dropbox/Projects/ds/test/</p>
 <p>cd ~2 is /Project/Warnest/docs/</p>

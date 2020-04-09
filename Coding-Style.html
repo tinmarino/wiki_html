@@ -91,6 +91,7 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
+<li><a href="#list-buzzwords">List Buzzwords</a></li>
 <li><a href="#from-so">From So</a>
 <ul>
 <li><a href="#how-do-you-tell-someone-theyre-writing-bad-code">How do you tell someone they’re writing bad code</a></li>
@@ -98,6 +99,8 @@
 <li><a href="#constructor-should-have-maximum-3-arguments">Constructor should have maximum 3 arguments</a></li>
 <li><a href="#null-a-freed-pointer-and-uninitialised">Null a freed pointer (and uninitialised)</a></li>
 <li><a href="#replace-nested-conditional-with-guard-clauses">Replace Nested Conditional with Guard Clauses</a></li>
+<li><a href="#no-return-in-the-middle">No return in the middle</a></li>
+<li><a href="#anti-if">Anti if</a></li>
 </ul></li>
 <li><a href="#refactoring-catalog">Refactoring Catalog</a>
 <ul>
@@ -138,9 +141,16 @@
 <li><a href="#split-phase">Split Phase</a></li>
 <li><a href="#split-variable">Split Variable</a></li>
 <li><a href="#substitute-algorithm">Substitute Algorithm</a></li>
+<li><a href="#link">Link</a></li>
 </ul></li>
 </ul>
 </nav>
+<section id="list-buzzwords" class="level3">
+<h3>List Buzzwords</h3>
+<ul>
+<li>exit early</li>
+</ul>
+</section>
 <section id="from-so" class="level2">
 <h2>From So</h2>
 <section class="level2">
@@ -225,7 +235,10 @@
 <ul>
 <li>Exiting early allows you to pop stuff off your limited mental stack</li>
 <li>The same way, <code>break</code> is allowed only at top of loop (clause)</li>
+<li>Better separation of corner cases from the main method logic</li>
+<li>Another big problem arises when the logic of such code becomes long enough to not fit the screen vertically. At some point you may even forget that it’s there, which would completely break your picture</li>
 </ul>
+<p>Probably the most documented case is the guard clause, also known as assert or precondition. The idea is that when you have something to assert in the beginning of a method — do this using a fast return.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">SomeFunction</span>(bool someCondition)</span>
 <span id="cb2-2"><a href="#cb2-2"></a>{</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    <span class="kw">if</span> (someCondition)</span>
@@ -242,6 +255,185 @@
 <span id="cb3-7"><a href="#cb3-7"></a>    <span class="co">// Do Something</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="op">}</span></span></code></pre></div>
 </section>
+<section id="no-return-in-the-middle" class="level3">
+<h3>No return in the middle</h3>
+<ul>
+<li>a return or throw in the middle of the method is not so easily detected at the first sight</li>
+<li>it requires you to consider that under some circumstances, the main logic of this method will not be executed completely</li>
+<li>every time you’ll have to decide: should you put the new code before or after this return?</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeTimer</span>( <span class="bu">String</span> timerId ) {</span>
+<span id="cb4-2"><a href="#cb4-2"></a>  logger.<span class="fu">debug</span>( <span class="st">&quot;Executing timer with ID {}&quot;</span>, timerId );  TimerEntity timerEntity = timerRepository.<span class="fu">find</span>( timerId );  logger.<span class="fu">debug</span>( <span class="st">&quot;Found TimerEntity {} for timer ID {}&quot;</span>, timerEntity, timerId );  <span class="kw">if</span>( timerEntity == <span class="kw">null</span> )</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="kw">return</span>;  <span class="bu">Timer</span> timer = <span class="bu">Timer</span>.<span class="fu">fromEntity</span>( timerEntity );</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  timersInvoker.<span class="fu">execute</span>( timer );</span>
+<span id="cb4-5"><a href="#cb4-5"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeTimer</span>( <span class="bu">String</span> timerId ) {</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  logger.<span class="fu">debug</span>( <span class="st">&quot;Executing timer with ID {}&quot;</span>, timerId );  TimerEntity timerEntity = timerRepository.<span class="fu">find</span>( timerId );  logger.<span class="fu">debug</span>( <span class="st">&quot;Found TimerEntity {} for timer ID {}&quot;</span>, timerEntity, timerId );  <span class="fu">executeTimer</span>( timerEntity );</span>
+<span id="cb5-3"><a href="#cb5-3"></a>}</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">private</span> <span class="dt">void</span> <span class="fu">executeTimer</span>( TimerEntity timerEntity ) {</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="kw">if</span>( timerEntity == <span class="kw">null</span> )</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="kw">return</span>;  <span class="bu">Timer</span> timer = <span class="bu">Timer</span>.<span class="fu">fromEntity</span>( timerEntity );</span>
+<span id="cb5-7"><a href="#cb5-7"></a>  timersInvoker.<span class="fu">execute</span>( timer );</span>
+<span id="cb5-8"><a href="#cb5-8"></a>}</span></code></pre></div>
+</section>
+<section id="anti-if" class="level3">
+<h3>Anti if</h3>
+<section id="boolean-parameters-to-duplicate-method" class="level4">
+<h4>Boolean parameters to duplicate method</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">example</span>() {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    FileUtils.<span class="fu">createFile</span>(<span class="st">&quot;name.txt&quot;</span>, <span class="st">&quot;file contents&quot;</span>, <span class="kw">false</span>);</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    FileUtils.<span class="fu">createFile</span>(<span class="st">&quot;name_temp.txt&quot;</span>, <span class="st">&quot;file contents&quot;</span>, <span class="kw">true</span>);</span>
+<span id="cb6-4"><a href="#cb6-4"></a>}</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">public</span> <span class="kw">class</span> FileUtils {</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">createFile</span>(<span class="bu">String</span> name, <span class="bu">String</span> contents, <span class="dt">boolean</span> temporary) {</span>
+<span id="cb6-8"><a href="#cb6-8"></a>        <span class="kw">if</span>(temporary) {</span>
+<span id="cb6-9"><a href="#cb6-9"></a>            <span class="co">// save temp file</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>        } <span class="kw">else</span> {</span>
+<span id="cb6-11"><a href="#cb6-11"></a>            <span class="co">// save permanent file</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>        }</span>
+<span id="cb6-13"><a href="#cb6-13"></a>    }</span>
+<span id="cb6-14"><a href="#cb6-14"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">example</span>() {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    FileUtils.<span class="fu">createFile</span>(<span class="st">&quot;name.txt&quot;</span>, <span class="st">&quot;file contents&quot;</span>);</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    FileUtils.<span class="fu">createTemporaryFile</span>(<span class="st">&quot;name_temp.txt&quot;</span>, <span class="st">&quot;file contents&quot;</span>);</span>
+<span id="cb7-4"><a href="#cb7-4"></a>}</span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">public</span> <span class="kw">class</span> FileUtils {</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">createFile</span>(<span class="bu">String</span> name, <span class="bu">String</span> contents) {</span>
+<span id="cb7-8"><a href="#cb7-8"></a>        <span class="co">// save permanent file</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a>    }</span>
+<span id="cb7-10"><a href="#cb7-10"></a></span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">createTemporaryFile</span>(<span class="bu">String</span> name, <span class="bu">String</span> contents) {</span>
+<span id="cb7-12"><a href="#cb7-12"></a>        <span class="co">// save temp file</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>    }</span>
+<span id="cb7-14"><a href="#cb7-14"></a>}</span></code></pre></div>
+</section>
+<section id="switch-to-polymorphism" class="level4">
+<h4>Switch to polymorphism</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">public</span> <span class="kw">class</span> Bird {</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="kw">private</span> <span class="kw">enum</span> Species {</span>
+<span id="cb8-4"><a href="#cb8-4"></a>        EUROPEAN, AFRICAN, NORWEGIAN_BLUE;</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    }</span>
+<span id="cb8-6"><a href="#cb8-6"></a></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    <span class="kw">private</span> <span class="dt">boolean</span> isNailed;</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    <span class="kw">private</span> Species type;</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSpeed</span>() {</span>
+<span id="cb8-11"><a href="#cb8-11"></a>        <span class="kw">switch</span> (type) {</span>
+<span id="cb8-12"><a href="#cb8-12"></a>            <span class="kw">case</span> EUROPEAN:</span>
+<span id="cb8-13"><a href="#cb8-13"></a>                <span class="kw">return</span> <span class="fu">getBaseSpeed</span>();</span>
+<span id="cb8-14"><a href="#cb8-14"></a>            <span class="kw">case</span> AFRICAN:</span>
+<span id="cb8-15"><a href="#cb8-15"></a>                <span class="kw">return</span> <span class="fu">getBaseSpeed</span>() - <span class="fu">getLoadFactor</span>();</span>
+<span id="cb8-16"><a href="#cb8-16"></a>            <span class="kw">case</span> NORWEGIAN_BLUE:</span>
+<span id="cb8-17"><a href="#cb8-17"></a>                <span class="kw">return</span> isNailed ? <span class="dv">0</span> : <span class="fu">getBaseSpeed</span>();</span>
+<span id="cb8-18"><a href="#cb8-18"></a>            <span class="kw">default</span>:</span>
+<span id="cb8-19"><a href="#cb8-19"></a>                <span class="kw">return</span> <span class="dv">0</span>;</span>
+<span id="cb8-20"><a href="#cb8-20"></a>        }</span>
+<span id="cb8-21"><a href="#cb8-21"></a>    }</span>
+<span id="cb8-22"><a href="#cb8-22"></a></span>
+<span id="cb8-23"><a href="#cb8-23"></a>    <span class="kw">private</span> <span class="dt">double</span> <span class="fu">getLoadFactor</span>() {</span>
+<span id="cb8-24"><a href="#cb8-24"></a>        <span class="kw">return</span> <span class="dv">3</span>;</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    }</span>
+<span id="cb8-26"><a href="#cb8-26"></a></span>
+<span id="cb8-27"><a href="#cb8-27"></a>    <span class="kw">private</span> <span class="dt">double</span> <span class="fu">getBaseSpeed</span>() {</span>
+<span id="cb8-28"><a href="#cb8-28"></a>        <span class="kw">return</span> <span class="dv">10</span>;</span>
+<span id="cb8-29"><a href="#cb8-29"></a>    }</span>
+<span id="cb8-30"><a href="#cb8-30"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Bird {</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">double</span> <span class="fu">getSpeed</span>();</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">protected</span> <span class="dt">double</span> <span class="fu">getLoadFactor</span>() {</span>
+<span id="cb9-6"><a href="#cb9-6"></a>        <span class="kw">return</span> <span class="dv">3</span>;</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    }</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    <span class="kw">protected</span> <span class="dt">double</span> <span class="fu">getBaseSpeed</span>() {</span>
+<span id="cb9-10"><a href="#cb9-10"></a>        <span class="kw">return</span> <span class="dv">10</span>;</span>
+<span id="cb9-11"><a href="#cb9-11"></a>    }</span>
+<span id="cb9-12"><a href="#cb9-12"></a>}</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="kw">public</span> <span class="kw">class</span> EuropeanBird <span class="kw">extends</span> Bird {</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSpeed</span>() {</span>
+<span id="cb9-16"><a href="#cb9-16"></a>        <span class="kw">return</span> <span class="fu">getBaseSpeed</span>();</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    }</span>
+<span id="cb9-18"><a href="#cb9-18"></a>}</span>
+<span id="cb9-19"><a href="#cb9-19"></a></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="kw">public</span> <span class="kw">class</span> AfricanBird <span class="kw">extends</span> Bird {</span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSpeed</span>() {</span>
+<span id="cb9-22"><a href="#cb9-22"></a>        <span class="kw">return</span> <span class="fu">getBaseSpeed</span>() - <span class="fu">getLoadFactor</span>();</span>
+<span id="cb9-23"><a href="#cb9-23"></a>    }</span>
+<span id="cb9-24"><a href="#cb9-24"></a>}</span>
+<span id="cb9-25"><a href="#cb9-25"></a></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="kw">public</span> <span class="kw">class</span> NorwegianBird <span class="kw">extends</span> Bird {</span>
+<span id="cb9-27"><a href="#cb9-27"></a>    <span class="kw">private</span> <span class="dt">boolean</span> isNailed;</span>
+<span id="cb9-28"><a href="#cb9-28"></a></span>
+<span id="cb9-29"><a href="#cb9-29"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">getSpeed</span>() {</span>
+<span id="cb9-30"><a href="#cb9-30"></a>        <span class="kw">return</span> isNailed ? <span class="dv">0</span> : <span class="fu">getBaseSpeed</span>();</span>
+<span id="cb9-31"><a href="#cb9-31"></a>    }</span>
+<span id="cb9-32"><a href="#cb9-32"></a>}</span></code></pre></div>
+</section>
+<section id="small-conditional-actions-to-method" class="level4">
+<h4>Small conditional actions to method</h4>
+<p>You’ll probably notice this further, when each time you invoke the method you need to add this if-statement because the business logic says so</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">if</span>( timer.<span class="fu">getMode</span>() != TimerMode.<span class="fu">DRAFT</span> )</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  timer.<span class="fu">validate</span>();</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">validate</span>() {</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="kw">if</span>( mode == TimerMode.<span class="fu">DRAFT</span> )</span>
+<span id="cb11-3"><a href="#cb11-3"></a>    <span class="kw">return</span>;</span>
+<span id="cb11-4"><a href="#cb11-4"></a></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="co">// validation logic</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>}</span>
+<span id="cb11-7"><a href="#cb11-7"></a>timer.<span class="fu">validate</span>();</span></code></pre></div>
+</section>
+<section id="nullobjectoptional-over-null-passing" class="level4">
+<h4>NullObject/Optional over null passing</h4>
+<ul>
+<li>Avoid null object: prefer <code>""</code> or <code>[]</code></li>
+</ul>
+<p>Tolerance: It’s necessary to be defensive at the outer parts of your codebase, but being defensive inside your codebase probably means the code that you are writing is offensive. Don’t write offensive code.</p>
+<p>Solution: Use a NullObject or Optional type instead of ever passing a null. An empty collection is a great alternative.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">example</span>() {</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="fu">sumOf</span>(<span class="kw">null</span>);</span>
+<span id="cb12-3"><a href="#cb12-3"></a>}</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">private</span> <span class="dt">int</span> <span class="fu">sumOf</span>(<span class="bu">List</span>&lt;<span class="bu">Integer</span>&gt; numbers) {</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="kw">if</span>(numbers == <span class="kw">null</span>) {</span>
+<span id="cb12-7"><a href="#cb12-7"></a>        <span class="kw">return</span> <span class="dv">0</span>;</span>
+<span id="cb12-8"><a href="#cb12-8"></a>    }</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    <span class="kw">return</span> numbers.<span class="fu">stream</span>().<span class="fu">mapToInt</span>(i -&gt; i).<span class="fu">sum</span>();</span>
+<span id="cb12-11"><a href="#cb12-11"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">example</span>() {</span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="fu">sumOf</span>(<span class="kw">new</span> <span class="bu">ArrayList</span>&lt;&gt;());</span>
+<span id="cb13-3"><a href="#cb13-3"></a>}</span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="kw">private</span> <span class="dt">int</span> <span class="fu">sumOf</span>(<span class="bu">List</span>&lt;<span class="bu">Integer</span>&gt; numbers) {</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="kw">return</span> numbers.<span class="fu">stream</span>().<span class="fu">mapToInt</span>(i -&gt; i).<span class="fu">sum</span>();</span>
+<span id="cb13-7"><a href="#cb13-7"></a>}</span></code></pre></div>
+</section>
+<section id="inline-statements-into-expressions" class="level4">
+<h4>Inline statements into expressions</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">horrible</span>(<span class="dt">boolean</span> foo, <span class="dt">boolean</span> bar, <span class="dt">boolean</span> baz) {</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="kw">if</span> (foo) {</span>
+<span id="cb14-3"><a href="#cb14-3"></a>        <span class="kw">if</span> (bar) {</span>
+<span id="cb14-4"><a href="#cb14-4"></a>            <span class="kw">return</span> <span class="kw">true</span>;</span>
+<span id="cb14-5"><a href="#cb14-5"></a>        }</span>
+<span id="cb14-6"><a href="#cb14-6"></a>    }</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="kw">if</span> (baz) {</span>
+<span id="cb14-9"><a href="#cb14-9"></a>        <span class="kw">return</span> <span class="kw">true</span>;</span>
+<span id="cb14-10"><a href="#cb14-10"></a>    } <span class="kw">else</span> {</span>
+<span id="cb14-11"><a href="#cb14-11"></a>        <span class="kw">return</span> <span class="kw">false</span>;</span>
+<span id="cb14-12"><a href="#cb14-12"></a>    }</span>
+<span id="cb14-13"><a href="#cb14-13"></a>}</span></code></pre></div>
+<p>To</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">horrible</span>(<span class="dt">boolean</span> foo, <span class="dt">boolean</span> bar, <span class="dt">boolean</span> baz) {</span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="kw">return</span> foo &amp;&amp; bar || baz;</span>
+<span id="cb15-3"><a href="#cb15-3"></a>}</span></code></pre></div>
+</section>
+</section>
 </section>
 </section>
 <section id="refactoring-catalog" class="level2">
@@ -250,148 +442,148 @@
 <section id="combine-function-into-class" class="level3">
 <h3>Combine function into class</h3>
 <p><strong>Problem:</strong> Functions are always taking the same parameters</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">function</span> <span class="at">base</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">function</span> <span class="at">taxableCharge</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">function</span> <span class="at">calculateBaseCharge</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">class</span> Reading <span class="op">{</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="at">base</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="at">taxableCharge</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="at">calculateBaseCharge</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">function</span> <span class="at">base</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">function</span> <span class="at">taxableCharge</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">function</span> <span class="at">calculateBaseCharge</span>(aReading) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">class</span> Reading <span class="op">{</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">base</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="at">taxableCharge</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="at">calculateBaseCharge</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="consolidate-conditional-expression" class="level3">
 <h3>Consolidate Conditional Expression</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">seniority</span> <span class="op">&lt;</span> <span class="dv">2</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">monthsDisabled</span> <span class="op">&gt;</span> <span class="dv">12</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">isPartTime</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="cf">if</span> (<span class="at">isNotEligableForDisability</span>()) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">function</span> <span class="at">isNotEligableForDisability</span>() <span class="op">{</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="cf">return</span> ((<span class="va">anEmployee</span>.<span class="at">seniority</span> <span class="op">&lt;</span> <span class="dv">2</span>)</span>
-<span id="cb7-6"><a href="#cb7-6"></a>          <span class="op">||</span> (<span class="va">anEmployee</span>.<span class="at">monthsDisabled</span> <span class="op">&gt;</span> <span class="dv">12</span>)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>          <span class="op">||</span> (<span class="va">anEmployee</span>.<span class="at">isPartTime</span>))<span class="op">;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">seniority</span> <span class="op">&lt;</span> <span class="dv">2</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">monthsDisabled</span> <span class="op">&gt;</span> <span class="dv">12</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="cf">if</span> (<span class="va">anEmployee</span>.<span class="at">isPartTime</span>) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="cf">if</span> (<span class="at">isNotEligableForDisability</span>()) <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">function</span> <span class="at">isNotEligableForDisability</span>() <span class="op">{</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="cf">return</span> ((<span class="va">anEmployee</span>.<span class="at">seniority</span> <span class="op">&lt;</span> <span class="dv">2</span>)</span>
+<span id="cb19-6"><a href="#cb19-6"></a>          <span class="op">||</span> (<span class="va">anEmployee</span>.<span class="at">monthsDisabled</span> <span class="op">&gt;</span> <span class="dv">12</span>)</span>
+<span id="cb19-7"><a href="#cb19-7"></a>          <span class="op">||</span> (<span class="va">anEmployee</span>.<span class="at">isPartTime</span>))<span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="decompose-conditional" class="level3">
 <h3>Decompose Conditional</h3>
 <p><strong>Problem:</strong> tired of seen deeply nested long statements</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="va">aDate</span>.<span class="at">isBefore</span>(<span class="va">plan</span>.<span class="at">summerStart</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="va">aDate</span>.<span class="at">isAfter</span>(<span class="va">plan</span>.<span class="at">summerEnd</span>))</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  charge <span class="op">=</span> quantity <span class="op">*</span> <span class="va">plan</span>.<span class="at">summerRate</span><span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="cf">else</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  charge <span class="op">=</span> quantity <span class="op">*</span> <span class="va">plan</span>.<span class="at">regularRate</span> <span class="op">+</span> <span class="va">plan</span>.<span class="at">regularServiceCharge</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="cf">if</span> (<span class="at">summer</span>())</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  charge <span class="op">=</span> <span class="at">summerCharge</span>()<span class="op">;</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="cf">else</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  charge <span class="op">=</span> <span class="at">regularCharge</span>()<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="va">aDate</span>.<span class="at">isBefore</span>(<span class="va">plan</span>.<span class="at">summerStart</span>) <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="va">aDate</span>.<span class="at">isAfter</span>(<span class="va">plan</span>.<span class="at">summerEnd</span>))</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  charge <span class="op">=</span> quantity <span class="op">*</span> <span class="va">plan</span>.<span class="at">summerRate</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="cf">else</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  charge <span class="op">=</span> quantity <span class="op">*</span> <span class="va">plan</span>.<span class="at">regularRate</span> <span class="op">+</span> <span class="va">plan</span>.<span class="at">regularServiceCharge</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="cf">if</span> (<span class="at">summer</span>())</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  charge <span class="op">=</span> <span class="at">summerCharge</span>()<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="cf">else</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a>  charge <span class="op">=</span> <span class="at">regularCharge</span>()<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="encapsulate-record---data-class" class="level3">
 <h3>Encapsulate Record -&gt; Data class</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1"></a>organization <span class="op">=</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Acme Gooseberries&quot;</span><span class="op">,</span> <span class="dt">country</span><span class="op">:</span> <span class="st">&quot;GB&quot;</span><span class="op">};</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="kw">class</span> Organization <span class="op">{</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="at">constructor</span>(data) <span class="op">{</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> <span class="va">data</span>.<span class="at">name</span><span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>    <span class="kw">this</span>.<span class="at">_country</span> <span class="op">=</span> <span class="va">data</span>.<span class="at">country</span><span class="op">;</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="op">}</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>  get <span class="at">name</span>()    <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_name</span><span class="op">;}</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a>  set <span class="at">name</span>(arg) <span class="op">{</span><span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> arg<span class="op">;}</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a>  get <span class="at">country</span>()    <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_country</span><span class="op">;}</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>  set <span class="at">country</span>(arg) <span class="op">{</span><span class="kw">this</span>.<span class="at">_country</span> <span class="op">=</span> arg<span class="op">;}</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1"></a>organization <span class="op">=</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Acme Gooseberries&quot;</span><span class="op">,</span> <span class="dt">country</span><span class="op">:</span> <span class="st">&quot;GB&quot;</span><span class="op">};</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1"></a></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="kw">class</span> Organization <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">constructor</span>(data) <span class="op">{</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> <span class="va">data</span>.<span class="at">name</span><span class="op">;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>    <span class="kw">this</span>.<span class="at">_country</span> <span class="op">=</span> <span class="va">data</span>.<span class="at">country</span><span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="op">}</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a>  get <span class="at">name</span>()    <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_name</span><span class="op">;}</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  set <span class="at">name</span>(arg) <span class="op">{</span><span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> arg<span class="op">;}</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>  get <span class="at">country</span>()    <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_country</span><span class="op">;}</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>  set <span class="at">country</span>(arg) <span class="op">{</span><span class="kw">this</span>.<span class="at">_country</span> <span class="op">=</span> arg<span class="op">;}</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="op">}</span></span></code></pre></div>
 <p>The caller is happyer</p>
 </section>
 <section id="extract-class" class="level3">
 <h3>Extract Class</h3>
 <p>When can you divide on class in two ? Here:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  get <span class="at">officeAreaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_officeAreaCode</span><span class="op">;}</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  get <span class="at">officeNumber</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_officeNumber</span><span class="op">;}</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a>  get <span class="at">officeAreaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">_telephoneNumber</span>.<span class="at">areaCode</span><span class="op">;}</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a>  get <span class="at">officeNumber</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">_telephoneNumber</span>.<span class="at">number</span><span class="op">;}</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="op">}</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">class</span> TelephoneNumber <span class="op">{</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>  get <span class="at">areaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_areaCode</span><span class="op">;}</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>  get <span class="at">number</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_number</span><span class="op">;}</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  get <span class="at">officeAreaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_officeAreaCode</span><span class="op">;}</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>  get <span class="at">officeNumber</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_officeNumber</span><span class="op">;}</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  get <span class="at">officeAreaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">_telephoneNumber</span>.<span class="at">areaCode</span><span class="op">;}</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  get <span class="at">officeNumber</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">_telephoneNumber</span>.<span class="at">number</span><span class="op">;}</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="op">}</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="kw">class</span> TelephoneNumber <span class="op">{</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>  get <span class="at">areaCode</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_areaCode</span><span class="op">;}</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  get <span class="at">number</span>()   <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="at">_number</span><span class="op">;}</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="extract-function" class="level3">
 <h3>Extract Function</h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">function</span> <span class="at">printOwing</span>(invoice) <span class="op">{</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="at">printBanner</span>()<span class="op">;</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">let</span> outstanding  <span class="op">=</span> <span class="at">calculateOutstanding</span>()<span class="op">;</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="co">//print details</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`name: </span><span class="sc">${</span><span class="va">invoice</span>.<span class="at">customer</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`amount: </span><span class="sc">${</span>outstanding<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  </span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1"></a></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">function</span> <span class="at">printOwing</span>(invoice) <span class="op">{</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">printBanner</span>()<span class="op">;</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="kw">let</span> outstanding  <span class="op">=</span> <span class="at">calculateOutstanding</span>()<span class="op">;</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">printDetails</span>(outstanding)<span class="op">;</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="kw">function</span> <span class="at">printDetails</span>(outstanding) <span class="op">{</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`name: </span><span class="sc">${</span><span class="va">invoice</span>.<span class="at">customer</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`amount: </span><span class="sc">${</span>outstanding<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a>  <span class="op">}</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">function</span> <span class="at">printOwing</span>(invoice) <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="at">printBanner</span>()<span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="kw">let</span> outstanding  <span class="op">=</span> <span class="at">calculateOutstanding</span>()<span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="co">//print details</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`name: </span><span class="sc">${</span><span class="va">invoice</span>.<span class="at">customer</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`amount: </span><span class="sc">${</span>outstanding<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span>  </span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">function</span> <span class="at">printOwing</span>(invoice) <span class="op">{</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>  <span class="at">printBanner</span>()<span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>  <span class="kw">let</span> outstanding  <span class="op">=</span> <span class="at">calculateOutstanding</span>()<span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>  <span class="at">printDetails</span>(outstanding)<span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7"></a>  <span class="kw">function</span> <span class="at">printDetails</span>(outstanding) <span class="op">{</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`name: </span><span class="sc">${</span><span class="va">invoice</span>.<span class="at">customer</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`amount: </span><span class="sc">${</span>outstanding<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb27-10"><a href="#cb27-10"></a>  <span class="op">}</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="extract-superclass" class="level3">
 <h3>Extract Superclass</h3>
 <p>Heritance is made to mutualize varaibles / functions</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">class</span> Department <span class="op">{</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  get <span class="at">totalAnnualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a>  get <span class="at">headCount</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="op">}</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">class</span> Employee <span class="op">{</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a>  get <span class="at">id</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1"></a></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">class</span> Party <span class="op">{</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="op">}</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="kw">class</span> Department <span class="kw">extends</span> Party <span class="op">{</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a>  get <span class="at">headCount</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="op">}</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-14"><a href="#cb17-14"></a>  get <span class="at">id</span>() <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb17-15"><a href="#cb17-15"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">class</span> Department <span class="op">{</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>  get <span class="at">totalAnnualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-3"><a href="#cb28-3"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>  get <span class="at">headCount</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="op">}</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a><span class="kw">class</span> Employee <span class="op">{</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>  get <span class="at">id</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1"></a></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="kw">class</span> Party <span class="op">{</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>  get <span class="at">name</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="op">}</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="kw">class</span> Department <span class="kw">extends</span> Party <span class="op">{</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>  get <span class="at">headCount</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="op">}</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a></span>
+<span id="cb29-12"><a href="#cb29-12"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
+<span id="cb29-13"><a href="#cb29-13"></a>  get <span class="at">annualCost</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a>  get <span class="at">id</span>() <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="extract-variable" class="level3">
 <h3>Extract Variable</h3>
 <p><strong>Problem:</strong> Long declaration line</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1"></a><span class="cf">return</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">-</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">-</span> <span class="dv">500</span>) <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.05</span> <span class="op">+</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a>  <span class="va">Math</span>.<span class="at">min</span>(<span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1"></a></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">const</span> basePrice <span class="op">=</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span><span class="op">;</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">const</span> quantityDiscount <span class="op">=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">-</span> <span class="dv">500</span>) <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.05</span><span class="op">;</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">const</span> shipping <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(basePrice <span class="op">*</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="cf">return</span> basePrice <span class="op">-</span> quantityDiscount <span class="op">+</span> shipping<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1"></a><span class="cf">return</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">-</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">-</span> <span class="dv">500</span>) <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.05</span> <span class="op">+</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="va">Math</span>.<span class="at">min</span>(<span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1"></a></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="kw">const</span> basePrice <span class="op">=</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span><span class="op">;</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="kw">const</span> quantityDiscount <span class="op">=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">-</span> <span class="dv">500</span>) <span class="op">*</span> <span class="va">order</span>.<span class="at">itemPrice</span> <span class="op">*</span> <span class="fl">0.05</span><span class="op">;</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="kw">const</span> shipping <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(basePrice <span class="op">*</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="cf">return</span> basePrice <span class="op">-</span> quantityDiscount <span class="op">+</span> shipping<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="hide-delegate" class="level3">
 <h3>Hide Delegate</h3>
 <p>inverse of Remove Middle Man</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="at">manager</span><span class="op">;</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a>  get <span class="at">manager</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;}</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a></span>
+<span id="cb33-2"><a href="#cb33-2"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="at">manager</span><span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a>  get <span class="at">manager</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;}</span></span></code></pre></div>
 </section>
 <section id="inline" class="level3">
 <h3>Inline</h3>
@@ -399,404 +591,412 @@
 </section>
 <section id="introduction-assertion" class="level3">
 <h3>Introduction Assertion</h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">discountRate</span>)</span>
-<span id="cb22-2"><a href="#cb22-2"></a>  base <span class="op">=</span> base <span class="op">-</span> (<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">*</span> base)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb23-1"><a href="#cb23-1"></a></span>
-<span id="cb23-2"><a href="#cb23-2"></a><span class="at">assert</span>(<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">discountRate</span>)</span>
-<span id="cb23-4"><a href="#cb23-4"></a>  base <span class="op">=</span> base <span class="op">-</span> (<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">*</span> base)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">discountRate</span>)</span>
+<span id="cb34-2"><a href="#cb34-2"></a>  base <span class="op">=</span> base <span class="op">-</span> (<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">*</span> base)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="at">assert</span>(<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">&gt;=</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">discountRate</span>)</span>
+<span id="cb35-4"><a href="#cb35-4"></a>  base <span class="op">=</span> base <span class="op">-</span> (<span class="kw">this</span>.<span class="at">discountRate</span> <span class="op">*</span> base)<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="introduce-parameter-object" class="level3">
 <h3>Introduce Parameter Object</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">function</span> <span class="at">amountInvoiced</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a><span class="kw">function</span> <span class="at">amountReceived</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb24-3"><a href="#cb24-3"></a><span class="kw">function</span> <span class="at">amountOverdue</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb25-1"><a href="#cb25-1"></a></span>
-<span id="cb25-2"><a href="#cb25-2"></a><span class="kw">function</span> <span class="at">amountInvoiced</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="kw">function</span> <span class="at">amountReceived</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="kw">function</span> <span class="at">amountOverdue</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">function</span> <span class="at">amountInvoiced</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">function</span> <span class="at">amountReceived</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">function</span> <span class="at">amountOverdue</span>(startDate<span class="op">,</span> endDate) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb37-1"><a href="#cb37-1"></a></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="kw">function</span> <span class="at">amountInvoiced</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">function</span> <span class="at">amountReceived</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a><span class="kw">function</span> <span class="at">amountOverdue</span>(aDateRange) <span class="op">{</span>...<span class="op">}</span></span></code></pre></div>
 </section>
 <section id="introduce-special-case" class="level3">
 <h3>Introduce Special Case</h3>
 <p>As class</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb26-1"><a href="#cb26-1"></a><span class="cf">if</span> (aCustomer <span class="op">===</span> <span class="st">&quot;unknown&quot;</span>) customerName <span class="op">=</span> <span class="st">&quot;occupant&quot;</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb27-1"><a href="#cb27-1"></a></span>
-<span id="cb27-2"><a href="#cb27-2"></a><span class="kw">class</span> UnknownCustomer <span class="op">{</span></span>
-<span id="cb27-3"><a href="#cb27-3"></a>    get <span class="at">name</span>() <span class="op">{</span><span class="cf">return</span> <span class="st">&quot;occupant&quot;</span><span class="op">;}</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1"></a><span class="cf">if</span> (aCustomer <span class="op">===</span> <span class="st">&quot;unknown&quot;</span>) customerName <span class="op">=</span> <span class="st">&quot;occupant&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb39-1"><a href="#cb39-1"></a></span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">class</span> UnknownCustomer <span class="op">{</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>    get <span class="at">name</span>() <span class="op">{</span><span class="cf">return</span> <span class="st">&quot;occupant&quot;</span><span class="op">;}</span></span></code></pre></div>
 </section>
 <section id="move-statements-into-function" class="level3">
 <h3>Move Statements into Function</h3>
 <p><strong>Problem:</strong> Caller always sanitize/concat in/out of function call</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb28-1"><a href="#cb28-1"></a><span class="va">result</span>.<span class="at">push</span>(<span class="vs">`&lt;p&gt;title: </span><span class="sc">${</span><span class="va">person</span>.<span class="va">photo</span>.<span class="at">title</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span>)<span class="op">;</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="va">result</span>.<span class="at">concat</span>(<span class="at">photoData</span>(<span class="va">person</span>.<span class="at">photo</span>))<span class="op">;</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">function</span> <span class="at">photoData</span>(aPhoto) <span class="op">{</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>  <span class="cf">return</span> [</span>
-<span id="cb28-6"><a href="#cb28-6"></a>    <span class="vs">`&lt;p&gt;location: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">location</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="vs">`&lt;p&gt;date: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="va">date</span>.<span class="at">toDateString</span>()<span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>  ]<span class="op">;</span></span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb29-1"><a href="#cb29-1"></a></span>
-<span id="cb29-2"><a href="#cb29-2"></a><span class="va">result</span>.<span class="at">concat</span>(<span class="at">photoData</span>(<span class="va">person</span>.<span class="at">photo</span>))<span class="op">;</span></span>
-<span id="cb29-3"><a href="#cb29-3"></a></span>
-<span id="cb29-4"><a href="#cb29-4"></a><span class="kw">function</span> <span class="at">photoData</span>(aPhoto) <span class="op">{</span></span>
-<span id="cb29-5"><a href="#cb29-5"></a>  <span class="cf">return</span> [</span>
-<span id="cb29-6"><a href="#cb29-6"></a>    <span class="vs">`&lt;p&gt;title: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">title</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb29-7"><a href="#cb29-7"></a>    <span class="vs">`&lt;p&gt;location: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">location</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a>    <span class="vs">`&lt;p&gt;date: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="va">date</span>.<span class="at">toDateString</span>()<span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
-<span id="cb29-9"><a href="#cb29-9"></a>  ]<span class="op">;</span></span>
-<span id="cb29-10"><a href="#cb29-10"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb40-1"><a href="#cb40-1"></a><span class="va">result</span>.<span class="at">push</span>(<span class="vs">`&lt;p&gt;title: </span><span class="sc">${</span><span class="va">person</span>.<span class="va">photo</span>.<span class="at">title</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span>)<span class="op">;</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a><span class="va">result</span>.<span class="at">concat</span>(<span class="at">photoData</span>(<span class="va">person</span>.<span class="at">photo</span>))<span class="op">;</span></span>
+<span id="cb40-3"><a href="#cb40-3"></a></span>
+<span id="cb40-4"><a href="#cb40-4"></a><span class="kw">function</span> <span class="at">photoData</span>(aPhoto) <span class="op">{</span></span>
+<span id="cb40-5"><a href="#cb40-5"></a>  <span class="cf">return</span> [</span>
+<span id="cb40-6"><a href="#cb40-6"></a>    <span class="vs">`&lt;p&gt;location: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">location</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb40-7"><a href="#cb40-7"></a>    <span class="vs">`&lt;p&gt;date: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="va">date</span>.<span class="at">toDateString</span>()<span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb40-8"><a href="#cb40-8"></a>  ]<span class="op">;</span></span>
+<span id="cb40-9"><a href="#cb40-9"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="va">result</span>.<span class="at">concat</span>(<span class="at">photoData</span>(<span class="va">person</span>.<span class="at">photo</span>))<span class="op">;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a></span>
+<span id="cb41-4"><a href="#cb41-4"></a><span class="kw">function</span> <span class="at">photoData</span>(aPhoto) <span class="op">{</span></span>
+<span id="cb41-5"><a href="#cb41-5"></a>  <span class="cf">return</span> [</span>
+<span id="cb41-6"><a href="#cb41-6"></a>    <span class="vs">`&lt;p&gt;title: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">title</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb41-7"><a href="#cb41-7"></a>    <span class="vs">`&lt;p&gt;location: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="at">location</span><span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb41-8"><a href="#cb41-8"></a>    <span class="vs">`&lt;p&gt;date: </span><span class="sc">${</span><span class="va">aPhoto</span>.<span class="va">date</span>.<span class="at">toDateString</span>()<span class="sc">}</span><span class="vs">&lt;/p&gt;`</span><span class="op">,</span></span>
+<span id="cb41-9"><a href="#cb41-9"></a>  ]<span class="op">;</span></span>
+<span id="cb41-10"><a href="#cb41-10"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="parametrize-function" class="level3">
 <h3>Parametrize Function</h3>
 <p>Opposite of something (remove parameters)</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">function</span> <span class="at">tenPercentRaise</span>(aPerson) <span class="op">{</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="fl">1.1</span>)<span class="op">;</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a><span class="op">}</span></span>
-<span id="cb30-4"><a href="#cb30-4"></a><span class="kw">function</span> <span class="at">fivePercentRaise</span>(aPerson) <span class="op">{</span></span>
-<span id="cb30-5"><a href="#cb30-5"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="fl">1.05</span>)<span class="op">;</span></span>
-<span id="cb30-6"><a href="#cb30-6"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb31-1"><a href="#cb31-1"></a></span>
-<span id="cb31-2"><a href="#cb31-2"></a><span class="kw">function</span> <span class="at">raise</span>(aPerson<span class="op">,</span> factor) <span class="op">{</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="dv">1</span> <span class="op">+</span> factor)<span class="op">;</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">function</span> <span class="at">tenPercentRaise</span>(aPerson) <span class="op">{</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="fl">1.1</span>)<span class="op">;</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a><span class="op">}</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="kw">function</span> <span class="at">fivePercentRaise</span>(aPerson) <span class="op">{</span></span>
+<span id="cb42-5"><a href="#cb42-5"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="fl">1.05</span>)<span class="op">;</span></span>
+<span id="cb42-6"><a href="#cb42-6"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb43-1"><a href="#cb43-1"></a></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="kw">function</span> <span class="at">raise</span>(aPerson<span class="op">,</span> factor) <span class="op">{</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="va">aPerson</span>.<span class="at">salary</span> <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">salary</span>.<span class="at">multiply</span>(<span class="dv">1</span> <span class="op">+</span> factor)<span class="op">;</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="preserve-whole-object" class="level3">
 <h3>Preserve Whole Object</h3>
 <p>In function call</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">const</span> low <span class="op">=</span> <span class="va">aRoom</span>.<span class="va">daysTempRange</span>.<span class="at">low</span><span class="op">;</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a><span class="kw">const</span> high <span class="op">=</span> <span class="va">aRoom</span>.<span class="va">daysTempRange</span>.<span class="at">high</span><span class="op">;</span></span>
-<span id="cb32-3"><a href="#cb32-3"></a><span class="cf">if</span> (<span class="va">aPlan</span>.<span class="at">withinRange</span>(low<span class="op">,</span> high))</span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a></span>
-<span id="cb33-2"><a href="#cb33-2"></a><span class="cf">if</span> (<span class="va">aPlan</span>.<span class="at">withinRange</span>(<span class="va">aRoom</span>.<span class="at">daysTempRange</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">const</span> low <span class="op">=</span> <span class="va">aRoom</span>.<span class="va">daysTempRange</span>.<span class="at">low</span><span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="kw">const</span> high <span class="op">=</span> <span class="va">aRoom</span>.<span class="va">daysTempRange</span>.<span class="at">high</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="cf">if</span> (<span class="va">aPlan</span>.<span class="at">withinRange</span>(low<span class="op">,</span> high))</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a></span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="cf">if</span> (<span class="va">aPlan</span>.<span class="at">withinRange</span>(<span class="va">aRoom</span>.<span class="at">daysTempRange</span>))</span></code></pre></div>
 </section>
 <section id="pull-up-constructor-body" class="level3">
 <h3>Pull Up Constructor Body</h3>
 <p>Works with fields / methods</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">class</span> Party <span class="op">{</span>...<span class="op">}</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a>  <span class="at">constructor</span>(name<span class="op">,</span> id<span class="op">,</span> monthlyCost) <span class="op">{</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>    <span class="kw">super</span>()<span class="op">;</span></span>
-<span id="cb34-6"><a href="#cb34-6"></a>    <span class="kw">this</span>.<span class="at">_id</span> <span class="op">=</span> id<span class="op">;</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb34-8"><a href="#cb34-8"></a>    <span class="kw">this</span>.<span class="at">_monthlyCost</span> <span class="op">=</span> monthlyCost<span class="op">;</span></span>
-<span id="cb34-9"><a href="#cb34-9"></a>  <span class="op">}</span></span>
-<span id="cb34-10"><a href="#cb34-10"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb35-1"><a href="#cb35-1"></a></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="kw">class</span> Party <span class="op">{</span></span>
-<span id="cb35-3"><a href="#cb35-3"></a>  <span class="at">constructor</span>(name)<span class="op">{</span></span>
-<span id="cb35-4"><a href="#cb35-4"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> name<span class="op">;</span></span>
-<span id="cb35-5"><a href="#cb35-5"></a>  <span class="op">}</span></span>
-<span id="cb35-6"><a href="#cb35-6"></a><span class="op">}</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a></span>
-<span id="cb35-8"><a href="#cb35-8"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
-<span id="cb35-9"><a href="#cb35-9"></a>  <span class="at">constructor</span>(name<span class="op">,</span> id<span class="op">,</span> monthlyCost) <span class="op">{</span></span>
-<span id="cb35-10"><a href="#cb35-10"></a>    <span class="kw">super</span>(name)<span class="op">;</span></span>
-<span id="cb35-11"><a href="#cb35-11"></a>    <span class="kw">this</span>.<span class="at">_id</span> <span class="op">=</span> id<span class="op">;</span></span>
-<span id="cb35-12"><a href="#cb35-12"></a>    <span class="kw">this</span>.<span class="at">_monthlyCost</span> <span class="op">=</span> monthlyCost<span class="op">;</span></span>
-<span id="cb35-13"><a href="#cb35-13"></a>  <span class="op">}</span></span>
-<span id="cb35-14"><a href="#cb35-14"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">class</span> Party <span class="op">{</span>...<span class="op">}</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>  <span class="at">constructor</span>(name<span class="op">,</span> id<span class="op">,</span> monthlyCost) <span class="op">{</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>    <span class="kw">super</span>()<span class="op">;</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a>    <span class="kw">this</span>.<span class="at">_id</span> <span class="op">=</span> id<span class="op">;</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a>    <span class="kw">this</span>.<span class="at">_monthlyCost</span> <span class="op">=</span> monthlyCost<span class="op">;</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a>  <span class="op">}</span></span>
+<span id="cb46-10"><a href="#cb46-10"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb47-1"><a href="#cb47-1"></a></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">class</span> Party <span class="op">{</span></span>
+<span id="cb47-3"><a href="#cb47-3"></a>  <span class="at">constructor</span>(name)<span class="op">{</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>    <span class="kw">this</span>.<span class="at">_name</span> <span class="op">=</span> name<span class="op">;</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>  <span class="op">}</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a><span class="op">}</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a></span>
+<span id="cb47-8"><a href="#cb47-8"></a><span class="kw">class</span> Employee <span class="kw">extends</span> Party <span class="op">{</span></span>
+<span id="cb47-9"><a href="#cb47-9"></a>  <span class="at">constructor</span>(name<span class="op">,</span> id<span class="op">,</span> monthlyCost) <span class="op">{</span></span>
+<span id="cb47-10"><a href="#cb47-10"></a>    <span class="kw">super</span>(name)<span class="op">;</span></span>
+<span id="cb47-11"><a href="#cb47-11"></a>    <span class="kw">this</span>.<span class="at">_id</span> <span class="op">=</span> id<span class="op">;</span></span>
+<span id="cb47-12"><a href="#cb47-12"></a>    <span class="kw">this</span>.<span class="at">_monthlyCost</span> <span class="op">=</span> monthlyCost<span class="op">;</span></span>
+<span id="cb47-13"><a href="#cb47-13"></a>  <span class="op">}</span></span>
+<span id="cb47-14"><a href="#cb47-14"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="change-value-to-reference" class="level3">
 <h3>Change Value to Reference</h3>
-<div class="sourceCode" id="cb36"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">let</span> customer <span class="op">=</span> <span class="kw">new</span> <span class="at">Customer</span>(customerData)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb37-1"><a href="#cb37-1"></a></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="kw">let</span> customer <span class="op">=</span> <span class="va">customerRepository</span>.<span class="at">get</span>(<span class="va">customerData</span>.<span class="at">id</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">let</span> customer <span class="op">=</span> <span class="kw">new</span> <span class="at">Customer</span>(customerData)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb49-1"><a href="#cb49-1"></a></span>
+<span id="cb49-2"><a href="#cb49-2"></a><span class="kw">let</span> customer <span class="op">=</span> <span class="va">customerRepository</span>.<span class="at">get</span>(<span class="va">customerData</span>.<span class="at">id</span>)<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="remove-flag-argument" class="level3">
 <h3>Remove Flag Argument</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">function</span> <span class="at">setDimension</span>(name<span class="op">,</span> value) <span class="op">{</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="cf">if</span> (name <span class="op">===</span> <span class="st">&quot;height&quot;</span>) <span class="op">{</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a>    <span class="kw">this</span>.<span class="at">_height</span> <span class="op">=</span> value<span class="op">;</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a>  <span class="op">}</span></span>
-<span id="cb38-6"><a href="#cb38-6"></a>  <span class="cf">if</span> (name <span class="op">===</span> <span class="st">&quot;width&quot;</span>) <span class="op">{</span></span>
-<span id="cb38-7"><a href="#cb38-7"></a>    <span class="kw">this</span>.<span class="at">_width</span> <span class="op">=</span> value<span class="op">;</span></span>
-<span id="cb38-8"><a href="#cb38-8"></a>    <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb38-9"><a href="#cb38-9"></a>  <span class="op">}</span></span>
-<span id="cb38-10"><a href="#cb38-10"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb39-1"><a href="#cb39-1"></a></span>
-<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">function</span> <span class="at">setHeight</span>(value) <span class="op">{</span><span class="kw">this</span>.<span class="at">_height</span> <span class="op">=</span> value<span class="op">;}</span></span>
-<span id="cb39-3"><a href="#cb39-3"></a><span class="kw">function</span> <span class="at">setWidth</span> (value) <span class="op">{</span><span class="kw">this</span>.<span class="at">_width</span> <span class="op">=</span> value<span class="op">;}</span></span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">function</span> <span class="at">setDimension</span>(name<span class="op">,</span> value) <span class="op">{</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>  <span class="cf">if</span> (name <span class="op">===</span> <span class="st">&quot;height&quot;</span>) <span class="op">{</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a>    <span class="kw">this</span>.<span class="at">_height</span> <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a>  <span class="op">}</span></span>
+<span id="cb50-6"><a href="#cb50-6"></a>  <span class="cf">if</span> (name <span class="op">===</span> <span class="st">&quot;width&quot;</span>) <span class="op">{</span></span>
+<span id="cb50-7"><a href="#cb50-7"></a>    <span class="kw">this</span>.<span class="at">_width</span> <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb50-8"><a href="#cb50-8"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a>  <span class="op">}</span></span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb51-1"><a href="#cb51-1"></a></span>
+<span id="cb51-2"><a href="#cb51-2"></a><span class="kw">function</span> <span class="at">setHeight</span>(value) <span class="op">{</span><span class="kw">this</span>.<span class="at">_height</span> <span class="op">=</span> value<span class="op">;}</span></span>
+<span id="cb51-3"><a href="#cb51-3"></a><span class="kw">function</span> <span class="at">setWidth</span> (value) <span class="op">{</span><span class="kw">this</span>.<span class="at">_width</span> <span class="op">=</span> value<span class="op">;}</span></span></code></pre></div>
 </section>
 <section id="remove-middle-man" class="level3">
 <h3>Remove Middle Man</h3>
-<div class="sourceCode" id="cb40"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb40-1"><a href="#cb40-1"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="at">manager</span><span class="op">;</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a></span>
-<span id="cb40-3"><a href="#cb40-3"></a><span class="kw">class</span> Person <span class="op">{</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a>  get <span class="at">manager</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;}</span></span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb41-1"><a href="#cb41-1"></a></span>
-<span id="cb41-2"><a href="#cb41-2"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="at">manager</span><span class="op">;</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a></span>
+<span id="cb52-3"><a href="#cb52-3"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb52-4"><a href="#cb52-4"></a>  get <span class="at">manager</span>() <span class="op">{</span><span class="cf">return</span> <span class="kw">this</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;}</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="#cb53-1"></a></span>
+<span id="cb53-2"><a href="#cb53-2"></a>manager <span class="op">=</span> <span class="va">aPerson</span>.<span class="va">department</span>.<span class="at">manager</span><span class="op">;</span></span></code></pre></div>
 </section>
 <section id="replace-conditional-with-polymorphism" class="level3">
 <h3>Replace Conditional with Polymorphism</h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb42-1"><a href="#cb42-1"></a><span class="cf">switch</span> (<span class="va">bird</span>.<span class="at">type</span>) <span class="op">{</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="cf">case</span> <span class="st">&#39;EuropeanSwallow&#39;</span><span class="op">:</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>    <span class="cf">return</span> <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="cf">case</span> <span class="st">&#39;AfricanSwallow&#39;</span><span class="op">:</span></span>
-<span id="cb42-5"><a href="#cb42-5"></a>    <span class="cf">return</span> (<span class="va">bird</span>.<span class="at">numberOfCoconuts</span> <span class="op">&gt;</span> <span class="dv">2</span>) <span class="op">?</span> <span class="st">&quot;tired&quot;</span> : <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
-<span id="cb42-6"><a href="#cb42-6"></a>  <span class="cf">case</span> <span class="st">&#39;NorwegianBlueParrot&#39;</span><span class="op">:</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a>    <span class="cf">return</span> (<span class="va">bird</span>.<span class="at">voltage</span> <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">?</span> <span class="st">&quot;scorched&quot;</span> : <span class="st">&quot;beautiful&quot;</span><span class="op">;</span></span>
-<span id="cb42-8"><a href="#cb42-8"></a>  <span class="cf">default</span><span class="op">:</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a>    <span class="cf">return</span> <span class="st">&quot;unknown&quot;</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb43-1"><a href="#cb43-1"></a></span>
-<span id="cb43-2"><a href="#cb43-2"></a><span class="kw">class</span> EuropeanSwallow <span class="op">{</span></span>
-<span id="cb43-3"><a href="#cb43-3"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
-<span id="cb43-4"><a href="#cb43-4"></a>    <span class="cf">return</span> <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
-<span id="cb43-5"><a href="#cb43-5"></a>  <span class="op">}</span></span>
-<span id="cb43-6"><a href="#cb43-6"></a><span class="kw">class</span> AfricanSwallow <span class="op">{</span></span>
-<span id="cb43-7"><a href="#cb43-7"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
-<span id="cb43-8"><a href="#cb43-8"></a>     <span class="cf">return</span> (<span class="kw">this</span>.<span class="at">numberOfCoconuts</span> <span class="op">&gt;</span> <span class="dv">2</span>) <span class="op">?</span> <span class="st">&quot;tired&quot;</span> : <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
-<span id="cb43-9"><a href="#cb43-9"></a>  <span class="op">}</span></span>
-<span id="cb43-10"><a href="#cb43-10"></a><span class="kw">class</span> NorwegianBlueParrot <span class="op">{</span></span>
-<span id="cb43-11"><a href="#cb43-11"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
-<span id="cb43-12"><a href="#cb43-12"></a>     <span class="cf">return</span> (<span class="kw">this</span>.<span class="at">voltage</span> <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">?</span> <span class="st">&quot;scorched&quot;</span> : <span class="st">&quot;beautiful&quot;</span><span class="op">;</span></span>
-<span id="cb43-13"><a href="#cb43-13"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="cf">switch</span> (<span class="va">bird</span>.<span class="at">type</span>) <span class="op">{</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a>  <span class="cf">case</span> <span class="st">&#39;EuropeanSwallow&#39;</span><span class="op">:</span></span>
+<span id="cb54-3"><a href="#cb54-3"></a>    <span class="cf">return</span> <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
+<span id="cb54-4"><a href="#cb54-4"></a>  <span class="cf">case</span> <span class="st">&#39;AfricanSwallow&#39;</span><span class="op">:</span></span>
+<span id="cb54-5"><a href="#cb54-5"></a>    <span class="cf">return</span> (<span class="va">bird</span>.<span class="at">numberOfCoconuts</span> <span class="op">&gt;</span> <span class="dv">2</span>) <span class="op">?</span> <span class="st">&quot;tired&quot;</span> : <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
+<span id="cb54-6"><a href="#cb54-6"></a>  <span class="cf">case</span> <span class="st">&#39;NorwegianBlueParrot&#39;</span><span class="op">:</span></span>
+<span id="cb54-7"><a href="#cb54-7"></a>    <span class="cf">return</span> (<span class="va">bird</span>.<span class="at">voltage</span> <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">?</span> <span class="st">&quot;scorched&quot;</span> : <span class="st">&quot;beautiful&quot;</span><span class="op">;</span></span>
+<span id="cb54-8"><a href="#cb54-8"></a>  <span class="cf">default</span><span class="op">:</span></span>
+<span id="cb54-9"><a href="#cb54-9"></a>    <span class="cf">return</span> <span class="st">&quot;unknown&quot;</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a></span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">class</span> EuropeanSwallow <span class="op">{</span></span>
+<span id="cb55-3"><a href="#cb55-3"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>    <span class="cf">return</span> <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
+<span id="cb55-5"><a href="#cb55-5"></a>  <span class="op">}</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a><span class="kw">class</span> AfricanSwallow <span class="op">{</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>     <span class="cf">return</span> (<span class="kw">this</span>.<span class="at">numberOfCoconuts</span> <span class="op">&gt;</span> <span class="dv">2</span>) <span class="op">?</span> <span class="st">&quot;tired&quot;</span> : <span class="st">&quot;average&quot;</span><span class="op">;</span></span>
+<span id="cb55-9"><a href="#cb55-9"></a>  <span class="op">}</span></span>
+<span id="cb55-10"><a href="#cb55-10"></a><span class="kw">class</span> NorwegianBlueParrot <span class="op">{</span></span>
+<span id="cb55-11"><a href="#cb55-11"></a>  get <span class="at">plumage</span>() <span class="op">{</span></span>
+<span id="cb55-12"><a href="#cb55-12"></a>     <span class="cf">return</span> (<span class="kw">this</span>.<span class="at">voltage</span> <span class="op">&gt;</span> <span class="dv">100</span>) <span class="op">?</span> <span class="st">&quot;scorched&quot;</span> : <span class="st">&quot;beautiful&quot;</span><span class="op">;</span></span>
+<span id="cb55-13"><a href="#cb55-13"></a>  <span class="op">}</span></span></code></pre></div>
 </section>
 <section id="replace-constructor-with-factory-function" class="level3">
 <h3>Replace Constructor with Factory Function</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb44-1"><a href="#cb44-1"></a>leadEngineer <span class="op">=</span> <span class="kw">new</span> <span class="at">Employee</span>(<span class="va">document</span>.<span class="at">leadEngineer</span><span class="op">,</span> <span class="st">&#39;E&#39;</span>)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb45-1"><a href="#cb45-1"></a></span>
-<span id="cb45-2"><a href="#cb45-2"></a>leadEngineer <span class="op">=</span> <span class="at">createEngineer</span>(<span class="va">document</span>.<span class="at">leadEngineer</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb56-1"><a href="#cb56-1"></a>leadEngineer <span class="op">=</span> <span class="kw">new</span> <span class="at">Employee</span>(<span class="va">document</span>.<span class="at">leadEngineer</span><span class="op">,</span> <span class="st">&#39;E&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a></span>
+<span id="cb57-2"><a href="#cb57-2"></a>leadEngineer <span class="op">=</span> <span class="at">createEngineer</span>(<span class="va">document</span>.<span class="at">leadEngineer</span>)<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="replace-control-flag-with-break" class="level3">
 <h3>Replace Control Flag with Break</h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb46-1"><a href="#cb46-1"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>  <span class="cf">if</span> (<span class="op">!</span> found) <span class="op">{</span></span>
-<span id="cb46-3"><a href="#cb46-3"></a>    <span class="cf">if</span> ( p <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a>      <span class="at">sendAlert</span>()<span class="op">;</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a>      found <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb46-6"><a href="#cb46-6"></a>    <span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb47-1"><a href="#cb47-1"></a></span>
-<span id="cb47-2"><a href="#cb47-2"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
-<span id="cb47-3"><a href="#cb47-3"></a>  <span class="cf">if</span> ( p <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
-<span id="cb47-4"><a href="#cb47-4"></a>    <span class="at">sendAlert</span>()<span class="op">;</span></span>
-<span id="cb47-5"><a href="#cb47-5"></a>    <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb47-6"><a href="#cb47-6"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb58-1"><a href="#cb58-1"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="cf">if</span> (<span class="op">!</span> found) <span class="op">{</span></span>
+<span id="cb58-3"><a href="#cb58-3"></a>    <span class="cf">if</span> ( p <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
+<span id="cb58-4"><a href="#cb58-4"></a>      <span class="at">sendAlert</span>()<span class="op">;</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a>      found <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb58-6"><a href="#cb58-6"></a>    <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb59-1"><a href="#cb59-1"></a></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>  <span class="cf">if</span> ( p <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a>    <span class="at">sendAlert</span>()<span class="op">;</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a>    <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a>  <span class="op">}</span></span></code></pre></div>
 </section>
 <section id="replace-exception-with-precheck" class="level3">
 <h3>Replace Exception with Precheck</h3>
 <p>Also called <code>Clause</code></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb48-1"><a href="#cb48-1"></a>double <span class="at">getValueForPeriod</span> (int periodNumber) <span class="op">{</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>  <span class="cf">try</span> <span class="op">{</span></span>
-<span id="cb48-3"><a href="#cb48-3"></a>    <span class="cf">return</span> values[periodNumber]<span class="op">;</span></span>
-<span id="cb48-4"><a href="#cb48-4"></a>  <span class="op">}</span> <span class="cf">catch</span> (ArrayIndexOutOfBoundsException e) <span class="op">{</span></span>
-<span id="cb48-5"><a href="#cb48-5"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb48-6"><a href="#cb48-6"></a>  <span class="op">}</span></span>
-<span id="cb48-7"><a href="#cb48-7"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb49-1"><a href="#cb49-1"></a></span>
-<span id="cb49-2"><a href="#cb49-2"></a>double <span class="at">getValueForPeriod</span> (int periodNumber) <span class="op">{</span></span>
-<span id="cb49-3"><a href="#cb49-3"></a>  <span class="cf">return</span> (periodNumber <span class="op">&gt;=</span> <span class="va">values</span>.<span class="at">length</span>) <span class="op">?</span> <span class="dv">0</span> : values[periodNumber]<span class="op">;</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb60-1"><a href="#cb60-1"></a>double <span class="at">getValueForPeriod</span> (int periodNumber) <span class="op">{</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>  <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>    <span class="cf">return</span> values[periodNumber]<span class="op">;</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="op">}</span> <span class="cf">catch</span> (ArrayIndexOutOfBoundsException e) <span class="op">{</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a>  <span class="op">}</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a></span>
+<span id="cb61-2"><a href="#cb61-2"></a>double <span class="at">getValueForPeriod</span> (int periodNumber) <span class="op">{</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>  <span class="cf">return</span> (periodNumber <span class="op">&gt;=</span> <span class="va">values</span>.<span class="at">length</span>) <span class="op">?</span> <span class="dv">0</span> : values[periodNumber]<span class="op">;</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="replace-inline-code-with-function-call" class="level3">
 <h3>Replace Inline Code with Function Call</h3>
-<div class="sourceCode" id="cb50"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">let</span> appliesToMass <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb50-2"><a href="#cb50-2"></a><span class="cf">for</span>(<span class="kw">const</span> s <span class="kw">of</span> states) <span class="op">{</span></span>
-<span id="cb50-3"><a href="#cb50-3"></a>  <span class="cf">if</span> (s <span class="op">===</span> <span class="st">&quot;MA&quot;</span>) appliesToMass <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb51-1"><a href="#cb51-1"></a></span>
-<span id="cb51-2"><a href="#cb51-2"></a>appliesToMass <span class="op">=</span> <span class="va">states</span>.<span class="at">includes</span>(<span class="st">&quot;MA&quot;</span>)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">let</span> appliesToMass <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb62-2"><a href="#cb62-2"></a><span class="cf">for</span>(<span class="kw">const</span> s <span class="kw">of</span> states) <span class="op">{</span></span>
+<span id="cb62-3"><a href="#cb62-3"></a>  <span class="cf">if</span> (s <span class="op">===</span> <span class="st">&quot;MA&quot;</span>) appliesToMass <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb62-4"><a href="#cb62-4"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb63-1"><a href="#cb63-1"></a></span>
+<span id="cb63-2"><a href="#cb63-2"></a>appliesToMass <span class="op">=</span> <span class="va">states</span>.<span class="at">includes</span>(<span class="st">&quot;MA&quot;</span>)<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="replace-loop-with-pipeline" class="level3">
 <h3>Replace Loop with Pipeline</h3>
 <p><strong>Keywords:</strong> Streams, Functional progamming</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">const</span> names <span class="op">=</span> []<span class="op">;</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a><span class="cf">for</span> (<span class="kw">const</span> i <span class="kw">of</span> input) <span class="op">{</span></span>
-<span id="cb52-3"><a href="#cb52-3"></a>  <span class="cf">if</span> (<span class="va">i</span>.<span class="at">job</span> <span class="op">===</span> <span class="st">&quot;programmer&quot;</span>)</span>
-<span id="cb52-4"><a href="#cb52-4"></a>    <span class="va">names</span>.<span class="at">push</span>(<span class="va">i</span>.<span class="at">name</span>)<span class="op">;</span></span>
-<span id="cb52-5"><a href="#cb52-5"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb53-1"><a href="#cb53-1"></a></span>
-<span id="cb53-2"><a href="#cb53-2"></a>  <span class="kw">const</span> names <span class="op">=</span> input</span>
-<span id="cb53-3"><a href="#cb53-3"></a>    .<span class="at">filter</span>(i <span class="kw">=&gt;</span> <span class="va">i</span>.<span class="at">job</span> <span class="op">===</span> <span class="st">&quot;programmer&quot;</span>)</span>
-<span id="cb53-4"><a href="#cb53-4"></a>    .<span class="at">map</span>(i <span class="kw">=&gt;</span> <span class="va">i</span>.<span class="at">name</span>)</span>
-<span id="cb53-5"><a href="#cb53-5"></a>  <span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">const</span> names <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="cf">for</span> (<span class="kw">const</span> i <span class="kw">of</span> input) <span class="op">{</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>  <span class="cf">if</span> (<span class="va">i</span>.<span class="at">job</span> <span class="op">===</span> <span class="st">&quot;programmer&quot;</span>)</span>
+<span id="cb64-4"><a href="#cb64-4"></a>    <span class="va">names</span>.<span class="at">push</span>(<span class="va">i</span>.<span class="at">name</span>)<span class="op">;</span></span>
+<span id="cb64-5"><a href="#cb64-5"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb65-1"><a href="#cb65-1"></a></span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="kw">const</span> names <span class="op">=</span> input</span>
+<span id="cb65-3"><a href="#cb65-3"></a>    .<span class="at">filter</span>(i <span class="kw">=&gt;</span> <span class="va">i</span>.<span class="at">job</span> <span class="op">===</span> <span class="st">&quot;programmer&quot;</span>)</span>
+<span id="cb65-4"><a href="#cb65-4"></a>    .<span class="at">map</span>(i <span class="kw">=&gt;</span> <span class="va">i</span>.<span class="at">name</span>)</span>
+<span id="cb65-5"><a href="#cb65-5"></a>  <span class="op">;</span></span></code></pre></div>
 </section>
 <section id="replace-magic-literal" class="level3">
 <h3>Replace Magic Literal</h3>
 <p>With constants</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">function</span> <span class="at">potentialEnergy</span>(mass<span class="op">,</span> height) <span class="op">{</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>  <span class="cf">return</span> mass <span class="op">*</span> <span class="fl">9.81</span> <span class="op">*</span> height<span class="op">;</span></span>
-<span id="cb54-3"><a href="#cb54-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb55-1"><a href="#cb55-1"></a></span>
-<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">const</span> STANDARD_GRAVITY <span class="op">=</span> <span class="fl">9.81</span><span class="op">;</span></span>
-<span id="cb55-3"><a href="#cb55-3"></a><span class="kw">function</span> <span class="at">potentialEnergy</span>(mass<span class="op">,</span> height) <span class="op">{</span></span>
-<span id="cb55-4"><a href="#cb55-4"></a>  <span class="cf">return</span> mass <span class="op">*</span> STANDARD_GRAVITY <span class="op">*</span> height<span class="op">;</span></span>
-<span id="cb55-5"><a href="#cb55-5"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">function</span> <span class="at">potentialEnergy</span>(mass<span class="op">,</span> height) <span class="op">{</span></span>
+<span id="cb66-2"><a href="#cb66-2"></a>  <span class="cf">return</span> mass <span class="op">*</span> <span class="fl">9.81</span> <span class="op">*</span> height<span class="op">;</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb67-1"><a href="#cb67-1"></a></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="kw">const</span> STANDARD_GRAVITY <span class="op">=</span> <span class="fl">9.81</span><span class="op">;</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="kw">function</span> <span class="at">potentialEnergy</span>(mass<span class="op">,</span> height) <span class="op">{</span></span>
+<span id="cb67-4"><a href="#cb67-4"></a>  <span class="cf">return</span> mass <span class="op">*</span> STANDARD_GRAVITY <span class="op">*</span> height<span class="op">;</span></span>
+<span id="cb67-5"><a href="#cb67-5"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="replace-parameter-with-query" class="level3">
 <h3>Replace Parameter with Query</h3>
 <p>That is why it is better to pass the full object</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb56-1"><a href="#cb56-1"></a><span class="at">availableVacation</span>(anEmployee<span class="op">,</span> <span class="va">anEmployee</span>.<span class="at">grade</span>)<span class="op">;</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a></span>
-<span id="cb56-3"><a href="#cb56-3"></a><span class="kw">function</span> <span class="at">availableVacation</span>(anEmployee<span class="op">,</span> grade) <span class="op">{</span></span>
-<span id="cb56-4"><a href="#cb56-4"></a>  <span class="co">// calculate vacation...</span></span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb57-1"><a href="#cb57-1"></a></span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="at">availableVacation</span>(anEmployee)</span>
-<span id="cb57-3"><a href="#cb57-3"></a></span>
-<span id="cb57-4"><a href="#cb57-4"></a><span class="kw">function</span> <span class="at">availableVacation</span>(anEmployee) <span class="op">{</span></span>
-<span id="cb57-5"><a href="#cb57-5"></a>  <span class="kw">const</span> grade <span class="op">=</span> <span class="va">anEmployee</span>.<span class="at">grade</span><span class="op">;</span></span>
-<span id="cb57-6"><a href="#cb57-6"></a>  <span class="co">// calculate vacation...</span></span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb68-1"><a href="#cb68-1"></a><span class="at">availableVacation</span>(anEmployee<span class="op">,</span> <span class="va">anEmployee</span>.<span class="at">grade</span>)<span class="op">;</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a></span>
+<span id="cb68-3"><a href="#cb68-3"></a><span class="kw">function</span> <span class="at">availableVacation</span>(anEmployee<span class="op">,</span> grade) <span class="op">{</span></span>
+<span id="cb68-4"><a href="#cb68-4"></a>  <span class="co">// calculate vacation...</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb69-1"><a href="#cb69-1"></a></span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="at">availableVacation</span>(anEmployee)</span>
+<span id="cb69-3"><a href="#cb69-3"></a></span>
+<span id="cb69-4"><a href="#cb69-4"></a><span class="kw">function</span> <span class="at">availableVacation</span>(anEmployee) <span class="op">{</span></span>
+<span id="cb69-5"><a href="#cb69-5"></a>  <span class="kw">const</span> grade <span class="op">=</span> <span class="va">anEmployee</span>.<span class="at">grade</span><span class="op">;</span></span>
+<span id="cb69-6"><a href="#cb69-6"></a>  <span class="co">// calculate vacation...</span></span></code></pre></div>
 </section>
 <section id="replace-temp-with-query" class="level3">
 <h3>Replace Temp with Query</h3>
-<div class="sourceCode" id="cb58"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">const</span> basePrice <span class="op">=</span> <span class="kw">this</span>.<span class="at">_quantity</span> <span class="op">*</span> <span class="kw">this</span>.<span class="at">_itemPrice</span><span class="op">;</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a><span class="cf">if</span> (basePrice <span class="op">&gt;</span> <span class="dv">1000</span>)</span>
-<span id="cb58-3"><a href="#cb58-3"></a>  <span class="cf">return</span> basePrice <span class="op">*</span> <span class="fl">0.95</span><span class="op">;</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a><span class="cf">else</span></span>
-<span id="cb58-5"><a href="#cb58-5"></a>  <span class="cf">return</span> basePrice <span class="op">*</span> <span class="fl">0.98</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb59"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb59-1"><a href="#cb59-1"></a></span>
-<span id="cb59-2"><a href="#cb59-2"></a>get <span class="at">basePrice</span>() <span class="op">{</span><span class="kw">this</span>.<span class="at">_quantity</span> <span class="op">*</span> <span class="kw">this</span>.<span class="at">_itemPrice</span><span class="op">;}</span></span>
-<span id="cb59-3"><a href="#cb59-3"></a></span>
-<span id="cb59-4"><a href="#cb59-4"></a>...</span>
-<span id="cb59-5"><a href="#cb59-5"></a></span>
-<span id="cb59-6"><a href="#cb59-6"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">&gt;</span> <span class="dv">1000</span>)</span>
-<span id="cb59-7"><a href="#cb59-7"></a>  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">*</span> <span class="fl">0.95</span><span class="op">;</span></span>
-<span id="cb59-8"><a href="#cb59-8"></a><span class="cf">else</span></span>
-<span id="cb59-9"><a href="#cb59-9"></a>  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">*</span> <span class="fl">0.98</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">const</span> basePrice <span class="op">=</span> <span class="kw">this</span>.<span class="at">_quantity</span> <span class="op">*</span> <span class="kw">this</span>.<span class="at">_itemPrice</span><span class="op">;</span></span>
+<span id="cb70-2"><a href="#cb70-2"></a><span class="cf">if</span> (basePrice <span class="op">&gt;</span> <span class="dv">1000</span>)</span>
+<span id="cb70-3"><a href="#cb70-3"></a>  <span class="cf">return</span> basePrice <span class="op">*</span> <span class="fl">0.95</span><span class="op">;</span></span>
+<span id="cb70-4"><a href="#cb70-4"></a><span class="cf">else</span></span>
+<span id="cb70-5"><a href="#cb70-5"></a>  <span class="cf">return</span> basePrice <span class="op">*</span> <span class="fl">0.98</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb71-1"><a href="#cb71-1"></a></span>
+<span id="cb71-2"><a href="#cb71-2"></a>get <span class="at">basePrice</span>() <span class="op">{</span><span class="kw">this</span>.<span class="at">_quantity</span> <span class="op">*</span> <span class="kw">this</span>.<span class="at">_itemPrice</span><span class="op">;}</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a></span>
+<span id="cb71-4"><a href="#cb71-4"></a>...</span>
+<span id="cb71-5"><a href="#cb71-5"></a></span>
+<span id="cb71-6"><a href="#cb71-6"></a><span class="cf">if</span> (<span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">&gt;</span> <span class="dv">1000</span>)</span>
+<span id="cb71-7"><a href="#cb71-7"></a>  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">*</span> <span class="fl">0.95</span><span class="op">;</span></span>
+<span id="cb71-8"><a href="#cb71-8"></a><span class="cf">else</span></span>
+<span id="cb71-9"><a href="#cb71-9"></a>  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">basePrice</span> <span class="op">*</span> <span class="fl">0.98</span><span class="op">;</span></span></code></pre></div>
 </section>
 <section id="replace-type-code-with-subclasses" class="level3">
 <h3>Replace Type Code with Subclasses</h3>
-<div class="sourceCode" id="cb60"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb60-1"><a href="#cb60-1"></a><span class="kw">function</span> <span class="at">createEmployee</span>(name<span class="op">,</span> type) <span class="op">{</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a>  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Employee</span>(name<span class="op">,</span> type)<span class="op">;</span></span>
-<span id="cb60-3"><a href="#cb60-3"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb61-1"><a href="#cb61-1"></a></span>
-<span id="cb61-2"><a href="#cb61-2"></a><span class="kw">function</span> <span class="at">createEmployee</span>(name<span class="op">,</span> type) <span class="op">{</span></span>
-<span id="cb61-3"><a href="#cb61-3"></a>  <span class="cf">switch</span> (type) <span class="op">{</span></span>
-<span id="cb61-4"><a href="#cb61-4"></a>    <span class="cf">case</span> <span class="st">&quot;engineer&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">Engineer</span>(name)<span class="op">;</span></span>
-<span id="cb61-5"><a href="#cb61-5"></a>    <span class="cf">case</span> <span class="st">&quot;salesman&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">Salesman</span>(name)<span class="op">;</span></span>
-<span id="cb61-6"><a href="#cb61-6"></a>    <span class="cf">case</span> <span class="st">&quot;manager&quot;</span><span class="op">:</span>  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Manager</span> (name)<span class="op">;</span></span>
-<span id="cb61-7"><a href="#cb61-7"></a>  <span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">function</span> <span class="at">createEmployee</span>(name<span class="op">,</span> type) <span class="op">{</span></span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Employee</span>(name<span class="op">,</span> type)<span class="op">;</span></span>
+<span id="cb72-3"><a href="#cb72-3"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb73-1"><a href="#cb73-1"></a></span>
+<span id="cb73-2"><a href="#cb73-2"></a><span class="kw">function</span> <span class="at">createEmployee</span>(name<span class="op">,</span> type) <span class="op">{</span></span>
+<span id="cb73-3"><a href="#cb73-3"></a>  <span class="cf">switch</span> (type) <span class="op">{</span></span>
+<span id="cb73-4"><a href="#cb73-4"></a>    <span class="cf">case</span> <span class="st">&quot;engineer&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">Engineer</span>(name)<span class="op">;</span></span>
+<span id="cb73-5"><a href="#cb73-5"></a>    <span class="cf">case</span> <span class="st">&quot;salesman&quot;</span><span class="op">:</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">Salesman</span>(name)<span class="op">;</span></span>
+<span id="cb73-6"><a href="#cb73-6"></a>    <span class="cf">case</span> <span class="st">&quot;manager&quot;</span><span class="op">:</span>  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Manager</span> (name)<span class="op">;</span></span>
+<span id="cb73-7"><a href="#cb73-7"></a>  <span class="op">}</span></span></code></pre></div>
 </section>
 <section id="return-modified-value" class="level3">
 <h3>Return Modified Value</h3>
 <p>Of input</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">let</span> totalAscent <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a><span class="at">calculateAscent</span>()<span class="op">;</span></span>
-<span id="cb62-3"><a href="#cb62-3"></a></span>
-<span id="cb62-4"><a href="#cb62-4"></a><span class="kw">function</span> <span class="at">calculateAscent</span>() <span class="op">{</span></span>
-<span id="cb62-5"><a href="#cb62-5"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">points</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
-<span id="cb62-6"><a href="#cb62-6"></a>    <span class="kw">const</span> verticalChange <span class="op">=</span> points[i].<span class="at">elevation</span> <span class="op">-</span> points[i<span class="dv">-1</span>].<span class="at">elevation</span><span class="op">;</span></span>
-<span id="cb62-7"><a href="#cb62-7"></a>    totalAscent <span class="op">+=</span> (verticalChange <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> verticalChange : <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb62-8"><a href="#cb62-8"></a>  <span class="op">}</span></span>
-<span id="cb62-9"><a href="#cb62-9"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb63-1"><a href="#cb63-1"></a></span>
-<span id="cb63-2"><a href="#cb63-2"></a><span class="kw">const</span> totalAscent <span class="op">=</span> <span class="at">calculateAscent</span>()<span class="op">;</span></span>
-<span id="cb63-3"><a href="#cb63-3"></a></span>
-<span id="cb63-4"><a href="#cb63-4"></a><span class="kw">function</span> <span class="at">calculateAscent</span>() <span class="op">{</span></span>
-<span id="cb63-5"><a href="#cb63-5"></a>  <span class="kw">let</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb63-6"><a href="#cb63-6"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">points</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
-<span id="cb63-7"><a href="#cb63-7"></a>    <span class="kw">const</span> verticalChange <span class="op">=</span> points[i].<span class="at">elevation</span> <span class="op">-</span> points[i<span class="dv">-1</span>].<span class="at">elevation</span><span class="op">;</span></span>
-<span id="cb63-8"><a href="#cb63-8"></a>    result <span class="op">+=</span> (verticalChange <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> verticalChange : <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb63-9"><a href="#cb63-9"></a>  <span class="op">}</span></span>
-<span id="cb63-10"><a href="#cb63-10"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb63-11"><a href="#cb63-11"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">let</span> totalAscent <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="at">calculateAscent</span>()<span class="op">;</span></span>
+<span id="cb74-3"><a href="#cb74-3"></a></span>
+<span id="cb74-4"><a href="#cb74-4"></a><span class="kw">function</span> <span class="at">calculateAscent</span>() <span class="op">{</span></span>
+<span id="cb74-5"><a href="#cb74-5"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">points</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb74-6"><a href="#cb74-6"></a>    <span class="kw">const</span> verticalChange <span class="op">=</span> points[i].<span class="at">elevation</span> <span class="op">-</span> points[i<span class="dv">-1</span>].<span class="at">elevation</span><span class="op">;</span></span>
+<span id="cb74-7"><a href="#cb74-7"></a>    totalAscent <span class="op">+=</span> (verticalChange <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> verticalChange : <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb74-8"><a href="#cb74-8"></a>  <span class="op">}</span></span>
+<span id="cb74-9"><a href="#cb74-9"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb75-1"><a href="#cb75-1"></a></span>
+<span id="cb75-2"><a href="#cb75-2"></a><span class="kw">const</span> totalAscent <span class="op">=</span> <span class="at">calculateAscent</span>()<span class="op">;</span></span>
+<span id="cb75-3"><a href="#cb75-3"></a></span>
+<span id="cb75-4"><a href="#cb75-4"></a><span class="kw">function</span> <span class="at">calculateAscent</span>() <span class="op">{</span></span>
+<span id="cb75-5"><a href="#cb75-5"></a>  <span class="kw">let</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb75-6"><a href="#cb75-6"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">points</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb75-7"><a href="#cb75-7"></a>    <span class="kw">const</span> verticalChange <span class="op">=</span> points[i].<span class="at">elevation</span> <span class="op">-</span> points[i<span class="dv">-1</span>].<span class="at">elevation</span><span class="op">;</span></span>
+<span id="cb75-8"><a href="#cb75-8"></a>    result <span class="op">+=</span> (verticalChange <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">?</span> verticalChange : <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb75-9"><a href="#cb75-9"></a>  <span class="op">}</span></span>
+<span id="cb75-10"><a href="#cb75-10"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb75-11"><a href="#cb75-11"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="separate-query-from-modifier" class="level3">
 <h3>Separate Query from Modifier</h3>
-<div class="sourceCode" id="cb64"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">function</span> <span class="at">getTotalOutstandingAndSendBill</span>() <span class="op">{</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="va">customer</span>.<span class="va">invoices</span>.<span class="at">reduce</span>((total<span class="op">,</span> each) <span class="kw">=&gt;</span> <span class="va">each</span>.<span class="at">amount</span> <span class="op">+</span> total<span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a>  <span class="at">sendBill</span>()<span class="op">;</span></span>
-<span id="cb64-4"><a href="#cb64-4"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
-<span id="cb64-5"><a href="#cb64-5"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb65-1"><a href="#cb65-1"></a></span>
-<span id="cb65-2"><a href="#cb65-2"></a><span class="kw">function</span> <span class="at">totalOutstanding</span>() <span class="op">{</span></span>
-<span id="cb65-3"><a href="#cb65-3"></a>  <span class="cf">return</span> <span class="va">customer</span>.<span class="va">invoices</span>.<span class="at">reduce</span>((total<span class="op">,</span> each) <span class="kw">=&gt;</span> <span class="va">each</span>.<span class="at">amount</span> <span class="op">+</span> total<span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span>  </span>
-<span id="cb65-4"><a href="#cb65-4"></a><span class="op">}</span></span>
-<span id="cb65-5"><a href="#cb65-5"></a><span class="kw">function</span> <span class="at">sendBill</span>() <span class="op">{</span></span>
-<span id="cb65-6"><a href="#cb65-6"></a>  <span class="va">emailGateway</span>.<span class="at">send</span>(<span class="at">formatBill</span>(customer))<span class="op">;</span></span>
-<span id="cb65-7"><a href="#cb65-7"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb76-1"><a href="#cb76-1"></a><span class="kw">function</span> <span class="at">getTotalOutstandingAndSendBill</span>() <span class="op">{</span></span>
+<span id="cb76-2"><a href="#cb76-2"></a>  <span class="kw">const</span> result <span class="op">=</span> <span class="va">customer</span>.<span class="va">invoices</span>.<span class="at">reduce</span>((total<span class="op">,</span> each) <span class="kw">=&gt;</span> <span class="va">each</span>.<span class="at">amount</span> <span class="op">+</span> total<span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb76-3"><a href="#cb76-3"></a>  <span class="at">sendBill</span>()<span class="op">;</span></span>
+<span id="cb76-4"><a href="#cb76-4"></a>  <span class="cf">return</span> result<span class="op">;</span></span>
+<span id="cb76-5"><a href="#cb76-5"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb77-1"><a href="#cb77-1"></a></span>
+<span id="cb77-2"><a href="#cb77-2"></a><span class="kw">function</span> <span class="at">totalOutstanding</span>() <span class="op">{</span></span>
+<span id="cb77-3"><a href="#cb77-3"></a>  <span class="cf">return</span> <span class="va">customer</span>.<span class="va">invoices</span>.<span class="at">reduce</span>((total<span class="op">,</span> each) <span class="kw">=&gt;</span> <span class="va">each</span>.<span class="at">amount</span> <span class="op">+</span> total<span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span>  </span>
+<span id="cb77-4"><a href="#cb77-4"></a><span class="op">}</span></span>
+<span id="cb77-5"><a href="#cb77-5"></a><span class="kw">function</span> <span class="at">sendBill</span>() <span class="op">{</span></span>
+<span id="cb77-6"><a href="#cb77-6"></a>  <span class="va">emailGateway</span>.<span class="at">send</span>(<span class="at">formatBill</span>(customer))<span class="op">;</span></span>
+<span id="cb77-7"><a href="#cb77-7"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="slide-statement" class="level3">
 <h3>Slide statement</h3>
 <p>Together, far from call</p>
 <p>aliases Consolidate Duplicate Conditional Fragments</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">const</span> pricingPlan <span class="op">=</span> <span class="at">retrievePricingPlan</span>()<span class="op">;</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a><span class="kw">const</span> order <span class="op">=</span> <span class="at">retreiveOrder</span>()<span class="op">;</span></span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="kw">let</span> charge<span class="op">;</span></span>
-<span id="cb66-4"><a href="#cb66-4"></a><span class="kw">const</span> chargePerUnit <span class="op">=</span> <span class="va">pricingPlan</span>.<span class="at">unit</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb67-1"><a href="#cb67-1"></a></span>
-<span id="cb67-2"><a href="#cb67-2"></a><span class="kw">const</span> pricingPlan <span class="op">=</span> <span class="at">retrievePricingPlan</span>()<span class="op">;</span></span>
-<span id="cb67-3"><a href="#cb67-3"></a><span class="kw">const</span> chargePerUnit <span class="op">=</span> <span class="va">pricingPlan</span>.<span class="at">unit</span><span class="op">;</span></span>
-<span id="cb67-4"><a href="#cb67-4"></a><span class="kw">const</span> order <span class="op">=</span> <span class="at">retreiveOrder</span>()<span class="op">;</span></span>
-<span id="cb67-5"><a href="#cb67-5"></a><span class="kw">let</span> charge<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb78-1"><a href="#cb78-1"></a><span class="kw">const</span> pricingPlan <span class="op">=</span> <span class="at">retrievePricingPlan</span>()<span class="op">;</span></span>
+<span id="cb78-2"><a href="#cb78-2"></a><span class="kw">const</span> order <span class="op">=</span> <span class="at">retreiveOrder</span>()<span class="op">;</span></span>
+<span id="cb78-3"><a href="#cb78-3"></a><span class="kw">let</span> charge<span class="op">;</span></span>
+<span id="cb78-4"><a href="#cb78-4"></a><span class="kw">const</span> chargePerUnit <span class="op">=</span> <span class="va">pricingPlan</span>.<span class="at">unit</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb79-1"><a href="#cb79-1"></a></span>
+<span id="cb79-2"><a href="#cb79-2"></a><span class="kw">const</span> pricingPlan <span class="op">=</span> <span class="at">retrievePricingPlan</span>()<span class="op">;</span></span>
+<span id="cb79-3"><a href="#cb79-3"></a><span class="kw">const</span> chargePerUnit <span class="op">=</span> <span class="va">pricingPlan</span>.<span class="at">unit</span><span class="op">;</span></span>
+<span id="cb79-4"><a href="#cb79-4"></a><span class="kw">const</span> order <span class="op">=</span> <span class="at">retreiveOrder</span>()<span class="op">;</span></span>
+<span id="cb79-5"><a href="#cb79-5"></a><span class="kw">let</span> charge<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="split-loop" class="level3">
 <h3>Split Loop</h3>
 <p>Work with the ass little nesting level as possible -&gt; return from loop early</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb68-1"><a href="#cb68-1"></a><span class="kw">let</span> averageAge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb68-2"><a href="#cb68-2"></a><span class="kw">let</span> totalSalary <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb68-3"><a href="#cb68-3"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
-<span id="cb68-4"><a href="#cb68-4"></a>  averageAge <span class="op">+=</span> <span class="va">p</span>.<span class="at">age</span><span class="op">;</span></span>
-<span id="cb68-5"><a href="#cb68-5"></a>  totalSalary <span class="op">+=</span> <span class="va">p</span>.<span class="at">salary</span><span class="op">;</span></span>
-<span id="cb68-6"><a href="#cb68-6"></a><span class="op">}</span></span>
-<span id="cb68-7"><a href="#cb68-7"></a>averageAge <span class="op">=</span> averageAge <span class="op">/</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb69-1"><a href="#cb69-1"></a></span>
-<span id="cb69-2"><a href="#cb69-2"></a><span class="kw">let</span> totalSalary <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb69-3"><a href="#cb69-3"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
-<span id="cb69-4"><a href="#cb69-4"></a>  totalSalary <span class="op">+=</span> <span class="va">p</span>.<span class="at">salary</span><span class="op">;</span></span>
-<span id="cb69-5"><a href="#cb69-5"></a><span class="op">}</span></span>
-<span id="cb69-6"><a href="#cb69-6"></a></span>
-<span id="cb69-7"><a href="#cb69-7"></a><span class="kw">let</span> averageAge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb69-8"><a href="#cb69-8"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
-<span id="cb69-9"><a href="#cb69-9"></a>  averageAge <span class="op">+=</span> <span class="va">p</span>.<span class="at">age</span><span class="op">;</span></span>
-<span id="cb69-10"><a href="#cb69-10"></a><span class="op">}</span></span>
-<span id="cb69-11"><a href="#cb69-11"></a>averageAge <span class="op">=</span> averageAge <span class="op">/</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb80-1"><a href="#cb80-1"></a><span class="kw">let</span> averageAge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb80-2"><a href="#cb80-2"></a><span class="kw">let</span> totalSalary <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb80-3"><a href="#cb80-3"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
+<span id="cb80-4"><a href="#cb80-4"></a>  averageAge <span class="op">+=</span> <span class="va">p</span>.<span class="at">age</span><span class="op">;</span></span>
+<span id="cb80-5"><a href="#cb80-5"></a>  totalSalary <span class="op">+=</span> <span class="va">p</span>.<span class="at">salary</span><span class="op">;</span></span>
+<span id="cb80-6"><a href="#cb80-6"></a><span class="op">}</span></span>
+<span id="cb80-7"><a href="#cb80-7"></a>averageAge <span class="op">=</span> averageAge <span class="op">/</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb81-1"><a href="#cb81-1"></a></span>
+<span id="cb81-2"><a href="#cb81-2"></a><span class="kw">let</span> totalSalary <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb81-3"><a href="#cb81-3"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
+<span id="cb81-4"><a href="#cb81-4"></a>  totalSalary <span class="op">+=</span> <span class="va">p</span>.<span class="at">salary</span><span class="op">;</span></span>
+<span id="cb81-5"><a href="#cb81-5"></a><span class="op">}</span></span>
+<span id="cb81-6"><a href="#cb81-6"></a></span>
+<span id="cb81-7"><a href="#cb81-7"></a><span class="kw">let</span> averageAge <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb81-8"><a href="#cb81-8"></a><span class="cf">for</span> (<span class="kw">const</span> p <span class="kw">of</span> people) <span class="op">{</span></span>
+<span id="cb81-9"><a href="#cb81-9"></a>  averageAge <span class="op">+=</span> <span class="va">p</span>.<span class="at">age</span><span class="op">;</span></span>
+<span id="cb81-10"><a href="#cb81-10"></a><span class="op">}</span></span>
+<span id="cb81-11"><a href="#cb81-11"></a>averageAge <span class="op">=</span> averageAge <span class="op">/</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span></span></code></pre></div>
 </section>
 <section id="split-phase" class="level3">
 <h3>Split Phase</h3>
-<div class="sourceCode" id="cb70"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">const</span> orderData <span class="op">=</span> <span class="va">orderString</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>)<span class="op">;</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a><span class="kw">const</span> productPrice <span class="op">=</span> priceList[orderData[<span class="dv">0</span>].<span class="at">split</span>(<span class="st">&quot;-&quot;</span>)[<span class="dv">1</span>]]<span class="op">;</span></span>
-<span id="cb70-3"><a href="#cb70-3"></a><span class="kw">const</span> orderPrice <span class="op">=</span> <span class="at">parseInt</span>(orderData[<span class="dv">1</span>]) <span class="op">*</span> productPrice<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb71-1"><a href="#cb71-1"></a></span>
-<span id="cb71-2"><a href="#cb71-2"></a><span class="kw">const</span> orderRecord <span class="op">=</span> <span class="at">parseOrder</span>(order)<span class="op">;</span></span>
-<span id="cb71-3"><a href="#cb71-3"></a><span class="kw">const</span> orderPrice <span class="op">=</span> <span class="at">price</span>(orderRecord<span class="op">,</span> priceList)<span class="op">;</span></span>
-<span id="cb71-4"><a href="#cb71-4"></a></span>
-<span id="cb71-5"><a href="#cb71-5"></a><span class="kw">function</span> <span class="at">parseOrder</span>(aString) <span class="op">{</span></span>
-<span id="cb71-6"><a href="#cb71-6"></a>  <span class="kw">const</span> values <span class="op">=</span>  <span class="va">aString</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>)<span class="op">;</span></span>
-<span id="cb71-7"><a href="#cb71-7"></a>  <span class="cf">return</span> (<span class="op">{</span></span>
-<span id="cb71-8"><a href="#cb71-8"></a>    <span class="dt">productID</span><span class="op">:</span> values[<span class="dv">0</span>].<span class="at">split</span>(<span class="st">&quot;-&quot;</span>)[<span class="dv">1</span>]<span class="op">,</span></span>
-<span id="cb71-9"><a href="#cb71-9"></a>    <span class="dt">quantity</span><span class="op">:</span> <span class="at">parseInt</span>(values[<span class="dv">1</span>])<span class="op">,</span></span>
-<span id="cb71-10"><a href="#cb71-10"></a>  <span class="op">}</span>)<span class="op">;</span></span>
-<span id="cb71-11"><a href="#cb71-11"></a><span class="op">}</span></span>
-<span id="cb71-12"><a href="#cb71-12"></a><span class="kw">function</span> <span class="at">price</span>(order<span class="op">,</span> priceList) <span class="op">{</span></span>
-<span id="cb71-13"><a href="#cb71-13"></a>  <span class="cf">return</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> priceList[<span class="va">order</span>.<span class="at">productID</span>]<span class="op">;</span></span>
-<span id="cb71-14"><a href="#cb71-14"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb82-1"><a href="#cb82-1"></a><span class="kw">const</span> orderData <span class="op">=</span> <span class="va">orderString</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>)<span class="op">;</span></span>
+<span id="cb82-2"><a href="#cb82-2"></a><span class="kw">const</span> productPrice <span class="op">=</span> priceList[orderData[<span class="dv">0</span>].<span class="at">split</span>(<span class="st">&quot;-&quot;</span>)[<span class="dv">1</span>]]<span class="op">;</span></span>
+<span id="cb82-3"><a href="#cb82-3"></a><span class="kw">const</span> orderPrice <span class="op">=</span> <span class="at">parseInt</span>(orderData[<span class="dv">1</span>]) <span class="op">*</span> productPrice<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb83-1"><a href="#cb83-1"></a></span>
+<span id="cb83-2"><a href="#cb83-2"></a><span class="kw">const</span> orderRecord <span class="op">=</span> <span class="at">parseOrder</span>(order)<span class="op">;</span></span>
+<span id="cb83-3"><a href="#cb83-3"></a><span class="kw">const</span> orderPrice <span class="op">=</span> <span class="at">price</span>(orderRecord<span class="op">,</span> priceList)<span class="op">;</span></span>
+<span id="cb83-4"><a href="#cb83-4"></a></span>
+<span id="cb83-5"><a href="#cb83-5"></a><span class="kw">function</span> <span class="at">parseOrder</span>(aString) <span class="op">{</span></span>
+<span id="cb83-6"><a href="#cb83-6"></a>  <span class="kw">const</span> values <span class="op">=</span>  <span class="va">aString</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\s+</span><span class="ss">/</span>)<span class="op">;</span></span>
+<span id="cb83-7"><a href="#cb83-7"></a>  <span class="cf">return</span> (<span class="op">{</span></span>
+<span id="cb83-8"><a href="#cb83-8"></a>    <span class="dt">productID</span><span class="op">:</span> values[<span class="dv">0</span>].<span class="at">split</span>(<span class="st">&quot;-&quot;</span>)[<span class="dv">1</span>]<span class="op">,</span></span>
+<span id="cb83-9"><a href="#cb83-9"></a>    <span class="dt">quantity</span><span class="op">:</span> <span class="at">parseInt</span>(values[<span class="dv">1</span>])<span class="op">,</span></span>
+<span id="cb83-10"><a href="#cb83-10"></a>  <span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb83-11"><a href="#cb83-11"></a><span class="op">}</span></span>
+<span id="cb83-12"><a href="#cb83-12"></a><span class="kw">function</span> <span class="at">price</span>(order<span class="op">,</span> priceList) <span class="op">{</span></span>
+<span id="cb83-13"><a href="#cb83-13"></a>  <span class="cf">return</span> <span class="va">order</span>.<span class="at">quantity</span> <span class="op">*</span> priceList[<span class="va">order</span>.<span class="at">productID</span>]<span class="op">;</span></span>
+<span id="cb83-14"><a href="#cb83-14"></a><span class="op">}</span></span></code></pre></div>
 </section>
 <section id="split-variable" class="level3">
 <h3>Split Variable</h3>
-<div class="sourceCode" id="cb72"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">let</span> temp <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (height <span class="op">+</span> width)<span class="op">;</span></span>
-<span id="cb72-2"><a href="#cb72-2"></a><span class="va">console</span>.<span class="at">log</span>(temp)<span class="op">;</span></span>
-<span id="cb72-3"><a href="#cb72-3"></a>temp <span class="op">=</span> height <span class="op">*</span> width<span class="op">;</span></span>
-<span id="cb72-4"><a href="#cb72-4"></a><span class="va">console</span>.<span class="at">log</span>(temp)<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb73-1"><a href="#cb73-1"></a></span>
-<span id="cb73-2"><a href="#cb73-2"></a><span class="kw">const</span> perimeter <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (height <span class="op">+</span> width)<span class="op">;</span></span>
-<span id="cb73-3"><a href="#cb73-3"></a><span class="va">console</span>.<span class="at">log</span>(perimeter)<span class="op">;</span></span>
-<span id="cb73-4"><a href="#cb73-4"></a><span class="kw">const</span> area <span class="op">=</span> height <span class="op">*</span> width<span class="op">;</span></span>
-<span id="cb73-5"><a href="#cb73-5"></a><span class="va">console</span>.<span class="at">log</span>(area)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">let</span> temp <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (height <span class="op">+</span> width)<span class="op">;</span></span>
+<span id="cb84-2"><a href="#cb84-2"></a><span class="va">console</span>.<span class="at">log</span>(temp)<span class="op">;</span></span>
+<span id="cb84-3"><a href="#cb84-3"></a>temp <span class="op">=</span> height <span class="op">*</span> width<span class="op">;</span></span>
+<span id="cb84-4"><a href="#cb84-4"></a><span class="va">console</span>.<span class="at">log</span>(temp)<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb85-1"><a href="#cb85-1"></a></span>
+<span id="cb85-2"><a href="#cb85-2"></a><span class="kw">const</span> perimeter <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (height <span class="op">+</span> width)<span class="op">;</span></span>
+<span id="cb85-3"><a href="#cb85-3"></a><span class="va">console</span>.<span class="at">log</span>(perimeter)<span class="op">;</span></span>
+<span id="cb85-4"><a href="#cb85-4"></a><span class="kw">const</span> area <span class="op">=</span> height <span class="op">*</span> width<span class="op">;</span></span>
+<span id="cb85-5"><a href="#cb85-5"></a><span class="va">console</span>.<span class="at">log</span>(area)<span class="op">;</span></span></code></pre></div>
 </section>
 <section id="substitute-algorithm" class="level3">
 <h3>Substitute Algorithm</h3>
-<div class="sourceCode" id="cb74"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">function</span> <span class="at">foundPerson</span>(people) <span class="op">{</span></span>
-<span id="cb74-2"><a href="#cb74-2"></a>  <span class="cf">for</span>(<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
-<span id="cb74-3"><a href="#cb74-3"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
-<span id="cb74-4"><a href="#cb74-4"></a>      <span class="cf">return</span> <span class="st">&quot;Don&quot;</span><span class="op">;</span></span>
-<span id="cb74-5"><a href="#cb74-5"></a>    <span class="op">}</span></span>
-<span id="cb74-6"><a href="#cb74-6"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;John&quot;</span>) <span class="op">{</span></span>
-<span id="cb74-7"><a href="#cb74-7"></a>      <span class="cf">return</span> <span class="st">&quot;John&quot;</span><span class="op">;</span></span>
-<span id="cb74-8"><a href="#cb74-8"></a>    <span class="op">}</span></span>
-<span id="cb74-9"><a href="#cb74-9"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;Kent&quot;</span>) <span class="op">{</span></span>
-<span id="cb74-10"><a href="#cb74-10"></a>      <span class="cf">return</span> <span class="st">&quot;Kent&quot;</span><span class="op">;</span></span>
-<span id="cb74-11"><a href="#cb74-11"></a>    <span class="op">}</span></span>
-<span id="cb74-12"><a href="#cb74-12"></a>  <span class="op">}</span></span>
-<span id="cb74-13"><a href="#cb74-13"></a>  <span class="cf">return</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
-<span id="cb74-14"><a href="#cb74-14"></a><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb75-1"><a href="#cb75-1"></a></span>
-<span id="cb75-2"><a href="#cb75-2"></a><span class="kw">function</span> <span class="at">foundPerson</span>(people) <span class="op">{</span></span>
-<span id="cb75-3"><a href="#cb75-3"></a>  <span class="kw">const</span> candidates <span class="op">=</span> [<span class="st">&quot;Don&quot;</span><span class="op">,</span> <span class="st">&quot;John&quot;</span><span class="op">,</span> <span class="st">&quot;Kent&quot;</span>]<span class="op">;</span></span>
-<span id="cb75-4"><a href="#cb75-4"></a>  <span class="cf">return</span> <span class="va">people</span>.<span class="at">find</span>(p <span class="kw">=&gt;</span> <span class="va">candidates</span>.<span class="at">includes</span>(p)) <span class="op">||</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
-<span id="cb75-5"><a href="#cb75-5"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb86-1"><a href="#cb86-1"></a><span class="kw">function</span> <span class="at">foundPerson</span>(people) <span class="op">{</span></span>
+<span id="cb86-2"><a href="#cb86-2"></a>  <span class="cf">for</span>(<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">people</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></span>
+<span id="cb86-3"><a href="#cb86-3"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;Don&quot;</span>) <span class="op">{</span></span>
+<span id="cb86-4"><a href="#cb86-4"></a>      <span class="cf">return</span> <span class="st">&quot;Don&quot;</span><span class="op">;</span></span>
+<span id="cb86-5"><a href="#cb86-5"></a>    <span class="op">}</span></span>
+<span id="cb86-6"><a href="#cb86-6"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;John&quot;</span>) <span class="op">{</span></span>
+<span id="cb86-7"><a href="#cb86-7"></a>      <span class="cf">return</span> <span class="st">&quot;John&quot;</span><span class="op">;</span></span>
+<span id="cb86-8"><a href="#cb86-8"></a>    <span class="op">}</span></span>
+<span id="cb86-9"><a href="#cb86-9"></a>    <span class="cf">if</span> (people[i] <span class="op">===</span> <span class="st">&quot;Kent&quot;</span>) <span class="op">{</span></span>
+<span id="cb86-10"><a href="#cb86-10"></a>      <span class="cf">return</span> <span class="st">&quot;Kent&quot;</span><span class="op">;</span></span>
+<span id="cb86-11"><a href="#cb86-11"></a>    <span class="op">}</span></span>
+<span id="cb86-12"><a href="#cb86-12"></a>  <span class="op">}</span></span>
+<span id="cb86-13"><a href="#cb86-13"></a>  <span class="cf">return</span> <span class="st">&quot;&quot;</span><span class="op">;</span></span>
+<span id="cb86-14"><a href="#cb86-14"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb87-1"><a href="#cb87-1"></a></span>
+<span id="cb87-2"><a href="#cb87-2"></a><span class="kw">function</span> <span class="at">foundPerson</span>(people) <span class="op">{</span></span>
+<span id="cb87-3"><a href="#cb87-3"></a>  <span class="kw">const</span> candidates <span class="op">=</span> [<span class="st">&quot;Don&quot;</span><span class="op">,</span> <span class="st">&quot;John&quot;</span><span class="op">,</span> <span class="st">&quot;Kent&quot;</span>]<span class="op">;</span></span>
+<span id="cb87-4"><a href="#cb87-4"></a>  <span class="cf">return</span> <span class="va">people</span>.<span class="at">find</span>(p <span class="kw">=&gt;</span> <span class="va">candidates</span>.<span class="at">includes</span>(p)) <span class="op">||</span> <span class="st">&#39;&#39;</span><span class="op">;</span></span>
+<span id="cb87-5"><a href="#cb87-5"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="link" class="level3">
+<h3>Link</h3>
+<ul>
+<li><a href="https://refactoring.com/catalog/.html">catalog of refactorings</a></li>
+<li><a href="https://stackoverflow.com/questions/tagged/coding-style?sort=votes.html">StackOverflow/coding-style</a></li>
+<li><a href="https://softwareengineering.stackexchange.com/questions/tagged/coding-style?sort=votes.html">StackEngeenering/coding-style</a></li>
+</ul>
 </section>
 </section>
 </section>

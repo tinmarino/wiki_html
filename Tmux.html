@@ -23,6 +23,7 @@
 <h1 class="title">Tmux : TerminalMultiplexer</h1>
 </header>
 <p><a href="Tmux-Conf.html">Tmux Conf</a></p>
+<p>tmux capture-pane -pS -1000000 -t 0 &gt; file.out</p>
 <section id="pane-to-new-windows-break-pane-o" class="level3">
 <h3>Pane to new Windows == break pane o</h3>
 <pre><code>join-pane -s
@@ -46,13 +47,19 @@ tmux list-commands
 tmux info
 tmux source-file ~/.tmux.conf
     list-keys -T copy-mode-vi
-C-b ?# Display a list of keyboard shortcuts:
-
-
-    tmux list-sessions
-    C-b w# List windows
-
-    C-b s# List sessions</code></pre>
+C-b ?</code></pre>
+</section>
+<section id="display-a-list-of-keyboard-shortcuts" class="level1">
+<h1>Display a list of keyboard shortcuts:</h1>
+<pre><code>    tmux list-sessions
+    C-b w</code></pre>
+</section>
+<section id="list-windows" class="level1">
+<h1>List windows</h1>
+<pre><code>    C-b s</code></pre>
+</section>
+<section id="list-sessions" class="level1">
+<h1>List sessions</h1>
 </section>
 <section id="tips" class="level1">
 <h1>Tips</h1>
@@ -65,7 +72,7 @@ C-b ?# Display a list of keyboard shortcuts:
 <p>Ctrl-b $ (tmux|ctrl-b :) rename-session -t current-name new-name</p></li>
 <li><p>tmux list-keys | grep “send-keys -X cancel”</p></li>
 <li><p>Reorder windows?</p>
-<p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0# In the unlikely case of having no window at index 0, do:</p>
+<p>swap-window -s 3 -t 1 swap-window -t 0 move-window -t 0 # In the unlikely case of having no window at index 0, do:</p>
 <p>bind-key T swap-window -t 0</p></li>
 </ul>
 </section>
@@ -93,8 +100,11 @@ unbind C-b</code></pre>
 <h2>Copy mode</h2>
 <pre><code>    bind-key -T copy-mode-vi &#39;v&#39; send -X begin-selection
     bind-key -T copy-mode-vi &#39;y&#39; send -X copy-selection-and-cancel
-    &lt;C-b&gt; =# show the yank ring</code></pre>
+    &lt;C-b&gt; =</code></pre>
 </section>
+</section>
+<section id="show-the-yank-ring" class="level1">
+<h1>show the yank ring</h1>
 <section id="sessions-windows-panes" class="level2">
 <h2>Sessions, windows, panes</h2>
 <p>Session is a set of windows, plus a notion of which window is current.</p>
@@ -115,9 +125,9 @@ unbind C-b</code></pre>
 <p>tmux attach -t work</p></li>
 <li><p>Detach from a session: <code>C-a d</code>.</p></li>
 <li><p>Kill session</p>
-<p>tmux kill-session -t mysession# Kill my session</p>
-<p>tmux kill-session -a# Kill all sessions</p>
-<p>tmux kill-session -a -t mysession# Kill all sessions but the current</p></li>
+<p>tmux kill-session -t mysession # Kill my session</p>
+<p>tmux kill-session -a # Kill all sessions</p>
+<p>tmux kill-session -a -t mysession # Kill all sessions but the current</p></li>
 <li><p>Switch between sessions: C-a ( previous session C-a ) next session C-a L ‘last’ (previously used) session C-a s choose a session from a list (navigate)</p></li>
 <li><p>Other: C-a $ rename the current session</p></li>
 </ul>
@@ -129,8 +139,8 @@ unbind C-b</code></pre>
 <li><p><strong>Switch</strong> between windows: C-a 0 … 9 switch to window 0, …, 9 C-a p previous window C-a n next window C-a l ‘last’ (previously used) window C-a w choose window from a list C-a M-n next window with a bell, activity or content alert C-a M-p previous such window</p></li>
 <li><p><strong>Rename</strong>, <strong>Kill</strong>: C-a , rename the current window C-a &amp; kill the current window</p></li>
 <li><p><strong>Reorder</strong> (from commmands)</p>
-<p>:swap-window -s 2 -t 1# Reorder window, swap window number 2(src) and 1(dst)</p>
-<p>:swap-window -t -1# Move current window to the left by one position</p></li>
+<p>:swap-window -s 2 -t 1 # Reorder window, swap window number 2(src) and 1(dst)</p>
+<p>:swap-window -t -1 # Move current window to the left by one position</p></li>
 </ul>
 </section>
 <section id="managing-split-panes" class="level2">
@@ -185,7 +195,7 @@ C-a q          display pane numbers for a short while</code></pre>
 </section>
 <section id="copy-mode-1" class="level2">
 <h2>Copy mode</h2>
-<p>:setw -g mode-keys vi# use vi keys in buffer</p>
+<p>:setw -g mode-keys vi # use vi keys in buffer</p>
 <pre><code>Function                vi             emacs
 Back to indentation     ^              M-m
 Clear selection         Escape         C-g
@@ -218,32 +228,60 @@ Start of line           0              C-a
 Start selection         Space          C-Space
 Transpose chars                        C-t</code></pre>
 <p><strong>From and to copy mode</strong>:</p>
-<pre><code>Ctrl + b ]# Paste contents of buffer_0
-
-Ctrl + b [# Enter copy mode
-
-Ctrl + b PgUp# Enter copy mode and scroll one page up
-
-q# Quit mode
-
-Spacebar# Start selection
-
-Esc# Clear selection
-
-Enter# Copy selection</code></pre>
-<p><strong>Copy commands</strong></p>
-<pre><code>:show-buffer# display buffer_0 contents
-
-:capture-pane# copy entire visible contents of pane to a buffer
-
-:list-buffers# Show all buffers
-
-:choose-buffer# Show all buffers and paste selected
-
-:save-buffer buf.txt# Save buffer contents to buf.txt
-
-:delete-buffer -b 1# delete buffer_1</code></pre>
+<pre><code>Ctrl + b ]</code></pre>
 </section>
+</section>
+<section id="paste-contents-of-buffer_0" class="level1">
+<h1>Paste contents of buffer_0</h1>
+<pre><code>Ctrl + b [</code></pre>
+</section>
+<section id="enter-copy-mode" class="level1">
+<h1>Enter copy mode</h1>
+<pre><code>Ctrl + b PgUp</code></pre>
+</section>
+<section id="enter-copy-mode-and-scroll-one-page-up" class="level1">
+<h1>Enter copy mode and scroll one page up</h1>
+<pre><code>q</code></pre>
+</section>
+<section id="quit-mode" class="level1">
+<h1>Quit mode</h1>
+<pre><code>Spacebar</code></pre>
+</section>
+<section id="start-selection" class="level1">
+<h1>Start selection</h1>
+<pre><code>Esc</code></pre>
+</section>
+<section id="clear-selection" class="level1">
+<h1>Clear selection</h1>
+<pre><code>Enter</code></pre>
+</section>
+<section id="copy-selection" class="level1">
+<h1>Copy selection</h1>
+<p><strong>Copy commands</strong></p>
+<pre><code>:show-buffer</code></pre>
+</section>
+<section id="display-buffer_0-contents" class="level1">
+<h1>display buffer_0 contents</h1>
+<pre><code>:capture-pane</code></pre>
+</section>
+<section id="copy-entire-visible-contents-of-pane-to-a-buffer" class="level1">
+<h1>copy entire visible contents of pane to a buffer</h1>
+<pre><code>:list-buffers</code></pre>
+</section>
+<section id="show-all-buffers" class="level1">
+<h1>Show all buffers</h1>
+<pre><code>:choose-buffer</code></pre>
+</section>
+<section id="show-all-buffers-and-paste-selected" class="level1">
+<h1>Show all buffers and paste selected</h1>
+<pre><code>:save-buffer buf.txt</code></pre>
+</section>
+<section id="save-buffer-contents-to-buf.txt" class="level1">
+<h1>Save buffer contents to buf.txt</h1>
+<pre><code>:delete-buffer -b 1</code></pre>
+</section>
+<section id="delete-buffer_1" class="level1">
+<h1>delete buffer_1</h1>
 <section id="other-config-file-settings" class="level2">
 <h2>Other config file settings</h2>
 <p>Force a reload of the config file on C-a r: unbind r bind r source-file ~/.tmux.conf</p>
@@ -314,7 +352,8 @@ unbind C-b </code></pre>
 <li><p>: Enter the tmux command prompt.</p></li>
 <li><p>C-b Send the prefix key (C-b) through to the application.</p></li>
 <li><p>C-z Suspend the tmux client.</p></li>
-<li><p># List all paste buffers.</p></li>
+<li><p><br />
+# List all paste buffers.</p></li>
 <li><p>( Switch the attached client to the previous session.</p></li>
 <li><p>) Switch the attached client to the next session.</p></li>
 <li><p>- Delete the most recently copied buffer of text.</p></li>

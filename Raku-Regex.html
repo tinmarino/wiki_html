@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Raku-Regex.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="section" class="level2">
+<h2>&gt;</h2>
+<p>On <code>my name is toto</code></p>
+<ul>
+<li><code>&lt;?toto&gt;</code> zero lenght <code>&lt;?nn&gt; me</code> -&gt; <code>｢me｣</code></li>
+<li><code>&lt;(</code> and <code>)&gt;</code> : start ant end of match</li>
+<li><code>&lt;?&gt;</code> Always match : succesfully math null string</li>
+<li><code>&lt;!&gt;</code> Always fail</li>
+</ul>
+<pre class="raku"><code>say &#39;abc&#39; ~~ / a &lt;( b )&gt; c/;
+# OUTPUT: «｢b｣␤» 
+say &#39;abc&#39; ~~ / &lt;(a &lt;( b )&gt; c)&gt;/;
+# OUTPUT: «｢bc｣␤»</code></pre>
+<section id="backtrack" class="level3">
+<h3>Backtrack</h3>
+<ul>
+<li><code>a*!</code> Greedy (default <code>a*</code>)</li>
+<li><code>a*?</code> Frugal (alias: minimal or non-greedy)</li>
+<li><code>a*:</code> Ratchet (alias: non-backtracking)</li>
+<li><code>a ** 1..10</code> Numbered quantifier</li>
+</ul>
+</section>
+<section id="vs" class="level3">
+<h3>| Vs ||</h3>
+<ul>
+<li>|| is the alteration sequence, try from first to last</li>
+<li><div class="line-block">is Longest Token Matching alteration, goes for the branch with logest matching first</div></li>
+</ul>
+</section>
+</section>
+</body>
+</html>

@@ -12,6 +12,71 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
   <!--[if lt IE 9]>
@@ -20,8 +85,36 @@
 </head>
 <body>
 <ul>
-<li><a href="Vim-Menu.html">Vim Menu</a></li>
+<li><p><a href="Vim-Menu.html">Vim Menu</a></p></li>
+<li><p><code>:window diffthis</code></p></li>
+<li><p><code>:diffoff!  " &lt;-:window diffoff</code></p></li>
 </ul>
+<section id="python" class="level2">
+<h2>Python</h2>
+<pre class="ŧext"><code>]] Jump forward to begin of next toplevel
+[[ Jump backwards to begin of current toplevel (if already there, previous toplevel)
+]m Jump forward to begin of next method/scope
+[m Jump backwords to begin of previous method/scope
+
+][ Jump forward to end of current toplevel
+[] Jump backward to end of previous of toplevel
+]M Jump forward to end of current method/scope
+[M Jump backward to end of previous method/scope
+
+PYMODE
+==========  ============================
+Key         Command (modes)
+==========  ============================
+[[          Jump to previous class or function (normal, visual, operator)
+]]          Jump to next class or function  (normal, visual, operator)
+[M          Jump to previous class or method (normal, visual, operator)
+]M          Jump to next class or method (normal, visual, operator)
+aC          Select a class. Ex: vaC, daC, yaC, caC (normal, operator)
+iC          Select inner class. Ex: viC, diC, yiC, ciC (normal, operator)
+aM          Select a function or method. Ex: vaM, daM, yaM, caM (normal, operator)
+iM          Select inner func. or method. Ex: viM, diM, yiM, ciM (normal, operator)
+==========  ============================</code></pre>
+</section>
 <section id="snippet" class="level2">
 <h2>Snippet</h2>
 <pre class="language-vim"><code>&quot; Make it AutoScroll
@@ -30,44 +123,58 @@ augroup JupyterTerm
     autocmd TextChanged __jupyter_term__ call cursor(&#39;$&#39;, 0)
 augroup END
 echo getregtype(&#39;a&#39;) &quot; To see if in Visual or v</code></pre>
+<section id="run-lines" class="level3">
+<h3>Run lines</h3>
+<pre class="language-vim"><code>:vnoremap &lt;f2&gt; :&lt;c-u&gt;exe join(getline(&quot;&#39;&lt;&quot;,&quot;&#39;&gt;&quot;),&#39;&lt;bar&gt;&#39;)&lt;cr&gt;
+:execute getline(&quot;.&quot;)</code></pre>
+</section>
 <section id="location-list" class="level3">
 <h3>Location list</h3>
 <p>call setqflist([])</p>
 </section>
 <section id="compile" class="level3">
 <h3>Compile</h3>
-<p>./configure<br />
-–with-features=huge<br />
-–prefix=/usr/local<br />
-–disable-netbeans<br />
-–enable-gui=auto<br />
-<br />
-–enable-cscope<br />
-–enable-fail-if-missing<br />
-–enable-largefile<br />
-–enable-luainterp<br />
-–enable-multibyte<br />
-<br />
-–enable-perlinterp=dynamic<br />
-–enable-python3interp=dynamic<br />
-–with-python3-config-dir=<span class="math inline">(<em>p</em><em>y</em><em>t</em><em>h</em><em>o</em><em>n</em>3 − <em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em> −  − <em>c</em><em>o</em><em>n</em><em>f</em><em>i</em><em>g</em><em>d</em><em>i</em><em>r</em>)  −  − <em>e</em><em>n</em><em>a</em><em>b</em><em>l</em><em>e</em> − <em>r</em><em>u</em><em>b</em><em>y</em><em>i</em><em>n</em><em>t</em><em>e</em><em>r</em><em>p</em> = <em>d</em><em>y</em><em>n</em><em>a</em><em>m</em><em>i</em><em>c</em>  −  − <em>w</em><em>i</em><em>t</em><em>h</em> − <em>r</em><em>u</em><em>b</em><em>y</em> − <em>c</em><em>o</em><em>m</em><em>m</em><em>a</em><em>n</em><em>d</em>=</span>(which ruby)<br />
-–with-luajit<br />
-<br />
-<br />
-–with-compiledby=“Tinmarino”<br />
-</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># Add first line for debug</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="va">CFLAGS=</span><span class="st">&#39;-g -gdwarf4 -DDEBUG -O0 -fno-omit-frame-pointer&#39;</span> <span class="kw">\</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">./configure</span> \</span>
+<span id="cb4-5"><a href="#cb4-5"></a>            --with-features=huge \</span>
+<span id="cb4-6"><a href="#cb4-6"></a>            --prefix=/usr/local \</span>
+<span id="cb4-7"><a href="#cb4-7"></a>            --disable-netbeans \</span>
+<span id="cb4-8"><a href="#cb4-8"></a>            --enable-gui=auto \</span>
+<span id="cb4-9"><a href="#cb4-9"></a>            \</span>
+<span id="cb4-10"><a href="#cb4-10"></a>            --enable-cscope \</span>
+<span id="cb4-11"><a href="#cb4-11"></a>            --enable-fail-if-missing \</span>
+<span id="cb4-12"><a href="#cb4-12"></a>            --enable-largefile \</span>
+<span id="cb4-13"><a href="#cb4-13"></a>            --enable-luainterp \</span>
+<span id="cb4-14"><a href="#cb4-14"></a>            --enable-multibyte \</span>
+<span id="cb4-15"><a href="#cb4-15"></a>            \</span>
+<span id="cb4-16"><a href="#cb4-16"></a>            --enable-perlinterp=dynamic \</span>
+<span id="cb4-17"><a href="#cb4-17"></a>            --enable-python3interp=dynamic \</span>
+<span id="cb4-18"><a href="#cb4-18"></a>            --with-python3-config-dir=<span class="va">$(</span><span class="ex">python3-config</span> --configdir<span class="va">)</span> \</span>
+<span id="cb4-19"><a href="#cb4-19"></a>            --enable-rubyinterp=dynamic \</span>
+<span id="cb4-20"><a href="#cb4-20"></a>            --with-ruby-command=<span class="va">$(</span><span class="fu">which</span> ruby<span class="va">)</span> \</span>
+<span id="cb4-21"><a href="#cb4-21"></a>            --with-luajit \</span>
+<span id="cb4-22"><a href="#cb4-22"></a>            \</span>
+<span id="cb4-23"><a href="#cb4-23"></a>            \</span>
+<span id="cb4-24"><a href="#cb4-24"></a>            --with-compiledby=<span class="st">&quot;Tinmarino&quot;</span> \</span></code></pre></div>
 <p><strong>Notes</strong>: * Cannot make py2 and py3 in debian (choose only one) * Dynamic loading impossible in debian</p>
 </section>
 <section id="match-non-ascii" class="level3">
 <h3>Match non ascii</h3>
 <ul>
-<li><p><code>/[^\x00-\x7F]</code></p></li>
-<li><p><code>[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]</code> ## Prompt press enter</p></li>
-<li><p>For a confirmation, I would use <code>:call confirm('My warning here')</code>; this uses a popup window in GVIM.</p></li>
-<li><p>To wait for <em>any</em> character, you can use <code>:call getchar()</code>.</p></li>
-<li><p>For a confirmation with <kbd>Enter</kbd>, the already mentioned <code>:call input('Press enter to continue')</code></p></li>
+<li><code>/[^\x00-\x7F]</code></li>
+<li><code>[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]</code></li>
 </ul>
 </section>
+</section>
+<section id="prompt-press-enter" class="level2">
+<h2>Prompt press enter</h2>
+<ul>
+<li>For a confirmation, I would use <code>:call confirm('My warning here')</code>; this uses a popup window in GVIM.</li>
+<li>To wait for <em>any</em> character, you can use <code>:call getchar()</code>.</li>
+<li>For a confirmation with <kbd>Enter</kbd>, the already mentioned <code>:call input('Press enter to continue')</code></li>
+</ul>
 </section>
 <section id="debug-timing-function" class="level1">
 <h1>Debug timing function</h1>
@@ -93,15 +200,15 @@ echo &quot;elapsed time:&quot; reltimestr(reltime(start_time))</code></pre>
 </section>
 <section id="youcompleteme-stop" class="level3">
 <h3>YouCompleteMe Stop</h3>
-<pre class="language-vim"><code>call youcompleteme#DisableCursorMovedAutocommands()
-
+<pre class="language-vim"><code>call youcompleteme
+#DisableCursorMovedAutocommands()
 &quot; do your stuff
-call youcompleteme#EnableCursorMovedAutocommands()
-</code></pre>
+call youcompleteme
+#EnableCursorMovedAutocommands()</code></pre>
 </section>
 <section id="exit" class="level3">
 <h3>Exit</h3>
-<p>ZZ</p>
+<p>ZZ ZQ</p>
 </section>
 <section id="jump-matching-endif" class="level3">
 <h3>Jump matching endif</h3>

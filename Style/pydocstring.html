@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>pydocstring.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="coding-utf-8---" class="level1">
+<h1>-<em>- coding: utf-8 -</em>-</h1>
+<p>"""Example Google style docstrings.</p>
+<p>This module demonstrates documentation as specified by the <code>Google Python Style Guide</code>_. Docstrings may extend over multiple lines. Sections are created with a section header and a colon followed by a block of indented text.</p>
+<pre class="text"><code>
+Example:
+    Examples can be given using either the ``Example`` or ``Examples``
+    sections. Sections support any reStructuredText formatting, including
+    literal blocks::
+
+        $ python example_google.py
+
+Section breaks are created by resuming unindented text. Section breaks
+are also implicitly created anytime a new section starts.
+
+Attributes:
+    module_level_variable1 (int): Module level variables may be documented in
+        either the ``Attributes`` section of the module docstring, or in an
+        inline docstring immediately following the variable.
+
+        Either form is acceptable, but the two should not be mixed. Choose
+        one convention to document module level variables and be consistent
+        with it.
+
+Todo:
+    * For module TODOs
+    * You have to also use ``sphinx.ext.todo`` extension
+
+.. _Google Python Style Guide:
+   http://google.github.io/styleguide/pyguide.html
+
+&quot;&quot;&quot;
+
+module_level_variable1 = 12345
+
+module_level_variable2 = 98765
+&quot;&quot;&quot;int: Module level variable documented inline.
+
+The docstring may span multiple lines. The type may optionally be specified
+on the first line, separated by a colon.
+&quot;&quot;&quot;
+</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">def</span> function_with_types_in_docstring(param1, param2):</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="co">&quot;&quot;&quot;Example function with types documented in the docstring.</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">    `PEP 484`_ type annotations are supported. If attribute, parameter, and</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">    return types are annotated according to `PEP 484`_, they do not need to be</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">    included in the docstring:</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">    Args:</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">        param1 (int): The first parameter.</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">        param2 (str): The second parameter.</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">    Returns:</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">        bool: The return value. True for success, False otherwise.</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">    .. _PEP 484:</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">        https://www.python.org/dev/peps/pep-0484/</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a></span>
+<span id="cb2-21"><a href="#cb2-21"></a></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="kw">def</span> function_with_pep484_type_annotations(param1: <span class="bu">int</span>, param2: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="co">&quot;&quot;&quot;Example function with PEP 484 type annotations.</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">    Args:</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co">        param1: The first parameter.</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">        param2: The second parameter.</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">    Returns:</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">        The return value. True for success, False otherwise.</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a></span>
+<span id="cb2-34"><a href="#cb2-34"></a></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="kw">def</span> module_level_function(param1, param2<span class="op">=</span><span class="va">None</span>, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb2-36"><a href="#cb2-36"></a>    <span class="co">&quot;&quot;&quot;This is an example of a module level function.</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="co">    Function parameters should be documented in the ``Args`` section. The name</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="co">    of each parameter is required. The type and description of each parameter</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co">    is optional, but should be included if not obvious.</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="co">    If \*args or \*\*kwargs are accepted,</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="co">    they should be listed as ``*args`` and ``**kwargs``.</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a></span>
+<span id="cb2-45"><a href="#cb2-45"></a><span class="co">    The format for a parameter is::</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="co">        name (type): description</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="co">            The description may span multiple lines. Following</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="co">            lines should be indented. The &quot;(type)&quot; is optional.</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a></span>
+<span id="cb2-51"><a href="#cb2-51"></a><span class="co">            Multiple paragraphs are supported in parameter</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="co">            descriptions.</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a></span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="co">    Args:</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="co">        param1 (int): The first parameter.</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="co">        param2 (:obj:`str`, optional): The second parameter. Defaults to None.</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="co">            Second line of description should be indented.</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="co">        *args: Variable length argument list.</span></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="co">        **kwargs: Arbitrary keyword arguments.</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a></span>
+<span id="cb2-61"><a href="#cb2-61"></a><span class="co">    Returns:</span></span>
+<span id="cb2-62"><a href="#cb2-62"></a><span class="co">        bool: True if successful, False otherwise.</span></span>
+<span id="cb2-63"><a href="#cb2-63"></a></span>
+<span id="cb2-64"><a href="#cb2-64"></a><span class="co">        The return type is optional and may be specified at the beginning of</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a><span class="co">        the ``Returns`` section followed by a colon.</span></span>
+<span id="cb2-66"><a href="#cb2-66"></a></span>
+<span id="cb2-67"><a href="#cb2-67"></a><span class="co">        The ``Returns`` section may span multiple lines and paragraphs.</span></span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="co">        Following lines should be indented to match the first line.</span></span>
+<span id="cb2-69"><a href="#cb2-69"></a></span>
+<span id="cb2-70"><a href="#cb2-70"></a><span class="co">        The ``Returns`` section supports any reStructuredText formatting,</span></span>
+<span id="cb2-71"><a href="#cb2-71"></a><span class="co">        including literal blocks::</span></span>
+<span id="cb2-72"><a href="#cb2-72"></a></span>
+<span id="cb2-73"><a href="#cb2-73"></a><span class="co">            {</span></span>
+<span id="cb2-74"><a href="#cb2-74"></a><span class="co">                &#39;param1&#39;: param1,</span></span>
+<span id="cb2-75"><a href="#cb2-75"></a><span class="co">                &#39;param2&#39;: param2</span></span>
+<span id="cb2-76"><a href="#cb2-76"></a><span class="co">            }</span></span>
+<span id="cb2-77"><a href="#cb2-77"></a></span>
+<span id="cb2-78"><a href="#cb2-78"></a><span class="co">    Raises:</span></span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="co">        AttributeError: The ``Raises`` section is a list of all exceptions</span></span>
+<span id="cb2-80"><a href="#cb2-80"></a><span class="co">            that are relevant to the interface.</span></span>
+<span id="cb2-81"><a href="#cb2-81"></a><span class="co">        ValueError: If `param2` is equal to `param1`.</span></span>
+<span id="cb2-82"><a href="#cb2-82"></a></span>
+<span id="cb2-83"><a href="#cb2-83"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-84"><a href="#cb2-84"></a>    <span class="cf">if</span> param1 <span class="op">==</span> param2:</span>
+<span id="cb2-85"><a href="#cb2-85"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&#39;param1 may not be equal to param2&#39;</span>)</span>
+<span id="cb2-86"><a href="#cb2-86"></a>    <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb2-87"><a href="#cb2-87"></a></span>
+<span id="cb2-88"><a href="#cb2-88"></a></span>
+<span id="cb2-89"><a href="#cb2-89"></a><span class="kw">def</span> example_generator(n):</span>
+<span id="cb2-90"><a href="#cb2-90"></a>    <span class="co">&quot;&quot;&quot;Generators have a ``Yields`` section instead of a ``Returns`` section.</span></span>
+<span id="cb2-91"><a href="#cb2-91"></a></span>
+<span id="cb2-92"><a href="#cb2-92"></a><span class="co">    Args:</span></span>
+<span id="cb2-93"><a href="#cb2-93"></a><span class="co">        n (int): The upper limit of the range to generate, from 0 to `n` - 1.</span></span>
+<span id="cb2-94"><a href="#cb2-94"></a></span>
+<span id="cb2-95"><a href="#cb2-95"></a><span class="co">    Yields:</span></span>
+<span id="cb2-96"><a href="#cb2-96"></a><span class="co">        int: The next number in the range of 0 to `n` - 1.</span></span>
+<span id="cb2-97"><a href="#cb2-97"></a></span>
+<span id="cb2-98"><a href="#cb2-98"></a><span class="co">    Examples:</span></span>
+<span id="cb2-99"><a href="#cb2-99"></a><span class="co">        Examples should be written in doctest format, and should illustrate how</span></span>
+<span id="cb2-100"><a href="#cb2-100"></a><span class="co">        to use the function.</span></span>
+<span id="cb2-101"><a href="#cb2-101"></a></span>
+<span id="cb2-102"><a href="#cb2-102"></a><span class="co">        &gt;&gt;&gt; print([i for i in example_generator(4)])</span></span>
+<span id="cb2-103"><a href="#cb2-103"></a><span class="co">        [0, 1, 2, 3]</span></span>
+<span id="cb2-104"><a href="#cb2-104"></a></span>
+<span id="cb2-105"><a href="#cb2-105"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-106"><a href="#cb2-106"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb2-107"><a href="#cb2-107"></a>        <span class="cf">yield</span> i</span>
+<span id="cb2-108"><a href="#cb2-108"></a></span>
+<span id="cb2-109"><a href="#cb2-109"></a></span>
+<span id="cb2-110"><a href="#cb2-110"></a><span class="kw">class</span> ExampleError(<span class="pp">Exception</span>):</span>
+<span id="cb2-111"><a href="#cb2-111"></a>    <span class="co">&quot;&quot;&quot;Exceptions are documented in the same way as classes.</span></span>
+<span id="cb2-112"><a href="#cb2-112"></a></span>
+<span id="cb2-113"><a href="#cb2-113"></a><span class="co">    The __init__ method may be documented in either the class level</span></span>
+<span id="cb2-114"><a href="#cb2-114"></a><span class="co">    docstring, or as a docstring on the __init__ method itself.</span></span>
+<span id="cb2-115"><a href="#cb2-115"></a></span>
+<span id="cb2-116"><a href="#cb2-116"></a><span class="co">    Either form is acceptable, but the two should not be mixed. Choose one</span></span>
+<span id="cb2-117"><a href="#cb2-117"></a><span class="co">    convention to document the __init__ method and be consistent with it.</span></span>
+<span id="cb2-118"><a href="#cb2-118"></a></span>
+<span id="cb2-119"><a href="#cb2-119"></a><span class="co">    Note:</span></span>
+<span id="cb2-120"><a href="#cb2-120"></a><span class="co">        Do not include the `self` parameter in the ``Args`` section.</span></span>
+<span id="cb2-121"><a href="#cb2-121"></a></span>
+<span id="cb2-122"><a href="#cb2-122"></a><span class="co">    Args:</span></span>
+<span id="cb2-123"><a href="#cb2-123"></a><span class="co">        msg (str): Human readable string describing the exception.</span></span>
+<span id="cb2-124"><a href="#cb2-124"></a><span class="co">        code (:obj:`int`, optional): Error code.</span></span>
+<span id="cb2-125"><a href="#cb2-125"></a></span>
+<span id="cb2-126"><a href="#cb2-126"></a><span class="co">    Attributes:</span></span>
+<span id="cb2-127"><a href="#cb2-127"></a><span class="co">        msg (str): Human readable string describing the exception.</span></span>
+<span id="cb2-128"><a href="#cb2-128"></a><span class="co">        code (int): Exception error code.</span></span>
+<span id="cb2-129"><a href="#cb2-129"></a></span>
+<span id="cb2-130"><a href="#cb2-130"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-131"><a href="#cb2-131"></a></span>
+<span id="cb2-132"><a href="#cb2-132"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, msg, code):</span>
+<span id="cb2-133"><a href="#cb2-133"></a>        <span class="va">self</span>.msg <span class="op">=</span> msg</span>
+<span id="cb2-134"><a href="#cb2-134"></a>        <span class="va">self</span>.code <span class="op">=</span> code</span>
+<span id="cb2-135"><a href="#cb2-135"></a></span>
+<span id="cb2-136"><a href="#cb2-136"></a></span>
+<span id="cb2-137"><a href="#cb2-137"></a><span class="kw">class</span> ExampleClass(<span class="bu">object</span>):</span>
+<span id="cb2-138"><a href="#cb2-138"></a>    <span class="co">&quot;&quot;&quot;The summary line for a class docstring should fit on one line.</span></span>
+<span id="cb2-139"><a href="#cb2-139"></a></span>
+<span id="cb2-140"><a href="#cb2-140"></a><span class="co">    If the class has public attributes, they may be documented here</span></span>
+<span id="cb2-141"><a href="#cb2-141"></a><span class="co">    in an ``Attributes`` section and follow the same formatting as a</span></span>
+<span id="cb2-142"><a href="#cb2-142"></a><span class="co">    function&#39;s ``Args`` section. Alternatively, attributes may be documented</span></span>
+<span id="cb2-143"><a href="#cb2-143"></a><span class="co">    inline with the attribute&#39;s declaration (see __init__ method below).</span></span>
+<span id="cb2-144"><a href="#cb2-144"></a></span>
+<span id="cb2-145"><a href="#cb2-145"></a><span class="co">    Properties created with the ``@property`` decorator should be documented</span></span>
+<span id="cb2-146"><a href="#cb2-146"></a><span class="co">    in the property&#39;s getter method.</span></span>
+<span id="cb2-147"><a href="#cb2-147"></a></span>
+<span id="cb2-148"><a href="#cb2-148"></a><span class="co">    Attributes:</span></span>
+<span id="cb2-149"><a href="#cb2-149"></a><span class="co">        attr1 (str): Description of `attr1`.</span></span>
+<span id="cb2-150"><a href="#cb2-150"></a><span class="co">        attr2 (:obj:`int`, optional): Description of `attr2`.</span></span>
+<span id="cb2-151"><a href="#cb2-151"></a></span>
+<span id="cb2-152"><a href="#cb2-152"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb2-153"><a href="#cb2-153"></a></span>
+<span id="cb2-154"><a href="#cb2-154"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, param1, param2, param3):</span>
+<span id="cb2-155"><a href="#cb2-155"></a>        <span class="co">&quot;&quot;&quot;Example of docstring on the __init__ method.</span></span>
+<span id="cb2-156"><a href="#cb2-156"></a></span>
+<span id="cb2-157"><a href="#cb2-157"></a><span class="co">        The __init__ method may be documented in either the class level</span></span>
+<span id="cb2-158"><a href="#cb2-158"></a><span class="co">        docstring, or as a docstring on the __init__ method itself.</span></span>
+<span id="cb2-159"><a href="#cb2-159"></a></span>
+<span id="cb2-160"><a href="#cb2-160"></a><span class="co">        Either form is acceptable, but the two should not be mixed. Choose one</span></span>
+<span id="cb2-161"><a href="#cb2-161"></a><span class="co">        convention to document the __init__ method and be consistent with it.</span></span>
+<span id="cb2-162"><a href="#cb2-162"></a></span>
+<span id="cb2-163"><a href="#cb2-163"></a><span class="co">        Note:</span></span>
+<span id="cb2-164"><a href="#cb2-164"></a><span class="co">            Do not include the `self` parameter in the ``Args`` section.</span></span>
+<span id="cb2-165"><a href="#cb2-165"></a></span>
+<span id="cb2-166"><a href="#cb2-166"></a><span class="co">        Args:</span></span>
+<span id="cb2-167"><a href="#cb2-167"></a><span class="co">            param1 (str): Description of `param1`.</span></span>
+<span id="cb2-168"><a href="#cb2-168"></a><span class="co">            param2 (:obj:`int`, optional): Description of `param2`. Multiple</span></span>
+<span id="cb2-169"><a href="#cb2-169"></a><span class="co">                lines are supported.</span></span>
+<span id="cb2-170"><a href="#cb2-170"></a><span class="co">            param3 (:obj:`list` of :obj:`str`): Description of `param3`.</span></span>
+<span id="cb2-171"><a href="#cb2-171"></a></span>
+<span id="cb2-172"><a href="#cb2-172"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-173"><a href="#cb2-173"></a>        <span class="va">self</span>.attr1 <span class="op">=</span> param1</span>
+<span id="cb2-174"><a href="#cb2-174"></a>        <span class="va">self</span>.attr2 <span class="op">=</span> param2</span>
+<span id="cb2-175"><a href="#cb2-175"></a>        <span class="va">self</span>.attr3 <span class="op">=</span> param3</span>
+<span id="cb2-176"><a href="#cb2-176"></a><span class="co">#: Doc comment *inline* with attribute</span></span>
+<span id="cb2-177"><a href="#cb2-177"></a></span>
+<span id="cb2-178"><a href="#cb2-178"></a></span>
+<span id="cb2-179"><a href="#cb2-179"></a><span class="co">#: list of str: Doc comment *before* attribute, with type specified</span></span>
+<span id="cb2-180"><a href="#cb2-180"></a>        <span class="va">self</span>.attr4 <span class="op">=</span> [<span class="st">&#39;attr4&#39;</span>]</span>
+<span id="cb2-181"><a href="#cb2-181"></a></span>
+<span id="cb2-182"><a href="#cb2-182"></a>        <span class="va">self</span>.attr5 <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-183"><a href="#cb2-183"></a>        <span class="co">&quot;&quot;&quot;str: Docstring *after* attribute, with type specified.&quot;&quot;&quot;</span></span>
+<span id="cb2-184"><a href="#cb2-184"></a></span>
+<span id="cb2-185"><a href="#cb2-185"></a>    <span class="at">@property</span></span>
+<span id="cb2-186"><a href="#cb2-186"></a>    <span class="kw">def</span> readonly_property(<span class="va">self</span>):</span>
+<span id="cb2-187"><a href="#cb2-187"></a>        <span class="co">&quot;&quot;&quot;str: Properties should be documented in their getter method.&quot;&quot;&quot;</span></span>
+<span id="cb2-188"><a href="#cb2-188"></a>        <span class="cf">return</span> <span class="st">&#39;readonly_property&#39;</span></span>
+<span id="cb2-189"><a href="#cb2-189"></a></span>
+<span id="cb2-190"><a href="#cb2-190"></a>    <span class="at">@property</span></span>
+<span id="cb2-191"><a href="#cb2-191"></a>    <span class="kw">def</span> readwrite_property(<span class="va">self</span>):</span>
+<span id="cb2-192"><a href="#cb2-192"></a>        <span class="co">&quot;&quot;&quot;:obj:`list` of :obj:`str`: Properties with both a getter and setter</span></span>
+<span id="cb2-193"><a href="#cb2-193"></a><span class="co">        should only be documented in their getter method.</span></span>
+<span id="cb2-194"><a href="#cb2-194"></a></span>
+<span id="cb2-195"><a href="#cb2-195"></a><span class="co">        If the setter method contains notable behavior, it should be</span></span>
+<span id="cb2-196"><a href="#cb2-196"></a><span class="co">        mentioned here.</span></span>
+<span id="cb2-197"><a href="#cb2-197"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-198"><a href="#cb2-198"></a>        <span class="cf">return</span> [<span class="st">&#39;readwrite_property&#39;</span>]</span>
+<span id="cb2-199"><a href="#cb2-199"></a></span>
+<span id="cb2-200"><a href="#cb2-200"></a>    <span class="at">@readwrite_property.setter</span></span>
+<span id="cb2-201"><a href="#cb2-201"></a>    <span class="kw">def</span> readwrite_property(<span class="va">self</span>, value):</span>
+<span id="cb2-202"><a href="#cb2-202"></a>        value</span>
+<span id="cb2-203"><a href="#cb2-203"></a></span>
+<span id="cb2-204"><a href="#cb2-204"></a>    <span class="kw">def</span> example_method(<span class="va">self</span>, param1, param2):</span>
+<span id="cb2-205"><a href="#cb2-205"></a>        <span class="co">&quot;&quot;&quot;Class methods are similar to regular functions.</span></span>
+<span id="cb2-206"><a href="#cb2-206"></a></span>
+<span id="cb2-207"><a href="#cb2-207"></a><span class="co">        Note:</span></span>
+<span id="cb2-208"><a href="#cb2-208"></a><span class="co">            Do not include the `self` parameter in the ``Args`` section.</span></span>
+<span id="cb2-209"><a href="#cb2-209"></a></span>
+<span id="cb2-210"><a href="#cb2-210"></a><span class="co">        Args:</span></span>
+<span id="cb2-211"><a href="#cb2-211"></a><span class="co">            param1: The first parameter.</span></span>
+<span id="cb2-212"><a href="#cb2-212"></a><span class="co">            param2: The second parameter.</span></span>
+<span id="cb2-213"><a href="#cb2-213"></a></span>
+<span id="cb2-214"><a href="#cb2-214"></a><span class="co">        Returns:</span></span>
+<span id="cb2-215"><a href="#cb2-215"></a><span class="co">            True if successful, False otherwise.</span></span>
+<span id="cb2-216"><a href="#cb2-216"></a></span>
+<span id="cb2-217"><a href="#cb2-217"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-218"><a href="#cb2-218"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb2-219"><a href="#cb2-219"></a></span>
+<span id="cb2-220"><a href="#cb2-220"></a>    <span class="kw">def</span> __special__(<span class="va">self</span>):</span>
+<span id="cb2-221"><a href="#cb2-221"></a>        <span class="co">&quot;&quot;&quot;By default special members with docstrings are not included.</span></span>
+<span id="cb2-222"><a href="#cb2-222"></a></span>
+<span id="cb2-223"><a href="#cb2-223"></a><span class="co">        Special members are any methods or attributes that start with and</span></span>
+<span id="cb2-224"><a href="#cb2-224"></a><span class="co">        end with a double underscore. Any special member with a docstring</span></span>
+<span id="cb2-225"><a href="#cb2-225"></a><span class="co">        will be included in the output, if</span></span>
+<span id="cb2-226"><a href="#cb2-226"></a><span class="co">        ``napoleon_include_special_with_doc`` is set to True.</span></span>
+<span id="cb2-227"><a href="#cb2-227"></a></span>
+<span id="cb2-228"><a href="#cb2-228"></a><span class="co">        This behavior can be enabled by changing the following setting in</span></span>
+<span id="cb2-229"><a href="#cb2-229"></a><span class="co">        Sphinx&#39;s conf.py::</span></span>
+<span id="cb2-230"><a href="#cb2-230"></a></span>
+<span id="cb2-231"><a href="#cb2-231"></a><span class="co">            napoleon_include_special_with_doc = True</span></span>
+<span id="cb2-232"><a href="#cb2-232"></a></span>
+<span id="cb2-233"><a href="#cb2-233"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-234"><a href="#cb2-234"></a>        <span class="cf">pass</span></span>
+<span id="cb2-235"><a href="#cb2-235"></a></span>
+<span id="cb2-236"><a href="#cb2-236"></a>    <span class="kw">def</span> __special_without_docstring__(<span class="va">self</span>):</span>
+<span id="cb2-237"><a href="#cb2-237"></a>        <span class="cf">pass</span></span>
+<span id="cb2-238"><a href="#cb2-238"></a></span>
+<span id="cb2-239"><a href="#cb2-239"></a>    <span class="kw">def</span> _private(<span class="va">self</span>):</span>
+<span id="cb2-240"><a href="#cb2-240"></a>        <span class="co">&quot;&quot;&quot;By default private members are not included.</span></span>
+<span id="cb2-241"><a href="#cb2-241"></a></span>
+<span id="cb2-242"><a href="#cb2-242"></a><span class="co">        Private members are any methods or attributes that start with an</span></span>
+<span id="cb2-243"><a href="#cb2-243"></a><span class="co">        underscore and are *not* special. By default they are not included</span></span>
+<span id="cb2-244"><a href="#cb2-244"></a><span class="co">        in the output.</span></span>
+<span id="cb2-245"><a href="#cb2-245"></a></span>
+<span id="cb2-246"><a href="#cb2-246"></a><span class="co">        This behavior can be changed such that private members *are* included</span></span>
+<span id="cb2-247"><a href="#cb2-247"></a><span class="co">        by changing the following setting in Sphinx&#39;s conf.py::</span></span>
+<span id="cb2-248"><a href="#cb2-248"></a></span>
+<span id="cb2-249"><a href="#cb2-249"></a><span class="co">            napoleon_include_private_with_doc = True</span></span>
+<span id="cb2-250"><a href="#cb2-250"></a></span>
+<span id="cb2-251"><a href="#cb2-251"></a><span class="co">        &quot;&quot;&quot;</span></span>
+<span id="cb2-252"><a href="#cb2-252"></a>        <span class="cf">pass</span></span>
+<span id="cb2-253"><a href="#cb2-253"></a></span>
+<span id="cb2-254"><a href="#cb2-254"></a>    <span class="kw">def</span> _private_without_docstring(<span class="va">self</span>):</span>
+<span id="cb2-255"><a href="#cb2-255"></a>        <span class="cf">pass</span></span></code></pre></div>
+</section>
+</body>
+</html>

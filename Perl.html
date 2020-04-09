@@ -4,34 +4,28 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Perl.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Perl.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <ul>
 <li><a href="Perl-Perldoc.html">Perldoc</a></li>
-<li><a href="Perl-One_Liners.html">One_Liners</a></li>
-<li><a href="Perl-Programming-Note.html">Perl Programming Note</a></li>
-<li><a href="Perl-Japh.html">Japh</a> : Just Another Perl Hacker</li>
-</ul>
-<section id="old" class="level1">
-<h1>Old</h1>
-<ul>
-<li><a href="Perl-Structure.html">If &amp; For &amp; Sub = Structures</a></li>
-<li><a href="Perl-Array.html">List &amp; Hash = Arrays</a></li>
-<li><a href="Perl-Regexp-Downloaded.html">/ = Regexp (Downloaded)</a></li>
-<li><a href="Perl-Tuto-France.html">Tutorial France Anger</a></li>
 <li><a href="Perl-Cheatsheet_one_page.html">Cheatsheet_one_page</a></li>
 <li><a href="Perl-One_Liners_old.html">Perl One_Liners_old</a></li>
 <li><a href="Perl-Snippet.html">Perl Snippet</a></li>
+<li><a href="Perl_Old_Reference.html">Perl_Old_Reference</a></li>
 </ul>
-</section>
 <section id="tips" class="level1">
 <h1>Tips</h1>
 <ul>
@@ -58,7 +52,7 @@
 </ul></li>
 </ul>
 <p>my <span class="math inline">$foo = "zombies are the bombies";if ($</span>foo =~ / zombie # sorry pirates /x ) { print “urg. brains.”;} /x modifier for pretty regzx print</p>
-<p>Even without the /x modifier, you can enclose comments in (?# … ):my $foo = “zombies are the bombies”;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print “urg. brains.”;}</p>
+<p>Even without the /x modifier, you can enclose comments in (? # … ):my $foo = “zombies are the bombies”;if ( $foo =~ /zombie(?# sorry pirates)/ ) { print “urg. brains.”;}</p>
 <p>Add to path use lib qw(.); # Will add your cwd to <span class="citation" data-cites="INC">@INC</span> use lib qw(. /path/to/my/home /some/other/dir); # will add those dirs perl -I/path/to/include script</p>
 <p>Get package path perl -MTime::HiRes -e ‘print $INC{“Time/HiRes.pm”}’ or perldoc -l Time::HiRes cpan -D Time::HiRes</p>
 <p>How do I completely remove an element from an array?</p>
@@ -66,12 +60,15 @@
 ```
 @files = qw(/foo/bar/file.pdf /foo/baz/file2.jpg);
 
-foreach $file (@files) {
-        # exclude any files whose full name contains the string &#39;bar&#39;
-        next if $file =~ /bar/;
-
-        # print all other files
-        print &quot;$file\n&quot;;
+foreach $file (@files) {</code></pre>
+</section>
+<section id="exclude-any-files-whose-full-name-contains-the-string-bar" class="level1">
+<h1>exclude any files whose full name contains the string ‘bar’</h1>
+<pre><code>        next if $file =~ /bar/;</code></pre>
+</section>
+<section id="print-all-other-files" class="level1">
+<h1>print all other files</h1>
+<pre><code>        print &quot;$file\n&quot;;
 }
 ```</code></pre>
 <p>Pdl</p>
@@ -90,11 +87,17 @@ perldoc perldebguts</code></pre>
 <pre><code>export PERL5LIB=/home/foobar/code
 use lib &#39;/home/foobar/code&#39;;
 use My::Module;
-perl -I /home/foobar/code script.pl  # That is a capital i like include</code></pre>
+perl -I /home/foobar/code script.pl</code></pre>
+</section>
+<section id="that-is-a-capital-i-like-include" class="level1">
+<h1>That is a capital i like include</h1>
 <p>Fork Bomb</p>
 <pre><code>perl -e &quot;fork while fork&quot; &amp;</code></pre>
 <p>Console</p>
-<pre><code>perl -de1 # debugging a trivial programe</code></pre>
+<pre><code>perl -de1</code></pre>
+</section>
+<section id="debugging-a-trivial-programe" class="level1">
+<h1>debugging a trivial programe</h1>
 <p>Write multiple line regex<br />
 * Delete the space, then type CtrlV, CtrlJ.<br />
 Then Return.<br />
@@ -145,7 +148,7 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 </tr>
 <tr class="even">
 <td></td>
-<td><code>perl -i.bak -ne 'print unless /^#/' script.sh</code></td>
+<td><code>perl -i.bak -ne 'print unless /^ #/' script.sh</code></td>
 </tr>
 <tr class="odd">
 <td>-a</td>
@@ -298,7 +301,7 @@ The Ctrl-V prevents the shell interpreting the next character (newline) literall
 <section id="links-maybe-to-parse-and-add" class="level1">
 <h1>Links (maybe to parse and add)</h1>
 <ul>
-<li>Readen from France/Anger http://www.info.univ-angers.fr/~gh/tuteurs/tutperl.htm#dataty</li>
+<li>Readen from France/Anger http://www.info.univ-angers.fr/~gh/tuteurs/tutperl.htm #dataty</li>
 </ul>
 </section>
 </body>

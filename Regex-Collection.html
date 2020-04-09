@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Regex-Collection.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>Don’t forget to escape  in java</p>
+<section id="notes" class="level3">
+<h3>Notes</h3>
+<section id="include-newline-linebreak-in-dot-." class="level4">
+<h4>Include newline (linebreak) in dot (.)</h4>
+<ol type="1">
+<li>Pattern.DOTALL</li>
+<li>(?s) # “single-line” mode</li>
+<li>[]</li>
+<li>(.|) or (.|| # Bad: expensive</li>
+</ol>
+<p>Note: (?m) multiline</p>
+</section>
+<section id="some-unfamous-atoms" class="level4">
+<h4>Some unfamous atoms</h4>
+<ul>
+<li><code>\p{L}</code> which means “any Unicode letter” good substitution for <code>[a-zA-Z]</code> or <code>[[:alpha:]]</code></li>
+</ul>
+</section>
+</section>
+<section id="cool" class="level3">
+<h3>Cool</h3>
+<ul>
+<li><strong>Ip address:</strong> <code>((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\.|$)){4}</code></li>
+<li><strong>Ipv6:</strong> <code>(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))</code></li>
+<li><strong>C comment:</strong> <code>(?s)(?m)(//.*?$|/\*.*?\*/)</code></li>
+<li><strong>Email address:</strong> <code>\b\S+@\S+\.\S+\b</code></li>
+</ul>
+</section>
+<section id="ipv6" class="level3">
+<h3>IPV6</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">my</span> <span class="dt">$r_ipv6</span> = <span class="kw">qr/</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){7,7}[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}|</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># 1:2:3:4:5:6:7:8</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,7}</span><span class="ot">:</span><span class="ch">|</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># 1::                              1:2:3:4:5:6:7::</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,6}</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}|</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># 1::8             1:2:3:4:5:6::8  1:2:3:4:5:6::8</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,5}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,2}|</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># 1::7:8           1:2:3:4:5::7:8  1:2:3:4:5::8</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,4}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,3}|</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># 1::6:7:8         1:2:3:4::6:7:8  1:2:3:4::8</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,3}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,4}|</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co"># 1::5:6:7:8       1:2:3::5:6:7:8  1:2:3::8</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,2}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,5}|</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># 1::4:5:6:7:8     1:2::4:5:6:7:8  1:2::8</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="ot">  </span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">((</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,6})|</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co"># 1::3:4:5:6:7:8   1::3:4:5:6:7:8  1::8  </span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="ot">  :</span><span class="ch">((</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,7}|</span><span class="ot">:</span><span class="ch">)|</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="co"># ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8 ::8       ::     </span></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="ot">  fe80:</span><span class="ch">(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{0,4}){0,4}</span><span class="ot">%</span><span class="ch">[</span><span class="bn">0-9a-zA-Z</span><span class="ch">]{1,}|</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="co"># fe80::7:8%eth0   fe80::7:8%1     (link-local IPv6 addresses with zone index)</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="ot">  ::</span><span class="ch">(</span><span class="ot">ffff</span><span class="ch">(</span><span class="ot">:0</span><span class="ch">{1,4}){0,1}</span><span class="ot">:</span><span class="ch">){0,1}</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="ot">  </span><span class="ch">((</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span><span class="ot">\.</span><span class="ch">){3,3}</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="ot">  </span><span class="ch">(</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])|</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co"># ::255.255.255.255   ::ffff:255.255.255.255  ::ffff:0:255.255.255.255  (IPv4-mapped IPv6 addresses and IPv4-translated addresses)</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,4}</span><span class="ot">:</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="ot">  </span><span class="ch">((</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span><span class="ot">\.</span><span class="ch">){3,3}</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a><span class="ot">  </span><span class="ch">(</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="co"># 2001:db8:3:4::192.0.2.33  64:ff9b::192.0.2.33 (IPv4-Embedded IPv6 Address)</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="ot">  </span><span class="kw">/x</span>;</span></code></pre></div>
+</section>
+<section id="email" class="level3">
+<h3>Email</h3>
+<p>From: https://stackoverflow.com/questions/201323/how-to-validate-an-email-address-using-a-regular-expression</p>
+<pre class="text"><code>/^\S+@\S+\.\S+$/</code></pre>
+<pre class="text"><code>\w+([-+.&#39;]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*</code></pre>
+<pre class="text"><code>[a-zA-Z0-9.!
+#$%&amp;&#39;*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9].html)?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9].html)?)*</code></pre>
+<pre class="text"><code>(?:[a-z0-9!
+#$%&amp;&#39;*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;&#39;*+/=?^_`{|}~-]+)*|&quot;(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*&quot;)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9].html)?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9].html)?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">/</span><span class="ch">(?(DEFINE)</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">address&gt;         </span><span class="ch">(?&amp;mailbox)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;group))</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">mailbox&gt;         </span><span class="ch">(?&amp;name_addr)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;addr_spec))</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">name_addr&gt;       </span><span class="ch">(?&amp;display_name)?</span><span class="ot"> </span><span class="ch">(?&amp;angle_addr))</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">angle_addr&gt;      </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> &lt; </span><span class="ch">(?&amp;addr_spec)</span><span class="ot"> &gt; </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">group&gt;           </span><span class="ch">(?&amp;display_name)</span><span class="ot"> : </span><span class="ch">(?:(?&amp;mailbox_list)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;CFWS))?</span><span class="ot"> ;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="ot">                                          </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">display_name&gt;    </span><span class="ch">(?&amp;phrase))</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">mailbox_list&gt;    </span><span class="ch">(?&amp;mailbox)</span><span class="ot"> </span><span class="ch">(?:</span><span class="ot"> , </span><span class="ch">(?&amp;mailbox))*)</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">addr_spec&gt;       </span><span class="ch">(?&amp;local_part)</span><span class="ot"> \@ </span><span class="ch">(?&amp;domain))</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">local_part&gt;      </span><span class="ch">(?&amp;dot_atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_string))</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">domain&gt;          </span><span class="ch">(?&amp;dot_atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;domain_literal))</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">domain_literal&gt;  </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> \[ </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;dcontent))*</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="ot">                                 \] </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">dcontent&gt;        </span><span class="ch">(?&amp;dtext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair))</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">dtext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21-\x5a\x5e-\x7e</span><span class="ch">])</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">atext&gt;           </span><span class="ch">(?&amp;ALPHA)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;DIGIT)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">!\</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="bn">#\$%&amp;&#39;*+-\/=?</span><span class="ch">^</span><span class="bn">_`{|}~</span><span class="ch">])</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">atom&gt;            </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;atext)+</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">dot_atom&gt;        </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;dot_atom_text)</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">dot_atom_text&gt;   </span><span class="ch">(?&amp;atext)+</span><span class="ot"> </span><span class="ch">(?:</span><span class="ot"> \. </span><span class="ch">(?&amp;atext)+)*)</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">text&gt;            </span><span class="ch">[</span><span class="bn">\x01-\x09\x0b\x0c\x0e-\x7f</span><span class="ch">])</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">quoted_pair&gt;     \\ </span><span class="ch">(?&amp;text))</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">qtext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21\x23-\x5b\x5d-\x7e</span><span class="ch">])</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">qcontent&gt;        </span><span class="ch">(?&amp;qtext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair))</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">quoted_string&gt;   </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;DQUOTE)</span><span class="ot"> </span><span class="ch">(?:(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;qcontent))*</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="ot">                        </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;DQUOTE)</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">word&gt;            </span><span class="ch">(?&amp;atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_string))</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">phrase&gt;          </span><span class="ch">(?&amp;word)+)</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a></span>
+<span id="cb6-36"><a href="#cb6-36"></a></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co"># Folding white space</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">FWS&gt;             </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;WSP)*</span><span class="ot"> </span><span class="ch">(?&amp;CRLF))?</span><span class="ot"> </span><span class="ch">(?&amp;WSP)+)</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">ctext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21-\x27\x2a-\x5b\x5d-\x7e</span><span class="ch">])</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">ccontent&gt;        </span><span class="ch">(?&amp;ctext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;comment))</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">comment&gt;         \( </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;ccontent))*</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> \) </span><span class="ch">)</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">CFWS&gt;            </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;comment))*</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="ot">                       </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?:(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;comment))</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;FWS)))</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a></span>
+<span id="cb6-45"><a href="#cb6-45"></a></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co"># No whitespace control</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">NO_WS_CTL&gt;       </span><span class="ch">[</span><span class="bn">\x01-\x08\x0b\x0c\x0e-\x1f\x7f</span><span class="ch">])</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">ALPHA&gt;           </span><span class="ch">[</span><span class="bn">A-Za-z</span><span class="ch">])</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">DIGIT&gt;           </span><span class="ch">[</span><span class="bn">0-9</span><span class="ch">])</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">CRLF&gt;            </span><span class="dt">\x0d</span><span class="ot"> </span><span class="dt">\x0a</span><span class="ch">)</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">DQUOTE&gt;          &quot;</span><span class="ch">)</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="ot">   </span><span class="ch">(?&lt;</span><span class="ot">WSP&gt;             </span><span class="ch">[</span><span class="bn">\x20\x09</span><span class="ch">])</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="ot"> </span><span class="ch">)</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="ot"> </span><span class="ch">(?&amp;address)</span><span class="kw">/x</span></span></code></pre></div>
+</section>
+<section id="links" class="level3">
+<h3>Links</h3>
+</section>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Raku-Nqp.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="note-quite-perl" class="level1">
+<h1>Note Quite Perl</h1>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>QAST Node</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>QAST::Block</td>
+<td>A lexical scope</td>
+</tr>
+<tr class="even">
+<td>QAST::Stmts</td>
+<td>A sequence of things to execute</td>
+</tr>
+<tr class="odd">
+<td>QAST::Stmt</td>
+<td>As above, but also a temporaries boundary</td>
+</tr>
+<tr class="even">
+<td>QAST::Op</td>
+<td>An operation of some kind</td>
+</tr>
+<tr class="odd">
+<td>QAST::Var</td>
+<td>A variable or parameter usage/declaration</td>
+</tr>
+<tr class="even">
+<td>QAST::IVal</td>
+<td>Integer literal</td>
+</tr>
+<tr class="odd">
+<td>QAST::NVal</td>
+<td>Floating point literal</td>
+</tr>
+<tr class="even">
+<td>QAST::SVal</td>
+<td>String literal</td>
+</tr>
+<tr class="odd">
+<td>QAST::BVal</td>
+<td>Block Value, refer to other block in the tree (dynamic)</td>
+</tr>
+<tr class="even">
+<td>QAST::WVal</td>
+<td>Refer to a var in the World Serialization Context</td>
+</tr>
+<tr class="odd">
+<td>QAST::Want</td>
+<td>Permit to choose boxing accoring to type (context of identifyer)</td>
+</tr>
+<tr class="even">
+<td>QAST::VM</td>
+<td>Virtual Machine specific operation (discriminator)</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">P6opaque | Opaque attribute storage; default in Perl 6 |<br />
+P6int | A native integer; flattens into a P6opaque |<br />
+P6num | A native float; flattens into a P6opaque |<br />
+P6str | A native string reference; flattens into a P6opaque |<br />
+P6bigint | Big integer; flattens into a P6opaque |<br />
+VMArray | Automatically resizing array, type-parametric |<br />
+VMHash | Hash table |<br />
+Uninstantiable | Type object only; used for module, role, etc. |</div>
+<p>The NQP iterator types for hashes that enable .key and .value methods are not yet set up, so this code uses nqp::iterkey s and nqp::iterval.</p>
+</section>
+</body>
+</html>

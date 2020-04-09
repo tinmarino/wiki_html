@@ -4,14 +4,19 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Ubuntu.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Ubuntu.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <section id="mouse" class="level1">
@@ -21,7 +26,7 @@
 <section id="restart" class="level1">
 <h1>Restart</h1>
 <ul>
-<li>DISPLAY=:0 gnome-shell –replace</li>
+<li>DISPLAY=:0 gnome-shell <a href="--replace.html">replace</a></li>
 <li>alt f2 + r or <code>restart</code></li>
 </ul>
 </section>
@@ -32,13 +37,10 @@
 <li><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</li>
 <li><code>sudoedit /etc/UPower/UPower.conf</code></li>
 <li><code>service upower restart</code></li>
-<li><p>In <code>/etc/systemd/sleep.conf</code> new file:</p>
-<pre><code>[Sleep]
-HibernateDelaySec=3600</code></pre></li>
-<li><p>In <code>/etc/systemd/logind.conf</code></p>
-<pre><code>HandleLidSwitch=suspend-then-hibernate</code></pre></li>
+<li>In <code>/etc/systemd/sleep.conf</code> new file: <code>[Sleep]     HibernateDelaySec=3600</code></li>
+<li>In <code>/etc/systemd/logind.conf</code> <code>HandleLidSwitch=suspend-then-hibernate</code></li>
 <li><code>systemctl restart systemd-logind.service</code></li>
-<li><p><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</p></li>
+<li><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</li>
 </ul>
 <section id="power-stop-sleeping" class="level2">
 <h2>Power : stop sleeping</h2>

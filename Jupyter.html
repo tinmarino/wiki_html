@@ -84,6 +84,43 @@
   <![endif]-->
 </head>
 <body>
+<section id="links" class="level1">
+<h1>Links</h1>
+<ul>
+<li><a href="Jupyter-TroubleShooting-Windows.html">Jupyter TroubleShooting Windows</a></li>
+</ul>
+</section>
+<section id="contents" class="level1">
+<h1>Contents</h1>
+<ul>
+<li><a href="#Supported%20kernel%20languages">Supported kernel languages</a></li>
+<li><a href="#Jupyter%20generic">Jupyter generic</a>
+<ul>
+<li><a href="#Jupyter%20generic#Jupyter%20Connection">Jupyter Connection</a></li>
+<li><a href="#Jupyter%20generic#References">References</a></li>
+</ul></li>
+<li><a href="#Language%20specific">Language specific</a>
+<ul>
+<li><a href="#Language%20specific#C++">C++</a></li>
+<li><a href="#Language%20specific#Java">Java</a></li>
+<li><a href="#Language%20specific#Javascript">Javascript</a></li>
+<li><a href="#Language%20specific#Perl%20(shitty/buggy)">Perl (shitty/buggy)</a></li>
+<li><a href="#Language%20specific#Perl6%20(TODO)">Perl6 (TODO)</a></li>
+<li><a href="#Language%20specific#Ruby">Ruby</a></li>
+<li><a href="#Language%20specific#Rust%20(TODO)">Rust (TODO)</a></li>
+</ul></li>
+<li><a href="#Kernel%20Not%20to%20implement">Kernel Not to implement</a>
+<ul>
+<li><a href="#Kernel%20Not%20to%20implement#Asm%20(No%20syscall,%20to%20be%20used%20in%20notebook)">Asm (No syscall, to be used in notebook)</a></li>
+<li><a href="#Kernel%20Not%20to%20implement#C%20(shitty)">C (shitty)</a></li>
+</ul></li>
+</ul>
+<section id="supported-kernel-languages" class="level2">
+<h2>Supported kernel languages</h2>
+</section>
+</section>
+<section id="jupyter-generic" class="level1">
+<h1>Jupyter generic</h1>
 <section id="jupyter-connection" class="level3">
 <h3>Jupyter Connection</h3>
 <ul>
@@ -92,26 +129,27 @@
 <li><p>Never starting by <code>nbserver</code> : this is the server that open kernels (from firefox)</p></li>
 </ul>
 </section>
-<section id="asm" class="level3">
-<h3>Asm</h3>
-<ul>
-<li><a href="https://github.com/gcallah/Emu86.html">Asm at Github</a></li>
-</ul>
+<section id="references" class="level3">
+<h3>References</h3>
+<p><a href="https://github.com/jupyter/jupyter/wiki/Jupyter-kernels.html">kernel list</a></p>
 </section>
-<section id="c-shitty" class="level3">
-<h3>C (shitty)</h3>
-<ul>
-<li><p>Note: None sens to get vim wrapper : is must compiel all cell as one file</p></li>
-<li><p><a href="https://github.com/brendan-rius/jupyter-c-kernel.html">C at Github (400 stars)</a></p></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">sudo</span> pip3 install jupyter-c-kernel</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">sudo</span> sudo install_c_kernel --sys-prefix</span></code></pre></div>
 </section>
-<section id="c-todo" class="level3">
-<h3>C++ (TODO)</h3>
+<section id="language-specific" class="level1">
+<h1>Language specific</h1>
+<section id="c" class="level3">
+<h3>C++</h3>
 <ul>
 <li><a href="https://github.com/QuantStack/xeus-cling.html">C++ at Gihub (1.2k stars)</a></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">// Redefinition</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">void</span> (*myFunc)() = <span class="kw">nullptr</span>;</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">// Cell 2</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>myFunc = []()-&gt;<span class="dt">void</span> {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You&quot;</span>;           </span>
+<span id="cb1-8"><a href="#cb1-8"></a>};</span>
+<span id="cb1-9"><a href="#cb1-9"></a>myFunc();</span></code></pre></div>
 </section>
 <section id="java" class="level3">
 <h3>Java</h3>
@@ -134,7 +172,7 @@
 <h3>Perl (shitty/buggy)</h3>
 </section>
 <section id="perl6-todo" class="level3">
-<h3>Perl6 (TODO</h3>
+<h3>Perl6 (TODO)</h3>
 <ul>
 <li><a href="https://github.com/bduggan/p6-jupyter-kernel.html">Perl6 at Github</a></li>
 </ul>
@@ -147,6 +185,28 @@
 <ul>
 <li><a href="https://github.com/google/evcxr/tree/master/evcxr_jupyter.html">Rust at Github</a></li>
 </ul>
+</section>
+</section>
+<section id="kernel-not-to-implement" class="level1">
+<h1>Kernel Not to implement</h1>
+<section id="asm-no-syscall-to-be-used-in-notebook" class="level3">
+<h3>Asm (No syscall, to be used in notebook)</h3>
+<ul>
+<li><a href="https://github.com/gcallah/Emu86.html">Asm at Github</a></li>
+<li>No system call</li>
+<li>No data section</li>
+<li>pretty web site: https://gcallah.github.io/Emu86/index.html</li>
+</ul>
+</section>
+<section id="c-shitty" class="level3">
+<h3>C (shitty)</h3>
+<ul>
+<li><p>Note: None sens to get vim wrapper : is must compiel all cell as one file</p></li>
+<li><p><a href="https://github.com/brendan-rius/jupyter-c-kernel.html">C at Github (400 stars)</a></p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">sudo</span> pip3 install jupyter-c-kernel</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">sudo</span> sudo install_c_kernel --sys-prefix</span></code></pre></div>
+</section>
 </section>
 </body>
 </html>

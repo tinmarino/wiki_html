@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>System-Design.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="youtube-gaurav-sen" class="level1">
+<h1>Youtube Gaurav Sen</h1>
+<ul>
+<li>Messenging tools</li>
+</ul>
+<section id="interview-tips" class="level2">
+<h2>Interview tips</h2>
+<ul>
+<li>Front to back approach: what user want -&gt; how to configure servers</li>
+<li>Each time you have a collection, think you should get a max number of items, size</li>
+</ul>
+<ol type="1">
+<li>Think about the features you want, 4 feature is enought for 1h interview</li>
+<li>Store profile 1. Id 2. Score (good client ?) 3. Surname 4. Images (Give a max bound), Avatar</li>
+<li>Recommend matches (Tinder)</li>
+<li>Notes maches, analytices</li>
+<li>Direct messaging (chat)</li>
+<li>Group messages (Wts)</li>
+<li>Sent / Delivered / Read notification (Wts)</li>
+</ol>
+<ul>
+<li>Preparing beforehand at non peek hours
+<ol type="1">
+<li>Identificate the hours</li>
+<li>Cron jobs</li>
+</ol></li>
+</ul>
+<section id="tips-video" class="level3">
+<h3>5 tips video</h3>
+<ol type="1">
+<li>Do not detail early (top-bottom) =&gt; speak alone</li>
+<li>Don’t get a full architecture at once, wait for the scenario to evolve. Avoid silver bullet, golden harmer</li>
+<li>Keep It Simple Stupid. Every block should be the same size</li>
+<li>Justify each choice. Form your thought</li>
+<li>Be tech aware (Name load balancer, database host)</li>
+</ol>
+<p>Be 1. Clear 2. Flexible 3. Knowledge</p>
+</section>
+</section>
+<section id="voc" class="level2">
+<h2>Voc</h2>
+<ul>
+<li>Vertical scaling: buy a bigger machine</li>
+<li>Horizontal scaling: buy more machines</li>
+<li>Scalable: With horizontal, increase number of user</li>
+<li>Consistent: the cache is consistent, the data if one server fails</li>
+<li>Resilient: power failure, os crash</li>
+<li>Fault tolerant</li>
+<li>Resilient to changes</li>
+<li>Extendable</li>
+<li>Single point of failure: if one system fails, cannot be replaced</li>
+<li>Microservice: A specialized program (cook empanadas) so each time a client ask for empanada, he can directly ask there</li>
+<li>Decoupling, separate responsabilities: tje cook does no need to know if it is the.client a a delivery agent coming to get the empanada</li>
+<li>Consisten hashing, used by load balancers to responsibilise a server on a (discontinous) range of request IDs
+<ul>
+<li>Ensure there is no duplicayes</li>
+</ul></li>
+<li>Notifier: Check heartbeat for each server (each 10sec) and if one is dead, notify</li>
+<li>Database Sharding: Divide the data in different machines according to the mist relevant index =&gt; first find the most relvant index (goelic, age, tag). Also known as horizontal partitioning.</li>
+<li>Client Server Communication Protocol: (ex: HTTP) The client requedt, the server respond. Pb: if slow operation, the client must request every 5s, generate noise</li>
+<li>Peer to Peer: (ex: XMPP) Every actor is equal, WebSocket (C TCP)</li>
+<li>Long pooling: repitively send HTTP request for user to check if there is a change in server (i.e. if he received a message)</li>
+<li>Service discovery: each service.must authentificate (name, ip, port) to the load balancer</li>
+<li>Health check, a 2 way heart beat to ensure a service is performing well his job, and kill it otherwise. Availability, economy of forces.</li>
+</ul>
+</section>
+<section id="api" class="level2">
+<h2>API</h2>
+<p>www.site.com/chat-messeging/getAdmins/v1 get m with gid=123 json in the request you can replace the get in the route because the HTTP request is get</p>
+<p>For big response: 1. Pagination gives the responsibility to the client of repetitive calls 2. Fragmentation</p>
+</section>
+<section id="databases" class="level2">
+<h2>Databases</h2>
+<ul>
+<li><p>Blob: Binary large object stored in databaese have 3 avantages over files</p></li>
+<li><p>You must shard your database according to the query. Some frameworks do it automamatically (Casandra, Dynamo)</p></li>
+<li><p>Blob</p>
+<ol type="1">
+<li>Mutability: can change cells := item attributes</li>
+<li>Transaction safety: atomic operation safe</li>
+<li>Indexablility</li>
+<li>Access control: possible with files too</li>
+</ol></li>
+<li><p>Files (No select *)</p>
+<ol type="1">
+<li>Cheap</li>
+<li>Faster</li>
+<li>Content Delivery Network: Distributed File System : each file is referenced by an url</li>
+</ol></li>
+<li><p>Cache:</p>
+<ol type="1">
+<li>Save networkk call</li>
+<li>Avoid repeated computation</li>
+<li>Reduce Db load</li>
+</ol></li>
+<li><p>Cache policies:</p>
+<ol type="1">
+<li>Least Recently Used (queue)</li>
+<li>Least Frecuently Used</li>
+</ol></li>
+<li><p>Redis is a global cache, slower but more accurate than in memory cache. Easyer to scale</p></li>
+<li><p>Write though cache, first write cache then db</p></li>
+<li><p>Write-back cache, first db then write cache</p></li>
+</ul>
+<section id="master-slave" class="level4">
+<h4>Master slave</h4>
+<p>Master write and propagte, read inconsitent only on slave. Like facbook where more read tha write</p>
+</section>
+<section id="distributed-consensus" class="level4">
+<h4>Distributed consensus</h4>
+<p>Multiple node agree for the final state. Odd number of nodes is better for votes</p>
+<ul>
+<li>Consistency, use 3 databases in a triangular (Split-Brain). Because db can crash and network too.</li>
+<li>Transaction: Only when transaction as been approved by all nodes, we may commit them -&gt; consistent state committed, inconsistent transaction looking back and foward to propagate before writing</li>
+<li>MVCC: protocol to get consistent read (heavy)</li>
+<li>SAGA: very long transaction able to roll back in case of failure</li>
+</ul>
+</section>
+<section id="not-only-sql" class="level3">
+<h3>Not Only SQL</h3>
+<p>Advantages are like json Vs comma separated values. Dynamic Vs Static. Array Vs List</p>
+<p>SQL is said to be a relational Db.</p>
+<ul>
+<li>Faster to read a full row (SELECT *) : all data is in one block</li>
+<li>Scheme easily changeable: easy to add a col</li>
+<li>Better scalable</li>
+<li>Faster metric, analytics (average salary)</li>
+<li>Bad for coherence ACID not garantee</li>
+<li><ul>
+<li>Slower read time (for a column)</li>
+</ul></li>
+<li><ul>
+<li>Relations are not implicits</li>
+</ul></li>
+<li><ul>
+<li>Joins are hard</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="monolith-vs-microservices" class="level2">
+<h2>Monolith Vs microservices</h2>
+<ul>
+<li>Advantages
+<ul>
+<li>Less architecture</li>
+<li>Less moving parts</li>
+<li>Deployement, set up, test</li>
+<li>Faster, no RPC (if 2 micro services speak a lot, join them)</li>
+</ul></li>
+<li>Drawbacks
+<ul>
+<li>Integration of new team memeber, must be in context</li>
+<li>Deployelement must be more frequent</li>
+<li>Test complicates</li>
+<li>Single point of failuer</li>
+<li>More difficult to scale, more difficult monitoring, maybe the chat part limits, maybe the analytics</li>
+<li>More dificult to work in parrallel code in different files, machines, less dependencies</li>
+</ul></li>
+<li>StackOverflow is a monolith</li>
+</ul>
+<section id="publisher-subscriber-model" class="level4">
+<h4>Publisher / Subscriber model</h4>
+<p>Pb: Request / Response has a stron coupling, client machine must wait a may timeout: failure latency.</p>
+<p>Publisher / Subscriber model: there is a message broker between asker and responder that take the responsability to wait</p>
+<p>Warning, no atomicity, poor consistency</p>
+<p>Twitter is the perfect example: one publisher, many subscribers</p>
+</section>
+<section id="event-driven-microservices" class="level4">
+<h4>Event driven (micro)services</h4>
+<p>The calling service is publishing events when he feels someone may need it. In a Request / Response services, he ask directly someone to do a job.</p>
+<p>Avantages 1. Availability (! This always means inconsistency) 2. Easy Roll Back (Undo possible) 3. Replacement (due to easy rool back) 4. Transaction guarantee (can be send max or min 1 email) 5. Store intent</p>
+<p>Drawbacks 1. Inconsistency 2. Gateway must store all responses 3. Lesser control from master -&gt; dificult to trace data flow for devs</p>
+<ul>
+<li>The publisher is sending an event to the event bus or message broker and who is interested can read from the event bus</li>
+<li>Good in video games to get a consistent timeline of game: where was player2 when player1 shot, no when server received both info</li>
+</ul>
+</section>
+</section>
+<section id="evernote" class="level2">
+<h2>Evernote</h2>
+<p>Mobile is the way in for new users.</p>
+<section id="keywords" class="level3">
+<h3>Keywords</h3>
+<ul>
+<li><strong>WebDav:</strong> file server</li>
+<li><strong>PubSub:</strong> message queue for Publisher Subscriber</li>
+<li><strong>GCS:</strong> Google Cloud Storage</li>
+<li><strong>RAID:</strong> Redundant Array of Inexpensive Disks</li>
+<li><strong>MySql:</strong> NoteStore</li>
+<li><strong>Lucene:</strong></li>
+<li>Graphite For logging with Slunk</li>
+<li>Splunk ingestion pipeline.</li>
+<li><strong>Ansible:</strong> Automate deployment, configuration, instalation</li>
+<li><strong>Puppet:</strong> Declarative configuration language</li>
+<li><strong>Kubernetes:</strong> Orchestration framework</li>
+</ul>
+</section>
+<section id="experience-first" class="level3">
+<h3>Experience first</h3>
+<p>Feature anti-pattern: 1. if a feature, you are thinking about must appear in preference (configurable): red alert. It is pointing the job to the user. 2. Disagree on the default value</p>
+<p>Icons, and UX matters a lot when competing in the noise of conpetency (app, themes: food, music)</p>
+</section>
+<section id="design-by-feature" class="level3">
+<h3>Design by Feature</h3>
+<section id="feature" class="level4">
+<h4>Feature</h4>
+<p><strong>Idea</strong> offline doc with zeal framework or webclipper</p>
+<ol type="1">
+<li>Web Clipper</li>
+<li>Templates</li>
+<li>Spaces</li>
+<li>Integrations</li>
+<li>Notes Sync</li>
+<li>PDF &amp; Doc Search</li>
+<li>Search Handwriting</li>
+<li>Document Scanning</li>
+<li>Notebooks &amp; Tags</li>
+</ol>
+</section>
+<section id="products" class="level4">
+<h4>Products</h4>
+<ol type="1">
+<li>Evernote</li>
+<li>Web clipper</li>
+<li>Scannable</li>
+<li>Skitch: draw on a image</li>
+<li>Penultimate: Get presentation from hand written</li>
+</ol>
+</section>
+<section id="sharing" class="level4">
+<h4>Sharing</h4>
+<ol type="1">
+<li>Individual</li>
+<li>Group</li>
+<li>World</li>
+</ol>
+<ul>
+<li>As soon as you have a feed, people stated to share. But too noisy, voctim of its.own success</li>
+<li>Personal and shared content side by side, publicize the share</li>
+</ul>
+</section>
+<section id="searching" class="level4">
+<h4>Searching</h4>
+<ol type="1">
+<li>Keyword</li>
+<li>Tag</li>
+</ol>
+</section>
+</section>
+</section>
+</section>
+</body>
+</html>

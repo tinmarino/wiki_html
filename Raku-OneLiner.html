@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Raku-OneLiner.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="perl-6-one-liners" class="level1">
+<h1>Perl 6 One Liners</h1>
+<p>This book is a work in progress. I hope you find it interesting, maybe even useful! If you would like to contribute, feedback, issues and new or improved regexes are all welcome! CONTENTS ——–</p>
+<ol type="1">
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#tutorial">Tutorial</a></li>
+<li><a href="#file-spacing">File Spacing</a></li>
+<li><a href="#line-numbering">Line Numbering</a></li>
+<li><a href="#calculations">Calculations</a></li>
+<li><a href="#string-creation-and-array-creation">String Creation and Array Creation</a></li>
+<li><a href="#text-conversion-and-substitution">Text Conversion and Substitution</a></li>
+<li><a href="#text-analysis">Text Analysis</a></li>
+<li><a href="#selective-line-printing">Selective Line Printing</a></li>
+<li><a href="data-transformation-with-pipes.html">Data Transformation With Pipes</a> (in progress)</li>
+<li><a href="#www">WWW</a> (in progress)</li>
+<li><a href="#converting-for-windows">Converting for Windows</a></li>
+</ol>
+<section id="introduction" class="level2">
+<h2>INTRODUCTION</h2>
+<p>One thing that sets Perl apart from other languages is the ability to write small programs in a single line of code, known as a “one liner”. It’s often faster to type a program directly into the terminal than to write a throwaway script. And one liners are powerful too; they’re fully fledged programs which can load external libraries but also integrate into the terminal. You can pipe data in or out of a one liner.</p>
+<p>Like Perl 5, Perl 6 supports one liners. And just like Perl 6 cleaned up Perl 5’s warts elsewhere, the one liner syntax is also better. It’s cleaner with fewer special variables and options to memorize. This book provides many useful examples of Perl 6 one liners that can do everything from finding duplicate lines in a file to running a web server. Although Perl 6 has fewer special variables, because of its advanced object oriented syntax most of the one liners are shorter in Perl 6 than their Perl 5 equivalent.</p>
+<p>This book can be read in a number of ways. If you’re new to one liners, start with the <a href="#tutorial">tutorial</a>. It walks you through the core concepts of a one liner; don’t worry - it’s really very simple once you get the hang of it. If you’re familiar with Perl, Bash or Sed/Awk, you can probably get stuck in to the examples right away. Feel free to skim and scan the material for whatever piques your interest. If you don’t understand some code, try it out in the terminal! Included in this repo is the ubiquitous <code>example.txt</code> file which is used in many of the one liners.</p>
+<p>Programming with one liners is just one paradigm that Perl 6 excels in. There’s a beauty in the brevity of this code, but whilst you’re learning a productive skill, remember that you’re also learning the ropes of a powerful new programming language. Check out the <a href="http://perl6.org.html">perl6.org</a> website for the official documentation.</p>
+</section>
+<section id="tutorial" class="level2">
+<h2>TUTORIAL</h2>
+<p>To get started with one liners, all you really need to understand is the <code>-e</code> option. This tells Perl to execute what follows as a program. For example:</p>
+<pre><code>perl6 -e &#39;say &quot;Hello, World!&quot;&#39;</code></pre>
+<p>Let’s step through this code. <code>perl6</code> invokes the Perl 6 program, <code>-e</code> tells Perl 6 to execute and <code>'say "Hello, World!"'</code> is the program. Every program must be surrounded in single quotes (except on Windows, see <a href="#converting-for-windows">Converting for Windows</a>). To run the one-liner, just type it into the terminal:</p>
+<pre><code>&gt; perl6 -e &#39;say &quot;Hello, World!&quot;&#39;
+Hello, World!</code></pre>
+<p>If you want to load a file, just add the path to the file after the program code:</p>
+<pre><code>perl6 -e &#39;for (lines) { say $_ }&#39; /path/to/file.txt</code></pre>
+<p>This program prints every line in <code>/path/to/file.txt</code>. You may know that <code>$_</code> is the default variable, which in this case is the current line being looped through. <code>lines</code> is a list that is automatically created for you whenever you pass a filepath to a one-liner. Now let’s re-write that one liner, step-by-step. These are all equivalent:</p>
+<pre><code>perl6 -e &#39;for (lines) { say $_ }&#39; /path/to/file.txt
+perl6 -e &#39;for (lines) { $_.say }&#39; /path/to/file.txt
+perl6 -e &#39;for (lines) { .say }&#39; /path/to/file.txt
+perl6 -e &#39;.say for (lines)&#39; /path/to/file.txt
+perl6 -e &#39;.say for lines&#39; /path/to/file.txt</code></pre>
+<p>Just like <code>$_</code> is the default variable, methods called on the default variable can omit the variable reference. They become default methods. So <code>$_.say</code> becomes <code>.say</code>. This brevity pays off with one liners - it’s less typing!</p>
+<p>The <code>-n</code> option changes the behavior of the program: it executes the code once for every line of the file. So uppercase and print every line of <code>/path/to/file.txt</code> you can type:</p>
+<pre><code>perl6 -ne &#39;.uc.say&#39; /path/to/file.txt</code></pre>
+<p>The <code>-p</code> option is just like <code>-n</code> except that it will automatically print <code>$_</code>. So another way we could uppercase a file would be:</p>
+<pre><code>perl6 -pe &#39;$_ = .uc&#39; /path/to/file.txt</code></pre>
+<p>Or two shorter versions that do the same thing:</p>
+<pre><code>perl6 -pe &#39;.=uc&#39; /path/to/file.txt
+perl6 -pe .=uc /path/to/file.txt</code></pre>
+<p>In the second example we were able to completely remove the surrounding single quotes. This is a rare scenario, but in the event your one liner has no spaces and no sigils or quotes in it, you can usually remove the outer quotes.</p>
+<p>The <code>-n</code> and <code>-p</code> options are really useful. There are lots of example one-liners that use them in this book.</p>
+<p>The final thing you should know is how to load a module. This is really powerful as you can extend Perl 6’s capabilities by importing external libraries. The <code>-M</code> switch stands for load module:</p>
+<pre><code>perl6 -M URI::Encode -e &#39;say uri_encode(&quot;example.com/10 ways to crush it with Perl 6&quot;)&#39;</code></pre>
+<p>This: <code>-M URI::Encode</code> loads the URI::Encode module, which exports the <code>uri_encode</code> subroutine. You can use <code>-M</code> more than once if you want to load more than one module:</p>
+<pre><code>perl6 -M URI::Encode -M URI -e &#39;&lt;your code here&gt;&#39;</code></pre>
+<p>What if you have a local module, that is not installed yet? Easy, just pass use the <code>-I</code> switch to include the directory:</p>
+<pre><code>perl6 -I lib -M URI::Encode -e &#39;&lt;your code here&gt;&#39;</code></pre>
+<p>Now Perl 6 will search for <code>URI::Encode</code> in <code>lib</code> as well as the standard install locations.</p>
+<p>To get a list of Perl 6 command line switches, use the <code>-h</code> option for help:</p>
+<pre><code>perl6 -h</code></pre>
+<p>This prints a nice summary of the available options.</p>
+</section>
+<section id="file-spacing" class="level2">
+<h2>FILE SPACING</h2>
+<p>Double space a file</p>
+<pre><code>perl6 -pe &#39;$_ ~= &quot;\n&quot;&#39; example.txt</code></pre>
+<p>N-space a file (e.g. quadruple space)</p>
+<pre><code>perl6 -pe &#39;$_ ~= &quot;\n&quot; x 4&#39; example.txt</code></pre>
+<p>Add a blank line before every line</p>
+<pre><code>perl6 -pe &#39;say &quot;&quot;&#39; example.txt</code></pre>
+<p>Remove all blank lines</p>
+<pre><code>perl6 -ne &#39;.say if /\S/&#39; example.txt
+perl6 -ne &#39;.say if .chars&#39; example.txt</code></pre>
+<p>Remove all consecutive blank lines, leaving just one</p>
+<pre><code>perl6 -e &#39;$*ARGFILES.slurp.subst(/\n+/, &quot;\n\n&quot;, :g).say&#39; example.txt</code></pre>
+</section>
+<section id="line-numbering" class="level2">
+<h2>LINE NUMBERING</h2>
+<p>Number all lines in a file</p>
+<pre><code>perl6 -ne &#39;say &quot;{++$} $_&quot;&#39; example.txt
+perl6 -ne &#39;say $*ARGFILES.lines.kv ~ &quot; $_&quot;&#39; example.txt</code></pre>
+<p>Number only non-empty lines in a file</p>
+<pre><code>perl6 -pe &#39;$_ = &quot;{++$} $_&quot; if /\S/&#39; example.txt</code></pre>
+<p>Number all lines but print line numbers only for non-empty lines</p>
+<pre><code>perl6 -pe &#39;$_ = $*ARGFILES.lines.kv ~ &quot; $_&quot; if /\S/&#39; example.txt</code></pre>
+<p>Print the total number of lines in a file (emulate wc -l)</p>
+<pre><code>perl6 -e &#39;say lines.elems&#39; example.txt
+perl6 -e &#39;say lines.Int&#39; example.txt
+perl6 -e &#39;lines.Int.say&#39; example.txt</code></pre>
+<p>Print the number of non-empty lines in a file</p>
+<pre><code>perl6 -e &#39;lines.grep(/\S/).elems.say&#39; example.txt</code></pre>
+<p>Print the number of empty lines in a file</p>
+<pre><code>perl6 -e &#39;lines.grep(/^\s*$/).elems.say&#39; example.txt</code></pre>
+</section>
+<section id="calculations" class="level2">
+<h2>CALCULATIONS</h2>
+<p>Check if a number is a prime</p>
+<pre><code>perl6 -e &#39;say &quot;7 is prime&quot; if 7.is-prime&#39;</code></pre>
+<p>Print the sum of all the fields on a line</p>
+<pre><code>perl6 -ne &#39;say [+] .split(&quot;\t&quot;)&#39;</code></pre>
+<p>Print the sum of all the fields on all lines</p>
+<pre><code>perl6 -e &#39;say [+] lines.split(&quot;\t&quot;)&#39;</code></pre>
+<p>Shuffle all fields on a line</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;).pick(*).join(&quot;\t&quot;).say&#39;</code></pre>
+<p>Find the lexically minimum element on a line</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;).min.say&#39;</code></pre>
+<p>Find the lexically minimum element over all the lines</p>
+<pre><code>perl6 -e &#39;lines.split(&quot;\t&quot;).min.say&#39;</code></pre>
+<p>Find the lexically maximum element on a line</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;).max.say&#39;</code></pre>
+<p>Find the lexically maximum element over all the lines</p>
+<pre><code>perl6 -e &#39;lines.split(&quot;\t&quot;).max.say&#39;</code></pre>
+<p>Find the numerically minimum element on a line</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;)».Numeric.min.say&#39;</code></pre>
+<p>Find the numerically maximum element on a line</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;)».Numeric.max.say&#39;</code></pre>
+<p>Replace each field with its absolute value</p>
+<pre><code>perl6 -ne &#39;.split(&quot;\t&quot;).map(*.abs).join(&quot;\t&quot;).say&#39;</code></pre>
+<p>Find the total number of letters on each line</p>
+<pre><code>perl6 -ne &#39;.chars.say&#39; example.txt</code></pre>
+<p>Find the total number of words on each line</p>
+<pre><code>perl6 -ne &#39;.words.elems.say&#39; example.txt</code></pre>
+<p>Find the total number of elements on each line, split on a comma</p>
+<pre><code>perl6 -ne &#39;.split(&quot;,&quot;).elems.say&#39; example.txt</code></pre>
+<p>Find the total number of fields (words) on all lines</p>
+<pre><code>perl6 -e &#39;say lines.split(&quot;\t&quot;).elems&#39;</code></pre>
+<p>#fields perl6 -e ‘say lines.words.elems’ example.txt #words</p>
+<p>Print the total number of fields that match a pattern</p>
+<pre><code>perl6 -e &#39;say lines.split(&quot;\t&quot;).comb(/pattern/).elems&#39;</code></pre>
+<p>#fields perl6 -e ‘say lines.words.comb(/pattern/).elems’ #words</p>
+<p>Print the total number of lines that match a pattern</p>
+<pre><code>perl6 -e &#39;say lines.grep(/in/).elems&#39;</code></pre>
+<p>Print the number PI to n decimal places (e.g. 10)</p>
+<pre><code>perl6 -e &#39;say pi.fmt(&quot;%.10f&quot;);&#39;</code></pre>
+<p>Print the number PI to 15 decimal places</p>
+<pre><code>perl6 -e &#39;say π&#39;</code></pre>
+<p>Print the number E to n decimal places (e.g. 10)</p>
+<pre><code>perl6 -e &#39;say e.fmt(&quot;%.10f&quot;);&#39;</code></pre>
+<p>Print the number E to 15 decimal places</p>
+<pre><code>perl6 -e &#39;say e&#39;</code></pre>
+<p>Print UNIX time (seconds since Jan 1, 1970, 00:00:00 UTC)</p>
+<pre><code>perl6 -e &#39;say time&#39;</code></pre>
+<p>Print GMT (Greenwich Mean Time) and local computer time</p>
+<pre><code>perl6 -MDateTime::TimeZone -e &#39;say to-timezone(&quot;GMT&quot;,DateTime.now)&#39;
+perl6 -e &#39;say DateTime.now&#39;</code></pre>
+<p>Print local computer time in H:M:S format</p>
+<pre><code>perl6 -e &#39;say DateTime.now.map({$_.hour, $_.minute, $_.second.round}).join(&quot;:&quot;)&#39;</code></pre>
+<p>Print yesterday’s date</p>
+<pre><code>perl6 -e &#39;say DateTime.now.earlier(:1day)&#39;</code></pre>
+<p>Print date 14 months, 9 days and 7 seconds ago</p>
+<pre><code>perl6 -e &#39;say DateTime.now.earlier(:14months).earlier(:9days).earlier(:7seconds)&#39;</code></pre>
+<p>Prepend timestamps to stdout (GMT, localtime)</p>
+<pre><code>tail -f logfile | perl6 -MDateTime::TimeZone -ne &#39;say to-timezone(&quot;GMT&quot;,DateTime.now) ~ &quot;\t$_&quot;&#39;
+tail -f logfile | perl6 -ne &#39;say DateTime.now ~ &quot;\t$_&quot;&#39;</code></pre>
+<p>Calculate factorial of 5</p>
+<pre><code>perl6 -e &#39;say [*] 1..5&#39;</code></pre>
+<p>Calculate greatest common divisor</p>
+<pre><code>perl6 -e &#39;say [gcd] @list_of_numbers&#39;</code></pre>
+<p>Calculate GCM of numbers 20 and 35 using Euclid’s algorithm</p>
+<pre><code>perl6 -e &#39;say (20, 35, *%* ... 0)[*-2]&#39;</code></pre>
+<p>Calculate least common multiple (LCM) of 20 and 35</p>
+<pre><code>perl6 -e &#39;say 20 lcm 35&#39;</code></pre>
+<p>Calculate LCM of 20 and 35 using Euclid’s algorithm: <code>n*m/gcd(n,m)</code></p>
+<pre><code>perl6 -e &#39;say 20 * 35 / (20 gcd 35)&#39;</code></pre>
+<p>Generate 10 random numbers between 5 and 15 (excluding 15)</p>
+<pre><code>perl6 -e &#39;.say for (5..^15).roll(10)&#39;</code></pre>
+<p>Find and print all permutations of a list</p>
+<pre><code>perl6 -e &#39;say .join for [1..5].permutations&#39;</code></pre>
+<p>Generate the power set</p>
+<pre><code>perl6 -e &#39;.say for &lt;1 2 3&gt;.combinations&#39;</code></pre>
+<p>Convert an IP address to unsigned integer</p>
+<pre><code>perl6 -e &#39;say :256[&quot;127.0.0.1&quot;.comb(/\d+/)]&#39;
+perl6 -e &#39;say +&quot;:256[{q/127.0.0.1/.subst(:g,/\./,q/,/)}]&quot;&#39;
+perl6 -e &#39;say Buf.new(+«&quot;127.0.0.1&quot;.split(&quot;.&quot;)).unpack(&quot;N&quot;)&#39;</code></pre>
+<p>Convert an unsigned integer to an IP address</p>
+<pre><code>perl6 -e &#39;say join &quot;.&quot;, @(pack &quot;N&quot;, 2130706433)&#39;
+perl6 -e &#39;say join &quot;.&quot;, map { ((2130706433+&gt;(8*$_))+&amp;0xFF) }, (3...0)&#39;</code></pre>
+</section>
+<section id="string-creation-and-array-creation" class="level2">
+<h2>STRING CREATION AND ARRAY CREATION</h2>
+<p>Generate and print the alphabet</p>
+<pre><code>perl6 -e &#39;.say for &quot;a&quot;..&quot;z&quot;&#39;</code></pre>
+<p>Generate and print all the strings from “a” to “zz”</p>
+<pre><code>perl6 -e &#39;.say for &quot;a&quot;..&quot;zz&quot;&#39;</code></pre>
+<p>Convert a integer to hex</p>
+<pre><code>perl6 -e &#39;say 255.base(16)&#39;
+perl6 -e &#39;say sprintf(&quot;%x&quot;, 255)&#39;</code></pre>
+<p>Print an int to hex translation table</p>
+<pre><code>perl6 -e &#39;say sprintf(&quot;%3i =&gt; %2x&quot;, $_, $_) for 0..255&#39;</code></pre>
+<p>Percent encode an integer</p>
+<pre><code>perl6 -e &#39;say sprintf(&quot;%%%x&quot;, 255)&#39;</code></pre>
+<p>Generate a random 10 a-z character string</p>
+<pre><code>perl6 -e &#39;print roll 10, &quot;a&quot;..&quot;z&quot;&#39;
+perl6 -e &#39;print roll &quot;a&quot;..&quot;z&quot;: 10&#39;</code></pre>
+<p>Generate a random 15 ASCII Character password</p>
+<pre><code>perl6 -e &#39;print roll 15, &quot;0&quot;..&quot;z&quot;&#39;
+perl6 -e &#39;print roll &quot;0&quot;..&quot;z&quot;: 15&#39;</code></pre>
+<p>Create a string of specific length</p>
+<pre><code>perl6 -e &#39;print &quot;a&quot; x 50&#39;</code></pre>
+<p>Generate and print an array of even numbers from 1 to 100</p>
+<pre><code>perl6 -e &#39;(1..100).grep(* %% 2).say&#39;</code></pre>
+<p>Find the length of the string</p>
+<pre><code>perl6 -e &#39;&quot;storm in a teacup&quot;.chars.say&#39;</code></pre>
+<p>Find the number of elements in an array</p>
+<pre><code>perl6 -e &#39;my @letters = &quot;a&quot;..&quot;z&quot;; @letters.Int.say&#39;</code></pre>
+</section>
+<section id="text-conversion-and-substitution" class="level2">
+<h2>TEXT CONVERSION AND SUBSTITUTION</h2>
+<p>ROT 13 a file</p>
+<pre><code>perl6 -pe &#39;tr/A..Za..z/N..ZA..Mn..za..m/&#39; example.txt</code></pre>
+<p>Base64 encode a string</p>
+<pre><code>perl6 -MMIME::Base64 -ne &#39;print MIME::Base64.encode-str($_)&#39; example.txt</code></pre>
+<p>Base64 decode a string</p>
+<pre><code>perl6 -MMIME::Base64 -ne &#39;print MIME::Base64.decode-str($_)&#39; base64.txt</code></pre>
+<p>URL-escape a string</p>
+<pre><code>perl6 -MURI::Encode -le &#39;say uri_encode($string)&#39;</code></pre>
+<p>URL-unescape a string</p>
+<pre><code>perl6 -MURI::Encode -le &#39;say uri_decode($string)&#39;</code></pre>
+<p>HTML-encode a string</p>
+<pre><code>perl6 -MHTML::Entity -e &#39;print encode-entities($string)&#39;</code></pre>
+<p>HTML-decode a string</p>
+<pre><code>perl6 -MHTML::Entity -e &#39;print decode-entities($string)&#39;</code></pre>
+<p>Convert all text to uppercase</p>
+<pre><code>perl6 -pe &#39;.=uc&#39; example.txt
+perl6 -ne &#39;say .uc&#39; example.txt</code></pre>
+<p>Convert all text to lowercase</p>
+<pre><code>perl6 -pe &#39;.=lc&#39; example.txt
+perl6 -ne &#39;say .lc&#39; example.txt</code></pre>
+<p>Uppercase only the first word of each line</p>
+<pre><code>perl6 -ne &#39;say s/(\w+){}/{$0.uc}/&#39; example.txt</code></pre>
+<p>Invert the letter case</p>
+<pre><code>perl6 -pe &#39;tr/a..zA..Z/A..Za..z/&#39; example.txt
+perl6 -ne &#39;say tr/a..zA..Z/A..Za..z/.after&#39; example.txt</code></pre>
+<p>Camel case each line</p>
+<pre><code>perl6 -ne &#39;say .wordcase&#39; example.txt</code></pre>
+<p>Strip leading whitespace (spaces, tabs) from the beginning of each line</p>
+<pre><code>perl6 -ne &#39;say .trim-leading&#39; example.txt</code></pre>
+<p>Strip trailing whitespace (space, tabs) from the end of each line</p>
+<pre><code>perl6 -ne &#39;say .trim-trailing&#39; example.txt</code></pre>
+<p>Strip whitespace from the beginning and end of each line</p>
+<pre><code>perl6 -ne &#39;say .trim&#39; example.txt</code></pre>
+<p>Convert UNIX newlines to DOS/Windows newlines</p>
+<pre><code>perl6 -ne &#39;print .subst(/\n/, &quot;\r\n&quot;)&#39; example.txt</code></pre>
+<p>Convert DOS/Windows newlines to UNIX newlines</p>
+<pre><code>perl6 -ne &#39;print .subst(/\r\n/, &quot;\n&quot;)&#39; example.txt</code></pre>
+<p>Find and replace all instances of “ut” with “foo” on each line</p>
+<pre><code>perl6 -pe &#39;s:g/ut/foo/&#39; example.txt</code></pre>
+<p>Find and replace all instances of “ut” with “foo” on each line that contains “lorem”</p>
+<pre><code>perl6 -pe &#39;s:g/ut/foo/ if /Lorem/&#39; example.txt</code></pre>
+<p>Convert a file to JSON</p>
+<pre><code>perl6 -M JSON::Tiny -e &#39;say to-json(lines)&#39; example.txt</code></pre>
+<p>Pick 5 random words from each line of a file</p>
+<pre><code>perl6 -ne &#39;say .words.pick(5)&#39; example.txt</code></pre>
+</section>
+<section id="text-analysis" class="level2">
+<h2>TEXT ANALYSIS</h2>
+<p>Print n-grams of a string</p>
+<pre><code>perl6 -e &#39;my $n=2; say &quot;banana&quot;.comb.rotor($n =&gt; 1 - $n)».join()&#39;</code></pre>
+<p>Print unique n-grams</p>
+<pre><code>perl6 -e &#39;my $n=2; say &quot;banana&quot;.comb.rotor($n =&gt; 1 - $n)».join().Set.sort&#39;</code></pre>
+<p>Print occurrence counts of n-grams</p>
+<pre><code>perl6 -e &#39;my $n=2; say &quot;banana&quot;.comb.rotor($n =&gt; 1 - $n)».join().Bag.sort.join(&quot;\n&quot;)&#39;</code></pre>
+<p>Print occurrence counts of words (1-grams)</p>
+<pre><code>perl6 -e &#39;say lines[0].words.join().Bag.sort.join(&quot;\n&quot;)&#39; example.txt</code></pre>
+<p>Print Dice similarity coefficient based on sets of 1-grams</p>
+<pre><code>perl6 -e &#39;my $a=&quot;banana&quot;.comb;my $b=&quot;anna&quot;.comb;say ($a (&amp;) $b)/($a.Set + $b.Set)&#39;</code></pre>
+<p>Print Jaccard similarity coefficient based on 1-grams</p>
+<pre><code>perl6 -e &#39;my $a=&quot;banana&quot;.comb;my $b=&quot;anna&quot;.comb;say ($a (&amp;) $b) / ($a (|) $b)&#39;</code></pre>
+<p>Print overlap coefficient based on 1-grams</p>
+<pre><code>perl6 -e &#39;my $a=&quot;banana&quot;.comb;my $b=&quot;anna&quot;.comb;say ($a (&amp;) $b)/($a.Set.elems,$b.Set.elems).min&#39;</code></pre>
+<p>Print cosine similarity based on 1-grams</p>
+<pre><code>perl6 -e &#39;my $a=&quot;banana&quot;.comb;my $b=&quot;anna&quot;.comb;say ($a (&amp;) $b)/($a.Set.elems.sqrt*$b.Set.elems.sqrt)&#39;</code></pre>
+<p>Build an index of characters within a string and print it</p>
+<pre><code>perl6 -e &#39;say {}.push: %(&quot;banana&quot;.comb.pairs).invert&#39;</code></pre>
+<p>Build an index of words within a line and print it</p>
+<pre><code>perl6 -e &#39;({}.push: %(lines[0].words.pairs).invert).sort.join(&quot;\n&quot;).say&#39; example.txt</code></pre>
+</section>
+<section id="selective-line-printing" class="level2">
+<h2>SELECTIVE LINE PRINTING</h2>
+<p>Print the first line of a file (emulate head -1)</p>
+<pre><code>perl6 -ne &#39;.say;exit&#39; example.txt
+perl6 -e &#39;lines[0].say&#39; example.txt
+perl6 -e &#39;lines.shift.say&#39; example.txt</code></pre>
+<p>Print the first 10 lines of a file (emulate head -10)</p>
+<pre><code>perl6 -pe &#39;exit if ++$ &gt; 10&#39; example.txt
+perl6 -ne &#39;.say if ++$ &lt; 11&#39; example.txt</code></pre>
+<p>Print the last line of a file (emulate tail -1)</p>
+<pre><code>perl6 -e &#39;lines.pop.say&#39; example.txt</code></pre>
+<p>Print the last 5 lines of a file (emulate tail -5)</p>
+<pre><code>perl6 -e &#39;.say for lines[*-5..*]&#39; example.txt</code></pre>
+<p>Print only lines that contain vowels</p>
+<pre><code>perl6 -ne &#39;/&lt;[aeiou]&gt;/ &amp;&amp; .print&#39; example.txt</code></pre>
+<p>Print lines that contain all vowels</p>
+<pre><code>perl6 -ne &#39;.say if .comb (&gt;=) &lt;a e i o u&gt;&#39; example.txt
+perl6 -ne &#39;.say if .comb ⊇ &lt;a e i o u&gt;&#39; example.txt</code></pre>
+<p>Print lines that are 80 chars or longer</p>
+<pre><code>perl6 -ne &#39;.print if .chars &gt;= 80&#39; example.txt
+perl6 -ne &#39;.chars &gt;= 80 &amp;&amp; .print&#39; example.txt</code></pre>
+<p>Print only line 2</p>
+<pre><code>perl6 -ne &#39;.print if ++$ == 2&#39; example.txt</code></pre>
+<p>Print all lines except line 2</p>
+<pre><code>perl6 -pe &#39;next if ++$ == 2&#39; example.txt</code></pre>
+<p>Print all lines 1 to 3</p>
+<pre><code>perl6 -ne &#39;.print if (1..3).any == ++$&#39; example.txt</code></pre>
+<p>Print all lines between two regexes (including lines that match regex)</p>
+<pre><code>perl6 -ne &#39;.print if /^Lorem/../laborum\.$/&#39; example.txt</code></pre>
+<p>Print the length of the longest line</p>
+<pre><code>perl6 -e &#39;say lines.max.chars&#39; example.txt
+perl6 -ne &#39;state $l=0; $l = .chars if .chars &gt; $l;END { $l.say }&#39; example.txt</code></pre>
+<p>Print the longest line</p>
+<pre><code>perl6 -e &#39;say lines.max&#39; example.txt
+perl6 -e &#39;my $l=&quot;&quot;; for (lines) {$l = $_ if .chars &gt; $l.chars};END { $l.say }&#39; example.txt</code></pre>
+<p>Print all lines that contain a number</p>
+<pre><code>perl6 -ne &#39;.say if /\d/&#39; example.txt
+perl6 -e &#39;.say for lines.grep(/\d/)&#39; example.txt
+perl6 -ne &#39;/\d/ &amp;&amp; .say&#39; example.txt
+perl6 -pe &#39;next if ! $_.match(/\d/)&#39; example.txt</code></pre>
+<p>Find all lines that contain only a number</p>
+<pre><code>perl6 -ne &#39;.say if /^\d+$/&#39; example.txt
+perl6 -e &#39;.say for lines.grep(/^\d+$/)&#39; example.txt
+perl6 -ne &#39;/^\d+$/ &amp;&amp; .say&#39; example.txt
+perl6 -pe &#39;next if ! $_.match(/^\d+$/)&#39; example.txt</code></pre>
+<p>Print every even line</p>
+<pre><code>perl6 -ne &#39;.say if ++$ %% 2&#39; example.txt</code></pre>
+<p>Print every odd line</p>
+<pre><code>perl6 -ne &#39;.say if ++$ !%% 2&#39; example.txt</code></pre>
+<p>Print all lines that repeat</p>
+<pre><code>perl6 -ne &#39;state %l;.say if ++%l{$_}==2&#39; example.txt</code></pre>
+<p>Print unique lines</p>
+<pre><code>perl6 -ne &#39;state %l;.say if ++%l{$_}==1&#39; example.txt</code></pre>
+<p>Print the first field (word) of every line (emulate cut -f 1 -d ’ ’)</p>
+<pre><code>perl6 -ne &#39;.words[0].say&#39; example.txt</code></pre>
+</section>
+<section id="data-transformation-with-pipes" class="level2">
+<h2>DATA TRANSFORMATION WITH PIPES</h2>
+<p>Perl 6 programs integrate straight into the command line. You can pipe data in-to and out-of a one liner by using the pipe <code>|</code> character. For piping data in, Perl 6 automatically sets STDIN to <code>$*IN</code>. Just like with files, data piped in can be looped through using <code>-n</code> and is also available in <code>lines</code>. To pipe data out of a one liner just use <code>print</code> or <code>say</code>.</p>
+<p>JSON-encode a list of all files in the current directory</p>
+<pre><code>ls | perl6 -M JSON::Tiny -e &#39;say to-json(lines)&#39;</code></pre>
+<p>Print a random sample of approx 5% of lines in a file</p>
+<pre><code>perl6 -ne &#39;.say if 1.rand &lt;= 0.05&#39; /usr/share/dict/words</code></pre>
+<p>Color conversion, HTML to RGB</p>
+<pre><code>echo &quot;</code></pre>
+<p>#ffff00" | perl6 -ne ’.comb(//).map({:16($_)}).say’</p>
+<p>Color conversion, RGB to HTML</p>
+<pre><code>echo &quot;</code></pre>
+<p>#ffff00" | perl6 -ne ’.comb(//).map({:16($_)}).say’</p>
+</section>
+<section id="www" class="level2">
+<h2>WWW</h2>
+<p>Download a webpage</p>
+<pre><code>perl6 -M HTTP::UserAgent -e &#39;say HTTP::UserAgent.new.get(&quot;google.com&quot;).content&#39;</code></pre>
+<p>Download a webpage and strip out the HTML</p>
+<pre><code>wget -O - &quot;http://perl6.org&quot; | perl6 -ne &#39;s:g/\&lt;.+?\&gt;//.say&#39;</code></pre>
+<p>Download a webpage, strip out and decode the HTML</p>
+<pre><code>wget -O - &quot;http://perl6.org&quot; | perl6 -MHTML::Strip -ne &#39;strip_html($_).say&#39;</code></pre>
+<p>Launch a simple web server</p>
+<pre><code>perl6 -M HTTP::Server::Simple -e &#39;HTTP::Server::Simple.new.run&#39;</code></pre>
+</section>
+<section id="converting-for-windows" class="level2">
+<h2>CONVERTING FOR WINDOWS</h2>
+<p>Running one liners on Windows is a piece of cake once you know the rules of the road. One liners work on both cmd.exe and PowerShell. The cardinal rule is: replace the outer single-quotes with double quotes and use the interpolated quoting operator <code>qq//</code> for quoting strings inside a one liner. For non-interpolated quoting, you can use single-quotes. Let’s look at some examples.</p>
+<p>Here’s a simple one liner to print the time:</p>
+<pre><code>perl6 -e &#39;say DateTime.now&#39;</code></pre>
+<p>To run on Windows, we just replace the single quotes with double quotes:</p>
+<pre><code>perl6 -e &quot;say DateTime.now&quot;</code></pre>
+<p>This one liner appends a newline to every line in a file, using an interpolated string:</p>
+<pre><code>perl6 -pe &#39;$_ ~= &quot;\n&quot;&#39; example.txt</code></pre>
+<p>On Windows this should be written as:</p>
+<pre><code>perl6 -pe &quot;$_ ~= qq/\n/&quot; example.txt</code></pre>
+<p>In this case we want to interpolate <code>\n</code> as a newline and not literally add a backslash and an “n” to the line, so we have to use <code>qq</code>. But you can usually use single-quotes within a one liner so:</p>
+<pre><code>perl6 -e &#39;say &quot;Hello, World!&quot;&#39;</code></pre>
+<p>On Windows can be written as:</p>
+<pre><code>perl6 -e &quot;say &#39;hello, World!&#39;&quot;</code></pre>
+<p>Simple output redirection works like it does on Unix-based systems. This one liner prints an ASCII character index table to a file using <code>&gt;</code>:</p>
+<pre><code>perl6 -e &quot;say .chr ~ &#39; &#39; ~ $_ for 0..255&quot; &gt; ascii_codes.txt</code></pre>
+<p>When using <code>&gt;</code> if the file doesn’t exist, it will be created. If the file does exist, it will be overwritten. If you’d rather append to a file, use <code>&gt;&gt;</code> instead.</p>
+</section>
+<section id="author" class="level2">
+<h2>AUTHOR</h2>
+<p>David Farrell <a href="http://perltricks.com.html">PerlTricks.com</a></p>
+</section>
+<section id="version" class="level2">
+<h2>VERSION</h2>
+<p>Version 0.01</p>
+</section>
+<section id="license" class="level2">
+<h2>LICENSE</h2>
+<p>FreeBSD - see LICENSE</p>
+</section>
+<section id="contributors" class="level2">
+<h2>CONTRIBUTORS</h2>
+<ul>
+<li>Alexander Moquin</li>
+<li>Bruce Gray</li>
+<li>Cale</li>
+<li>Carl Mäsak</li>
+<li>David H. Adler</li>
+<li>FROGGS</li>
+<li>Helmut Wollmersdorfer</li>
+<li>Hugh Simpson</li>
+<li>japhb</li>
+<li>Larry Wall</li>
+<li>Mathieu Gagnon</li>
+<li>Matt Oates</li>
+<li>Moritz Lenz</li>
+<li>Mouq</li>
+<li>Salve J Nilsen</li>
+<li>Sam S</li>
+<li>Skids</li>
+<li>timotimo</li>
+</ul>
+</section>
+<section id="thanks" class="level2">
+<h2>THANKS</h2>
+<p>Inspired by Peteris Krumins Perl 5 examples <a href="http://www.catonmat.net/download/perl1line.txt.html">file</a>. He literally wrote the <a href="http://www.nostarch.com/perloneliners.html">book</a> on Perl 5 one liners.</p>
+<p>The wonderful folks on #Perl6 <a href="http://webchat.freenode.net/?channels=perl6&amp;nick=.html">irc</a>.</p>
+</section>
+</section>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Raku_Mem.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="so-never-posted" class="level3">
+<h3>So never posted</h3>
+<p>I am trying to write a <a href="https://github.com/tinmarino/nogil.html">Slang for Raku without sigil</a>.</p>
+<p>So I want the <code>nogil</code> token, matching anythin <code>&lt;?&gt;</code> to return a clean Match (actually a NQPMatch) but when Grammar.nqp is calling <a href="https://github.com/rakudo/rakudo/blob/master/src/Perl6/Grammar.nqp%20#L2334"><code>$&lt;sigil&gt;.Str</code></a> I want the result to be ‘$’.</p>
+<p>Currently my token sigil look like that</p>
+<pre class="raku"><code>token sigil {
+    | &lt;[$@%&amp;]&gt;
+    | &lt;?{ by-variable }&gt; &lt;nogil&gt; { say &quot;Nogil returned: &quot;, lk($/, &#39;nogil&#39;).Str; }
+}
+token nogil-proxy {
+    | &#39;€&#39;
+    | &lt;?&gt;
+    {log &quot;No sigil:&quot;, get-stack; }
+}</code></pre>
+<p>And the method with that should return a <code>NQPMatch</code> with method <code>Str</code> overwritten</p>
+<pre class="raku"><code>method nogil {
+    my $cursor := self.nogil-proxy;
+
+# .. This si where Nqp expertise would be nice
+    say &quot;string is:&quot;, $cursor.Str;
+    return $cursor;
+}</code></pre>
+<pre class="raku"><code>$cursor.^cache_add(&#39;Str&#39;, sub { return &#39;$&#39;; } );
+$cursor.^publish_method_cache;
+for $cursor.^attributes { .name.say };
+for $cursor.^methods { .name.say };
+say $cursor.WHAT.Str;
+nqp::setmethcacheauth($cursor, 0);</code></pre>
+<p>Currently, most of my tests work but I have problems in declarations without my (with <code>no strict</code>) like <code>my-var = 42;</code> because they are considered as method call.</p>
+<p><span class="citation" data-cites="Arne-Sommer">@Arne-Sommer</span> already make a <a href="https://stackoverflow.com/questions/55079169.html">post</a> and an <a href="https://raku-musings.com/eu.html.html">article</a></p>
+<section id="section" class="level39">
+<p class="heading"></p>
+<pre class="raku"><code>=head2 List: How can I concatenate lists?
+
+Use the slip prefix (L&lt;C&lt;|&gt;|/language/operators
+#prefix_|&gt;) or the L&lt;flat|/routine/flat&gt; routine
+
+=begin code
+my @a = &lt;a b c&gt;;
+my @b = &lt;d e f&gt;;
+my @ab = |@a, |@b; say @ab;
+# OUTPUT: «[a b c d e f]␤»
+say (@a, @b).flat;
+# OUTPUT: «(a b c d e f)␤»
+=end code
+
+Note that flat recursively flattens L&lt;non-containerized|/language/containers&gt; L&lt;iterables|/type/Iterable&gt;.
+
+
+=head2 List: How can I remove duplicates items in a list?
+
+Use L&lt;.unique|/routine/unique&gt;:
+
+=begin code
+(1, 2, 3, 2, 3, 1, 1, 0).unique;
+# OUTPUT: «(1 2 3 0)␤»
+=end code
+
+
+=head2 List: How can I delete an element from a list?
+
+To delete by index, use L&lt;.splice|/routine/splice&gt;:
+
+=begin code
+my @a = &lt;3 18 4 8 92 14 30&gt;;
+say @a.splice(3, 1);
+# OUTPUT: «[8]␤»
+say @a;
+# OUTPUT: «[3 18 4 92 14 30]␤»
+=end code
+
+Note that the L&lt;delete subscript|/language/subscripts
+#index-entry-:delete_(subscript_adverb)&gt; replaces the element with its natural (i.e. default) state. Here (Any):
+
+=begin code
+my @a = &lt;3 18 4 8 92 14 30&gt;;
+@a[3]:delete;
+say @a;
+# OUTPUT: «[3 18 4 (Any) 92 14 30]␤»
+=end code
+
+To delete by value, use L&lt;.grep|/routine/grep&gt;:
+
+=begin code
+my @letters = &lt;a b c&gt;;
+@letters .= grep: * ne &quot;b&quot;;
+say @letters;
+# OUTPUT: «[a c]␤»
+=end code
+
+
+=head2 List: How can I show index while looping through a list?
+
+Use L&lt;.kv|/routine/kv&gt; or L&lt;.pairs|/routine/pairs&gt;:
+
+=begin code
+my @aa = 8 .. 12;
+for @aa.kv -&gt; $i, $_ { say &quot;$i: $_&quot; };
+# OUTPUT: «0: 8␤1: 9␤2: 10␤3: 11␤4: 12␤»
+say &quot;$_.key(): $_.value()&quot; for @aa.pairs;
+# OUTPUT: «0: 8␤1: 9␤2: 10␤3: 11␤4: 12␤»
+=end code
+
+=head2 List: How can I generate a list of random numbers?
+
+Use L&lt;.roll|/routine/roll&gt;:
+
+=begin code
+say (1..100).roll(50);
+# prints 50 numbers between 1 and 100
+say [+] (1..6).roll(4);
+# prints 1 number = 4d6
+for (1..10).roll(*) { .say; last if $_ == 9 };
+# * is creating a lazy list
+=end code
+
+=head2 List: How can I get a list of repeated item?
+
+Use the L&lt;xx infix|/routine/xx&gt; operator:
+
+=begin code
+say 42 xx 3;
+# OUTPUT: «(42 42 42)␤»
+=end code
+
+=head2 List: How can I get the sum of a list of numbers?
+
+Use the C&lt;[+]&gt; L&lt;reduction metaoperator|/operators
+#Reduction_metaoperators&gt;:
+
+=begin code
+say [+] 1..10;
+# OUTPUT: «55␤»
+=end code
+
+=head2 List: How can I add two lists element wise?
+
+Use the C&lt;Z+&gt; L&lt;zip metaoperator|/operators
+#Zip_metaoperator&gt;:
+
+=begin code
+say [1, 37, 12] Z+ [41, 5, 30];
+# OUTPUT: «(42 42 42)␤»
+say 1..10 Z+ 2 &lt;&lt;*&gt;&gt; 100 xx 10;
+# OUTPUT: «(201 202 203 204 205 206 207 208 209 210)␤»
+=end code
+
+
+=head2 System: How can I check the execution operating system
+
+L&lt;$*KERNEL|/language/variables
+#$*KERNEL&gt; gives information on the underlying kernel.
+To check is running on windows use L&lt;$*DISTRO|/language/variables
+#$*DISTRO&gt;.is-win.
+
+
+=head2 System: How can I work with file and folder
+
+=item Delete: L&lt;unlink|/routine/unlink&gt; &#39;file.txt&#39;; for a file, L&lt;rmdir|/routine/rmdir&gt; &quot;dir&quot;; for a directory
+
+=item Copy: &#39;file-from.twt&#39;.L&lt;copy|/type/IO::Path
+#routine_copy&gt;(&#39;file-to.txt&#39;);
+
+=item Move: &#39;file-or-dir-from&#39;.L&lt;rename|/type/IO::Path
+#routine_rename&gt;(&#39;file-or-dir-to&#39;);
+
+=item Create: &#39;file-or-dir-from&#39;.L&lt;rename|/type/IO::Path
+#routine_rename&gt;(&#39;file-or-dir-to&#39;);
+
+=item Read: say &#39;file.txt&#39;.IO.L&lt;slurp|/type/IO::Path
+#routine_slurp&gt;;
+
+=item List: say &#39;dir&#39;.IO.L&lt;dir|/type/IO::Path
+#routine_dir&gt;;
+
+=item Inspect: say &#39;file.txt&#39;.IO.L&lt;absolute|/type/IO::Path
+#method_absolute&gt;; say $filename.IO.L&lt;extension|/type/IO::Path#method_extension&gt;;
+
+=item Check: say &#39;exists&#39; if &#39;file.txt&#39;.IO.L&lt;e|/type/IO::Path
+#method_e&gt;;
+say &#39;is a file&#39; if &#39;file.txt&#39;.IO.L&lt;f|/type/IO::Path
+#method_f&gt;;
+say &#39;is a directory&#39;  if &#39;dir&#39;.IO.L&lt;d|/type/IO::Path
+#method_d&gt;;
+
+=item Write: &#39;file.txt&#39;.IO.L&lt;spurt|/type/IO::Path
+#method_spurt&gt;: &#39;I ❤ 🦋&#39;; Use the C&lt;:append&gt; adverb to append.
+
+=item Open: my $fh = &#39;file.txt&#39;.IO.L&lt;open|/type/IO::Path
+#method_open&gt;;
+
+File handles are powerfull, read the L&lt;overview|/language/io&gt;, L&lt;guide|/language/io-guide&gt; or L&lt;IO::Path|/type/IO::Path&gt;. As usual, there are hundreds of ways to code with them, find yours!
+
+
+=head2 System: How can I recursively list file (find command)
+
+Build a recursive function:
+
+=begin code
+sub find-files ($dir, Mu :$test) {
+    gather for dir $dir -&gt; $path {
+        if $path.basename ~~ $test { take $path }
+        if $path.d                 { .take for find-files $path, :$test };
+    }
+}
+.put for find-files &#39;.&#39;, test =&gt; /&#39;.txt&#39; $/;
+=end code
+
+Or use File::Find module:
+
+=begin code
+use File::Find;
+.say for find dir =&gt; &#39;.&#39;, name =&gt; /&#39;.txt&#39; $/;
+=end code
+
+
+=head2 System: How can I read from STDIN
+
+L&lt;$*IN|/language/variables
+#Special_filehandles:_STDIN,_STDOUT_and_STDERR&gt; is the default variable when no object is specified to a &lt;IO::Path|/type/IO::Path&gt; method
+
+=begin code
+say slurp;
+# Print all STIND
+.say for lines();
+# Print STDIN line by line
+say get();
+# Consume and print one line of STDIN
+=end code</code></pre>
+</section>
+</section>
+</body>
+</html>

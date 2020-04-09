@@ -120,10 +120,18 @@
 <ul>
 <li><a href="#saying-hi">Saying Hi</a></li>
 <li><a href="#hackerrank-language">HackerRank Language</a></li>
+<li><a href="#programming-language">Programming Language</a></li>
+<li><a href="#regex-test">Regex Test</a></li>
+<li><a href="#detect-the-domain-name">Detect the domain name</a></li>
+<li><a href="#building-a-smart-ide-identifying-comments">Building a Smart IDE: Identifying comments</a></li>
+<li><a href="#detecting-valid-latitude-and-longitude-pairs">Detecting Valid Latitude and Longitude Pairs</a></li>
+<li><a href="#hackerrank-tweets">HackerRank Tweets</a></li>
+<li><a href="#detect-html-links">Detect HTML links</a></li>
 </ul></li>
 </ul></li>
 </ul>
 </nav>
+<section class="level2">
 <section id="java-hackerrank" class="level1">
 <h1>Java HackerRank</h1>
 <section id="jdb" class="level2">
@@ -372,80 +380,90 @@
 <span id="cb6-36"><a href="#cb6-36"></a></span>
 <span id="cb6-37"><a href="#cb6-37"></a>}</span>
 <span id="cb6-38"><a href="#cb6-38"></a></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="co">// IN/Out till EOF</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="dt">int</span> n=in.<span class="fu">nextInt</span>();</span>
-<span id="cb6-42"><a href="#cb6-42"></a>in.<span class="fu">nextLine</span>();</span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++) {</span>
-<span id="cb6-44"><a href="#cb6-44"></a>  <span class="bu">String</span> name=in.<span class="fu">nextLine</span>();</span>
-<span id="cb6-45"><a href="#cb6-45"></a>  <span class="dt">int</span> phone=in.<span class="fu">nextInt</span>();</span>
-<span id="cb6-46"><a href="#cb6-46"></a>  in.<span class="fu">nextLine</span>();</span>
-<span id="cb6-47"><a href="#cb6-47"></a>}</span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="kw">while</span>(in.<span class="fu">hasNext</span>()) {</span>
-<span id="cb6-49"><a href="#cb6-49"></a>  <span class="bu">String</span> s=in.<span class="fu">nextLine</span>();</span>
-<span id="cb6-50"><a href="#cb6-50"></a>}</span>
-<span id="cb6-51"><a href="#cb6-51"></a></span>
-<span id="cb6-52"><a href="#cb6-52"></a></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="co">// Generic methods solution 1</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="kw">public</span> <span class="dt">static</span> &lt; E &gt; <span class="dt">void</span> <span class="fu">printArray</span>( E[] inputArray ){    </span>
-<span id="cb6-55"><a href="#cb6-55"></a>     <span class="kw">for</span> ( E element : inputArray ){        </span>
-<span id="cb6-56"><a href="#cb6-56"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>( element );</span>
-<span id="cb6-57"><a href="#cb6-57"></a>     }</span>
-<span id="cb6-58"><a href="#cb6-58"></a>} </span>
-<span id="cb6-59"><a href="#cb6-59"></a><span class="co">// Generic methods solution 2</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">printArray</span>(<span class="bu">Object</span>[] a){</span>
-<span id="cb6-61"><a href="#cb6-61"></a>   <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; a.<span class="fu">length</span>; i++){</span>
-<span id="cb6-62"><a href="#cb6-62"></a>       <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(a[i]);</span>
-<span id="cb6-63"><a href="#cb6-63"></a>   }</span>
-<span id="cb6-64"><a href="#cb6-64"></a>}</span>
-<span id="cb6-65"><a href="#cb6-65"></a><span class="co">// Generic methods solution 3: overloading of course (better)</span></span>
-<span id="cb6-66"><a href="#cb6-66"></a></span>
-<span id="cb6-67"><a href="#cb6-67"></a><span class="co">// Comparator</span></span>
-<span id="cb6-68"><a href="#cb6-68"></a><span class="kw">class</span> Checker <span class="kw">implements</span> <span class="bu">Comparator</span>&lt;Player&gt;{</span>
-<span id="cb6-69"><a href="#cb6-69"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span>(Player p1, Player p2){</span>
-<span id="cb6-70"><a href="#cb6-70"></a>        <span class="kw">if</span> (p1.<span class="fu">score</span> != p2.<span class="fu">score</span>){</span>
-<span id="cb6-71"><a href="#cb6-71"></a>            <span class="kw">return</span> p2.<span class="fu">score</span> - p1.<span class="fu">score</span>; </span>
-<span id="cb6-72"><a href="#cb6-72"></a>        }</span>
-<span id="cb6-73"><a href="#cb6-73"></a>        <span class="kw">return</span> p1.<span class="fu">name</span>.<span class="fu">compareTo</span>(p2.<span class="fu">name</span>);</span>
-<span id="cb6-74"><a href="#cb6-74"></a>    }</span>
-<span id="cb6-75"><a href="#cb6-75"></a>}</span>
-<span id="cb6-76"><a href="#cb6-76"></a><span class="co">// The compare() method should return a negative integer in order to pick the first argument.</span></span>
-<span id="cb6-77"><a href="#cb6-77"></a><span class="kw">if</span>(a.<span class="fu">score</span> &gt; b.<span class="fu">score</span>){ <span class="co">// For decreasing order</span></span>
-<span id="cb6-78"><a href="#cb6-78"></a>    <span class="kw">return</span> -<span class="dv">1</span>;</span>
-<span id="cb6-79"><a href="#cb6-79"></a>}</span>
-<span id="cb6-80"><a href="#cb6-80"></a></span>
-<span id="cb6-81"><a href="#cb6-81"></a><span class="co">// Custom sort</span></span>
-<span id="cb6-82"><a href="#cb6-82"></a><span class="bu">ArrayList</span>&lt;Student&gt; studentList = studentList.<span class="fu">stream</span>().<span class="fu">sorted</span>((f1, f2) -&gt; {</span>
-<span id="cb6-83"><a href="#cb6-83"></a>    <span class="dt">double</span> res = <span class="dv">0</span>;</span>
-<span id="cb6-84"><a href="#cb6-84"></a>    res = f2.<span class="fu">getCgpa</span>() - f1.<span class="fu">getCgpa</span>();</span>
-<span id="cb6-85"><a href="#cb6-85"></a>    <span class="kw">if</span> (<span class="dv">0</span> != res) { <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(res); }</span>
-<span id="cb6-86"><a href="#cb6-86"></a></span>
-<span id="cb6-87"><a href="#cb6-87"></a>    res = f1.<span class="fu">getFname</span>().<span class="fu">compareTo</span>(f2.<span class="fu">getFname</span>());</span>
-<span id="cb6-88"><a href="#cb6-88"></a>    <span class="kw">if</span> (<span class="dv">0</span> != res) { <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(res); }</span>
-<span id="cb6-89"><a href="#cb6-89"></a></span>
-<span id="cb6-90"><a href="#cb6-90"></a>    <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(f2.<span class="fu">getId</span>() - f1.<span class="fu">getId</span>());</span>
-<span id="cb6-91"><a href="#cb6-91"></a>}).<span class="fu">collect</span>(Collectors.<span class="fu">toList</span>());</span>
-<span id="cb6-92"><a href="#cb6-92"></a></span>
-<span id="cb6-93"><a href="#cb6-93"></a><span class="co">// Custom sort from 7</span></span>
-<span id="cb6-94"><a href="#cb6-94"></a><span class="kw">class</span> StudentComparator <span class="kw">implements</span> <span class="bu">Comparator</span>&lt;Student&gt;{</span>
-<span id="cb6-95"><a href="#cb6-95"></a></span>
-<span id="cb6-96"><a href="#cb6-96"></a>    <span class="at">@Override</span></span>
-<span id="cb6-97"><a href="#cb6-97"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span>(Student s1, Student s2) {}</span>
-<span id="cb6-98"><a href="#cb6-98"></a>}  </span>
-<span id="cb6-99"><a href="#cb6-99"></a><span class="bu">Collections</span>.<span class="fu">sort</span>(studentList, <span class="kw">new</span> <span class="fu">StudentComparator</span>());</span>
-<span id="cb6-100"><a href="#cb6-100"></a></span>
-<span id="cb6-101"><a href="#cb6-101"></a><span class="co">// Stream</span></span>
-<span id="cb6-102"><a href="#cb6-102"></a><span class="dt">long</span> i_new = deque.<span class="fu">stream</span>()</span>
-<span id="cb6-103"><a href="#cb6-103"></a>    .<span class="fu">skip</span>(j).<span class="fu">limit</span>(m)</span>
-<span id="cb6-104"><a href="#cb6-104"></a>    .<span class="fu">distinct</span>().<span class="fu">count</span>();</span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">// In/out till EOF reduced (StdIn)</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">// Slurp in</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="bu">String</span> s_in = <span class="st">&quot;&quot;</span>;</span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="kw">while</span> (in.<span class="fu">hasNextLine</span>()) {</span>
+<span id="cb6-44"><a href="#cb6-44"></a>    s_in += in.<span class="fu">nextLine</span>() + <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb6-45"><a href="#cb6-45"></a>}</span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;s_in is: &quot;</span> + s_in + <span class="st">&quot; : over&quot;</span>);</span>
+<span id="cb6-47"><a href="#cb6-47"></a></span>
+<span id="cb6-48"><a href="#cb6-48"></a></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">// IN/Out till EOF</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="dt">int</span> n=in.<span class="fu">nextInt</span>();</span>
+<span id="cb6-52"><a href="#cb6-52"></a>in.<span class="fu">nextLine</span>();</span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="kw">for</span>(<span class="dt">int</span> i=<span class="dv">0</span>;i&lt;n;i++) {</span>
+<span id="cb6-54"><a href="#cb6-54"></a>  <span class="bu">String</span> name=in.<span class="fu">nextLine</span>();</span>
+<span id="cb6-55"><a href="#cb6-55"></a>  <span class="dt">int</span> phone=in.<span class="fu">nextInt</span>();</span>
+<span id="cb6-56"><a href="#cb6-56"></a>  in.<span class="fu">nextLine</span>();</span>
+<span id="cb6-57"><a href="#cb6-57"></a>}</span>
+<span id="cb6-58"><a href="#cb6-58"></a><span class="kw">while</span>(in.<span class="fu">hasNext</span>()) {</span>
+<span id="cb6-59"><a href="#cb6-59"></a>  <span class="bu">String</span> s=in.<span class="fu">nextLine</span>();</span>
+<span id="cb6-60"><a href="#cb6-60"></a>}</span>
+<span id="cb6-61"><a href="#cb6-61"></a></span>
+<span id="cb6-62"><a href="#cb6-62"></a></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">// Generic methods solution 1</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="kw">public</span> <span class="dt">static</span> &lt; E &gt; <span class="dt">void</span> <span class="fu">printArray</span>( E[] inputArray ){    </span>
+<span id="cb6-65"><a href="#cb6-65"></a>     <span class="kw">for</span> ( E element : inputArray ){        </span>
+<span id="cb6-66"><a href="#cb6-66"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>( element );</span>
+<span id="cb6-67"><a href="#cb6-67"></a>     }</span>
+<span id="cb6-68"><a href="#cb6-68"></a>} </span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="co">// Generic methods solution 2</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="kw">public</span> <span class="dt">void</span> <span class="fu">printArray</span>(<span class="bu">Object</span>[] a){</span>
+<span id="cb6-71"><a href="#cb6-71"></a>   <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; a.<span class="fu">length</span>; i++){</span>
+<span id="cb6-72"><a href="#cb6-72"></a>       <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(a[i]);</span>
+<span id="cb6-73"><a href="#cb6-73"></a>   }</span>
+<span id="cb6-74"><a href="#cb6-74"></a>}</span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="co">// Generic methods solution 3: overloading of course (better)</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a></span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="co">// Comparator</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="kw">class</span> Checker <span class="kw">implements</span> <span class="bu">Comparator</span>&lt;Player&gt;{</span>
+<span id="cb6-79"><a href="#cb6-79"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span>(Player p1, Player p2){</span>
+<span id="cb6-80"><a href="#cb6-80"></a>        <span class="kw">if</span> (p1.<span class="fu">score</span> != p2.<span class="fu">score</span>){</span>
+<span id="cb6-81"><a href="#cb6-81"></a>            <span class="kw">return</span> p2.<span class="fu">score</span> - p1.<span class="fu">score</span>; </span>
+<span id="cb6-82"><a href="#cb6-82"></a>        }</span>
+<span id="cb6-83"><a href="#cb6-83"></a>        <span class="kw">return</span> p1.<span class="fu">name</span>.<span class="fu">compareTo</span>(p2.<span class="fu">name</span>);</span>
+<span id="cb6-84"><a href="#cb6-84"></a>    }</span>
+<span id="cb6-85"><a href="#cb6-85"></a>}</span>
+<span id="cb6-86"><a href="#cb6-86"></a><span class="co">// The compare() method should return a negative integer in order to pick the first argument.</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a><span class="kw">if</span>(a.<span class="fu">score</span> &gt; b.<span class="fu">score</span>){ <span class="co">// For decreasing order</span></span>
+<span id="cb6-88"><a href="#cb6-88"></a>    <span class="kw">return</span> -<span class="dv">1</span>;</span>
+<span id="cb6-89"><a href="#cb6-89"></a>}</span>
+<span id="cb6-90"><a href="#cb6-90"></a></span>
+<span id="cb6-91"><a href="#cb6-91"></a><span class="co">// Custom sort</span></span>
+<span id="cb6-92"><a href="#cb6-92"></a><span class="bu">ArrayList</span>&lt;Student&gt; studentList = studentList.<span class="fu">stream</span>().<span class="fu">sorted</span>((f1, f2) -&gt; {</span>
+<span id="cb6-93"><a href="#cb6-93"></a>    <span class="dt">double</span> res = <span class="dv">0</span>;</span>
+<span id="cb6-94"><a href="#cb6-94"></a>    res = f2.<span class="fu">getCgpa</span>() - f1.<span class="fu">getCgpa</span>();</span>
+<span id="cb6-95"><a href="#cb6-95"></a>    <span class="kw">if</span> (<span class="dv">0</span> != res) { <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(res); }</span>
+<span id="cb6-96"><a href="#cb6-96"></a></span>
+<span id="cb6-97"><a href="#cb6-97"></a>    res = f1.<span class="fu">getFname</span>().<span class="fu">compareTo</span>(f2.<span class="fu">getFname</span>());</span>
+<span id="cb6-98"><a href="#cb6-98"></a>    <span class="kw">if</span> (<span class="dv">0</span> != res) { <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(res); }</span>
+<span id="cb6-99"><a href="#cb6-99"></a></span>
+<span id="cb6-100"><a href="#cb6-100"></a>    <span class="kw">return</span> (<span class="dt">int</span>) <span class="bu">Math</span>.<span class="fu">signum</span>(f2.<span class="fu">getId</span>() - f1.<span class="fu">getId</span>());</span>
+<span id="cb6-101"><a href="#cb6-101"></a>}).<span class="fu">collect</span>(Collectors.<span class="fu">toList</span>());</span>
+<span id="cb6-102"><a href="#cb6-102"></a></span>
+<span id="cb6-103"><a href="#cb6-103"></a><span class="co">// Custom sort from 7</span></span>
+<span id="cb6-104"><a href="#cb6-104"></a><span class="kw">class</span> StudentComparator <span class="kw">implements</span> <span class="bu">Comparator</span>&lt;Student&gt;{</span>
 <span id="cb6-105"><a href="#cb6-105"></a></span>
-<span id="cb6-106"><a href="#cb6-106"></a><span class="co">// Initilise List ArraList</span></span>
-<span id="cb6-107"><a href="#cb6-107"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="bu">List</span>.<span class="fu">of</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>);</span>
-<span id="cb6-108"><a href="#cb6-108"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="bu">Arrays</span>.<span class="fu">asList</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>);</span>
-<span id="cb6-109"><a href="#cb6-109"></a><span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt; list = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;&gt;(<span class="bu">List</span>.<span class="fu">of</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>));</span>
-<span id="cb6-110"><a href="#cb6-110"></a><span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt; list = Stream.<span class="fu">of</span>(<span class="st">&quot;Buenos Aires&quot;</span>, <span class="st">&quot;Córdoba&quot;</span>, <span class="st">&quot;La Plata&quot;</span>).<span class="fu">collect</span>(Collectors.<span class="fu">toCollection</span>(<span class="bu">ArrayList</span>::<span class="kw">new</span>));</span>
-<span id="cb6-111"><a href="#cb6-111"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt;(); <span class="bu">Collections</span>.<span class="fu">addAll</span>(list,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>);</span>
-<span id="cb6-112"><a href="#cb6-112"></a></span></code></pre></div>
+<span id="cb6-106"><a href="#cb6-106"></a>    <span class="at">@Override</span></span>
+<span id="cb6-107"><a href="#cb6-107"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compare</span>(Student s1, Student s2) {}</span>
+<span id="cb6-108"><a href="#cb6-108"></a>}  </span>
+<span id="cb6-109"><a href="#cb6-109"></a><span class="bu">Collections</span>.<span class="fu">sort</span>(studentList, <span class="kw">new</span> <span class="fu">StudentComparator</span>());</span>
+<span id="cb6-110"><a href="#cb6-110"></a></span>
+<span id="cb6-111"><a href="#cb6-111"></a><span class="co">// Stream</span></span>
+<span id="cb6-112"><a href="#cb6-112"></a><span class="dt">long</span> i_new = deque.<span class="fu">stream</span>()</span>
+<span id="cb6-113"><a href="#cb6-113"></a>    .<span class="fu">skip</span>(j).<span class="fu">limit</span>(m)</span>
+<span id="cb6-114"><a href="#cb6-114"></a>    .<span class="fu">distinct</span>().<span class="fu">count</span>();</span>
+<span id="cb6-115"><a href="#cb6-115"></a></span>
+<span id="cb6-116"><a href="#cb6-116"></a><span class="co">// Initilise List ArraList</span></span>
+<span id="cb6-117"><a href="#cb6-117"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="bu">List</span>.<span class="fu">of</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>);</span>
+<span id="cb6-118"><a href="#cb6-118"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="bu">Arrays</span>.<span class="fu">asList</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>);</span>
+<span id="cb6-119"><a href="#cb6-119"></a><span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt; list = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;&gt;(<span class="bu">List</span>.<span class="fu">of</span>(<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>));</span>
+<span id="cb6-120"><a href="#cb6-120"></a><span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt; list = Stream.<span class="fu">of</span>(<span class="st">&quot;Buenos Aires&quot;</span>, <span class="st">&quot;Córdoba&quot;</span>, <span class="st">&quot;La Plata&quot;</span>).<span class="fu">collect</span>(Collectors.<span class="fu">toCollection</span>(<span class="bu">ArrayList</span>::<span class="kw">new</span>));</span>
+<span id="cb6-121"><a href="#cb6-121"></a><span class="bu">List</span>&lt;<span class="bu">String</span>&gt; list = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt;(); <span class="bu">Collections</span>.<span class="fu">addAll</span>(list,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>);</span>
+<span id="cb6-122"><a href="#cb6-122"></a></span></code></pre></div>
 </section>
 <section id="object-orientation-tuto" class="level3">
 <h3>Object orientation tuto</h3>
@@ -672,6 +690,372 @@
 <span id="cb15-13"><a href="#cb15-13"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;INVALID&quot;</span>);</span>
 <span id="cb15-14"><a href="#cb15-14"></a>    }</span>
 <span id="cb15-15"><a href="#cb15-15"></a>});</span></code></pre></div>
+</section>
+<section id="programming-language" class="level3">
+<h3>Programming Language</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="bu">String</span> lang = <span class="st">&quot;C&quot;</span>;</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="bu">String</span> c_regex = <span class="st">&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>#include<span class="st">&quot;;</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="bu">String</span> java_regex = <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*import.*;&quot;</span>;</span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="bu">String</span> quote_regex = <span class="st">&quot;</span><span class="sc">\\</span><span class="st">s*[{}].*&quot;</span>;</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">// Read AND Write loop</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="kw">while</span> (in.<span class="fu">hasNext</span>()){</span>
+<span id="cb16-11"><a href="#cb16-11"></a>  <span class="bu">String</span> s = in.<span class="fu">nextLine</span>();</span>
+<span id="cb16-12"><a href="#cb16-12"></a>  <span class="kw">if</span>(s.<span class="fu">matches</span>(c_regex)){</span>
+<span id="cb16-13"><a href="#cb16-13"></a>      lang = <span class="st">&quot;C&quot;</span>;</span>
+<span id="cb16-14"><a href="#cb16-14"></a>  } <span class="kw">else</span> <span class="kw">if</span>(s.<span class="fu">matches</span>(java_regex)) {</span>
+<span id="cb16-15"><a href="#cb16-15"></a>      lang = <span class="st">&quot;Java&quot;</span>;</span>
+<span id="cb16-16"><a href="#cb16-16"></a>  }</span>
+<span id="cb16-17"><a href="#cb16-17"></a>  <span class="kw">if</span> (s.<span class="fu">matches</span>(quote_regex)){</span>
+<span id="cb16-18"><a href="#cb16-18"></a>      <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(lang);</span>
+<span id="cb16-19"><a href="#cb16-19"></a>      <span class="kw">return</span>;</span>
+<span id="cb16-20"><a href="#cb16-20"></a></span>
+<span id="cb16-21"><a href="#cb16-21"></a>  }</span>
+<span id="cb16-22"><a href="#cb16-22"></a>}</span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Python&quot;</span>);</span></code></pre></div>
+<ul>
+<li>Other in Python</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>code <span class="op">=</span> <span class="bu">input</span>()</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb17-3"><a href="#cb17-3"></a>    <span class="cf">try</span>: code <span class="op">+=</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">+</span> <span class="bu">input</span>()</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="cf">except</span>: <span class="cf">break</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="cf">if</span> <span class="st">&#39;import java&#39;</span> <span class="kw">in</span> code: <span class="bu">print</span>(<span class="st">&quot;Java&quot;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="cf">elif</span> <span class="st">&#39;</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="st">#include&#39;</span> <span class="kw">in</span> code: <span class="bu">print</span>(<span class="st">&quot;C&quot;</span>)</span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="cf">else</span>: <span class="bu">print</span>(<span class="st">&quot;Python&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Ugly Python (will almost never work)</li>
+</ul>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">import</span> re</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="im">import</span> sys</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a>src <span class="op">=</span> <span class="st">&#39;&#39;</span>.join(sys.stdin.readlines())</span>
+<span id="cb18-5"><a href="#cb18-5"></a></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="cf">if</span> <span class="st">&#39;java&#39;</span> <span class="kw">in</span> src:</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="bu">print</span>(<span class="st">&quot;Java&quot;</span>)</span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="cf">elif</span> <span class="st">&#39;</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="st">#include&#39;</span> <span class="kw">in</span> src:</span>
+<span id="cb18-10"><a href="#cb18-10"></a>    <span class="bu">print</span>(<span class="st">&quot;C&quot;</span>)</span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="cf">else</span>:</span>
+<span id="cb18-12"><a href="#cb18-12"></a>    <span class="bu">print</span>(<span class="st">&quot;Python&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Ugly regex</li>
+</ul>
+<pre class="text"><code>C = &quot;(?s).*(
+#\\s*include\\s*(&lt;\\s*[\\w/]+(\\.\\w+)?\\s*&gt;|\&quot;[\\w/]+(\\.\\w+)?\&quot;\\s*))(?s).*&quot;
+
+JAVA = &quot;(?s).*(^(public\\s+|private\\s+|protected\\s+)*.*\\w+\\(.*?\\)\\s*\\{|import\\s+[\\w\\.\\*]+;)(?s).*&quot;
+
+PYTHON = &quot;(?s).*(^print\\s\&quot;.*\&quot;$|^
+#\\s.*$|def\\s.*$|^if\\s[^()]+:)(?s).*&quot;</code></pre>
+<ul>
+<li>Identifier proof solution in js</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">function</span> <span class="at">processData</span>(input) <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>    <span class="va">console</span>.<span class="at">log</span>(<span class="at">identifyLanguage</span>(input))<span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="op">}</span> </span>
+<span id="cb20-4"><a href="#cb20-4"></a></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">var</span> langPatterns <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>    <span class="dt">C</span><span class="op">:</span> [</span>
+<span id="cb20-7"><a href="#cb20-7"></a>        <span class="ss">/</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>#(<span class="va">include</span>.<span class="op">*?&gt;|</span><span class="va">define</span>.<span class="op">*</span>)<span class="op">/</span>g<span class="op">,</span> <span class="co">//cPreprocessor</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>        <span class="ss">/</span><span class="sc">\b(</span><span class="ss">typedef.</span><span class="sc">*?</span><span class="ss">;</span><span class="sc">|</span><span class="ss">struct.</span><span class="sc">*?(?</span><span class="ss">=</span><span class="sc">\s*?\{))</span><span class="ss">/g</span><span class="op">,</span> <span class="co">//cStruct</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>        <span class="ss">/</span><span class="sc">\b\w+\s*</span><span class="ss">-&gt;</span><span class="sc">\s*\w+\b</span><span class="ss">/g</span><span class="op">,</span> <span class="co">//cPointers</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>        <span class="ss">/</span><span class="sc">[a-zA-Z]+\s+\*\s+([a-zA-Z_]\w*)\s*\([a-zA-Z]*\s*([a-zA-Z_]\w*)\)\s*\{</span><span class="ss">/g</span><span class="op">,</span> <span class="co">//cFunctionPointerReturn</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>        <span class="ss">/</span><span class="sc">[a-zA-Z]+\s*\*?\s*([a-zA-Z_]\w*)\(</span><span class="ss">.</span><span class="sc">*[a-zA-Z]+\s*\*\s*([a-zA-Z_]\w*)</span><span class="ss">.</span><span class="sc">*\)\s*\{</span><span class="ss">/g</span> <span class="co">//cFunctionPointerArg</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>    ]<span class="op">,</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>    Java: [</span>
+<span id="cb20-15"><a href="#cb20-15"></a>        <span class="ss">/</span><span class="sc">\b</span><span class="ss">import</span><span class="sc">\s*</span><span class="ss">.</span><span class="sc">*?</span><span class="ss">;/g</span><span class="op">,</span> <span class="co">//javaImport</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>        <span class="ss">/</span><span class="sc">(</span><span class="ss">public</span><span class="sc">|</span><span class="ss">private</span><span class="sc">)?\s*</span><span class="ss">class.</span><span class="sc">*?\{</span><span class="ss">/g</span> <span class="co">//javaClass</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>    ]<span class="op">,</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a>    <span class="dt">Python</span><span class="op">:</span> [</span>
+<span id="cb20-19"><a href="#cb20-19"></a>        <span class="ss">/</span><span class="sc">(</span><span class="ss">class</span><span class="sc">|</span><span class="ss">def</span><span class="sc">|</span><span class="ss">if</span><span class="sc">|</span><span class="ss">while</span><span class="sc">|</span><span class="ss">else</span><span class="sc">|</span><span class="ss">for</span><span class="sc">)</span><span class="ss">.</span><span class="sc">*</span><span class="ss">:/g</span><span class="op">,</span> <span class="co">//pythonKeywords</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a>        <span class="ss">/</span><span class="sc">\[((\d+|(</span><span class="ss">&quot;</span><span class="sc">|</span><span class="ss">&#39;</span><span class="sc">)</span><span class="ss">.</span><span class="sc">+\3)</span><span class="ss">,</span><span class="sc">)*(\d+|(</span><span class="ss">&quot;</span><span class="sc">|</span><span class="ss">&#39;</span><span class="sc">)</span><span class="ss">.</span><span class="sc">+\5)\]</span><span class="ss">/g</span><span class="op">,</span> <span class="co">//pythonLists</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>        <span class="ss">/</span><span class="sc">\b</span><span class="ss">print</span><span class="sc">(\s*(</span><span class="ss">&quot;</span><span class="sc">|</span><span class="ss">&#39;</span><span class="sc">)</span><span class="ss">.</span><span class="sc">+\2|\(</span><span class="ss">.</span><span class="sc">*\))</span><span class="ss">/g</span><span class="op">,</span> <span class="co">//pythonPrint</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a>        <span class="co">///True|False/g //pythonBoolean</span></span>
+<span id="cb20-23"><a href="#cb20-23"></a>    ]<span class="op">,</span></span>
+<span id="cb20-24"><a href="#cb20-24"></a><span class="op">}</span></span>
+<span id="cb20-25"><a href="#cb20-25"></a></span>
+<span id="cb20-26"><a href="#cb20-26"></a><span class="kw">var</span> identifyLanguage <span class="op">=</span> <span class="kw">function</span> (code) <span class="op">{</span></span>
+<span id="cb20-27"><a href="#cb20-27"></a>    <span class="cf">return</span> <span class="va">Object</span>.<span class="at">keys</span>(langPatterns).<span class="at">find</span>(lang <span class="kw">=&gt;</span> </span>
+<span id="cb20-28"><a href="#cb20-28"></a>        langPatterns[lang].<span class="at">some</span>(pattern <span class="kw">=&gt;</span> </span>
+<span id="cb20-29"><a href="#cb20-29"></a>            <span class="va">pattern</span>.<span class="at">test</span>(code)))<span class="op">;</span></span>
+<span id="cb20-30"><a href="#cb20-30"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="regex-test" class="level3">
+<h3>Regex Test</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">import</span><span class="im"> java.util.regex.*;</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">public</span> <span class="kw">class</span> Solution {    </span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
+<span id="cb21-5"><a href="#cb21-5"></a></span>
+<span id="cb21-6"><a href="#cb21-6"></a>        Regex_Test tester = <span class="kw">new</span> <span class="fu">Regex_Test</span>();</span>
+<span id="cb21-7"><a href="#cb21-7"></a>        tester.<span class="fu">checker</span>(<span class="st">&quot;(</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">D){2}</span><span class="sc">\\</span><span class="st">d{4}&quot;</span>); <span class="co">// Use \\ instead of using \ </span></span>
+<span id="cb21-8"><a href="#cb21-8"></a></span>
+<span id="cb21-9"><a href="#cb21-9"></a>    }</span>
+<span id="cb21-10"><a href="#cb21-10"></a>}</span>
+<span id="cb21-11"><a href="#cb21-11"></a></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="kw">class</span> Regex_Test {</span>
+<span id="cb21-13"><a href="#cb21-13"></a></span>
+<span id="cb21-14"><a href="#cb21-14"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">checker</span>(<span class="bu">String</span> Regex_Pattern){</span>
+<span id="cb21-15"><a href="#cb21-15"></a></span>
+<span id="cb21-16"><a href="#cb21-16"></a>        <span class="bu">Scanner</span> Input = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb21-17"><a href="#cb21-17"></a>        <span class="bu">String</span> Test_String = Input.<span class="fu">nextLine</span>();</span>
+<span id="cb21-18"><a href="#cb21-18"></a>        <span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(Regex_Pattern);</span>
+<span id="cb21-19"><a href="#cb21-19"></a>        <span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(Test_String);</span>
+<span id="cb21-20"><a href="#cb21-20"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(m.<span class="fu">find</span>());</span>
+<span id="cb21-21"><a href="#cb21-21"></a>    }   </span>
+<span id="cb21-22"><a href="#cb21-22"></a></span>
+<span id="cb21-23"><a href="#cb21-23"></a>}</span></code></pre></div>
+</section>
+<section id="detect-the-domain-name" class="level3">
+<h3>Detect the domain name</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="dt">int</span> n = in.<span class="fu">nextInt</span>(); in.<span class="fu">nextLine</span>();</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="bu">SortedSet</span>&lt;<span class="bu">String</span>&gt; matches = <span class="kw">new</span> <span class="bu">TreeSet</span>&lt;&gt;();</span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="bu">String</span> regex = <span class="st">&quot;https?://(?:ww[w2]</span><span class="sc">\\</span><span class="st">.)?([a-zA-Z0-9</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">-]+)&quot;</span>;</span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(regex);</span>
+<span id="cb22-7"><a href="#cb22-7"></a></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++){</span>
+<span id="cb22-9"><a href="#cb22-9"></a>    <span class="bu">String</span> s = in.<span class="fu">nextLine</span>();</span>
+<span id="cb22-10"><a href="#cb22-10"></a>    <span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(s);</span>
+<span id="cb22-11"><a href="#cb22-11"></a>    <span class="kw">while</span> (m.<span class="fu">find</span>()) {</span>
+<span id="cb22-12"><a href="#cb22-12"></a>        <span class="bu">String</span> s_new = m.<span class="fu">group</span>(<span class="dv">1</span>);</span>
+<span id="cb22-13"><a href="#cb22-13"></a>        <span class="kw">if</span> (s_new.<span class="fu">indexOf</span>(<span class="ch">&#39;.&#39;</span>) &lt; <span class="dv">0</span>){ <span class="kw">continue</span>; }</span>
+<span id="cb22-14"><a href="#cb22-14"></a>        matches.<span class="fu">add</span>(s_new);</span>
+<span id="cb22-15"><a href="#cb22-15"></a>    }</span>
+<span id="cb22-16"><a href="#cb22-16"></a>}</span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="bu">String</span>.<span class="fu">join</span>(<span class="st">&quot;;&quot;</span>, matches));</span></code></pre></div>
+</section>
+<section id="building-a-smart-ide-identifying-comments" class="level3">
+<h3>Building a Smart IDE: Identifying comments</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">// Slurp in</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="bu">String</span> s_in = <span class="st">&quot;&quot;</span>;</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">while</span> (in.<span class="fu">hasNextLine</span>()) {</span>
+<span id="cb23-5"><a href="#cb23-5"></a>    s_in += in.<span class="fu">nextLine</span>() + <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>;</span>
+<span id="cb23-6"><a href="#cb23-6"></a>}</span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="co">// Declare regex</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="bu">String</span> r_single = <span class="st">&quot;//.*&quot;</span>;</span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="bu">String</span> r_mult = <span class="st">&quot;/</span><span class="sc">\\</span><span class="st">*((?!</span><span class="sc">\\</span><span class="st">*/)[</span><span class="sc">\\</span><span class="st">s</span><span class="sc">\\</span><span class="st">S])*</span><span class="sc">\\</span><span class="st">*/&quot;</span>;</span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="bu">String</span> r_comment = r_single + <span class="st">&quot;|&quot;</span> + r_mult;</span>
+<span id="cb23-12"><a href="#cb23-12"></a><span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(r_comment);</span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(s_in);</span>
+<span id="cb23-14"><a href="#cb23-14"></a></span>
+<span id="cb23-15"><a href="#cb23-15"></a><span class="co">// Parse</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a><span class="bu">ArrayList</span>&lt;<span class="bu">String</span>&gt; matches = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;&gt;();</span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="kw">while</span> (m.<span class="fu">find</span>()) {</span>
+<span id="cb23-18"><a href="#cb23-18"></a>    <span class="bu">String</span> s_new = m.<span class="fu">group</span>(<span class="dv">0</span>);</span>
+<span id="cb23-19"><a href="#cb23-19"></a></span>
+<span id="cb23-20"><a href="#cb23-20"></a>    <span class="co">// Trim each line</span></span>
+<span id="cb23-21"><a href="#cb23-21"></a>    <span class="bu">Arrays</span>.<span class="fu">stream</span>(s_new.<span class="fu">split</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)).<span class="fu">forEachOrdered</span>(x -&gt; {</span>
+<span id="cb23-22"><a href="#cb23-22"></a>        matches.<span class="fu">add</span>(x.<span class="fu">trim</span>());</span>
+<span id="cb23-23"><a href="#cb23-23"></a>    });</span>
+<span id="cb23-24"><a href="#cb23-24"></a>}</span>
+<span id="cb23-25"><a href="#cb23-25"></a></span>
+<span id="cb23-26"><a href="#cb23-26"></a><span class="co">// Print</span></span>
+<span id="cb23-27"><a href="#cb23-27"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="bu">String</span>.<span class="fu">join</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, matches));</span></code></pre></div>
+<ul>
+<li>Fast java answer (pre trim because you don’t care the stdin)</li>
+</ul>
+<div class="sourceCode" id="cb24"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(<span class="bu">String</span>[] args) {</span>
+<span id="cb24-2"><a href="#cb24-2"></a>    <span class="bu">Scanner</span> sc = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="bu">String</span> s;</span>
+<span id="cb24-4"><a href="#cb24-4"></a>    <span class="kw">for</span>(s=<span class="st">&quot;&quot;</span>;sc.<span class="fu">hasNextLine</span>();s+=sc.<span class="fu">nextLine</span>().<span class="fu">trim</span>()+<span class="ch">&#39;\n&#39;</span>);</span>
+<span id="cb24-5"><a href="#cb24-5"></a>    <span class="bu">Matcher</span> m=<span class="bu">Pattern</span>.<span class="fu">compile</span>(<span class="st">&quot;//.*|/</span><span class="sc">\\</span><span class="st">*(?s).*?</span><span class="sc">\\</span><span class="st">*/&quot;</span>).<span class="fu">matcher</span>(s);</span>
+<span id="cb24-6"><a href="#cb24-6"></a>    <span class="kw">while</span>(m.<span class="fu">find</span>())<span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(m.<span class="fu">group</span>());</span>
+<span id="cb24-7"><a href="#cb24-7"></a>}</span></code></pre></div>
+<ul>
+<li>Fast python answer</li>
+</ul>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="im">import</span> re</span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="im">import</span> sys</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a>pat <span class="op">=</span> <span class="vs">r&#39;(/\*.*?\*/|//.*?$)&#39;</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>txt <span class="op">=</span> sys.stdin.read()</span>
+<span id="cb25-6"><a href="#cb25-6"></a></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="co"># re.sub() for Testcase #4: others will just work with comment</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="bu">print</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>.join(re.sub(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">\s+&#39;</span>, <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>, comment) <span class="cf">for</span> comment <span class="kw">in</span> re.findall(pat, txt, re.DOTALL<span class="op">|</span>re.MULTILINE))</span></code></pre></div>
+</section>
+<section id="detecting-valid-latitude-and-longitude-pairs" class="level3">
+<h3>Detecting Valid Latitude and Longitude Pairs</h3>
+<ul>
+<li>My solution, extract they give to code</li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="dt">int</span> n = in.<span class="fu">nextInt</span>(); in.<span class="fu">nextLine</span>();</span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co">// Declare regex</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a><span class="co">// // (X.xxxxx, Y.yyyyyy)</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="co">// // (77.11112223331, 149.99999999)</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a><span class="bu">String</span> regex_x = <span class="st">&quot;([+</span><span class="sc">\\</span><span class="st">-]?(?:0|[1-9]</span><span class="sc">\\</span><span class="st">d*)(?:</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?)&quot;</span>;</span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="bu">String</span> regex_y = regex_x;</span>
+<span id="cb26-9"><a href="#cb26-9"></a><span class="bu">String</span> regex = <span class="st">&quot;</span><span class="sc">\\</span><span class="st">(&quot;</span> + regex_x + <span class="st">&quot;, &quot;</span> + regex_y + <span class="st">&quot;</span><span class="sc">\\</span><span class="st">)&quot;</span>;</span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(regex);</span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a><span class="co">// Read &amp; Match &amp; Write</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++){</span>
+<span id="cb26-14"><a href="#cb26-14"></a>    <span class="bu">String</span> s = in.<span class="fu">nextLine</span>();</span>
+<span id="cb26-15"><a href="#cb26-15"></a>    <span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(s);</span>
+<span id="cb26-16"><a href="#cb26-16"></a>    <span class="co">// Search &amp; Check</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a>    <span class="kw">if</span> (!m.<span class="fu">find</span>()){</span>
+<span id="cb26-18"><a href="#cb26-18"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Invalid&quot;</span>);</span>
+<span id="cb26-19"><a href="#cb26-19"></a>        <span class="kw">continue</span>;</span>
+<span id="cb26-20"><a href="#cb26-20"></a>    }</span>
+<span id="cb26-21"><a href="#cb26-21"></a>    <span class="co">//try {</span></span>
+<span id="cb26-22"><a href="#cb26-22"></a>        <span class="bu">String</span> s_x = m.<span class="fu">group</span>(<span class="dv">1</span>);</span>
+<span id="cb26-23"><a href="#cb26-23"></a>        <span class="bu">String</span> s_y = m.<span class="fu">group</span>(<span class="dv">2</span>);</span>
+<span id="cb26-24"><a href="#cb26-24"></a></span>
+<span id="cb26-25"><a href="#cb26-25"></a>        <span class="dt">float</span> i_x = <span class="bu">Float</span>.<span class="fu">valueOf</span>(s_x);</span>
+<span id="cb26-26"><a href="#cb26-26"></a>        <span class="dt">float</span> i_y = <span class="bu">Float</span>.<span class="fu">valueOf</span>(s_y);</span>
+<span id="cb26-27"><a href="#cb26-27"></a>        <span class="co">// System.out.println(&quot;  Retrieved &quot; + s_x + &quot; : &quot; + s_y);</span></span>
+<span id="cb26-28"><a href="#cb26-28"></a></span>
+<span id="cb26-29"><a href="#cb26-29"></a>        <span class="co">// Where -90&lt;=X&lt;=+90 and -180&lt;=Y&lt;=180.</span></span>
+<span id="cb26-30"><a href="#cb26-30"></a>        <span class="kw">if</span> (-<span class="dv">90</span> &lt;= i_x &amp;&amp; i_x &lt;= <span class="dv">90</span> </span>
+<span id="cb26-31"><a href="#cb26-31"></a>            &amp;&amp; -<span class="dv">180</span> &lt;= i_y &amp;&amp; i_y &lt;= <span class="dv">180</span>){</span>
+<span id="cb26-32"><a href="#cb26-32"></a>            <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Valid&quot;</span>);</span>
+<span id="cb26-33"><a href="#cb26-33"></a>            <span class="kw">continue</span>;</span>
+<span id="cb26-34"><a href="#cb26-34"></a>        }</span>
+<span id="cb26-35"><a href="#cb26-35"></a>    <span class="co">// } catch (Exception e) { }</span></span>
+<span id="cb26-36"><a href="#cb26-36"></a>    <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Invalid&quot;</span>);</span></code></pre></div>
+<ul>
+<li>Idea for java regex not so ugly:</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1"></a><span class="st">&quot;^</span><span class="sc">\\</span><span class="st">(&quot;</span> + </span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="st">&quot;[-+]?(([1-8]?[0-9]|0)(</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?|90(</span><span class="sc">\\</span><span class="st">.0+)?), &quot;</span> +</span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">&quot;[-+]?((1?[1-7]?[0-9]|10[0-9]|[1-9][0-9]|0)(</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?|180(</span><span class="sc">\\</span><span class="st">.0+)?)&quot;</span>   +<span class="st">&quot;</span><span class="sc">\\</span><span class="st">)$&quot;</span></span></code></pre></div>
+<ul>
+<li>Python with sub regex</li>
+</ul>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">import</span> re</span>
+<span id="cb28-2"><a href="#cb28-2"></a></span>
+<span id="cb28-3"><a href="#cb28-3"></a>SIGN <span class="op">=</span> <span class="st">&#39;[\+-]?&#39;</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a>DECIMALS <span class="op">=</span> <span class="st">&#39;(\.[0-9]+)?&#39;</span></span>
+<span id="cb28-5"><a href="#cb28-5"></a>ZEROS <span class="op">=</span> <span class="st">&#39;(\.0+)?&#39;</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a></span>
+<span id="cb28-7"><a href="#cb28-7"></a>LATITUDE <span class="op">=</span>  <span class="ss">f&#39;</span><span class="sc">{</span>SIGN<span class="sc">}</span><span class="ss">(90</span><span class="sc">{</span>ZEROS<span class="sc">}</span><span class="ss">|[1-8]\d</span><span class="sc">{</span>DECIMALS<span class="sc">}</span><span class="ss">|\d</span><span class="sc">{</span>DECIMALS<span class="sc">}</span><span class="ss">)&#39;</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>LONGITUDE <span class="op">=</span> <span class="ss">f&#39;</span><span class="sc">{</span>SIGN<span class="sc">}</span><span class="ss">(180</span><span class="sc">{</span>ZEROS<span class="sc">}</span><span class="ss">|1[0-7]\d</span><span class="sc">{</span>DECIMALS<span class="sc">}</span><span class="ss">|[1-9]\d</span><span class="sc">{</span>DECIMALS<span class="sc">}</span><span class="ss">|\d</span><span class="sc">{</span>DECIMALS<span class="sc">}</span><span class="ss">)&#39;</span></span>
+<span id="cb28-9"><a href="#cb28-9"></a></span>
+<span id="cb28-10"><a href="#cb28-10"></a>REGEX <span class="op">=</span> <span class="ss">f&#39;\(</span><span class="sc">{</span>LATITUDE<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>LONGITUDE<span class="sc">}</span><span class="ss">\)&#39;</span></span>
+<span id="cb28-11"><a href="#cb28-11"></a>pattern <span class="op">=</span> re.<span class="bu">compile</span>(REGEX)</span>
+<span id="cb28-12"><a href="#cb28-12"></a></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="kw">def</span> validate(value):</span>
+<span id="cb28-14"><a href="#cb28-14"></a>    <span class="cf">return</span> pattern.search(value)</span>
+<span id="cb28-15"><a href="#cb28-15"></a></span>
+<span id="cb28-16"><a href="#cb28-16"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">int</span>(<span class="bu">input</span>())):</span>
+<span id="cb28-17"><a href="#cb28-17"></a>    <span class="cf">if</span> validate(<span class="bu">input</span>()):</span>
+<span id="cb28-18"><a href="#cb28-18"></a>        <span class="bu">print</span>(<span class="st">&#39;Valid&#39;</span>)</span>
+<span id="cb28-19"><a href="#cb28-19"></a>    <span class="cf">else</span>:</span>
+<span id="cb28-20"><a href="#cb28-20"></a>        <span class="bu">print</span>(<span class="st">&#39;Invalid&#39;</span>)</span></code></pre></div>
+<ul>
+<li>python monster</li>
+</ul>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="im">import</span> re</span>
+<span id="cb29-2"><a href="#cb29-2"></a></span>
+<span id="cb29-3"><a href="#cb29-3"></a>t <span class="op">=</span> re.<span class="bu">compile</span>(<span class="vs">r&quot;&quot;&quot;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="vs">    ^\(</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="vs">    [+-]?((90(\.0+)?)|([1-8][0-9](\.[0-9]+.html)?)|([0-9](\.[0-9]+.html)?)),</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="vs">    \ </span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="vs">    [+-]?((180(\.0+)?)|((1[0-7][0-9]|[1-9][0-9]|[0-9])(\.[0-9]+)?))</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a><span class="vs">    \)$&quot;&quot;&quot;</span>, re.X)</span>
+<span id="cb29-9"><a href="#cb29-9"></a></span>
+<span id="cb29-10"><a href="#cb29-10"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">int</span>(<span class="bu">input</span>())):</span>
+<span id="cb29-11"><a href="#cb29-11"></a>    <span class="cf">if</span> t.match(<span class="bu">input</span>()):</span>
+<span id="cb29-12"><a href="#cb29-12"></a>        <span class="bu">print</span>(<span class="st">&quot;Valid&quot;</span>)</span>
+<span id="cb29-13"><a href="#cb29-13"></a>    <span class="cf">else</span>:</span>
+<span id="cb29-14"><a href="#cb29-14"></a>        <span class="bu">print</span>(<span class="st">&quot;Invalid&quot;</span>)</span></code></pre></div>
+<ul>
+<li>Java monster</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1"></a><span class="bu">Scanner</span> scanner = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>); </span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="dt">int</span> numberOfInput = <span class="bu">Integer</span>.<span class="fu">parseInt</span>(scanner.<span class="fu">nextLine</span>()); </span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="bu">String</span> inputSentence = <span class="st">&quot;&quot;</span>; </span>
+<span id="cb30-4"><a href="#cb30-4"></a><span class="bu">String</span> validLatAndLong = <span class="st">&quot;</span><span class="sc">\\</span><span class="st">([+-]?((90(</span><span class="sc">\\</span><span class="st">.0+)?)|((([1-8][0-9])|([0-9]))(</span><span class="sc">\\</span><span class="st">.[0-9]+)?)), [+-]?((180(</span><span class="sc">\\</span><span class="st">.0+)?)|(((1[0-7][0-9])|([1-9][0-9])|[0-9])(</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+)?))</span><span class="sc">\\</span><span class="st">)&quot;</span>; </span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="kw">for</span> (<span class="dt">int</span> i =<span class="dv">0</span>; i&lt;numberOfInput; i++) {</span>
+<span id="cb30-6"><a href="#cb30-6"></a>    inputSentence = scanner.<span class="fu">nextLine</span>(); </span>
+<span id="cb30-7"><a href="#cb30-7"></a>    <span class="kw">if</span> (inputSentence.<span class="fu">matches</span>(validLatAndLong)) {</span>
+<span id="cb30-8"><a href="#cb30-8"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Valid&quot;</span>); </span>
+<span id="cb30-9"><a href="#cb30-9"></a>    } <span class="kw">else</span> {</span>
+<span id="cb30-10"><a href="#cb30-10"></a>        <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;Invalid&quot;</span>); </span>
+<span id="cb30-11"><a href="#cb30-11"></a>    }</span>
+<span id="cb30-12"><a href="#cb30-12"></a>}</span></code></pre></div>
+</section>
+<section id="hackerrank-tweets" class="level3">
+<h3>HackerRank Tweets</h3>
+<ul>
+<li>Case insisitive number of match</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb31-1"><a href="#cb31-1"></a><span class="dt">int</span> res = <span class="dv">0</span>;</span>
+<span id="cb31-2"><a href="#cb31-2"></a></span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb31-4"><a href="#cb31-4"></a><span class="dt">int</span> n = in.<span class="fu">nextInt</span>(); in.<span class="fu">nextLine</span>();</span>
+<span id="cb31-5"><a href="#cb31-5"></a></span>
+<span id="cb31-6"><a href="#cb31-6"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++){</span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="bu">String</span> s_line = in.<span class="fu">nextLine</span>();</span>
+<span id="cb31-8"><a href="#cb31-8"></a>    <span class="bu">Matcher</span> m = <span class="bu">Pattern</span>.<span class="fu">compile</span>(<span class="st">&quot;(?i)hackerrank&quot;</span>).<span class="fu">matcher</span>(s_line);</span>
+<span id="cb31-9"><a href="#cb31-9"></a>    <span class="kw">while</span> (m.<span class="fu">find</span>()){</span>
+<span id="cb31-10"><a href="#cb31-10"></a>        res++;</span>
+<span id="cb31-11"><a href="#cb31-11"></a>    }</span>
+<span id="cb31-12"><a href="#cb31-12"></a>}</span>
+<span id="cb31-13"><a href="#cb31-13"></a></span>
+<span id="cb31-14"><a href="#cb31-14"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(<span class="bu">String</span>.<span class="fu">valueOf</span>(res));</span></code></pre></div>
+</section>
+<section id="detect-html-links" class="level3">
+<h3>Detect HTML links</h3>
+<ul>
+<li>Print href and content</li>
+</ul>
+<div class="sourceCode" id="cb32"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb32-1"><a href="#cb32-1"></a><span class="bu">String</span> res = <span class="st">&quot;&quot;</span>;</span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="bu">Scanner</span> in = <span class="kw">new</span> <span class="bu">Scanner</span>(<span class="bu">System</span>.<span class="fu">in</span>);</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="dt">int</span> n = in.<span class="fu">nextInt</span>(); in.<span class="fu">nextLine</span>();</span>
+<span id="cb32-4"><a href="#cb32-4"></a></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="co">// &lt;a href=&quot;http://www.hackerrank.com&quot;&gt;&lt;h1&gt;&lt;b&gt;HackerRank&lt;/b&gt;&lt;/h1&gt;&lt;/a&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="co">// Href</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="bu">String</span> regex = <span class="st">&quot;&lt;a [^&gt;]*href=&quot;</span> + <span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">([^</span><span class="sc">\&quot;</span><span class="st">]*)</span><span class="sc">\&quot;</span><span class="st">&quot;</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>    <span class="co">// Push to last   + Content  + end</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>    + <span class="st">&quot;(?:(?!&lt;/).)*&gt;&quot;</span> + <span class="st">&quot;([^&lt;&gt;]*)&quot;</span> + <span class="st">&quot;&lt;/&quot;</span>;</span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(regex);</span>
+<span id="cb32-11"><a href="#cb32-11"></a></span>
+<span id="cb32-12"><a href="#cb32-12"></a><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++){</span>
+<span id="cb32-13"><a href="#cb32-13"></a>    <span class="bu">String</span> s_line = in.<span class="fu">nextLine</span>();</span>
+<span id="cb32-14"><a href="#cb32-14"></a></span>
+<span id="cb32-15"><a href="#cb32-15"></a>    <span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(s_line);</span>
+<span id="cb32-16"><a href="#cb32-16"></a>    <span class="kw">while</span> (m.<span class="fu">find</span>()){</span>
+<span id="cb32-17"><a href="#cb32-17"></a>        res += m.<span class="fu">group</span>(<span class="dv">1</span>) + <span class="st">&quot;,&quot;</span> + m.<span class="fu">group</span>(<span class="dv">2</span>).<span class="fu">trim</span>() + <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>; </span>
+<span id="cb32-18"><a href="#cb32-18"></a>    }</span>
+<span id="cb32-19"><a href="#cb32-19"></a>}</span>
+<span id="cb32-20"><a href="#cb32-20"></a></span>
+<span id="cb32-21"><a href="#cb32-21"></a><span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(res);</span></code></pre></div>
+<ul>
+<li>JS elegant</li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">var</span> regex<span class="op">=</span><span class="ss">/&lt;a.</span><span class="sc">*?</span><span class="ss">href=&quot;</span><span class="sc">(</span><span class="ss">.</span><span class="sc">*?)</span><span class="ss">&quot;.</span><span class="sc">*?</span><span class="ss">&gt;</span><span class="sc">(</span><span class="ss">.</span><span class="sc">*?)</span><span class="ss">&lt;</span><span class="sc">\/</span><span class="ss">a&gt;/ig</span><span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="kw">var</span> output<span class="op">=</span>[]<span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a><span class="va">input</span>.<span class="at">replace</span>(regex<span class="op">,</span><span class="kw">function</span>(_<span class="op">,</span>href<span class="op">,</span>text)<span class="op">{</span> </span>
+<span id="cb33-4"><a href="#cb33-4"></a>    <span class="va">output</span>.<span class="at">push</span>(<span class="va">href</span>.<span class="at">trim</span>()<span class="op">+</span><span class="st">&#39;,&#39;</span><span class="op">+</span><span class="va">text</span>.<span class="at">replace</span>(<span class="ss">/&lt;.</span><span class="sc">*?</span><span class="ss">&gt;/g</span><span class="op">,</span><span class="st">&#39;&#39;</span>).<span class="at">trim</span>())</span>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="op">}</span>)<span class="op">;</span></span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="va">console</span>.<span class="at">log</span>(<span class="va">output</span>.<span class="at">join</span>(<span class="st">&#39;</span><span class="sc">\n</span><span class="st">&#39;</span>))<span class="op">;</span></span></code></pre></div>
+<ul>
+<li>Java short</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb34-1"><a href="#cb34-1"></a><span class="bu">String</span> str = sc.<span class="fu">nextLine</span>();           </span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="bu">Pattern</span> p = <span class="bu">Pattern</span>.<span class="fu">compile</span>(<span class="st">&quot;&lt;a</span><span class="sc">\\</span><span class="st">shref=</span><span class="sc">\&quot;</span><span class="st">([^</span><span class="sc">\&quot;</span><span class="st">]++)</span><span class="sc">\&quot;</span><span class="st">([^&lt;&gt;]*)&gt;(&lt;</span><span class="sc">\\</span><span class="st">w&gt;)*([^&lt;&gt;]*)&lt;&quot;</span>);</span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="bu">Matcher</span> m = p.<span class="fu">matcher</span>(str);</span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="kw">while</span>(m.<span class="fu">find</span>()) <span class="bu">System</span>.<span class="fu">out</span>.<span class="fu">println</span>(m.<span class="fu">group</span>(<span class="dv">1</span>).<span class="fu">trim</span>()+<span class="st">&quot;,&quot;</span>+m.<span class="fu">group</span>(<span class="dv">4</span>).<span class="fu">trim</span>());</span></code></pre></div>
+<ol type="1">
+<li><code>([^\"]++)</code> is the link you can see that it sits between "" as expected.</li>
+<li><code>([^&lt;&gt;]*)</code> is anything that comes after the link but still in the ‘a’ tag. It is immediately followed by a ‘&gt;’ which is closing the ‘a’ tag.</li>
+<li><code>(&lt;\w&gt;)*</code> is any additional tags preceding the text. You can see that each such tag is enclose in ‘&lt; &gt;’ e.g</li>
+<li><code>([^&lt;&gt;]*)&lt;")</code> is the text.as you can see it is anything other than ‘&lt;&gt;’ before the first occurance of ‘&lt;’.</li>
+</ol>
+</section>
 </section>
 </section>
 </section>

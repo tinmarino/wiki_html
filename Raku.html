@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Raku.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<ul>
+<li><p><a href="Raku-Regex.html">Raku Regex</a></p></li>
+<li><p><a href="Raku-Nqp.html">Raku Nqp</a></p></li>
+<li><p><a href="Raku-Cheat.html">Raku Cheat</a></p></li>
+<li><p><a href="Raku-OneLiner.html">Raku OneLiner</a></p></li>
+<li><p><a href="Raky-Style.html">Raky Style</a></p></li>
+<li><p><a href="Raku-Guide.html">Raku Guide</a></p></li>
+<li><p><a href="Raku-Y-Minute.html">Raku Y Minute</a></p></li>
+<li><p><a href="Raku_Mem.html">Raku_Mem</a></p></li>
+<li><p>Tie variables</p></li>
+</ul>
+<pre class="raku"><code>my $1 := my $b = 2;</code></pre>
+<ul>
+<li>Enable not defining variables</li>
+</ul>
+<pre class="raku"><code>no strict;</code></pre>
+<ul>
+<li>Number base</li>
+</ul>
+<pre class="raku"><code>my $b = :2&lt;11110000&gt;;
+# -&gt; 240   ## A binary (base 2) number
+my $a = :16&lt;FF&gt;;
+# -&gt; 255   ## A hexadecimal (base 16) number
+my $b = :2(&quot;11110000&quot;);
+# -&gt; 240   ## A binary (base 2) number</code></pre>
+<section id="instrospection" class="level3">
+<h3>Instrospection</h3>
+<pre class="raku"><code>for &quot;azea&quot;.HOW.^attributes { .name.say }</code></pre>
+</section>
+<section id="dispatch" class="level3">
+<h3>Dispatch</h3>
+<ul>
+<li>Link: https://perl6.party/post/Perl6-But-Heres-My-Dispatch-So-Callwith-Maybe</li>
+</ul>
+<p>call____ — call next matching candidate in the chain and come back here next____ — just go to next matching candidate in the chain and don’t come back ____same — use the same arguments as were used for current candidate ____with — make the operation with these new arguments provided samewith — make the same call from scratch, following a new dispatch chain, with these new arguments, and come back</p>
+</section>
+<section id="async" class="level3">
+<h3>Async</h3>
+</section>
+<section id="types" class="level3">
+<h3>Types</h3>
+<ul>
+<li>Native C types</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Perl</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>int8</td>
+<td>int8_t, also used for char</td>
+</tr>
+<tr class="even">
+<td>int16</td>
+<td>int16_t, also used for short</td>
+</tr>
+<tr class="odd">
+<td>int32</td>
+<td>int32_t, also used for int</td>
+</tr>
+<tr class="even">
+<td>int64</td>
+<td>int64_t</td>
+</tr>
+<tr class="odd">
+<td>uint8</td>
+<td>uint8_t, also used for unsigned char</td>
+</tr>
+<tr class="even">
+<td>uint16</td>
+<td>uint16_t, also used for unsigned short</td>
+</tr>
+<tr class="odd">
+<td>uint32</td>
+<td>uint32_t, also used for unsigned int</td>
+</tr>
+<tr class="even">
+<td>uint64</td>
+<td>uint64_t</td>
+</tr>
+<tr class="odd">
+<td>Long</td>
+<td>long</td>
+</tr>
+<tr class="even">
+<td>Longlong</td>
+<td>long Long, at least 64-bit</td>
+</tr>
+<tr class="odd">
+<td>num32</td>
+<td>float</td>
+</tr>
+<tr class="even">
+<td>num64</td>
+<td>double</td>
+</tr>
+<tr class="odd">
+<td>Str</td>
+<td>string</td>
+</tr>
+<tr class="even">
+<td>CArray[int32]</td>
+<td>int*, an array of ints</td>
+</tr>
+<tr class="odd">
+<td>Pointer[void]</td>
+<td>void*, can point to all other types</td>
+</tr>
+<tr class="even">
+<td>bool</td>
+<td>bool from C99</td>
+</tr>
+<tr class="odd">
+<td>size_t</td>
+<td>size_t</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Custom types</li>
+</ul>
+<div class="line-block">— | — | – | — |<br />
+package | grammar | module | role |<br />
+knowhow | enum | class | subset |</div>
+</section>
+<section id="module" class="level1">
+<h1>Module</h1>
+<ul>
+<li>use loads and imports a module at compile time</li>
+<li>need loads a module at compile time but does not import anything from it</li>
+<li>import imports the names from the loaded module at compile time</li>
+<li>require loads a module at runtime without importing the names</li>
+</ul>
+<section id="string" class="level3">
+<h3>String</h3>
+<ul>
+<li><p>.comb -&gt; array of chars</p></li>
+<li><p>.chars -&gt; length</p></li>
+<li><p>.flip -&gt; reverse</p></li>
+<li><p>~ -&gt; stringify (the intify is +)</p></li>
+<li><p>.IO -&gt; get IO::HANDLE</p></li>
+<li><p>.index “na” -&gt; first index of occurence</p></li>
+<li><p>.rindex “na” -&gt; last index</p></li>
+<li><p>.contains “na”</p></li>
+<li><p>.substr pos, length</p>
+<ul>
+<li>.substr *-5 - &gt; last 5 chars (graphemes)</li>
+</ul></li>
+</ul>
+</section>
+<section id="iohandle" class="level3">
+<h3>IO::HANDLE</h3>
+<ul>
+<li>.lines -&gt; array of chomped lines</li>
+<li>.slurp</li>
+<li>.spurt -&gt; write clobering</li>
+</ul>
+</section>
+<section id="array" class="level3">
+<h3>Array</h3>
+<ul>
+<li>.elems -&gt; length</li>
+<li>.end -&gt; index of last</li>
+<li>.unique</li>
+<li>.squish -&gt; unique for sorted</li>
+<li>|<span class="citation" data-cites="arr">@arr</span> -&gt; convert to list (to use with push and unshift)</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Reduce</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">my</span> <span class="dt">$sum</span> = reduce { <span class="dt">$^a</span> + <span class="dt">$^b</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb5-4"><a href="#cb5-4"></a>say [+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">4</span>;</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># -&gt; 10</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>say [\+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>;</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># -&gt; (1 3 6 10)</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>say [<span class="kw">lt</span>] &lt;a b c d e&gt;;</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># -&gt; True</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Map</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="fu">map</span> { <span class="dt">$_</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">map</span> <span class="dt">$num</span> -&gt; { <span class="dt">$num</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="fu">map</span> { <span class="dt">$^a</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># Filter</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="fu">grep</span> { <span class="kw">/</span><span class="ot">&lt;</span><span class="ch">[</span><span class="bn">aeiouy</span><span class="ch">]</span><span class="ot">&gt;</span><span class="kw">/</span> }, <span class="dt">@array</span>;</span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="fu">grep</span> {<span class="kw">&#39;</span><span class="st">uno</span><span class="kw">&#39;</span>}, <span class="dt">%eng2sp</span>.<span class="fu">values</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb6-1"><a href="#cb6-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Type</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">my</span> Int <span class="dt">@arr</span> = <span class="dv">1</span>...<span class="dv">20</span>;</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Shaped arrays</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">my</span> <span class="dt">@arr</span>[<span class="dv">12</span>] = <span class="dv">22</span>, <span class="dv">12</span>;</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Fill with Any</span></span></code></pre></div>
+</section>
+<section id="hash" class="level3">
+<h3>Hash</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb7-1"><a href="#cb7-1"></a>say <span class="fu">grep</span> { .value == <span class="dv">2</span> }, <span class="dt">%histo</span>.pairs</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="dt">%seen</span>{<span class="dt">$key</span>}:<span class="fu">exists</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">my</span> <span class="dt">%uniq</span> = <span class="fu">map</span> { <span class="dt">$_</span> =&gt; <span class="dv">1</span> }, <span class="dt">@arr</span>;</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">my</span> <span class="dt">%rev</span> = <span class="dt">%hash</span>.kv.<span class="fu">reverse</span>;</span></code></pre></div>
+</section>
+<section id="how-higher-order-working" class="level3">
+<h3>HOW: Higher Order Working</h3>
+<p>Can be invoked with <code>'toto'.^methods</code></p>
+<ul>
+<li>.methods</li>
+</ul>
+</section>
+</section>
+</body>
+</html>

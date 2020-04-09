@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Perl-HackerRank.md – Perl HackerRank tips</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/color_dark_solarized.css" />
+  <link rel="stylesheet" href="Css/layout_toc.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="Css/js_masonry_desandro.js"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Perl HackerRank tips</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#stdin">Stdin</a></li>
+<li><a href="#number-of-match">Number of match</a></li>
+<li><a href="#branch-reset-group-ab">Branch reset Group <code>(?|(a)|(b))</code></a></li>
+<li><a href="#forward-references-2tictac">Forward references <code>^(\2tic|(tac))+$</code></a></li>
+<li><a href="#the-british-and-american-style-of-spelling">The British and American Style of Spelling</a></li>
+<li><a href="#uk-and-us-part-2">UK and US: Part 2</a></li>
+<li><a href="#detect-the-email-addresses">Detect the Email Addresses</a></li>
+<li><a href="#build-a-stack-exchange-scraper">Build a Stack Exchange Scraper</a></li>
+<li><a href="#utopian-identification-number">Utopian Identification Number</a></li>
+<li><a href="#valid-pan-number">Valid PAN number</a></li>
+<li><a href="#find-hackerrank">Find Hackerrank</a></li>
+<li><a href="#ip-address-validation">IP Address Validation</a></li>
+<li><a href="#split-the-phone-numbers">Split the Phone Numbers</a></li>
+<li><a href="#detect-html-attributes">Detect HTML Attributes</a></li>
+<li><a href="#matching">Matching</a></li>
+<li><a href="#detect-html-tags">Detect HTML Tags</a></li>
+</ul>
+</nav>
+<section class="level2">
+<section id="stdin" class="level3">
+<h3>Stdin</h3>
+<ul>
+<li>Slurp all stdin to list or string</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">my</span> <span class="dt">@lines</span> = <span class="kw">&lt;STDIN&gt;</span>;</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">my</span> <span class="dt">$str</span> = <span class="kw">do</span> { <span class="kw">local</span> <span class="dt">$/</span>; <span class="kw">&lt;STDIN&gt;</span> };</span></code></pre></div>
+<ul>
+<li>Read all lines (except first)</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">sub </span><span class="fu">read_all_lines</span>(){&lt;&gt;;(<span class="kw">&lt;STDIN&gt;</span>);}</span></code></pre></div>
+<ul>
+<li>Read_n_lines: Function to read num then num x lines</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">sub </span><span class="fu">read_n_lines</span>(){</span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$line</span>;}</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="kw">return</span> <span class="dt">@res</span>;</span>
+<span id="cb3-6"><a href="#cb3-6"></a>}</span></code></pre></div>
+<ul>
+<li>Inline example</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">my</span> <span class="dt">@data</span>; <span class="kw">my</span> <span class="dt">@query</span>;</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@data</span>, <span class="dt">$line</span>;}</span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">my</span> <span class="dt">$q</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$q</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@query</span>, <span class="dt">$line</span>;}</span></code></pre></div>
+</section>
+<section id="number-of-match" class="level3">
+<h3>Number of match</h3>
+<p>Put the regex in list context (to get the number of matches) and put that into scalar context.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">my</span> <span class="dt">$number</span> = () = <span class="dt">$string</span> =~ <span class="kw">/</span><span class="ot">\.</span><span class="kw">/gi</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">my</span> <span class="dt">$string</span> = <span class="kw">&quot;</span><span class="st">one.two.three.four</span><span class="kw">&quot;</span>;</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">my</span> <span class="dt">@count</span> = <span class="dt">$string</span> =~ <span class="kw">/</span><span class="ot">\.</span><span class="kw">/g</span>;</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">print</span> <span class="fu">scalar</span> <span class="dt">@count</span>;</span></code></pre></div>
+</section>
+<section id="branch-reset-group-ab" class="level3">
+<h3>Branch reset Group <code>(?|(a)|(b))</code></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb7-1"><a href="#cb7-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">^\d\d(?|(-)|(:)|(\.)|(---))\d\d\1\d\d\1\d\d$</span><span class="kw">&#39;</span>;</span></code></pre></div>
+</section>
+<section id="forward-references-2tictac" class="level3">
+<h3>Forward references <code>^(\2tic|(tac))+$</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">^(\2tic|(tac))+$</span><span class="kw">&#39;</span></span></code></pre></div>
+</section>
+<section id="the-british-and-american-style-of-spelling" class="level3">
+<h3>The British and American Style of Spelling</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw">sub </span><span class="fu">read_lines</span>(){</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$line</span>;}</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="kw">return</span> <span class="dt">@res</span>;</span>
+<span id="cb9-8"><a href="#cb9-8"></a>}</span>
+<span id="cb9-9"><a href="#cb9-9"></a></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="kw">my</span> <span class="dt">@data</span> = read_lines;</span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="kw">my</span> <span class="dt">@query</span> = read_lines;</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="kw">my</span> <span class="dt">$data</span> = <span class="fu">join</span> <span class="kw">&quot;</span><span class="st"> </span><span class="kw">&quot;</span>, <span class="dt">@data</span>;</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="kw">for</span> <span class="kw">my</span> <span class="dt">$query</span> (<span class="dt">@query</span>){</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="kw">my</span> <span class="dt">$re</span> = <span class="kw">&#39;</span><span class="st">\b</span><span class="kw">&#39;</span> . <span class="dt">$query</span> . <span class="kw">&#39;</span><span class="st">|</span><span class="kw">&#39;</span> . <span class="dt">$query</span> =~ <span class="kw">s/</span><span class="ot">ze</span><span class="ch">$</span><span class="kw">/</span><span class="st">se</span><span class="kw">/</span>r . <span class="kw">&#39;</span><span class="st">\b</span><span class="kw">&#39;</span>;</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="kw">my</span> <span class="dt">$num</span> = () = <span class="dt">$data</span> =~ <span class="kw">/</span><span class="dt">$re</span><span class="kw">/gi</span>;</span>
+<span id="cb9-17"><a href="#cb9-17"></a>    say <span class="dt">$num</span>;</span>
+<span id="cb9-18"><a href="#cb9-18"></a>}</span></code></pre></div>
+<ul>
+<li>One liner</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb10-1"><a href="#cb10-1"></a><span class="dt">$;</span>.=&lt;&gt; <span class="kw">for</span>(<span class="dv">0</span>..&lt;&gt;); <span class="kw">s/</span><span class="ot">ze</span><span class="bn">\n</span><span class="ch">?$</span><span class="kw">//</span>, <span class="dt">@_</span>=<span class="dt">$;</span>=~<span class="kw">/</span><span class="ch">\b</span><span class="dt">$_</span><span class="ch">[</span><span class="bn">zs</span><span class="ch">]</span><span class="ot">e</span><span class="ch">\b</span><span class="kw">/g</span>, print$</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#_+1,$/ while&lt;&gt;</span></span></code></pre></div>
+</section>
+<section id="uk-and-us-part-2" class="level3">
+<h3>UK and US: Part 2</h3>
+<ul>
+<li>Same as above with:</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">my</span> <span class="dt">$re</span> = <span class="kw">&#39;</span><span class="st">\b</span><span class="kw">&#39;</span> . <span class="dt">$query</span> =~ <span class="kw">s/</span><span class="ot">our</span><span class="kw">/</span><span class="st">ou?r</span><span class="kw">/</span>r . <span class="kw">&#39;</span><span class="st">\b</span><span class="kw">&#39;</span>;</span></code></pre></div>
+</section>
+<section id="detect-the-email-addresses" class="level3">
+<h3>Detect the Email Addresses</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">sub </span><span class="fu">read_lines</span>(){</span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb12-5"><a href="#cb12-5"></a>    <span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$line</span>;}</span>
+<span id="cb12-7"><a href="#cb12-7"></a>    <span class="kw">return</span> <span class="dt">@res</span>;</span>
+<span id="cb12-8"><a href="#cb12-8"></a>}</span>
+<span id="cb12-9"><a href="#cb12-9"></a></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="kw">sub </span><span class="fu">uniq</span> {</span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="kw">my</span> <span class="dt">%seen</span>;</span>
+<span id="cb12-12"><a href="#cb12-12"></a>    <span class="fu">grep</span> !<span class="dt">$seen</span>{<span class="dt">$_</span>}++, <span class="dt">@_</span>;</span>
+<span id="cb12-13"><a href="#cb12-13"></a>}</span>
+<span id="cb12-14"><a href="#cb12-14"></a></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="kw">my</span> <span class="dt">@data</span> = read_lines;</span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="kw">my</span> <span class="dt">$data</span> = <span class="fu">join</span> <span class="kw">&quot;</span><span class="st"> </span><span class="kw">&quot;</span>, <span class="dt">@data</span>;</span>
+<span id="cb12-17"><a href="#cb12-17"></a></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="kw">my</span> <span class="dt">$re</span> = <span class="kw">/</span><span class="ch">\b</span><span class="bn">\S</span><span class="ch">+\b</span><span class="kw">/</span>;</span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="kw">my</span> <span class="dt">@match</span> = <span class="dt">$data</span> =~ <span class="kw">/</span><span class="ch">\b</span><span class="bn">\S</span><span class="ch">+</span><span class="dt">@</span><span class="bn">\S</span><span class="ch">+</span><span class="ot">\.</span><span class="bn">\S</span><span class="ch">+\b</span><span class="kw">/g</span>;</span>
+<span id="cb12-20"><a href="#cb12-20"></a>say <span class="fu">join</span> <span class="kw">&#39;</span><span class="st">;</span><span class="kw">&#39;</span>, uniq <span class="fu">sort</span> <span class="dt">@match</span>;</span></code></pre></div>
+<ul>
+<li>Too slow</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="kw">sub </span><span class="fu">read_lines</span>(){</span>
+<span id="cb13-4"><a href="#cb13-4"></a>    <span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$line</span>;}</span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="kw">return</span> <span class="dt">@res</span>;</span>
+<span id="cb13-8"><a href="#cb13-8"></a>}</span>
+<span id="cb13-9"><a href="#cb13-9"></a></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="kw">sub </span><span class="fu">uniq</span> {</span>
+<span id="cb13-11"><a href="#cb13-11"></a>    <span class="kw">my</span> <span class="dt">%seen</span>;</span>
+<span id="cb13-12"><a href="#cb13-12"></a>    <span class="fu">grep</span> !<span class="dt">$seen</span>{<span class="dt">$_</span>}++, <span class="dt">@_</span>;</span>
+<span id="cb13-13"><a href="#cb13-13"></a>}</span>
+<span id="cb13-14"><a href="#cb13-14"></a></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="kw">my</span> <span class="dt">@data</span> = read_lines;</span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="kw">my</span> <span class="dt">$data</span> = <span class="fu">join</span> <span class="kw">&quot;</span><span class="st"> </span><span class="kw">&quot;</span>, <span class="dt">@data</span>;</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="kw">my</span> <span class="dt">$rfc5322</span> = <span class="kw">qr{</span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="ot">    </span><span class="ch">\b(?=</span><span class="bn">\S</span><span class="ch">)(</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="ot">    </span><span class="ch">(?(DEFINE)</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">address&gt;         </span><span class="ch">(?&amp;mailbox)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;group))</span></span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">mailbox&gt;         </span><span class="ch">(?&amp;name_addr)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;addr_spec))</span></span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">name_addr&gt;       </span><span class="ch">(?&amp;display_name)?</span><span class="ot"> </span><span class="ch">(?&amp;angle_addr))</span></span>
+<span id="cb13-24"><a href="#cb13-24"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">angle_addr&gt;      </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> &lt; </span><span class="ch">(?&amp;addr_spec)</span><span class="ot"> &gt; </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">group&gt;           </span><span class="ch">(?&amp;display_name)</span><span class="ot"> : </span><span class="ch">(?:(?&amp;mailbox_list)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;CFWS))?</span><span class="ot"> ; </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">display_name&gt;    </span><span class="ch">(?&amp;phrase))</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">mailbox_list&gt;    </span><span class="ch">(?&amp;mailbox)</span><span class="ot"> </span><span class="ch">(?:</span><span class="ot"> , </span><span class="ch">(?&amp;mailbox))*)</span></span>
+<span id="cb13-28"><a href="#cb13-28"></a></span>
+<span id="cb13-29"><a href="#cb13-29"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">addr_spec&gt;       </span><span class="ch">(?&amp;local_part)</span><span class="ot"> \@ </span><span class="ch">(?&amp;domain))</span></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">local_part&gt;      </span><span class="ch">(?&amp;dot_atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_string))</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">domain&gt;          </span><span class="ch">(?&amp;dot_atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;domain_literal))</span></span>
+<span id="cb13-32"><a href="#cb13-32"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">domain_literal&gt;  </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> \[ </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;dcontent))*</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="ot">                            \] </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">dcontent&gt;        </span><span class="ch">(?&amp;dtext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair))</span></span>
+<span id="cb13-35"><a href="#cb13-35"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">dtext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21-\x5a\x5e-\x7e</span><span class="ch">])</span></span>
+<span id="cb13-36"><a href="#cb13-36"></a></span>
+<span id="cb13-37"><a href="#cb13-37"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">atext&gt;           </span><span class="ch">(?&amp;ALPHA)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;DIGIT)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">!\</span></span>
+<span id="cb13-38"><a href="#cb13-38"></a><span class="bn">#\$%&amp;&#39;*+-\/=?</span><span class="ch">^</span><span class="bn">_`{|}~</span><span class="ch">])</span></span>
+<span id="cb13-39"><a href="#cb13-39"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">atom&gt;            </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;atext)+</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-40"><a href="#cb13-40"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">dot_atom&gt;        </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;dot_atom_text)</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-41"><a href="#cb13-41"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">dot_atom_text&gt;   </span><span class="ch">(?&amp;atext)+</span><span class="ot"> </span><span class="ch">(?:</span><span class="ot"> \. </span><span class="ch">(?&amp;atext)+)*)</span></span>
+<span id="cb13-42"><a href="#cb13-42"></a></span>
+<span id="cb13-43"><a href="#cb13-43"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">text&gt;            </span><span class="ch">[</span><span class="bn">\x01-\x09\x0b\x0c\x0e-\x7f</span><span class="ch">])</span></span>
+<span id="cb13-44"><a href="#cb13-44"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">quoted_pair&gt;     \\ </span><span class="ch">(?&amp;text))</span></span>
+<span id="cb13-45"><a href="#cb13-45"></a></span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">qtext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21\x23-\x5b\x5d-\x7e</span><span class="ch">])</span></span>
+<span id="cb13-47"><a href="#cb13-47"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">qcontent&gt;        </span><span class="ch">(?&amp;qtext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair))</span></span>
+<span id="cb13-48"><a href="#cb13-48"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">quoted_string&gt;   </span><span class="ch">(?&amp;CFWS)?</span><span class="ot"> </span><span class="ch">(?&amp;DQUOTE)</span><span class="ot"> </span><span class="ch">(?:(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;qcontent))*</span></span>
+<span id="cb13-49"><a href="#cb13-49"></a><span class="ot">                            </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;DQUOTE)</span><span class="ot"> </span><span class="ch">(?&amp;CFWS)?)</span></span>
+<span id="cb13-50"><a href="#cb13-50"></a></span>
+<span id="cb13-51"><a href="#cb13-51"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">word&gt;            </span><span class="ch">(?&amp;atom)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_string))</span></span>
+<span id="cb13-52"><a href="#cb13-52"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">phrase&gt;          </span><span class="ch">(?&amp;word)+)</span></span>
+<span id="cb13-53"><a href="#cb13-53"></a></span>
+<span id="cb13-54"><a href="#cb13-54"></a></span>
+<span id="cb13-55"><a href="#cb13-55"></a><span class="co"># Folding white space</span></span>
+<span id="cb13-56"><a href="#cb13-56"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">FWS&gt;             </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;WSP)*</span><span class="ot"> </span><span class="ch">(?&amp;CRLF))?</span><span class="ot"> </span><span class="ch">(?&amp;WSP)+)</span></span>
+<span id="cb13-57"><a href="#cb13-57"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">ctext&gt;           </span><span class="ch">(?&amp;NO_WS_CTL)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">[</span><span class="bn">\x21-\x27\x2a-\x5b\x5d-\x7e</span><span class="ch">])</span></span>
+<span id="cb13-58"><a href="#cb13-58"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">ccontent&gt;        </span><span class="ch">(?&amp;ctext)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;quoted_pair)</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;comment))</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">comment&gt;         \( </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;ccontent))*</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> \) </span><span class="ch">)</span></span>
+<span id="cb13-60"><a href="#cb13-60"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">CFWS&gt;            </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;comment))*</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a><span class="ot">                            </span><span class="ch">(?:</span><span class="ot"> </span><span class="ch">(?:(?&amp;FWS)?</span><span class="ot"> </span><span class="ch">(?&amp;comment))</span><span class="ot"> </span><span class="ch">|</span><span class="ot"> </span><span class="ch">(?&amp;FWS)))</span></span>
+<span id="cb13-62"><a href="#cb13-62"></a></span>
+<span id="cb13-63"><a href="#cb13-63"></a></span>
+<span id="cb13-64"><a href="#cb13-64"></a><span class="co"># No whitespace control</span></span>
+<span id="cb13-65"><a href="#cb13-65"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">NO_WS_CTL&gt;       </span><span class="ch">[</span><span class="bn">\x01-\x08\x0b\x0c\x0e-\x1f\x7f</span><span class="ch">])</span></span>
+<span id="cb13-66"><a href="#cb13-66"></a></span>
+<span id="cb13-67"><a href="#cb13-67"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">ALPHA&gt;           </span><span class="ch">[</span><span class="bn">A-Za-z</span><span class="ch">])</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">DIGIT&gt;           </span><span class="ch">[</span><span class="bn">0-9</span><span class="ch">])</span></span>
+<span id="cb13-69"><a href="#cb13-69"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">CRLF&gt;            </span><span class="dt">\x0d</span><span class="ot"> </span><span class="dt">\x0a</span><span class="ch">)</span></span>
+<span id="cb13-70"><a href="#cb13-70"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">DQUOTE&gt;          &quot;</span><span class="ch">)</span></span>
+<span id="cb13-71"><a href="#cb13-71"></a><span class="ot">        </span><span class="ch">(?&lt;</span><span class="ot">WSP&gt;             </span><span class="ch">[</span><span class="bn">\x20\x09</span><span class="ch">])</span></span>
+<span id="cb13-72"><a href="#cb13-72"></a><span class="ot">    </span><span class="ch">)</span></span>
+<span id="cb13-73"><a href="#cb13-73"></a></span>
+<span id="cb13-74"><a href="#cb13-74"></a><span class="ot">    </span><span class="ch">(?&amp;address)</span></span>
+<span id="cb13-75"><a href="#cb13-75"></a><span class="ot">    </span><span class="ch">)\b(?&lt;=</span><span class="bn">\S</span><span class="ch">)</span></span>
+<span id="cb13-76"><a href="#cb13-76"></a><span class="kw">}x</span>;</span>
+<span id="cb13-77"><a href="#cb13-77"></a></span>
+<span id="cb13-78"><a href="#cb13-78"></a></span>
+<span id="cb13-79"><a href="#cb13-79"></a></span>
+<span id="cb13-80"><a href="#cb13-80"></a><span class="kw">my</span> <span class="dt">@match</span>;</span>
+<span id="cb13-81"><a href="#cb13-81"></a><span class="kw">while</span> (<span class="dt">$data</span> =~ <span class="kw">/</span><span class="dt">$rfc5322</span><span class="kw">/g</span>){</span>
+<span id="cb13-82"><a href="#cb13-82"></a>    <span class="fu">push</span> <span class="dt">@match</span>, <span class="dt">$&amp;</span> ;</span>
+<span id="cb13-83"><a href="#cb13-83"></a>}</span>
+<span id="cb13-84"><a href="#cb13-84"></a></span>
+<span id="cb13-85"><a href="#cb13-85"></a>say <span class="fu">join</span> <span class="kw">&#39;</span><span class="st">;</span><span class="kw">&#39;</span>, uniq <span class="fu">sort</span> <span class="dt">@match</span>;</span></code></pre></div>
+</section>
+<section id="build-a-stack-exchange-scraper" class="level3">
+<h3>Build a Stack Exchange Scraper</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">my</span> <span class="dt">$str</span>; { <span class="kw">local</span> <span class="dt">$/</span>; <span class="dt">$str</span> = <span class="kw">&lt;STDIN&gt;</span> }</span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">=pod</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">&lt;h3&gt;&lt;a href=&quot;/questions/80407/about-power-supply-of-opertional-amplifier&quot; class=&quot;question-hyperlink&quot;&gt;about power supply of opertional amplifier&lt;/a&gt;&lt;/h3&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">....</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">asked &lt;span title=&quot;2013-08-27 21:49:14Z&quot; class=&quot;relativetime&quot;&gt;11 hours ago&lt;/span&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">=cut</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="kw">my</span> <span class="dt">$r1</span> = <span class="kw">qr/</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="ot">    questions\/</span><span class="ch">(</span><span class="bn">\d</span><span class="ch">*)</span><span class="ot">\/</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># question grep(id)                      </span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="ot">    </span><span class="ch">[^</span><span class="bn">&gt;</span><span class="ch">]*?</span><span class="ot">&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co"># ...&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="ot">        </span><span class="ch">([^</span><span class="bn">&lt;</span><span class="ch">]*?)</span><span class="ot">&lt;</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co"># grep(title)&lt;</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="ot">    .</span><span class="ch">*?</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="co"># closest ...</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="ot">    relativetime</span><span class="ch">[^</span><span class="bn">&gt;</span><span class="ch">]*?</span><span class="ot">&gt;</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co"># ... relativetime</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="ot">        </span><span class="ch">([^</span><span class="bn">&lt;</span><span class="ch">]*?)</span><span class="ot">&lt;</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co"># grep(title)</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="ot">    </span><span class="kw">/xs</span>;</span>
+<span id="cb14-25"><a href="#cb14-25"></a></span>
+<span id="cb14-26"><a href="#cb14-26"></a></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="kw">while</span> (<span class="dt">$str</span> =~ <span class="kw">/</span><span class="dt">$r1</span><span class="kw">/g</span>){</span>
+<span id="cb14-29"><a href="#cb14-29"></a>    <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$1</span> . <span class="kw">&#39;</span><span class="st">;</span><span class="kw">&#39;</span> . <span class="dt">$2</span> . <span class="kw">&#39;</span><span class="st">;</span><span class="kw">&#39;</span> . <span class="dt">$3</span>;</span>
+<span id="cb14-30"><a href="#cb14-30"></a>}</span>
+<span id="cb14-31"><a href="#cb14-31"></a></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="fu">print</span> <span class="fu">join</span> <span class="kw">&quot;</span><span class="ch">\n</span><span class="kw">&quot;</span>, <span class="dt">@res</span>;</span></code></pre></div>
+</section>
+<section id="utopian-identification-number" class="level3">
+<h3>Utopian Identification Number</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb15-2"><a href="#cb15-2"></a></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="co">=pod</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">The string must begin with between 0-3 (inclusive) lowercase letters.</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">Immediately following the letters, there must be a sequence of digits (0-9). The length of this segment must be between 2 and 8, both inclusive.</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">Immediately following the numbers, there must be atleast 3 uppercase letters.</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co">=cut</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">my</span> <span class="dt">$re</span> = <span class="kw">qr/</span><span class="ch">^[</span><span class="bn">a-z</span><span class="ch">]{0,3}</span><span class="bn">\d</span><span class="ch">{2,8}[</span><span class="bn">A-Z</span><span class="ch">]{3,}$</span><span class="kw">/</span>;</span>
+<span id="cb15-11"><a href="#cb15-11"></a></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="kw">sub </span><span class="fu">read_lines</span>(){</span>
+<span id="cb15-13"><a href="#cb15-13"></a>    <span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb15-14"><a href="#cb15-14"></a>    <span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt; + <span class="dv">0</span>;</span>
+<span id="cb15-15"><a href="#cb15-15"></a>    <span class="kw">for</span> (<span class="dv">1</span> .. <span class="dt">$n</span>) {<span class="kw">my</span> <span class="dt">$line</span> = &lt;&gt;; <span class="fu">chomp</span> <span class="dt">$line</span>; <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$line</span>;}</span>
+<span id="cb15-16"><a href="#cb15-16"></a>    <span class="kw">return</span> <span class="dt">@res</span>;</span>
+<span id="cb15-17"><a href="#cb15-17"></a>}</span>
+<span id="cb15-18"><a href="#cb15-18"></a></span>
+<span id="cb15-19"><a href="#cb15-19"></a><span class="kw">for</span> <span class="kw">my</span> <span class="dt">$line</span> (read_lines){</span>
+<span id="cb15-20"><a href="#cb15-20"></a>    say <span class="dt">$line</span> =~ <span class="kw">m/</span><span class="dt">$re</span><span class="kw">/</span> ? <span class="kw">&#39;</span><span class="st">VALID</span><span class="kw">&#39;</span> : <span class="kw">&#39;</span><span class="st">INVALID</span><span class="kw">&#39;</span>;</span>
+<span id="cb15-21"><a href="#cb15-21"></a>}</span></code></pre></div>
+</section>
+<section id="valid-pan-number" class="level3">
+<h3>Valid PAN number</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># &lt;char&gt;&lt;char&gt;&lt;char&gt;&lt;char&gt;&lt;char&gt;&lt;digit&gt;&lt;digit&gt;&lt;digit&gt;&lt;digit&gt;&lt;char&gt;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">my</span> <span class="dt">$re</span> = <span class="kw">qr/</span><span class="ch">^[</span><span class="bn">A-Z</span><span class="ch">]{5}</span><span class="bn">\d</span><span class="ch">{4}[</span><span class="bn">A-Z</span><span class="ch">]$</span><span class="kw">/</span>;</span>
+<span id="cb16-6"><a href="#cb16-6"></a></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">sub </span><span class="fu">read_lines</span>(){&lt;&gt;;(<span class="kw">&lt;STDIN&gt;</span>);}</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="kw">for</span> <span class="kw">my</span> <span class="dt">$line</span> (read_lines){</span>
+<span id="cb16-10"><a href="#cb16-10"></a>    say <span class="dt">$line</span> =~ <span class="kw">m/</span><span class="dt">$re</span><span class="kw">/</span> ? <span class="kw">&#39;</span><span class="st">YES</span><span class="kw">&#39;</span> : <span class="kw">&#39;</span><span class="st">NO</span><span class="kw">&#39;</span>;</span>
+<span id="cb16-11"><a href="#cb16-11"></a>}</span></code></pre></div>
+</section>
+<section id="find-hackerrank" class="level3">
+<h3>Find Hackerrank</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb17-2"><a href="#cb17-2"></a>&lt;&gt;;</span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">my</span> <span class="dt">@lines</span> = &lt;&gt;;</span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">my</span> <span class="dt">$r1</span> = <span class="kw">&#39;</span><span class="st">hackerrank</span><span class="kw">&#39;</span>;</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">for</span> (<span class="dt">@lines</span>){</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="kw">given</span> (<span class="dt">$_</span>){</span>
+<span id="cb17-7"><a href="#cb17-7"></a>        <span class="kw">when</span> (<span class="kw">/</span><span class="ch">^</span><span class="dt">$r1</span><span class="ch">$</span><span class="kw">/</span>){say <span class="dv">0</span>;}</span>
+<span id="cb17-8"><a href="#cb17-8"></a>        <span class="kw">when</span> (<span class="kw">/</span><span class="dt">$r1</span><span class="ch">$</span><span class="kw">/</span>){say <span class="dv">2</span>;}</span>
+<span id="cb17-9"><a href="#cb17-9"></a>        <span class="kw">when</span> (<span class="kw">/</span><span class="ch">^</span><span class="dt">$r1</span><span class="kw">/</span>){say <span class="dv">1</span>;}</span>
+<span id="cb17-10"><a href="#cb17-10"></a>        <span class="kw">default</span> {say <span class="dv">-1</span>;}</span>
+<span id="cb17-11"><a href="#cb17-11"></a>    }</span>
+<span id="cb17-12"><a href="#cb17-12"></a>}</span></code></pre></div>
+</section>
+<section id="ip-address-validation" class="level3">
+<h3>IP Address Validation</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb18-2"><a href="#cb18-2"></a>&lt;&gt;;<span class="kw">my</span> <span class="dt">@lines</span> = &lt;&gt;;</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">my</span> <span class="dt">$r_ipv4</span> = <span class="kw">&#39;</span><span class="st">((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(</span><span class="ch">\\</span><span class="st">.|$)){4}</span><span class="kw">&#39;</span>;</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">my</span> <span class="dt">$r_ipv6</span> = <span class="kw">qr/</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){7,7}[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}|</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># 1:2:3:4:5:6:7:8</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,7}</span><span class="ot">:</span><span class="ch">|</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co"># 1::                              1:2:3:4:5:6:7::</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,6}</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}|</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co"># 1::8             1:2:3:4:5:6::8  1:2:3:4:5:6::8</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,5}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,2}|</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="co"># 1::7:8           1:2:3:4:5::7:8  1:2:3:4:5::8</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,4}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,3}|</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co"># 1::6:7:8         1:2:3:4::6:7:8  1:2:3:4::8</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,3}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,4}|</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co"># 1::5:6:7:8       1:2:3::5:6:7:8  1:2:3::8</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,2}(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,5}|</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># 1::4:5:6:7:8     1:2::4:5:6:7:8  1:2::8</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="ot">  </span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">((</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,6})|</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co"># 1::3:4:5:6:7:8   1::3:4:5:6:7:8  1::8  </span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="ot">  :</span><span class="ch">((</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}){1,7}|</span><span class="ot">:</span><span class="ch">)|</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co"># ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8 ::8       ::     </span></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="ot">  fe80:</span><span class="ch">(</span><span class="ot">:</span><span class="ch">[</span><span class="bn">0-9a-fA-F</span><span class="ch">]{0,4}){0,4}</span><span class="ot">%</span><span class="ch">[</span><span class="bn">0-9a-zA-Z</span><span class="ch">]{1,}|</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="co"># fe80::7:8%eth0   fe80::7:8%1     (link-local IPv6 addresses with zone index)</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a><span class="ot">  ::</span><span class="ch">(</span><span class="ot">ffff</span><span class="ch">(</span><span class="ot">:0</span><span class="ch">{1,4}){0,1}</span><span class="ot">:</span><span class="ch">){0,1}</span></span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="ot">  </span><span class="ch">((</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span><span class="ot">\.</span><span class="ch">){3,3}</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a><span class="ot">  </span><span class="ch">(</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])|</span></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="co"># ::255.255.255.255   ::ffff:255.255.255.255  ::ffff:0:255.255.255.255  (IPv4-mapped IPv6 addresses and IPv4-translated addresses)</span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="ot">  </span><span class="ch">([</span><span class="bn">0-9a-fA-F</span><span class="ch">]{1,4}</span><span class="ot">:</span><span class="ch">){1,4}</span><span class="ot">:</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="ot">  </span><span class="ch">((</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span><span class="ot">\.</span><span class="ch">){3,3}</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="ot">  </span><span class="ch">(</span><span class="ot">25</span><span class="ch">[</span><span class="bn">0-5</span><span class="ch">]|(</span><span class="ot">2</span><span class="ch">[</span><span class="bn">0-4</span><span class="ch">]|</span><span class="ot">1</span><span class="ch">{0,1}[</span><span class="bn">0-9</span><span class="ch">]){0,1}[</span><span class="bn">0-9</span><span class="ch">])</span></span>
+<span id="cb18-32"><a href="#cb18-32"></a><span class="co"># 2001:db8:3:4::192.0.2.33  64:ff9b::192.0.2.33 (IPv4-Embedded IPv6 Address)</span></span>
+<span id="cb18-33"><a href="#cb18-33"></a><span class="ot">  </span><span class="kw">/x</span>;</span>
+<span id="cb18-34"><a href="#cb18-34"></a></span>
+<span id="cb18-35"><a href="#cb18-35"></a><span class="kw">for</span> (<span class="dt">@lines</span>){</span>
+<span id="cb18-36"><a href="#cb18-36"></a>    <span class="kw">given</span> (<span class="dt">$_</span>){</span>
+<span id="cb18-37"><a href="#cb18-37"></a>        <span class="kw">when</span> (<span class="kw">/</span><span class="ch">^</span><span class="dt">$r_ipv4</span><span class="ch">$</span><span class="kw">/</span>){say <span class="kw">&#39;</span><span class="st">IPv4</span><span class="kw">&#39;</span>;}</span>
+<span id="cb18-38"><a href="#cb18-38"></a>        <span class="kw">when</span> (<span class="kw">/</span><span class="ch">^</span><span class="dt">$r_ipv6</span><span class="ch">$</span><span class="kw">/</span>){say <span class="kw">&#39;</span><span class="st">IPv6</span><span class="kw">&#39;</span>;}</span>
+<span id="cb18-39"><a href="#cb18-39"></a>        <span class="kw">default</span> {say <span class="kw">&#39;</span><span class="st">Neither</span><span class="kw">&#39;</span>;}      </span>
+<span id="cb18-40"><a href="#cb18-40"></a>    }</span>
+<span id="cb18-41"><a href="#cb18-41"></a>}</span></code></pre></div>
+</section>
+<section id="split-the-phone-numbers" class="level3">
+<h3>Split the Phone Numbers</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb19-2"><a href="#cb19-2"></a>&lt;&gt;;<span class="kw">my</span> <span class="dt">@lines</span> = &lt;&gt;;</span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="kw">my</span> <span class="dt">$r</span> = <span class="kw">&#39;</span><span class="st">^(\d+)[- ](\d+.html)[- ](\d+.html)</span><span class="kw">&#39;</span>;</span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="kw">for</span> (<span class="dt">@lines</span>){</span>
+<span id="cb19-5"><a href="#cb19-5"></a>    <span class="dt">$_</span> =~ <span class="kw">m/</span><span class="dt">$r</span><span class="kw">/</span>;</span>
+<span id="cb19-6"><a href="#cb19-6"></a>    say <span class="kw">&quot;</span><span class="st">CountryCode=</span><span class="dt">$1</span><span class="st">,LocalAreaCode=</span><span class="dt">$2</span><span class="st">,Number=</span><span class="dt">$3</span><span class="kw">&quot;</span>;</span>
+<span id="cb19-7"><a href="#cb19-7"></a>}</span></code></pre></div>
+</section>
+<section id="detect-html-attributes" class="level3">
+<h3>Detect HTML Attributes</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">use</span> v5.<span class="dv">26</span>;</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">use</span> <span class="fu">Set::Scalar</span>;</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a>&lt;&gt;;</span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="kw">my</span> <span class="dt">$text</span> = <span class="kw">do</span> { <span class="kw">local</span> <span class="dt">$/</span>; <span class="kw">&lt;STDIN&gt;</span> };</span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="kw">my</span> <span class="dt">%hash</span>;</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co"># Use grep to filter so we only look at lines with a start tag in them</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="kw">for</span> <span class="kw">my</span> <span class="dt">$input</span> ( <span class="fu">grep</span> { <span class="kw">/</span><span class="ot">&lt;</span><span class="bn">\w</span><span class="kw">/</span> } <span class="fu">split</span> <span class="kw">/</span><span class="ot">&gt;</span><span class="kw">/</span>, <span class="dt">$text</span> ) {</span>
+<span id="cb20-11"><a href="#cb20-11"></a></span>
+<span id="cb20-12"><a href="#cb20-12"></a></span>
+<span id="cb20-13"><a href="#cb20-13"></a><span class="co"># Get the tag:</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="kw">unless</span> ( <span class="dt">$input</span> =~ <span class="kw">/</span><span class="ot">&lt;</span><span class="ch">(</span><span class="bn">\w</span><span class="ch">+)</span><span class="kw">/</span> ) { <span class="kw">continue</span>; }</span>
+<span id="cb20-15"><a href="#cb20-15"></a>    <span class="kw">my</span> <span class="dt">$tag</span> = <span class="dt">$1</span>;</span>
+<span id="cb20-16"><a href="#cb20-16"></a></span>
+<span id="cb20-17"><a href="#cb20-17"></a></span>
+<span id="cb20-18"><a href="#cb20-18"></a><span class="co"># Get the attribute-value pairs</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a></span>
+<span id="cb20-20"><a href="#cb20-20"></a><span class="co"># @matches will be empty if there are none</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>    <span class="kw">my</span> <span class="dt">@matches</span> = <span class="dt">$input</span> =~ <span class="kw">/</span><span class="bn">\s</span><span class="ch">(</span><span class="bn">\w</span><span class="ch">+)</span><span class="ot">=</span><span class="ch">[</span><span class="bn">&quot;&#39;</span><span class="ch">]</span><span class="ot">.</span><span class="ch">*?[</span><span class="bn">&quot;&#39;</span><span class="ch">]</span><span class="kw">/g</span>;</span>
+<span id="cb20-22"><a href="#cb20-22"></a>    <span class="kw">if</span> ( <span class="dt">$hash</span>{<span class="dt">$tag</span>} ) {</span>
+<span id="cb20-23"><a href="#cb20-23"></a>        <span class="dt">$hash</span>{<span class="dt">$tag</span>}-&gt;insert(<span class="dt">@matches</span>);</span>
+<span id="cb20-24"><a href="#cb20-24"></a>    }</span>
+<span id="cb20-25"><a href="#cb20-25"></a>    <span class="kw">else</span> {</span>
+<span id="cb20-26"><a href="#cb20-26"></a>        <span class="dt">$hash</span>{<span class="dt">$tag</span>} = <span class="fu">Set::Scalar</span>-&gt;new(<span class="dt">@matches</span>);</span>
+<span id="cb20-27"><a href="#cb20-27"></a>    }</span>
+<span id="cb20-28"><a href="#cb20-28"></a>}</span>
+<span id="cb20-29"><a href="#cb20-29"></a></span>
+<span id="cb20-30"><a href="#cb20-30"></a></span>
+<span id="cb20-31"><a href="#cb20-31"></a><span class="co"># Print out</span></span>
+<span id="cb20-32"><a href="#cb20-32"></a><span class="kw">for</span> <span class="kw">my</span> <span class="dt">$tag</span> (<span class="fu">sort</span> <span class="fu">keys</span> <span class="dt">%hash</span>) {</span>
+<span id="cb20-33"><a href="#cb20-33"></a>    say <span class="kw">&quot;</span><span class="dt">$tag</span><span class="st">:</span><span class="kw">&quot;</span> . <span class="fu">join</span> (<span class="kw">&quot;</span><span class="st">,</span><span class="kw">&quot;</span>,  <span class="fu">sort</span> <span class="dt">$hash</span>{<span class="dt">$tag</span>}-&gt;elements);</span>
+<span id="cb20-34"><a href="#cb20-34"></a>}</span></code></pre></div>
+</section>
+<section id="matching" class="level3">
+<h3>Matching</h3>
+<section id="word-boundaries" class="level4">
+<h4>Word Boundaries</h4>
+<div class="sourceCode" id="cb21"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb21-1"><a href="#cb21-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">\b[aeiouAEIOU][a-zA-Z]*\b</span><span class="kw">&#39;</span>;</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="dt">$Test_String</span> = <span class="kw">&lt;STDIN&gt;</span> ;</span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="kw">if</span>(<span class="dt">$Test_String</span> =~ <span class="kw">/</span><span class="dt">$Regex_Pattern</span><span class="kw">/</span>){</span>
+<span id="cb21-5"><a href="#cb21-5"></a>    <span class="fu">print</span> <span class="kw">&quot;</span><span class="st">true</span><span class="kw">&quot;</span>;</span>
+<span id="cb21-6"><a href="#cb21-6"></a>} <span class="kw">else</span> {</span>
+<span id="cb21-7"><a href="#cb21-7"></a>    <span class="fu">print</span> <span class="kw">&quot;</span><span class="st">false</span><span class="kw">&quot;</span>;</span>
+<span id="cb21-8"><a href="#cb21-8"></a>}</span></code></pre></div>
+</section>
+<section id="alternative-matching" class="level4">
+<h4>Alternative Matching</h4>
+<div class="sourceCode" id="cb22"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb22-1"><a href="#cb22-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">^(?:Mr|Mrs|Ms|Dr|Er)\.[[:alpha:]]++$</span><span class="kw">&#39;</span>;</span></code></pre></div>
+</section>
+<section id="negative-lookbehind" class="level4">
+<h4>Negative Lookbehind</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb23-1"><a href="#cb23-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">(?&lt;![aeiuoAEIOU]).</span><span class="kw">&#39;</span>;</span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="dt">$Test_String</span> = <span class="kw">&lt;STDIN&gt;</span> ;</span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="dt">$count</span> = () = <span class="dt">$Test_String</span> =~ <span class="kw">/</span><span class="dt">$Regex_Pattern</span><span class="kw">/g</span>;</span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="fu">print</span> <span class="kw">&quot;</span><span class="st">Number of matches : </span><span class="kw">&quot;</span>,<span class="dt">$count</span> ;</span></code></pre></div>
+</section>
+<section id="matching-x-y-repetitions" class="level4">
+<h4>Matching {x, y} Repetitions</h4>
+<div class="sourceCode" id="cb24"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb24-1"><a href="#cb24-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">^\d\d?[[:alpha:]]{3,}\.{0,3}$</span><span class="kw">&#39;</span>;</span></code></pre></div>
+</section>
+<section id="matching-same-text-again-again" class="level4">
+<h4>Matching Same Text Again &amp; Again</h4>
+<div class="sourceCode" id="cb25"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb25-1"><a href="#cb25-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">qr/</span><span class="ch">^([</span><span class="bn">a-z</span><span class="ch">]</span><span class="bn">\w\s\W\d\D</span><span class="ch">[</span><span class="bn">A-Z</span><span class="ch">][</span><span class="bn">a-zA-Z</span><span class="ch">][</span><span class="bn">aeiuoAEIOU</span><span class="ch">]</span><span class="bn">\S</span><span class="ch">)</span><span class="dt">\1</span><span class="ch">$</span><span class="kw">/</span>;</span></code></pre></div>
+</section>
+<section id="backreferences-to-failed-groups" class="level4">
+<h4>Backreferences To Failed Groups</h4>
+<div class="sourceCode" id="cb26"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb26-1"><a href="#cb26-1"></a>Regex_Pattern = <span class="kw">&#39;</span><span class="st">^\d\d(-?)\d\d\1\d\d\1\d\d$</span><span class="kw">&#39;</span></span></code></pre></div>
+</section>
+<section id="negative-lookahead" class="level4">
+<h4>Negative Lookahead</h4>
+<div class="sourceCode" id="cb27"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb27-1"><a href="#cb27-1"></a><span class="dt">$Regex_Pattern</span> = <span class="kw">&#39;</span><span class="st">(.)(?!\1)</span><span class="kw">&#39;</span>;</span></code></pre></div>
+</section>
+</section>
+<section id="detect-html-tags" class="level3">
+<h3>Detect HTML Tags</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb28-1"><a href="#cb28-1"></a>&lt;&gt;;</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">my</span> <span class="dt">$text</span> = <span class="kw">do</span> { <span class="kw">local</span> <span class="dt">$/</span>; <span class="kw">&lt;STDIN&gt;</span> };</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="kw">my</span> <span class="dt">$r</span> = <span class="kw">qr/</span><span class="ot">&lt;</span><span class="ch">(</span><span class="bn">\w</span><span class="ch">+)</span><span class="ot">.</span><span class="ch">*?</span><span class="ot">&gt;</span><span class="kw">/</span>;</span>
+<span id="cb28-4"><a href="#cb28-4"></a><span class="kw">my</span> <span class="dt">@res</span>;</span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="kw">sub </span><span class="fu">uniq</span> {</span>
+<span id="cb28-6"><a href="#cb28-6"></a>    <span class="kw">my</span> <span class="dt">%seen</span>;</span>
+<span id="cb28-7"><a href="#cb28-7"></a>    <span class="fu">grep</span> !<span class="dt">$seen</span>{<span class="dt">$_</span>}++, <span class="dt">@_</span>;</span>
+<span id="cb28-8"><a href="#cb28-8"></a>}</span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="kw">while</span> (<span class="dt">$text</span> =~ <span class="kw">m/</span><span class="dt">$r</span><span class="kw">/g</span>){</span>
+<span id="cb28-10"><a href="#cb28-10"></a>    <span class="fu">push</span> <span class="dt">@res</span>, <span class="dt">$1</span>;</span>
+<span id="cb28-11"><a href="#cb28-11"></a>}</span>
+<span id="cb28-12"><a href="#cb28-12"></a></span>
+<span id="cb28-13"><a href="#cb28-13"></a><span class="fu">print</span> <span class="fu">join</span> <span class="kw">&quot;</span><span class="st">;</span><span class="kw">&quot;</span>, uniq <span class="fu">sort</span> <span class="dt">@res</span>;</span></code></pre></div>
+</section>
+</section>
+</body>
+</html>

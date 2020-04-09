@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Perl_Old_Reference.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="stdio-large" class="level3">
+<h3>Stdio Large</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">open</span>(<span class="kw">my</span> <span class="dt">$fptr</span>, <span class="kw">&#39;</span><span class="st">&gt;</span><span class="kw">&#39;</span>, <span class="dt">$ENV</span>{<span class="kw">&#39;</span><span class="st">OUTPUT_PATH</span><span class="kw">&#39;</span>});</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">my</span> <span class="dt">$n</span> = &lt;&gt;;</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">$n</span> =~ <span class="kw">s/</span><span class="bn">\s</span><span class="ch">+$</span><span class="kw">//</span>;</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">my</span> <span class="dt">@indexes</span> = ();</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">for</span> (<span class="dv">1</span>..<span class="dt">$n</span>) {</span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="kw">my</span> <span class="dt">$indexes_item</span> = &lt;&gt;;</span>
+<span id="cb1-10"><a href="#cb1-10"></a>    <span class="dt">$indexes_item</span> =~ <span class="kw">s/</span><span class="bn">\s</span><span class="ch">+$</span><span class="kw">//</span>;</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">my</span> <span class="dt">@indexes_item</span> = <span class="fu">split</span> <span class="kw">/</span><span class="bn">\s</span><span class="ch">+</span><span class="kw">/</span>, <span class="dt">$indexes_item</span>;</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="fu">push</span> <span class="dt">@indexes</span>, \<span class="dt">@indexes_item</span>;</span>
+<span id="cb1-14"><a href="#cb1-14"></a>}</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="kw">my</span> <span class="dt">$queries_count</span> = &lt;&gt;;</span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="dt">$queries_count</span> =~ <span class="kw">s/</span><span class="bn">\s</span><span class="ch">+$</span><span class="kw">//</span>;</span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="kw">my</span> <span class="dt">@queries</span> = ();</span>
+<span id="cb1-20"><a href="#cb1-20"></a></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">for</span> (<span class="dv">1</span>..<span class="dt">$queries_count</span>) {</span>
+<span id="cb1-22"><a href="#cb1-22"></a>    <span class="kw">my</span> <span class="dt">$queries_item</span> = &lt;&gt;;</span>
+<span id="cb1-23"><a href="#cb1-23"></a>    <span class="dt">$queries_item</span> =~ <span class="kw">s/</span><span class="bn">\s</span><span class="ch">+$</span><span class="kw">//</span>;</span>
+<span id="cb1-24"><a href="#cb1-24"></a>    <span class="fu">push</span> <span class="dt">@queries</span>, <span class="dt">$queries_item</span>;</span>
+<span id="cb1-25"><a href="#cb1-25"></a>}</span>
+<span id="cb1-26"><a href="#cb1-26"></a></span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="kw">my</span> <span class="dt">@result</span> = swapNodes \<span class="dt">@indexes</span>, \<span class="dt">@queries</span>;</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a><span class="fu">print</span> <span class="dt">$fptr</span> <span class="fu">join</span> <span class="kw">&quot;</span><span class="ch">\n</span><span class="kw">&quot;</span>, <span class="fu">map</span>{ <span class="fu">join</span> <span class="kw">&quot;</span><span class="st"> </span><span class="kw">&quot;</span>, <span class="dt">@</span>{<span class="dt">$_</span>} } <span class="dt">@result</span>;</span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="fu">print</span> <span class="dt">$fptr</span> <span class="kw">&quot;</span><span class="ch">\n</span><span class="kw">&quot;</span>;</span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a><span class="fu">close</span> <span class="dt">$fptr</span>;</span></code></pre></div>
+</section>
+</body>
+</html>
