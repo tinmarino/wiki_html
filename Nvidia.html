@@ -4,22 +4,28 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Nvidia.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Nvidia.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<p>GUI : NVIDIA X server settings</p>
+<section id="gui-nvidia-x-server-settings" class="level1">
+<h1>GUI : NVIDIA X server settings</h1>
 <ul>
 <li><code>nvidia-smi</code> : system management interface</li>
 <li><code>nvidia-smi --query-gpu=driver_version --format=csv,noheader</code></li>
 <li><code>modinfo nvidia | grep version</code></li>
-<li><code>lspci -k | grep -A 2 -i &quot;VGA&quot;</code></li>
+<li><code>lspci -k | grep -A 2 -i "VGA"</code></li>
 <li><code>lspci -vnn</code> # Will be with ‘driver in use’</li>
 <li><code>lshw -numeric -C display</code></li>
 <li><code>nvidia-settings -q all</code></li>
@@ -28,6 +34,15 @@
 <li><code>cat /proc/driver/nvidia/gpus/0/info</code></li>
 <li><code>cat /proc/cpuinfo</code></li>
 </ul>
+</section>
+<section id="install" class="level1">
+<h1>Install</h1>
+<ul>
+<li><code>sudo lshw -c display</code>: Check</li>
+<li><code>sudo ubuntu-drivers devices</code>: See if ubuntu can help</li>
+<li><code>sudo ubuntu-drivers autoinstall</code> if seems good</li>
+</ul>
+</section>
 <section id="important-files" class="level1">
 <h1>Important files</h1>
 <ul>
@@ -40,7 +55,6 @@
 <h1>Ubuntu</h1>
 <ul>
 <li><code>gpu-manager</code></li>
-<li></li>
 </ul>
 </section>
 <section id="log-files" class="level1">

@@ -33,14 +33,17 @@
 <section id="power-management-suspend-then-hibernate" class="level1">
 <h1>Power management : suspend then hibernate</h1>
 <ul>
-<li><code>systemctl suspend-then-hibernate</code> # test</li>
-<li><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</li>
-<li><code>sudoedit /etc/UPower/UPower.conf</code></li>
-<li><code>service upower restart</code></li>
-<li>In <code>/etc/systemd/sleep.conf</code> new file: <code>[Sleep]     HibernateDelaySec=3600</code></li>
-<li>In <code>/etc/systemd/logind.conf</code> <code>HandleLidSwitch=suspend-then-hibernate</code></li>
-<li><code>systemctl restart systemd-logind.service</code></li>
-<li><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</li>
+<li><p><code>systemctl suspend-then-hibernate</code> # test</p></li>
+<li><p><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</p></li>
+<li><p><code>sudoedit /etc/UPower/UPower.conf</code></p></li>
+<li><p><code>service upower restart</code></p></li>
+<li><p>In <code>/etc/systemd/sleep.conf</code> new file:</p>
+<pre><code>[Sleep]
+HibernateDelaySec=3600</code></pre></li>
+<li><p>In <code>/etc/systemd/logind.conf</code></p>
+<pre><code>HandleLidSwitch=suspend-then-hibernate</code></pre></li>
+<li><p><code>systemctl restart systemd-logind.service</code></p></li>
+<li><p><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</p></li>
 </ul>
 <section id="power-stop-sleeping" class="level2">
 <h2>Power : stop sleeping</h2>

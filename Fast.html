@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Fast.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<p>JOBS <em>mlinux-cd</em> <em>mlinux-jobs</em></p>
+<p>This resume the work, commands I discover while trying to cd to vim’s pwd when pressing <c-z> and fg</p>
+<p>JOBS ~ jobs -l</p>
+<p>IPC (Inter-Process-Communication) ~ /proc/{PID}/cwd is as symlink the pwd of the current process bash local -i PID=<span class="math inline">${$</span>{<span class="math inline">${(s.:.)$</span>{(v)jobstates[1]}}[3]}%=*} cd <span class="math inline">(<em>r</em><em>e</em><em>a</em><em>d</em><em>l</em><em>i</em><em>n</em><em>k</em>/<em>p</em><em>r</em><em>o</em><em>c</em>/</span>PID/cwd) alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” xdotool kill -l # to see the trap list</p>
+<section id="for-ctrl-z-sigstp" class="level1">
+<h1>20 for ctrl-z sigstp</h1>
+<p>!./ttyecho -n /dev/pts/22 “echo hello” -&gt; Give to me the write to read and write at tty or ioctl disown %2 gdb retpy tmux screen to reatach :e **/palette.cpp stty -a show shell shortcut for SIGNALS kill -SIGSTOP <code>vim &gt; /dev/pts/22</code> exec vi (rplace shell by vim last shell command) REad : export PROMPT_COMMAND=“ls -a &gt; /dev/pts/23” echo -en ‘’ &gt; /dev/ttyS0 sudo chmod o-rw /dev/tty23 open /usr/share/doc/base-passwd/users-and-groups.html ( echo <br /><span class="math display">$$; echo $BASHPID )
+$$</span><br /> -&gt; Expands to the process ID of the (current) shell. $! -&gt; Expands to the process ID of the most recently executed background command. ps ax | grep pts/16 ps -f ax | grep pts/16 ps –ppid $$ -o CMD PROMPT_COMMAND is the key truncate -s 0 filename &gt;filename or tail -n +2</p>
+</section>
+<section id="shell---vim" class="level1">
+<h1>shell -&gt; vim</h1>
+<p>alias fg=“$VIM –remote-send ‘:cd $PWD<CR>’; fg” On resume :cd $PWD $ sleep 42 &amp; [1] 5260 $ echo $! 5260</p>
+</section>
+</body>
+</html>

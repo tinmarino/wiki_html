@@ -115,6 +115,13 @@ aM          Select a function or method. Ex: vaM, daM, yaM, caM (normal, operato
 iM          Select inner func. or method. Ex: viM, diM, yiM, ciM (normal, operator)
 ==========  ============================</code></pre>
 </section>
+<section id="sudo" class="level2">
+<h2>Sudo</h2>
+<ul>
+<li><code>sudo -E vim README.txt</code></li>
+<li><code>sudoedit</code></li>
+</ul>
+</section>
 <section id="snippet" class="level2">
 <h2>Snippet</h2>
 <pre class="language-vim"><code>&quot; Make it AutoScroll
@@ -152,12 +159,14 @@ echo getregtype(&#39;a&#39;) &quot; To see if in Visual or v</code></pre>
 <span id="cb4-16"><a href="#cb4-16"></a>            --enable-perlinterp=dynamic \</span>
 <span id="cb4-17"><a href="#cb4-17"></a>            --enable-python3interp=dynamic \</span>
 <span id="cb4-18"><a href="#cb4-18"></a>            --with-python3-config-dir=<span class="va">$(</span><span class="ex">python3-config</span> --configdir<span class="va">)</span> \</span>
-<span id="cb4-19"><a href="#cb4-19"></a>            --enable-rubyinterp=dynamic \</span>
-<span id="cb4-20"><a href="#cb4-20"></a>            --with-ruby-command=<span class="va">$(</span><span class="fu">which</span> ruby<span class="va">)</span> \</span>
-<span id="cb4-21"><a href="#cb4-21"></a>            --with-luajit \</span>
-<span id="cb4-22"><a href="#cb4-22"></a>            \</span>
-<span id="cb4-23"><a href="#cb4-23"></a>            \</span>
-<span id="cb4-24"><a href="#cb4-24"></a>            --with-compiledby=<span class="st">&quot;Tinmarino&quot;</span> \</span></code></pre></div>
+<span id="cb4-19"><a href="#cb4-19"></a></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">##--with-python3-command=python3.7 </span></span>
+<span id="cb4-21"><a href="#cb4-21"></a>            <span class="ex">--enable-rubyinterp</span>=dynamic \</span>
+<span id="cb4-22"><a href="#cb4-22"></a>            --with-ruby-command=<span class="va">$(</span><span class="fu">which</span> ruby<span class="va">)</span> \</span>
+<span id="cb4-23"><a href="#cb4-23"></a>            --with-luajit \</span>
+<span id="cb4-24"><a href="#cb4-24"></a>            \</span>
+<span id="cb4-25"><a href="#cb4-25"></a>            \</span>
+<span id="cb4-26"><a href="#cb4-26"></a>            --with-compiledby=<span class="st">&quot;Tinmarino&quot;</span> \</span></code></pre></div>
 <p><strong>Notes</strong>: * Cannot make py2 and py3 in debian (choose only one) * Dynamic loading impossible in debian</p>
 </section>
 <section id="match-non-ascii" class="level3">

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ElasticSearch.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<section id="tuto" class="level2">
+<h2>Tuto</h2>
+<ul>
+<li><p><strong>Init:</strong> <code>sudo systemctl start elasticsearch.service</code></p></li>
+<li><p><strong>Test:</strong> <code>curl GET "localhost:9200"</code></p></li>
+<li><p><strong>Test:</strong> <code>curl -X GET "http://localhost:9200/?pretty"</code></p></li>
+<li><p><strong>Read clusters:</strong> <code>curl -XGET 'http://localhost:9200/_cluster/state?pretty'</code></p></li>
+<li><p><strong>Note:</strong> Remember to be root to explore directories: toherwise, they appears void</p></li>
+</ul>
+<section id="querying" class="level3">
+<h3>Querying</h3>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/reference/7.5/query-dsl-query-string-query.html%20#query-string-syntax">Querry syntax</a></p>
+<p>curl -X POST localhost:9200/twitter/_search?q=username:eriky</p>
+<ul>
+<li><p><code>~1</code> for accept syntax errors curl -X POST http://localhost:9200/twitter/_search?q=Elastcsearch~1&amp;pretty</p></li>
+<li><p><strong>All:</strong> <code>POST /_all/_search</code></p></li>
+<li><p><code>GET /_all/_search?q=city:paprola</code>: All indices with city paprola</p></li>
+<li><p><strong>indices:</strong> <code>POST /index1,index2,index3/_search</code></p></li>
+<li><p><code>POST /school*,-schools_gov /_search</code> : starting with school without schools_gov</p></li>
+</ul>
+</section>
+<section id="config-in-etcelasticsearch" class="level3">
+<h3>Config (in /etc/elasticsearch)</h3>
+<ul>
+<li>elasticsearch.yml for configuring Elasticsearch</li>
+<li>jvm.options for configuring Elasticsearch JVM settings</li>
+<li>log4j2.properties for configuring Elasticsearch logging</li>
+</ul>
+</section>
+<section id="fix-master_not_discovered_exception" class="level3">
+<h3>Fix master_not_discovered_exception</h3>
+<ul>
+<li>Purge and reinstall WITHOUT config</li>
+</ul>
+</section>
+<section id="fix-discovery-startup-error" class="level3">
+<h3>Fix discovery startup error</h3>
+<pre class="text"><code>avril 20 17:37:07 tourny elasticsearch[10763]: ERROR: [1] bootstrap checks failed
+avril 20 17:37:07 tourny elasticsearch[10763]: [1]: the default discovery settings are unsuitable for production use; at least one of [discovery.seed_hosts, discovery.se</code></pre>
+<ul>
+<li><code>sudoedit /etc/elasticsearch/elasticsearch.yml</code></li>
+</ul>
+<pre class="text"><code>node.data : true
+network.host : 0.0.0.0
+discovery.seed_hosts : []
+cluster.initial_master_nodes : []</code></pre>
+</section>
+</section>
+</body>
+</html>

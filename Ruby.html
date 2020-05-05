@@ -4,16 +4,254 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Ruby.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Ruby.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span. { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
 <p>x, y, z = 10, 20, 30 # parralel asignment</p>
+<section id="hackerrank" class="level1">
+<h1>HackerRank</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb1-1"><a href="#cb1-1"></a>print <span class="dv">self</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># OUTPUT: main (if not in main exe)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Variadic argument</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">def</span> full_name(*rest)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>    <span class="kw">return</span> rest.join(<span class="ch">&#39; &#39;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">end</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co"># Argument Hash</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="kw">def</span> fetch_file(uri, options)</span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="kw">if</span> options.has_key?(<span class="st">:proxy</span>)</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co"># do something</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="kw">end</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="kw">end</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a></span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="co"># Argument Optional</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="kw">def</span> foo(x, <span class="st">str: &quot;foo&quot;</span>, <span class="st">num: </span><span class="dv">424242</span>)</span>
+<span id="cb1-22"><a href="#cb1-22"></a>  [x, str, num]</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="kw">end</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>foo(<span class="dv">13</span>)</span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="co">#=&gt; [13, &#39;foo&#39;, 424242]</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>foo(<span class="dv">13</span>, <span class="st">str: &#39;bar&#39;</span>)</span>
+<span id="cb1-27"><a href="#cb1-27"></a><span class="co">#=&gt; [13, &#39;bar&#39;, 424242]</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co"># Argument optional hash</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="kw">def</span> foo(<span class="st">str: &quot;foo&quot;</span>, <span class="st">num: </span><span class="dv">424242</span>, **options)</span>
+<span id="cb1-32"><a href="#cb1-32"></a>  [str, num, options]</span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="kw">end</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>foo</span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="co">#=&gt; [&#39;foo&#39;, 424242, {}]</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a>foo(<span class="st">check: </span><span class="dv">true</span>)</span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="co"># =&gt; [&#39;foo&#39;, 424242, {check: true}]</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a></span>
+<span id="cb1-40"><a href="#cb1-40"></a></span>
+<span id="cb1-41"><a href="#cb1-41"></a></span>
+<span id="cb1-42"><a href="#cb1-42"></a></span></code></pre></div>
+<section id="temperature-conversion" class="level3">
+<h3>Temperature conversion</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb2-1"><a href="#cb2-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># My</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">def</span> convert_temp(cel, input_scale:, <span class="st">output_scale: &#39;celsius&#39;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="kw">if</span> input_scale.downcase == <span class="st">&#39;kelvin&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        cel = cel - <span class="fl">273.15</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="kw">elsif</span> input_scale.downcase == <span class="st">&#39;fahrenheit&#39;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        cel = (cel - <span class="dv">32</span>) / (<span class="dv">9</span>/<span class="dv">5</span>)</span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="kw">end</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    <span class="kw">if</span> output_scale == <span class="st">&#39;kelvin&#39;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>        <span class="kw">return</span> cel + <span class="fl">273.15</span>;</span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="kw">elsif</span> output_scale == <span class="st">&#39;fahrenheit&#39;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>        <span class="kw">return</span> (cel * <span class="dv">9</span>/<span class="dv">5</span>) + <span class="dv">32</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="kw">else</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>        <span class="kw">return</span> cel</span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="kw">end</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">end</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co"># Their</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="kw">def</span> convert_temp(temp, input_scale:, <span class="st">output_scale: &#39;Celsius&#39;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a>    <span class="kw">case</span> input_scale.downcase</span>
+<span id="cb2-23"><a href="#cb2-23"></a>    <span class="kw">when</span> <span class="st">&#39;fahrenheit&#39;</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>        <span class="kw">return</span> output_scale == <span class="st">&#39;kelvin&#39;</span> ? </span>
+<span id="cb2-25"><a href="#cb2-25"></a>        ((temp - <span class="dv">32</span>) / <span class="fl">1.8</span>) + <span class="fl">273.15</span> : (temp - <span class="dv">32</span>) / <span class="fl">1.8</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="kw">when</span> <span class="st">&#39;celsius&#39;</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>        <span class="kw">return</span> output_scale == <span class="st">&#39;kelvin&#39;</span> ? </span>
+<span id="cb2-28"><a href="#cb2-28"></a>        temp + <span class="fl">273.15</span> : (temp * <span class="fl">1.8</span>) + <span class="dv">32</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="kw">when</span> <span class="st">&#39;kelvin&#39;</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>        <span class="kw">return</span> output_scale == <span class="st">&#39;celsius&#39;</span> ? </span>
+<span id="cb2-31"><a href="#cb2-31"></a>        temp - <span class="fl">273.15</span> : (temp - <span class="fl">273.15</span>) * <span class="fl">1.8</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>    <span class="kw">end</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="kw">end</span></span></code></pre></div>
+</section>
+<section id="block" class="level3">
+<h3>Block</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> factorial (n)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">yield</span> (<span class="dv">1</span>..n).reduce(:*)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">end</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a>n = gets.to_i</span>
+<span id="cb3-6"><a href="#cb3-6"></a>factorial(n) <span class="kw">do</span> |result|</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    puts result</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="kw">end</span></span></code></pre></div>
+</section>
+<section id="proc" class="level3">
+<h3>Proc</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> square_of_sum (my_array, proc_square, proc_sum)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>    sum = proc_sum.call(my_array)</span>
+<span id="cb4-3"><a href="#cb4-3"></a>    proc_square.call(sum)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">end</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a></span>
+<span id="cb4-6"><a href="#cb4-6"></a>proc_square_number = proc {|num| num ** <span class="dv">2</span>}</span>
+<span id="cb4-7"><a href="#cb4-7"></a>proc_sum_array     = proc {|arr| arr.reduce(<span class="dv">0</span>, :+)}</span>
+<span id="cb4-8"><a href="#cb4-8"></a>my_array = gets.split().map(&amp;<span class="st">:to_i</span>)</span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a>puts square_of_sum(my_array, proc_square_number, proc_sum_array)</span></code></pre></div>
+</section>
+<section id="lambda" class="level3">
+<h3>Lambda</h3>
+<p>Lambdas can be used as arguments to higher-order functions. They can also be used to construct the result of a higher-order function that needs to return a function.</p>
+<ul>
+<li>No argument:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> area (l, b)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>   -&gt; { l * b } </span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">end</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>x = <span class="fl">10.0</span>; y = <span class="fl">20.0</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>area_rectangle = area(x, y).call</span>
+<span id="cb5-8"><a href="#cb5-8"></a>area_triangle = <span class="fl">0.5</span> * area(x, y).()</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>puts area_rectangle</span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#200.0</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>puts area_triangle</span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#100.0</span></span></code></pre></div>
+<ul>
+<li>With argument:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb6-1"><a href="#cb6-1"></a>area = -&gt;(a, b) { a * b }</span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a>x = <span class="fl">10.0</span>; y = <span class="fl">20.0</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a>area_rectangle = area.(x, y)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>area_triangle = <span class="fl">0.5</span> * area.call(x, y)</span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a>puts area_rectangle</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#200.0</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>puts area_triangle</span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#100.0    </span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Write a lambda which takes an integer and square it</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>square      = -&gt;(i) { i ** <span class="dv">2</span>}</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co"># Write a lambda which takes an integer and increment it by 1</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a>plus_one    = -&gt;(i) { i+<span class="dv">1</span> }</span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Write a lambda which takes an integer and multiply it by 2</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>into_2      = -&gt;(i) { i * <span class="dv">2</span> } </span>
+<span id="cb7-12"><a href="#cb7-12"></a></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># Write a lambda which takes two integers and adds them</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>adder       = -&gt;(i,j) { i+j } </span>
+<span id="cb7-16"><a href="#cb7-16"></a></span>
+<span id="cb7-17"><a href="#cb7-17"></a></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co"># Write a lambda which takes a hash and returns an array of hash values</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>values_only = -&gt;(h) { h.values } </span>
+<span id="cb7-20"><a href="#cb7-20"></a></span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a>input_number_1 = gets.to_i</span>
+<span id="cb7-23"><a href="#cb7-23"></a>input_number_2 = gets.to_i</span>
+<span id="cb7-24"><a href="#cb7-24"></a>input_hash = eval(gets)</span>
+<span id="cb7-25"><a href="#cb7-25"></a></span>
+<span id="cb7-26"><a href="#cb7-26"></a>a = square.(input_number_1); b = plus_one.(input_number_2);c = into_2.(input_number_1); </span>
+<span id="cb7-27"><a href="#cb7-27"></a>d = adder.(input_number_1, input_number_2);e = values_only.(input_hash)</span>
+<span id="cb7-28"><a href="#cb7-28"></a></span>
+<span id="cb7-29"><a href="#cb7-29"></a>p a; p b; p c; p d; p e</span></code></pre></div>
+</section>
+</section>
 </body>
 </html>

@@ -93,7 +93,12 @@
 <li><p><a href="Raku-Guide.html">Raku Guide</a></p></li>
 <li><p><a href="Raku-Y-Minute.html">Raku Y Minute</a></p></li>
 <li><p><a href="Raku_Mem.html">Raku_Mem</a></p></li>
-<li><p>Tie variables</p></li>
+<li><p>Show index while looping (enumerate)</p></li>
+</ul>
+<pre class="raku"><code>my @aa = 8 .. 12;
+for @aa.kv -&gt; $i, $_ { say &quot;$i: $_&quot; }</code></pre>
+<ul>
+<li>Tie variables</li>
 </ul>
 <pre class="raku"><code>my $1 := my $b = 2;</code></pre>
 <ul>
@@ -111,7 +116,14 @@ my $b = :2(&quot;11110000&quot;);
 # -&gt; 240   ## A binary (base 2) number</code></pre>
 <section id="instrospection" class="level3">
 <h3>Instrospection</h3>
-<pre class="raku"><code>for &quot;azea&quot;.HOW.^attributes { .name.say }</code></pre>
+<pre class="raku"><code>for &quot;azea&quot;.HOW.^attributes { .name.say }
+
+
+# Candidates
+say .signature for @arr.^method_table{&#39;AT-POS&#39;}.candidates;</code></pre>
+<ul>
+<li><code>FALLBACK</code> is called for methods with unknown name</li>
+</ul>
 </section>
 <section id="dispatch" class="level3">
 <h3>Dispatch</h3>
@@ -255,40 +267,40 @@ knowhow | enum | class | subset |</div>
 <li>.squish -&gt; unique for sorted</li>
 <li>|<span class="citation" data-cites="arr">@arr</span> -&gt; convert to list (to use with push and unshift)</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb5-1"><a href="#cb5-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Reduce</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">my</span> <span class="dt">$sum</span> = reduce { <span class="dt">$^a</span> + <span class="dt">$^b</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
-<span id="cb5-4"><a href="#cb5-4"></a>say [+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">4</span>;</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># -&gt; 10</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>say [\+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>;</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># -&gt; (1 3 6 10)</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a>say [<span class="kw">lt</span>] &lt;a b c d e&gt;;</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># -&gt; True</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a></span>
-<span id="cb5-11"><a href="#cb5-11"></a></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Map</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="fu">map</span> { <span class="dt">$_</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="fu">map</span> <span class="dt">$num</span> -&gt; { <span class="dt">$num</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="fu">map</span> { <span class="dt">$^a</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># Filter</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="fu">grep</span> { <span class="kw">/</span><span class="ot">&lt;</span><span class="ch">[</span><span class="bn">aeiouy</span><span class="ch">]</span><span class="ot">&gt;</span><span class="kw">/</span> }, <span class="dt">@array</span>;</span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="fu">grep</span> {<span class="kw">&#39;</span><span class="st">uno</span><span class="kw">&#39;</span>}, <span class="dt">%eng2sp</span>.<span class="fu">values</span>;</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb6-1"><a href="#cb6-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Type</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">my</span> Int <span class="dt">@arr</span> = <span class="dv">1</span>...<span class="dv">20</span>;</span>
-<span id="cb6-4"><a href="#cb6-4"></a></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Shaped arrays</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="kw">my</span> <span class="dt">@arr</span>[<span class="dv">12</span>] = <span class="dv">22</span>, <span class="dv">12</span>;</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Fill with Any</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Reduce</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">my</span> <span class="dt">$sum</span> = reduce { <span class="dt">$^a</span> + <span class="dt">$^b</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb6-4"><a href="#cb6-4"></a>say [+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>,<span class="dv">4</span>;</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># -&gt; 10</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>say [\+] <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>;</span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># -&gt; (1 3 6 10)</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>say [<span class="kw">lt</span>] &lt;a b c d e&gt;;</span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># -&gt; True</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co"># Map</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="fu">map</span> { <span class="dt">$_</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="fu">map</span> <span class="dt">$num</span> -&gt; { <span class="dt">$num</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="fu">map</span> { <span class="dt">$^a</span> <span class="kw">*</span> <span class="dv">2</span> }, <span class="dv">1</span>..<span class="dv">10</span>;</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co"># Filter</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="fu">grep</span> { <span class="kw">/</span><span class="ot">&lt;</span><span class="ch">[</span><span class="bn">aeiouy</span><span class="ch">]</span><span class="ot">&gt;</span><span class="kw">/</span> }, <span class="dt">@array</span>;</span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="fu">grep</span> {<span class="kw">&#39;</span><span class="st">uno</span><span class="kw">&#39;</span>}, <span class="dt">%eng2sp</span>.<span class="fu">values</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Type</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">my</span> Int <span class="dt">@arr</span> = <span class="dv">1</span>...<span class="dv">20</span>;</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># Shaped arrays</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="kw">my</span> <span class="dt">@arr</span>[<span class="dv">12</span>] = <span class="dv">22</span>, <span class="dv">12</span>;</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># Fill with Any</span></span></code></pre></div>
 </section>
 <section id="hash" class="level3">
 <h3>Hash</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb7-1"><a href="#cb7-1"></a>say <span class="fu">grep</span> { .value == <span class="dv">2</span> }, <span class="dt">%histo</span>.pairs</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="dt">%seen</span>{<span class="dt">$key</span>}:<span class="fu">exists</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw">my</span> <span class="dt">%uniq</span> = <span class="fu">map</span> { <span class="dt">$_</span> =&gt; <span class="dv">1</span> }, <span class="dt">@arr</span>;</span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">my</span> <span class="dt">%rev</span> = <span class="dt">%hash</span>.kv.<span class="fu">reverse</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb8-1"><a href="#cb8-1"></a>say <span class="fu">grep</span> { .value == <span class="dv">2</span> }, <span class="dt">%histo</span>.pairs</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="dt">%seen</span>{<span class="dt">$key</span>}:<span class="fu">exists</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">my</span> <span class="dt">%uniq</span> = <span class="fu">map</span> { <span class="dt">$_</span> =&gt; <span class="dv">1</span> }, <span class="dt">@arr</span>;</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">my</span> <span class="dt">%rev</span> = <span class="dt">%hash</span>.kv.<span class="fu">reverse</span>;</span></code></pre></div>
 </section>
 <section id="how-higher-order-working" class="level3">
 <h3>HOW: Higher Order Working</h3>

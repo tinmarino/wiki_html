@@ -4,18 +4,32 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Apt.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <title>Apt.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
 </head>
 <body>
-<p># Remove 2015 sudo apt-get clean 2020 sudo dpkg –configure -a 2023 sudo apt-get autoremove 2034 sudo apt-get upgrade &amp;&amp; sudo apt-get -f install</p>
-<p>sudo dpkg –remove –force-remove-reinstreq package_name</p>
-<p>LC_MESSAGES=C dpkg-divert –list ‘<em>nvidia-340</em>’ | sed -nre ‘s/^diversion of (.<em>) to .</em>/\1/p’ | xargs -rd’’ -n1 – sudo dpkg-divert –remove sudo apt –fix-broken install</p>
+<section id="remove" class="level1">
+<h1>Remove</h1>
+<ul>
+<li>sudo apt-get clean</li>
+<li>sudo dpkg –configure -a</li>
+<li>sudo apt-get autoremove</li>
+<li>sudo apt-get upgrade &amp;&amp; sudo apt-get -f install</li>
+<li>sudo dpkg –remove –force-remove-reinstreq package_name</li>
+</ul>
+<pre><code>LC_MESSAGES=C dpkg-divert --list &#39;*nvidia-340*&#39; | sed -nre &#39;s/^diversion of (.*) to .*/\1/p&#39; | xargs -rd&#39;\n&#39; -n1 -- sudo dpkg-divert --remove
+sudo apt --fix-broken install</code></pre>
+</section>
 </body>
 </html>
