@@ -91,6 +91,8 @@
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
+<li><a href="#contents">Contents</a>
+<ul>
 <li><a href="#tips">Tips</a></li>
 <li><a href="#classes-tips">Classes tips</a>
 <ul>
@@ -129,8 +131,13 @@
 <li><a href="#find-a-sub-word-regex-list">Find A Sub-Word (Regex list)</a></li>
 <li><a href="#regex-alien-username">Regex: Alien Username</a></li>
 </ul></li>
+</ul></li>
 </ul>
 </nav>
+<section id="contents" class="level1">
+<h1>Contents</h1>
+<pre><code>- [Tips](</code></pre>
+<p>#Tips) - <a href="#Tips#Memoize%20function%20return%20value%20(cache)">Memoize function return value (cache)</a> - <a href="#Tips#Increase%20recursion%20depth">Increase recursion depth</a> - <a href="#Classes%20tips">Classes tips</a> - <a href="#Classes%20tips#String">String</a> - <a href="#Classes%20tips#List">List</a> - <a href="#Classes%20tips#Dictionary">Dictionary</a> - <a href="#Classes%20tips#Golf">Golf</a> - <a href="#Classes%20tips#StdIn%20/%20StdOut">StdIn / StdOut</a> - <a href="#Classes%20tips#Sorting">Sorting</a> - <a href="#Classes%20tips#Idioms">Idioms</a> - <a href="#Some%20HackerRank%20solutions">Some HackerRank solutions</a> - <a href="#Some%20HackerRank%20solutions#Rotate%20left%20list">Rotate left list</a> - <a href="#Some%20HackerRank%20solutions#Count%20triplet">Count triplet</a> - <a href="#Some%20HackerRank%20solutions#Solution:%20Reverse%20Shuffle%20Merge">Solution: Reverse Shuffle Merge</a> - <a href="#Some%20HackerRank%20solutions#Fraudulent%20Activity%20Notifications">Fraudulent Activity Notifications</a> - <a href="#Some%20HackerRank%20solutions#Sherlock%20and%20Anagrams">Sherlock and Anagrams</a> - <a href="#Some%20HackerRank%20solutions#String:%20Sub%20count">String: Sub count</a> - <a href="#Some%20HackerRank%20solutions#String:%20Sub%20count#1%20My%20solution%20with%20too%20many%20if">1 My solution with too many if</a> - <a href="#Some%20HackerRank%20solutions#String:%20Sub%20count#2%20Can%20be%20replaced%20with%20regex%20!!">2 Can be replaced with regex !!</a> - <a href="#Some%20HackerRank%20solutions#String:%20Sub%20count#3%20Can%20mutualize%20some%20if">3 Can mutualize some if</a> - <a href="#Some%20HackerRank%20solutions#String:%20Longest%20Common%20substring%20problem">String: Longest Common substring problem</a> - <a href="#Some%20HackerRank%20solutions#Tree:%20Swap%20Node">Tree: Swap Node</a> - <a href="#Some%20HackerRank%20solutions#Array%20:%20max%20sum%20in%20subarray%20(Max%20Array%20Sum)">Array : max sum in subarray (Max Array Sum)</a> - <a href="#Some%20HackerRank%20solutions#Pairs%20(of%20equal%20difference)">Pairs (of equal difference)</a> - <a href="#Some%20HackerRank%20solutions#Triple%20sum%20(find%20unique)">Triple sum (find unique)</a> - <a href="#Some%20HackerRank%20solutions#Minimum%20Time%20Required">Minimum Time Required</a> - <a href="#Some%20HackerRank%20solutions#Balanced%20parenthesis%20(Stack%20of%20course)">Balanced parenthesis (Stack of course)</a> - <a href="#Some%20HackerRank%20solutions#Maze:%20Castle%20on%20the%20Grid">Maze: Castle on the Grid</a> - <a href="#Some%20HackerRank%20solutions#Array%20Largest%20rectangle">Array Largest rectangle</a> - <a href="#Some%20HackerRank%20solutions#Recursion:%20Davis&#39;%20Staircase">Recursion: Davis’ Staircase</a> - <a href="#Some%20HackerRank%20solutions#Binary%20Tree:%20Height">Binary Tree: Height</a> - <a href="#Some%20HackerRank%20solutions#Binary%20Tree:%20Lowest%20Common%20Ancestor">Binary Tree: Lowest Common Ancestor</a> - <a href="#Some%20HackerRank%20solutions#Trees:%20Is%20This%20a%20Binary%20Search%20Tree?">Trees: Is This a Binary Search Tree?</a> - <a href="#Some%20HackerRank%20solutions#Tree:%20Huffman%20Decoding">Tree: Huffman Decoding</a> - <a href="#Some%20HackerRank%20solutions#Dynamic%20Programming:%20Abbreviation">Dynamic Programming: Abbreviation</a> - <a href="#Some%20HackerRank%20solutions#Dynamic%20programming:%20candies">Dynamic programming: candies</a> - <a href="#Some%20HackerRank%20solutions#Find%20A%20Sub-Word%20(Regex%20list)">Find A Sub-Word (Regex list)</a> - <a href="#Some%20HackerRank%20solutions#Regex:%20Alien%20Username">Regex: Alien Username</a></p>
 <section class="level2">
 <section id="tips" class="level3">
 <h3>Tips</h3>
@@ -142,7 +149,7 @@
 <li>Represent the case of array and not the bound : arr[0] is first case not first frontier</li>
 <li><code>UNIQUE</code> &lt;- grep this keyword, then pre-uniquify anything: can fasten a lot combinatory</li>
 <li><code>42.2 // 2</code> -&gt; <code>int(42.2/2)</code> or <code>math.floor(42.2/2)</code> but the result is float</li>
-<li>Do not dickotomize by hand !!! Use bisect</li>
+<li>Do not dickotomize by hand: use bisect</li>
 <li>Use differential or integral of an array can sometime helps
 <ul>
 <li>differential can be used to work on range input</li>
@@ -154,27 +161,27 @@
 <ul>
 <li>lru_cache &lt;- Least Recently Used</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="at">@functools.lru_cache</span>(maxsize<span class="op">=</span><span class="dv">100</span>, typed<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="at">@functools.lru_cache</span>(maxsize<span class="op">=</span><span class="va">None</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Fibonacci numbers</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="at">@lru_cache</span>(maxsize<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="kw">def</span> fib(n):</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
-<span id="cb2-6"><a href="#cb2-6"></a>        <span class="cf">return</span> n</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="cf">return</span> fib(n<span class="dv">-1</span>) <span class="op">+</span> fib(n<span class="dv">-2</span>)</span>
-<span id="cb2-8"><a href="#cb2-8"></a></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>([fib(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>)])</span>
-<span id="cb2-10"><a href="#cb2-10"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">55</span>, <span class="dv">89</span>, <span class="dv">144</span>, <span class="dv">233</span>, <span class="dv">377</span>, <span class="dv">610</span>]</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(fib.cache_info())</span>
-<span id="cb2-13"><a href="#cb2-13"></a>CacheInfo(hits<span class="op">=</span><span class="dv">28</span>, misses<span class="op">=</span><span class="dv">16</span>, maxsize<span class="op">=</span><span class="va">None</span>, currsize<span class="op">=</span><span class="dv">16</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="at">@functools.lru_cache</span>(maxsize<span class="op">=</span><span class="dv">100</span>, typed<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="at">@functools.lru_cache</span>(maxsize<span class="op">=</span><span class="va">None</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># Fibonacci numbers</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="at">@lru_cache</span>(maxsize<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">def</span> fib(n):</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb3-6"><a href="#cb3-6"></a>        <span class="cf">return</span> n</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">return</span> fib(n<span class="dv">-1</span>) <span class="op">+</span> fib(n<span class="dv">-2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>([fib(n) <span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">16</span>)])</span>
+<span id="cb3-10"><a href="#cb3-10"></a>[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">21</span>, <span class="dv">34</span>, <span class="dv">55</span>, <span class="dv">89</span>, <span class="dv">144</span>, <span class="dv">233</span>, <span class="dv">377</span>, <span class="dv">610</span>]</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(fib.cache_info())</span>
+<span id="cb3-13"><a href="#cb3-13"></a>CacheInfo(hits<span class="op">=</span><span class="dv">28</span>, misses<span class="op">=</span><span class="dv">16</span>, maxsize<span class="op">=</span><span class="va">None</span>, currsize<span class="op">=</span><span class="dv">16</span>)</span></code></pre></div>
 </section>
 <section id="increase-recursion-depth" class="level4">
 <h4>Increase recursion depth</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">print</span>(sys.getrecursionlimit())</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># gives me 1000</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>sys.setrecursionlimit(<span class="dv">3000</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="bu">print</span>(sys.getrecursionlimit())</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># gives me 1000</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>sys.setrecursionlimit(<span class="dv">3000</span>) </span></code></pre></div>
 </section>
 </section>
 </section>
@@ -191,171 +198,171 @@
 <li>Container’s <strong>str</strong> uses contained objects’ <strong>repr</strong></li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># Reverse string</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">&quot;Hello World&quot;</span>[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Find last char </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">&quot;Hello&quot;</span>.rfind(<span class="st">&#39;l&#39;</span>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># Get alphbet</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="im">from</span> string <span class="im">import</span> ascii_lowercase</span>
-<span id="cb4-12"><a href="#cb4-12"></a></span>
-<span id="cb4-13"><a href="#cb4-13"></a></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co"># Find all index match</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a>s <span class="op">=</span> <span class="st">&quot;ababdfegtduab&quot;</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a>[m.start() <span class="cf">for</span> m <span class="kw">in</span> re.finditer(<span class="vs">r&quot;ab&quot;</span>,s)]</span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co"># -&gt; [0, 2, 11]</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Reverse string</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">&quot;Hello World&quot;</span>[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># Find last char </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">&quot;Hello&quot;</span>.rfind(<span class="st">&#39;l&#39;</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co"># Get alphbet</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="im">from</span> string <span class="im">import</span> ascii_lowercase</span>
+<span id="cb5-12"><a href="#cb5-12"></a></span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co"># Find all index match</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>s <span class="op">=</span> <span class="st">&quot;ababdfegtduab&quot;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>[m.start() <span class="cf">for</span> m <span class="kw">in</span> re.finditer(<span class="vs">r&quot;ab&quot;</span>,s)]</span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co"># -&gt; [0, 2, 11]</span></span></code></pre></div>
 </section>
 <section id="list" class="level3">
 <h3>List</h3>
 <ul>
 <li>deque is short for Double Ended Queue</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Find last elt of list</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>li <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;6&quot;</span>]</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">&#39;&#39;</span>.join(li).rindex(<span class="st">&#39;a&#39;</span>)</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="bu">len</span>(li) <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> li[::<span class="op">-</span><span class="dv">1</span>].index(<span class="st">&#39;a&#39;</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># Find index</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co"># # All of whatever condition</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>indexes <span class="op">=</span> [i <span class="cf">for</span> i,x <span class="kw">in</span> <span class="bu">enumerate</span>(xs) <span class="cf">if</span> x <span class="op">==</span> <span class="st">&#39;foo&#39;</span>]</span>
-<span id="cb5-12"><a href="#cb5-12"></a></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># # First (surround with try catch)</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a>[<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>].index(<span class="st">&quot;bar&quot;</span>)</span>
-<span id="cb5-15"><a href="#cb5-15"></a></span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co"># Contains only hi</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="bu">all</span>(elem <span class="op">==</span> <span class="st">&quot;hi&quot;</span> <span class="cf">for</span> elem <span class="kw">in</span> bag)</span>
-<span id="cb5-19"><a href="#cb5-19"></a></span>
-<span id="cb5-20"><a href="#cb5-20"></a></span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="co"># Equality</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a><span class="im">import</span> collections</span>
-<span id="cb5-23"><a href="#cb5-23"></a>collections.Counter(x) <span class="op">==</span> collections.Counter(y)</span>
-<span id="cb5-24"><a href="#cb5-24"></a></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co"># # or</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="bu">sorted</span>(x) <span class="op">==</span> <span class="bu">sorted</span>(y)</span>
-<span id="cb5-27"><a href="#cb5-27"></a></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="co"># # or if unique</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="bu">set</span>(x) <span class="op">==</span> <span class="bu">set</span>(y)</span>
-<span id="cb5-30"><a href="#cb5-30"></a></span>
-<span id="cb5-31"><a href="#cb5-31"></a></span>
-<span id="cb5-32"><a href="#cb5-32"></a><span class="co"># Reverse</span></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="bu">reversed</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb5-34"><a href="#cb5-34"></a></span>
-<span id="cb5-35"><a href="#cb5-35"></a></span>
-<span id="cb5-36"><a href="#cb5-36"></a><span class="co"># append multiple items</span></span>
-<span id="cb5-37"><a href="#cb5-37"></a>l <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb5-38"><a href="#cb5-38"></a>l.extends([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
-<span id="cb5-39"><a href="#cb5-39"></a></span>
-<span id="cb5-40"><a href="#cb5-40"></a><span class="co"># &quot; Better</span></span>
-<span id="cb5-41"><a href="#cb5-41"></a>l <span class="op">+=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
-<span id="cb5-42"><a href="#cb5-42"></a></span>
-<span id="cb5-43"><a href="#cb5-43"></a></span>
-<span id="cb5-44"><a href="#cb5-44"></a><span class="co"># Enumerate, very usefull</span></span>
-<span id="cb5-45"><a href="#cb5-45"></a></span>
-<span id="cb5-46"><a href="#cb5-46"></a></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="co"># Set</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="co"># # intersection</span></span>
-<span id="cb5-50"><a href="#cb5-50"></a>z <span class="op">=</span> x.intersection(y) </span>
-<span id="cb5-51"><a href="#cb5-51"></a></span>
-<span id="cb5-52"><a href="#cb5-52"></a></span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="co"># Copy nested list (2 dimension)</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a>y <span class="op">=</span> [row[:] <span class="cf">for</span> row <span class="kw">in</span> x]</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Find last elt of list</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>li <span class="op">=</span> [<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;6&quot;</span>]</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">&#39;&#39;</span>.join(li).rindex(<span class="st">&#39;a&#39;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="bu">len</span>(li) <span class="op">-</span> <span class="dv">1</span> <span class="op">-</span> li[::<span class="op">-</span><span class="dv">1</span>].index(<span class="st">&#39;a&#39;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># Find index</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># # All of whatever condition</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>indexes <span class="op">=</span> [i <span class="cf">for</span> i,x <span class="kw">in</span> <span class="bu">enumerate</span>(xs) <span class="cf">if</span> x <span class="op">==</span> <span class="st">&#39;foo&#39;</span>]</span>
+<span id="cb6-12"><a href="#cb6-12"></a></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># # First (surround with try catch)</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>[<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;bar&quot;</span>, <span class="st">&quot;baz&quot;</span>].index(<span class="st">&quot;bar&quot;</span>)</span>
+<span id="cb6-15"><a href="#cb6-15"></a></span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co"># Contains only hi</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="bu">all</span>(elem <span class="op">==</span> <span class="st">&quot;hi&quot;</span> <span class="cf">for</span> elem <span class="kw">in</span> bag)</span>
+<span id="cb6-19"><a href="#cb6-19"></a></span>
+<span id="cb6-20"><a href="#cb6-20"></a></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co"># Equality</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="im">import</span> collections</span>
+<span id="cb6-23"><a href="#cb6-23"></a>collections.Counter(x) <span class="op">==</span> collections.Counter(y)</span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co"># # or</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="bu">sorted</span>(x) <span class="op">==</span> <span class="bu">sorted</span>(y)</span>
+<span id="cb6-27"><a href="#cb6-27"></a></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co"># # or if unique</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="bu">set</span>(x) <span class="op">==</span> <span class="bu">set</span>(y)</span>
+<span id="cb6-30"><a href="#cb6-30"></a></span>
+<span id="cb6-31"><a href="#cb6-31"></a></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co"># Reverse</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="bu">reversed</span>([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
+<span id="cb6-34"><a href="#cb6-34"></a></span>
+<span id="cb6-35"><a href="#cb6-35"></a></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co"># append multiple items</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a>l <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb6-38"><a href="#cb6-38"></a>l.extends([<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>])</span>
+<span id="cb6-39"><a href="#cb6-39"></a></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co"># &quot; Better</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a>l <span class="op">+=</span> [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb6-42"><a href="#cb6-42"></a></span>
+<span id="cb6-43"><a href="#cb6-43"></a></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co"># Enumerate, very usefull</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a></span>
+<span id="cb6-46"><a href="#cb6-46"></a></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co"># Set</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co"># # intersection</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a>z <span class="op">=</span> x.intersection(y) </span>
+<span id="cb6-51"><a href="#cb6-51"></a></span>
+<span id="cb6-52"><a href="#cb6-52"></a></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co"># Copy nested list (2 dimension)</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a>y <span class="op">=</span> [row[:] <span class="cf">for</span> row <span class="kw">in</span> x]</span></code></pre></div>
 </section>
 <section id="dictionary" class="level3">
 <h3>Dictionary</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># Add 2 dict</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>dic3 <span class="op">=</span> {<span class="op">**</span>dic1, <span class="op">**</span>dic2}</span>
-<span id="cb6-4"><a href="#cb6-4"></a>z <span class="op">=</span> x.copy()</span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># start with x&#39;s keys and values</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>z.update(y)</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># modifies z with y&#39;s keys and values &amp; returns None</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># Auto vivication</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
-<span id="cb6-12"><a href="#cb6-12"></a>d <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
-<span id="cb6-13"><a href="#cb6-13"></a>d[<span class="dv">3</span>] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co"># -&gt; defaultdict(int, {3: 1})</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># Add 2 dict</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a>dic3 <span class="op">=</span> {<span class="op">**</span>dic1, <span class="op">**</span>dic2}</span>
+<span id="cb7-4"><a href="#cb7-4"></a>z <span class="op">=</span> x.copy()</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># start with x&#39;s keys and values</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>z.update(y)</span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># modifies z with y&#39;s keys and values &amp; returns None</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Auto vivication</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb7-12"><a href="#cb7-12"></a>d <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
+<span id="cb7-13"><a href="#cb7-13"></a>d[<span class="dv">3</span>] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># -&gt; defaultdict(int, {3: 1})</span></span></code></pre></div>
 </section>
 <section id="golf" class="level3">
 <h3>Golf</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">for</span> i <span class="kw">in</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]:</span>
-<span id="cb7-2"><a href="#cb7-2"></a>    <span class="bu">print</span>(i)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="cf">if</span> i<span class="op">==</span><span class="dv">3</span>:</span>
-<span id="cb7-4"><a href="#cb7-4"></a>        <span class="cf">break</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">else</span>:</span>
-<span id="cb7-6"><a href="#cb7-6"></a>    <span class="bu">print</span>(<span class="st">&quot;for loop was not broken&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="cf">for</span> i <span class="kw">in</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]:</span>
+<span id="cb8-2"><a href="#cb8-2"></a>    <span class="bu">print</span>(i)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>    <span class="cf">if</span> i<span class="op">==</span><span class="dv">3</span>:</span>
+<span id="cb8-4"><a href="#cb8-4"></a>        <span class="cf">break</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="cf">else</span>:</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="bu">print</span>(<span class="st">&quot;for loop was not broken&quot;</span>)</span></code></pre></div>
 </section>
 <section id="stdin-stdout" class="level3">
 <h3>StdIn / StdOut</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>fptr <span class="op">=</span> <span class="bu">open</span>(os.environ[<span class="st">&#39;OUTPUT_PATH&#39;</span>], <span class="st">&#39;w&#39;</span>)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>())</span>
-<span id="cb8-4"><a href="#cb8-4"></a></span>
-<span id="cb8-5"><a href="#cb8-5"></a>s <span class="op">=</span> <span class="bu">input</span>()</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a>result <span class="op">=</span> substrCount(n, s)</span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a>fptr.write(<span class="bu">str</span>(result) <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb8-10"><a href="#cb8-10"></a></span>
-<span id="cb8-11"><a href="#cb8-11"></a>fptr.close()</span></code></pre></div>
-<p>Or more complex</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>fptr <span class="op">=</span> <span class="bu">open</span>(os.environ[<span class="st">&#39;OUTPUT_PATH&#39;</span>], <span class="st">&#39;w&#39;</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3"></a>q <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>().strip())</span>
+<span id="cb9-3"><a href="#cb9-3"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>())</span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a>queries <span class="op">=</span> []</span>
+<span id="cb9-5"><a href="#cb9-5"></a>s <span class="op">=</span> <span class="bu">input</span>()</span>
 <span id="cb9-6"><a href="#cb9-6"></a></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(q):</span>
-<span id="cb9-8"><a href="#cb9-8"></a>    queries.append(<span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().rstrip().split())))</span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a>ans <span class="op">=</span> freqQuery(queries)</span>
-<span id="cb9-11"><a href="#cb9-11"></a></span>
-<span id="cb9-12"><a href="#cb9-12"></a>fptr.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(<span class="bu">map</span>(<span class="bu">str</span>, ans)))</span>
-<span id="cb9-13"><a href="#cb9-13"></a>fptr.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a>fptr.close()</span></code></pre></div>
+<span id="cb9-7"><a href="#cb9-7"></a>result <span class="op">=</span> substrCount(n, s)</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a>fptr.write(<span class="bu">str</span>(result) <span class="op">+</span> <span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>fptr.close()</span></code></pre></div>
+<p>Or more complex</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>fptr <span class="op">=</span> <span class="bu">open</span>(os.environ[<span class="st">&#39;OUTPUT_PATH&#39;</span>], <span class="st">&#39;w&#39;</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a></span>
+<span id="cb10-3"><a href="#cb10-3"></a>q <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>().strip())</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>queries <span class="op">=</span> []</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(q):</span>
+<span id="cb10-8"><a href="#cb10-8"></a>    queries.append(<span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">int</span>, <span class="bu">input</span>().rstrip().split())))</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a>ans <span class="op">=</span> freqQuery(queries)</span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>fptr.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>.join(<span class="bu">map</span>(<span class="bu">str</span>, ans)))</span>
+<span id="cb10-13"><a href="#cb10-13"></a>fptr.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</span>
+<span id="cb10-14"><a href="#cb10-14"></a></span>
+<span id="cb10-15"><a href="#cb10-15"></a>fptr.close()</span></code></pre></div>
 </section>
 <section id="sorting" class="level3">
 <h3>Sorting</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># Eumerate function</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>l1 <span class="op">=</span> [<span class="st">&quot;eat&quot;</span>,<span class="st">&quot;sleep&quot;</span>,<span class="st">&quot;repeat&quot;</span>] </span>
-<span id="cb10-4"><a href="#cb10-4"></a>s1 <span class="op">=</span> <span class="st">&quot;geek&quot;</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="bu">print</span> <span class="bu">list</span>(<span class="bu">enumerate</span>(l1)) </span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co"># changing start index to 2 from 0 </span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="bu">print</span> <span class="bu">list</span>(<span class="bu">enumerate</span>(s1,<span class="dv">2</span>)) </span>
-<span id="cb10-10"><a href="#cb10-10"></a></span>
-<span id="cb10-11"><a href="#cb10-11"></a></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co"># Map lambda</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a>new_list <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">%</span>num, old_list)</span>
-<span id="cb10-14"><a href="#cb10-14"></a>new_list <span class="op">=</span> [ x<span class="op">%</span>num <span class="cf">for</span> x <span class="kw">in</span> old_list]</span>
-<span id="cb10-15"><a href="#cb10-15"></a></span>
-<span id="cb10-16"><a href="#cb10-16"></a></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co"># Swap (with &#39;tuple-unpacking&#39;)</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>arr[i], arr[j] <span class="op">=</span> arr[j], arr[i]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># Eumerate function</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>l1 <span class="op">=</span> [<span class="st">&quot;eat&quot;</span>,<span class="st">&quot;sleep&quot;</span>,<span class="st">&quot;repeat&quot;</span>] </span>
+<span id="cb11-4"><a href="#cb11-4"></a>s1 <span class="op">=</span> <span class="st">&quot;geek&quot;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="bu">print</span> <span class="bu">list</span>(<span class="bu">enumerate</span>(l1)) </span>
+<span id="cb11-6"><a href="#cb11-6"></a></span>
+<span id="cb11-7"><a href="#cb11-7"></a></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co"># changing start index to 2 from 0 </span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="bu">print</span> <span class="bu">list</span>(<span class="bu">enumerate</span>(s1,<span class="dv">2</span>)) </span>
+<span id="cb11-10"><a href="#cb11-10"></a></span>
+<span id="cb11-11"><a href="#cb11-11"></a></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co"># Map lambda</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a>new_list <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> x: x<span class="op">%</span>num, old_list)</span>
+<span id="cb11-14"><a href="#cb11-14"></a>new_list <span class="op">=</span> [ x<span class="op">%</span>num <span class="cf">for</span> x <span class="kw">in</span> old_list]</span>
+<span id="cb11-15"><a href="#cb11-15"></a></span>
+<span id="cb11-16"><a href="#cb11-16"></a></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co"># Swap (with &#39;tuple-unpacking&#39;)</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a>arr[i], arr[j] <span class="op">=</span> arr[j], arr[i]</span></code></pre></div>
 </section>
 <section id="idioms" class="level3">
 <h3>Idioms</h3>
 <ul>
 <li>tuple-unpacking:</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>foo, boo, moo <span class="op">=</span> boo[<span class="dv">0</span>], moo[<span class="dv">0</span>], foo[<span class="dv">0</span>] <span class="op">=</span> moo[<span class="dv">0</span>], foo[<span class="dv">0</span>], boo[<span class="dv">0</span>] <span class="op">=</span> [<span class="dv">0</span>], [<span class="dv">0</span>], [<span class="dv">0</span>]`</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>foo, boo, moo <span class="op">=</span> boo[<span class="dv">0</span>], moo[<span class="dv">0</span>], foo[<span class="dv">0</span>] <span class="op">=</span> moo[<span class="dv">0</span>], foo[<span class="dv">0</span>], boo[<span class="dv">0</span>] <span class="op">=</span> [<span class="dv">0</span>], [<span class="dv">0</span>], [<span class="dv">0</span>]`</span></code></pre></div>
 <ul>
 <li>Get from dict (of dict):</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>value <span class="op">=</span> d.get(key, {}).get(key2, <span class="st">&quot;empty&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>value <span class="op">=</span> d.get(key, {}).get(key2, <span class="st">&quot;empty&quot;</span>)</span></code></pre></div>
 </section>
 </section>
 </section>
@@ -367,111 +374,111 @@
 <ul>
 <li>Using modular arithmetic to calculate new pos</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; lengthOfArray; i++){</span>
-<span id="cb13-2"><a href="#cb13-2"></a>    <span class="dt">int</span> newLocation = (i + (lengthOfArray - shiftAmount)) % lengthOfArray;</span>
-<span id="cb13-3"><a href="#cb13-3"></a>    a[newLocation] = in.<span class="fu">nextInt</span>();</span>
-<span id="cb13-4"><a href="#cb13-4"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; lengthOfArray; i++){</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="dt">int</span> newLocation = (i + (lengthOfArray - shiftAmount)) % lengthOfArray;</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    a[newLocation] = in.<span class="fu">nextInt</span>();</span>
+<span id="cb14-4"><a href="#cb14-4"></a>}</span></code></pre></div>
 <ul>
 <li>Slicing</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">def</span> rotLeft(a, d): <span class="cf">return</span> a[d:]<span class="op">+</span>a[:d]</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">def</span> rotLeft(a, d): <span class="cf">return</span> a[d:]<span class="op">+</span>a[:d]</span></code></pre></div>
 <ul>
 <li>Deque in python support that</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
-<span id="cb15-2"><a href="#cb15-2"></a></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="kw">def</span> rotLeft(a, d):</span>
-<span id="cb15-4"><a href="#cb15-4"></a>    deq <span class="op">=</span> deque(a)</span>
-<span id="cb15-5"><a href="#cb15-5"></a>    deq.rotate(<span class="op">-</span>d)</span>
-<span id="cb15-6"><a href="#cb15-6"></a>    <span class="cf">return</span> <span class="bu">list</span>(deq)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">def</span> rotLeft(a, d):</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    deq <span class="op">=</span> deque(a)</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    deq.rotate(<span class="op">-</span>d)</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="cf">return</span> <span class="bu">list</span>(deq)</span></code></pre></div>
 </section>
 <section id="count-triplet" class="level3">
 <h3>Count triplet</h3>
 <p>Count number of geometric progression in array [x, x<em>k, x</em>k*k]. K is given, read the rules !</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">def</span> countTriplets(arr, r):</span>
-<span id="cb16-2"><a href="#cb16-2"></a>    count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> dic1 <span class="op">=</span> {}<span class="op">;</span> dic2 <span class="op">=</span> {}</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a>    <span class="cf">for</span> i3 <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(arr)):</span>
-<span id="cb16-5"><a href="#cb16-5"></a></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co"># get</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a>        val3 <span class="op">=</span> arr[i3]</span>
-<span id="cb16-8"><a href="#cb16-8"></a>        val2 <span class="op">=</span> val3 <span class="op">/</span> r</span>
-<span id="cb16-9"><a href="#cb16-9"></a></span>
-<span id="cb16-10"><a href="#cb16-10"></a></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="co"># count</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a>        count <span class="op">+=</span> dic2.get(val2, <span class="dv">0</span>)</span>
-<span id="cb16-13"><a href="#cb16-13"></a></span>
-<span id="cb16-14"><a href="#cb16-14"></a></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="co"># update</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a>        dic2[val3] <span class="op">=</span> dic2.get(val3, <span class="dv">0</span>) <span class="op">+</span> dic1.get(val2, <span class="dv">0</span>)</span>
-<span id="cb16-17"><a href="#cb16-17"></a>        dic1[val3] <span class="op">=</span> dic1.get(val3, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a></span>
-<span id="cb16-19"><a href="#cb16-19"></a>    <span class="cf">return</span> count</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">def</span> countTriplets(arr, r):</span>
-<span id="cb17-3"><a href="#cb17-3"></a>    v2 <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
-<span id="cb17-4"><a href="#cb17-4"></a>    v3 <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
-<span id="cb17-5"><a href="#cb17-5"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>    <span class="cf">for</span> k <span class="kw">in</span> arr:</span>
-<span id="cb17-7"><a href="#cb17-7"></a>        count <span class="op">+=</span> v3[k]</span>
-<span id="cb17-8"><a href="#cb17-8"></a>        v3[k<span class="op">*</span>r] <span class="op">+=</span> v2[k]</span>
-<span id="cb17-9"><a href="#cb17-9"></a>        v2[k<span class="op">*</span>r] <span class="op">+=</span> <span class="dv">1</span></span>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">def</span> countTriplets(arr, r):</span>
+<span id="cb17-2"><a href="#cb17-2"></a>    count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> dic1 <span class="op">=</span> {}<span class="op">;</span> dic2 <span class="op">=</span> {}</span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="cf">for</span> i3 <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(arr)):</span>
+<span id="cb17-5"><a href="#cb17-5"></a></span>
+<span id="cb17-6"><a href="#cb17-6"></a><span class="co"># get</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>        val3 <span class="op">=</span> arr[i3]</span>
+<span id="cb17-8"><a href="#cb17-8"></a>        val2 <span class="op">=</span> val3 <span class="op">/</span> r</span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
 <span id="cb17-10"><a href="#cb17-10"></a></span>
-<span id="cb17-11"><a href="#cb17-11"></a>    <span class="cf">return</span> count</span></code></pre></div>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="co"># count</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>        count <span class="op">+=</span> dic2.get(val2, <span class="dv">0</span>)</span>
+<span id="cb17-13"><a href="#cb17-13"></a></span>
+<span id="cb17-14"><a href="#cb17-14"></a></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="co"># update</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>        dic2[val3] <span class="op">=</span> dic2.get(val3, <span class="dv">0</span>) <span class="op">+</span> dic1.get(val2, <span class="dv">0</span>)</span>
+<span id="cb17-17"><a href="#cb17-17"></a>        dic1[val3] <span class="op">=</span> dic1.get(val3, <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a></span>
+<span id="cb17-19"><a href="#cb17-19"></a>    <span class="cf">return</span> count</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">def</span> countTriplets(arr, r):</span>
+<span id="cb18-3"><a href="#cb18-3"></a>    v2 <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    v3 <span class="op">=</span> defaultdict(<span class="bu">int</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="cf">for</span> k <span class="kw">in</span> arr:</span>
+<span id="cb18-7"><a href="#cb18-7"></a>        count <span class="op">+=</span> v3[k]</span>
+<span id="cb18-8"><a href="#cb18-8"></a>        v3[k<span class="op">*</span>r] <span class="op">+=</span> v2[k]</span>
+<span id="cb18-9"><a href="#cb18-9"></a>        v2[k<span class="op">*</span>r] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a>    <span class="cf">return</span> count</span></code></pre></div>
 </section>
 <section id="solution-reverse-shuffle-merge" class="level3">
 <h3>Solution: Reverse Shuffle Merge</h3>
 <p>Note : I did not manage in 3h. When tired, get really bad + no paper to note =&gt; Must concentrate</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">def</span> reverseShuffleMerge(s):</span>
-<span id="cb18-2"><a href="#cb18-2"></a></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="co"># Total character counts in s</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a>    char_count <span class="op">=</span> Counter(s)</span>
-<span id="cb18-5"><a href="#cb18-5"></a></span>
-<span id="cb18-6"><a href="#cb18-6"></a></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># Character counts we need in our final string</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a>    string_chars <span class="op">=</span> { </span>
-<span id="cb18-9"><a href="#cb18-9"></a>        char: <span class="bu">int</span>(count <span class="op">/</span> <span class="dv">2</span>) <span class="cf">for</span> char, count <span class="kw">in</span> char_count.items() </span>
-<span id="cb18-10"><a href="#cb18-10"></a>    }</span>
-<span id="cb18-11"><a href="#cb18-11"></a></span>
-<span id="cb18-12"><a href="#cb18-12"></a></span>
-<span id="cb18-13"><a href="#cb18-13"></a><span class="co"># Character counts we need in the shuffled </span></span>
-<span id="cb18-14"><a href="#cb18-14"></a></span>
-<span id="cb18-15"><a href="#cb18-15"></a><span class="co"># version of our original string </span></span>
-<span id="cb18-16"><a href="#cb18-16"></a>    shuffled_chars <span class="op">=</span> { </span>
-<span id="cb18-17"><a href="#cb18-17"></a>        char: <span class="bu">int</span>(count <span class="op">/</span> <span class="dv">2</span>) <span class="cf">for</span> char, count <span class="kw">in</span> char_count.items() </span>
-<span id="cb18-18"><a href="#cb18-18"></a>    }</span>
-<span id="cb18-19"><a href="#cb18-19"></a></span>
-<span id="cb18-20"><a href="#cb18-20"></a>    string <span class="op">=</span> []</span>
-<span id="cb18-21"><a href="#cb18-21"></a></span>
-<span id="cb18-22"><a href="#cb18-22"></a>    <span class="cf">for</span> char <span class="kw">in</span> <span class="bu">reversed</span>(s):</span>
-<span id="cb18-23"><a href="#cb18-23"></a>        <span class="cf">if</span> string_chars[char] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb18-24"><a href="#cb18-24"></a></span>
-<span id="cb18-25"><a href="#cb18-25"></a><span class="co"># See if this character should appear before any </span></span>
-<span id="cb18-26"><a href="#cb18-26"></a></span>
-<span id="cb18-27"><a href="#cb18-27"></a><span class="co"># previous ones. Basically, if this char is smaller </span></span>
-<span id="cb18-28"><a href="#cb18-28"></a></span>
-<span id="cb18-29"><a href="#cb18-29"></a><span class="co"># than the previous char, and the previous char </span></span>
-<span id="cb18-30"><a href="#cb18-30"></a></span>
-<span id="cb18-31"><a href="#cb18-31"></a><span class="co"># still occurs in the chars of the shuffled string, </span></span>
-<span id="cb18-32"><a href="#cb18-32"></a></span>
-<span id="cb18-33"><a href="#cb18-33"></a><span class="co"># we can the safely replace the previous char </span></span>
-<span id="cb18-34"><a href="#cb18-34"></a></span>
-<span id="cb18-35"><a href="#cb18-35"></a><span class="co"># with this one. That&#39;s so because we should be </span></span>
-<span id="cb18-36"><a href="#cb18-36"></a></span>
-<span id="cb18-37"><a href="#cb18-37"></a><span class="co"># able to still create a valid string which contains</span></span>
-<span id="cb18-38"><a href="#cb18-38"></a></span>
-<span id="cb18-39"><a href="#cb18-39"></a><span class="co"># both characters although the order will differs.</span></span>
-<span id="cb18-40"><a href="#cb18-40"></a>            <span class="cf">while</span> string <span class="kw">and</span> string[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> char <span class="kw">and</span> shuffled_chars[string[<span class="op">-</span><span class="dv">1</span>]] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb18-41"><a href="#cb18-41"></a>                removed <span class="op">=</span> string.pop()</span>
-<span id="cb18-42"><a href="#cb18-42"></a>                string_chars[removed] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb18-43"><a href="#cb18-43"></a>                shuffled_chars[removed] <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb18-44"><a href="#cb18-44"></a></span>
-<span id="cb18-45"><a href="#cb18-45"></a>            string.append(char)</span>
-<span id="cb18-46"><a href="#cb18-46"></a>            string_chars[char] <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb18-47"><a href="#cb18-47"></a>        <span class="cf">else</span>:</span>
-<span id="cb18-48"><a href="#cb18-48"></a>            shuffled_chars[char] <span class="op">-=</span> <span class="dv">1</span></span>
-<span id="cb18-49"><a href="#cb18-49"></a></span>
-<span id="cb18-50"><a href="#cb18-50"></a>    <span class="cf">return</span> <span class="st">&#39;&#39;</span>.join(string)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">def</span> reverseShuffleMerge(s):</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># Total character counts in s</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>    char_count <span class="op">=</span> Counter(s)</span>
+<span id="cb19-5"><a href="#cb19-5"></a></span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># Character counts we need in our final string</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>    string_chars <span class="op">=</span> { </span>
+<span id="cb19-9"><a href="#cb19-9"></a>        char: <span class="bu">int</span>(count <span class="op">/</span> <span class="dv">2</span>) <span class="cf">for</span> char, count <span class="kw">in</span> char_count.items() </span>
+<span id="cb19-10"><a href="#cb19-10"></a>    }</span>
+<span id="cb19-11"><a href="#cb19-11"></a></span>
+<span id="cb19-12"><a href="#cb19-12"></a></span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="co"># Character counts we need in the shuffled </span></span>
+<span id="cb19-14"><a href="#cb19-14"></a></span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="co"># version of our original string </span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>    shuffled_chars <span class="op">=</span> { </span>
+<span id="cb19-17"><a href="#cb19-17"></a>        char: <span class="bu">int</span>(count <span class="op">/</span> <span class="dv">2</span>) <span class="cf">for</span> char, count <span class="kw">in</span> char_count.items() </span>
+<span id="cb19-18"><a href="#cb19-18"></a>    }</span>
+<span id="cb19-19"><a href="#cb19-19"></a></span>
+<span id="cb19-20"><a href="#cb19-20"></a>    string <span class="op">=</span> []</span>
+<span id="cb19-21"><a href="#cb19-21"></a></span>
+<span id="cb19-22"><a href="#cb19-22"></a>    <span class="cf">for</span> char <span class="kw">in</span> <span class="bu">reversed</span>(s):</span>
+<span id="cb19-23"><a href="#cb19-23"></a>        <span class="cf">if</span> string_chars[char] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb19-24"><a href="#cb19-24"></a></span>
+<span id="cb19-25"><a href="#cb19-25"></a><span class="co"># See if this character should appear before any </span></span>
+<span id="cb19-26"><a href="#cb19-26"></a></span>
+<span id="cb19-27"><a href="#cb19-27"></a><span class="co"># previous ones. Basically, if this char is smaller </span></span>
+<span id="cb19-28"><a href="#cb19-28"></a></span>
+<span id="cb19-29"><a href="#cb19-29"></a><span class="co"># than the previous char, and the previous char </span></span>
+<span id="cb19-30"><a href="#cb19-30"></a></span>
+<span id="cb19-31"><a href="#cb19-31"></a><span class="co"># still occurs in the chars of the shuffled string, </span></span>
+<span id="cb19-32"><a href="#cb19-32"></a></span>
+<span id="cb19-33"><a href="#cb19-33"></a><span class="co"># we can the safely replace the previous char </span></span>
+<span id="cb19-34"><a href="#cb19-34"></a></span>
+<span id="cb19-35"><a href="#cb19-35"></a><span class="co"># with this one. That&#39;s so because we should be </span></span>
+<span id="cb19-36"><a href="#cb19-36"></a></span>
+<span id="cb19-37"><a href="#cb19-37"></a><span class="co"># able to still create a valid string which contains</span></span>
+<span id="cb19-38"><a href="#cb19-38"></a></span>
+<span id="cb19-39"><a href="#cb19-39"></a><span class="co"># both characters although the order will differs.</span></span>
+<span id="cb19-40"><a href="#cb19-40"></a>            <span class="cf">while</span> string <span class="kw">and</span> string[<span class="op">-</span><span class="dv">1</span>] <span class="op">&gt;</span> char <span class="kw">and</span> shuffled_chars[string[<span class="op">-</span><span class="dv">1</span>]] <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb19-41"><a href="#cb19-41"></a>                removed <span class="op">=</span> string.pop()</span>
+<span id="cb19-42"><a href="#cb19-42"></a>                string_chars[removed] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb19-43"><a href="#cb19-43"></a>                shuffled_chars[removed] <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb19-44"><a href="#cb19-44"></a></span>
+<span id="cb19-45"><a href="#cb19-45"></a>            string.append(char)</span>
+<span id="cb19-46"><a href="#cb19-46"></a>            string_chars[char] <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb19-47"><a href="#cb19-47"></a>        <span class="cf">else</span>:</span>
+<span id="cb19-48"><a href="#cb19-48"></a>            shuffled_chars[char] <span class="op">-=</span> <span class="dv">1</span></span>
+<span id="cb19-49"><a href="#cb19-49"></a></span>
+<span id="cb19-50"><a href="#cb19-50"></a>    <span class="cf">return</span> <span class="st">&#39;&#39;</span>.join(string)</span></code></pre></div>
 </section>
 <section id="fraudulent-activity-notifications" class="level3">
 <h3>Fraudulent Activity Notifications</h3>
@@ -479,8 +486,8 @@
 <ol type="1">
 <li>bisect_left:</li>
 </ol>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>ix <span class="op">=</span> bisect_left(v, de)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="kw">del</span> v[ix]</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>ix <span class="op">=</span> bisect_left(v, de)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">del</span> v[ix]</span></code></pre></div>
 <p>you could <code>remove v[de]</code> but it would take O(n) time to find de whereas bisect_left assume a sorted list and find the index in O(log(n)).</p>
 <hr />
 <ol start="2" type="1">
@@ -488,185 +495,185 @@
 </ol>
 <p>gives you an index (i) used to remove the last income</p>
 <hr />
-<ol type="1">
+<ol start="3" type="1">
 <li>del</li>
 </ol>
 <p>This is the slow version O(n): The end of the list must be copied. Here we are lucky, please explain to me !! This also work: <code>l_sorted.remove(index)</code></p>
 <hr />
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">from</span> bisect <span class="im">import</span> insort, bisect_left</span>
-<span id="cb20-2"><a href="#cb20-2"></a></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">def</span> activityNotifications(expenditure, d):</span>
-<span id="cb20-4"><a href="#cb20-4"></a></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="co"># Check in</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a>    <span class="cf">if</span> <span class="bu">len</span>(expenditure) <span class="op">&lt;</span> d : <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a></span>
-<span id="cb20-8"><a href="#cb20-8"></a></span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="co"># Usefull var</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a>    half <span class="op">=</span> <span class="bu">int</span>(d <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb20-12"><a href="#cb20-12"></a>    is_impair <span class="op">=</span> d <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> </span>
-<span id="cb20-13"><a href="#cb20-13"></a></span>
-<span id="cb20-14"><a href="#cb20-14"></a></span>
-<span id="cb20-15"><a href="#cb20-15"></a><span class="co"># Prepare, sort</span></span>
-<span id="cb20-16"><a href="#cb20-16"></a>    l_sorted <span class="op">=</span> <span class="bu">sorted</span>(expenditure[:d])</span>
-<span id="cb20-17"><a href="#cb20-17"></a></span>
-<span id="cb20-18"><a href="#cb20-18"></a>    <span class="cf">for</span> i, current <span class="kw">in</span> <span class="bu">enumerate</span>(expenditure[d:]):</span>
-<span id="cb20-19"><a href="#cb20-19"></a></span>
-<span id="cb20-20"><a href="#cb20-20"></a><span class="co"># Add point</span></span>
-<span id="cb20-21"><a href="#cb20-21"></a>        <span class="cf">if</span> is_impair: med2 <span class="op">=</span> l_sorted[half] <span class="op">+</span> l_sorted[half<span class="dv">-1</span>]</span>
-<span id="cb20-22"><a href="#cb20-22"></a>        <span class="cf">else</span>: med2 <span class="op">=</span> l_sorted[half] <span class="op">*</span> <span class="dv">2</span></span>
-<span id="cb20-23"><a href="#cb20-23"></a>        <span class="cf">if</span> current <span class="op">&gt;=</span> med2:  res <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb20-24"><a href="#cb20-24"></a></span>
-<span id="cb20-25"><a href="#cb20-25"></a></span>
-<span id="cb20-26"><a href="#cb20-26"></a><span class="co"># Remove last</span></span>
-<span id="cb20-27"><a href="#cb20-27"></a>        last <span class="op">=</span> expenditure[i]</span>
-<span id="cb20-28"><a href="#cb20-28"></a>        index <span class="op">=</span> bisect_left(l_sorted, last)</span>
-<span id="cb20-29"><a href="#cb20-29"></a>        <span class="kw">del</span> l_sorted[index]</span>
-<span id="cb20-30"><a href="#cb20-30"></a></span>
-<span id="cb20-31"><a href="#cb20-31"></a></span>
-<span id="cb20-32"><a href="#cb20-32"></a><span class="co"># Add new</span></span>
-<span id="cb20-33"><a href="#cb20-33"></a>        insort(l_sorted, current)</span>
-<span id="cb20-34"><a href="#cb20-34"></a></span>
-<span id="cb20-35"><a href="#cb20-35"></a>    <span class="cf">return</span> res</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="im">from</span> bisect <span class="im">import</span> insort, bisect_left</span>
+<span id="cb21-2"><a href="#cb21-2"></a></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">def</span> activityNotifications(expenditure, d):</span>
+<span id="cb21-4"><a href="#cb21-4"></a></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co"># Check in</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a>    <span class="cf">if</span> <span class="bu">len</span>(expenditure) <span class="op">&lt;</span> d : <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb21-7"><a href="#cb21-7"></a></span>
+<span id="cb21-8"><a href="#cb21-8"></a></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co"># Usefull var</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a>    half <span class="op">=</span> <span class="bu">int</span>(d <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb21-12"><a href="#cb21-12"></a>    is_impair <span class="op">=</span> d <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span> </span>
+<span id="cb21-13"><a href="#cb21-13"></a></span>
+<span id="cb21-14"><a href="#cb21-14"></a></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="co"># Prepare, sort</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a>    l_sorted <span class="op">=</span> <span class="bu">sorted</span>(expenditure[:d])</span>
+<span id="cb21-17"><a href="#cb21-17"></a></span>
+<span id="cb21-18"><a href="#cb21-18"></a>    <span class="cf">for</span> i, current <span class="kw">in</span> <span class="bu">enumerate</span>(expenditure[d:]):</span>
+<span id="cb21-19"><a href="#cb21-19"></a></span>
+<span id="cb21-20"><a href="#cb21-20"></a><span class="co"># Add point</span></span>
+<span id="cb21-21"><a href="#cb21-21"></a>        <span class="cf">if</span> is_impair: med2 <span class="op">=</span> l_sorted[half] <span class="op">+</span> l_sorted[half<span class="dv">-1</span>]</span>
+<span id="cb21-22"><a href="#cb21-22"></a>        <span class="cf">else</span>: med2 <span class="op">=</span> l_sorted[half] <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb21-23"><a href="#cb21-23"></a>        <span class="cf">if</span> current <span class="op">&gt;=</span> med2:  res <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb21-24"><a href="#cb21-24"></a></span>
+<span id="cb21-25"><a href="#cb21-25"></a></span>
+<span id="cb21-26"><a href="#cb21-26"></a><span class="co"># Remove last</span></span>
+<span id="cb21-27"><a href="#cb21-27"></a>        last <span class="op">=</span> expenditure[i]</span>
+<span id="cb21-28"><a href="#cb21-28"></a>        index <span class="op">=</span> bisect_left(l_sorted, last)</span>
+<span id="cb21-29"><a href="#cb21-29"></a>        <span class="kw">del</span> l_sorted[index]</span>
+<span id="cb21-30"><a href="#cb21-30"></a></span>
+<span id="cb21-31"><a href="#cb21-31"></a></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="co"># Add new</span></span>
+<span id="cb21-33"><a href="#cb21-33"></a>        insort(l_sorted, current)</span>
+<span id="cb21-34"><a href="#cb21-34"></a></span>
+<span id="cb21-35"><a href="#cb21-35"></a>    <span class="cf">return</span> res</span></code></pre></div>
 </section>
 <section id="sherlock-and-anagrams" class="level3">
 <h3>Sherlock and Anagrams</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a></span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co"># Complete the sherlockAndAnagrams function below.</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="kw">def</span> sherlockAndAnagrams(s):</span>
-<span id="cb21-4"><a href="#cb21-4"></a>    res <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i_l <span class="op">=</span> <span class="bu">len</span>(s)</span>
-<span id="cb21-5"><a href="#cb21-5"></a></span>
-<span id="cb21-6"><a href="#cb21-6"></a></span>
-<span id="cb21-7"><a href="#cb21-7"></a><span class="co"># Loop letter number 1 .. i_l - 1</span></span>
-<span id="cb21-8"><a href="#cb21-8"></a>    <span class="cf">for</span> i_letter <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, i_l):</span>
-<span id="cb21-9"><a href="#cb21-9"></a></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co"># Loop i_c: 0 .. i_l - letter and sort i_c:i_c+letter</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a>        a_sort1 <span class="op">=</span> <span class="bu">sorted</span>(s[:i_letter <span class="op">-</span> <span class="dv">1</span>])</span>
-<span id="cb21-12"><a href="#cb21-12"></a>        <span class="cf">for</span> i_c <span class="kw">in</span> <span class="bu">range</span>(i_l <span class="op">-</span> i_letter <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb21-13"><a href="#cb21-13"></a>            insort(a_sort1, s[i_c<span class="op">+</span>i_letter<span class="dv">-1</span>])</span>
-<span id="cb21-14"><a href="#cb21-14"></a></span>
-<span id="cb21-15"><a href="#cb21-15"></a></span>
-<span id="cb21-16"><a href="#cb21-16"></a><span class="co"># Loop j_c: i_c+1: i_l - letter and sort j_c:j_c+letter</span></span>
-<span id="cb21-17"><a href="#cb21-17"></a>            blacklist <span class="op">=</span> []</span>
-<span id="cb21-18"><a href="#cb21-18"></a>            a_sort2 <span class="op">=</span> <span class="bu">sorted</span>(s[i_c<span class="op">+</span><span class="dv">1</span> : i_c<span class="op">+</span><span class="dv">1</span> <span class="op">+</span> i_letter<span class="dv">-1</span>])</span>
-<span id="cb21-19"><a href="#cb21-19"></a>            <span class="cf">for</span> j_c <span class="kw">in</span> <span class="bu">range</span>( i_c<span class="op">+</span><span class="dv">1</span>, i_l <span class="op">-</span>i_letter <span class="op">+</span> <span class="dv">1</span>):</span>
-<span id="cb21-20"><a href="#cb21-20"></a>                <span class="cf">if</span> j_c <span class="kw">in</span> blacklist: <span class="cf">continue</span></span>
-<span id="cb21-21"><a href="#cb21-21"></a>                insort(a_sort2, s[j_c<span class="op">+</span>i_letter<span class="dv">-1</span>])</span>
-<span id="cb21-22"><a href="#cb21-22"></a></span>
-<span id="cb21-23"><a href="#cb21-23"></a></span>
-<span id="cb21-24"><a href="#cb21-24"></a><span class="co"># Match</span></span>
-<span id="cb21-25"><a href="#cb21-25"></a>                <span class="cf">if</span> a_sort1 <span class="op">==</span> a_sort2:</span>
-<span id="cb21-26"><a href="#cb21-26"></a>                    res <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb21-27"><a href="#cb21-27"></a>                    blacklist.append(j_c)</span>
-<span id="cb21-28"><a href="#cb21-28"></a></span>
-<span id="cb21-29"><a href="#cb21-29"></a>                ix2 <span class="op">=</span> bisect_left(a_sort2, s[j_c])</span>
-<span id="cb21-30"><a href="#cb21-30"></a>                <span class="kw">del</span> a_sort2[ix2]                </span>
-<span id="cb21-31"><a href="#cb21-31"></a></span>
-<span id="cb21-32"><a href="#cb21-32"></a>            ix1 <span class="op">=</span> bisect_left(a_sort1, s[i_c])</span>
-<span id="cb21-33"><a href="#cb21-33"></a>            <span class="kw">del</span> a_sort1[ix1]</span>
-<span id="cb21-34"><a href="#cb21-34"></a></span>
-<span id="cb21-35"><a href="#cb21-35"></a>    <span class="cf">return</span> res</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># Complete the sherlockAndAnagrams function below.</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="kw">def</span> sherlockAndAnagrams(s):</span>
+<span id="cb22-4"><a href="#cb22-4"></a>    res <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i_l <span class="op">=</span> <span class="bu">len</span>(s)</span>
+<span id="cb22-5"><a href="#cb22-5"></a></span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a><span class="co"># Loop letter number 1 .. i_l - 1</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="cf">for</span> i_letter <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, i_l):</span>
+<span id="cb22-9"><a href="#cb22-9"></a></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="co"># Loop i_c: 0 .. i_l - letter and sort i_c:i_c+letter</span></span>
+<span id="cb22-11"><a href="#cb22-11"></a>        a_sort1 <span class="op">=</span> <span class="bu">sorted</span>(s[:i_letter <span class="op">-</span> <span class="dv">1</span>])</span>
+<span id="cb22-12"><a href="#cb22-12"></a>        <span class="cf">for</span> i_c <span class="kw">in</span> <span class="bu">range</span>(i_l <span class="op">-</span> i_letter <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-13"><a href="#cb22-13"></a>            insort(a_sort1, s[i_c<span class="op">+</span>i_letter<span class="dv">-1</span>])</span>
+<span id="cb22-14"><a href="#cb22-14"></a></span>
+<span id="cb22-15"><a href="#cb22-15"></a></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co"># Loop j_c: i_c+1: i_l - letter and sort j_c:j_c+letter</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a>            blacklist <span class="op">=</span> []</span>
+<span id="cb22-18"><a href="#cb22-18"></a>            a_sort2 <span class="op">=</span> <span class="bu">sorted</span>(s[i_c<span class="op">+</span><span class="dv">1</span> : i_c<span class="op">+</span><span class="dv">1</span> <span class="op">+</span> i_letter<span class="dv">-1</span>])</span>
+<span id="cb22-19"><a href="#cb22-19"></a>            <span class="cf">for</span> j_c <span class="kw">in</span> <span class="bu">range</span>( i_c<span class="op">+</span><span class="dv">1</span>, i_l <span class="op">-</span>i_letter <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb22-20"><a href="#cb22-20"></a>                <span class="cf">if</span> j_c <span class="kw">in</span> blacklist: <span class="cf">continue</span></span>
+<span id="cb22-21"><a href="#cb22-21"></a>                insort(a_sort2, s[j_c<span class="op">+</span>i_letter<span class="dv">-1</span>])</span>
+<span id="cb22-22"><a href="#cb22-22"></a></span>
+<span id="cb22-23"><a href="#cb22-23"></a></span>
+<span id="cb22-24"><a href="#cb22-24"></a><span class="co"># Match</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a>                <span class="cf">if</span> a_sort1 <span class="op">==</span> a_sort2:</span>
+<span id="cb22-26"><a href="#cb22-26"></a>                    res <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb22-27"><a href="#cb22-27"></a>                    blacklist.append(j_c)</span>
+<span id="cb22-28"><a href="#cb22-28"></a></span>
+<span id="cb22-29"><a href="#cb22-29"></a>                ix2 <span class="op">=</span> bisect_left(a_sort2, s[j_c])</span>
+<span id="cb22-30"><a href="#cb22-30"></a>                <span class="kw">del</span> a_sort2[ix2]                </span>
+<span id="cb22-31"><a href="#cb22-31"></a></span>
+<span id="cb22-32"><a href="#cb22-32"></a>            ix1 <span class="op">=</span> bisect_left(a_sort1, s[i_c])</span>
+<span id="cb22-33"><a href="#cb22-33"></a>            <span class="kw">del</span> a_sort1[ix1]</span>
+<span id="cb22-34"><a href="#cb22-34"></a></span>
+<span id="cb22-35"><a href="#cb22-35"></a>    <span class="cf">return</span> res</span></code></pre></div>
 </section>
 <section id="string-sub-count" class="level3">
 <h3>String: Sub count</h3>
 <ul>
 <li>Replace loop over string</li>
 </ul>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="cf">for</span> i_start <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb22-2"><a href="#cb22-2"></a>    c_start <span class="op">=</span> s[i_start]</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a> <span class="cf">for</span> i_start, c_start <span class="kw">in</span> <span class="bu">enumerate</span>(s):</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="cf">for</span> i_start <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb23-2"><a href="#cb23-2"></a>    c_start <span class="op">=</span> s[i_start]</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a> <span class="cf">for</span> i_start, c_start <span class="kw">in</span> <span class="bu">enumerate</span>(s):</span></code></pre></div>
 <section id="my-solution-with-too-many-if" class="level4">
 <h4>1 My solution with too many if</h4>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">def</span> substrCount(n, s):</span>
-<span id="cb24-2"><a href="#cb24-2"></a>    count <span class="op">=</span> n</span>
-<span id="cb24-3"><a href="#cb24-3"></a></span>
-<span id="cb24-4"><a href="#cb24-4"></a>    <span class="cf">for</span> i_start <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb24-5"><a href="#cb24-5"></a>        c_start <span class="op">=</span> s[i_start]</span>
-<span id="cb24-6"><a href="#cb24-6"></a></span>
-<span id="cb24-7"><a href="#cb24-7"></a>        i_middle <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb24-8"><a href="#cb24-8"></a>        <span class="cf">for</span> i_end <span class="kw">in</span> <span class="bu">range</span>(i_start<span class="op">+</span><span class="dv">1</span>, n):</span>
-<span id="cb24-9"><a href="#cb24-9"></a>            <span class="cf">if</span> s[i_end] <span class="op">!=</span> c_start:</span>
-<span id="cb24-10"><a href="#cb24-10"></a>                <span class="cf">if</span> <span class="kw">not</span> i_middle:</span>
-<span id="cb24-11"><a href="#cb24-11"></a>                    i_middle <span class="op">=</span> i_end</span>
-<span id="cb24-12"><a href="#cb24-12"></a>                    <span class="cf">continue</span></span>
-<span id="cb24-13"><a href="#cb24-13"></a>                <span class="cf">break</span></span>
-<span id="cb24-14"><a href="#cb24-14"></a></span>
-<span id="cb24-15"><a href="#cb24-15"></a>            <span class="cf">if</span> <span class="kw">not</span> i_middle:</span>
-<span id="cb24-16"><a href="#cb24-16"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-17"><a href="#cb24-17"></a>                <span class="cf">continue</span></span>
-<span id="cb24-18"><a href="#cb24-18"></a></span>
-<span id="cb24-19"><a href="#cb24-19"></a>            <span class="cf">if</span> i_end <span class="op">-</span> i_middle <span class="op">==</span> i_middle <span class="op">-</span> i_start:</span>
-<span id="cb24-20"><a href="#cb24-20"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb24-21"><a href="#cb24-21"></a>                <span class="cf">break</span></span>
-<span id="cb24-22"><a href="#cb24-22"></a></span>
-<span id="cb24-23"><a href="#cb24-23"></a>    <span class="cf">return</span> count</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">def</span> substrCount(n, s):</span>
+<span id="cb25-2"><a href="#cb25-2"></a>    count <span class="op">=</span> n</span>
+<span id="cb25-3"><a href="#cb25-3"></a></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="cf">for</span> i_start <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb25-5"><a href="#cb25-5"></a>        c_start <span class="op">=</span> s[i_start]</span>
+<span id="cb25-6"><a href="#cb25-6"></a></span>
+<span id="cb25-7"><a href="#cb25-7"></a>        i_middle <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>        <span class="cf">for</span> i_end <span class="kw">in</span> <span class="bu">range</span>(i_start<span class="op">+</span><span class="dv">1</span>, n):</span>
+<span id="cb25-9"><a href="#cb25-9"></a>            <span class="cf">if</span> s[i_end] <span class="op">!=</span> c_start:</span>
+<span id="cb25-10"><a href="#cb25-10"></a>                <span class="cf">if</span> <span class="kw">not</span> i_middle:</span>
+<span id="cb25-11"><a href="#cb25-11"></a>                    i_middle <span class="op">=</span> i_end</span>
+<span id="cb25-12"><a href="#cb25-12"></a>                    <span class="cf">continue</span></span>
+<span id="cb25-13"><a href="#cb25-13"></a>                <span class="cf">break</span></span>
+<span id="cb25-14"><a href="#cb25-14"></a></span>
+<span id="cb25-15"><a href="#cb25-15"></a>            <span class="cf">if</span> <span class="kw">not</span> i_middle:</span>
+<span id="cb25-16"><a href="#cb25-16"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-17"><a href="#cb25-17"></a>                <span class="cf">continue</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a></span>
+<span id="cb25-19"><a href="#cb25-19"></a>            <span class="cf">if</span> i_end <span class="op">-</span> i_middle <span class="op">==</span> i_middle <span class="op">-</span> i_start:</span>
+<span id="cb25-20"><a href="#cb25-20"></a>                count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb25-21"><a href="#cb25-21"></a>                <span class="cf">break</span></span>
+<span id="cb25-22"><a href="#cb25-22"></a></span>
+<span id="cb25-23"><a href="#cb25-23"></a>    <span class="cf">return</span> count</span></code></pre></div>
 </section>
 <section id="can-be-replaced-with-regex" class="level4">
 <h4>2 Can be replaced with regex !!</h4>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>count <span class="op">=</span> <span class="bu">len</span>(s)</span>
-<span id="cb25-2"><a href="#cb25-2"></a></span>
-<span id="cb25-3"><a href="#cb25-3"></a></span>
-<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># With middle</span></span>
-<span id="cb25-5"><a href="#cb25-5"></a>exp1 <span class="op">=</span> <span class="vs">r&#39;(([a-z])\2*)(?!\1)(?=[a-z]\1)&#39;</span></span>
-<span id="cb25-6"><a href="#cb25-6"></a>m <span class="op">=</span> re.finditer(exp1,s)</span>
-<span id="cb25-7"><a href="#cb25-7"></a>count <span class="op">+=</span> <span class="bu">sum</span>([<span class="bu">len</span>(x.group(<span class="dv">0</span>)) <span class="cf">for</span> x <span class="kw">in</span> m])</span>
-<span id="cb25-8"><a href="#cb25-8"></a></span>
-<span id="cb25-9"><a href="#cb25-9"></a></span>
-<span id="cb25-10"><a href="#cb25-10"></a><span class="co"># Just repeated seqs</span></span>
-<span id="cb25-11"><a href="#cb25-11"></a>exp2 <span class="op">=</span> <span class="vs">r&#39;([a-z])\1+&#39;</span></span>
-<span id="cb25-12"><a href="#cb25-12"></a>m <span class="op">=</span> re.finditer(exp2,s)</span>
-<span id="cb25-13"><a href="#cb25-13"></a>count <span class="op">+=</span> <span class="bu">sum</span>([triangular_number(<span class="bu">len</span>(x.group(<span class="dv">0</span>))<span class="op">-</span><span class="dv">1</span>) <span class="cf">for</span> x <span class="kw">in</span> m])</span>
-<span id="cb25-14"><a href="#cb25-14"></a></span>
-<span id="cb25-15"><a href="#cb25-15"></a><span class="cf">return</span> count</span>
-<span id="cb25-16"><a href="#cb25-16"></a></span>
-<span id="cb25-17"><a href="#cb25-17"></a><span class="kw">def</span> triangular_number(n):</span>
-<span id="cb25-18"><a href="#cb25-18"></a>    <span class="co">&quot;&quot;&quot;Count xxxx for any submatch xx xxx x .. so 4 + 3 + 2 + 1&quot;&quot;&quot;</span></span>
-<span id="cb25-19"><a href="#cb25-19"></a>    <span class="cf">return</span> (<span class="bu">pow</span>(n,<span class="dv">2</span>)<span class="op">+</span>n)<span class="op">//</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>count <span class="op">=</span> <span class="bu">len</span>(s)</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a></span>
+<span id="cb26-4"><a href="#cb26-4"></a><span class="co"># With middle</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>exp1 <span class="op">=</span> <span class="vs">r&#39;(([a-z])\2*)(?!\1)(?=[a-z]\1)&#39;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>m <span class="op">=</span> re.finditer(exp1,s)</span>
+<span id="cb26-7"><a href="#cb26-7"></a>count <span class="op">+=</span> <span class="bu">sum</span>([<span class="bu">len</span>(x.group(<span class="dv">0</span>)) <span class="cf">for</span> x <span class="kw">in</span> m])</span>
+<span id="cb26-8"><a href="#cb26-8"></a></span>
+<span id="cb26-9"><a href="#cb26-9"></a></span>
+<span id="cb26-10"><a href="#cb26-10"></a><span class="co"># Just repeated seqs</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a>exp2 <span class="op">=</span> <span class="vs">r&#39;([a-z])\1+&#39;</span></span>
+<span id="cb26-12"><a href="#cb26-12"></a>m <span class="op">=</span> re.finditer(exp2,s)</span>
+<span id="cb26-13"><a href="#cb26-13"></a>count <span class="op">+=</span> <span class="bu">sum</span>([triangular_number(<span class="bu">len</span>(x.group(<span class="dv">0</span>))<span class="op">-</span><span class="dv">1</span>) <span class="cf">for</span> x <span class="kw">in</span> m])</span>
+<span id="cb26-14"><a href="#cb26-14"></a></span>
+<span id="cb26-15"><a href="#cb26-15"></a><span class="cf">return</span> count</span>
+<span id="cb26-16"><a href="#cb26-16"></a></span>
+<span id="cb26-17"><a href="#cb26-17"></a><span class="kw">def</span> triangular_number(n):</span>
+<span id="cb26-18"><a href="#cb26-18"></a>    <span class="co">&quot;&quot;&quot;Count xxxx for any submatch xx xxx x .. so 4 + 3 + 2 + 1&quot;&quot;&quot;</span></span>
+<span id="cb26-19"><a href="#cb26-19"></a>    <span class="cf">return</span> (<span class="bu">pow</span>(n,<span class="dv">2</span>)<span class="op">+</span>n)<span class="op">//</span><span class="dv">2</span></span></code></pre></div>
 </section>
 <section id="can-mutualize-some-if" class="level4">
 <h4>3 Can mutualize some if</h4>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">def</span> substrCount(n, s):</span>
-<span id="cb26-2"><a href="#cb26-2"></a>    tot <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>    count_sequence <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb26-4"><a href="#cb26-4"></a>    prev <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
-<span id="cb26-5"><a href="#cb26-5"></a>    <span class="cf">for</span> i,v <span class="kw">in</span> <span class="bu">enumerate</span>(s):</span>
-<span id="cb26-6"><a href="#cb26-6"></a></span>
-<span id="cb26-7"><a href="#cb26-7"></a><span class="co"># first increase counter for all seperate characters</span></span>
-<span id="cb26-8"><a href="#cb26-8"></a>        count_sequence <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb26-9"><a href="#cb26-9"></a>        <span class="cf">if</span> i <span class="kw">and</span> (prev <span class="op">!=</span> v):</span>
-<span id="cb26-10"><a href="#cb26-10"></a></span>
-<span id="cb26-11"><a href="#cb26-11"></a><span class="co"># if this is not the first char in the string </span></span>
-<span id="cb26-12"><a href="#cb26-12"></a></span>
-<span id="cb26-13"><a href="#cb26-13"></a><span class="co"># and it is not same as previous char, </span></span>
-<span id="cb26-14"><a href="#cb26-14"></a></span>
-<span id="cb26-15"><a href="#cb26-15"></a><span class="co"># we should check for sequence x.x, xx.xx, xxx.xxx etc</span></span>
-<span id="cb26-16"><a href="#cb26-16"></a></span>
-<span id="cb26-17"><a href="#cb26-17"></a><span class="co"># and we know it cant be longer on the right side than</span></span>
-<span id="cb26-18"><a href="#cb26-18"></a></span>
-<span id="cb26-19"><a href="#cb26-19"></a><span class="co"># the sequence we already found on the left side.</span></span>
-<span id="cb26-20"><a href="#cb26-20"></a>            j <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb26-21"><a href="#cb26-21"></a>            <span class="cf">while</span> ((i<span class="op">-</span>j) <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="kw">and</span> ((i<span class="op">+</span>j) <span class="op">&lt;</span> <span class="bu">len</span>(s)) <span class="kw">and</span> j <span class="op">&lt;=</span> count_sequence:</span>
-<span id="cb26-22"><a href="#cb26-22"></a></span>
-<span id="cb26-23"><a href="#cb26-23"></a><span class="co"># make sure the chars to the right and left are equal</span></span>
-<span id="cb26-24"><a href="#cb26-24"></a></span>
-<span id="cb26-25"><a href="#cb26-25"></a><span class="co"># to the char in the previous found squence</span></span>
-<span id="cb26-26"><a href="#cb26-26"></a>                <span class="cf">if</span> s[i<span class="op">-</span>j] <span class="op">==</span> prev <span class="op">==</span> s[i<span class="op">+</span>j]:</span>
-<span id="cb26-27"><a href="#cb26-27"></a></span>
-<span id="cb26-28"><a href="#cb26-28"></a><span class="co"># if so increase total score and step one step further out</span></span>
-<span id="cb26-29"><a href="#cb26-29"></a>                    tot <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb26-30"><a href="#cb26-30"></a>                    j <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb26-31"><a href="#cb26-31"></a>                <span class="cf">else</span>:</span>
-<span id="cb26-32"><a href="#cb26-32"></a></span>
-<span id="cb26-33"><a href="#cb26-33"></a><span class="co"># no need to loop any further if this loop did </span></span>
-<span id="cb26-34"><a href="#cb26-34"></a></span>
-<span id="cb26-35"><a href="#cb26-35"></a><span class="co"># not find an x.x  pattern</span></span>
-<span id="cb26-36"><a href="#cb26-36"></a>                    <span class="cf">break</span></span>
-<span id="cb26-37"><a href="#cb26-37"></a></span>
-<span id="cb26-38"><a href="#cb26-38"></a><span class="co">#if the current char is different from previous, reset counter to 1</span></span>
-<span id="cb26-39"><a href="#cb26-39"></a>            count_sequence <span class="op">=</span> <span class="dv">1</span>  </span>
-<span id="cb26-40"><a href="#cb26-40"></a>        tot <span class="op">+=</span> count_sequence            </span>
-<span id="cb26-41"><a href="#cb26-41"></a>        prev <span class="op">=</span> v</span>
-<span id="cb26-42"><a href="#cb26-42"></a>  <span class="cf">return</span> tot    </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">def</span> substrCount(n, s):</span>
+<span id="cb27-2"><a href="#cb27-2"></a>    tot <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a>    count_sequence <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>    prev <span class="op">=</span> <span class="st">&#39;&#39;</span></span>
+<span id="cb27-5"><a href="#cb27-5"></a>    <span class="cf">for</span> i,v <span class="kw">in</span> <span class="bu">enumerate</span>(s):</span>
+<span id="cb27-6"><a href="#cb27-6"></a></span>
+<span id="cb27-7"><a href="#cb27-7"></a><span class="co"># first increase counter for all seperate characters</span></span>
+<span id="cb27-8"><a href="#cb27-8"></a>        count_sequence <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-9"><a href="#cb27-9"></a>        <span class="cf">if</span> i <span class="kw">and</span> (prev <span class="op">!=</span> v):</span>
+<span id="cb27-10"><a href="#cb27-10"></a></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="co"># if this is not the first char in the string </span></span>
+<span id="cb27-12"><a href="#cb27-12"></a></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="co"># and it is not same as previous char, </span></span>
+<span id="cb27-14"><a href="#cb27-14"></a></span>
+<span id="cb27-15"><a href="#cb27-15"></a><span class="co"># we should check for sequence x.x, xx.xx, xxx.xxx etc</span></span>
+<span id="cb27-16"><a href="#cb27-16"></a></span>
+<span id="cb27-17"><a href="#cb27-17"></a><span class="co"># and we know it cant be longer on the right side than</span></span>
+<span id="cb27-18"><a href="#cb27-18"></a></span>
+<span id="cb27-19"><a href="#cb27-19"></a><span class="co"># the sequence we already found on the left side.</span></span>
+<span id="cb27-20"><a href="#cb27-20"></a>            j <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb27-21"><a href="#cb27-21"></a>            <span class="cf">while</span> ((i<span class="op">-</span>j) <span class="op">&gt;=</span> <span class="dv">0</span>) <span class="kw">and</span> ((i<span class="op">+</span>j) <span class="op">&lt;</span> <span class="bu">len</span>(s)) <span class="kw">and</span> j <span class="op">&lt;=</span> count_sequence:</span>
+<span id="cb27-22"><a href="#cb27-22"></a></span>
+<span id="cb27-23"><a href="#cb27-23"></a><span class="co"># make sure the chars to the right and left are equal</span></span>
+<span id="cb27-24"><a href="#cb27-24"></a></span>
+<span id="cb27-25"><a href="#cb27-25"></a><span class="co"># to the char in the previous found squence</span></span>
+<span id="cb27-26"><a href="#cb27-26"></a>                <span class="cf">if</span> s[i<span class="op">-</span>j] <span class="op">==</span> prev <span class="op">==</span> s[i<span class="op">+</span>j]:</span>
+<span id="cb27-27"><a href="#cb27-27"></a></span>
+<span id="cb27-28"><a href="#cb27-28"></a><span class="co"># if so increase total score and step one step further out</span></span>
+<span id="cb27-29"><a href="#cb27-29"></a>                    tot <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-30"><a href="#cb27-30"></a>                    j <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb27-31"><a href="#cb27-31"></a>                <span class="cf">else</span>:</span>
+<span id="cb27-32"><a href="#cb27-32"></a></span>
+<span id="cb27-33"><a href="#cb27-33"></a><span class="co"># no need to loop any further if this loop did </span></span>
+<span id="cb27-34"><a href="#cb27-34"></a></span>
+<span id="cb27-35"><a href="#cb27-35"></a><span class="co"># not find an x.x  pattern</span></span>
+<span id="cb27-36"><a href="#cb27-36"></a>                    <span class="cf">break</span></span>
+<span id="cb27-37"><a href="#cb27-37"></a></span>
+<span id="cb27-38"><a href="#cb27-38"></a><span class="co">#if the current char is different from previous, reset counter to 1</span></span>
+<span id="cb27-39"><a href="#cb27-39"></a>            count_sequence <span class="op">=</span> <span class="dv">1</span>  </span>
+<span id="cb27-40"><a href="#cb27-40"></a>        tot <span class="op">+=</span> count_sequence            </span>
+<span id="cb27-41"><a href="#cb27-41"></a>        prev <span class="op">=</span> v</span>
+<span id="cb27-42"><a href="#cb27-42"></a>  <span class="cf">return</span> tot    </span></code></pre></div>
 </section>
 </section>
 <section id="string-longest-common-substring-problem" class="level3">
@@ -675,280 +682,267 @@
 <li>https://en.wikipedia.org/wiki/Longest_common_subsequence_problem</li>
 <li>Linked to the edit distance (you know, article with the snake path for yadiff)</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">def</span> commonChild(s1, s2):</span>
-<span id="cb27-2"><a href="#cb27-2"></a>    m, n <span class="op">=</span> <span class="bu">len</span>(s1), <span class="bu">len</span>(s2)</span>
-<span id="cb27-3"><a href="#cb27-3"></a>    prev, cur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>), [<span class="dv">0</span>]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>)</span>
-<span id="cb27-4"><a href="#cb27-4"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, m<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb27-5"><a href="#cb27-5"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb27-6"><a href="#cb27-6"></a>            <span class="cf">if</span> s1[i<span class="dv">-1</span>] <span class="op">==</span> s2[j<span class="dv">-1</span>]:</span>
-<span id="cb27-7"><a href="#cb27-7"></a>                cur[j] <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> prev[j<span class="dv">-1</span>]</span>
-<span id="cb27-8"><a href="#cb27-8"></a>            <span class="cf">else</span>:</span>
-<span id="cb27-9"><a href="#cb27-9"></a>                <span class="cf">if</span> cur[j<span class="dv">-1</span>] <span class="op">&gt;</span> prev[j]:</span>
-<span id="cb27-10"><a href="#cb27-10"></a>                    cur[j] <span class="op">=</span> cur[j<span class="dv">-1</span>]</span>
-<span id="cb27-11"><a href="#cb27-11"></a>                <span class="cf">else</span>:</span>
-<span id="cb27-12"><a href="#cb27-12"></a>                    cur[j] <span class="op">=</span> prev[j]</span>
-<span id="cb27-13"><a href="#cb27-13"></a>        cur, prev <span class="op">=</span> prev, cur</span>
-<span id="cb27-14"><a href="#cb27-14"></a>    <span class="cf">return</span> prev[n]</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">def</span> commonChild(s1, s2):</span>
+<span id="cb28-2"><a href="#cb28-2"></a>    m, n <span class="op">=</span> <span class="bu">len</span>(s1), <span class="bu">len</span>(s2)</span>
+<span id="cb28-3"><a href="#cb28-3"></a>    prev, cur <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>), [<span class="dv">0</span>]<span class="op">*</span>(n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb28-4"><a href="#cb28-4"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, m<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb28-5"><a href="#cb28-5"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb28-6"><a href="#cb28-6"></a>            <span class="cf">if</span> s1[i<span class="dv">-1</span>] <span class="op">==</span> s2[j<span class="dv">-1</span>]:</span>
+<span id="cb28-7"><a href="#cb28-7"></a>                cur[j] <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> prev[j<span class="dv">-1</span>]</span>
+<span id="cb28-8"><a href="#cb28-8"></a>            <span class="cf">else</span>:</span>
+<span id="cb28-9"><a href="#cb28-9"></a>                <span class="cf">if</span> cur[j<span class="dv">-1</span>] <span class="op">&gt;</span> prev[j]:</span>
+<span id="cb28-10"><a href="#cb28-10"></a>                    cur[j] <span class="op">=</span> cur[j<span class="dv">-1</span>]</span>
+<span id="cb28-11"><a href="#cb28-11"></a>                <span class="cf">else</span>:</span>
+<span id="cb28-12"><a href="#cb28-12"></a>                    cur[j] <span class="op">=</span> prev[j]</span>
+<span id="cb28-13"><a href="#cb28-13"></a>        cur, prev <span class="op">=</span> prev, cur</span>
+<span id="cb28-14"><a href="#cb28-14"></a>    <span class="cf">return</span> prev[n]</span></code></pre></div>
 </section>
 <section id="tree-swap-node" class="level3">
 <h3>Tree: Swap Node</h3>
 <p>My solution:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">class</span> Tree:</span>
-<span id="cb28-2"><a href="#cb28-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, i):</span>
-<span id="cb28-3"><a href="#cb28-3"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> i</span>
-<span id="cb28-4"><a href="#cb28-4"></a>        <span class="va">self</span>.left <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a>        <span class="va">self</span>.right <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a></span>
-<span id="cb28-7"><a href="#cb28-7"></a>    <span class="at">@staticmethod</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a>    <span class="kw">def</span> build(<span class="bu">id</span>, nexts):</span>
-<span id="cb28-9"><a href="#cb28-9"></a>        <span class="co">&quot;&quot;&quot;Helper: create a tree and if not null append to next&quot;&quot;&quot;</span></span>
-<span id="cb28-10"><a href="#cb28-10"></a>        <span class="cf">if</span> <span class="bu">id</span> <span class="op">==</span> <span class="dv">-1</span>: <span class="cf">return</span> <span class="va">None</span></span>
-<span id="cb28-11"><a href="#cb28-11"></a>        tree <span class="op">=</span> Tree(<span class="bu">id</span>)</span>
-<span id="cb28-12"><a href="#cb28-12"></a>        nexts.append(tree)</span>
-<span id="cb28-13"><a href="#cb28-13"></a>        <span class="cf">return</span> Tree(<span class="bu">id</span>)</span>
-<span id="cb28-14"><a href="#cb28-14"></a></span>
-<span id="cb28-15"><a href="#cb28-15"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
-<span id="cb28-16"><a href="#cb28-16"></a>        <span class="cf">return</span> <span class="ss">f&quot;Tree:</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">&quot;</span></span>
-<span id="cb28-17"><a href="#cb28-17"></a></span>
-<span id="cb28-18"><a href="#cb28-18"></a></span>
-<span id="cb28-19"><a href="#cb28-19"></a><span class="kw">def</span> traverse(tree):</span>
-<span id="cb28-20"><a href="#cb28-20"></a>    <span class="cf">if</span> tree <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> []</span>
-<span id="cb28-21"><a href="#cb28-21"></a></span>
-<span id="cb28-22"><a href="#cb28-22"></a><span class="co"># Traverse the left subtree</span></span>
-<span id="cb28-23"><a href="#cb28-23"></a>    res <span class="op">=</span> traverse(tree.left)</span>
-<span id="cb28-24"><a href="#cb28-24"></a></span>
-<span id="cb28-25"><a href="#cb28-25"></a></span>
-<span id="cb28-26"><a href="#cb28-26"></a><span class="co"># Visit root</span></span>
-<span id="cb28-27"><a href="#cb28-27"></a>    res.append(tree.<span class="bu">id</span>)</span>
-<span id="cb28-28"><a href="#cb28-28"></a></span>
-<span id="cb28-29"><a href="#cb28-29"></a></span>
-<span id="cb28-30"><a href="#cb28-30"></a><span class="co"># Traverse the right subtree</span></span>
-<span id="cb28-31"><a href="#cb28-31"></a>    <span class="cf">return</span> res <span class="op">+</span> traverse(tree.right)</span>
-<span id="cb28-32"><a href="#cb28-32"></a></span>
-<span id="cb28-33"><a href="#cb28-33"></a></span>
-<span id="cb28-34"><a href="#cb28-34"></a><span class="kw">def</span> swapNodes(indexes, queries):</span>
-<span id="cb28-35"><a href="#cb28-35"></a></span>
-<span id="cb28-36"><a href="#cb28-36"></a><span class="co"># Some test go far in recursion but just onces fct(fct(fct ....))</span></span>
-<span id="cb28-37"><a href="#cb28-37"></a>    sys.setrecursionlimit(<span class="dv">3000</span>) </span>
-<span id="cb28-38"><a href="#cb28-38"></a></span>
-<span id="cb28-39"><a href="#cb28-39"></a></span>
-<span id="cb28-40"><a href="#cb28-40"></a><span class="co"># Create tree</span></span>
-<span id="cb28-41"><a href="#cb28-41"></a>    root <span class="op">=</span> Tree(<span class="dv">1</span>)</span>
-<span id="cb28-42"><a href="#cb28-42"></a></span>
-<span id="cb28-43"><a href="#cb28-43"></a><span class="co"># Memoize depth</span></span>
-<span id="cb28-44"><a href="#cb28-44"></a>    depths <span class="op">=</span> []</span>
-<span id="cb28-45"><a href="#cb28-45"></a></span>
-<span id="cb28-46"><a href="#cb28-46"></a></span>
-<span id="cb28-47"><a href="#cb28-47"></a><span class="co"># Build</span></span>
-<span id="cb28-48"><a href="#cb28-48"></a>    nexs <span class="op">=</span> [root]<span class="op">;</span> curs <span class="op">=</span> []</span>
-<span id="cb28-49"><a href="#cb28-49"></a>    <span class="cf">for</span> left, right <span class="kw">in</span> indexes:</span>
-<span id="cb28-50"><a href="#cb28-50"></a>        <span class="cf">if</span> <span class="bu">len</span>(curs) <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb28-51"><a href="#cb28-51"></a>            depths.append(nexs)</span>
-<span id="cb28-52"><a href="#cb28-52"></a>            curs <span class="op">=</span> nexs.copy()</span>
-<span id="cb28-53"><a href="#cb28-53"></a>            nexs <span class="op">=</span> []</span>
-<span id="cb28-54"><a href="#cb28-54"></a></span>
-<span id="cb28-55"><a href="#cb28-55"></a>        cur <span class="op">=</span> curs.pop(<span class="dv">0</span>)</span>
-<span id="cb28-56"><a href="#cb28-56"></a>        cur.left <span class="op">=</span> Tree.build(left, nexs)</span>
-<span id="cb28-57"><a href="#cb28-57"></a>        cur.right <span class="op">=</span> Tree.build(right, nexs)</span>
-<span id="cb28-58"><a href="#cb28-58"></a></span>
-<span id="cb28-59"><a href="#cb28-59"></a></span>
-<span id="cb28-60"><a href="#cb28-60"></a></span>
-<span id="cb28-61"><a href="#cb28-61"></a><span class="co"># Swap</span></span>
-<span id="cb28-62"><a href="#cb28-62"></a>    res <span class="op">=</span> []</span>
-<span id="cb28-63"><a href="#cb28-63"></a>    <span class="cf">for</span> query <span class="kw">in</span> queries:</span>
-<span id="cb28-64"><a href="#cb28-64"></a>        <span class="cf">for</span> depth <span class="kw">in</span> <span class="bu">range</span>(query, <span class="bu">len</span>(depths), query):</span>
-<span id="cb28-65"><a href="#cb28-65"></a>            <span class="cf">for</span> tree <span class="kw">in</span> depths[depth <span class="op">-</span> <span class="dv">1</span>]:</span>
-<span id="cb28-66"><a href="#cb28-66"></a>                tree.left, tree.right <span class="op">=</span> tree.right, tree.left</span>
-<span id="cb28-67"><a href="#cb28-67"></a>        res.append(traverse(root))</span>
-<span id="cb28-68"><a href="#cb28-68"></a></span>
-<span id="cb28-69"><a href="#cb28-69"></a>    <span class="cf">return</span> res</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">class</span> Tree:</span>
+<span id="cb29-2"><a href="#cb29-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, i):</span>
+<span id="cb29-3"><a href="#cb29-3"></a>        <span class="va">self</span>.<span class="bu">id</span> <span class="op">=</span> i</span>
+<span id="cb29-4"><a href="#cb29-4"></a>        <span class="va">self</span>.left <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>        <span class="va">self</span>.right <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a>    <span class="at">@staticmethod</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>    <span class="kw">def</span> build(<span class="bu">id</span>, nexts):</span>
+<span id="cb29-9"><a href="#cb29-9"></a>        <span class="co">&quot;&quot;&quot;Helper: create a tree and if not null append to next&quot;&quot;&quot;</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>        <span class="cf">if</span> <span class="bu">id</span> <span class="op">==</span> <span class="dv">-1</span>: <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a>        tree <span class="op">=</span> Tree(<span class="bu">id</span>)</span>
+<span id="cb29-12"><a href="#cb29-12"></a>        nexts.append(tree)</span>
+<span id="cb29-13"><a href="#cb29-13"></a>        <span class="cf">return</span> Tree(<span class="bu">id</span>)</span>
+<span id="cb29-14"><a href="#cb29-14"></a></span>
+<span id="cb29-15"><a href="#cb29-15"></a>    <span class="kw">def</span> <span class="fu">__str__</span>(<span class="va">self</span>):</span>
+<span id="cb29-16"><a href="#cb29-16"></a>        <span class="cf">return</span> <span class="ss">f&quot;Tree:</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span><span class="bu">id</span><span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb29-17"><a href="#cb29-17"></a></span>
+<span id="cb29-18"><a href="#cb29-18"></a></span>
+<span id="cb29-19"><a href="#cb29-19"></a><span class="kw">def</span> traverse(tree):</span>
+<span id="cb29-20"><a href="#cb29-20"></a>    <span class="cf">if</span> tree <span class="kw">is</span> <span class="va">None</span>: <span class="cf">return</span> []</span>
+<span id="cb29-21"><a href="#cb29-21"></a></span>
+<span id="cb29-22"><a href="#cb29-22"></a><span class="co"># Traverse the left subtree</span></span>
+<span id="cb29-23"><a href="#cb29-23"></a>    res <span class="op">=</span> traverse(tree.left)</span>
+<span id="cb29-24"><a href="#cb29-24"></a></span>
+<span id="cb29-25"><a href="#cb29-25"></a></span>
+<span id="cb29-26"><a href="#cb29-26"></a><span class="co"># Visit root</span></span>
+<span id="cb29-27"><a href="#cb29-27"></a>    res.append(tree.<span class="bu">id</span>)</span>
+<span id="cb29-28"><a href="#cb29-28"></a></span>
+<span id="cb29-29"><a href="#cb29-29"></a></span>
+<span id="cb29-30"><a href="#cb29-30"></a><span class="co"># Traverse the right subtree</span></span>
+<span id="cb29-31"><a href="#cb29-31"></a>    <span class="cf">return</span> res <span class="op">+</span> traverse(tree.right)</span>
+<span id="cb29-32"><a href="#cb29-32"></a></span>
+<span id="cb29-33"><a href="#cb29-33"></a></span>
+<span id="cb29-34"><a href="#cb29-34"></a><span class="kw">def</span> swapNodes(indexes, queries):</span>
+<span id="cb29-35"><a href="#cb29-35"></a></span>
+<span id="cb29-36"><a href="#cb29-36"></a><span class="co"># Some test go far in recursion but just onces fct(fct(fct ....))</span></span>
+<span id="cb29-37"><a href="#cb29-37"></a>    sys.setrecursionlimit(<span class="dv">3000</span>) </span>
+<span id="cb29-38"><a href="#cb29-38"></a></span>
+<span id="cb29-39"><a href="#cb29-39"></a></span>
+<span id="cb29-40"><a href="#cb29-40"></a><span class="co"># Create tree</span></span>
+<span id="cb29-41"><a href="#cb29-41"></a>    root <span class="op">=</span> Tree(<span class="dv">1</span>)</span>
+<span id="cb29-42"><a href="#cb29-42"></a></span>
+<span id="cb29-43"><a href="#cb29-43"></a><span class="co"># Memoize depth</span></span>
+<span id="cb29-44"><a href="#cb29-44"></a>    depths <span class="op">=</span> []</span>
+<span id="cb29-45"><a href="#cb29-45"></a></span>
+<span id="cb29-46"><a href="#cb29-46"></a></span>
+<span id="cb29-47"><a href="#cb29-47"></a><span class="co"># Build</span></span>
+<span id="cb29-48"><a href="#cb29-48"></a>    nexs <span class="op">=</span> [root]<span class="op">;</span> curs <span class="op">=</span> []</span>
+<span id="cb29-49"><a href="#cb29-49"></a>    <span class="cf">for</span> left, right <span class="kw">in</span> indexes:</span>
+<span id="cb29-50"><a href="#cb29-50"></a>        <span class="cf">if</span> <span class="bu">len</span>(curs) <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb29-51"><a href="#cb29-51"></a>            depths.append(nexs)</span>
+<span id="cb29-52"><a href="#cb29-52"></a>            curs <span class="op">=</span> nexs.copy()</span>
+<span id="cb29-53"><a href="#cb29-53"></a>            nexs <span class="op">=</span> []</span>
+<span id="cb29-54"><a href="#cb29-54"></a></span>
+<span id="cb29-55"><a href="#cb29-55"></a>        cur <span class="op">=</span> curs.pop(<span class="dv">0</span>)</span>
+<span id="cb29-56"><a href="#cb29-56"></a>        cur.left <span class="op">=</span> Tree.build(left, nexs)</span>
+<span id="cb29-57"><a href="#cb29-57"></a>        cur.right <span class="op">=</span> Tree.build(right, nexs)</span>
+<span id="cb29-58"><a href="#cb29-58"></a></span>
+<span id="cb29-59"><a href="#cb29-59"></a></span>
+<span id="cb29-60"><a href="#cb29-60"></a></span>
+<span id="cb29-61"><a href="#cb29-61"></a><span class="co"># Swap</span></span>
+<span id="cb29-62"><a href="#cb29-62"></a>    res <span class="op">=</span> []</span>
+<span id="cb29-63"><a href="#cb29-63"></a>    <span class="cf">for</span> query <span class="kw">in</span> queries:</span>
+<span id="cb29-64"><a href="#cb29-64"></a>        <span class="cf">for</span> depth <span class="kw">in</span> <span class="bu">range</span>(query, <span class="bu">len</span>(depths), query):</span>
+<span id="cb29-65"><a href="#cb29-65"></a>            <span class="cf">for</span> tree <span class="kw">in</span> depths[depth <span class="op">-</span> <span class="dv">1</span>]:</span>
+<span id="cb29-66"><a href="#cb29-66"></a>                tree.left, tree.right <span class="op">=</span> tree.right, tree.left</span>
+<span id="cb29-67"><a href="#cb29-67"></a>        res.append(traverse(root))</span>
+<span id="cb29-68"><a href="#cb29-68"></a></span>
+<span id="cb29-69"><a href="#cb29-69"></a>    <span class="cf">return</span> res</span></code></pre></div>
 </section>
 <section id="array-max-sum-in-subarray-max-array-sum" class="level3">
 <h3>Array : max sum in subarray (Max Array Sum)</h3>
 <p>See <strong>Dynamic Programming:</strong> https://www.geeksforgeeks.org/dynamic-programming/</p>
 <p>Max sum of non adjacent element in array</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">def</span> maxSubsetSum(arr):</span>
-<span id="cb29-2"><a href="#cb29-2"></a>    n <span class="op">=</span> <span class="bu">len</span>(arr)</span>
-<span id="cb29-3"><a href="#cb29-3"></a>    dp <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n</span>
-<span id="cb29-4"><a href="#cb29-4"></a>    dp[<span class="dv">0</span>] <span class="op">=</span> arr[<span class="dv">0</span>]</span>
-<span id="cb29-5"><a href="#cb29-5"></a>    dp[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">max</span>(arr[<span class="dv">1</span>], dp[<span class="dv">0</span>])</span>
-<span id="cb29-6"><a href="#cb29-6"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n):</span>
-<span id="cb29-7"><a href="#cb29-7"></a>        dp[i] <span class="op">=</span> <span class="bu">max</span>(arr[i], dp[i<span class="dv">-1</span>], arr[i] <span class="op">+</span> dp[i<span class="dv">-2</span>])</span>
-<span id="cb29-8"><a href="#cb29-8"></a>    <span class="cf">return</span> dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">def</span> maxSubsetSum(arr):</span>
+<span id="cb30-2"><a href="#cb30-2"></a>    n <span class="op">=</span> <span class="bu">len</span>(arr)</span>
+<span id="cb30-3"><a href="#cb30-3"></a>    dp <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span>n</span>
+<span id="cb30-4"><a href="#cb30-4"></a>    dp[<span class="dv">0</span>] <span class="op">=</span> arr[<span class="dv">0</span>]</span>
+<span id="cb30-5"><a href="#cb30-5"></a>    dp[<span class="dv">1</span>] <span class="op">=</span> <span class="bu">max</span>(arr[<span class="dv">1</span>], dp[<span class="dv">0</span>])</span>
+<span id="cb30-6"><a href="#cb30-6"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,n):</span>
+<span id="cb30-7"><a href="#cb30-7"></a>        dp[i] <span class="op">=</span> <span class="bu">max</span>(arr[i], dp[i<span class="dv">-1</span>], arr[i] <span class="op">+</span> dp[i<span class="dv">-2</span>])</span>
+<span id="cb30-8"><a href="#cb30-8"></a>    <span class="cf">return</span> dp[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 <p>Intro: Since we know it’s DP, we can solve the problem by solving subproblems of smaller size.</p>
 <p>Because of the condition. No two adjacent elements can be picked. Therefore we can either take one and then skip one, or skip one and run the subroutine.</p>
 <p>we can solve this problem in linear time and constant space ;)</p>
 <p>Idea: store solutions for problem of size i-2 and i-1, where i is the size of the subproblem. The solution for problem of size i is either solution for problem i-1, or solution for problem i-2, or solution of problem i-2 + arr[i], or ar[i]. Iterate for every i. Start with 0, 0 for problems of size - 2 and -1</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">def</span> maxSubsetSum(coll):</span>
-<span id="cb30-2"><a href="#cb30-2"></a>    a,b <span class="op">=</span> <span class="dv">0</span>,<span class="dv">0</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a></span>
-<span id="cb30-4"><a href="#cb30-4"></a>    <span class="cf">for</span> val <span class="kw">in</span> coll:</span>
-<span id="cb30-5"><a href="#cb30-5"></a>        a,b <span class="op">=</span> b, <span class="bu">max</span>(a, a <span class="op">+</span> val, b, val) </span>
-<span id="cb30-6"><a href="#cb30-6"></a></span>
-<span id="cb30-7"><a href="#cb30-7"></a>    <span class="cf">return</span> b</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">def</span> maxSubsetSum(coll):</span>
+<span id="cb31-2"><a href="#cb31-2"></a>    a,b <span class="op">=</span> <span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a>    <span class="cf">for</span> val <span class="kw">in</span> coll:</span>
+<span id="cb31-5"><a href="#cb31-5"></a>        a,b <span class="op">=</span> b, <span class="bu">max</span>(a, a <span class="op">+</span> val, b, val) </span>
+<span id="cb31-6"><a href="#cb31-6"></a></span>
+<span id="cb31-7"><a href="#cb31-7"></a>    <span class="cf">return</span> b</span></code></pre></div>
 </section>
 <section id="pairs-of-equal-difference" class="level3">
 <h3>Pairs (of equal difference)</h3>
 <ul>
 <li>My solution</li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">def</span> pairs(k, arr):</span>
-<span id="cb31-2"><a href="#cb31-2"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb31-3"><a href="#cb31-3"></a>    ct <span class="op">=</span> Counter(arr)</span>
-<span id="cb31-4"><a href="#cb31-4"></a>    <span class="cf">for</span> val1 <span class="kw">in</span> ct:</span>
-<span id="cb31-5"><a href="#cb31-5"></a></span>
-<span id="cb31-6"><a href="#cb31-6"></a><span class="co"># val1 - val2 = +/- k </span></span>
-<span id="cb31-7"><a href="#cb31-7"></a>        res <span class="op">+=</span> ct[val1] <span class="op">*</span> (ct[val1<span class="op">-</span>k] <span class="op">+</span> ct[val1<span class="op">+</span>k])</span>
-<span id="cb31-8"><a href="#cb31-8"></a>    <span class="cf">return</span> <span class="bu">int</span>(res <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">def</span> pairs(k, arr):</span>
+<span id="cb32-2"><a href="#cb32-2"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>    ct <span class="op">=</span> Counter(arr)</span>
+<span id="cb32-4"><a href="#cb32-4"></a>    <span class="cf">for</span> val1 <span class="kw">in</span> ct:</span>
+<span id="cb32-5"><a href="#cb32-5"></a></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="co"># val1 - val2 = +/- k </span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>        res <span class="op">+=</span> ct[val1] <span class="op">*</span> (ct[val1<span class="op">-</span>k] <span class="op">+</span> ct[val1<span class="op">+</span>k])</span>
+<span id="cb32-8"><a href="#cb32-8"></a>    <span class="cf">return</span> <span class="bu">int</span>(res <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <ul>
 <li>One liner !</li>
 <li>Had to note the constraint: each integer of arr will be unique</li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="cf">return</span> <span class="bu">len</span>(<span class="bu">set</span>(arr) <span class="op">&amp;</span> <span class="bu">set</span>([item <span class="op">+</span> k <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">set</span>(arr)])) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="cf">return</span> <span class="bu">len</span>(<span class="bu">set</span>(arr) <span class="op">&amp;</span> <span class="bu">set</span>([item <span class="op">+</span> k <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">set</span>(arr)])) </span></code></pre></div>
 </section>
 <section id="triple-sum-find-unique" class="level3">
 <h3>Triple sum (find unique)</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="im">from</span> bisect <span class="im">import</span> bisect_left</span>
-<span id="cb33-2"><a href="#cb33-2"></a></span>
-<span id="cb33-3"><a href="#cb33-3"></a><span class="kw">def</span> triplets(a, b, c):</span>
-<span id="cb33-4"><a href="#cb33-4"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a></span>
-<span id="cb33-6"><a href="#cb33-6"></a></span>
-<span id="cb33-7"><a href="#cb33-7"></a><span class="co"># Uniquely sort</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a>    a <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(a))</span>
-<span id="cb33-9"><a href="#cb33-9"></a>    b <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(b))</span>
-<span id="cb33-10"><a href="#cb33-10"></a>    c <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(c))</span>
-<span id="cb33-11"><a href="#cb33-11"></a></span>
-<span id="cb33-12"><a href="#cb33-12"></a></span>
-<span id="cb33-13"><a href="#cb33-13"></a><span class="co"># Check if usefull to loop</span></span>
-<span id="cb33-14"><a href="#cb33-14"></a>    <span class="cf">if</span> b[<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> a[<span class="dv">0</span>] <span class="kw">or</span> b[<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> c[<span class="dv">0</span>]:</span>
-<span id="cb33-15"><a href="#cb33-15"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
-<span id="cb33-16"><a href="#cb33-16"></a></span>
-<span id="cb33-17"><a href="#cb33-17"></a></span>
-<span id="cb33-18"><a href="#cb33-18"></a><span class="co"># Find possible combinations</span></span>
-<span id="cb33-19"><a href="#cb33-19"></a>    lowa <span class="op">=</span> lowc <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb33-20"><a href="#cb33-20"></a><span class="co"># Fasten bisect search with low bound, known a priory</span></span>
-<span id="cb33-21"><a href="#cb33-21"></a>    <span class="cf">for</span> i <span class="kw">in</span> b:</span>
-<span id="cb33-22"><a href="#cb33-22"></a>        lowa <span class="op">=</span> bisect_left(a, i<span class="fl">+0.5</span>, lo<span class="op">=</span>lowa)</span>
-<span id="cb33-23"><a href="#cb33-23"></a>        lowc <span class="op">=</span> bisect_left(c, i<span class="fl">+0.5</span>, lo<span class="op">=</span>lowc)</span>
-<span id="cb33-24"><a href="#cb33-24"></a>        res <span class="op">+=</span> lowc <span class="op">*</span> lowa</span>
-<span id="cb33-25"><a href="#cb33-25"></a></span>
-<span id="cb33-26"><a href="#cb33-26"></a>    <span class="cf">return</span> res</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="im">from</span> bisect <span class="im">import</span> bisect_left</span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">def</span> triplets(a, b, c):</span>
+<span id="cb34-4"><a href="#cb34-4"></a>    res <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a></span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="co"># Uniquely sort</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a>    a <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(a))</span>
+<span id="cb34-9"><a href="#cb34-9"></a>    b <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(b))</span>
+<span id="cb34-10"><a href="#cb34-10"></a>    c <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">set</span>(c))</span>
+<span id="cb34-11"><a href="#cb34-11"></a></span>
+<span id="cb34-12"><a href="#cb34-12"></a></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="co"># Check if usefull to loop</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a>    <span class="cf">if</span> b[<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> a[<span class="dv">0</span>] <span class="kw">or</span> b[<span class="op">-</span><span class="dv">1</span>] <span class="op">&lt;</span> c[<span class="dv">0</span>]:</span>
+<span id="cb34-15"><a href="#cb34-15"></a>        <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a></span>
+<span id="cb34-17"><a href="#cb34-17"></a></span>
+<span id="cb34-18"><a href="#cb34-18"></a><span class="co"># Find possible combinations</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a>    lowa <span class="op">=</span> lowc <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb34-20"><a href="#cb34-20"></a><span class="co"># Fasten bisect search with low bound, known a priory</span></span>
+<span id="cb34-21"><a href="#cb34-21"></a>    <span class="cf">for</span> i <span class="kw">in</span> b:</span>
+<span id="cb34-22"><a href="#cb34-22"></a>        lowa <span class="op">=</span> bisect_left(a, i<span class="fl">+0.5</span>, lo<span class="op">=</span>lowa)</span>
+<span id="cb34-23"><a href="#cb34-23"></a>        lowc <span class="op">=</span> bisect_left(c, i<span class="fl">+0.5</span>, lo<span class="op">=</span>lowc)</span>
+<span id="cb34-24"><a href="#cb34-24"></a>        res <span class="op">+=</span> lowc <span class="op">*</span> lowa</span>
+<span id="cb34-25"><a href="#cb34-25"></a></span>
+<span id="cb34-26"><a href="#cb34-26"></a>    <span class="cf">return</span> res</span></code></pre></div>
 </section>
 <section id="minimum-time-required" class="level3">
 <h3>Minimum Time Required</h3>
 <p>My dichotomic bad solution</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="kw">def</span> in_day(n, ct):</span>
-<span id="cb34-2"><a href="#cb34-2"></a></span>
-<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># in n days they build ct[val1] * int(n / val) = items</span></span>
-<span id="cb34-4"><a href="#cb34-4"></a>    item <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb34-5"><a href="#cb34-5"></a>    <span class="cf">for</span> val <span class="kw">in</span> ct:</span>
-<span id="cb34-6"><a href="#cb34-6"></a>        <span class="cf">if</span> val <span class="op">&gt;</span> n : <span class="cf">continue</span></span>
-<span id="cb34-7"><a href="#cb34-7"></a>        item <span class="op">+=</span> ct[val] <span class="op">*</span> <span class="bu">int</span>(n<span class="op">/</span>val)</span>
-<span id="cb34-8"><a href="#cb34-8"></a>    <span class="cf">return</span> item</span>
-<span id="cb34-9"><a href="#cb34-9"></a></span>
-<span id="cb34-10"><a href="#cb34-10"></a></span>
-<span id="cb34-11"><a href="#cb34-11"></a><span class="co"># Complete the minTime function below.</span></span>
-<span id="cb34-12"><a href="#cb34-12"></a><span class="kw">def</span> minTime(machines, goal):</span>
-<span id="cb34-13"><a href="#cb34-13"></a>    ct <span class="op">=</span> Counter(machines)</span>
-<span id="cb34-14"><a href="#cb34-14"></a></span>
-<span id="cb34-15"><a href="#cb34-15"></a>    high <span class="op">=</span> <span class="dv">999999999999999</span></span>
-<span id="cb34-16"><a href="#cb34-16"></a>    day <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb34-17"><a href="#cb34-17"></a>    low <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb34-18"><a href="#cb34-18"></a>    n1 <span class="op">=</span> <span class="dv">-1</span></span>
-<span id="cb34-19"><a href="#cb34-19"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
-<span id="cb34-20"><a href="#cb34-20"></a>        n1 <span class="op">=</span> in_day(day, ct)</span>
-<span id="cb34-21"><a href="#cb34-21"></a></span>
-<span id="cb34-22"><a href="#cb34-22"></a>        <span class="bu">print</span>(day, high , low , n1)</span>
-<span id="cb34-23"><a href="#cb34-23"></a></span>
-<span id="cb34-24"><a href="#cb34-24"></a></span>
-<span id="cb34-25"><a href="#cb34-25"></a><span class="co"># Lucky</span></span>
-<span id="cb34-26"><a href="#cb34-26"></a>        <span class="cf">if</span> low <span class="op">&gt;=</span> high <span class="dv">-1</span>:</span>
-<span id="cb34-27"><a href="#cb34-27"></a>            <span class="cf">if</span> in_day(low, ct) <span class="op">&gt;=</span> goal:</span>
-<span id="cb34-28"><a href="#cb34-28"></a>                <span class="cf">return</span> low</span>
-<span id="cb34-29"><a href="#cb34-29"></a>            <span class="cf">else</span>:</span>
-<span id="cb34-30"><a href="#cb34-30"></a>                <span class="cf">return</span> high</span>
-<span id="cb34-31"><a href="#cb34-31"></a></span>
-<span id="cb34-32"><a href="#cb34-32"></a></span>
-<span id="cb34-33"><a href="#cb34-33"></a><span class="co"># May increase</span></span>
-<span id="cb34-34"><a href="#cb34-34"></a>        <span class="cf">if</span> n1 <span class="op">&lt;</span> goal:</span>
-<span id="cb34-35"><a href="#cb34-35"></a>            low, day <span class="op">=</span> day, day <span class="op">+</span> <span class="bu">int</span>(<span class="bu">abs</span>(day <span class="op">-</span> high) <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb34-36"><a href="#cb34-36"></a>            <span class="cf">continue</span></span>
-<span id="cb34-37"><a href="#cb34-37"></a></span>
-<span id="cb34-38"><a href="#cb34-38"></a></span>
-<span id="cb34-39"><a href="#cb34-39"></a><span class="co"># Now find minimum</span></span>
-<span id="cb34-40"><a href="#cb34-40"></a>        high, day <span class="op">=</span> day, day <span class="op">-</span> <span class="bu">int</span>(<span class="bu">abs</span>(day <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="kw">def</span> in_day(n, ct):</span>
+<span id="cb35-2"><a href="#cb35-2"></a></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="co"># in n days they build ct[val1] * int(n / val) = items</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>    item <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a>    <span class="cf">for</span> val <span class="kw">in</span> ct:</span>
+<span id="cb35-6"><a href="#cb35-6"></a>        <span class="cf">if</span> val <span class="op">&gt;</span> n : <span class="cf">continue</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a>        item <span class="op">+=</span> ct[val] <span class="op">*</span> <span class="bu">int</span>(n<span class="op">/</span>val)</span>
+<span id="cb35-8"><a href="#cb35-8"></a>    <span class="cf">return</span> item</span>
+<span id="cb35-9"><a href="#cb35-9"></a></span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a><span class="co"># Complete the minTime function below.</span></span>
+<span id="cb35-12"><a href="#cb35-12"></a><span class="kw">def</span> minTime(machines, goal):</span>
+<span id="cb35-13"><a href="#cb35-13"></a>    ct <span class="op">=</span> Counter(machines)</span>
+<span id="cb35-14"><a href="#cb35-14"></a></span>
+<span id="cb35-15"><a href="#cb35-15"></a>    high <span class="op">=</span> <span class="dv">999999999999999</span></span>
+<span id="cb35-16"><a href="#cb35-16"></a>    day <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb35-17"><a href="#cb35-17"></a>    low <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb35-18"><a href="#cb35-18"></a>    n1 <span class="op">=</span> <span class="dv">-1</span></span>
+<span id="cb35-19"><a href="#cb35-19"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb35-20"><a href="#cb35-20"></a>        n1 <span class="op">=</span> in_day(day, ct)</span>
+<span id="cb35-21"><a href="#cb35-21"></a></span>
+<span id="cb35-22"><a href="#cb35-22"></a>        <span class="bu">print</span>(day, high , low , n1)</span>
+<span id="cb35-23"><a href="#cb35-23"></a></span>
+<span id="cb35-24"><a href="#cb35-24"></a></span>
+<span id="cb35-25"><a href="#cb35-25"></a><span class="co"># Lucky</span></span>
+<span id="cb35-26"><a href="#cb35-26"></a>        <span class="cf">if</span> low <span class="op">&gt;=</span> high <span class="dv">-1</span>:</span>
+<span id="cb35-27"><a href="#cb35-27"></a>            <span class="cf">if</span> in_day(low, ct) <span class="op">&gt;=</span> goal:</span>
+<span id="cb35-28"><a href="#cb35-28"></a>                <span class="cf">return</span> low</span>
+<span id="cb35-29"><a href="#cb35-29"></a>            <span class="cf">else</span>:</span>
+<span id="cb35-30"><a href="#cb35-30"></a>                <span class="cf">return</span> high</span>
+<span id="cb35-31"><a href="#cb35-31"></a></span>
+<span id="cb35-32"><a href="#cb35-32"></a></span>
+<span id="cb35-33"><a href="#cb35-33"></a><span class="co"># May increase</span></span>
+<span id="cb35-34"><a href="#cb35-34"></a>        <span class="cf">if</span> n1 <span class="op">&lt;</span> goal:</span>
+<span id="cb35-35"><a href="#cb35-35"></a>            low, day <span class="op">=</span> day, day <span class="op">+</span> <span class="bu">int</span>(<span class="bu">abs</span>(day <span class="op">-</span> high) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb35-36"><a href="#cb35-36"></a>            <span class="cf">continue</span></span>
+<span id="cb35-37"><a href="#cb35-37"></a></span>
+<span id="cb35-38"><a href="#cb35-38"></a></span>
+<span id="cb35-39"><a href="#cb35-39"></a><span class="co"># Now find minimum</span></span>
+<span id="cb35-40"><a href="#cb35-40"></a>        high, day <span class="op">=</span> day, day <span class="op">-</span> <span class="bu">int</span>(<span class="bu">abs</span>(day <span class="op">-</span> low) <span class="op">/</span> <span class="dv">2</span>)</span></code></pre></div>
 <ul>
 <li>Other O(log(n) x machines)</li>
 <li><strong>Note:</strong> Instead of doing dichotomy by hand, use bisect left with a yielder and mindays, maxDays</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="im">from</span> bisect <span class="im">import</span> bisect_left</span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="kw">class</span> Yeild:</span>
-<span id="cb35-3"><a href="#cb35-3"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, machines):</span>
-<span id="cb35-4"><a href="#cb35-4"></a>        <span class="va">self</span>.machines_ <span class="op">=</span> machines</span>
-<span id="cb35-5"><a href="#cb35-5"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, days):</span>
-<span id="cb35-6"><a href="#cb35-6"></a>        production <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb35-7"><a href="#cb35-7"></a>        <span class="cf">for</span> d <span class="kw">in</span> machines:</span>
-<span id="cb35-8"><a href="#cb35-8"></a>            production <span class="op">+=</span> <span class="bu">int</span>(days<span class="op">/</span>d)</span>
-<span id="cb35-9"><a href="#cb35-9"></a>        <span class="cf">return</span> production</span>
-<span id="cb35-10"><a href="#cb35-10"></a></span>
-<span id="cb35-11"><a href="#cb35-11"></a><span class="kw">def</span> minTime(machines, goal):</span>
-<span id="cb35-12"><a href="#cb35-12"></a>    machines.sort()</span>
-<span id="cb35-13"><a href="#cb35-13"></a>    minDays <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb35-14"><a href="#cb35-14"></a>    maxDays <span class="op">=</span> goal <span class="op">*</span> machines[<span class="dv">0</span>]</span>
-<span id="cb35-15"><a href="#cb35-15"></a>    days <span class="op">=</span> bisect_left(Yeild(machines), goal, minDays, maxDays)</span>
-<span id="cb35-16"><a href="#cb35-16"></a>    <span class="cf">return</span> days</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="im">from</span> bisect <span class="im">import</span> bisect_left</span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="kw">class</span> Yeild:</span>
+<span id="cb36-3"><a href="#cb36-3"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, machines):</span>
+<span id="cb36-4"><a href="#cb36-4"></a>        <span class="va">self</span>.machines_ <span class="op">=</span> machines</span>
+<span id="cb36-5"><a href="#cb36-5"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, days):</span>
+<span id="cb36-6"><a href="#cb36-6"></a>        production <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a>        <span class="cf">for</span> d <span class="kw">in</span> machines:</span>
+<span id="cb36-8"><a href="#cb36-8"></a>            production <span class="op">+=</span> <span class="bu">int</span>(days<span class="op">/</span>d)</span>
+<span id="cb36-9"><a href="#cb36-9"></a>        <span class="cf">return</span> production</span>
+<span id="cb36-10"><a href="#cb36-10"></a></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="kw">def</span> minTime(machines, goal):</span>
+<span id="cb36-12"><a href="#cb36-12"></a>    machines.sort()</span>
+<span id="cb36-13"><a href="#cb36-13"></a>    minDays <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a>    maxDays <span class="op">=</span> goal <span class="op">*</span> machines[<span class="dv">0</span>]</span>
+<span id="cb36-15"><a href="#cb36-15"></a>    days <span class="op">=</span> bisect_left(Yeild(machines), goal, minDays, maxDays)</span>
+<span id="cb36-16"><a href="#cb36-16"></a>    <span class="cf">return</span> days</span></code></pre></div>
 <ul>
 <li>With harmonic mean, what I wanted first.</li>
 <li>He just calculate a low bound, then add one by one: should not be so long</li>
 </ul>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="im">import</span> heapq</span>
-<span id="cb36-2"><a href="#cb36-2"></a><span class="im">import</span> statistics </span>
-<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">def</span> minTime(machines, goal):</span>
-<span id="cb36-4"><a href="#cb36-4"></a>    minDays <span class="op">=</span> math.ceil(goal<span class="op">*</span>statistics.harmonic_mean(machines)<span class="op">/</span><span class="bu">len</span>(machines))</span>
-<span id="cb36-5"><a href="#cb36-5"></a>    totalManufactured <span class="op">=</span> <span class="bu">sum</span>([minDays<span class="op">//</span>x <span class="cf">for</span> x <span class="kw">in</span> machines])</span>
-<span id="cb36-6"><a href="#cb36-6"></a>    nextTimes <span class="op">=</span> [(x<span class="op">*</span>(minDays<span class="op">//</span>x)<span class="op">+</span>x,x) <span class="cf">for</span> x <span class="kw">in</span> machines]</span>
-<span id="cb36-7"><a href="#cb36-7"></a>    heapq.heapify(nextTimes)</span>
-<span id="cb36-8"><a href="#cb36-8"></a>    popped<span class="op">=</span><span class="va">None</span></span>
-<span id="cb36-9"><a href="#cb36-9"></a>    <span class="cf">while</span> totalManufactured<span class="op">&lt;</span>goal:</span>
-<span id="cb36-10"><a href="#cb36-10"></a>        popped<span class="op">=</span> heapq.heappop(nextTimes)</span>
-<span id="cb36-11"><a href="#cb36-11"></a>        heapq.heappush(nextTimes, (popped[<span class="dv">0</span>]<span class="op">+</span>popped[<span class="dv">1</span>], popped[<span class="dv">1</span>]))</span>
-<span id="cb36-12"><a href="#cb36-12"></a>        totalManufactured<span class="op">+=</span><span class="dv">1</span></span>
-<span id="cb36-13"><a href="#cb36-13"></a>    <span class="cf">return</span> minDays <span class="cf">if</span> <span class="kw">not</span> popped <span class="cf">else</span> popped[<span class="dv">0</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="im">import</span> heapq</span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="im">import</span> statistics </span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">def</span> minTime(machines, goal):</span>
+<span id="cb37-4"><a href="#cb37-4"></a>    minDays <span class="op">=</span> math.ceil(goal<span class="op">*</span>statistics.harmonic_mean(machines)<span class="op">/</span><span class="bu">len</span>(machines))</span>
+<span id="cb37-5"><a href="#cb37-5"></a>    totalManufactured <span class="op">=</span> <span class="bu">sum</span>([minDays<span class="op">//</span>x <span class="cf">for</span> x <span class="kw">in</span> machines])</span>
+<span id="cb37-6"><a href="#cb37-6"></a>    nextTimes <span class="op">=</span> [(x<span class="op">*</span>(minDays<span class="op">//</span>x)<span class="op">+</span>x,x) <span class="cf">for</span> x <span class="kw">in</span> machines]</span>
+<span id="cb37-7"><a href="#cb37-7"></a>    heapq.heapify(nextTimes)</span>
+<span id="cb37-8"><a href="#cb37-8"></a>    popped<span class="op">=</span><span class="va">None</span></span>
+<span id="cb37-9"><a href="#cb37-9"></a>    <span class="cf">while</span> totalManufactured<span class="op">&lt;</span>goal:</span>
+<span id="cb37-10"><a href="#cb37-10"></a>        popped<span class="op">=</span> heapq.heappop(nextTimes)</span>
+<span id="cb37-11"><a href="#cb37-11"></a>        heapq.heappush(nextTimes, (popped[<span class="dv">0</span>]<span class="op">+</span>popped[<span class="dv">1</span>], popped[<span class="dv">1</span>]))</span>
+<span id="cb37-12"><a href="#cb37-12"></a>        totalManufactured<span class="op">+=</span><span class="dv">1</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a>    <span class="cf">return</span> minDays <span class="cf">if</span> <span class="kw">not</span> popped <span class="cf">else</span> popped[<span class="dv">0</span>]</span></code></pre></div>
 </section>
 <section id="balanced-parenthesis-stack-of-course" class="level3">
 <h3>Balanced parenthesis (Stack of course)</h3>
 <ul>
 <li>My first</li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">def</span> isBalanced(s):</span>
-<span id="cb37-2"><a href="#cb37-2"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="st">&quot;YES&quot;</span></span>
-<span id="cb37-3"><a href="#cb37-3"></a>    stack <span class="op">=</span> []</span>
-<span id="cb37-4"><a href="#cb37-4"></a>    <span class="cf">for</span> i <span class="kw">in</span> s:</span>
-<span id="cb37-5"><a href="#cb37-5"></a>        <span class="cf">if</span> i <span class="kw">in</span> (<span class="st">&#39;(&#39;</span>, <span class="st">&#39;[&#39;</span>, <span class="st">&#39;{&#39;</span>):</span>
-<span id="cb37-6"><a href="#cb37-6"></a>            stack.append(i)</span>
-<span id="cb37-7"><a href="#cb37-7"></a>            <span class="cf">continue</span></span>
-<span id="cb37-8"><a href="#cb37-8"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">len</span>(stack): <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
-<span id="cb37-9"><a href="#cb37-9"></a>        j <span class="op">=</span> stack.pop()</span>
-<span id="cb37-10"><a href="#cb37-10"></a>        <span class="cf">if</span> (j,i) <span class="kw">not</span> <span class="kw">in</span> ((<span class="st">&#39;(&#39;</span>, <span class="st">&#39;)&#39;</span>), (<span class="st">&#39;[&#39;</span>, <span class="st">&#39;]&#39;</span>), (<span class="st">&#39;{&#39;</span>, <span class="st">&#39;}&#39;</span>)):</span>
-<span id="cb37-11"><a href="#cb37-11"></a>            <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
-<span id="cb37-12"><a href="#cb37-12"></a></span>
-<span id="cb37-13"><a href="#cb37-13"></a>    <span class="cf">return</span> <span class="st">&quot;YES&quot;</span> <span class="cf">if</span> <span class="bu">len</span>(stack) <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&quot;NO&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">def</span> isBalanced(s):</span>
+<span id="cb38-2"><a href="#cb38-2"></a>    <span class="cf">if</span> <span class="bu">len</span>(s) <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="st">&quot;YES&quot;</span></span>
+<span id="cb38-3"><a href="#cb38-3"></a>    stack <span class="op">=</span> []</span>
+<span id="cb38-4"><a href="#cb38-4"></a>    <span class="cf">for</span> i <span class="kw">in</span> s:</span>
+<span id="cb38-5"><a href="#cb38-5"></a>        <span class="cf">if</span> i <span class="kw">in</span> (<span class="st">&#39;(&#39;</span>, <span class="st">&#39;[&#39;</span>, <span class="st">&#39;{&#39;</span>):</span>
+<span id="cb38-6"><a href="#cb38-6"></a>            stack.append(i)</span>
+<span id="cb38-7"><a href="#cb38-7"></a>            <span class="cf">continue</span></span>
+<span id="cb38-8"><a href="#cb38-8"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">len</span>(stack): <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
+<span id="cb38-9"><a href="#cb38-9"></a>        j <span class="op">=</span> stack.pop()</span>
+<span id="cb38-10"><a href="#cb38-10"></a>        <span class="cf">if</span> (j,i) <span class="kw">not</span> <span class="kw">in</span> ((<span class="st">&#39;(&#39;</span>, <span class="st">&#39;)&#39;</span>), (<span class="st">&#39;[&#39;</span>, <span class="st">&#39;]&#39;</span>), (<span class="st">&#39;{&#39;</span>, <span class="st">&#39;}&#39;</span>)):</span>
+<span id="cb38-11"><a href="#cb38-11"></a>            <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
+<span id="cb38-12"><a href="#cb38-12"></a></span>
+<span id="cb38-13"><a href="#cb38-13"></a>    <span class="cf">return</span> <span class="st">&quot;YES&quot;</span> <span class="cf">if</span> <span class="bu">len</span>(stack) <span class="op">==</span> <span class="dv">0</span> <span class="cf">else</span> <span class="st">&quot;NO&quot;</span></span></code></pre></div>
 <ul>
 <li>Shorter one by someone</li>
-</ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">def</span> isBalanced(s):</span>
-<span id="cb38-2"><a href="#cb38-2"></a>    stack <span class="op">=</span> []</span>
-<span id="cb38-3"><a href="#cb38-3"></a>    closer <span class="op">=</span> {<span class="st">&#39;{&#39;</span>: <span class="st">&#39;}&#39;</span>, <span class="st">&#39;[&#39;</span>: <span class="st">&#39;]&#39;</span>, <span class="st">&#39;(&#39;</span>: <span class="st">&#39;)&#39;</span>}</span>
-<span id="cb38-4"><a href="#cb38-4"></a>    <span class="cf">for</span> bracket <span class="kw">in</span> s:</span>
-<span id="cb38-5"><a href="#cb38-5"></a>        <span class="cf">if</span> bracket <span class="kw">in</span> {<span class="st">&#39;}&#39;</span>,<span class="st">&#39;]&#39;</span>,<span class="st">&#39;)&#39;</span>}:</span>
-<span id="cb38-6"><a href="#cb38-6"></a>            <span class="cf">if</span> <span class="kw">not</span> stack <span class="kw">or</span> closer[stack.pop()] <span class="op">!=</span> bracket:</span>
-<span id="cb38-7"><a href="#cb38-7"></a>                <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
-<span id="cb38-8"><a href="#cb38-8"></a>        <span class="cf">else</span>:</span>
-<span id="cb38-9"><a href="#cb38-9"></a>            stack.append(bracket)</span>
-<span id="cb38-10"><a href="#cb38-10"></a>    <span class="cf">return</span> <span class="st">&quot;NO&quot;</span> <span class="cf">if</span> stack <span class="cf">else</span> <span class="st">&quot;YES&quot;</span></span></code></pre></div>
-<ul>
-<li>My imporvement removing duplication of ‘{’ definition</li>
 </ul>
 <div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">def</span> isBalanced(s):</span>
 <span id="cb39-2"><a href="#cb39-2"></a>    stack <span class="op">=</span> []</span>
@@ -958,7 +952,7 @@
 <span id="cb39-6"><a href="#cb39-6"></a>            stack.append(bracket)</span>
 <span id="cb39-7"><a href="#cb39-7"></a>            <span class="cf">continue</span></span>
 <span id="cb39-8"><a href="#cb39-8"></a>        <span class="cf">if</span> <span class="kw">not</span> stack <span class="kw">or</span> closer[stack.pop()] <span class="op">!=</span> bracket:</span>
-<span id="cb39-9"><a href="#cb39-9"></a>                <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a>            <span class="cf">return</span> <span class="st">&quot;NO&quot;</span></span>
 <span id="cb39-10"><a href="#cb39-10"></a>    <span class="cf">return</span> <span class="st">&quot;NO&quot;</span> <span class="cf">if</span> stack <span class="cf">else</span> <span class="st">&quot;YES&quot;</span></span></code></pre></div>
 </section>
 <section id="maze-castle-on-the-grid" class="level3">
@@ -1324,7 +1318,7 @@
 </section>
 <section id="tree-huffman-decoding" class="level3">
 <h3>Tree: Huffman Decoding</h3>
-<p>My solution, note that reading a String + Visiting a tree, the recursive solution could not be the shortest: because you have to pass many variables (at least 2) and one is often unchanged, or changed together so why bother: just reloop + I knwo when it is finished: when the string_in is completely consumed</p>
+<p>My solution, note that reading a String + Visiting a tree, the recursive solution could not be the shortest: because you have to pass many variables (at least 2) and one is often unchanged, or changed together so why bother: just reloop + I know when it is finished: when the string_in is completely consumed</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">def</span> readChar(sub, s):</span>
 <span id="cb55-2"><a href="#cb55-2"></a></span>
 <span id="cb55-3"><a href="#cb55-3"></a><span class="co"># Finish</span></span>
@@ -1568,6 +1562,7 @@
 <span id="cb67-4"><a href="#cb67-4"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>())</span>
 <span id="cb67-5"><a href="#cb67-5"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):</span>
 <span id="cb67-6"><a href="#cb67-6"></a>    <span class="bu">print</span>(<span class="st">&#39;VALID&#39;</span> <span class="cf">if</span> re.match(r_user, <span class="bu">input</span>()) <span class="cf">else</span> <span class="st">&#39;INVALID&#39;</span>)</span></code></pre></div>
+</section>
 </section>
 </section>
 </section>
