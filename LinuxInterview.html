@@ -4,19 +4,80 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>LinuxInterview.md – -</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <title>LinuxInterview.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <ul>
@@ -48,10 +109,10 @@
 <li>Embedded software</li>
 <li>Web Applications</li>
 <li>Artificial Intelligence software</li>
-<li>Scientific software.</li>
+<li>Scientific software</li>
 </ul></li>
 <li>Describe the software development process in brief:
-<ul>
+<ol type="1">
 <li>Requirement analysis</li>
 <li>Specification</li>
 <li>Software architecture</li>
@@ -60,7 +121,7 @@
 <li>Documentation</li>
 <li>Training and support</li>
 <li>Maintenance</li>
-</ul></li>
+</ol></li>
 <li>How do you organize CSS files?
 <ul>
 <li>reset.css: reset and normalization styles; minimal color, border, or font-related declarations</li>
@@ -74,17 +135,52 @@
 </ul></li>
 <li>What are some ways to make websites faster?
 <ul>
-<li>Implement your own content delivery network (CDN).</li>
-<li>Use adaptive images.</li>
-<li>Cache, cache, cache.</li>
-<li>Evaluate your plugins.</li>
-<li>Combine images into CSS sprites.</li>
-<li>Enable HTTP keep-alive response headers.</li>
-<li>Compress your content.</li>
-<li>Configure expires headers.</li>
-<li>Minify JavaScript and CSS.</li>
-<li>Review your hosting package.</li>
+<li>Implement your own content delivery network (CDN)</li>
+<li>Use adaptive images</li>
+<li>Cache, cache, cache</li>
+<li>Evaluate your plugins</li>
+<li>Combine images into CSS sprites</li>
+<li>Enable HTTP keep-alive response headers</li>
+<li>Compress your content</li>
+<li>Configure expires headers</li>
+<li>Minify JavaScript and CSS</li>
+<li>Review your hosting package</li>
 </ul></li>
+</ul>
+</section>
+<section id="python" class="level2">
+<h2>Python</h2>
+<ul>
+<li>PEP: Python Enhancement Proposal</li>
+<li>Type conversion
+<ul>
+<li>int() – converts any data type into integer type</li>
+<li>float() – converts any data type into float type</li>
+<li>ord() – converts characters into integer</li>
+<li>hex() – converts integers to hexadecimal</li>
+<li>oct() – converts integer to octal</li>
+<li>tuple() – This function is used to convert to a tuple.</li>
+<li>set() – This function returns the type after converting to set.</li>
+<li>list() – This function is used to convert any data type to a list type.</li>
+<li>dict() – This function is used to convert a tuple of order (key,value) into a dictionary.</li>
+<li>str() – Used to convert integer into a string.</li>
+<li>complex(real,imag) – This functionconverts real numbers to complex(real,imag) number.</li>
+</ul></li>
+<li>Array Vs List: Arrays can hold only a single data type elements whereas lists can hold any data type elements.</li>
+<li></li>
+<li>Help() function: The help() function is used to display the documentation string and also facilitates you to see the help related to modules, keywords, attributes, etc.</li>
+<li>Dir() function: The dir() function is used to display the defined symbols.</li>
+<li>PUSH: append, extend and insert</li>
+<li>POP: pop, remove</li>
+<li>Encapsulation means binding the code and the data together</li>
+<li>object(): returns a featureless object that is a base for all classes</li>
+<li>How to get indices of N maximum values in a NumPy array?</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb1-2" title="2">arr <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>])</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="bu">print</span>(arr.argsort()[<span class="op">-</span><span class="dv">3</span>:][::<span class="op">-</span><span class="dv">1</span>])</a></code></pre></div>
+<ul>
+<li></li>
 </ul>
 </section>
 </body>

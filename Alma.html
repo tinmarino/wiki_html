@@ -4,24 +4,29 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Alma.md – -</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <title>Alma.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
-<section id="science---submillimetre-astronomy" class="level1">
-<h1>Science -&gt; Submillimetre astronomy</h1>
+<p>https://tinmarino.github.io/?show=cosmo_obs_cheat</p>
+<p><a href="Alma-ReleaseManagement.html">Alma ReleaseManagement</a> <a href="Alma-ACS.html">Alma ACS</a></p>
+<section id="science" class="level1">
+<h1>Science</h1>
+<section id="submillimetre-astronomy" class="level2">
+<h2>Submillimetre astronomy</h2>
 <ul>
+<li>0.3 mm to 3.6 mm, 84 GHz to 950 GHz =&gt; a range of 10 around 1mm</li>
+<li>REsolution:
+<ul>
+<li>ALMA: 0.1’’</li>
+<li>Event Horizon Telescope: 25e-6 ’’</li>
+</ul></li>
 <li>mm/sub-mm wavelength region are essential for investigating the coolest components of outer space such as cold and dusty molecular clouds, where star formation is occurring</li>
 <li>carbon monoxide rotational transition
 <ul>
@@ -31,8 +36,88 @@
 <li>Broad band 16 GhZ wide</li>
 </ul>
 </section>
-<section id="emission" class="level1">
-<h1>Emission</h1>
+<section id="vocabulary-optical-vs-radio" class="level2">
+<h2>Vocabulary: Optical Vs Radio</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Optical</th>
+<th>Radio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OPD: Optical Path Difference</td>
+<td>Delay, Lag</td>
+</tr>
+<tr class="even">
+<td>PSF: Point Spread Function</td>
+<td>Dirty Beam</td>
+</tr>
+<tr class="odd">
+<td>Raw Image</td>
+<td>Dirty Image</td>
+</tr>
+<tr class="even">
+<td>Differential piston</td>
+<td>Delay residual</td>
+</tr>
+<tr class="odd">
+<td>Beam combiner</td>
+<td>Correlator</td>
+</tr>
+<tr class="even">
+<td>Strehl Ratio</td>
+<td>Antena gain</td>
+</tr>
+<tr class="odd">
+<td>Background level</td>
+<td>System temperature</td>
+</tr>
+<tr class="even">
+<td>Fringe tracking</td>
+<td>Phase referencing</td>
+</tr>
+<tr class="odd">
+<td>Telescope</td>
+<td>Antenna</td>
+</tr>
+<tr class="even">
+<td>Magnitude</td>
+<td>Log (flux density)</td>
+</tr>
+<tr class="odd">
+<td>Obscure band designation</td>
+<td>Confusing band designation</td>
+</tr>
+<tr class="even">
+<td>Adaptive Optic</td>
+<td>Phase Calibration</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="article-notes" class="level2">
+<h2>Article Notes</h2>
+<ul>
+<li>PyUnit</li>
+<li>Hudson</li>
+<li>Scheduling blocks, created by the <strong>observing tool</strong>, selected and queued by the <strong>scheduling subsystem</strong>, exxecuted by the <strong>monitor and control system</strong>, reduced by <strong>telescope calibration</strong> and stored in the <strong>arhive</strong> for later analysis.</li>
+<li>Many small pains are easier to deal with than few big ones =&gt; deliver software more often</li>
+<li>Add complexity later when warranted, but it is very hard to substract it</li>
+<li>Regular operation are the best possible test bed for any integrated system</li>
+<li>Usual tests:
+<ol type="1">
+<li>Regression</li>
+<li>Scability</li>
+<li>Feature/Functionality</li>
+<li>Bug fix</li>
+</ol></li>
+<li>Avoid testing: Code without added value, such as getters/setters and delegations</li>
+</ul>
+</section>
+<section id="emission" class="level2">
+<h2>Emission</h2>
 <ol type="1">
 <li>Discrete cosmic radio sources, at first, supernova remnants and radio galaxies (1948; see Kirshner 2004),</li>
 <li>The 21 cm line of atomic hydrogen (1951; see Sparke and Gallagher 2007; Kalberla et al. , 2005),</li>
@@ -46,8 +131,100 @@
 <li>Molecules in high redshift sources (see Solomon and Vanden Bout 2005).</li>
 </ol>
 </section>
+</section>
 <section id="technic" class="level1">
 <h1>Technic</h1>
+<section id="calibration" class="level2">
+<h2>Calibration</h2>
+<ol type="1">
+<li>Primary Calibration: use of a “known” standard source to determine time independent quantities e.g. B ij</li>
+<li>Secondary Calibration: estimate local conditions with nearby calibrator</li>
+<li>Self-Calibration: use of the target field to determine time dependent quantities, e.g. G ij</li>
+</ol>
+<ul>
+<li>Sources of error:
+<ul>
+<li>Atmosphere
+<ul>
+<li>Ionosphere</li>
+<li>Troposphere</li>
+<li>water vapor</li>
+</ul></li>
+<li>Antenna/feed
+<ul>
+<li>System temperature</li>
+<li>Primary beam</li>
+<li>Pointing</li>
+<li>Position (location)</li>
+</ul></li>
+<li>LNA+conversion chain
+<ul>
+<li>Clock</li>
+<li>Gain, phase, delay</li>
+<li>Frequency response</li>
+</ul></li>
+<li>Digitiser/Correlator
+<ul>
+<li>Auto-leveling</li>
+<li>Baseline errors</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="reduction" class="level2">
+<h2>Reduction</h2>
+<p>All deconvolution methods supply missing information. * CLEAN does this by saying that sky is point sources. * MEM demands that the smoothest map consistent with the data is the most likely</p>
+<section id="vocabulary" class="level3">
+<h3>Vocabulary</h3>
+<ul>
+<li>Dirty beam: Point spread function: inverse Fourier transform of the aperture</li>
+<li>Dirty image: Image not reduced: ∬ S(u, v)V(u, v)exp[2iπ(ul+vm)]dldm</li>
+</ul>
+</section>
+<section id="mem-maximum-entropy-method" class="level3">
+<h3>MEM: Maximum Entropy Method</h3>
+<p>Bayesian strategy that selects one image among many feasible. Since the data is noisy and incomplete, the solution space is first reduced choosing those images that fit the measured visibilities to within noise level. Among these, the Bayesian strategy selects the one that has a maximum probability of being observed according to a counting rule</p>
+</section>
+<section id="clean" class="level3">
+<h3>Clean</h3>
+<ul>
+<li>https://en.wikipedia.org/wiki/CLEAN_(algorithm)</li>
+<li>CLEAN heuristic (Hogbom, 1974). This algorithm is based on the dirty image/beam representation of the problem (Algorithm A), which results in a deconvolution problem</li>
+<li>The algorithm assumes that the image consists of a number of point sources. It will iteratively find the highest value in the image and subtract a small gain of this point source convolved with the point spread function (“dirty beam”) of the observation, until the highest value is smaller than some threshold.</li>
+</ul>
+<section id="clean-ideas" class="level4">
+<h4>CLEAN ideas</h4>
+<p>The family of CLEAN algorithms is based on the a priori assumption that the sky intensity distribution is a collection of point sources. The algorithms have three main steps</p>
+<section id="initialization" class="level5">
+<h5>1. Initialization</h5>
+<ul>
+<li>of the residual map to the dirty map;</li>
+<li>and of the clean component list to a NULL (i.e. zero) value.</li>
+</ul>
+<p>The clean beam is usually a fit of the main lobe (i.e. the inner part) of the dirty beam</p>
+</section>
+<section id="iterative-search" class="level5">
+<h5>2. Iterative search</h5>
+<ul>
+<li>for point sources on the residual map. As those point sources are found,</li>
+<li>they are subtracted from the residual map;</li>
+<li>and then they are logged in the clean component list.</li>
+</ul>
+</section>
+<section id="restoration" class="level5">
+<h5>3. Restoration</h5>
+<ul>
+<li>of the clean map
+<ol type="1">
+<li>by convolution of the clean component list with the clean beam, i.e. a Gaussian whose size matches the synthesized beam size and</li>
+<li>by addition of the residual map</li>
+</ol></li>
+<li>The final addition of the residual map plays a double role. First, it is a first order correction to insufficient deconvolution. Second, it enables noise estimate on the cleaned image since the residual image should be essentially noise when the deconvolution has converged.</li>
+</ul>
+</section>
+</section>
+</section>
+</section>
 <section id="antenas" class="level2">
 <h2>Antenas</h2>
 <ul>
@@ -82,6 +259,14 @@
 <section id="transporters" class="level2">
 <h2>Transporters</h2>
 </section>
+</section>
+<section id="links" class="level1">
+<h1>Links:</h1>
+<ul>
+<li>ESO: Eris: https://www.eso.org/sci/meetings/2015/eris2015/program.html</li>
+<li>2018_Tool_Of_Radio_Astro</li>
+<li>2017_Book_Interferometry_And_Synthesis_In_RA</li>
+</ul>
 </section>
 </body>
 </html>

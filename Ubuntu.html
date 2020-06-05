@@ -4,21 +4,23 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Ubuntu.md – -</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <title>Ubuntu.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
+<section id="sortcut" class="level1">
+<h1>Sortcut</h1>
+<ul>
+<li>Super + Q : Show number of window app in dock (left launcher)</li>
+<li>Alt + f2 : Run command</li>
+</ul>
+</section>
 <section id="mouse" class="level1">
 <h1>Mouse</h1>
 <p>modprobe -r psmouse</p>
@@ -33,16 +35,16 @@
 <section id="power-management-suspend-then-hibernate" class="level1">
 <h1>Power management : suspend then hibernate</h1>
 <ul>
-<li><p><code>systemctl suspend-then-hibernate</code> # test</p></li>
-<li><p><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</p></li>
-<li><p><code>sudoedit /etc/UPower/UPower.conf</code></p></li>
-<li><p><code>service upower restart</code></p></li>
+<li><code>systemctl suspend-then-hibernate</code> # test</li>
+<li><code>dconf-editor</code> : /org/gnome/settings-daemon/plugins/power/</li>
+<li><code>sudoedit /etc/UPower/UPower.conf</code></li>
+<li><code>service upower restart</code></li>
 <li><p>In <code>/etc/systemd/sleep.conf</code> new file:</p>
 <pre><code>[Sleep]
 HibernateDelaySec=3600</code></pre></li>
 <li><p>In <code>/etc/systemd/logind.conf</code></p>
 <pre><code>HandleLidSwitch=suspend-then-hibernate</code></pre></li>
-<li><p><code>systemctl restart systemd-logind.service</code></p></li>
+<li><code>systemctl restart systemd-logind.service</code></li>
 <li><p><code>gconftool-2 -t string -s /apps/gnome-power-manager/buttons/lid_ac nothing</code> # Nothing on battery</p></li>
 </ul>
 <section id="power-stop-sleeping" class="level2">

@@ -4,19 +4,14 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Nvidia.md – -</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <title>Nvidia.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <section id="gui-nvidia-x-server-settings" class="level1">
@@ -60,6 +55,30 @@
 <section id="log-files" class="level1">
 <h1>Log files</h1>
 <p>cat /var/log/lightdm cat /var/log/Xorg.0.log cat /var/log/gpu-manager.log</p>
+</section>
+<section id="smi" class="level1">
+<h1>Smi</h1>
+<section id="smi-working" class="level2">
+<h2>SMi working</h2>
+<pre class="text"><code>Wed May 20 00:28:45 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 440.64       Driver Version: 440.64       CUDA Version: 10.2     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 850M    Off  | 00000000:04:00.0 Off |                  N/A |
+| N/A   57C    P0    N/A /  N/A |    183MiB /  4046MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0       964      G   /usr/lib/xorg/Xorg                           110MiB |
+|    0      1353      G   /usr/bin/gnome-shell                          70MiB |
++-----------------------------------------------------------------------------+</code></pre>
+</section>
 </section>
 </body>
 </html>

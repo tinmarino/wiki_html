@@ -5,25 +5,20 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Tmux.md – Tmux : TerminalMultiplexer</title>
-  <style>
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
 <h1 class="title">Tmux : TerminalMultiplexer</h1>
 </header>
 <p><a href="Tmux-Conf.html">Tmux Conf</a></p>
-<p>tmux capture-pane -pS -1000000 -t 0 &gt; file.out</p>
+<p>TMUX=1 gnome-terminal tmux capture-pane -pS -1000000 -t 0 &gt; file.out</p>
 <section id="pane-to-new-windows-break-pane-o" class="level3">
 <h3>Pane to new Windows == break pane o</h3>
 <pre><code>join-pane -s
@@ -300,84 +295,84 @@ unbind C-b </code></pre>
 <p>tmux may be controlled from an attached client by using a key combination of a prefix key, ‘C-b’ (Ctrl-b) by default, followed by a command key.</p>
 <ul>
 <li><p>? List all key bindings.</p></li>
-<li><p>tmux new -s name_instance –&gt; new session called “name_instance”.</p></li>
-<li><p>d detach from the tmux session.</p></li>
-<li><p>tmux ls –&gt; list existing tmux sessions.</p></li>
-<li><p>tmux new -s name_instance_two -d –&gt; new session instance in the background.</p></li>
-<li><p>tmux attach –&gt; if we only have one session running.</p></li>
-<li><p>tmux attach -t name_instance–&gt; attach to the session name_instance.</p></li>
+<li>tmux new -s name_instance –&gt; new session called “name_instance”.</li>
+<li>d detach from the tmux session.</li>
+<li>tmux ls –&gt; list existing tmux sessions.</li>
+<li>tmux new -s name_instance_two -d –&gt; new session instance in the background.</li>
+<li>tmux attach –&gt; if we only have one session running.</li>
+<li>tmux attach -t name_instance–&gt; attach to the session name_instance.</li>
 <li><p>tmux kill-session -t name_instance –&gt; killing sessions</p></li>
-<li><p>[ enter copy mode and move the cursor to where we want to start selecting text.</p></li>
-<li><p>SPACE and move the cursor to the end of the text and press ENTER (the selected text gets copied into a paste buffer)</p></li>
-<li><p>] paste the contents we just capture (the current buffer)</p></li>
-<li><p>= Lists all paste buffers and pastes selected buffer contents</p></li>
-<li><p>h , j , k , and l Moves the cursor left, down, up, and right respectively.</p></li>
-<li><p>w Moves the cursor forward one word at a time.</p></li>
-<li><p>b Moves the cursor backward one word at a time.</p></li>
-<li><p>f followed by any character Moves to the next occurrence of the specified character.</p></li>
-<li><p>F followed by any character Moves to the previous occurrence of the specified character.</p></li>
-<li><p>CTRL - b Scrolls up one page.</p></li>
-<li><p>CTRL - f Scrolls down one page.</p></li>
-<li><p>g Jumps to the top of the buffer.</p></li>
-<li><p>G Jumps to the bottom of the buffer.</p></li>
-<li><p>? Starts a search backward through the buffer.</p></li>
+<li>[ enter copy mode and move the cursor to where we want to start selecting text.</li>
+<li>SPACE and move the cursor to the end of the text and press ENTER (the selected text gets copied into a paste buffer)</li>
+<li>] paste the contents we just capture (the current buffer)</li>
+<li>= Lists all paste buffers and pastes selected buffer contents</li>
+<li>h , j , k , and l Moves the cursor left, down, up, and right respectively.</li>
+<li>w Moves the cursor forward one word at a time.</li>
+<li>b Moves the cursor backward one word at a time.</li>
+<li>f followed by any character Moves to the next occurrence of the specified character.</li>
+<li>F followed by any character Moves to the previous occurrence of the specified character.</li>
+<li>CTRL - b Scrolls up one page.</li>
+<li>CTRL - f Scrolls down one page.</li>
+<li>g Jumps to the top of the buffer.</li>
+<li>G Jumps to the bottom of the buffer.</li>
+<li>? Starts a search backward through the buffer.</li>
 <li><p>/ Starts a search forward through the buffer.</p></li>
-<li><p>" Split the current pane into two, top and bottom.</p></li>
-<li><p>% Split the current pane into two, left and right.</p></li>
-<li><p>o Select the next pane in the current window.</p></li>
-<li><p>x Kill the current pane.</p></li>
-<li><p>C-o Rotate the panes in the current window forwards.</p></li>
-<li><p>! Break the current pane out of the window.</p></li>
-<li><p>; Move to the previously active pane.</p></li>
-<li><p>q Briefly display pane indexes.</p></li>
-<li><p>{ Swap the current pane with the previous pane.</p></li>
+<li>" Split the current pane into two, top and bottom.</li>
+<li>% Split the current pane into two, left and right.</li>
+<li>o Select the next pane in the current window.</li>
+<li>x Kill the current pane.</li>
+<li>C-o Rotate the panes in the current window forwards.</li>
+<li>! Break the current pane out of the window.</li>
+<li>; Move to the previously active pane.</li>
+<li>q Briefly display pane indexes.</li>
+<li>{ Swap the current pane with the previous pane.</li>
 <li><p>} Swap the current pane with the next pane.</p></li>
-<li><p>$ Rename the current session.</p></li>
-<li><p>tmux new -s &lt;session-name&gt; (if you get some error related to $TMUX us this command - TMUX= tmux new-session -s &lt;session-name&gt;)</p></li>
-<li><p>d Detach from the current session.</p></li>
-<li><p>tmux list-sessions | tmux ls</p></li>
-<li><p>tmux attach -t &lt;session-name&gt; re-attach a session</p></li>
+<li>$ Rename the current session.</li>
+<li>tmux new -s &lt;session-name&gt; (if you get some error related to $TMUX us this command - TMUX= tmux new-session -s &lt;session-name&gt;)</li>
+<li>d Detach from the current session.</li>
+<li>tmux list-sessions | tmux ls</li>
+<li>tmux attach -t &lt;session-name&gt; re-attach a session</li>
 <li><p>tmux kill-session -t &lt;session-name&gt;</p></li>
-<li><p>c Create a new window.</p></li>
-<li><p>, Rename the current window.</p></li>
-<li><p>w Choose from a list of windows interactively.</p></li>
-<li><p>l Move to the previously selected window.</p></li>
-<li><p>n Change to the next window.</p></li>
-<li><p>p Change to the previous window.</p></li>
-<li><p>&amp; Kill the current window.</p></li>
-<li><p>’ Prompt for a window index to select.</p></li>
-<li><p>f Prompt to search for text in open windows.</p></li>
-<li><p>i Display some information about the current window.</p></li>
+<li>c Create a new window.</li>
+<li>, Rename the current window.</li>
+<li>w Choose from a list of windows interactively.</li>
+<li>l Move to the previously selected window.</li>
+<li>n Change to the next window.</li>
+<li>p Change to the previous window.</li>
+<li>&amp; Kill the current window.</li>
+<li>’ Prompt for a window index to select.</li>
+<li>f Prompt to search for text in open windows.</li>
+<li>i Display some information about the current window.</li>
 <li><p>0 to 9 Select windows 0 to 9.</p></li>
-<li><p>: Enter the tmux command prompt.</p></li>
-<li><p>C-b Send the prefix key (C-b) through to the application.</p></li>
-<li><p>C-z Suspend the tmux client.</p></li>
-<li><p><br />
-# List all paste buffers.</p></li>
-<li><p>( Switch the attached client to the previous session.</p></li>
-<li><p>) Switch the attached client to the next session.</p></li>
-<li><p>- Delete the most recently copied buffer of text.</p></li>
-<li><p>. Prompt for an index to move the current window.</p></li>
-<li><p>= Choose which buffer to paste interactively from a list.</p></li>
-<li><p>D Choose a client to detach.</p></li>
-<li><p>L Switch the attached client back to the last session.</p></li>
-<li><p>[ Enter copy mode to copy text or view the history.</p></li>
-<li><p>] Paste the most recently copied buffer of text.</p></li>
-<li><p>r Force redraw of the attached client.</p></li>
-<li><p>m Mark the current pane (see select-pane -m).</p></li>
-<li><p>M Clear the marked pane.</p></li>
-<li><p>s Select a new session for the attached client interactively.</p></li>
-<li><p>t Show the time.</p></li>
-<li><p>z Toggle zoom state of the current pane.</p></li>
-<li><p>~ Show previous messages from tmux, if any.</p></li>
-<li><p>Page Up Enter copy mode and scroll one page up.</p></li>
-<li><p>Up, Down, Left, Right Change to the pane above, below, to the left, or to the right of the current pane.</p></li>
-<li><p>M-1 to M-5 Arrange panes in one of the five preset layouts: even-horizontal, even-vertical, main-horizontal, main-vertical, or tiled.</p></li>
-<li><p>Space Arrange the current window in the next preset layout.</p></li>
-<li><p>M-n Move to the next window with a bell or activity marker.</p></li>
-<li><p>M-o Rotate the panes in the current window backwards.</p></li>
-<li><p>M-p Move to the previous window with a bell or activity marker.</p></li>
-<li><p>C-Up, C-Down, C-Left, C-Right Resize the current pane in steps of one cell.</p></li>
+<li>: Enter the tmux command prompt.</li>
+<li>C-b Send the prefix key (C-b) through to the application.</li>
+<li>C-z Suspend the tmux client.</li>
+<li><br />
+# List all paste buffers.</li>
+<li>( Switch the attached client to the previous session.</li>
+<li>) Switch the attached client to the next session.</li>
+<li>- Delete the most recently copied buffer of text.</li>
+<li>. Prompt for an index to move the current window.</li>
+<li>= Choose which buffer to paste interactively from a list.</li>
+<li>D Choose a client to detach.</li>
+<li>L Switch the attached client back to the last session.</li>
+<li>[ Enter copy mode to copy text or view the history.</li>
+<li>] Paste the most recently copied buffer of text.</li>
+<li>r Force redraw of the attached client.</li>
+<li>m Mark the current pane (see select-pane -m).</li>
+<li>M Clear the marked pane.</li>
+<li>s Select a new session for the attached client interactively.</li>
+<li>t Show the time.</li>
+<li>z Toggle zoom state of the current pane.</li>
+<li>~ Show previous messages from tmux, if any.</li>
+<li>Page Up Enter copy mode and scroll one page up.</li>
+<li>Up, Down, Left, Right Change to the pane above, below, to the left, or to the right of the current pane.</li>
+<li>M-1 to M-5 Arrange panes in one of the five preset layouts: even-horizontal, even-vertical, main-horizontal, main-vertical, or tiled.</li>
+<li>Space Arrange the current window in the next preset layout.</li>
+<li>M-n Move to the next window with a bell or activity marker.</li>
+<li>M-o Rotate the panes in the current window backwards.</li>
+<li>M-p Move to the previous window with a bell or activity marker.</li>
+<li>C-Up, C-Down, C-Left, C-Right Resize the current pane in steps of one cell.</li>
 <li><p>M-Up, M-Down, M-Left, M-Right Resize the current pane in steps of five cells.</p></li>
 </ul>
 <p>Key bindings may be changed with the bind-key and unbind-key commands.</p>

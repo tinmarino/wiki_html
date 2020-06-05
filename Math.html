@@ -15,6 +15,68 @@
 </head>
 <body>
 <p><a href="Crypto.html">Crypto</a></p>
+<section id="calculo" class="level1">
+<h1>Calculo</h1>
+<ul>
+<li>Jacobiana</li>
+</ul>
+<pre class="text"><code>Jf(x,y) = | df1  |  df1 |
+          | ---  |  --- |
+          | dx   |  dy  | 
+          |------|------|
+          | df2  |  df2 |
+          | ---  |  --- |
+          | dx   |  dy  |</code></pre>
+<ul>
+<li>Norma
+<ol type="1">
+<li>Definida, positiva: <code>|x|&gt;0 &amp; |x| = 0 =&gt; x = 0</code></li>
+<li>Homogeneidad: <code>|αx| = α|x|</code></li>
+<li>Inegalidad triangular</li>
+</ol></li>
+<li>Producto Interno
+<ol type="1">
+<li>Definido positivo</li>
+<li>Symetrico</li>
+<li>Bilineal</li>
+</ol></li>
+</ul>
+<section id="bola" class="level2">
+<h2>Bola</h2>
+<ul>
+<li><strong>Adherencia:</strong> <code>Adr(A) := {x∈E: B(x,ε) ∩ A ≠ ∅; ∀ε&gt;0</code>
+<ul>
+<li>La Adherencia es el conjunto A unido con lo que tiene adherido y que no está necesariamente en A</li>
+</ul></li>
+<li><strong>Interior:</strong> <code>int A:= {x∈A: existe B(x,d) ∈ A}</code>
+<ul>
+<li>ex: No es posible meter una bola dentro del conjunto, por lo tanto Int(A) = ∅)</li>
+<li>A es abierto &lt;=&gt; A = int A</li>
+</ul></li>
+<li><p><strong>Frontera:</strong> Además <code>Fr(A) = Adh(A) \ Int(A) = Adh(A)</code> (en este caso de interior nulo)</p></li>
+<li><strong>Cerrado:</strong> (A) toda sucesion convergente de A converge en A
+<ul>
+<li>Adh(A) ⊂ A</li>
+</ul></li>
+<li><p><strong>Compacto:</strong> (A) toda sucesion de A tiene una subsecion convergente en A</p></li>
+<li><p><strong>Bola abierta:</strong> (B) de centro c y de radio r, (c,r)∈(E,ℝ); r&gt;0; <code>B(c, r) := {x∈E; ||c-x||&lt;r}</code></p></li>
+<li><p><strong>Parte abierta:</strong> (A) <code>∀x ∈ A; ∃d&gt;0 tq B(x,d) ⊂ A</code></p></li>
+<li><p><strong>Convexo:</strong> Una parte C de un espacio vectorial real es convexa si para cada par de puntos de C, el segmento que los une está totalmente incluido en C; es decir, un conjunto es convexo si se puede ir de cualquier punto a cualquier otro en línea recta, sin salir del mismo (wiki)</p></li>
+<li><p>E y ∅ son abiertos Y cerrados</p></li>
+</ul>
+</section>
+<section id="cauchy-banach-hilbert" class="level2">
+<h2>Cauchy, Banach, Hilbert</h2>
+<ul>
+<li><p><strong>Cauchy (Sucesion):</strong> (ak) <code>∀ε&gt;0; ∃k∈ℕ tq |ai-aj|&lt;ε; ∀(i,j)&gt;k</code></p></li>
+<li><strong>Ḇanach (Espacio):</strong> un espacio vectorial normado donde cada sucesion de Cauchy converge
+<ul>
+<li>Un EVN de dimension finita es de Banach</li>
+</ul></li>
+<li><p><strong>Hibert (Espacio):</strong> Espacio de Banach cuya norma esta definida por un producto interno</p></li>
+</ul>
+</section>
+</section>
 <section id="histogram-cross-entropy" class="level1">
 <h1>Histogram cross entropy</h1>
 <p>The distance between H1 and H2 is: <span class="math inline"><em>D</em>(<em>H</em>1, <em>H</em>2) =  − ∑<sub><em>i</em></sub><em>H</em>1<sub><em>i</em></sub>log (<em>H</em>2<sub><em>i</em></sub>)</span></p>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Alma-ACS.md – Untitled</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>ksh gcc libx11-dev libffi-dev<br />
+perl<br />
+libreadline-dev<br />
+bzip2<br />
+openssl-dev openldap-dev libxml2-dev freetype-dev libxslt-dev sqlite-dev expat-dev bison<br />
+flex<br />
+autoconf<br />
+unzip<br />
+dos2unix<br />
+tcl-dev<br />
+tk-dev<br />
+</p>
+<ul>
+<li>Model driven with code generation (IDL)</li>
+<li>Manager &gt; Container &gt; Component &amp;&amp; Channels</li>
+</ul>
+</section>
+<section id="tests" class="level1">
+<h1>Tests</h1>
+<ul>
+<li><strong>Class level:</strong> alias unit test</li>
+<li><strong>Component level:</strong> IDL interface access (API)</li>
+<li><strong>Systel level:</strong> alias end-to-end</li>
+</ul>
+</section>
+<section id="services" class="level1">
+<h1>Services</h1>
+<section id="logging" class="level2">
+<h2>Logging</h2>
+<ul>
+<li>Base on Notification Service<br />
+</li>
+<li>Client: jlog: ENGINEER, OPERATOR, SCILOG</li>
+<li>Level: Trace (1), Delouse (2), Debug (3), Info (4), Notice (5), Warning (6), Error (8), Critical (9), Alert (10), Emergency (11), Off (99)</li>
+<li>Archive: RDB</li>
+<li>Performance: Transparent caching, transfert async in batch</li>
+<li>Env: <code>$ACS_LOG_[STDOUT|CENTRAL|FILE]</code></li>
+<li>Files:
+<ul>
+<li>ACSErrTypeCommon.xml</li>
+<li>ACS_LOG_FILE (or default $ACS_TMP/<hostname>/acs_local_log_<processname></li>
+</ul></li>
+<li>Links:
+<ul>
+<li>http://almasw.hq.eso.org/almasw/bin/view/HLA/LoggingErrorAlarmsGuidelines</li>
+<li>http://www.eso.org/projects/alma/develop/acs/OnlineDocs/Logging_and_Archiving.pdf</li>
+</ul></li>
+</ul>
+</section>
+<section id="messaging" class="level2">
+<h2>Messaging</h2>
+<ul>
+<li>request/response: Corba messaging</li>
+<li>publish/subscribe: Notify Service</li>
+</ul>
+</section>
+<section id="error-management" class="level2">
+<h2>Error management</h2>
+<ul>
+<li>Trace: Linked-List</li>
+<li>Links:
+<ul>
+<li>http://www.eso.org/projects/alma/develop/acs/OnlineDocs/ACS_Error_System.p df</li>
+</ul></li>
+</ul>
+</section>
+<section id="alarms" class="level2">
+<h2>Alarms</h2>
+</section>
+<section id="configuration-data" class="level2">
+<h2>Configuration data</h2>
+</section>
+</section>
+</body>
+</html>
