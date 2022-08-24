@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tmux-Dump.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<section id="c-start-directory--n-window-name" class="level1">
+<h1>-c start-directory -n window-name</h1>
+<p>bind-key t<br />
+if-shell ‘tmux list-windows -F " ##{window_name}" | grep “TODO”’ { select-window -t TODO } { if-shell ‘tmux show-environment -g TMUX_WINDOW_TO_DO &amp;&amp; tmux has-session -t “$TMUX_WINDOW_TO_DO” &gt; /dev/null’ { display-message “HAS $TMUX_WINDOW_TO_DO” ;<br />
+link-window -s <span class="math inline">$TMUX_WINDOW_TO_DO  } {  display-message "NOT" ;\
+ new-window -c "$</span>HOME/wiki/todo" -n TODO “vi -c"call Windex(2)"” ;<br />
+move-window -t 9 ;<br />
+run-shell “tmux set-environment -g TMUX_WINDOW_TO_DO” #S:#W"" } }</p>
+</section>
+</body>
+</html>

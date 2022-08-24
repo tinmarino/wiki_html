@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Jenkins.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<p>From: https://wiki.jenkins.io/display/JENKINS/Administering+Jenkins</p>
+<section id="restrict-agent" class="level1">
+<h1>Restrict agent</h1>
+<ul>
+<li><p>pipeline</p>
+<pre><code>agent {
+    node {
+        label &#39;v-devel01.sco.alma.cl&#39;
+    }
+}</code></pre>
+<ul>
+<li>For no restiction:</li>
+</ul>
+<pre><code>agent any</code></pre></li>
+<li><p>Single job:</p>
+<ol type="1">
+<li>Restrict where this project can be run</li>
+<li>Label expr: v-bfnode703.sco.alma.cl</li>
+</ol></li>
+</ul>
+</section>
+<section id="filesystem" class="level1">
+<h1>FileSystem</h1>
+<p>From: https://wiki.jenkins.io/display/jenkins/administering+jenkins</p>
+<pre><code>JENKINS_HOME
+ +- config.xml     (jenkins root configuration)
+ +- *.xml          (other site-wide configuration files)
+ +- userContent    (files in this directory will be served under your http://server/userContent/)
+ +- fingerprints   (stores fingerprint records)
+ +- nodes          (slave configurations)
+ +- plugins        (stores plugins)
+ +- secrets        (secretes needed when migrating credentials to other servers)
+ +- workspace (working directory for the version control system)
+     +- [JOBNAME] (sub directory for each job)
+ +- jobs
+     +- [JOBNAME]      (sub directory for each job)
+         +- config.xml     (job configuration file)
+         +- latest         (symbolic link to the last successful build)
+         +- builds
+             +- [BUILD_ID]     (for each build)
+                 +- build.xml      (build result summary)
+                 +- log            (log file)
+                 +- changelog.xml  (change log)</code></pre>
+</section>
+</body>
+</html>

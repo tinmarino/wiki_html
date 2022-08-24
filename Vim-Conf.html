@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Vim-Conf.md – -</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<pre class="language-vim"><code>
+&quot; Fzf {{{1
+&quot; https://github.com/samoshkin/dotvim/blob/master/vimrc {{{2
+&quot; Ctrl-q allows to select multiple elements an open them in quick list
+let g:fzf_action = {
+  \ &#39;ctrl-q&#39;: function(&#39;s:build_quickfix_list&#39;),
+  \ &#39;ctrl-t&#39;: &#39;tab split&#39;,
+  \ &#39;ctrl-s&#39;: &#39;split&#39;,
+  \ &#39;ctrl-v&#39;: &#39;vsplit&#39; }
+
+&quot; Do not let UltiSnips set &lt;Tab&gt; mapping, as we&#39;re using own smart &lt;Tab&gt; implementation
+&quot; Also we don&#39;t need snippet listing, as we&#39;re using fzf for this purpose
+let g:UltiSnipsExpandTrigger=&quot;&lt;NUL&gt;&quot;
+let g:UltiSnipsListSnippets=&quot;&lt;NUL&gt;&quot;
+let g:UltiSnipsEditSplit = &#39;context&#39;
+
+&quot; Find available snippets from Insert mode using fzf
+&quot; Use :UltiSnipsEdit(!) command to edit private(all) snippet definition file
+inoremap &lt;silent&gt; &lt;F9&gt; &lt;ESC&gt;:FzfSnippets&lt;CR&gt;
+nnoremap &lt;silent&gt; &lt;F9&gt; :UltiSnipsEdit!&lt;CR&gt;</code></pre>
+</body>
+</html>
