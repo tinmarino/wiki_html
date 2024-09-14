@@ -4,17 +4,28 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Python.md – -</title>
+  <title>Python.md – Python</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -23,7 +34,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -46,7 +57,7 @@
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span. { color: #cfcfc2; } /* Normal */
+    code span { color: #cfcfc2; } /* Normal */
     code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
     code span.an { color: #3f8058; } /* Annotation */
     code span.at { color: #2980b9; } /* Attribute */
@@ -79,19 +90,28 @@
     code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Python</h1>
+</header>
 <ul>
 <li><a href="Pip.html">Pip</a></li>
 <li><a href="Python-HackerRank.html">Python HackerRank</a></li>
 </ul>
+<p>python -m site # Show path of modules find . -name ’*.pyc’
+-delete</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sys.executable</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sys.path</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">&#39;LD_LIBRARY_PATH&#39;</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">&#39;ORIG_LD_LIBRARY_PATH&#39;</span>]</span></code></pre></div>
 <section id="tkinter-thread" class="level1">
 <h1>tkinter thread</h1>
 <p>https://stackoverflow.com/questions/459083/how-do-you-run-your-own-code-alongside-tkinters-event-loop</p>
-<section id="photo-image-error-in-thread-because-belongs-to-process" class="level2">
+<section id="photo-image-error-in-thread-because-belongs-to-process"
+class="level2">
 <h2>Photo image error in thread (because belongs to process</h2>
 <p>splsh_img = tkinter.PhotoImage(file=file,master=wlcm_scrn)</p>
 <p>def clear_all_cache():</p>
@@ -112,100 +132,105 @@ for wrapper in wrappers:
 </section>
 <section id="decorator" class="level1">
 <h1>Decorator</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Used in vimspector to check if object._connected </span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">def</span> IfConnected( fct ):</span>
-<span id="cb2-4"><a href="#cb2-4"></a>  <span class="co">&quot;&quot;&quot;Decorator, call fct if self._connected else echo warning</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">  The decorated member function must belong to an object with _connection</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">  &quot;&quot;&quot;</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
-<span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">if</span> <span class="kw">not</span> args[<span class="dv">0</span>]._connection:</span>
-<span id="cb2-9"><a href="#cb2-9"></a>      MessageNoConnection( )</span>
-<span id="cb2-10"><a href="#cb2-10"></a>      <span class="cf">return</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>    <span class="cf">return</span> fct(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="cf">return</span> wrapper</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co"># Instead of passing in the instance attribute at class definition time, check it at runtime:</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="kw">def</span> check_authorization(f):</span>
-<span id="cb2-17"><a href="#cb2-17"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args):</span>
-<span id="cb2-18"><a href="#cb2-18"></a>        <span class="bu">print</span> args[<span class="dv">0</span>].url</span>
-<span id="cb2-19"><a href="#cb2-19"></a>        <span class="cf">return</span> f(<span class="op">*</span>args)</span>
-<span id="cb2-20"><a href="#cb2-20"></a>    <span class="cf">return</span> wrapper</span>
-<span id="cb2-21"><a href="#cb2-21"></a></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="kw">class</span> Client(<span class="bu">object</span>):</span>
-<span id="cb2-23"><a href="#cb2-23"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, url):</span>
-<span id="cb2-24"><a href="#cb2-24"></a>        <span class="va">self</span>.url <span class="op">=</span> url</span>
-<span id="cb2-25"><a href="#cb2-25"></a></span>
-<span id="cb2-26"><a href="#cb2-26"></a>    <span class="at">@check_authorization</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a>    <span class="kw">def</span> get(<span class="va">self</span>):</span>
-<span id="cb2-28"><a href="#cb2-28"></a>        <span class="bu">print</span> <span class="st">&#39;get&#39;</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="op">&gt;&gt;&gt;</span> Client(<span class="st">&#39;http://www.google.com&#39;</span>).get()</span>
-<span id="cb2-31"><a href="#cb2-31"></a>http:<span class="op">//</span>www.google.com</span>
-<span id="cb2-32"><a href="#cb2-32"></a>get</span>
-<span id="cb2-33"><a href="#cb2-33"></a></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="co"># Arguments without</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="at">@decorator</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="kw">def</span> foo(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
-<span id="cb2-37"><a href="#cb2-37"></a>    <span class="cf">pass</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a></span>
-<span id="cb2-39"><a href="#cb2-39"></a><span class="co"># -&gt; </span></span>
-<span id="cb2-40"><a href="#cb2-40"></a>foo <span class="op">=</span> decorator(foo)</span>
-<span id="cb2-41"><a href="#cb2-41"></a></span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="co"># Arugments with</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="at">@decorator_with_args</span>(arg)</span>
-<span id="cb2-44"><a href="#cb2-44"></a><span class="kw">def</span> foo(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
-<span id="cb2-45"><a href="#cb2-45"></a>    <span class="cf">pass</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a></span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="co"># -&gt;</span></span>
-<span id="cb2-48"><a href="#cb2-48"></a>foo <span class="op">=</span> decorator_with_args(arg)(foo)</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">def</span> memoize(function):</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  memo <span class="op">=</span> {}</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args):</span>
-<span id="cb3-4"><a href="#cb3-4"></a>    <span class="cf">if</span> args <span class="kw">in</span> memo:</span>
-<span id="cb3-5"><a href="#cb3-5"></a>      <span class="cf">return</span> memo[args]</span>
-<span id="cb3-6"><a href="#cb3-6"></a>    <span class="cf">else</span>:</span>
-<span id="cb3-7"><a href="#cb3-7"></a>      rv <span class="op">=</span> function(<span class="op">*</span>args)</span>
-<span id="cb3-8"><a href="#cb3-8"></a>      memo[args] <span class="op">=</span> rv</span>
-<span id="cb3-9"><a href="#cb3-9"></a>      <span class="cf">return</span> rv</span>
-<span id="cb3-10"><a href="#cb3-10"></a>  <span class="cf">return</span> wrapper</span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Example</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="at">@memoize</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="kw">def</span> fibonacci(n):</span>
-<span id="cb3-15"><a href="#cb3-15"></a>  <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>: <span class="cf">return</span> n</span>
-<span id="cb3-16"><a href="#cb3-16"></a>  <span class="cf">return</span> fibonacci(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fibonacci(n <span class="op">-</span> <span class="dv">2</span>)</span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co"># Class memoization</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">class</span> memorize(<span class="bu">dict</span>):</span>
-<span id="cb3-20"><a href="#cb3-20"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, func):</span>
-<span id="cb3-21"><a href="#cb3-21"></a>      <span class="va">self</span>.func <span class="op">=</span> func</span>
-<span id="cb3-22"><a href="#cb3-22"></a></span>
-<span id="cb3-23"><a href="#cb3-23"></a>  <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, <span class="op">*</span>args):</span>
-<span id="cb3-24"><a href="#cb3-24"></a>      <span class="cf">return</span> <span class="va">self</span>[args]</span>
-<span id="cb3-25"><a href="#cb3-25"></a></span>
-<span id="cb3-26"><a href="#cb3-26"></a>  <span class="kw">def</span> __missing__(<span class="va">self</span>, key):</span>
-<span id="cb3-27"><a href="#cb3-27"></a>      result <span class="op">=</span> <span class="va">self</span>[key] <span class="op">=</span> <span class="va">self</span>.func(<span class="op">*</span>key)</span>
-<span id="cb3-28"><a href="#cb3-28"></a>      <span class="cf">return</span> result</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Used in vimspector to check if object._connected </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> IfConnected( fct ):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">&quot;&quot;&quot;Decorator, call fct if self._connected else echo warning</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  The decorated member function must belong to an object with _connection</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">  &quot;&quot;&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> args[<span class="dv">0</span>]._connection:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      MessageNoConnection( )</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fct(<span class="op">*</span>args, <span class="op">**</span>kwargs)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of passing in the instance attribute at class definition time, check it at runtime:</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_authorization(f):</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> wrapper(<span class="op">*</span>args):</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> args[<span class="dv">0</span>].url</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> f(<span class="op">*</span>args)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Client(<span class="bu">object</span>):</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, url):</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.url <span class="op">=</span> url</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">@check_authorization</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get(<span class="va">self</span>):</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> <span class="st">&#39;get&#39;</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> Client(<span class="st">&#39;http://www.google.com&#39;</span>).get()</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>http:<span class="op">//</span>www.google.com</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>get</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Arguments without</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="at">@decorator</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt; </span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>foo <span class="op">=</span> decorator(foo)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Arugments with</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="at">@decorator_with_args</span>(arg)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> foo(<span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co"># -&gt;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>foo <span class="op">=</span> decorator_with_args(arg)(foo)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> memoize(function):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  memo <span class="op">=</span> {}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> wrapper(<span class="op">*</span>args):</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> args <span class="kw">in</span> memo:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> memo[args]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      rv <span class="op">=</span> function(<span class="op">*</span>args)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      memo[args] <span class="op">=</span> rv</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> rv</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> wrapper</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Example</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="at">@memoize</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fibonacci(n):</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> n <span class="op">&lt;</span> <span class="dv">2</span>: <span class="cf">return</span> n</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> fibonacci(n <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> fibonacci(n <span class="op">-</span> <span class="dv">2</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Class memoization</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> memorize(<span class="bu">dict</span>):</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, func):</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="va">self</span>.func <span class="op">=</span> func</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__call__</span>(<span class="va">self</span>, <span class="op">*</span>args):</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="va">self</span>[args]</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> <span class="fu">__missing__</span>(<span class="va">self</span>, key):</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>      result <span class="op">=</span> <span class="va">self</span>[key] <span class="op">=</span> <span class="va">self</span>.func(<span class="op">*</span>key)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> result</span></code></pre></div>
 </section>
 <section id="inspect" class="level1">
 <h1>Inspect</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">def</span> info(msg):</span>
-<span id="cb4-2"><a href="#cb4-2"></a>    frm <span class="op">=</span> inspect.stack()[<span class="dv">1</span>]</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    mod <span class="op">=</span> inspect.getmodule(frm[<span class="dv">0</span>])</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="bu">print</span>(<span class="st">&#39;[</span><span class="sc">%s</span><span class="st">] </span><span class="sc">%s</span><span class="st">&#39;</span> <span class="op">%</span> (mod.<span class="va">__name__</span>, msg))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> info(msg):</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    frm <span class="op">=</span> inspect.stack()[<span class="dv">1</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    mod <span class="op">=</span> inspect.getmodule(frm[<span class="dv">0</span>])</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;[</span><span class="sc">%s</span><span class="st">] </span><span class="sc">%s</span><span class="st">&#39;</span> <span class="op">%</span> (mod.<span class="va">__name__</span>, msg))</span></code></pre></div>
 </section>
 <section id="int" class="level1">
 <h1>Int</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">def</span> <span class="bu">cmp</span>(a, b):</span>
-<span id="cb5-2"><a href="#cb5-2"></a>    <span class="cf">return</span> (a <span class="op">&gt;</span> b) <span class="op">-</span> (a <span class="op">&lt;</span> b) </span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> <span class="bu">cmp</span>(a, b):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (a <span class="op">&gt;</span> b) <span class="op">-</span> (a <span class="op">&lt;</span> b) </span></code></pre></div>
 </section>
 <section id="string" class="level1">
 <h1>String</h1>
 <ul>
 <li>alphabet = [chr(i) for i in range(ord(‘a’),ord(‘z’)+1)]</li>
-<li>Format string <code>'Name: {user.name} Age: {user.age}'.format(user=user)</code></li>
+<li>Format string
+<code>'Name: {user.name} Age: {user.age}'.format(user=user)</code></li>
 </ul>
 </section>
 <section id="list" class="level1">
@@ -213,21 +238,24 @@ for wrapper in wrappers:
 <ul>
 <li>All combinations between two list</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>a <span class="op">=</span> [<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;melon&quot;</span>]</span>
-<span id="cb6-2"><a href="#cb6-2"></a>b <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>]</span>
-<span id="cb6-3"><a href="#cb6-3"></a>c <span class="op">=</span> <span class="bu">list</span>(itertools.product(a, b))</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="op">&gt;&gt;</span> [(<span class="st">&quot;foo&quot;</span>, <span class="va">True</span>), (<span class="st">&quot;foo&quot;</span>, <span class="va">False</span>), (<span class="st">&quot;melon&quot;</span>, <span class="va">True</span>), (<span class="st">&quot;melon&quot;</span>, <span class="va">False</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">&quot;foo&quot;</span>, <span class="st">&quot;melon&quot;</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="bu">list</span>(itertools.product(a, b))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> [(<span class="st">&quot;foo&quot;</span>, <span class="va">True</span>), (<span class="st">&quot;foo&quot;</span>, <span class="va">False</span>), (<span class="st">&quot;melon&quot;</span>, <span class="va">True</span>), (<span class="st">&quot;melon&quot;</span>, <span class="va">False</span>)]</span></code></pre></div>
 <ul>
 <li>Combination of len 2 of one list</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">list</span>(itertools.combinations([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], <span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>(itertools.combinations([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], <span class="dv">2</span>))</span></code></pre></div>
 </section>
 <section id="dict" class="level1">
 <h1>Dict</h1>
 <p>example_dict.get(‘key1’, {}).get(‘key2’)</p>
 <ul>
 <li><p>asyncio.Task.all_tasks()</p></li>
-<li><p>import datetime; print(‘Tin 1:’ + strdatetime.datetime.now()))</p></li>
+<li><p>import datetime; print(‘Tin 1:’ +
+strdatetime.datetime.now()))</p></li>
 <li><p>set([1,2,3,1,1]) -&gt; [1,2,3] (uniq)</p></li>
 <li><p>scipy.stats.entropy</p></li>
 <li><p>List of permutation</p>
@@ -236,13 +264,16 @@ for wrapper in wrappers:
 </ul></li>
 <li><p>Serialize</p>
 <ul>
-<li>json.dumps(o_toto, default=lambda o: getattr(o, ‘<strong>dict</strong>’, str(o)))</li>
+<li>json.dumps(o_toto, default=lambda o: getattr(o,
+‘<strong>dict</strong>’, str(o)))</li>
 </ul></li>
 <li><p>Display : get info</p>
-<p>print np.__file__ print sys.executable priunt os.environment[’_’] print sys.maxsize</p></li>
+<p>print np.__file__ print sys.executable priunt os.environment[’_’]
+print sys.maxsize</p></li>
 <li><p>Documentation (docstrings)</p>
-<p>""" This is first line</p>
-<p>:param param1: description :type param1: :return(s) : :raise(s) : """</p>
+<p>““” This is first line</p>
+<p>:param param1: description :type param1: :return(s) : :raise(s) :
+““”</p>
 <ul>
 <li>Note : use ‘:’ and not ‘@’</li>
 </ul></li>
@@ -250,7 +281,8 @@ for wrapper in wrappers:
 <ul>
 <li><code>IPython.core.debugger.Pdb.set_trace()</code></li>
 <li><code>vars(myobj)</code></li>
-<li>`for attr in dir(myobj) if not callable(getattr(obj, attr)) and not attr.startswit(’__’)</li>
+<li>`for attr in dir(myobj) if not callable(getattr(obj, attr)) and not
+attr.startswit(’__’)</li>
 <li><code>obj.__dict__</code></li>
 <li>ipy = get_ipython()</li>
 <li>from IPython import embeded ; embeded()</li>
@@ -260,14 +292,22 @@ for wrapper in wrappers:
 <li>app.start()</li>
 </ul></li>
 <li><p>Print python zen (19 principles) import this</p></li>
-<li><p>Get Path sys.executable # interpreter executable path os.path.realpath(<strong>file</strong>) # current script</p></li>
-<li><p>Format string “foo is {}”.format(bar) “foo is {bar}”.format(bar=bar) “foo is %s” % (bar,) “foo is %(bar)s” % {“bar”:bar} “foo is %(bar)s” % locals() “{{Hello}} {0}”.format(42) # prints {Hello} 42</p></li>
+<li><p>Get Path sys.executable # interpreter executable path
+os.path.realpath(<strong>file</strong>) # current script</p></li>
+<li><p>Format string “foo is {}”.format(bar) “foo is
+{bar}”.format(bar=bar) “foo is %s” % (bar,) “foo is %(bar)s” %
+{“bar”:bar} “foo is %(bar)s” % locals() “{{Hello}} {0}”.format(42) #
+prints {Hello} 42</p></li>
 <li><p><a href="Py-Keywords.html">Keywords</a></p></li>
-<li><p>Use stdout and restore sys.stdout = openb(“tmp”, “w”) sys.stdout = sys.__stdout__</p></li>
-<li><p>Hexadecimal outputs get_ipython().display_formatter.formatters[‘text/plain’].for_type([[int,]] lambda n, p, cycle : p.text(“0x%x” %n))</p></li>
+<li><p>Use stdout and restore sys.stdout = openb(“tmp”, “w”) sys.stdout
+= sys.__stdout__</p></li>
+<li><p>Hexadecimal outputs
+get_ipython().display_formatter.formatters[‘text/plain’].for_type([[int,]]
+lambda n, p, cycle : p.text(“0x%x” %n))</p></li>
 <li><p>Hexadecimal editor</p>
 <p>data = [hex(ord(c)) for c in bytearray]</p></li>
-<li><p>With Statement : 2 one the same line with open(‘a’, ‘w’) as a, open (‘b’, ‘w’) as b : do_stuff()</p></li>
+<li><p>With Statement : 2 one the same line with open(‘a’, ‘w’) as a,
+open (‘b’, ‘w’) as b : do_stuff()</p></li>
 </ul>
 <section id="function-utils" class="level2">
 <h2>Function, Utils</h2>
@@ -289,74 +329,173 @@ for wrapper in wrappers:
 <li>Modules by default are enought</li>
 <li></li>
 </ul>
-<p>============================================================================== STATEMENTS <em>c-python-statement</em></p>
-<p>If-Statement ~ if expression: statements elif expression: statements else: statements</p>
+<p>==============================================================================
+STATEMENTS <em>c-python-statement</em></p>
+<p>If-Statement ~ if expression: statements elif expression: statements
+else: statements</p>
 <p>While-Loop ~ while expression: statements</p>
 <p>For-Loop ~ for var in collection: statements</p>
-<p>Counting-For-Loop ~ for i in range(start, end [, step]): statements -&gt; (start is included; end is not)</p>
-<p>with context_manager_classs as cr ~ a Context Manager class must have <code>__enter__</code> and <code>__exit__</code> methods</p>
-<p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2, …): statements return expr ret = name(arg1, arg2)</p>
-<p>EXCEPTION <em>c-python-exception</em> try: statements except [exception type [as var]]: statements finally: statements</p>
-<p>============================================================================== TYPES <em>c-python-types</em></p>
-<p>Integer -256, 15 Float 253.23, 1.253e-10 String “Hello”, ‘Goodbye’, ""“Multiline”"" Boolean True, False List [ value, … ] Tuple ( value, … )<br />
--&gt; Parentheses usually optional Dictionary { key: value, … } Set { value:, value, … } -&gt; Create an empty set with set()</p>
-<p>============================================================================== OPERATORS <em>c-python-operators</em></p>
-<p>Arithmetic Operators ~ x + y Add x - y Subtract x * y Multiply x / y Divide x % y Modulus x ** y Exponent Assignment shortcuts: x op= y Example: x += 1 increments x</p>
-<p>Comparison Operators ~ x &lt; y Less x &lt;= y Less or eq x &gt; y Greater x &gt;= y Greater or eq x == y Equal x != y Not equal</p>
+<p>Counting-For-Loop ~ for i in range(start, end [, step]): statements
+-&gt; (start is included; end is not)</p>
+<p>with context_manager_classs as cr ~ a Context Manager class must have
+<code>__enter__</code> and <code>__exit__</code> methods</p>
+<p>FUNCTION DEFINITIONS <em>c-python-function</em> def name(arg1, arg2,
+…): statements return expr ret = name(arg1, arg2)</p>
+<p>EXCEPTION <em>c-python-exception</em> try: statements except
+[exception type [as var]]: statements finally: statements</p>
+<p>==============================================================================
+TYPES <em>c-python-types</em></p>
+<p>Integer -256, 15 Float 253.23, 1.253e-10 String “Hello”, ‘Goodbye’,
+“““Multiline”“” Boolean True, False List [ value, … ] Tuple ( value, …
+)<br />
+-&gt; Parentheses usually optional Dictionary { key: value, … } Set {
+value:, value, … } -&gt; Create an empty set with set()</p>
+<p>==============================================================================
+OPERATORS <em>c-python-operators</em></p>
+<p>Arithmetic Operators ~ x + y Add x - y Subtract x * y Multiply x / y
+Divide x % y Modulus x ** y Exponent Assignment shortcuts: x op= y
+Example: x += 1 increments x</p>
+<p>Comparison Operators ~ x &lt; y Less x &lt;= y Less or eq x &gt; y
+Greater x &gt;= y Greater or eq x == y Equal x != y Not equal</p>
 <p>Boolean Operators ~ not x<br />
 x and y x or y</p>
-<p>============================================================================== MISC <em>c-python-misc</em></p>
-<p>Conversion Functions ~ int(expr) Converts expr to integer float(expr) Converts expr to float str(expr) Converts expr to string chr(num) ASCII char num</p>
-<p>String / List / Tuple Operations ~ len(s) Length of s s[i] Ith item in s (0-based) s[start : end] Slice of s from start (included) to end (excluded) x in s true if x is contained in s x not in s true if x is not contained in s s + t The concatenation of s with t s * n n copies of s concatenated sorted(s) A sorted copy of s s.index(item) Position in s of item</p>
-<p>More String Operations ~ s.lower() Lowercase copy of s s.replace(old, new) Copy of s with old replaced with new s.split( delim ) List of substrings delimited by delim s.strip() Copy of s with whitespace trimmed s.upper() Uppercase copy of s -&gt; See also http://docs.python.org/library/stdtypes.html<br />
+<p>==============================================================================
+MISC <em>c-python-misc</em></p>
+<p>Conversion Functions ~ int(expr) Converts expr to integer float(expr)
+Converts expr to float str(expr) Converts expr to string chr(num) ASCII
+char num</p>
+<p>String / List / Tuple Operations ~ len(s) Length of s s[i] Ith item
+in s (0-based) s[start : end] Slice of s from start (included) to end
+(excluded) x in s true if x is contained in s x not in s true if x is
+not contained in s s + t The concatenation of s with t s * n n copies of
+s concatenated sorted(s) A sorted copy of s s.index(item) Position in s
+of item</p>
+<p>More String Operations ~ s.lower() Lowercase copy of s s.replace(old,
+new) Copy of s with old replaced with new s.split( delim ) List of
+substrings delimited by delim s.strip() Copy of s with whitespace
+trimmed s.upper() Uppercase copy of s -&gt; See also
+http://docs.python.org/library/stdtypes.html<br />
 #string-methgds</p>
-<p>Mutating List Operations ~ del lst[i] Deletes ith item from lst lst.append(e) Appends e to lst lst.insert(i, e) Inserts e before ith item in lst lst.sort() Sorts lst -&gt; See also http://docs.python.org/library/stdtypes.html<br />
+<p>Mutating List Operations ~ del lst[i] Deletes ith item from lst
+lst.append(e) Appends e to lst lst.insert(i, e) Inserts e before ith
+item in lst lst.sort() Sorts lst -&gt; See also
+http://docs.python.org/library/stdtypes.html<br />
 #typesseq-mutable</p>
-<p>Dictionary Operations ~ len(d) Number of items in d del d[key] Removes key from d key in d True if d contains key d.keys() Returns a list of keys in d -&gt; See also http://docs.python.org/library/stdtypes.html<br />
+<p>Dictionary Operations ~ len(d) Number of items in d del d[key]
+Removes key from d key in d True if d contains key d.keys() Returns a
+list of keys in d -&gt; See also
+http://docs.python.org/library/stdtypes.html<br />
 #mapping-types-dict</p>
-<p>Environment ~ sys.argv List of command line arguments (argv[0] is executable) os.environ Dictionary of environment variables os.curdir String with path of current directory -&gt; import sys; print(sys.argv) -&gt; or -&gt; from sys import argv; print(argv)}</p>
-<p>String Formatting ~ “Hello, {0} {1}”.format(“abe”, “jones”) -&gt; Hello, abe jones “Hello, {fn} {ln}”.format(fn=“abe”, ln=“jones”) -&gt; Hello, abe jones “You owe me ${0:,.2f}”.format(253422.3) -&gt; You owe me $253,422.30 now = datetime.now() ‘{:%Y-%m-%d %H:%M:%S}’.format(now) -&gt; 2012-05-16 15:04:33 -&gt; See http://docs.python.org/library/string.html<br />
+<p>Environment ~ sys.argv List of command line arguments (argv[0] is
+executable) os.environ Dictionary of environment variables os.curdir
+String with path of current directory -&gt; import sys; print(sys.argv)
+-&gt; or -&gt; from sys import argv; print(argv)}</p>
+<p>String Formatting ~ “Hello, {0} {1}”.format(“abe”, “jones”) -&gt;
+Hello, abe jones “Hello, {fn} {ln}”.format(fn=“abe”, ln=“jones”) -&gt;
+Hello, abe jones “You owe me ${0:,.2f}”.format(253422.3) -&gt; You owe
+me $253,422.30 now = datetime.now() ‘{:%Y-%m-%d %H:%M:%S}’.format(now)
+-&gt; 2012-05-16 15:04:33 -&gt; See
+http://docs.python.org/library/string.html<br />
 #format-specification-mini-language</p>
-<p>Useful Functions ~ exit( num ) Terminate program with exit num raw_input(“prompt”) Print prompt and readline() from stdin -&gt; Use input(“prompt”) in Python 3</p>
-<p>============================================================================== SYS <em>c-python-sys</em></p>
-<p>Python sys Variables ~ argv Command line args builtin_module_names Linked C modules byteorder Native byte order check_interval Signal check frequency exec_prefix Root directory executable Name of executable exitfunc Exit function name modules Loaded modules path Search path platform Current platform stdin, stdout, stderr File objects for I/O version_info Python version info winver Version number</p>
-<p>Python sys.argv ~ -&gt; sys.argv for the command: -&gt; python foo.py bar -c qux –h sys.argv[0] foo.py sys.argv[1] bar sys.argv[2] -c sys.argv[3] qux sys.argv[4] –h</p>
-<p>============================================================================== OS <em>c-python-os</em></p>
-<p>altsep Alternative sep curdir Current dir string defpath Default search path devnull Path of null device extsep Extension separator linesep Line separator name Name of OS pardir Parent dir string pathsep Patch separator sep Path separator -&gt; Registered OS names: “posix”, “nt”, “mac”, “os2”, “ce”, “java”, “riscos”</p>
-<p>============================================================================== CLASS <em>c-python-class</em></p>
-<p>Python Class Special Methods ~ <strong>new</strong>(cls) <strong>init</strong>(self, args) <strong>del</strong>(self) <strong>repr</strong>(self) <strong>str</strong>(self) <strong>cmp</strong>(self, other) <strong>index</strong>(self) <strong>hash</strong>(self) <strong>getattr</strong>(self, name) <strong>getattribute</strong>(self}, name) <strong>setattr</strong>(self, name, attr) <strong>delattr</strong>(self, name) <strong>call</strong>(self, args, kwargs) <strong>lt</strong>(self, other) <strong>le</strong>(self, other) <strong>gt</strong>(self, other) <strong>ge</strong>(self, other) <strong>eq</strong>(self, other) <strong>ne</strong>(self, other) <strong>nonzero</strong>(self)</p>
-<p>Python List Methods ~ append(item) count(item) extend(list) index(item) insert(position, item) remove(item) pop(position) reverse() sort()</p>
-<p>Python String Methods ~ capitalize() * lstrip() center(width) partition(sep) count(sub, start, end) replace(old, new) decode() rfind(sub, start ,end) encode() rindex(sub, start, end) endswith(sub) rjust(width) expandtabs() rpartition(sep) find(sub, start, end) rsplit(sep) index(sub, start, end) rstrip() isalnum() * split(sep) isalpha() * splitlines() isdigit() * startswith(sub) islower() * strip() isspace() * swapcase() <em> istitle() </em> title() <em> isupper() </em> translate(table) join() upper() <em> ljust(width) zfill(width) lower() </em> -&gt; Methods marked * are locale dependant for 8-bit strings.</p>
-<p>Python File Methods ~ close() readlines(size) flush() seek(offset) fileno() tell() isatty() truncate(size) next() write(string) read(size) writelines(list) readline(size)</p>
-<p>Python Indexes and Slices ~ -&gt; Indexes and Slices of a=[0,1,2,3,4,5] len(a) = 6 a[0] = 0 a[5] = 5 a[-1] = 5 a[-2] = 4 a[1:] = [1,2,3,4,5] a[:5] = [0,1,2,3,4] a[:-2] = [0,1,2,3] a[1:3] = [1,2] a[1:-1] = [1,2,3,4] b=a[:] = Shallow copy of a</p>
-<p>============================================================================== DATE <em>c-python-date</em></p>
-<p>Python Datetime Methods ~ today() fromordinal(ordinal) now(timezoneinfo) combine(date, time) utcnow() strptime(date, format) fromtimestamp(timestamp) utcfromtimestamp(timestamp)</p>
-<p>Python Time Methods ~ replace() utcoffset() isoformat() dst() <strong>str</strong>() tzname() strftime(format)</p>
-<p>Python Date Formatting ~ %a Abbreviated weekday (Sun) %A Weekday (Sunday) %b Abbreviated month name (Jan) %B Month name (January) %c Date and time %d Day (leading zeros) (01 to 31) %H 24 hour (leading zeros) (00 to 23) %I 12 hour (leading zeros) (01 to 12) %j Day of year (001 to 366) %m Month (01 to 12) %M Minute (00 to 59) %p AM or PM %S Second {4} %U Week number {1} (00 to 53) %w Weekday {2} (0 to 6) %W Week number {3} (00 to 53) %x Date %X Time %y Year without century (00 to 99) %Y Year (2008) %Z Time zone (GMT) %% A literal “%” character (%) -&gt; 1. Sunday as start of week. All days in a new year preceding the first Sunday are considered to be in week 0. -&gt; 2. 0 is Sunday, 6 is Saturday. -&gt; 3. Monday as start of week. All days in a new year preceding the first Monday are considered to be in week 0. -&gt; 4. This is not a mistake. Range takes account of leap and double-leap seconds.}</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># Loop-Over-Sequence</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="cf">for</span> index, value <span class="kw">in</span> <span class="bu">enumerate</span>(seq):</span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st"> : </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(index, value))</span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Loop-Over-Dictionary</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="cf">for</span> key <span class="kw">in</span> <span class="bu">sorted</span>(<span class="bu">dict</span>):</span>
-<span id="cb8-9"><a href="#cb8-9"></a>  <span class="bu">print</span>(<span class="bu">dict</span>[key])</span>
-<span id="cb8-10"><a href="#cb8-10"></a></span>
-<span id="cb8-11"><a href="#cb8-11"></a></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co"># Read-a-File</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;filename&quot;</span>, <span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
-<span id="cb8-14"><a href="#cb8-14"></a>  <span class="cf">for</span> line <span class="kw">in</span> f:</span>
-<span id="cb8-15"><a href="#cb8-15"></a>    line <span class="op">=</span> line.rstrip(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">extbackslash</span><span class="sc">{}</span><span class="st">n&quot;</span>)</span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co"># Strip newline</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a>    <span class="bu">print</span>(line)</span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="op">&lt;</span>python</span>
-<span id="cb8-19"><a href="#cb8-19"></a></span>
-<span id="cb8-20"><a href="#cb8-20"></a></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co"># Entropy</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a>s <span class="op">=</span> [<span class="bu">ord</span>(a) <span class="cf">for</span> a <span class="kw">in</span> <span class="st">&quot;azerty&quot;</span>] <span class="op">;\</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a>h <span class="op">=</span> np.histogram(s, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">256</span>))[<span class="dv">0</span>] <span class="op">;\</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="bu">print</span>(   scipy.stats.entropy(h) <span class="op">/</span> np.log(<span class="bu">len</span>(<span class="bu">set</span>(s)))   )</span></code></pre></div>
+<p>Useful Functions ~ exit( num ) Terminate program with exit num
+raw_input(“prompt”) Print prompt and readline() from stdin -&gt; Use
+input(“prompt”) in Python 3</p>
+<p>==============================================================================
+SYS <em>c-python-sys</em></p>
+<p>Python sys Variables ~ argv Command line args builtin_module_names
+Linked C modules byteorder Native byte order check_interval Signal check
+frequency exec_prefix Root directory executable Name of executable
+exitfunc Exit function name modules Loaded modules path Search path
+platform Current platform stdin, stdout, stderr File objects for I/O
+version_info Python version info winver Version number</p>
+<p>Python sys.argv ~ -&gt; sys.argv for the command: -&gt; python foo.py
+bar -c qux –h sys.argv[0] foo.py sys.argv[1] bar sys.argv[2] -c
+sys.argv[3] qux sys.argv[4] –h</p>
+<p>==============================================================================
+OS <em>c-python-os</em></p>
+<p>altsep Alternative sep curdir Current dir string defpath Default
+search path devnull Path of null device extsep Extension separator
+linesep Line separator name Name of OS pardir Parent dir string pathsep
+Patch separator sep Path separator -&gt; Registered OS names: “posix”,
+“nt”, “mac”, “os2”, “ce”, “java”, “riscos”</p>
+<p>==============================================================================
+CLASS <em>c-python-class</em></p>
+<p>Python Class Special Methods ~ <strong>new</strong>(cls)
+<strong>init</strong>(self, args) <strong>del</strong>(self)
+<strong>repr</strong>(self) <strong>str</strong>(self)
+<strong>cmp</strong>(self, other) <strong>index</strong>(self)
+<strong>hash</strong>(self) <strong>getattr</strong>(self, name)
+<strong>getattribute</strong>(self}, name)
+<strong>setattr</strong>(self, name, attr)
+<strong>delattr</strong>(self, name) <strong>call</strong>(self, args,
+kwargs) <strong>lt</strong>(self, other) <strong>le</strong>(self,
+other) <strong>gt</strong>(self, other) <strong>ge</strong>(self, other)
+<strong>eq</strong>(self, other) <strong>ne</strong>(self, other)
+<strong>nonzero</strong>(self)</p>
+<p>Python List Methods ~ append(item) count(item) extend(list)
+index(item) insert(position, item) remove(item) pop(position) reverse()
+sort()</p>
+<p>Python String Methods ~ capitalize() * lstrip() center(width)
+partition(sep) count(sub, start, end) replace(old, new) decode()
+rfind(sub, start ,end) encode() rindex(sub, start, end) endswith(sub)
+rjust(width) expandtabs() rpartition(sep) find(sub, start, end)
+rsplit(sep) index(sub, start, end) rstrip() isalnum() * split(sep)
+isalpha() * splitlines() isdigit() * startswith(sub) islower() * strip()
+isspace() * swapcase() <em> istitle() </em> title() <em> isupper() </em>
+translate(table) join() upper() <em> ljust(width) zfill(width) lower()
+</em> -&gt; Methods marked * are locale dependant for 8-bit strings.</p>
+<p>Python File Methods ~ close() readlines(size) flush() seek(offset)
+fileno() tell() isatty() truncate(size) next() write(string) read(size)
+writelines(list) readline(size)</p>
+<p>Python Indexes and Slices ~ -&gt; Indexes and Slices of
+a=[0,1,2,3,4,5] len(a) = 6 a[0] = 0 a[5] = 5 a[-1] = 5 a[-2] = 4 a[1:] =
+[1,2,3,4,5] a[:5] = [0,1,2,3,4] a[:-2] = [0,1,2,3] a[1:3] = [1,2]
+a[1:-1] = [1,2,3,4] b=a[:] = Shallow copy of a</p>
+<p>==============================================================================
+DATE <em>c-python-date</em></p>
+<p>Python Datetime Methods ~ today() fromordinal(ordinal)
+now(timezoneinfo) combine(date, time) utcnow() strptime(date, format)
+fromtimestamp(timestamp) utcfromtimestamp(timestamp)</p>
+<p>Python Time Methods ~ replace() utcoffset() isoformat() dst()
+<strong>str</strong>() tzname() strftime(format)</p>
+<p>Python Date Formatting ~ %a Abbreviated weekday (Sun) %A Weekday
+(Sunday) %b Abbreviated month name (Jan) %B Month name (January) %c Date
+and time %d Day (leading zeros) (01 to 31) %H 24 hour (leading zeros)
+(00 to 23) %I 12 hour (leading zeros) (01 to 12) %j Day of year (001 to
+366) %m Month (01 to 12) %M Minute (00 to 59) %p AM or PM %S Second {4}
+%U Week number {1} (00 to 53) %w Weekday {2} (0 to 6) %W Week number {3}
+(00 to 53) %x Date %X Time %y Year without century (00 to 99) %Y Year
+(2008) %Z Time zone (GMT) %% A literal “%” character (%) -&gt; 1. Sunday
+as start of week. All days in a new year preceding the first Sunday are
+considered to be in week 0. -&gt; 2. 0 is Sunday, 6 is Saturday. -&gt;
+3. Monday as start of week. All days in a new year preceding the first
+Monday are considered to be in week 0. -&gt; 4. This is not a mistake.
+Range takes account of leap and double-leap seconds.}</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop-Over-Sequence</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, value <span class="kw">in</span> <span class="bu">enumerate</span>(seq):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">{}</span><span class="st"> : </span><span class="sc">{}</span><span class="st">&quot;</span>.<span class="bu">format</span>(index, value))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop-Over-Dictionary</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> <span class="bu">sorted</span>(<span class="bu">dict</span>):</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="bu">dict</span>[key])</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Read-a-File</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;filename&quot;</span>, <span class="st">&quot;r&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> line.rstrip(<span class="st">&quot;</span><span class="ch">\t</span><span class="st">extbackslash</span><span class="sc">{}</span><span class="st">n&quot;</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Strip newline</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(line)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>python</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Entropy</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> [<span class="bu">ord</span>(a) <span class="cf">for</span> a <span class="kw">in</span> <span class="st">&quot;azerty&quot;</span>] <span class="op">;\</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> np.histogram(s, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">256</span>))[<span class="dv">0</span>] <span class="op">;\</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(   scipy.stats.entropy(h) <span class="op">/</span> np.log(<span class="bu">len</span>(<span class="bu">set</span>(s)))   )</span></code></pre></div>
 <p>vim: ft=myhelp</p>
 </section>
 </body>

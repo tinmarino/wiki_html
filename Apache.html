@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Dumps.md – Dumps</title>
+  <title>Apache.md – Apache</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -26,10 +26,14 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Dumps</h1>
+<h1 class="title">Apache</h1>
 </header>
-<ul>
-<li><a href="BashRc-Dump.md.html">BashRc Dump</a></li>
-</ul>
+<p>Below is an .htaccess sample configuration which sets the
+X-Frame-Options header in Apache. Note that without the always option,
+the header will only be sent for certain status codes, as described in
+the Apache documentation.</p>
+<p>https://httpd.apache.org/docs/2.4/mod/mod_headers.html #header</p>
+<p>&lt;IfModule mod_headers.c&gt; Header always set X-Frame-Options
+“DENY” </IfModule></p>
 </body>
 </html>

@@ -4,39 +4,85 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Gdb.md – -</title>
+  <title>Gdb.md – Gdb</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Gdb</h1>
+</header>
 <p>asm(“int $3”); gdb -ex run –args ./astroserv</p>
-<pre class="gdb"><code>info reg
+<pre class="gdb"><code>info files
+
+layout asm
+layout regs
+tui disable</code></pre>
+<pre class="gdb"><code>set follow-fork-mode child
+info reg
 info all-registers
+
+info inferior
+info proc mappings
+
+
+# Go
+run
+
+
+# Launched stopped
+starti
 
 x/20xa *((size_t *) ($rdi + 0x10))
 
 x/20xa $rsp
 x/20xa *((size_t *) ($rsp))
 
+define p
+x/15i $pc
+end
+
+
+# Enter function
 define s
 stepi
 x/15i $pc
 end
 
+
+# Do not enter funtion
 define n
 nexti
 x/15i $pc
-end
+end</code></pre>
+<section id="inmembin" class="level1">
+<h1>InMemBin</h1>
+<pre class="gdb"><code>run x86_64 -R bash in_mem_bin.sh
+handle SIGSEGV nopass
 
-layout asm
-layout regs
-tui disable</code></pre>
+set $pc = $pc+1
+p
+set *0x7ffff7d14992 = 0xf0003d48
+set *(0x7ffff7d14992+4) = 0x5677ffff
+set *(0x7ffff7d14992+8) = 0xc3
+x/15i 0x7ffff7d14992
+set $pc = 0x7ffff7d14992</code></pre>
+</section>
 </body>
 </html>

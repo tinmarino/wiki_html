@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Powershell.md – Powershell</title>
+  <title>Picturing.md – Picturing</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -93,102 +93,32 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Powershell</h1>
+<h1 class="title">Picturing</h1>
 </header>
-<p><a href="PowerShell-Pentest.md.html">PowerShell Pentest</a></p>
-<section id="added-by-hand" class="level1">
-<h1>Added by Hand</h1>
+<section id="casa" class="level1">
+<h1>Casa</h1>
+</section>
+<section id="astropy" class="level1">
+<h1>Astropy</h1>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode ps1"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Permit script execution (Admin)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> Unrestricted</span>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> astropy.io <span class="im">import</span> fits </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>fits_in <span class="op">=</span> fits.<span class="bu">open</span>(<span class="st">&#39;./Test703.fits&#39;</span>) </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a_in <span class="op">=</span> fits_in[<span class="dv">0</span>].data</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># List mount</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Get-Volume</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Local Mounts like C: D:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-WmiObject</span> <span class="op">-</span>Class Win32_NetworkConnection</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Network Mounts like Z: W:</span></span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fits_out <span class="op">=</span> fits.HDUList(a_out)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
 </section>
-<section id="shortcut-windows-terminal" class="level1">
-<h1>Shortcut Windows terminal</h1>
-<ul>
-<li>Esc =&gt; clear line</li>
-<li>Ctrl-Shift-W =&gt; exit</li>
-</ul>
-</section>
-<section id="list" class="level1">
-<h1>List</h1>
-<ul>
-<li><p>Remote Powershell</p>
-<ol type="1">
-<li>Guest :
-<ul>
-<li><code>Get-NetConectionProfile</code> : Get interface</li>
-<li><code>Set-NetConectionProfil -IntercaceIndex 9 -NetworkCategory Private</code>
-: Enable PS Remote</li>
-</ul></li>
-<li>Both : <code>Set-Item wsmon:\localhost\client\trustedhosts\ *</code>
-: Enable trust</li>
-<li>Both : <code>Restart-Service WimRM</code></li>
-<li>Host : <code>Test-WsMan COMPUTER</code></li>
-<li>Host :
-<code>Enter-PSSession -ComputerName COMPUTER -Credential USER</code></li>
-</ol></li>
-<li><p>Variable Afectation</p>
-<ul>
-<li><code>$a = ls 'HKLM:/Software/'</code></li>
-<li><code>$a[0].Property</code></li>
-</ul></li>
-<li><p>About</p>
-<ul>
-<li><code>[environment]::OSVersion.Version</code> : get os version
-(aparently :)</li>
-</ul></li>
-<li><p>Help</p>
-<ul>
-<li>Get-Help Get-Item</li>
-<li>Get-Command | ?{ $_.Name -like “temp”} | select Name</li>
-</ul></li>
-<li><p>Comment</p>
-<ul>
-<li><code># mycomment</code> Single line</li>
-<li><code>&lt; # mycomment #&gt;</code>multiline</li>
-</ul></li>
-<li><p>Enable scripts</p>
-<ul>
-<li>set-executionpolicy remotesigned</li>
-</ul></li>
-<li><p>Script location</p>
-<ul>
-<li>$PSScriptRoot</li>
-<li>split-path -parent $MyInvocation.MyCommand.Definition</li>
-</ul></li>
-<li><p>Load script</p>
-<ul>
-<li>Import module myscript.pm1</li>
-<li>&amp; “C:Script with space.ps1”</li>
-<li>C:_without_spaces.ps1</li>
-</ul></li>
-<li><p>Last Error</p>
-<ul>
-<li><code>$?</code> # True if last operation succeed</li>
-<li><code>$LastExitCode</code> # Exit code of last windows-based program
-that was run</li>
-</ul></li>
-<li><p>Environment</p>
-<ul>
-<li>Get-ChildItem env:windir</li>
-</ul></li>
-<li><p>Random</p>
-<ul>
-<li>Get-Random</li>
-</ul></li>
-<li><p>Find</p>
-<ul>
-<li><code>ls -Recurse -Fiel | select *</code></li>
-</ul></li>
-</ul>
+<section id="numpy" class="level1">
+<h1>Numpy</h1>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.zeros((<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), dtype<span class="op">=</span>np.int16)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>array.shape</span></code></pre></div>
+<p>np.int64 # Signed 64-bit integer types np.float32 # Standard
+double-precision floating point np.complex # Complex numbers represented
+by 128 floats np.bool # Boolean type storing TRUE and FALSE values
+np.object # Python object type np.string_ # Fixed-length string type
+np.unicode_ # Fixed-length unicode type</p>
 </section>
 </body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Java-Core-Interview.md – Java-Core-Interview</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Java-Core-Interview</h1>
+</header>
+<section id="spring-name-the-different-modules-of-the-spring-framework."
+class="level3">
+<h3>Spring: Name the different modules of the Spring framework.</h3>
+<ul>
+<li>Spring Context – for dependency injection.</li>
+<li>Spring AOP – for aspect oriented programming.</li>
+<li>Spring DAO – for database operations using DAO pattern</li>
+<li>Spring JDBC – for JDBC and DataSource support.</li>
+<li>Spring ORM – for ORM tools support such as Hibernate</li>
+<li>Spring Web Module – for creating web applications.</li>
+<li>Spring MVC – Model-View-Controller implementation for creating web
+applications, web services etc.</li>
+</ul>
+</section>
+<section
+id="spring-list-some-of-the-important-annotations-in-annotation-based-spring-configuration."
+class="level3">
+<h3>Spring: List some of the important annotations in annotation-based
+Spring configuration.</h3>
+<ul>
+<li><span class="citation" data-cites="Required">@Required</span></li>
+<li><span class="citation" data-cites="Autowired">@Autowired</span></li>
+<li><span class="citation" data-cites="Qualifier">@Qualifier</span></li>
+<li><span class="citation" data-cites="Resource">@Resource</span></li>
+<li><span class="citation"
+data-cites="PostConstruct">@PostConstruct</span></li>
+<li><span class="citation"
+data-cites="PreDestroy">@PreDestroy</span></li>
+</ul>
+</section>
+<section
+id="what-are-some-of-the-important-spring-annotations-which-you-have-used"
+class="level3">
+<h3>What are some of the important Spring annotations which you have
+used?</h3>
+<p><span class="citation" data-cites="Controller">@Controller</span> –
+for controller classes in Spring MVC project.</p>
+<p><span class="citation"
+data-cites="RequestMapping">@RequestMapping</span> – for configuring URI
+mapping in controller handler methods. This is a very important
+annotation, so you should go through Spring MVC RequestMapping
+Annotation Examples</p>
+<p><span class="citation" data-cites="ResponseBody">@ResponseBody</span>
+– for sending Object as response, usually for sending XML or JSON data
+as response.</p>
+<p><span class="citation" data-cites="PathVariable">@PathVariable</span>
+– for mapping dynamic values from the URI to handler method
+arguments.</p>
+<p><span class="citation" data-cites="Autowired">@Autowired</span> – for
+autowiring dependencies in spring beans.</p>
+<p><span class="citation" data-cites="Qualifier">@Qualifier</span> –
+with <span class="citation" data-cites="Autowired">@Autowired</span>
+annotation to avoid confusion when multiple instances of bean type is
+present.</p>
+<p><span class="citation" data-cites="Service">@Service</span> – for
+service classes.</p>
+<p><span class="citation" data-cites="Scope">@Scope</span> – for
+configuring the scope of the spring bean.</p>
+<p><span class="citation"
+data-cites="Configuration">@Configuration</span>, <span class="citation"
+data-cites="ComponentScan">@ComponentScan</span> and <span
+class="citation" data-cites="Bean">@Bean</span> – for java based
+configurations.</p>
+</section>
+<section id="what-is-the-life-cycle-of-a-servlet" class="level3">
+<h3>What is the life-cycle of a servlet?</h3>
+<ol type="1">
+<li>Servlet is loaded</li>
+<li>Servlet is instantiated</li>
+<li>Servlet is initialized</li>
+<li>Service the request</li>
+<li>Servlet is destroyed</li>
+</ol>
+</section>
+<section id="what-is-a-servlet" class="level3">
+<h3>What is a servlet?</h3>
+<p>Java Servlet is server-side technologies to extend the capability of
+web servers by providing support for dynamic response and data
+persistence.</p>
+</section>
+<section id="association-agregation-composition" class="level3">
+<h3>association, Agregation, composition</h3>
+<ul>
+<li>Association: teachers and students: is a relationship where all
+object have their own lifecycle and there is no owner.</li>
+<li>aggregation: Departement and teachers: a teacher has onl’y one
+department but if free department, teacher survives</li>
+<li></li>
+</ul>
+</section>
+<section id="why-java-is-not-100-object-oriented" class="level3">
+<h3>Why Java is not 100% Object-oriented?</h3>
+<p>Java is not 100% Object-oriented because it makes use of eight
+primitive data types such as boolean, byte, char, int, float, double,
+long, short which are not objects.</p>
+</section>
+</body>
+</html>

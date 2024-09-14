@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Powershell.md – Powershell</title>
+  <title>Xrand.md – Xrand</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -93,102 +93,39 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Powershell</h1>
+<h1 class="title">Xrand</h1>
 </header>
-<p><a href="PowerShell-Pentest.md.html">PowerShell Pentest</a></p>
-<section id="added-by-hand" class="level1">
-<h1>Added by Hand</h1>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode ps1"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Permit script execution (Admin)</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> Unrestricted</span>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying the Attached Monitors</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">--listmonitors</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># List mount</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Get-Volume</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Local Mounts like C: D:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-WmiObject</span> <span class="op">-</span>Class Win32_NetworkConnection</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Network Mounts like Z: W:</span></span></code></pre></div>
-</section>
-<section id="shortcut-windows-terminal" class="level1">
-<h1>Shortcut Windows terminal</h1>
-<ul>
-<li>Esc =&gt; clear line</li>
-<li>Ctrl-Shift-W =&gt; exit</li>
-</ul>
-</section>
-<section id="list" class="level1">
-<h1>List</h1>
-<ul>
-<li><p>Remote Powershell</p>
-<ol type="1">
-<li>Guest :
-<ul>
-<li><code>Get-NetConectionProfile</code> : Get interface</li>
-<li><code>Set-NetConectionProfil -IntercaceIndex 9 -NetworkCategory Private</code>
-: Enable PS Remote</li>
-</ul></li>
-<li>Both : <code>Set-Item wsmon:\localhost\client\trustedhosts\ *</code>
-: Enable trust</li>
-<li>Both : <code>Restart-Service WimRM</code></li>
-<li>Host : <code>Test-WsMan COMPUTER</code></li>
-<li>Host :
-<code>Enter-PSSession -ComputerName COMPUTER -Credential USER</code></li>
-</ol></li>
-<li><p>Variable Afectation</p>
-<ul>
-<li><code>$a = ls 'HKLM:/Software/'</code></li>
-<li><code>$a[0].Property</code></li>
-</ul></li>
-<li><p>About</p>
-<ul>
-<li><code>[environment]::OSVersion.Version</code> : get os version
-(aparently :)</li>
-</ul></li>
-<li><p>Help</p>
-<ul>
-<li>Get-Help Get-Item</li>
-<li>Get-Command | ?{ $_.Name -like “temp”} | select Name</li>
-</ul></li>
-<li><p>Comment</p>
-<ul>
-<li><code># mycomment</code> Single line</li>
-<li><code>&lt; # mycomment #&gt;</code>multiline</li>
-</ul></li>
-<li><p>Enable scripts</p>
-<ul>
-<li>set-executionpolicy remotesigned</li>
-</ul></li>
-<li><p>Script location</p>
-<ul>
-<li>$PSScriptRoot</li>
-<li>split-path -parent $MyInvocation.MyCommand.Definition</li>
-</ul></li>
-<li><p>Load script</p>
-<ul>
-<li>Import module myscript.pm1</li>
-<li>&amp; “C:Script with space.ps1”</li>
-<li>C:_without_spaces.ps1</li>
-</ul></li>
-<li><p>Last Error</p>
-<ul>
-<li><code>$?</code> # True if last operation succeed</li>
-<li><code>$LastExitCode</code> # Exit code of last windows-based program
-that was run</li>
-</ul></li>
-<li><p>Environment</p>
-<ul>
-<li>Get-ChildItem env:windir</li>
-</ul></li>
-<li><p>Random</p>
-<ul>
-<li>Get-Random</li>
-</ul></li>
-<li><p>Find</p>
-<ul>
-<li><code>ls -Recurse -Fiel | select *</code></li>
-</ul></li>
-</ul>
-</section>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Displaying Information About the Monitors</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">-q</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Setting a Monitor to Receive an Output</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">--output</span> DVI-D-O <span class="at">--mode</span> 1024x768</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Xrandr Setting Monitor Refresh Rate</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># -- use the --rate flag</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">--output</span> XWAYLAND0 <span class="at">--mode</span> 2560x1600 <span class="at">--rate</span> 60.00</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjusting the Monitor’s Brightness</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ex">randr</span> <span class="at">--output</span> LVDS-1 <span class="at">--brightness</span> 0.5</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Changing the Position of the Monitor Display</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">--output</span> DVI-D-0 <span class="at">--right-of</span> HDM1-1</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Mirroiring: Setting the Same Display Screen</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ex">xrandr</span> <span class="at">--output</span> DVI-D-0 –same-as HDMI-1</span></code></pre></div>
 </body>
 </html>

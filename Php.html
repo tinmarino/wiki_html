@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Php.md – Php</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Php</h1>
+</header>
+<p>Yo puedo cualquier tarde, preferiria no el miercoles noche y que
+trabajo presencial el dia despues</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// List GET parameters</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">foreach</span> (<span class="va">$_GET</span> <span class="kw">as</span> <span class="va">$key</span> =&gt; <span class="va">$value</span>) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">echo</span> <span class="va">$key</span> <span class="op">.</span> <span class="st">&#39; = &#39;</span> <span class="op">.</span> <span class="va">$value</span> <span class="op">.</span> <span class="st">&#39;&lt;br&gt;&#39;</span><span class="ot">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<section id="injection" class="level1">
+<h1>Injection</h1>
+<p>From:
+https://stackoverflow.com/questions/3115559/exploitable-php-functions</p>
+<section id="command-execution" class="level3">
+<h3>Command Execution</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exec</span>           <span class="op">-</span> Returns last line of commands output</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">passthru</span>       <span class="op">-</span> Passes commands output directly to the browser</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">system</span>         <span class="op">-</span> Passes commands output directly to the browser <span class="op">and</span> returns last line</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">shell_exec</span>     <span class="op">-</span> Returns commands output</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">``</span> (backticks) <span class="op">-</span> Same <span class="kw">as</span> <span class="fu">shell_exec</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">popen</span>          <span class="op">-</span> Opens read <span class="op">or</span> write pipe to process of a command</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">proc_open</span>      <span class="op">-</span> Similar to <span class="fu">popen</span>() but greater degree of control</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pcntl_exec</span>     <span class="op">-</span> Executes a program</span></code></pre></div>
+</section>
+<section id="php-code-execution" class="level3">
+<h3>PHP Code execution</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">eval</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>()  <span class="op">-</span> identical to <span class="kw">eval</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">preg_replace</span>(<span class="st">&#39;/.*/e&#39;</span><span class="ot">,</span>...) <span class="op">-</span> <span class="op">/</span>e does an <span class="kw">eval</span>() on the <span class="cf">match</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="er">create_function</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">include</span>()</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">include_once</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">require</span>()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">require_once</span>()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">$_GET</span>[<span class="st">&#39;func_name&#39;</span>](<span class="va">$_GET</span>[<span class="st">&#39;argument&#39;</span>]<span class="op">.</span>html)<span class="ot">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="va">$func</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">ReflectionFunction</span>(<span class="va">$_GET</span>[<span class="st">&#39;func_name&#39;</span>])<span class="ot">;</span> <span class="va">$func</span>-&gt;invoke()<span class="ot">;</span> <span class="op">or</span> <span class="va">$func</span>-&gt;invokeArgs(<span class="dt">array</span>())<span class="ot">;</span></span></code></pre></div>
+</section>
+<section id="function-with-callback" class="level3">
+<h3>Function with Callback</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">Function</span>                     =&gt; Position of callback arguments</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;ob_start&#39;</span>                   =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_diff_uassoc&#39;</span>          =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_diff_ukey&#39;</span>            =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_filter&#39;</span>               =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_intersect_uassoc&#39;</span>     =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_intersect_ukey&#39;</span>       =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_map&#39;</span>                  =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_reduce&#39;</span>               =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_udiff_assoc&#39;</span>          =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_udiff_uassoc&#39;</span>         =&gt; <span class="dt">array</span>(<span class="op">-</span><span class="dv">1</span><span class="ot">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="ot">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_udiff&#39;</span>                =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_uintersect_assoc&#39;</span>     =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_uintersect_uassoc&#39;</span>    =&gt; <span class="dt">array</span>(<span class="op">-</span><span class="dv">1</span><span class="ot">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="ot">,</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_uintersect&#39;</span>           =&gt; <span class="op">-</span><span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_walk_recursive&#39;</span>       =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;array_walk&#39;</span>                 =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;assert_options&#39;</span>             =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;uasort&#39;</span>                     =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;uksort&#39;</span>                     =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;usort&#39;</span>                      =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;preg_replace_callback&#39;</span>      =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;spl_autoload_register&#39;</span>      =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;iterator_apply&#39;</span>             =&gt;  <span class="dv">1</span><span class="ot">,</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;call_user_func&#39;</span>             =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;call_user_func_array&#39;</span>       =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;register_shutdown_function&#39;</span> =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;register_tick_function&#39;</span>     =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;set_error_handler&#39;</span>          =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;set_exception_handler&#39;</span>      =&gt;  <span class="dv">0</span><span class="ot">,</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;session_set_save_handler&#39;</span>   =&gt; <span class="dt">array</span>(<span class="dv">0</span><span class="ot">,</span> <span class="dv">1</span><span class="ot">,</span> <span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span><span class="ot">,</span> <span class="dv">4</span><span class="ot">,</span> <span class="dv">5</span>)<span class="ot">,</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;sqlite_create_aggregate&#39;</span>    =&gt; <span class="dt">array</span>(<span class="dv">2</span><span class="ot">,</span> <span class="dv">3</span>)<span class="ot">,</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;sqlite_create_function&#39;</span>     =&gt;  <span class="dv">2</span><span class="ot">,</span></span></code></pre></div>
+</section>
+<section id="info-disclosure" class="level3">
+<h3>Info Disclosure</h3>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">phpinfo</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">posix_mkfifo</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">posix_getlogin</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">posix_ttyname</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">getenv</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">get_current_user</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">proc_get_status</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get_cfg_var</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">disk_free_space</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">disk_total_space</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">diskfreespace</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">getcwd</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>getlastmo</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">getmygid</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">getmyinode</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">getmypid</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">getmyuid</span></span></code></pre></div>
+</section>
+<section id="file-system" class="level3">
+<h3>File system</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// open filesystem handler</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fopen</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tmpfile</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bzopen</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gzopen</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">SplFileObject</span>-&gt;<span class="bu">__construct</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// write to filesystem (partially in combination with reading)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">chgrp</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">chown</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">copy</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">file_put_contents</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">lchgrp</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">lchown</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">link</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">move_uploaded_file</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rmdir</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">symlink</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">tempnam</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">imagepng</span>   <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">imagewbmp</span>  <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span> </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="er">image2wbmp</span> <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span> </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>  <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="fu">imagexbm</span>   <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="fu">imagegif</span>   <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">imagegd</span>    <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="fu">imagegd2</span>   <span class="op">-</span> <span class="er">2</span>nd parameter is a path<span class="op">.</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="fu">iptcembed</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp_get</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp_nb_get</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">// read from filesystem</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="fu">file_exists</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="fu">file_get_contents</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">file</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="fu">fileatime</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="fu">filectime</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">filegroup</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="fu">fileinode</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fu">filemtime</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="fu">fileowner</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="fu">fileperms</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="fu">filesize</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="fu">filetype</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="fu">glob</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="fu">is_dir</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fu">is_executable</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="fu">is_file</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fu">is_link</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="fu">is_readable</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu">is_uploaded_file</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fu">is_writable</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="fu">is_writeable</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">linkinfo</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="fu">lstat</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_ini_file</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="fu">pathinfo</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">readfile</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="fu">readlink</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="fu">realpath</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="fu">stat</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="fu">gzfile</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="fu">readgzfile</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">getimagesize</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefromgif</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefromjpeg</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefrompng</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefromwbmp</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefromxbm</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecreatefromxpm</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp_put</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="fu">ftp_nb_put</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="fu">exif_read_data</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="er">read_exif_data</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="fu">exif_thumbnail</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="fu">exif_imagetype</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="fu">hash_file</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="fu">hash_hmac_file</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="fu">hash_update_file</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="fu">md5_file</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="fu">sha1_file</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="fu">highlight_file</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="fu">show_source</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="fu">php_strip_whitespace</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="fu">get_meta_tags</span></span></code></pre></div>
+</section>
+</section>
+</body>
+</html>

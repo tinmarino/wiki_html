@@ -5,16 +5,94 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Awk.md – Awk</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
-<header>
+<header id="title-block-header">
 <h1 class="title">Awk</h1>
 </header>
 <section id="tips" class="level1">
@@ -26,10 +104,12 @@
 </section>
 <section id="usage" class="level1">
 <h1>USAGE</h1>
-<p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ] ‘program’ [file1 file2…]</p>
+<p>awk [ - v var=val ] ‘program’ [file1 file2…] <br> awk [ - v var=val ]
+‘program’ [file1 file2…]</p>
 <section id="structure-of-an-awk-program" class="level3">
 <h3>Structure of an awk program</h3>
-<pre><code># comments
+<pre><code>
+# comments
 pattern { action }  A sequence of pattern-action statements
 pattern { action }</code></pre>
 <pre><code>For each file,
@@ -39,11 +119,18 @@ pattern { action }</code></pre>
 </section>
 <section id="pattern" class="level3">
 <h3>“pattern”</h3>
-<p>BEGIN :executes “action” before starting to view the input file <br> END :executes “action” after ending to view the input file <br> Other :regular, numeric or string expression or combination <br></p>
+<p>BEGIN :executes “action” before starting to view the input file <br>
+END :executes “action” after ending to view the input file <br> Other
+:regular, numeric or string expression or combination <br></p>
 </section>
 <section id="action-is-executable-code" class="level3">
 <h3>“action” is executable code</h3>
-<p>if (expression) statement1 else statement2 <br> while (expression) statement <br> for (expr1;expr2;expr3) statement <br> do statement while (expression) <br> break / continue :immediately leave / start next iteration of innermost enclosing loop <br> exit / exit expression : go immediately to the END action; if within the END action, exit program <br></p>
+<p>if (expression) statement1 else statement2 <br> while (expression)
+statement <br> for (expr1;expr2;expr3) statement <br> do statement while
+(expression) <br> break / continue :immediately leave / start next
+iteration of innermost enclosing loop <br> exit / exit expression : go
+immediately to the END action; if within the END action, exit program
+<br></p>
 </section>
 </section>
 <section id="built-in-variables" class="level1">
@@ -115,6 +202,10 @@ pattern { action }</code></pre>
 <h1>BUILT-IN FUNCTIONS</h1>
 <p>r: regex ; s,t: strings ; n,p: integers</p>
 <table>
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 56%" />
+</colgroup>
 <tbody>
 <tr class="odd">
 <td>int(n), sqrt(n), exp(n)</td>
@@ -158,39 +249,47 @@ pattern { action }</code></pre>
 </tr>
 <tr class="odd">
 <td>gsub(r,s,t)</td>
-<td>return # of subs made</td>
+<td>return</td>
 </tr>
 <tr class="even">
-<td></td>
+<td># of subs made</td>
 <td></td>
 </tr>
 <tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
 <td>index(s,t)</td>
 <td>Return first position of string t in s, or 0 if t</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td>is not present</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>length(s)</td>
 <td>Return number of characters in s</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>match(s,r)</td>
 <td>Test whether s contains a substring matched by r;</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td>return index or 0; sets RSTART and RLENGTH</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>split(s,a)</td>
 <td>Split s into array a on FS / field separaror fs;</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>split(s,a,fs)</td>
-<td>return # of fields</td>
+<td>return</td>
+</tr>
+<tr class="odd">
+<td># of fields</td>
+<td></td>
 </tr>
 <tr class="even">
 <td></td>
@@ -210,25 +309,29 @@ pattern { action }</code></pre>
 </tr>
 <tr class="even">
 <td>sub(r,s,t)</td>
-<td>$0 / t matched by r; return # of subs made</td>
+<td>$0 / t matched by r; return</td>
 </tr>
 <tr class="odd">
-<td></td>
+<td># of subs made</td>
 <td></td>
 </tr>
 <tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
 <td>substr(s,p)</td>
 <td>Return substring of s (of length n)starting at</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>substr(s,p,n)</td>
 <td>position p</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>tolower(s), toupper(s)</td>
 <td>Lower and upper cases</td>
 </tr>
@@ -239,6 +342,10 @@ pattern { action }</code></pre>
 <h1>FORMATTED OUTPUT</h1>
 <p>{ printf (“FORMAT”,value1,value2,value3,…) }</p>
 <table>
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 56%" />
+</colgroup>
 <tbody>
 <tr class="odd">
 <td>%c %s</td>
@@ -250,7 +357,8 @@ pattern { action }</code></pre>
 </tr>
 <tr class="odd">
 <td>%f %6.2f</td>
-<td>Print as float number,with 6 digits (4 as integer, 2 as decimal)</td>
+<td>Print as float number,with 6 digits (4 as integer, 2 as
+decimal)</td>
 </tr>
 <tr class="even">
 <td><code>\n</code></td>
@@ -262,6 +370,10 @@ pattern { action }</code></pre>
 <section id="operators" class="level1">
 <h1>OPERATORS</h1>
 <table>
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 56%" />
+</colgroup>
 <tbody>
 <tr class="odd">
 <td>&amp;&amp; <pipe> <pipe> !</td>
@@ -280,8 +392,10 @@ pattern { action }</code></pre>
 </section>
 <section id="example" class="level1">
 <h1>EXAMPLE</h1>
-<pre><code>{ print NR, $0 }        Precede each line by line #
-{ $1 = NR; print }      Replace first field by line #
+<pre><code>{ print NR, $0 }        Precede each line by line
+#
+{ $1 = NR; print }      Replace first field by line
+#
 { $2 = log($2); $3 =”” ; print }
                         Replace the 2nd field by its logarithm, zap field 3
 NF &gt; 0                  Print non-empty lines
@@ -316,6 +430,22 @@ BEGIN { RS=””; FS=”\n” }
 print “Address: “,$2 }
                         Multi-line records. Leading and trailing newlines are
                         ignored</code></pre>
+</section>
+<section id="dump" class="level1">
+<h1>Dump</h1>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jq</span> <span class="at">-r</span> .results[]._links.download <span class="op">&lt;</span> /tmp/academy-attachment.json <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span>/ <span class="st">&#39;{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">    split($5, a_filename,&quot;?&quot;);</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    print( \</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;mkdir&quot;, \</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;attachment/&quot; $4 &quot;;&quot;, \</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;wget&quot;, \</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;--no-check-certificate&quot;, \</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;\&quot;&#39;&quot;</span><span class="va">$url_base</span><span class="st">/&quot;&#39;&quot; $0 &quot;\&quot;&quot;, \</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;-O&quot;, \</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">      &quot;attachment/&quot; $4 &quot;/&quot; a_filename[1])</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="st">    }&#39;</span></span></code></pre></div>
 <p>from: http://www.cheat-sheets.org/saved-copy/awk_quickref.pdf</p>
 </section>
 </body>

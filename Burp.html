@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Burp.md – Burp</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Burp</h1>
+</header>
+<ul>
+<li>Note the byte quantity (bottom right)</li>
+<li>Note the time spend to answer</li>
+<li>Use comparer to diff responses</li>
+<li>Encode space with %20 or +</li>
+<li>En intruder es un fuzzer
+<ul>
+<li>Snipper:
+<ul>
+<li>Highlight varaible and click on Add &amp; at the right</li>
+<li>Runtime file &lt;= it has a lower RAM footprint</li>
+<li>use common.txt</li>
+</ul></li>
+<li>Configure include encoding and not</li>
+<li>Use HEAD (or OPTIONS) instead of GET for faster intruder (better
+than 10 threads). If there is a redireciton, it will use GET anyway. So
+earn time on not found</li>
+</ul></li>
+<li>/?p=42 is nice for wordpress</li>
+<li>Use proxychain for other tool, or python3 sqlmap –proxy
+localhost:8080</li>
+<li>Target: for auto scan, right click scan, setting, deep
+<ol type="1">
+<li>Con1: Can be blocked by wasp</li>
+<li>Con2: Can slowen your compu and takes time</li>
+<li>Con3: It can be intrusive, it can drop tables! And already happened
+to a consultor</li>
+</ol></li>
+</ul>
+<p>Burp: Nesus: Mejor para benchmark Zap: Nikto: Nuclei</p>
+<ol type="1">
+<li>Find subdominios:</li>
+<li>Find ports, httpx to see if it is HTTP</li>
+</ol>
+<section id="shortkey" class="level1">
+<h1>Shortkey</h1>
+<ul>
+<li>C-r Repeater</li>
+<li>C-f Filter</li>
+</ul>
+</section>
+<section id="links" class="level1">
+<h1>Links</h1>
+<ul>
+<li>https://portswigger.net/web-security/sql-injection/cheat-sheet</li>
+<li>https://github.com/wpscanteam/wpscan</li>
+<li>https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/wordpress</li>
+<li>https://osint.sh/subdomain/</li>
+<li>https://github.com/sqlmapproject/sqlmap</li>
+<li>https://github.com/projectdiscovery/nuclei</li>
+</ul>
+</section>
+<section id="questions" class="level1">
+<h1>Questions</h1>
+<ol type="1">
+<li><label><input type="checkbox" />Find vuln</label></li>
+<li><label><input type="checkbox" />Intrude multiple
+subdomain</label></li>
+<li><label><input type="checkbox" />By command line</label></li>
+</ol>
+</section>
+<section id="next" class="level1">
+<h1>Next</h1>
+</section>
+</body>
+</html>

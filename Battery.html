@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Battery.md – Battery</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Battery</h1>
+</header>
+<p><a href="Battery-script-example-1.md.html">Battery script example
+1</a></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">((</span><span class="va">i</span><span class="op">=</span><span class="dv">4</span><span class="kw">;</span><span class="va">i</span><span class="op">&lt;</span><span class="dv">16</span><span class="kw">;</span><span class="va">i</span><span class="op">++</span><span class="kw">));</span> <span class="cf">do</span> <span class="bu">echo</span> 0 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/devices/system/cpu/cpu<span class="va">$i</span>/online<span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="kw">((</span><span class="va">i</span><span class="op">=</span><span class="dv">0</span><span class="kw">;</span><span class="va">i</span><span class="op">&lt;</span><span class="dv">16</span><span class="kw">;</span><span class="va">i</span><span class="op">++</span><span class="kw">));</span> <span class="cf">do</span> <span class="bu">echo</span> 1 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/devices/system/cpu/cpu<span class="va">$i</span>/online<span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +1 /sys/devices/system/cpu/cpu<span class="pp">*</span>/online</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Set</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> 0..16<span class="kw">;</span> <span class="cf">do</span> <span class="fu">sudo</span> cpufreq-set <span class="at">-c</span> <span class="va">$i</span> <span class="at">-g</span> powersave<span class="kw">;</span> <span class="cf">done</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">cpufreq-info</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/current CPU frequency.*/\x1b[31m&amp;\x1b[0m/&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Resset</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpupower frequency-set <span class="at">-g</span> powersave <span class="at">-d</span> 0.8G <span class="at">-u</span> 1.2G</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Screen brigthness</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> 30 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/class/backlight/amdgpu_bl0/brightness</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/class/backlight/amdgpu_bl0/brightness</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Sound</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> 1 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/module/snd_hda_intel/parameters/power_save</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/module/snd_hda_intel/parameters/power_save</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Monitor power consumption</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/class/power_supply/BAT0/power_now <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $0 / 10^6 &quot; W&quot;}&#39;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0A:00/power_supply/BAT0/power_now <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $0 / 10^6}&#39;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> /sys/class/power_supply/BAT0/ <span class="at">-type</span> f <span class="at">-readable</span> <span class="kw">|</span> <span class="fu">xargs</span> tail <span class="at">-n</span> +1</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable boost</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> 0 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/devices/system/cpu/cpufreq/boost</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tlp-stat <span class="at">-p</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ex">powertop</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> cpulimit <span class="at">--limit</span> 20 /snap/firefox/2356/usr/lib/firefox/firefox</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Charge only until 60%</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> 1 <span class="op">&gt;</span> /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/bus/platform/drivers/ideapad_acpi/VPC2004\:00/conservation_mode</span></code></pre></div>
+<section id="tpd-tandberg-linux-package" class="level1">
+<h1>TPD: Tandberg Linux Package</h1>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tlp-stat</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tlp-stat <span class="at">-b</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart tlp</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See all scaling modes: conservative ondemand userspace powersave performance schedutil</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Sound</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> 0 <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/module/snd_hda_intel/parameters/power_save</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> Y <span class="kw">|</span> <span class="fu">sudo</span> dd of=/sys/module/snd_hda_intel/parameters/power_save_controller</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="ex">lsof</span> /dev/snd/<span class="pp">*</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span></code></pre></div>
+<p>In file /etc/tlp.conf</p>
+<p>START_CHARGE_THRESH_BAT0=60 STOP_CHARGE_THRESH_BAT0=90
+DEVICES_TO_DISABLE_ON_LAN_CONNECT=“wifi”</p>
+</section>
+</body>
+</html>

@@ -4,88 +4,104 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>C.md – Untitled</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #232629;
-    color: #7a7c7d;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
-div.sourceCode
-  { color: #cfcfc2; background-color: #232629; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span. { color: #cfcfc2; } /* Normal */
-code span.al { color: #95da4c; } /* Alert */
-code span.an { color: #3f8058; } /* Annotation */
-code span.at { color: #2980b9; } /* Attribute */
-code span.bn { color: #f67400; } /* BaseN */
-code span.bu { color: #7f8c8d; } /* BuiltIn */
-code span.cf { color: #fdbc4b; } /* ControlFlow */
-code span.ch { color: #3daee9; } /* Char */
-code span.cn { color: #27aeae; } /* Constant */
-code span.co { color: #7a7c7d; } /* Comment */
-code span.cv { color: #7f8c8d; } /* CommentVar */
-code span.do { color: #a43340; } /* Documentation */
-code span.dt { color: #2980b9; } /* DataType */
-code span.dv { color: #f67400; } /* DecVal */
-code span.er { color: #da4453; } /* Error */
-code span.ex { color: #0099ff; } /* Extension */
-code span.fl { color: #f67400; } /* Float */
-code span.fu { color: #8e44ad; } /* Function */
-code span.im { color: #27ae60; } /* Import */
-code span.in { color: #c45b00; } /* Information */
-code span.kw { color: #cfcfc2; } /* Keyword */
-code span.op { color: #cfcfc2; } /* Operator */
-code span.ot { color: #27ae60; } /* Other */
-code span.pp { color: #27ae60; } /* Preprocessor */
-code span.re { color: #2980b9; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #da4453; } /* SpecialString */
-code span.st { color: #f44f4f; } /* String */
-code span.va { color: #27aeae; } /* Variable */
-code span.vs { color: #da4453; } /* VerbatimString */
-code span.wa { color: #da4453; } /* Warning */
+  <title>C.md – C</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">C</h1>
+</header>
 <section id="c" class="level1">
 <h1>C</h1>
 <ul>
 <li><a href="Cheat/C-Keywords.html">Keywords</a></li>
 <li><a href="Cheat/C-Operators.html">Operators</a></li>
 <li><a href="C-Regle-De-Codage.html">Regle De Codage</a></li>
+<li><a href="Macro.md.html">Macro</a></li>
 </ul>
 <p>Werror overwrite make CFLAGS=-Wno-error</p>
 <p>Include path (print)</p>
@@ -95,19 +111,24 @@ gcc -xc++ -E -v -</code></pre>
 <section id="macro" class="level1">
 <h1>Macro</h1>
 <ul>
-<li><code>#define dbgprint(X,...) printf(X, ##__VA_ARGS__)</code> : variadic argument macro</li>
-<li><code>#</code> operator is called the <strong>stringifier</strong></li>
-<li><code>__declspec(dllexport)</code> # windows : export function in dll</li>
-<li><code>__debugbreak()</code> # Set breakpoint</li>
-<li><code>offsetof(struct_t, elt_t)</code> # Get elemenet offset</li>
-<li><code>extern int const iPi = 3.1415926535</code>
+<li><p><code>#define dbgprint(X,...) printf(X, ##__VA_ARGS__)</code> :
+variadic argument macro</p></li>
+<li><p><code>#</code> operator is called the
+<strong>stringifier</strong></p></li>
+<li><p><code>__declspec(dllexport)</code> # windows : export function in
+dll</p></li>
+<li><p><code>__debugbreak()</code> # Set breakpoint</p></li>
+<li><p><code>offsetof(struct_t, elt_t)</code> # Get elemenet
+offset</p></li>
+<li><p><code>extern int const iPi = 3.1415926535</code></p>
 <ul>
 <li>extern so importing this.h get iPi defined</li>
 <li>const for the precompiler (to avoid errors)</li>
 </ul></li>
-<li><code>#pragma pack(1)</code> # to let the structure without aligning each field</li>
-<li><code>__FILE__</code> # Name of the file.c</li>
-<li><code>__LINE__</code> # Current line</li>
+<li><p><code>#pragma pack(1)</code> # to let the structure without
+aligning each field</p></li>
+<li><p><code>__FILE__</code> # Name of the file.c</p></li>
+<li><p><code>__LINE__</code> # Current line</p></li>
 <li><p><code>__FUNCTION__</code> # Name of current function</p></li>
 <li><p>Jump to arbitrary addr</p>
 <p>void (*foo)(void) = 0xcacacaca; foo();</p></li>
@@ -116,13 +137,17 @@ gcc -xc++ -E -v -</code></pre>
 <section id="notes" class="level1">
 <h1>Notes</h1>
 <ul>
-<li>Le tableau aloue de la mémoire et le pointeur non =&gt; préféré le tableau</li>
+<li>Le tableau aloue de la mémoire et le pointeur non =&gt; préféré le
+tableau</li>
 </ul>
 <section id="random" class="level3">
 <h3>Random</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></a>
-<a class="sourceLine" id="cb2-2" title="2">srand(time(NULL));  # Set seed</a>
-<a class="sourceLine" id="cb2-3" title="3">rand();             # Get Random</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;time.h&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>srand<span class="op">(</span>time<span class="op">(</span>NULL<span class="op">));</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp"># </span><span class="er">Set seed</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rand<span class="op">();</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp"># </span><span class="er">Get Random</span></span></code></pre></div>
 </section>
 <section id="calling-conventions-function-prototype" class="level2">
 <h2>Calling conventions, function prototype</h2>
@@ -138,11 +163,13 @@ gcc -xc++ -E -v -</code></pre>
 </section>
 <section id="cdecl" class="level4">
 <h4>Cdecl</h4>
-<p>The <strong>caller</strong> is correcting the stack (because <strong>HE</strong> knows : <code>printf</code>)</p>
+<p>The <strong>caller</strong> is correcting the stack (because
+<strong>HE</strong> knows : <code>printf</code>)</p>
 </section>
 <section id="fastcall-x64" class="level4">
 <h4>Fastcall (x64)</h4>
-<p>Rcx contains first var. The <strong>callee</strong> is cleaning the pile</p>
+<p>Rcx contains first var. The <strong>callee</strong> is cleaning the
+pile</p>
 </section>
 </section>
 </section>

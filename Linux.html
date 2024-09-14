@@ -4,41 +4,123 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Linux.md – -</title>
+  <title>Linux.md – Linux</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Linux</h1>
+</header>
 <ul>
+<li><a href="Bios.md.html">Bios</a>: Grub</li>
+<li><a href="Gdb.md.html">Gdb</a></li>
 <li><a href="Apt.html">Apt</a></li>
 <li><a href="Sed.html">Sed</a></li>
 <li><a href="Awk.html">Awk</a></li>
 <li><a href="Readline.html">Readline</a></li>
-<li><a href="Tmux.html">Tmux</a></li>
 <li><a href="Dialog.html">Dialog</a></li>
 <li><a href="Termux.html">Termux</a></li>
 <li><a href="Git.html">Git</a></li>
 <li><a href="Gcc.html">Gcc</a></li>
 <li><a href="Pentest.html">Pentest</a></li>
 <li><a href="Emacs.html">Emacs</a></li>
-<li><a href="Network.html">Network</a> : Unbound</li>
+<li><a href="Network.html">Network</a>: Unbound</li>
 <li><a href="BusyBox.html">BusyBox</a></li>
 <li><a href="W3m.html">W3m</a></li>
 <li><a href="Nvidia.html">Nvidia</a></li>
 <li><a href="Ubuntu.html">Ubuntu</a></li>
 <li><a href="Man.html">Man</a></li>
 <li><a href="Docker.html">Docker</a></li>
+<li><a href="Jenkins.md.html">Jenkins</a></li>
 <li><a href="Make.html">Make</a></li>
+<li><a href="Sixel.md.html">Sixel</a></li>
+<li><a href="Syscall.md.html">Syscall</a></li>
+<li><a href="Shell.md.html">Shell</a></li>
+<li><a href="Linux-System.md.html">Linux System</a></li>
 </ul>
 <section id="program" class="level1">
 <h1>Program</h1>
@@ -50,25 +132,35 @@
 <section id="not-so-used" class="level1">
 <h1>Not so used</h1>
 <ul>
-<li><p><a href="LinuxInterview.html">LinuxInterview</a></p></li>
-<li><p><a href="Accronym.html">Accronym</a></p></li>
-<li><p><a href="Screen.html">Screen</a></p></li>
-<li><p>Trash: /home/$USER/.local/share/Trash (install trash-cli)</p></li>
-<li><p>find . -type f -name "*_peaks.bed" ! -path “./tmp/<em>" ! -path "./scripts/</em>”</p></li>
-<li><p>echo -e “” # beep</p></li>
-<li><p>qed -&gt; ed -&gt; ex -&gt; vi -&gt; vim</p></li>
-<li><pre><code>-&gt; grep -&gt; sed -&gt; awk -&gt; perl -&gt; ack -&gt; ag</code></pre></li>
-<li><p>clear</p></li>
-<li><p>reset</p></li>
-<li><p>tmux :clear-history</p></li>
-<li><p>tmux :bind -n C-k clear-history #-n to avoid prefix</p></li>
-<li><p>tmux: bind b send-keys-R ; clear-history</p></li>
+<li><a href="LinuxInterview.html">LinuxInterview</a></li>
+<li><a href="Accronym.html">Accronym</a></li>
+<li><a href="Screen.html">Screen</a></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">bind</span> <span class="st">&#39;&quot;\e[B&quot;: history-search-forward&#39;</span><span class="kw">;</span> <span class="bu">bind</span> <span class="st">&#39;&quot;\e[A&quot;: history-search-backward&#39;</span><span class="kw">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> Trash: /home/<span class="va">$USER</span>/.local/share/Trash <span class="er">(</span><span class="fu">install</span> trash-cli<span class="kw">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> find . <span class="at">-type</span> f <span class="at">-name</span> <span class="st">&quot;*_peaks.bed&quot;</span> ! <span class="at">-path</span> <span class="st">&quot;./tmp/*&quot;</span> ! <span class="at">-path</span> <span class="st">&quot;./scripts/*&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> echo <span class="at">-e</span> <span class="st">&quot;\a&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># beep</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span> qed <span class="at">-</span><span class="op">&gt;</span> ed <span class="at">-</span><span class="op">&gt;</span> ex <span class="at">-</span><span class="op">&gt;</span> vi <span class="at">-</span><span class="op">&gt;</span> vim</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">-</span>     <span class="at">-</span><span class="op">&gt;</span> grep <span class="at">-</span><span class="op">&gt;</span> sed <span class="at">-</span><span class="op">&gt;</span> awk <span class="at">-</span><span class="op">&gt;</span> perl <span class="at">-</span><span class="op">&gt;</span> ack <span class="at">-</span><span class="op">&gt;</span> ag</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> clear</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> reset </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> tmux :clear-history </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> tmux :bind <span class="at">-n</span> C-k clear-history</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#-n to avoid prefix</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ex">*</span> tmux: bind b send-keys-R <span class="dt">\;</span> clear-history</span></code></pre></div>
 </section>
 <section id="files-read-get-specific-info" class="level1">
 <h1>Files (Read, get specific info)</h1>
 <ul>
-<li><p>/proc/sys/vm/block_dump # echo 1 lgos IO; then tail -f /var/log/syslog</p></li>
+<li><p>/proc/sys/vm/block_dump # echo 1 lgos IO; then tail -f
+/var/log/syslog</p></li>
 <li><p>/proc/[pid]/io</p></li>
 <li><p>/proc/net/dev</p></li>
 <li><p>/sys/class/net/${interface}/statistics/</p></li>
@@ -77,18 +169,37 @@
 <li><p>/etc/hosts</p></li>
 <li><p>/etc/mailname</p></li>
 <li><p>/etc/hostname</p></li>
-<li><p>Xrand redshift xrandr -q | grep " connected" # gives me LVDS1 xrandr –output LVDS1 –brightness 0.5 xbacklight -set 50 xbacklight -inc 10 xbacklight -dec 10 echo 400 | sudo tee /sys/class/backlight/intel_backlight/brightness</p></li>
-<li><p>Module (kernel) depmod - handle dependency descriptions for loadable kernel modules. insmod - install loadable kernel module. lsmod - list loaded modules. modinfo - display information about a kernel module. modprobe - high level handling of loadable modules. rmmod - unload loadable modules.</p></li>
+<li><p>Xrand redshift xrandr -q | grep ” connected” # gives me LVDS1
+xrandr –output LVDS1 –brightness 0.5 xbacklight -set 50 xbacklight -inc
+10 xbacklight -dec 10 echo 400 | sudo tee
+/sys/class/backlight/intel_backlight/brightness</p></li>
+<li><p>Module (kernel) depmod - handle dependency descriptions for
+loadable kernel modules. insmod - install loadable kernel module. lsmod
+- list loaded modules. modinfo - display information about a kernel
+module. modprobe - high level handling of loadable modules. rmmod -
+unload loadable modules.</p></li>
 <li><p>User Rights, Capabilities visudo</p>
 <p>sudo systemctl hibernate</p></li>
-<li><p>Move mouse tmux send-key -t session:pane ls tput - initialize a terminal or query terminfo database</p>
+<li><p>Move mouse tmux send-key -t session:pane ls tput - initialize a
+terminal or query terminfo database</p>
 <ul>
 <li>color output xdotool - send keystrokes</li>
 </ul></li>
 <li><p>Screen off xset dpms force off</p></li>
 <li><p>Tar<br />
-tar - cvf tecmint-14-09-12.tar /home/tecmint/ tar cvzf MyImages-14-09-12.tar.gz /home/MyImages c – Creates a new .tar archive file. v – Verbosely show the .tar file progress. f – File name type of the archive file. z - Compress tar -xvf thumbnails-14-09-12.tar.gz tar -zxvf tar-archive-name.tar.gz</p></li>
-<li><p>Remotely move mouse : <code>xdotool</code></p></li>
+</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> cvf tecmint-14-09-12.tar /home/tecmint/</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> cvzf MyImages-14-09-12.tar.gz /home/MyImages</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">c</span> – Creates a new .tar archive file.</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">v</span> – Verbosely show the .tar file progress.</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">f</span> – File name type of the archive file.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">z</span> <span class="at">-</span> Compress</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> thumbnails-14-09-12.tar.gz</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-zxvf</span> tar-archive-name.tar.gz </span></code></pre></div>
+<ul>
+<li>Remotely move mouse : <code>xdotool</code></li>
 </ul>
 <pre><code>
 #! /bin/bash
@@ -106,12 +217,14 @@ xdotool click 3</code></pre>
 <li><p>Find file (and print only finle name)</p>
 <ul>
 <li><code>find /dir1 -type f -printf "%f\n"</code></li>
-<li><code>find ./dir1 -type f -exec basename {} \;</code> # If no printf</li>
+<li><code>find ./dir1 -type f -exec basename {} \;</code> # If no
+printf</li>
 </ul></li>
 <li><p>Remove windows line ending</p></li>
 <li><p><code>tr -d '\15\32' &lt; winfile.txt &gt;  unixfile.txt</code></p></li>
 <li><p><code>tr -d "\r" &lt; file</code></p></li>
-<li><p><code>vi -c '%s/^M//g</code> # use ctrl-v ctrl-m to insert the <code>^M</code></p></li>
+<li><p><code>vi -c '%s/^M//g</code> # use ctrl-v ctrl-m to insert the
+<code>^M</code></p></li>
 <li><p><code>sed 's/\x0D$//'</code></p></li>
 <li><p><code>find ./ -type f -exec dos2unix {} \;</code></p></li>
 <li><p><code>awk '{ sub("\r$",""); print }' dos.txt &gt; unix.txt</code></p></li>
@@ -134,13 +247,18 @@ xdotool click 3</code></pre>
 <p><code>jobs -l</code><br />
 <code>disown %2</code><br />
 <code>kill -l</code> # to see the trap list<br />
-<code>exec vi</code> # replace the shell by vim =&gt; destroy the shell) <code>tty</code> # to get my tty (of course)<br />
+<code>exec vi</code> # replace the shell by vim =&gt; destroy the shell)
+<code>tty</code> # to get my tty (of course)<br />
 <code>stty -a</code> # show shell shortcut for SIGNALS<br />
-<code>echo $$; echo $BASHPID</code> # Get my (shell) pid <code>$$</code> -&gt; Expands to the process ID of the (current) shell.<br />
-<code>$!</code> -&gt; Expands to the process ID of the most recently executed background command.<br />
+<code>echo $$; echo $BASHPID</code> # Get my (shell) pid <code>$$</code>
+-&gt; Expands to the process ID of the (current) shell.<br />
+<code>$!</code> -&gt; Expands to the process ID of the most recently
+executed background command.<br />
 <code>$PROMPT_COMMAND</code> To automate cmds<br />
-<code>disown -h %&lt;jobid&gt;</code> # After that, you can safely exit the terminal</p>
-<p><code>/proc/{PID}/cwd</code> is as symlink the pwd of the current process</p>
+<code>disown -h %&lt;jobid&gt;</code> # After that, you can safely exit
+the terminal</p>
+<p><code>/proc/{PID}/cwd</code> is as symlink the pwd of the current
+process</p>
 <pre><code>&quot; Send commadn to oter terminal (shell)  
 A: mkfifo mypipe  
 A: eval $(cat mypipe)  
@@ -161,7 +279,8 @@ mimetype img.jpg</p>
 <p>// Get current font<br />
 gsettings get org.gnome.desktop.interface monospace-font-name</p>
 <p>gconftool-2 –get /apps/gnome-terminal/profiles/Unnamed/font<br />
-gconftool-2 –set /apps/gnome-terminal/profiles/Unnamed/font –type string “courier new 12”</p>
+gconftool-2 –set /apps/gnome-terminal/profiles/Unnamed/font –type string
+“courier new 12”</p>
 </section>
 <section id="mouse" class="level4">
 <h4>Mouse</h4>

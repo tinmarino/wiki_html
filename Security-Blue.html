@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Security-Blue.md – Security-Blue</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Security-Blue</h1>
+</header>
+<section id="definitions" class="level1">
+<h1>Definitions</h1>
+<ul>
+<li><p>SAST: static application security testing</p>
+<ul>
+<li>scans an application before the code is compiled</li>
+</ul></li>
+<li><p>DAST: dynamic application security testing</p></li>
+<li><p>MAST: mobile application security testing</p></li>
+<li><p>SCA: software composition analysis</p>
+<ul>
+<li>automated process that identifies the open source software in a
+codebase</li>
+</ul></li>
+<li><p>RAT: Remote Access Trojan</p></li>
+<li><p>Pentest</p></li>
+<li><p>Fuzzing</p></li>
+<li><p>HIDS: host-based intrusion detection system</p></li>
+<li><p>NIDS: network-based intrusion detection system</p></li>
+<li><p>CRSF: Cross-Site Request Forgery.</p></li>
+<li><p>XXS: cross-site scripting</p></li>
+<li><p>WAF: Web Application Firewall</p></li>
+<li><p>IGPM: Internet Group Management Protocol, a braodcast protocol
+used in video games</p></li>
+<li><p>Shift-Left Testing: Test ASAP</p></li>
+<li><p>Intelligence and Obstruction (or Hindrance)</p></li>
+</ul>
+</section>
+<section id="owap-top-10" class="level1">
+<h1>OWAP top 10</h1>
+<ol type="1">
+<li><strong>Broken Access Control</strong></li>
+<li><strong>Cryptographic Failures</strong></li>
+<li><strong>Injection</strong></li>
+<li><strong>Insecure Design</strong></li>
+<li><strong>Security Misconfiguration</strong></li>
+<li><strong>Vulnerable and Outdated Components</strong></li>
+<li><strong>Identification and authentication failures</strong></li>
+<li><strong>Software and Data Integrity Failures</strong></li>
+<li><strong>Security Logging and Monitoring Failures</strong></li>
+<li><strong>Server-Side Request Forgery</strong></li>
+</ol>
+<hr />
+<ol type="1">
+<li><strong>Broken Access Control</strong></li>
+</ol>
+<ul>
+<li>For example, a web application might allow a user to access another
+user’s account by modifying the provided URL.</li>
+<li>Bypass access control checks</li>
+<li>Unauthorized access to accounts</li>
+<li>Unauthorized creation, reading,
+<ul>
+<li>Updating and deletion of data</li>
+</ul></li>
+<li>Elevation of privilege</li>
+<li>Privacy and regulatory impacts</li>
+<li>The biggest breaches and largest costs</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Cryptographic Failures</strong></li>
+</ol>
+<ul>
+<li>For example, an organization might use an insecure hash algorithm
+for password storage, fail to salt passwords, or use the same salt for
+all stored user passwords.</li>
+<li>Some facets of “Sensitive Data Exposure”</li>
+<li>Missing or ineffective data at rest controls</li>
+<li>Missing or ineffective TLS</li>
+<li>Missing or ineffective configuration</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Injection</strong></li>
+</ol>
+<ul>
+<li>For example, SQL commonly uses single (’) or double (“) quotation
+marks to delineate user data within a query, so user input containing
+these characters might be capable of changing the command being
+processed</li>
+<li>SQL injection</li>
+<li>XSS</li>
+<li>JS injection</li>
+</ul>
+<ol start="4" type="1">
+<li><strong>Insecure Design</strong></li>
+</ol>
+<ul>
+<li>For example, if the design for an application that stores and
+processes sensitive data does not include an authentication system, then
+a perfect implementation of the software as designed will still be
+insecure and fail to properly protect this sensitive dat</li>
+</ul>
+<ol start="5" type="1">
+<li><strong>Security Misconfiguration</strong></li>
+</ol>
+<ul>
+<li>Examples of security misconfigurations could include enabling
+unnecessary applications or ports, leaving default accounts and
+passwords active and unchanged, or configuring error messages to expose
+too much information to a user</li>
+</ul>
+<ol start="6" type="1">
+<li><strong>Vulnerable and Outdated Components</strong></li>
+</ol>
+<ul>
+<li>For example, an application may import a third-party library that
+has its own dependencies that could contain known exploitable
+vulnerabilities.</li>
+</ul>
+<ol start="7" type="1">
+<li><strong>Identification and authentication failures</strong></li>
+</ol>
+<ul>
+<li>For example, an application that lacks multi-factor authentication
+(MFA) might be vulnerable to a credential stuffing attack in which an
+attacker automatically tries username and password combinations from a
+list of weak, common, default, or compromised credentials</li>
+</ul>
+<ol start="8" type="1">
+<li><strong>Software and Data Integrity Failures</strong></li>
+<li><strong>Security Logging and Monitoring Failures</strong></li>
+<li><strong>Server-Side Request Forgery</strong></li>
+</ol>
+<p>Ref:
+https://www.checkpoint.com/cyber-hub/cloud-security/what-is-application-security-appsec/owasp-top-10-vulnerabilities/</p>
+<ul>
+<li>Virus List</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Virus</th>
+<th>Year</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Stuxnet</td>
+<td>2010</td>
+<td>Target SCADA Iran nuclear facilities</td>
+</tr>
+<tr class="even">
+<td>Hive</td>
+<td>2020</td>
+<td>1-day RansomWare RaaS, Hacked ALMA</td>
+</tr>
+<tr class="odd">
+<td>Spectre</td>
+<td>2017</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>WannaCry</td>
+<td>2017</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ZeuS</td>
+<td>2007</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>From Net</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Virus</th>
+<th>Year</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mydoom</td>
+<td>2004</td>
+<td>Phising worm</td>
+</tr>
+<tr class="even">
+<td>SoBig</td>
+<td>2003</td>
+<td>Phishing worm trojan</td>
+</tr>
+<tr class="odd">
+<td>Klez</td>
+<td>2001</td>
+<td>Phishing worm</td>
+</tr>
+<tr class="even">
+<td>ILoveYou</td>
+<td>2000</td>
+<td>Phishing worm with LOVE LETTER from Philippines student</td>
+</tr>
+<tr class="odd">
+<td>WannaCry</td>
+<td>2017</td>
+<td>1-day Ransomware, Blocked US hospitals</td>
+</tr>
+<tr class="even">
+<td>Zeus</td>
+<td>2007</td>
+<td>Web theft, botnet, 100 people arrested in US, Source code released
+in 2011</td>
+</tr>
+<tr class="odd">
+<td>Code Red</td>
+<td>2001</td>
+<td>Worm, “Hacked by Chinese!”, RAM only</td>
+</tr>
+<tr class="even">
+<td>Slammer</td>
+<td>2003</td>
+<td>SQL worm, targeting banks</td>
+</tr>
+<tr class="odd">
+<td>CryptoLocker</td>
+<td>2013</td>
+<td>Ransomware</td>
+</tr>
+<tr class="even">
+<td>Sasser</td>
+<td>2004</td>
+<td>From a 17 years-old German</td>
+</tr>
+<tr class="odd">
+<td>Agent Tesla</td>
+<td>2021</td>
+<td>RAT, exfiltrate credentials, log keystrokes, and capture
+screenshots</td>
+</tr>
+<tr class="even">
+<td>Shlayer</td>
+<td>2021</td>
+<td>Dropper for MAC</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="most-common-attacks" class="level1">
+<h1>Most common attacks</h1>
+<ol type="1">
+<li>Software vulnerability exploit</li>
+<li>Supply chain/third-party breach</li>
+<li>Web application exploit (SQLi, XSS, RFI)</li>
+<li>Phishing</li>
+<li>Social engineering</li>
+<li>Use of weak or stolen credentials</li>
+<li>Strategic web compromise</li>
+<li>Malspam</li>
+<li>Abuse of administrator tools</li>
+<li>Exploitation of lost/stolen asset</li>
+</ol>
+</section>
+</body>
+</html>

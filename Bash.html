@@ -4,17 +4,28 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Bash.md – BASH Bourne Again SHell</title>
+  <title>Bash.md – Bash</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -23,7 +34,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -82,218 +93,249 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">BASH Bourne Again SHell</h1>
+<h1 class="title">Bash</h1>
 </header>
-<p><a href="Bash-HackerRank.html">Bash HackerRank</a> <a href="Bash-Rc.html">Bash Rc</a> <a href="Bash_Snippet.md.html">Bash_Snippet</a> <a href="Bash_Cheatsheet.sh.html">Bash_Cheatsheet</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">https</span>://codegolf.stackexchange.com/questions/28786/write-a-program-that-makes-2-2-5</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co"># List process attached to tty (showed by w)</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="fu">ps</span> -ft pts/3 </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="co"># Remove duplicate lines while keeping the order of the lines</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="co"># From https://unix.stackexchange.com/questions/194780/remove-duplicate-lines-while-keeping-the-order-of-the-lines</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="fu">cat</span> -n out.txt <span class="kw">|</span> <span class="fu">sort</span> -k2 -k1n  <span class="kw">|</span> <span class="fu">uniq</span> -f1 <span class="kw">|</span> <span class="fu">sort</span> -nk1,1 <span class="kw">|</span> <span class="fu">cut</span> -f2-</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="va">newline_separated=${space_separated//</span> <span class="va">/</span><span class="st">$&#39;</span><span class="dt">\n</span><span class="st">&#39;</span><span class="va">}</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="bu">compgen</span> -c</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="co"># will list all the commands you could run.</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="bu">compgen</span> -a</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="co"># will list all the aliases you could run.</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="bu">compgen</span> -b</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="co"># will list all the built-ins you could run.</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="bu">compgen</span> -k</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true"></a><span class="co"># will list all the keywords you could run.</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true"></a><span class="bu">compgen</span> -A function</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true"></a><span class="co"># will list all the functions you could run.</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true"></a><span class="bu">compgen</span> -A function -abck</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true"></a><span class="co"># will list all the above in one go.</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true"></a><span class="co"># Replace recursive</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true"></a><span class="fu">find</span> . -type f -name <span class="st">&quot;*.txt&quot;</span> -print0 <span class="kw">|</span> <span class="fu">xargs</span> -0 sed -i -e <span class="st">&#39;s/foo/bar/g&#39;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true"></a><span class="co"># Cat all file with filename</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true"></a><span class="fu">tail</span> -n +1 file1.txt file2.txt file3.txt</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true"></a><span class="co"># Export all function</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true"></a><span class="bu">declare</span> -fx <span class="va">$(</span><span class="bu">compgen</span> -A function<span class="va">)</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true"></a><span class="fu">copy_function()</span> <span class="kw">{</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true"></a><span class="co"># See: https://stackoverflow.com/a/18839557/2544873</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true"></a>  <span class="bu">test</span> -n <span class="st">&quot;</span><span class="va">$(</span><span class="bu">declare</span> -f <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span> <span class="kw">||</span> <span class="bu">return</span> </span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true"></a>  <span class="bu">eval</span> <span class="st">&quot;</span><span class="va">${_/$1/$2}</span><span class="st">&quot;</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true"></a><span class="kw">}</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true"></a><span class="co"># Bash Terminal raw</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true"></a><span class="ex">alacritty</span> -e env -i INPUTRC= bash --noprofile --norc</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true"></a><span class="ex">alacritty</span> -e env -i INPUTRC= bash --noprofile --norc -ic <span class="st">&#39;echo toto; bash --norc&#39;</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true"></a><span class="fu">nl</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true"></a><span class="co"># for number line: prepend each line with line number, pipeutil</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true"></a><span class="va">IFS=</span><span class="st">&#39;&#39;</span>; <span class="kw">while</span> <span class="bu">read</span> <span class="va">REPLY</span>; <span class="kw">do</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$REPLY</span><span class="st">&quot;</span><span class="kw">;</span> <span class="kw">done</span> <span class="op">&lt;</span> <span class="ex">tag.md</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true"></a><span class="fu">ps</span> -ef <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;myProcessName&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> -v grep <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2}&#39;</span> <span class="kw">|</span> <span class="fu">xargs</span> -r kill -15</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true"></a><span class="co">#  kill all process from name</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true"></a><span class="bu">type</span> find<span class="kw">;</span> <span class="bu">type</span> vi</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true"></a><span class="co"># see if command is alias or function or binary</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true"></a><span class="bu">kill</span> -l</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true"></a><span class="co"># list signals</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true"></a></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true"></a><span class="va">current_script_dir=</span><span class="st">&quot;</span><span class="va">$(</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span> <span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">${BASH_SOURCE[0]}</span><span class="st">&quot;</span> <span class="va">)</span><span class="st">&quot;</span> <span class="op">&gt;</span>/dev/null <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span> <span class="va">)</span><span class="st">&quot;</span><span class="kw">`</span></span></code></pre></div>
+<ul>
+<li><a href="Bash-HackerRank.html">Bash HackerRank</a></li>
+<li><a href="Bash-Rc.html">Bash Rc</a></li>
+<li><a href="Bash_Snippet.md.html">Bash_Snippet</a></li>
+<li><a href="Bash_Cheatsheet.sh.html">Bash_Cheatsheet</a></li>
+<li><a href="Bash_Quizz.md.html">Bash_Quizz</a></li>
+<li><a href="Bash_Dump.md.html">Bash_Dump</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Rang in pipe</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span> 0 10 <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-I%</span> echo pre % post</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sed colorize</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;color test&quot;</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s,color,\x1b[31m&amp;\x1b[0m,&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat string</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;=%.0s&#39;</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">100</span><span class="dt">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Array map append to each elt (and prepend)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="va">array</span><span class="op">=</span><span class="va">(</span> <span class="st">&quot;</span><span class="va">${array</span><span class="op">[@]/%/</span>_content<span class="va">}</span><span class="st">&quot;</span> <span class="va">)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="va">array</span><span class="op">=</span><span class="va">(</span> <span class="st">&quot;</span><span class="va">${array</span><span class="op">[@]/</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">#/</span>prefix_<span class="va">}</span><span class="st">&quot;</span> <span class="va">)</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicate lines while keeping the order of the lines</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># From https://unix.stackexchange.com/questions/194780/remove-duplicate-lines-while-keeping-the-order-of-the-lines</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="at">-n</span> out.txt <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k2</span> <span class="at">-k1n</span>  <span class="kw">|</span> <span class="fu">uniq</span> <span class="at">-f1</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-nk1,1</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f2-</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace recursive</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> . <span class="at">-type</span> f <span class="at">-print0</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-0</span> sed <span class="at">-i</span> <span class="at">-e</span> <span class="st">&#39;s/foo/bar/g&#39;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># List process attached to tty (showed by w)</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-ft</span> pts/3 </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ex">pkill</span> <span class="at">-t</span> pts/1</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="va">newline_separated</span><span class="op">=</span><span class="va">${space_separated</span><span class="op">//</span><span class="ss"> </span><span class="op">/</span><span class="st">$&#39;</span><span class="dt">\n</span><span class="st">&#39;</span><span class="va">}</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-c</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the commands you could run.</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-a</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the aliases you could run.</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-b</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the built-ins you could run.</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-k</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the keywords you could run.</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-A</span> function</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the functions you could run.</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="bu">compgen</span> <span class="at">-A</span> function <span class="at">-abck</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># will list all the above in one go.</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ex">https://codegolf.stackexchange.com/questions/28786/write-a-program-that-makes-2-2-5</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Cat all file with filename</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +1 file1.txt file2.txt file3.txt</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Export all function</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="bu">declare</span> <span class="at">-fx</span> <span class="va">$(</span><span class="bu">compgen</span> <span class="at">-A</span> function<span class="va">)</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">copy_function()</span> <span class="kw">{</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># See: https://stackoverflow.com/a/18839557/2544873</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>  <span class="bu">test</span> <span class="at">-n</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">declare</span> <span class="at">-f</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="va">)</span><span class="st">&quot;</span> <span class="kw">||</span> <span class="cf">return</span> </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>  <span class="bu">eval</span> <span class="st">&quot;</span><span class="va">${_</span><span class="op">/</span><span class="va">$1</span><span class="op">/</span><span class="va">$2}</span><span class="st">&quot;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Bash Terminal raw</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ex">alacritty</span> <span class="at">-e</span> env <span class="at">-i</span> INPUTRC= bash <span class="at">--noprofile</span> <span class="at">--norc</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ex">alacritty</span> <span class="at">-e</span> env <span class="at">-i</span> INPUTRC= bash <span class="at">--noprofile</span> <span class="at">--norc</span> <span class="at">-ic</span> <span class="st">&#39;echo toto; bash --norc&#39;</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="fu">nl</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co"># for number line: prepend each line with line number, pipeutil</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="va">IFS</span><span class="op">=</span><span class="st">&#39;&#39;</span><span class="kw">;</span> <span class="cf">while</span> <span class="bu">read</span> <span class="va">REPLY</span><span class="kw">;</span> <span class="cf">do</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$REPLY</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">done</span> <span class="op">&lt;</span> tag.md</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">ps</span> <span class="at">-ef</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">&#39;myProcessName&#39;</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> grep <span class="kw">|</span> <span class="fu">awk</span> <span class="st">&#39;{print $2}&#39;</span> <span class="kw">|</span> <span class="fu">xargs</span> <span class="at">-r</span> kill <span class="at">-15</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="co">#  kill all process from name</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> find<span class="kw">;</span> <span class="bu">type</span> vi</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co"># see if command is alias or function or binary</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="bu">kill</span> <span class="at">-l</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a><span class="co"># list signals</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="va">current_script_dir</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$(</span> <span class="bu">cd</span> <span class="st">&quot;</span><span class="va">$(</span> <span class="fu">dirname</span> <span class="st">&quot;</span><span class="va">${BASH_SOURCE</span><span class="op">[</span><span class="dv">0</span><span class="op">]</span><span class="va">}</span><span class="st">&quot;</span> <span class="va">)</span><span class="st">&quot;</span> <span class="op">&gt;</span>/dev/null <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span> <span class="va">)</span><span class="st">&quot;</span><span class="kw">`</span></span></code></pre></div>
 <section id="create-user" class="level1">
 <h1>Create User</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="va">name=</span>isaacgd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a><span class="ex">useradd</span> -m -s <span class="va">$(</span><span class="fu">which</span> bash<span class="va">)</span> -d /users/<span class="va">$name</span> <span class="va">$name</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="fu">passwd</span> <span class="va">$name</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a><span class="fu">getent</span> passwd <span class="va">$name</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">name</span><span class="op">=</span>isaacgd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">useradd</span> <span class="at">-m</span> <span class="at">-s</span> <span class="va">$(</span><span class="fu">which</span> bash<span class="va">)</span> <span class="at">-d</span> /users/<span class="va">$name</span> <span class="va">$name</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">passwd</span> <span class="va">$name</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">getent</span> passwd <span class="va">$name</span></span></code></pre></div>
 </section>
 <section id="useless-cat" class="level1">
 <h1>Useless cat</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="va">value=</span><span class="kw">`</span><span class="fu">cat</span> config.txt<span class="kw">`</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="va">value=</span><span class="op">$(&lt;</span>config.txt<span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">value</span><span class="op">=</span><span class="kw">`</span><span class="fu">cat</span> config.txt<span class="kw">`</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">value</span><span class="op">=</span><span class="va">$(</span><span class="op">&lt;</span>config.txt<span class="va">)</span></span></code></pre></div>
 </section>
 <section id="redirection-and-file-descriptor" class="level1">
 <h1>Redirection and file descriptor</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a><span class="co"># Fork a pipe</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;Hello world.&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="op">&gt;(</span><span class="fu">sed</span> <span class="st">&#39;s/^/1: /&#39;</span><span class="op">)</span>  <span class="op">&gt;(</span><span class="fu">sed</span> <span class="st">&#39;s/^/2: /&#39;</span><span class="op">)</span> <span class="op">&gt;</span>/dev/null</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a><span class="co"># Fork a pipe bis: more sophisticated</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;Hello world.&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="op">&gt;(</span><span class="ex">md5sum</span> <span class="kw">|</span> <span class="fu">tee</span> out1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/md5 : /&#39;</span><span class="op">)</span> <span class="op">&gt;(</span><span class="ex">sha1sum</span> <span class="kw">|</span> <span class="fu">tee</span> out2 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/sha1: /&#39;</span><span class="op">)</span> <span class="op">&gt;</span> out3</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a><span class="co"># For a pipe posix compliant</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="kw">(</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a><span class="co"># 6</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a><span class="kw">(</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="co"># 5</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a><span class="kw">(</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true"></a><span class="co"># 4</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;Hello World&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /dev/fd/<span class="dt">{4,5}</span> <span class="op">&gt;</span> /dev/null</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true"></a><span class="kw">)</span> <span class="op">4&gt;&amp;1</span> <span class="kw">|</span> <span class="kw">(</span> <span class="fu">sed</span> <span class="st">&#39;s/^/one: /&#39;</span> <span class="op">&gt;</span> /dev/fd/6 <span class="kw">)</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true"></a><span class="kw">)</span> <span class="op">5&gt;&amp;1</span> <span class="kw">|</span> <span class="kw">(</span> <span class="fu">sed</span> <span class="st">&#39;s/^/two: /&#39;</span> <span class="op">&gt;</span> /dev/fd/6 <span class="kw">)</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true"></a><span class="kw">)</span> <span class="op">6&gt;&amp;1</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true"></a><span class="bu">shopt</span> -s lastpipe<span class="kw">;</span> <span class="kw">set</span> <span class="ex">+m</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true"></a><span class="co"># permit last pipe command to execute in current shell; disable Monitor mode (i.e. job control)</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true"></a><span class="kw">{</span> <span class="bu">echo</span> -e <span class="st">&quot;begin\ngrepme\nend&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /dev/fd/3 <span class="kw">|</span> <span class="fu">sed</span> -n <span class="st">&#39;/grepme/p&#39;</span> <span class="kw">|</span> <span class="ex">readarray</span> -t a_filter<span class="kw">;</span> <span class="kw">}</span> <span class="op">3&gt;&amp;1</span>; <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${a_filter[*]}</span><span class="st">&quot;</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true"></a><span class="co"># :from: https://catonmat.net/bash-redirections-cheat-sheet</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&gt;</span> file</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true"></a><span class="co"># Redirect the standard output (stdout) ofcmdto a file.</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">1&gt;</span> file</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true"></a><span class="co"># Same ascmd &gt; file. 1 is the default file descriptor (fd) for stdout.</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">2&gt;</span> file</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true"></a><span class="co"># Redirect the standard error (stderr) ofcmdto a file. 2 is the default fd for stderr.</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&gt;&gt;</span> file</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true"></a><span class="co"># Append stdout ofcmdto a file.</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">2&gt;&gt;</span> file</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true"></a><span class="co"># Append stderr ofcmdto a file.</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&amp;&gt;</span> file</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true"></a><span class="co"># Redirect stdout and stderr ofcmdto a file.</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&gt;</span> file <span class="op">2&gt;&amp;1</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true"></a><span class="co"># Another way to redirect both stdout and stderr ofascmd 2&gt;&amp;1 &gt; file. Redirection order matters! cmdto a file. This is notthe same</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&gt;</span> /dev/null</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true"></a><span class="co"># Discard stdout ofcmd.</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">2&gt;</span> /dev/null</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true"></a><span class="co"># Discard stderr ofcmd.</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&amp;&gt;</span> /dev/null</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true"></a><span class="co"># Discard stdout and stderr ofcmd.</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;</span> file</span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true"></a><span class="co"># Redirect the contents of the file to the standard input (stdin) ofcmd.</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true"></a></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true"></a><span class="co"># Redirect a bunch of lines to the stdin. If&#39;EOL&#39;is quoted, text is treated literally. This is called a here-document.</span></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;&lt; EOL</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true"></a>line</span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true"></a>line</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true"></a><span class="op">EOL</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true"></a></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true"></a><span class="co"># Redirect a bunch of lines to the stdin and strip the leading tabs.</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;&lt;- EOL</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true"></a>&lt;tab&gt;foo</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true"></a>&lt;tab&gt;&lt;tab&gt;bar</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true"></a><span class="op">EOL</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">&amp;&gt;</span> <span class="op">&gt;(</span><span class="fu">tee</span> -a log.out<span class="op">)</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true"></a><span class="co"># Redirect stdout and stderr to file</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">&amp;&gt;</span> /dev/tty</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true"></a><span class="co"># Reset stdout and stderr </span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true"></a></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;&lt;&lt;</span> <span class="st">&quot;string&quot;</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true"></a><span class="co"># Redirect a single line of text to the stdin ofcmd. This is called a here-string.</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">2&gt;</span> file</span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true"></a><span class="co"># Redirect stderr of all commands to a file forever.</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&lt;</span> file</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true"></a><span class="co"># Open a file for reading using a custom file descriptor.</span></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&gt;</span> file</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true"></a><span class="co"># Open a file for writing using a custom file descriptor.</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&lt;&gt;</span> file</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true"></a><span class="co"># Open a file for reading and writing using a custom file descriptor.</span></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&gt;</span><span class="kw">&amp;</span><span class="ex">-</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true"></a><span class="co"># Close a file descriptor.</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">4&gt;&amp;3</span></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true"></a><span class="co"># Make file descriptor 4 to be a copy of file descriptor 3. (Copy fd 3 to 4 .)</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">4&gt;&amp;3-</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true"></a><span class="co"># Copy file descriptor 3 to 4 and close file descriptor 3.</span></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true"></a><span class="bu">echo</span> <span class="st">&quot;foo&quot;</span> <span class="op">&gt;&amp;3</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true"></a><span class="co"># Write to a custom file descriptor.</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true"></a><span class="fu">cat</span> <span class="op">&lt;&amp;3</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true"></a><span class="co"># Read from a custom file descriptor.</span></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true"></a><span class="kw">(</span><span class="ex">cmd1</span><span class="kw">;</span> <span class="ex">cmd2</span><span class="kw">)</span> <span class="op">&gt;</span> <span class="fu">file</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true"></a><span class="co"># Redirect stdout from multiple commands to a file (using a sub-shell).</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true"></a><span class="kw">{</span> <span class="ex">cmd1</span><span class="kw">;</span> <span class="ex">cmd2</span><span class="kw">;</span> <span class="kw">}</span> <span class="op">&gt;</span> <span class="fu">file</span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true"></a><span class="co"># Redirect stdout from multiple commands to a file (faster; not using a sub-shell).</span></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&lt;&gt;</span> /dev/tcp/host/port</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true"></a><span class="co"># Open a TCP connection tohost:port. (This is a bash feature, not Linux feature).</span></span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true"></a><span class="bu">exec</span> <span class="op">3&lt;&gt;</span> /dev/udp/host/port</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true"></a><span class="co"># Open a UDP connection tohost:port. (This is a bash feature, not Linux feature).</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span></span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true"></a><span class="co"># Redirect stdout ofUseful whencmddoesn’t read from stdin directly.cmd1to an anonymous fifo, then pass the fifo tocmdas an argument.</span></span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span></span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true"></a><span class="co"># Redirect stdout ofBest example:diff &lt;(find /path1 | sort) &lt;(find /path2 | sort)cmd1to an anonymous fifo, then redirect the fifo to stdin of. cmd.</span></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span> <span class="op">&lt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true"></a><span class="co"># Redirect stdout ofarguments tocmd. cmd1andcmd2to two anonymous fifos, then pass both fifos as</span></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true"></a><span class="ex">cmd1</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true"></a><span class="co"># Runpipe as an argument tocmd2with its stdin connected to an anonymous fifo, and pass the filename of thecmd1.</span></span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true"></a><span class="ex">cmd1</span> <span class="op">&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true"></a><span class="co"># Runto this anonymous pipe.cmd2with its stdin connected to an anonymous fifo, then redirect stdout ofcmd</span></span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true"></a><span class="ex">cmd1</span> <span class="kw">|</span> <span class="ex">cmd2</span></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true"></a><span class="co"># Redirect stdout ofsame ascmd2 &lt; &lt;(cmd1)cmd1to stdin of, same ascmd2&gt; &gt;(cmd2) cmd1. Pro-tip: This is the same as, same as&lt; &lt;(cmd1) cmd2cmd1 &gt; &gt;(cmd2). ,</span></span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true"></a><span class="ex">cmd1</span> <span class="kw">|&amp;</span> <span class="ex">cmd2</span></span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true"></a><span class="co">#  Redirect stdout and stderr ofcmd1 2&gt;&amp;1 | cmd2for older bashes.cmd1 to stdin of cmd2 (bash 4.0+ only). Use</span></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true"></a><span class="ex">cmd</span> <span class="kw">|</span> <span class="fu">tee</span> file</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true"></a><span class="co"># Redirect stdout ofcmdto a file and print it to screen.</span></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true"></a><span class="bu">exec</span> <span class="dt">{filew}</span><span class="op">&gt;</span> file</span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true"></a><span class="co"># Open a file for writing using a named file descriptor called{filew}(bash 4.1+).</span></span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">3&gt;&amp;1</span> <span class="op">1&gt;&amp;2</span> <span class="op">2&gt;&amp;3</span></span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true"></a><span class="co"># Swap stdout and stderr ofcmd.</span></span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true"></a><span class="ex">cmd</span> <span class="op">&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd1</span><span class="op">)</span> <span class="op">2&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true"></a><span class="co"># Send stdout ofcmdtocmd1and stderr ofcmdtocmd2.</span></span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true"></a><span class="ex">cmd1</span> <span class="kw">|</span> <span class="ex">cmd2</span> <span class="kw">|</span> <span class="ex">cmd3</span> <span class="kw">|</span> <span class="ex">cmd</span><span class="kw">;</span> <span class="bu">echo</span> <span class="va">${PIPESTATUS[@]}</span></span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true"></a><span class="co"># Find out the exit codes of all piped commands.</span></span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true"></a></span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true"></a></span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true"></a><span class="co"># </span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fork a pipe</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Hello world.&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="op">&gt;(</span><span class="fu">sed</span> <span class="st">&#39;s/^/1: /&#39;</span><span class="op">)</span>  <span class="op">&gt;(</span><span class="fu">sed</span> <span class="st">&#39;s/^/2: /&#39;</span><span class="op">)</span> <span class="op">&gt;</span>/dev/null</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fork a pipe bis: more sophisticated</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Hello world.&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="op">&gt;(</span><span class="fu">md5sum</span> <span class="kw">|</span> <span class="fu">tee</span> out1 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/md5 : /&#39;</span><span class="op">)</span> <span class="op">&gt;(</span><span class="fu">sha1sum</span> <span class="kw">|</span> <span class="fu">tee</span> out2 <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&#39;s/^/sha1: /&#39;</span><span class="op">)</span> <span class="op">&gt;</span> /dev/null</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For a pipe posix compliant</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 6</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 5</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Hello World&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /dev/fd/<span class="dt">{4</span><span class="op">,</span><span class="dt">5}</span> <span class="op">&gt;</span> /dev/null</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="dv">4</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="kw">(</span> <span class="fu">sed</span> <span class="st">&#39;s/^/one: /&#39;</span> <span class="op">&gt;</span> /dev/fd/6 <span class="kw">)</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="dv">5</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="kw">(</span> <span class="fu">sed</span> <span class="st">&#39;s/^/two: /&#39;</span> <span class="op">&gt;</span> /dev/fd/6 <span class="kw">)</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span> <span class="dv">6</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="bu">shopt</span> <span class="at">-s</span> lastpipe<span class="kw">;</span> <span class="bu">set</span> +m</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># permit last pipe command to execute in current shell; disable Monitor mode (i.e. job control)</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span> <span class="bu">echo</span> <span class="at">-e</span> <span class="st">&quot;begin\ngrepme\nend&quot;</span> <span class="kw">|</span> <span class="fu">tee</span> /dev/fd/3 <span class="kw">|</span> <span class="fu">sed</span> <span class="at">-n</span> <span class="st">&#39;/grepme/p&#39;</span> <span class="kw">|</span> <span class="ex">readarray</span> <span class="at">-t</span> a_filter<span class="kw">;</span> <span class="kw">}</span> <span class="dv">3</span><span class="op">&gt;&amp;</span><span class="dv">1</span><span class="kw">;</span> <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">${a_filter</span><span class="op">[*]</span><span class="va">}</span><span class="st">&quot;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># :from: https://catonmat.net/bash-redirections-cheat-sheet</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&gt;</span> file</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect the standard output (stdout) ofcmdto a file.</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="dv">1</span><span class="op">&gt;</span> file</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Same ascmd &gt; file. 1 is the default file descriptor (fd) for stdout.</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="dv">2</span><span class="op">&gt;</span> file</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect the standard error (stderr) ofcmdto a file. 2 is the default fd for stderr.</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&gt;&gt;</span> file</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Append stdout ofcmdto a file.</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="dv">2</span><span class="op">&gt;&gt;</span> file</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Append stderr ofcmdto a file.</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&amp;&gt;</span> file</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout and stderr ofcmdto a file.</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&gt;</span> file <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Another way to redirect both stdout and stderr ofascmd 2&gt;&amp;1 &gt; file. Redirection order matters! cmdto a file. This is notthe same</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&gt;</span> /dev/null</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Discard stdout ofcmd.</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="dv">2</span><span class="op">&gt;</span> /dev/null</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Discard stderr ofcmd.</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&amp;&gt;</span> /dev/null</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Discard stdout and stderr ofcmd.</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;</span> file</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect the contents of the file to the standard input (stdin) ofcmd.</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect a bunch of lines to the stdin. If&#39;EOL&#39;is quoted, text is treated literally. This is called a here-document.</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;&lt; EOL</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="st">line</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="st">line</span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="op">EOL</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect a bunch of lines to the stdin and strip the leading tabs.</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;&lt;- EOL</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tab&gt;foo</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;tab&gt;&lt;tab&gt;bar</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="op">EOL</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="op">&amp;&gt;</span> <span class="op">&gt;(</span><span class="fu">tee</span> <span class="at">-a</span> log.out<span class="op">)</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout and stderr to file</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="op">&amp;&gt;</span> /dev/tty</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Reset stdout and stderr </span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;&lt;&lt;</span> <span class="st">&quot;string&quot;</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect a single line of text to the stdin ofcmd. This is called a here-string.</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">2</span><span class="op">&gt;</span> file</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stderr of all commands to a file forever.</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&lt;</span> file</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a file for reading using a custom file descriptor.</span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&gt;</span> file</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a file for writing using a custom file descriptor.</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&lt;&gt;</span> file</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a file for reading and writing using a custom file descriptor.</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&gt;&amp;</span>-</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Close a file descriptor.</span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">4</span><span class="op">&gt;&amp;</span><span class="dv">3</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Make file descriptor 4 to be a copy of file descriptor 3. (Copy fd 3 to 4 .)</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">4</span><span class="op">&gt;&amp;</span><span class="dv">3</span><span class="kw">-</span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy file descriptor 3 to 4 and close file descriptor 3.</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;foo&quot;</span> <span class="op">&gt;&amp;</span><span class="dv">3</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Write to a custom file descriptor.</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&amp;</span><span class="dv">3</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Read from a custom file descriptor.</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">cmd1</span><span class="kw">;</span> <span class="ex">cmd2</span><span class="kw">)</span> <span class="op">&gt;</span> file</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout from multiple commands to a file (using a sub-shell).</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="kw">{</span> <span class="ex">cmd1</span><span class="kw">;</span> <span class="ex">cmd2</span><span class="kw">;</span> <span class="kw">}</span> <span class="op">&gt;</span> file</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout from multiple commands to a file (faster; not using a sub-shell).</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&lt;&gt;</span> /dev/tcp/host/port</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a TCP connection tohost:port. (This is a bash feature, not Linux feature).</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> <span class="dv">3</span><span class="op">&lt;&gt;</span> /dev/udp/host/port</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a UDP connection tohost:port. (This is a bash feature, not Linux feature).</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout ofUseful whencmddoesn’t read from stdin directly.cmd1to an anonymous fifo, then pass the fifo tocmdas an argument.</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout ofBest example:diff &lt;(find /path1 | sort) &lt;(find /path2 | sort)cmd1to an anonymous fifo, then redirect the fifo to stdin of. cmd.</span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&lt;(</span><span class="ex">cmd1</span><span class="op">)</span> <span class="op">&lt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout ofarguments tocmd. cmd1andcmd2to two anonymous fifos, then pass both fifos as</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd1</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Runpipe as an argument tocmd2with its stdin connected to an anonymous fifo, and pass the filename of thecmd1.</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd1</span> <span class="op">&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="co"># Runto this anonymous pipe.cmd2with its stdin connected to an anonymous fifo, then redirect stdout ofcmd</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd1</span> <span class="kw">|</span> <span class="ex">cmd2</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout ofsame ascmd2 &lt; &lt;(cmd1)cmd1to stdin of, same ascmd2&gt; &gt;(cmd2) cmd1. Pro-tip: This is the same as, same as&lt; &lt;(cmd1) cmd2cmd1 &gt; &gt;(cmd2). ,</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd1</span> <span class="kw">|&amp;</span> <span class="ex">cmd2</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="co">#  Redirect stdout and stderr ofcmd1 2&gt;&amp;1 | cmd2for older bashes.cmd1 to stdin of cmd2 (bash 4.0+ only). Use</span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="kw">|</span> <span class="fu">tee</span> file</span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Redirect stdout ofcmdto a file and print it to screen.</span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a><span class="bu">exec</span> {filew}<span class="op">&gt;</span> file</span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Open a file for writing using a named file descriptor called{filew}(bash 4.1+).</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="dv">3</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="dv">1</span><span class="op">&gt;&amp;</span><span class="dv">2</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">3</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Swap stdout and stderr ofcmd.</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd</span> <span class="op">&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd1</span><span class="op">)</span> <span class="dv">2</span><span class="op">&gt;</span> <span class="op">&gt;(</span><span class="ex">cmd2</span><span class="op">)</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Send stdout ofcmdtocmd1and stderr ofcmdtocmd2.</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="ex">cmd1</span> <span class="kw">|</span> <span class="ex">cmd2</span> <span class="kw">|</span> <span class="ex">cmd3</span> <span class="kw">|</span> <span class="ex">cmd</span><span class="kw">;</span> <span class="bu">echo</span> <span class="va">${PIPESTATUS</span><span class="op">[@]</span><span class="va">}</span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Find out the exit codes of all piped commands.</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span></code></pre></div>
 </section>
 <section id="interactive" class="level1">
 <h1>interactive</h1>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="fu">bash</span> --init-file my-init-script</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a><span class="bu">eval</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">declare</span> -F <span class="kw">|</span> <span class="fu">sed</span> -e <span class="st">&#39;s/-f /-fx /&#39;</span><span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> <span class="at">--init-file</span> my-init-script</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> <span class="st">&quot;</span><span class="va">$(</span><span class="bu">declare</span> <span class="at">-F</span> <span class="kw">|</span> <span class="fu">sed</span> <span class="at">-e</span> <span class="st">&#39;s/-f /-fx /&#39;</span><span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
 </section>
 <section id="introspection" class="level1">
 <h1>Introspection</h1>
@@ -310,77 +352,81 @@
 </section>
 <section id="shell-check" class="level1">
 <h1>Shell check</h1>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a><span class="co"># shellcheck disable=SC2155  # Declare and assign separately to avoid masking return values -&gt; Prevent declare -a</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a><span class="co"># shellcheck disable=SC2092  # Remove backticks</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># shellcheck disable=SC2155  # Declare and assign separately to avoid masking return values -&gt; Prevent declare -a</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># shellcheck disable=SC2092  # Remove backticks</span></span></code></pre></div>
 </section>
 <section id="completion" class="level1">
 <h1>Completion</h1>
 <ul>
-<li>COMP_WORDS: an array of all the words typed after the name of the program the compspec belongs to</li>
-<li>COMP_CWORD: an index of the COMP_WORDS array pointing to the word the current cursor is at - in other words, the index of the word the cursor was when the tab key was pressed</li>
+<li>COMP_WORDS: an array of all the words typed after the name of the
+program the compspec belongs to</li>
+<li>COMP_CWORD: an index of the COMP_WORDS array pointing to the word
+the current cursor is at - in other words, the index of the word the
+cursor was when the tab key was pressed</li>
 <li>COMP_LINE: the current command line</li>
 </ul>
 </section>
 <section id="getopt" class="level1">
 <h1>Getopt</h1>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="co"># $@ is all command line parameters passed to the script.</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="co"># -o is for short options like -v</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="co"># -l is for long options with double dash like --version</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a><span class="va">options=$(</span><span class="fu">getopt</span> <span class="kw">\</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>  <span class="ex">-l</span> <span class="st">&quot;all,help,rosetta,site,vim,html,wiki&quot;</span> <span class="kw">\</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>  <span class="ex">-o</span> <span class="st">&quot;ahrsvxw&quot;</span> -- <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="va">)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a><span class="co"># set --:</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a><span class="co"># If no arguments follow this option, then the positional parameters are unset. Otherwise, the positional parameters</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a><span class="co"># are set to the arguments, even if some of them begin with a ‘-’.</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a><span class="bu">eval</span> set -- <span class="st">&quot;</span><span class="va">$options</span><span class="st">&quot;</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a><span class="bu">echo</span> -n <span class="st">&quot;Args: &quot;</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a><span class="kw">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="kw">do</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a>  <span class="kw">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="kw"> in</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>    -a<span class="kw">|</span>--all<span class="kw">)</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;All, &quot;</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a>      <span class="kw">((</span>ball=1<span class="kw">))</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a>    -h<span class="kw">|</span>--help<span class="kw">)</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a>      <span class="ex">usage</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true"></a>    -r<span class="kw">|</span>--rosetta<span class="kw">)</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;Rosetta, &quot;</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true"></a>      <span class="kw">((</span>brosetta=1<span class="kw">))</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true"></a>    -s<span class="kw">|</span>--site<span class="kw">)</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;Site, &quot;</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true"></a>      <span class="kw">((</span>bsite=1<span class="kw">))</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true"></a>    -v<span class="kw">|</span>--vim<span class="kw">)</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;Vim, &quot;</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true"></a>      <span class="kw">((</span>bvim=1<span class="kw">))</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true"></a>    -w<span class="kw">|</span>--wiki<span class="kw">)</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;Wiki, &quot;</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true"></a>      <span class="kw">((</span>bwiki=1<span class="kw">))</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true"></a>    -x<span class="kw">|</span>--html<span class="kw">)</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true"></a>      <span class="bu">echo</span> -n <span class="st">&quot;Html, &quot;</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true"></a>      <span class="kw">((</span>bhtml=1<span class="kw">))</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true"></a>    --<span class="kw">)</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true"></a>      <span class="bu">shift</span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true"></a>      <span class="bu">break</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true"></a>      <span class="kw">;;</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true"></a>  <span class="kw">esac</span></span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true"></a>  <span class="bu">shift</span></span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true"></a><span class="kw">done</span></span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true"></a><span class="bu">echo</span></span></code></pre></div>
-<p>~/Software/Bash $ toto a1 a2 a3</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># $@ is all command line parameters passed to the script.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -o is for short options like -v</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -l is for long options with double dash like --version</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="va">options</span><span class="op">=</span><span class="va">$(</span><span class="fu">getopt</span> <span class="dt">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">-l</span> <span class="st">&quot;all,help,rosetta,site,vim,html,wiki&quot;</span> <span class="dt">\</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> <span class="st">&quot;ahrsvxw&quot;</span> <span class="at">--</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="va">)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># set --:</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If no arguments follow this option, then the positional parameters are unset. Otherwise, the positional parameters</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># are set to the arguments, even if some of them begin with a ‘-’.</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">eval</span> set <span class="at">--</span> <span class="st">&quot;</span><span class="va">$options</span><span class="st">&quot;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Args: &quot;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-a</span><span class="kw">|</span><span class="ss">--all</span><span class="kw">)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;All, &quot;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">ball</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-h</span><span class="kw">|</span><span class="ss">--help</span><span class="kw">)</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>      <span class="ex">usage</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-r</span><span class="kw">|</span><span class="ss">--rosetta</span><span class="kw">)</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Rosetta, &quot;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">brosetta</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-s</span><span class="kw">|</span><span class="ss">--site</span><span class="kw">)</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Site, &quot;</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">bsite</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-v</span><span class="kw">|</span><span class="ss">--vim</span><span class="kw">)</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Vim, &quot;</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">bvim</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-w</span><span class="kw">|</span><span class="ss">--wiki</span><span class="kw">)</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Wiki, &quot;</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">bwiki</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    <span class="ss">-x</span><span class="kw">|</span><span class="ss">--html</span><span class="kw">)</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      <span class="bu">echo</span> <span class="at">-n</span> <span class="st">&quot;Html, &quot;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>      <span class="kw">((</span><span class="va">bhtml</span><span class="op">=</span><span class="dv">1</span><span class="kw">))</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>    <span class="ss">--</span><span class="kw">)</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>      <span class="bu">shift</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>      <span class="cf">break</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>      <span class="cf">;;</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">esac</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">shift</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span></span></code></pre></div>
 </section>
 <section id="tutorial-linkedin" class="level1">
 <h1>Tutorial LinkedIn</h1>
@@ -411,29 +457,42 @@
 <section id="mnemonic" class="level3">
 <h3>Mnemonic</h3>
 <ul>
-<li><code>tee</code> for T intersection</li>
+<li><code>tee</code> for T intersection, T pipe fitting (plumbing
+device)</li>
+<li>tr translate</li>
+<li>fd D file descriptors (as in /dev/fd)</li>
+<li>dev D devices</li>
+<li>diff C difference</li>
+<li>dd C (opinions 3-n) data, device, disk, dump in various
+combinations</li>
+<li>bc C better calculator</li>
+<li>awk C Aho, Weinberger, Kernighan (program authors)</li>
+<li>bash C Bourne again shell</li>
+<li>sed Stream EDitor</li>
 <li><code>cat</code> for concatenate</li>
 <li><code>tac</code> for cat upside down</li>
+<li>`xargss execute a command with many arguments</li>
 </ul>
 </section>
 </section>
-<section id="commpletion" class="level1">
-<h1>Commpletion</h1>
+<section id="completion-1" class="level1">
+<h1>Completion</h1>
 <ul>
 <li><code>complete -p</code> : list</li>
 <li>bind ‘set show-all-if-ambiguous on’</li>
 <li>bind TAB:menu-complete</li>
 </ul>
-<pre class="conf"><code>
-# display all possible matches for an ambiguous pattern at first tab
-set show-all-if-ambiguous on
-
-
-# next tab(s) will cycle through matches
-TAB: menu-complete
-
-# shift tab cycles backward
-&quot;\e[Z&quot;: menu-complete-backward</code></pre>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode conf"><code class="sourceCode toml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># display all possible matches for an ambiguous pattern at first tab</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">set</span> <span class="dt">show-all-if-ambiguous</span> <span class="dt">on</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># next tab(s) will cycle through matches</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dt">TAB</span><span class="er">:</span> <span class="dt">menu-complete</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># shift tab cycles backward</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;</span><span class="er">\e</span><span class="dt">[Z&quot;</span><span class="er">:</span> <span class="dt">menu-complete-backward</span></span></code></pre></div>
 </section>
 <section id="history" class="level1">
 <h1>History</h1>
@@ -449,11 +508,13 @@ TAB: menu-complete
 <section id="other-tips" class="level1">
 <h1>Other tips</h1>
 <ul>
-<li><p>How to join multiple lines of file names into one with custom delimiter?:</p>
+<li><p>How to join multiple lines of file names into one with custom
+delimiter?:</p>
 <ul>
 <li><code>paste</code> in <code>ls -1 | paste -sd "," -</code></li>
 <li><code>tr</code> in <code>ls -1 | tr '\n' ','</code></li>
-<li><code>awk</code> in <code>ls -1 | awk 'ORS=","'</code> Output Record Separator</li>
+<li><code>awk</code> in <code>ls -1 | awk 'ORS=","'</code> Output Record
+Separator</li>
 <li><code>xargs</code> in ls | xargs -d, -L 1 echo</li>
 </ul></li>
 <li><p>Exit with <C-D></p></li>
@@ -463,7 +524,8 @@ TAB: menu-complete
 </ul></li>
 <li><p>Read file line by line</p>
 <ul>
-<li>cat peptides.txt | while read line; do_something_with_$line_here; done</li>
+<li>cat peptides.txt | while read line; do_something_with_$line_here;
+done</li>
 <li>while read p; do echo “$p” ; done &lt;peptides.txt</li>
 </ul></li>
 <li><p>Xterm change mouse cursor</p>
@@ -495,29 +557,56 @@ TAB: menu-complete
 <li><code>dirname $0</code></li>
 <li><code>dirname "$(readlink -f "$0")"</code></li>
 </ul></li>
-<li><p>Faster redirect to null <code>| :</code> instead of <code>&gt; /dev/null</code></p></li>
+<li><p>Faster redirect to null <code>| :</code> instead of
+<code>&gt; /dev/null</code></p></li>
 <li><p>Center text (read ~/Bin/hi.sh)</p>
 <ul>
-<li><p>```bash title=“El terminal de la Ponette” printf "%*s" $(( ( ${ #title} + <span class="math inline">$columns ) / 2 )) "$</span>title"</p>
-<p>while read -r line do echo “$line” done &lt; &lt;(jobs) while read -r line ; do echo -e “ccaca <span class="math inline">$line" ; done&lt; &lt;(echo -e "$</span>toto”)</p>
-<p>lines=<span class="math inline">(<em>t</em><em>p</em><em>u</em><em>t</em><em>l</em><em>i</em><em>n</em><em>e</em><em>s</em>)<em>c</em><em>o</em><em>l</em><em>u</em><em>m</em><em>n</em><em>s</em>=</span>(tput cols)</p>
-<p>IFS=’’ read -r -d ’’ String &lt;&lt;“EOF” <?xml version="1.0" encoding='UTF-8'?> <painting> <img src="madonna.jpg" alt='Foligno Madonna, by Raphael'/></p>
+<li><p>```bash title=“El terminal de la Ponette” printf “%*s” $(( ( ${
+#title} + <span class="math inline">$columns ) / 2  ))
+"$</span>title”</p>
+<p>while read -r line do echo “$line” done &lt; &lt;(jobs) while read -r
+line ; do echo -e “ccaca <span class="math inline">$line" ; done&lt;
+&lt;(echo -e "$</span>toto”)</p>
+<p>lines=<span
+class="math inline">(<em>t</em><em>p</em><em>u</em><em>t</em><em>l</em><em>i</em><em>n</em><em>e</em><em>s</em>)<em>c</em><em>o</em><em>l</em><em>u</em><em>m</em><em>n</em><em>s</em>=</span>(tput
+cols)</p>
+<p>IFS=’’ read -r -d ’’ String &lt;&lt;“EOF”
+<?xml version="1.0" encoding='UTF-8'?> <painting>
+<img src="madonna.jpg" alt='Foligno Madonna, by Raphael'/></p>
 <caption>
-<p>This is Raphael’s “Foligno” Madonna, painted in <date>1511</date>-<date>1512</date>.</p>
+<p>This is Raphael’s “Foligno” Madonna, painted in
+<date>1511</date>-<date>1512</date>.</p>
 </caption>
-<p></painting> EOF This will put your text into your variable without needing to escape the quotes. It will also handle unbalanced quotes (apostrophes, i.e. ‘). Putting quotes around the sentinel (EOF) prevents the text from undergoing parameter expansion. The -d’’ causes it to read multiple lines (ignore newlines). read is a Bash built-in so it doesn’t require calling an external command such as cat. And if you are using this multi-line String variable to write to a file, put the variable around “QUOTES” like echo “<span class="math inline">${String}" &gt; /tmp/multiline_file.txt or echo "$</span>{String}” | tee /tmp/multiline_file.txt. Took me more than an hour to find that.</p></li>
+<p></painting> EOF This will put your text into your variable without
+needing to escape the quotes. It will also handle unbalanced quotes
+(apostrophes, i.e. ‘). Putting quotes around the sentinel (EOF) prevents
+the text from undergoing parameter expansion. The -d’’ causes it to read
+multiple lines (ignore newlines). read is a Bash built-in so it doesn’t
+require calling an external command such as cat. And if you are using
+this multi-line String variable to write to a file, put the variable
+around “QUOTES” like echo “<span class="math inline">${String}" &gt;
+/tmp/multiline_file.txt or echo "$</span>{String}” | tee
+/tmp/multiline_file.txt. Took me more than an hour to find
+that.</p></li>
 </ul></li>
 </ul>
 </section>
-<section id="more-there-httpsstackoverflow.comquestions1167746how-to-assign-a-heredoc-value-to-a-variable-in-bash" class="level1">
-<h1>more there : https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</h1>
+<section
+id="more-there-httpsstackoverflow.comquestions1167746how-to-assign-a-heredoc-value-to-a-variable-in-bash"
+class="level1">
+<h1>more there :
+https://stackoverflow.com/questions/1167746/how-to-assign-a-heredoc-value-to-a-variable-in-bash</h1>
 <pre><code>    ```</code></pre>
 <ul>
 <li><p>Fork bomb</p>
 <ul>
 <li>:(){ :|:&amp; };:</li>
 <li>Explications :</li>
-<li>:() définit une fonction nommée :. { :|:&amp; } est le corps de la fonction. Dans celui-ci, la fonction s’appelle elle-même (:), puis redirige la sortie à l’aide d’un pipe (|) sur l’entrée de la même fonction : et cache le processus en fond avec &amp;. La fonction, ensuite appelée avec :, s’appelle récursivement à l’infini.</li>
+<li>:() définit une fonction nommée :. { :|:&amp; } est le corps de la
+fonction. Dans celui-ci, la fonction s’appelle elle-même (:), puis
+redirige la sortie à l’aide d’un pipe (|) sur l’entrée de la même
+fonction : et cache le processus en fond avec &amp;. La fonction,
+ensuite appelée avec :, s’appelle récursivement à l’infini.</li>
 </ul></li>
 <li><p>Redirection</p>
 <ul>
@@ -540,7 +629,8 @@ TAB: menu-complete
 <li><code>IFS='%' ; echo $var</code>
 <ul>
 <li>GOOD : <code>abc        def    gh ijk</code></li>
-<li>Put your variable inside double quote to prevent field splitting, which ate your spaces:</li>
+<li>Put your variable inside double quote to prevent field splitting,
+which ate your spaces:</li>
 </ul></li>
 </ul></li>
 <li><p>Debugging</p>
@@ -549,7 +639,8 @@ TAB: menu-complete
 <li><p>set -x</p></li>
 <li><p>trap read debug</p>
 <ul>
-<li><h1 id="at-the-beginning-of-the-script">at the beginning of the script</h1>
+<li><h1 id="at-the-beginning-of-the-script">at the beginning of the
+script</h1>
 <ul>
 <li>to debug</li>
 </ul></li>
@@ -584,6 +675,13 @@ TAB: menu-complete
 <p>cd ~1 is ~/Dropbox/Projects/ds/test/</p>
 <p>cd ~2 is /Project/Warnest/docs/</p>
 <p>You can use <sub>1,</sub>2 etc in exactly the same way as</p></li>
+</ul>
+</section>
+<section id="link" class="level1">
+<h1>Link</h1>
+<ul>
+<li>Turn off buffereing with stdbuf:
+https://unix.stackexchange.com/questions/25372/turn-off-buffering-in-pipe</li>
 </ul>
 </section>
 </body>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Battery-script-example-1.md – Battery-script-example-1</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="Css/include.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Battery-script-example-1</h1>
+</header>
+<p>if [ “$1” != “ac_adapter” ] then sleep 4 fi</p>
+<p>bat0=<code>cat /sys/devices/platform/smapi/BAT0/state</code>
+bat1=<code>cat /sys/devices/platform/smapi/BAT1/state</code></p>
+<section
+id="list-of-modules-to-unload-space-seperated.-edit-depending-on-your-hardware-and-preferences."
+class="level1">
+<h1>List of modules to unload, space seperated. Edit depending on your
+hardware and preferences.</h1>
+<p>modlist=“uvcvideo”</p>
+</section>
+<section id="bus-list-for-runtime-pm.-probably-shouldnt-touch-this."
+class="level1">
+<h1>Bus list for runtime pm. Probably shouldn’t touch this.</h1>
+<p>buslist=“usb i2c pci_express pci”</p>
+<p>if [ $bat0 == discharging ] || [ $bat1 == discharging ] then</p>
+</section>
+<section id="enable-some-power-saving-settings-while-on-battery"
+class="level1">
+<h1>Enable some power saving settings while on battery</h1>
+</section>
+<section id="disable-nmi-watchdog" class="level1">
+<h1>Disable NMI watchdog</h1>
+<pre><code>    echo 0 &gt; /proc/sys/kernel/nmi_watchdog</code></pre>
+</section>
+<section id="disable-wake-on-line" class="level1">
+<h1>Disable Wake-on-line</h1>
+<pre><code>    ethtool -s enp0s25 wol d</code></pre>
+</section>
+<section id="enable-laptop-mode" class="level1">
+<h1>Enable laptop mode</h1>
+<pre><code>    echo 5 &gt; /proc/sys/vm/laptop_mode</code></pre>
+</section>
+<section id="less-vm-disk-activity.-suggested-by-powertop"
+class="level1">
+<h1>Less VM disk activity. Suggested by powertop</h1>
+<pre><code>    echo 1500 &gt; /proc/sys/vm/dirty_writeback_centisecs</code></pre>
+</section>
+<section id="intel-power-saving" class="level1">
+<h1>Intel power saving</h1>
+<pre><code>    echo Y &gt; /sys/module/snd_hda_intel/parameters/power_save_controller
+    echo 1 &gt; /sys/module/snd_hda_intel/parameters/power_save</code></pre>
+</section>
+<section id="set-backlight-brightness-to-20" class="level1">
+<h1>Set backlight brightness to 20%</h1>
+<pre><code>    echo 4 &gt; /sys/class/backlight/acpi_video0/device/backlight/acpi_video0/brightness</code></pre>
+</section>
+<section id="usb-powersaving" class="level1">
+<h1>USB powersaving</h1>
+<pre><code>    for i in /sys/bus/usb/devices/*/power/autosuspend; do
+        echo 1 &gt; $i
+    done</code></pre>
+</section>
+<section id="sata-power-saving" class="level1">
+<h1>SATA power saving</h1>
+<pre><code>    for i in /sys/class/scsi_host/host*/link_power_management_policy; do
+        echo min_power &gt; $i
+    done</code></pre>
+</section>
+<section id="disable-hardware-modules-to-save-power" class="level1">
+<h1>Disable hardware modules to save power</h1>
+<pre><code>    for mod in $modlist; do
+        grep $mod /proc/modules &gt;/dev/null || continue
+        modprobe -r $mod 2&gt;/dev/null
+    done</code></pre>
+</section>
+<section id="enable-runtime-power-management.-suggested-by-powertop."
+class="level1">
+<h1>Enable runtime power management. Suggested by powertop.</h1>
+<pre><code>    for bus in $buslist; do
+        for i in /sys/bus/$bus/devices/*/power/control; do
+            echo auto &gt; $i
+        done
+    done</code></pre>
+<p>else</p>
+<p>#Return settings to default on AC power echo 1 &gt;
+/proc/sys/kernel/nmi_watchdog echo 0 &gt; /proc/sys/vm/laptop_mode echo
+500 &gt; /proc/sys/vm/dirty_writeback_centisecs echo Y &gt;
+/sys/module/snd_hda_intel/parameters/power_save_controller echo 1 &gt;
+/sys/module/snd_hda_intel/parameters/power_save echo 12 &gt;
+/sys/class/backlight/acpi_video0/device/backlight/acpi_video0/brightness
+for i in /sys/bus/usb/devices/<em>/power/autosuspend; do echo 2 &gt; $i
+done for i in
+/sys/class/scsi_host/host</em>/link_power_management_policy do echo
+max_performance &gt; $i done for mod in $modlist; do if ! lsmod | grep
+$mod; then modprobe $mod 2&gt;/dev/null fi done for bus in <span
+class="math inline"><em>b</em><em>u</em><em>s</em><em>l</em><em>i</em><em>s</em><em>t</em>; <em>d</em><em>o</em><em>f</em><em>o</em><em>r</em><em>i</em><em>i</em><em>n</em>/<em>s</em><em>y</em><em>s</em>/<em>b</em><em>u</em><em>s</em>/</span>bus/devices/*/power/control;
+do echo on &gt; $i done done</p>
+</section>
+</body>
+</html>

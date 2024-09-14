@@ -4,18 +4,30 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Recipe.md – -</title>
+  <title>Recipe.md – Recipe</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
   <link rel="stylesheet" href="Css/include.css" />
 </head>
 <body>
+<header id="title-block-header">
+<h1 class="title">Recipe</h1>
+</header>
 <section id="contents" class="level1">
 <h1>Contents</h1>
 </section>
@@ -24,7 +36,8 @@
 <section id="ideas" class="level2">
 <h2>Ideas</h2>
 <ul>
-<li><p>Hamburger (not burger, con lechuga, mostaza, pepinillo, lechuga)</p></li>
+<li><p>Hamburger (not burger, con lechuga, mostaza, pepinillo,
+lechuga)</p></li>
 <li><p><a href="#salsa-de-tomate">Salsa de tomate</a></p></li>
 <li><p><a href="#risoto">Risoto</a></p></li>
 <li><p>Arroz: pimenton, ajo, cebolla</p></li>
@@ -38,13 +51,15 @@
 <li><p>Quiche: champiñones</p></li>
 <li><p>Galette TODO learn</p></li>
 <li><p>Dolmen, feuille de vigne</p></li>
-<li><p>Budin de sapallo Italiano, o sapallo saltado con tallarines y pesto</p></li>
+<li><p>Budin de sapallo Italiano, o sapallo saltado con tallarines y
+pesto</p></li>
 <li><p>Cucacha</p></li>
 <li><p>Lentilles</p></li>
 </ul>
 <section id="section" class="level3">
 <h3>1/2</h3>
 <ul>
+<li><a href="#Pesto">Pesto</a></li>
 <li><a href="#Gyoza">Gyoza</a></li>
 <li><a href="#Houmous">Houmous</a></li>
 <li>Tapenade d’olive</li>
@@ -52,13 +67,52 @@
 </section>
 </section>
 </section>
+<section id="pesto" class="level1">
+<h1>Pesto</h1>
+<ul>
+<li>Albahaca</li>
+<li>Aceite de oliva</li>
+<li>Nueces</li>
+<li>Parmesano</li>
+<li>Ajo, pimienta,</li>
+</ul>
+<ol type="1">
+<li>Hervir 1 min / 30 sec la abahaca y dejarla en agua helada =&gt;
+fijar la clorofina</li>
+<li>Liquar todo junto</li>
+<li>Mantener con aceite en potes cerrados</li>
+</ol>
+</section>
+<section id="kombucha" class="level1">
+<h1>Kombucha</h1>
+<ul>
+<li>Water (1L)</li>
+<li>Sugar, white (70g)</li>
+<li>Tea, black (10g)</li>
+</ul>
+<ol type="1">
+<li>Make the tea, very sugared but not drinkable (like Marcocans
+lol)</li>
+<li><strong>IMPORTANT</strong>: coolen the tea to room temperature
+(2h)</li>
+<li>Put the filtered, cold tea with the Scoby, cover with tissue
+(against flies)</li>
+<li>Wait 1 week, the first fermentation</li>
+<li>Move the filtered liquid, to bottles</li>
+<li>Wait 1 week, the second fermentation</li>
+</ol>
+<p>Notes: * <strong>Faster Fermentation</strong>: Be aware that the
+kombucha will ferment more quickly when it is warmer and when there is
+more sugar/fruit</p>
+</section>
 <section id="salsa-de-tomate" class="level1">
 <h1>Salsa de tomate</h1>
 <ul>
 <li>Aceite de oliva + ajo</li>
 <li>Tomates peladas</li>
 </ul>
-<p>Todo lento (no quemes el ajo que es solo para dar sabor al aceite)</p>
+<p>Todo lento (no quemes el ajo que es solo para dar sabor al
+aceite)</p>
 </section>
 <section id="risoto" class="level1">
 <h1>Risoto</h1>
@@ -76,9 +130,11 @@
 <li>Nacrer le riz: avec la 1/2 du beurre =&gt; riz translucide</li>
 <li>Optionel: Jeter le vere de vin blanc: “deglacer”</li>
 <li>Ajouter continuellement le bouillon (20 min)</li>
-<li>Ajouter le reste du beure et la 1/2 du parmesan -&gt; le tout est bien liee</li>
+<li>Ajouter le reste du beure et la 1/2 du parmesan -&gt; le tout est
+bien liee</li>
 </ol>
-<p>Apres la derniere etape, peut parfumer a convenace: * Tomate * Olive * Champignons * Poulet</p>
+<p>Apres la derniere etape, peut parfumer a convenace: * Tomate * Olive
+* Champignons * Poulet</p>
 </section>
 <section id="tiramisu" class="level1">
 <h1>Tiramisu</h1>
@@ -114,14 +170,16 @@
 </ul>
 <ol type="1">
 <li>Laver les poids chiche</li>
-<li>Mixer les poids chiche, ajouter un peu d’eau (eau de cuisson pour plus de saveur)</li>
+<li>Mixer les poids chiche, ajouter un peu d’eau (eau de cuisson pour
+plus de saveur)</li>
 <li>Ajouter tahin, citron, cumin, sel</li>
 </ol>
 <ul>
 <li>Opt: Ajouter ail # mais Rocío n’aime pas et ça pourri plus vite</li>
 </ul>
 <ol start="4" type="1">
-<li>Incorporer l’huile d’olive tout en mixant =&gt; texture homgene et crémeuse</li>
+<li>Incorporer l’huile d’olive tout en mixant =&gt; texture homgene et
+crémeuse</li>
 <li>Opt: Couvrir d’huile de sesame et de cumin</li>
 </ol>
 </section>
@@ -140,22 +198,26 @@
 <li><p>Sugar (1/2 teaspoon)</p></li>
 </ul>
 <ol type="1">
-<li>Frire le gingembre puis carrote, tofu, bean, choux =&gt; 5 a 10 min</li>
+<li>Frire le gingembre puis carrote, tofu, bean, choux =&gt; 5 a 10
+min</li>
 <li>Assaisoner avec: sel,sauce soja, sauce huitre, sucre</li>
 </ol>
 <ul>
 <li>Opt: sauce mushroom</li>
 </ul>
 <ol start="3" type="1">
-<li>Mixer le tout =&gt; pas de gros morceaux (arreter bien avant que ce soit de la purée)</li>
-<li>Assembler les petits trucs, utiliser de l’eau comme colle =&gt; toute la pate est utilisée</li>
+<li>Mixer le tout =&gt; pas de gros morceaux (arreter bien avant que ce
+soit de la purée)</li>
+<li>Assembler les petits trucs, utiliser de l’eau comme colle =&gt;
+toute la pate est utilisée</li>
 <li>Faire boullir les petits trucs =&gt; 1, 2 min (plutot 2)</li>
 <li>Faire la sauce:</li>
 <li>Sauce soja</li>
 <li>Vinegre noir</li>
 <li>Huile de sesame</li>
 <li>Sucre</li>
-<li>Opt: Servir: Avec cilantro, Huile de piment, graine de sesame toastées</li>
+<li>Opt: Servir: Avec cilantro, Huile de piment, graine de sesame
+toastées</li>
 </ol>
 </section>
 <section id="pate-a-pizza" class="level1">
@@ -168,10 +230,13 @@
 </ul>
 <ol type="1">
 <li><p>Melanger farine et sel, Levure fraiche et 1/2 d’eau</p></li>
-<li><p>Vercer la levure fraiche et progressivement l’eau dans la farine, remuer jusqu’à obtention de la pate</p></li>
+<li><p>Vercer la levure fraiche et progressivement l’eau dans la farine,
+remuer jusqu’à obtention de la pate</p></li>
 <li><p>Faire reposer la pate, diviser, reposer encore</p></li>
-<li><p>Etaller a pate avec les mains. Poings au milieu et la laisser se tendre par gravité</p></li>
-<li><p>Saupourdrer: sel, huile d’olive, tomate, mozarella, huile d’olive</p></li>
+<li><p>Etaller a pate avec les mains. Poings au milieu et la laisser se
+tendre par gravité</p></li>
+<li><p>Saupourdrer: sel, huile d’olive, tomate, mozarella, huile
+d’olive</p></li>
 <li><p>Cuire à 250 degree ou plus. 10 min</p></li>
 <li><p>Ajouter les ingredients choisi</p></li>
 <li><p>Recuire 3 minutes.</p></li>

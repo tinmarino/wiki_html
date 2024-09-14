@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Dumps.md – Dumps</title>
+  <title>Site.md – Site</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -26,10 +26,20 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Dumps</h1>
+<h1 class="title">Site</h1>
 </header>
+<p>My Site tinmarino.com</p>
+<ol type="1">
+<li>GoDaddy to register DNS, 25 dollars for 3 years, redireciona a
+cloudflare</li>
+<li>Cloudflare to proxy
 <ul>
-<li><a href="BashRc-Dump.md.html">BashRc Dump</a></li>
-</ul>
+<li>earl.ns.cloudflare.com</li>
+</ul></li>
+<li>AWS to host ctfd, ot github for website and root</li>
+</ol>
+<p>sudo iptables -t nat -A PREROUTING -p tcp –dport 80 -j REDIRECT
+–to-port 4000</p>
+<p>tinmarino.github.io tinmarino.com</p>
 </body>
 </html>

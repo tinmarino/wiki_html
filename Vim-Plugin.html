@@ -4,17 +4,28 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Vim-Plugin.md – Pluggin list: Community matters</title>
+  <title>Vim-Plugin.md – Vim-Plugin</title>
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
     pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span { line-height: 1.25; }
     pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
     code.sourceCode > span { color: inherit; text-decoration: inherit; }
     div.sourceCode { margin: 1em 0; }
     pre.sourceCode { margin: 0; }
@@ -23,7 +34,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -46,7 +57,7 @@
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span. { color: #cfcfc2; } /* Normal */
+    code span { color: #cfcfc2; } /* Normal */
     code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
     code span.an { color: #3f8058; } /* Annotation */
     code span.at { color: #2980b9; } /* Attribute */
@@ -79,15 +90,17 @@
     code span.wa { color: #da4453; } /* Warning */
   </style>
   <link rel="stylesheet" href="Css/include.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">Pluggin list: Community matters</h1>
+<h1 class="title">Vim-Plugin</h1>
 </header>
-<p>Pluggins are the most important stuff for a true text editor as one person cannot implement all the languages. Even thought most of Vim functionality is enought with small coding. Some big plugins bundle exist but you should known and clone these one by one. (Otherwise how can you use these all) Notice that the order in the TOC is not the same as in the file.</p>
+<p>Pluggins are the most important stuff for a true text editor as one
+person cannot implement all the languages. Even thought most of Vim
+functionality is enought with small coding. Some big plugins bundle
+exist but you should known and clone these one by one. (Otherwise how
+can you use these all) Notice that the order in the TOC is not the same
+as in the file.</p>
 <section id="menu" class="level1">
 <h1>MENU</h1>
 <table>
@@ -103,42 +116,231 @@
 <td></td>
 </tr>
 <tr class="even">
-<td><a href="#fugitive">Fugitive</a></td>
+<td><a href="#fugitive">Fugitive</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#fugitive)</td>
 <td>Git</td>
+</tr>
+<tr class="even">
+<td><a href="#ipython">Ipython</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#ipython)</td>
+<td>Ipython</td>
+</tr>
+<tr class="even">
+<td><a href="#python-mode">Python-mode</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#python-mode)</td>
+<td>Python</td>
+</tr>
+<tr class="even">
+<td><a href="#eclim">Eclim</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#eclim)</td>
+<td>Java</td>
+</tr>
+<tr class="even">
+<td><a href="#vimtex">Vimtex</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#vimtex)</td>
+<td>Latex</td>
+</tr>
+<tr class="even">
+<td><a href="#conque-gdb">Conque-GDB</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#conque-gdb)</td>
+<td>Gdb</td>
+</tr>
+<tr class="even">
+<td>Commands</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="#surround">Surround</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#surround)</td>
+<td>Around text-objects</td>
+</tr>
+<tr class="odd">
+<td><a href="#commentary">Commentary</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#commentary)</td>
+<td>Comment</td>
+</tr>
+<tr class="odd">
+<td><a href="#unimpaired">Unimpaired</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#unimpaired)</td>
+<td>Maps set</td>
+</tr>
+<tr class="odd">
+<td><a href="#abolish">Abolish</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#abolish)</td>
+<td>Sub, ab</td>
+</tr>
+<tr class="odd">
+<td><a href="#repeat">Repeat</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#repeat)</td>
+<td>Repeat maps</td>
+</tr>
+<tr class="odd">
+<td>[CamelCaseMotion](</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#camelcasemotion)</td>
+<td>Motions</td>
+</tr>
+<tr class="odd">
+<td><a href="#delimitmate">DelimitMate</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#delimitmate)</td>
+<td>Autoclose ()</td>
+</tr>
+<tr class="odd">
+<td><a href="#matchit">MatchIt</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#matchit)</td>
+<td>% better</td>
+</tr>
+<tr class="odd">
+<td><a href="#ultisnips">Ultisnips</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#ultisnips)</td>
+<td>Snippet manager</td>
+</tr>
+<tr class="odd">
+<td>[Vim-snippets](</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#vim-snippets)</td>
+<td>Snippet collection</td>
+</tr>
+<tr class="odd">
+<td>[Commandline](</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#commandline)</td>
+<td>Maps for cmdline</td>
+</tr>
+<tr class="odd">
+<td>Display</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>[Colorscheme](</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#colorscheme)</td>
+<td>More Colors</td>
+</tr>
+<tr class="even">
+<td><a href="#ansiesc">AnsiEsc</a>(</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#ansiesc)</td>
+<td>Color ANSI</td>
+</tr>
+<tr class="even">
+<td>[Rainbow_Pare.](</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>#rainbow_pare.)</td>
+<td>Color imbrication</td>
+</tr>
+<tr class="even">
+<td>Interface</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="#ctrlp">CtrlP</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#ctrlp)</td>
+<td>Fuzzy Browse</td>
+</tr>
+<tr class="odd">
+<td><a href="#nerdtree">NErdtree</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#nerdtree)</td>
+<td>Directory browsing</td>
+</tr>
+<tr class="odd">
+<td><a href="#airline">Airline</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#airline)</td>
+<td>Status bar (bottom)</td>
+</tr>
+<tr class="odd">
+<td><a href="#undotree">Undotree</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#undotree)</td>
+<td>See Undo as tree</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>### Old</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="#pathogen">Pathogen</a>(</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>#pathogen)</td>
+<td>Pluggin manager</td>
 </tr>
 </tbody>
 </table>
-<div class="line-block"><a href="#ipython">Ipython</a> | Ipython |</div>
-<div class="line-block"><a href="#python-mode">Python-mode</a> | Python |</div>
-<div class="line-block"><a href="#eclim">Eclim</a> | Java |</div>
-<div class="line-block"><a href="#vimtex">Vimtex</a> | Latex |</div>
-<div class="line-block"><a href="#conque-gdb">Conque-GDB</a> | Gdb |</div>
-<div class="line-block">Commands | |<br />
-<a href="#surround">Surround</a> | Around text-objects |</div>
-<div class="line-block"><a href="#commentary">Commentary</a> | Comment |</div>
-<div class="line-block"><a href="#unimpaired">Unimpaired</a> | Maps set |</div>
-<div class="line-block"><a href="#abolish">Abolish</a> | Sub, ab |</div>
-<div class="line-block"><a href="#repeat">Repeat</a> | Repeat maps |</div>
-<div class="line-block"><a href="#camelcasemotion">CamelCaseMotion</a> | Motions |</div>
-<div class="line-block"><a href="#delimitmate">DelimitMate</a> | Autoclose () |</div>
-<div class="line-block"><a href="#matchit">MatchIt</a> | % better |</div>
-<div class="line-block"><a href="#ultisnips">Ultisnips</a> | Snippet manager |</div>
-<div class="line-block"><a href="#vim-snippets">Vim-snippets</a> | Snippet collection |</div>
-<div class="line-block"><a href="#commandline">Commandline</a> | Maps for cmdline |</div>
-<div class="line-block">Display | |<br />
-<a href="#colorscheme">Colorscheme</a> | More Colors |</div>
-<div class="line-block"><a href="#ansiesc">AnsiEsc</a> | Color ANSI |</div>
-<div class="line-block"><a href="#rainbow_pare.">Rainbow_Pare.</a> | Color imbrication |</div>
-<div class="line-block">Interface | |<br />
-<a href="#ctrlp">CtrlP</a> | Fuzzy Browse |</div>
-<div class="line-block"><a href="#nerdtree">NErdtree</a> | Directory browsing |</div>
-<div class="line-block"><a href="#airline">Airline</a> | Status bar (bottom) |</div>
-<div class="line-block"><a href="#undotree">Undotree</a> | See Undo as tree |</div>
-<p>|### Old | |</p>
-<div class="line-block"><a href="#pathogen">Pathogen</a> | Pluggin manager |</div>
 <section id="on-local-machine" class="level3">
 <h3>On local machine</h3>
-<p>git submodule add https://github.com/tpope/vim-fugitive /pack/bundle/start/fugitive :Helptags ALL</p>
+<p>git submodule add https://github.com/tpope/vim-fugitive
+/pack/bundle/start/fugitive :Helptags ALL</p>
 </section>
 <section id="on-remote-machine" class="level3">
 <h3>On remote machine</h3>
@@ -151,44 +353,55 @@
 </section>
 <section id="pathogen" class="level1">
 <h1>PATHOGEN</h1>
-<p>Note: Since vim version 8.0, it is useless since pack/bundle will be automatically added to your runtimepath.</p>
-<p>Is a pluggin manager. It basically extends your runtimepath dynamically. You just have to git clone the desired pluggin in ~/.vim/bundle/ for it to be loaded as if it was in the root folder (~/.vim)</p>
+<p>Note: Since vim version 8.0, it is useless since pack/bundle will be
+automatically added to your runtimepath.</p>
+<p>Is a pluggin manager. It basically extends your runtimepath
+dynamically. You just have to git clone the desired pluggin in
+~/.vim/bundle/ for it to be loaded as if it was in the root folder
+(~/.vim)</p>
 </section>
 <section id="fugitive" class="level1">
 <h1>FUGITIVE</h1>
-<p>Get git functionality in current file folder with the <code>:Git</code> command. Very well coded :Gdiff -&gt; Use vimdiff to push in index :Gstatus -&gt; Many map to add or remove</p>
+<p>Get git functionality in current file folder with the
+<code>:Git</code> command. Very well coded :Gdiff -&gt; Use vimdiff to
+push in index :Gstatus -&gt; Many map to add or remove</p>
 <p>https://github.com/tpope/vim-fugitive</p>
 </section>
 <section id="ipython" class="level1">
 <h1>IPYTHON</h1>
-<p>Replaced by jupyter-vim The functionality <code>vim-server</code> and <code>python-zmq</code> (zero-message-query: to install) plus this small plugin, allow you to execute lines of code from here to a remote ipython/jupyter kernel</p>
+<p>Replaced by jupyter-vim The functionality <code>vim-server</code> and
+<code>python-zmq</code> (zero-message-query: to install) plus this small
+plugin, allow you to execute lines of code from here to a remote
+ipython/jupyter kernel</p>
 <p>https://github.com/ivanov/vim-ipython</p>
 </section>
 <section id="python-mode" class="level1">
 <h1>PYTHON-MODE</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">pip3</span> install --user pylint</span></code></pre></div>
-<p>A HUGE collection of python plugins taht are up to date because they are written in python. Thanks to the +python feature of vim that is now embeded with a python interpreter. Pylama# Wraps others</p>
-<pre><code>Rope# Refractoring
-
-PEP8; Pyflakes, Pylint# Code checking
-
-
-And much much more.</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip3</span> install <span class="at">--user</span> pylint</span></code></pre></div>
+<p>A HUGE collection of python plugins taht are up to date because they
+are written in python. Thanks to the +python feature of vim that is now
+embeded with a python interpreter. Pylama # Wraps others Rope #
+Refractoring PEP8; Pyflakes, Pylint # Code checking</p>
+<pre><code>And much much more.</code></pre>
 <p>NB: Community pluggin as dirty as python</p>
 <p>https://github.com/python-mode/python-mode</p>
 </section>
 <section id="eclim" class="level1">
 <h1>ECLIM</h1>
-<p>Java users: Eclipse (free) is used as a server and vim as a client. So I can get completion, jump to code and error checking.</p>
+<p>Java users: Eclipse (free) is used as a server and vim as a client.
+So I can get completion, jump to code and error checking.</p>
 <p>http://eclim.org/</p>
 </section>
 <section id="colorscheme-switcher" class="level1">
 <h1>COLORSCHEME SWITCHER</h1>
-<p>Lot of colorschemes and 2 maps to switch: <F8> and <S-F8> May be included in the Main vim disti (at least neovim)</p>
+<p>Lot of colorschemes and 2 maps to switch: <F8> and <S-F8> May be
+included in the Main vim disti (at least neovim)</p>
 </section>
 <section id="ctrlp" class="level1">
 <h1>CTRLP</h1>
-<p>Fuzzy file browsing with some regexp of the path (type scGam for s.<em>c.</em>G.<em>a.</em>m). Can browse in: 1. Files (above the pwd) 2. Most Recently Updated (MRU) 3. Buffers My settings are:</p>
+<p>Fuzzy file browsing with some regexp of the path (type scGam for
+s.<em>c.</em>G.<em>a.</em>m). Can browse in: 1. Files (above the pwd) 2.
+Most Recently Updated (MRU) 3. Buffers My settings are:</p>
 <pre class="language-vim"><code>&quot; E like edit and closer to ctrl + &lt;c-p&gt; used to paste
 let g:ctrlp_map = &#39;&lt;c-e&gt;&#39;
 &quot; Mixed to search in MRU, FIles, Buffers
@@ -205,27 +418,31 @@ let g:ctrlp_cmd = &#39;CtrlPMixed&#39;</code></pre>
 </section>
 <section id="vimtex" class="level1">
 <h1>VIMTEX</h1>
-<p>Help Writting compiling Tex, LaTex files. Huge doc: 2000 lines. Many commands, options the vim way. Continous build mode Works</p>
+<p>Help Writting compiling Tex, LaTex files. Huge doc: 2000 lines. Many
+commands, options the vim way. Continous build mode Works</p>
 <p>https://github.com/lervag/vimtex</p>
 </section>
 <section id="nerdtree" class="level1">
 <h1>NERDTREE</h1>
-<p>Explore the directories. Move … Better than the embeded netrw plugin</p>
+<p>Explore the directories. Move … Better than the embeded netrw
+plugin</p>
 <p>https://github.com/scrooloose/nerdtree</p>
 </section>
 <section id="conque-gdb" class="level1">
 <h1>CONQUE-GDB</h1>
-<p>Gdb integration thank to embede ConqueTerm. Works fine on Linux at least (on windows idk)</p>
+<p>Gdb integration thank to embede ConqueTerm. Works fine on Linux at
+least (on windows idk)</p>
 <p>https://github.com/vim-scripts/Conque-GDB</p>
 </section>
 <section id="ultisnips" class="level1">
 <h1>ULTISNIPS</h1>
-<p>Snippets manager. Easy to use. Considered to be the best by web community.</p>
+<p>Snippets manager. Easy to use. Considered to be the best by web
+community.</p>
 <p>https://github.com/SirVer/ultisnips</p>
 </section>
 <section id="snippets" class="level1">
 <h1>SNIPPETS</h1>
-<p>Snippets database for 2 plugins including |v-plugin#ultisnips|</p>
+<p>Snippets database for 2 plugins including |v-plugin #ultisnips|</p>
 <p>https://github.com/honza/vim-snippets</p>
 </section>
 <section id="airline" class="level1">
@@ -240,7 +457,8 @@ let g:ctrlp_cmd = &#39;CtrlPMixed&#39;</code></pre>
 </section>
 <section id="rainbow-parentheses" class="level1">
 <h1>RAINBOW PARENTHESES</h1>
-<p>Colorise parentheses according to imbrication. Give a quick short view of imbrication and maybe bugs</p>
+<p>Colorise parentheses according to imbrication. Give a quick short
+view of imbrication and maybe bugs</p>
 <p>https://github.com/kien/rainbow_parentheses.vim</p>
 </section>
 <section id="commentary" class="level1">
@@ -280,13 +498,100 @@ let g:ctrlp_cmd = &#39;CtrlPMixed&#39;</code></pre>
 </section>
 <section id="undotree" class="level1">
 <h1>UNDOTREE</h1>
-<p>Watch you undo as a tree. Cause it can be complicated to use vim default mapping</p>
+<p>Watch you undo as a tree. Cause it can be complicated to use vim
+default mapping</p>
 <p>https://github.com/mbbill/undotree</p>
 </section>
 <section id="emacs-commandline" class="level1">
 <h1>EMACS COMMANDLINE</h1>
-<p>To get emacs (terminal) shortcuts on vim cmdline Warning: It overwrites the: &lt;<C-R> -&gt; pretty annoying</p>
+<p>To get emacs (terminal) shortcuts on vim cmdline Warning: It
+overwrites the: &lt;<C-R> -&gt; pretty annoying</p>
 <p>https://github.com/houtsnip/vim-emacscommandline</p>
+</section>
+<section id="my-gitmodules-in-2023" class="level1">
+<h1>My gitmodules in 2023</h1>
+<p>When I started using Vim-Plug</p>
+<pre><code>https://github.com/junegunn/gv.vim
+https://github.com/scop/bash-completion
+https://github.com/jpalardy/vim-slime
+https://github.com/tinmarino/vim-almasw
+https://github.com/neoclide/coc.nvim
+https://github.com/ryanoasis/vim-devicons
+https://github.com/Xuyuanp/nerdtree-git-plugin
+https://github.com/kana/vim-submode
+https://github.com/farmergreg/vim-lastplace
+https://github.com/christoomey/vim-tmux-navigator
+https://github.com/junegunn/fzf
+https://github.com/junegunn/fzf.vim
+https://github.com/chrisbra/unicode.vim
+https://github.com/ycm-core/YouCompleteMe
+https://github.com/tinmarino/vim-color
+https://github.com/junegunn/vader.vim
+https://github.com/Raku/vim-raku
+https://github.com/kana/vim-textobj-user
+https://github.com/kana/vim-textobj-function
+https://github.com/tpope/vim-sleuth
+https://github.com/cohama/lexima.vim
+https://github.com/dense-analysis/ale
+https://github.com/mbbill/undotree
+https://github.com/tpope/vim-repeat
+https://github.com/chrisbra/Colorizer.git
+git://github.com/honza/vim-snippets.git
+https://github.com/itchyny/calendar.vim
+https://github.com/powerman/vim-plugin-viewdoc
+https://github.com/c9s/perlomni.vim
+https://github.com/dhruvasagar/vim-table-mode
+https://github.com/github/gitignore
+https://github.com/mileszs/ack.vim
+https://github.com/salsifis/vim-transpose
+https://github.com/python-mode/python-mode
+https://github.com/vim-vdebug/vdebug
+https://github.com/michaeljsmith/vim-indent-object
+https://github.com/vim-scripts/Align
+https://github.com/vim-scripts/Mines
+https://github.com/vim-scripts/DrawIt
+https://github.com/suan/vim-instant-markdown
+https://github.com/vimwiki/vimwiki
+https://github.com/tpope/vim-unimpaired
+https://github.com/junegunn/vim-emoji
+https://github.com/vim-scripts/argtextobj.vim
+https://github.com/michaeljsmith/vim-indent-object
+https://github.com/houtsnip/vim-emacscommandline
+https://github.com/powerman/vim-plugin-AnsiEsc
+https://github.com/SirVer/ultisnips
+https://github.com/vim-airline/vim-airline
+https://github.com/vim-scripts/Conque-GDB
+https://github.com/xolox/vim-misc
+https://github.com/scrooloose/nerdtree
+https://github.com/ctrlpvim/ctrlp.vim
+https://github.com/tpope/vim-surround
+https://github.com/xolox/vim-colorscheme-switcher
+https://github.com/lervag/vimtex
+https://github.com/python-mode/python-mode
+https://github.com/tpope/vim-fugitive</code></pre>
+</section>
+<section id="my-ex-vimconf" class="level1">
+<h1>My ex vimconf</h1>
+<p>Just to keep the timer trick</p>
+<p>```language-vim</p>
+<p>Plug farmergreg/vim-lastplace ” Open vim at last edition place on
+file Plug tpope/fugitive</p>
+<p>” TODO packadd submode ” Map C-W</p>
+function! TimerPack(timer) abort ” Lazy loader packadd almasw ” Map:
+10ms for 9pg packadd surround ” ySS
+<div>
+<p>packadd repeat ” for surround packadd textobj-user ” for function
+packadd textobj-arg ” data packadd textobj-indent ” dai packadd
+textobj-function ” daf packadd unimpaired ” 5ms ]b (:bn) , ]<space> (add
+empty lines), ]q packadd tmux-navigator ” ]q packadd emacscommandline ”
+3ms “packadd tex” Misc: packadd vader packadd ale ” Youcompleteme: is
+verbose at init if no python try python3 ‘42’ ” Deletes the vim intro
+screen let g:ycm_auto_hover = ’’ ” set omnifunc=syntaxcomplete #Complete
+” packadd youcompleteme catch | endtry “” Ultisnip: is annoying at run
+time if no python try python3 ‘42’ packadd ultisnips ” 3ms packadd
+snippets ” for some ultisnips macro catch | endtry endfunction</p>
+<p>” Call it if has(‘timers’) call timer_start(0, ‘TimerPack’) else call
+TimerPack(42) endif</p>
 </section>
 </body>
 </html>
